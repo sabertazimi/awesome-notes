@@ -22,7 +22,9 @@ a self-attention module takes in n inputs and returns n outputs:
 - The outputs are aggregates of these interactions and attention scores.
 
 $$
-Attention(Q, K, V) = softmax(\frac{QK^T}{\sqrt{d_k}})V
+\begin{equation}
+  Attention(Q, K, V)=softmax(\frac{QK^T}{\sqrt{d_k}})V
+\end{equation}
 $$
 
 [![Self-Attention Mechanism](./figures/Self-Attention.gif)](https://towardsdatascience.com/illustrated-self-attention-2d627e33b20a)
@@ -89,13 +91,13 @@ $QK^T$ for Input 1:
 :::tip $XX^T$
 
 $XX^T$ 为行向量分别与自己和其他两个行向量做内积 (点乘),
-向量的内积表征两个向量的夹角 ($\cos\theta=\frac{a \cdot b}{|a||b|}$),
+向量的内积表征两个向量的夹角 ($\cos\theta=\frac{a\cdot{b}}{|a||b|}$),
 表征一个向量在另一个向量上的投影,
 投影的值大, 说明两个向量相关度高 (Relevance/Similarity).
 
 :::
 
-Softmaxed([$\sigma(z_i) = \frac{e^{z_{i}}}{\sum_{j=1}^K e^{z_{j}}}$](https://en.wikipedia.org/wiki/Softmax_function))
+Softmaxed([$\sigma(z_i)=\frac{e^{z_i}}{\sum_{j=1}^K{e^{z_j}}}$](https://en.wikipedia.org/wiki/Softmax_function))
 attention scores, $softmax(\frac{QK^T}{\sqrt{d_k}})$:
 
 ```python
@@ -271,3 +273,56 @@ class Self_Attention_Muti_Head(nn.Module):
 
         return output
 ```
+
+### Positional Encoding Mechanism
+
+[位置编码](https://kazemnejad.com/blog/transformer_architecture_positional_encoding)
+使用正弦和余弦函数的 d 维向量编码方法,
+用于在输入序列中表示每个单词的位置信息,
+丰富了模型的输入数据, 为其提供位置信息
+(把词序信号加到词向量上帮助模型学习这些信息):
+
+- 唯一性 (Unique): 为每个时间步输出一个独一无二的编码.
+- 一致性 (Consistent): 不同长度的句子之间, 任何两个时间步之间的距离保持一致.
+- 泛化性 (Generalizable): 模型能毫不费力地泛化到更长的句子, 位置编码的值是有界的.
+- 确定性 (Deterministic): 位置编码的值是确定性的.
+
+编码函数使用正弦和余弦函数, 其频率沿着向量维度进行减少.
+编码向量包含每个频率的正弦和余弦对,
+以实现 $\sin(x+k)$ 和 $\cos(x+k)$ 的线性变换, 从而有效地表示相对位置.
+
+For $\vec{p_t}\in\mathbb{R}^d$ (where $d\equiv_2{0}$),
+then $f:\mathbb{N}\to\mathbb{R}^d$
+
+$$
+\begin{align}
+  \vec{p_t}^{(i)}=f(t)^{(i)}&:=
+  \begin{cases}
+      \sin({\omega_k}\cdot{t}), &\text{if}\ i=2k \\
+      \cos({\omega_k}\cdot{t}), &\text{if}\ i=2k+1
+  \end{cases}
+\end{align}
+$$
+
+where
+
+$$
+\omega_k=\frac{1}{10000^{2k/d}}
+$$
+
+outcomes
+
+$$
+\vec{p_t} = \begin{bmatrix}
+\sin({\omega_1}\cdot{t})\\
+\cos({\omega_1}\cdot{t})\\
+\\
+\sin({\omega_2}\cdot{t})\\
+\cos({\omega_2}\cdot{t})\\
+\\
+\vdots\\
+\\
+\sin({\omega_{d/2}}\cdot{t})\\
+\cos({\omega_{d/2}}\cdot{t})
+\end{bmatrix}_{d\times{1}}
+$$
