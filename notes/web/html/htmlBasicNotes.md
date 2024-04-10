@@ -1118,13 +1118,17 @@ value/max 百分比
 
 ### Image
 
-**Attr** -
-
 #### Src
 
 #### Alt
 
 (图片崩溃时文本)、title(提示信息)、class(CSS 类选择器)
+
+#### Loading
+
+```html
+<img src="picture.jpg" loading="lazy" />
+```
 
 #### Responsive Images
 
