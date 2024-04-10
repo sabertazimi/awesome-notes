@@ -818,15 +818,15 @@ tags: [Web, Framework, Library]
 
 ### Icon
 
-- [React Icons: SVG Icons of Popular Icon Packs](https://github.com/react-icons/react-icons)
-- [Remix Icons](https://github.com/Remix-Design/remixicon)
+- [LucideIcons: Beautiful and Consistent Icon Toolkit](https://github.com/lucide-icons/lucide)
+- [FeatherIcons: Simply Beautiful Icons](https://github.com/feathericons/feather)
+- [ReactIcons: SVG Icons of Popular Icon Packs](https://github.com/react-icons/react-icons)
+- [RemixIcons: Neutral Style Icon System](https://github.com/Remix-Design/remixicon)
 - [SimpleIcons: Popular Brand SVG Icons](https://github.com/simple-icons/simple-icons)
 - [FlagIcons: Country Flag SVG Icons](https://github.com/lipis/flag-icons)
-- [Icon Font](https://www.iconfont.cn)
-- [Icons8](https://icons8.com)
-- [Ikonate](https://github.com/mikolajdobrucki/ikonate)
-- [CSS Icons](https://github.com/wentin/cssicon)
-- [Open Source Icons](https://www.smashingmagazine.com/2021/08/open-source-icons)
+- [HealthIcons: Public Health Projects](https://github.com/resolvetosavelives/healthicons)
+- [BioIcons: Science Illustrations in Biology and Chemistry](https://github.com/duerrsimon/bioicons)
+- [PeepsIcons: Open Peeps Hand Drawn Illustration](https://github.com/CeamKrier/react-peeps)
 
 ### SVG
 
