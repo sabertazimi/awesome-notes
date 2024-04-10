@@ -8,6 +8,21 @@ tags: [CS, Math, AI]
 
 # AI Basic Notes
 
+## Multilayer Perceptron
+
+![Multilayer Perceptron](./figures/MultilayerPerceptron.avif 'Multilayer Perceptron')
+
+多层感知机是一种前馈神经网络 (Feedforward Neural Network)
+就像是一个模拟大脑处理信息的过程,
+通过多层处理, 从原始数据中提取特征, 并做出预测或分类:
+
+- 线性变换:
+  $H=w*x+b$.
+- 激活函数:
+  $y=\sigma(H)$, e.g ReLU (Rectified Linear Unit), Sigmoid,
+  引入非线性特性, 使得网络可以学习和模拟复杂函数.
+- 它通过调整内部连接权重来学习和改进其预测能力.
+
 ## Residual Architecture
 
 ResNet 通过残差学习解决了深度网络的退化问题 (深度网络的训练问题),
