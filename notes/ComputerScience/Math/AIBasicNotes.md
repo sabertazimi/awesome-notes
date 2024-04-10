@@ -21,12 +21,12 @@ ResNet 通过引入残差连接, 允许网络学习残差映射而不是原始�
 
 $$
 \begin{equation}
-  \begin{split}
-    \mathrm{y}&=\mathcal{F}(\mathrm{x}, W_i)+W_s\mathrm{x}    \\
-              &=\mathcal{F}(\mathrm{x})+\mathrm{x}            \\
-              &=\mathcal{H}(\mathrm{x})-\mathrm{x}+\mathrm{x} \\
-              &=\mathcal{H}(\mathrm{x})
-  \end{split}
+\begin{split}
+  \mathrm{y}&=\mathcal{F}(\mathrm{x}, W_i)+W_s\mathrm{x}    \\
+            &=\mathcal{F}(\mathrm{x})+\mathrm{x}            \\
+            &=\mathcal{H}(\mathrm{x})-\mathrm{x}+\mathrm{x} \\
+            &=\mathcal{H}(\mathrm{x})
+\end{split}
 \end{equation}
 $$
 
@@ -67,7 +67,7 @@ a self-attention module takes in n inputs and returns n outputs:
 
 $$
 \begin{equation}
-  Attention(Q, K, V)=softmax(\frac{QK^T}{\sqrt{d_k}})V
+  \text{Attention}(Q, K, V)=\text{softmax}(\frac{QK^T}{\sqrt{d_k}})V
 \end{equation}
 $$
 
@@ -142,7 +142,7 @@ $XX^T$ 为行向量分别与自己和其他两个行向量做内积 (点乘),
 :::
 
 Softmaxed([$\sigma(z_i)=\frac{e^{z_i}}{\sum_{j=1}^K{e^{z_j}}}$](https://en.wikipedia.org/wiki/Softmax_function))
-attention scores, $softmax(\frac{QK^T}{\sqrt{d_k}})$:
+attention scores, $\text{softmax}(\frac{QK^T}{\sqrt{d_k}})$:
 
 ```python
 softmax([2, 4, 4]) = [0.0, 0.5, 0.5]
@@ -151,13 +151,13 @@ softmax([2, 4, 4]) = [0.0, 0.5, 0.5]
 :::tip $\sqrt{d_k}$
 
 矩阵 $A$ 中每一个元素除以 $\sqrt{d_k}$ 后, 方差变为 1.
-这使得 $softmax(A)$ 的分布"陡峭"程度与 $d$ 解耦,
+这使得 $\text{softmax}(A)$ 的分布"陡峭"程度与 $d_k$ 解耦,
 从而使得训练过程中梯度值保持稳定.
 
 :::
 
 Alignment vectors (yellow vectors) addition to Output 1,
-$softmax(\frac{QK^T}{\sqrt{d_k}})V$:
+$\text{softmax}(\frac{QK^T}{\sqrt{d_k}})V$:
 
 ```python
 1: 0.0 * [1, 2, 3] = [0.0, 0.0, 0.0]
@@ -253,6 +253,17 @@ print(outputs)
 ```
 
 ### Multi-Head Attention Mechanism
+
+Multiple output channels:
+
+$$
+\begin{equation}
+\begin{split}
+  \text{MultiHead}(Q,K,V)&=\text{Concat}(\text{head}_1,\ldots,\text{head}_h)W^O \\
+  \text{where}\ \text{head}_i&=\text{Attention}(QW_i^Q,KW_i^K,VW_i^V)
+\end{split}
+\end{equation}
+$$
 
 ```python
 from math import sqrt
