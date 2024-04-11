@@ -505,6 +505,8 @@ Implementing design tokens in your workflow:
 - [Back Button](https://www.smashingmagazine.com/2022/08/back-button-ux-design)
 - [Error Message](https://www.smashingmagazine.com/2022/08/error-messages-ux-design)
 - [Inline Validation](https://www.smashingmagazine.com/2022/09/inline-validation-web-forms-ux)
+- [Pronouns Selector](https://uxdesign.cc/asking-users-for-their-pronouns-a-guide-for-ux-designers-4f31736ae808)
+- [Mobile Apps](https://www.smashingmagazine.com/2024/04/things-users-would-appreciate-mobile-apps)
 
 ### HomePage User Experience
 
