@@ -8,6 +8,9 @@ tags: [Web, React]
 
 # React Basic Notes
 
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
 ## Props and States
 
 ### SetState
@@ -2925,6 +2928,74 @@ polish FCP and LCP, and improve SEO:
 Each meta-framework came up with its own approach to achieve such target.
 Next.js has one approach, Gatsby has another, Remix has yet another.
 It hasn't been standardized.
+
+<Tabs>
+<TabItem value="next" label="Next">
+
+```tsx
+// pages/index.js
+import ParentComponent from '../components/parent-component'
+import type { PageProps } from '@/types'
+
+export default function Page({ data }: PageProps) {
+  return <ParentComponent data={data} />
+}
+
+export async function getServerSideProps() {
+  const response = await fetch('https://api.github.com/repos/vercel/next.js')
+  const data = await response.json()
+
+  return { props: { data } }
+}
+```
+
+</TabItem>
+<TabItem value="remix" label="Remix">
+
+```tsx
+// app/routes/_index.jsx
+import { useLoaderData } from '@remix-run/react'
+import { json } from '@remix-run/node'
+import ParentComponent from '../components/parent-component'
+
+export default function Page() {
+  const { data } = useLoaderData()
+
+  return <ParentComponent data={data} />
+}
+
+export async function loader() {
+  const response = await fetch('https://api.github.com/repos/remix-run/remix')
+  const data = await response.json()
+
+  return json({
+    data,
+  })
+}
+```
+
+</TabItem>
+<TabItem value="gatsby" label="Gatsby">
+
+```tsx
+// src/pages/index.js
+import ParentComponent from '../components/parent-component'
+import type { PageProps } from '@/types'
+
+export default function Page({ data }: PageProps) {
+  return <ParentComponent data={data} />
+}
+
+export async function getServerData() {
+  const response = await fetch('https://api.github.com/repos/gatsbyjs/gatsby')
+  const data = await response.json()
+
+  return { props: { data } }
+}
+```
+
+</TabItem>
+</Tabs>
 
 For years, the React team has been quietly tinkering on this problem,
 trying to come up with an official way to solve this problem.
