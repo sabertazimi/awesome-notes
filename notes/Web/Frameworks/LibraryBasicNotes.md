@@ -1132,16 +1132,15 @@ tags: [Web, Framework, Library]
 - [INI Parser](https://github.com/npm/ini)
 - [RSS Parser](https://github.com/rbren/rss-parser)
 
-### JavaScript Parser
+### JavaScript Parser and Engine
 
-- [Acorn](https://github.com/acornjs/acorn)
-- [Babel](https://github.com/babel/babel)
+- [Babel: Compiler for Writing Next Generation JavaScript](https://github.com/babel/babel)
 - [Sucrase: Super-fast Alternative to Babel Targeting Modern JS Runtime](https://github.com/alangpierce/sucrase)
-- [Espree](https://github.com/eslint/espree)
-- [Esprima](https://github.com/jquery/esprima)
-- [AST Explorer](https://github.com/fkling/astexplorer)
+- [Acorn: Small, Fast, JavaScript-based JavaScript Parser](https://github.com/acornjs/acorn)
+- [Espree: Esprima-compatible JavaScript Parser](https://github.com/eslint/espree)
 - [ReactDocGen TypeScript: React TypeScript Components Properties Parser](https://github.com/styleguidist/react-docgen-typescript)
 - [Boa: Embed JavaScript Engine Written in Rust](https://github.com/boa-dev/boa)
+- [QuickJS: Small and Embeddable Javascript Engine](https://github.com/bellard/quickjs)
 
 ### Markdown Parser and Render
 
@@ -1446,8 +1445,6 @@ tags: [Web, Framework, Library]
 
 - [SourceGraph: Universal Code Search](https://github.com/sourcegraph/sourcegraph)
 - [SonarSource: Static Source Code Analyzer](https://github.com/SonarSource/SonarJS)
-- [Babel](https://github.com/babel/babel)
-- [Acorn](https://github.com/acornjs/acorn)
 - [AST Explorer](https://github.com/fkling/astexplorer)
 - [PMD: Extensible Multi-language Static Code Analyzer](https://github.com/pmd/pmd)
 - [Java SpotBugs](https://github.com/spotbugs/spotbugs)
