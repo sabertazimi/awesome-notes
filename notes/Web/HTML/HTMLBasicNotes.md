@@ -295,15 +295,6 @@ Generating favicons in [all necessary sizes](https://github.com/pixel-point/favp
     </div>
   </fieldset>
 </form>
-
-<input type="email" />
-<input type="url" />
-<input type="number" />
-<input type="tel" />
-<input type="search" />
-<input type="range" />
-<input type="color" />
-<input type="date picker(data,month,week,time,datetime,datetime-local)" />
 ```
 
 ### Form Validation
@@ -486,6 +477,29 @@ textbox.value = '666666' //  等同于 input.value = '666666';
 ```
 
 ### Form Input
+
+#### Input Types
+
+```html
+<!-- default -->
+<input type="text" />
+<!-- numeric keyboard -->
+<input type="tel" />
+<!-- numeric keyboard -->
+<input type="number" />
+<!-- displays @ key -->
+<input type="email" />
+<!-- displays .com key -->
+<input type="url" />
+<!-- displays search button -->
+<input type="search" />
+<!-- displays date picker or wheel controls -->
+<input type="date" />
+<input type="date picker(data,month,week,time,datetime,datetime-local)" />
+
+<input type="range" />
+<input type="color" />
+```
 
 #### Text Input
 
