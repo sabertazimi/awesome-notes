@@ -341,6 +341,7 @@ tags: [Web, Framework, Library]
 
 ### Color Utils
 
+- [Color.js: Color Conversion and Manipulation Library](https://github.com/color-js/color.js)
 - [Prism: GitHub Color Palettes Creating and Maintaining Tool](https://github.com/primer/prism)
 - [Color2K: Color Parsing and Manipulation](https://github.com/ricokahler/color2k)
 - [Chroma: All Kinds of Color Manipulations](https://github.com/gka/chroma.js)
