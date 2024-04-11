@@ -10,16 +10,35 @@ tags: [Web, Node, GraphQL]
 
 ## Better REST
 
-- No OverFetching
-- No UnderFetching (need multiple RESTful request)
-- Flexible (clients can specify their exact data requirements)
-- strong `Schema` and `Type System` (just like database)
+Comparing to RESTful API, GraphQL has several advantages:
+
+- No overfetching.
+- No underfetching: need multiple RESTful request.
+- Flexible: clients can specify their exact data requirements.
+- Strong `Schema` and `Type System`.
+
+GraphQL [solves](https://mxstbr.com/thoughts/graphql):
+
+- Mobile apps break periodically after API changes:
+  GraphQL only returns the fields the client explicitly requests,
+  so new capabilities can be added by adding new types or fields,
+  which is never a breaking change for existing clients.
+- Slow loading times because of request waterfalls and/or overfetching:
+  With GraphQL, a client sends one request for all the data it needs,
+  and the server resolves all of it and sends it back in one response.
+- Difficult maintenance and endpoint discovery
+  due to hundreds of duplicative one-off endpoints:
+  GraphQL centralizes the data access of each entity/resource.
+- Security and performance are a game of whack-a-mole:
+  GraphQL is the central data access layer for clients,
+  so you can enforce security and performance SLAs
+  at as fine-grained a level as you need.
 
 ## GraphQL Client
 
-- `ctrl+enter`: run query
-- `ctrl+space`: auto complete in `()` or `{}`
-- `shift+ctrl+p`: prettify
+- `Ctrl + Enter`: run query.
+- `Ctrl + Space`: auto complete in `()` or `{}`.
+- `Ctrl + Shift + P`: prettify.
 
 ## Basic Query Syntax
 
