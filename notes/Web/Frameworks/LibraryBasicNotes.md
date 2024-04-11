@@ -1295,6 +1295,25 @@ tags: [Web, Framework, Library]
 - [ThirdWeb: Ultimate Web3 React Hooks Collection](https://github.com/thirdweb-dev/react)
 - [MetaMask: Ethereum Blockchain Apps Browser Extension](https://github.com/MetaMask/metamask-extension)
 
+## Security
+
+### Crypto
+
+- [NanoID](https://github.com/ai/nanoid)
+- [MD5](https://github.com/blueimp/JavaScript-MD5)
+- [Base64](https://github.com/dankogai/js-base64)
+
+### Auth
+
+- [SuperTokens: Open Source Alternative to Auth0 / Firebase Auth / AWS Cognito](https://github.com/supertokens/supertokens-website)
+- [NextAuth: Next.js Authentication](https://github.com/nextauthjs/next-auth)
+- [Lucia Auth: Simple Session Authentication](https://github.com/lucia-auth/lucia)
+- [Oslo: Collection of Auth-related Utilities](https://github.com/pilcrowonpaper/oslo)
+
+### XSS
+
+- [DOMPurify: DOM-only, super-fast, uber-tolerant XSS sanitizer for HTML, MathML and SVG](https://github.com/cure53/DOMPurify)
+
 ## Back-end Server
 
 ### Middlewares
@@ -1329,25 +1348,6 @@ tags: [Web, Framework, Library]
 - [Swagger Codegen: Template-driven Engine to Generate Documentation, API Clients and Server Stubs](https://github.com/swagger-api/swagger-codegen)
 - [Swagger UI: Generate Beautiful Documentation from Swagger-compliant API](https://github.com/swagger-api/swagger-ui)
 - [DevDocs](https://github.com/freeCodeCamp/devdocs)
-
-## Security
-
-### Crypto
-
-- [NanoID](https://github.com/ai/nanoid)
-- [MD5](https://github.com/blueimp/JavaScript-MD5)
-- [Base64](https://github.com/dankogai/js-base64)
-
-### Auth
-
-- [SuperTokens: Open Source Alternative to Auth0 / Firebase Auth / AWS Cognito](https://github.com/supertokens/supertokens-website)
-- [NextAuth: Next.js Authentication](https://github.com/nextauthjs/next-auth)
-- [Lucia Auth: Simple Session Authentication](https://github.com/lucia-auth/lucia)
-- [Oslo: Collection of Auth-related Utilities](https://github.com/pilcrowonpaper/oslo)
-
-### XSS
-
-- [DOMPurify: DOM-only, super-fast, uber-tolerant XSS sanitizer for HTML, MathML and SVG](https://github.com/cure53/DOMPurify)
 
 ## AI
 
