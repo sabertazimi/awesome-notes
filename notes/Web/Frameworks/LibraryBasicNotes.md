@@ -1026,13 +1026,6 @@ tags: [Web, Framework, Library]
 - [NocoDB: No Code Database](https://github.com/nocodb/nocodb)
 - [Directus: No-code Data Collaboration App for SQL Database](https://github.com/directus/directus)
 
-### DaaS and BaaS
-
-- [Firebase: App Development Platform](https://github.com/firebase/quickstart-js)
-- [Open Source Firebase Alternative](https://github.com/supabase/supabase)
-- [Convex: Backend-as-a-Service for Fullstack App Development](https://github.com/get-convex/convex-backend)
-- [AirTable: Google Sheets Alternative](https://github.com/Airtable/airtable.js)
-
 ## Search
 
 ### Search UI Components
@@ -1348,6 +1341,14 @@ tags: [Web, Framework, Library]
 - [Swagger Codegen: Template-driven Engine to Generate Documentation, API Clients and Server Stubs](https://github.com/swagger-api/swagger-codegen)
 - [Swagger UI: Generate Beautiful Documentation from Swagger-compliant API](https://github.com/swagger-api/swagger-ui)
 - [DevDocs](https://github.com/freeCodeCamp/devdocs)
+
+### BaaS
+
+- [Firebase: App Development Platform](https://github.com/firebase/quickstart-js)
+- [Open Source Firebase Alternative](https://github.com/supabase/supabase)
+- [Convex: Backend-as-a-Service for Fullstack App Development](https://github.com/get-convex/convex-backend)
+- [AirTable: Google Sheets Alternative](https://github.com/Airtable/airtable.js)
+- [ValTown: Collaborative, Flexible Environment for Creating and Running JavaScript](https://github.com/val-town)
 
 ## AI
 
