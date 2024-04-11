@@ -868,8 +868,8 @@ They interrupt one or more of the steps:
   - Modern format: WebP/SVG.
   - Correspond size.
 - Hero images pre-fetch loading (LCP).
-- Offscreen images lazy loading (FID).
-- Critical render path blocking images (FID):
+- Offscreen images lazy loading (INP).
+- Critical render path blocking images (INP):
   - Images compression and minification.
   - Images CDN.
 - Images placeholder with `aspect-ratio` (CLS).
@@ -1341,11 +1341,12 @@ Load 也不一定代表用户看到主要内容.
 但缺点是无原生 API 支持, 算法推导时 DOM 节点含权重.
 
 - First Paint (FP): 0 ~ 1 ~ 2.5s.
-- First Contentful Paint (FCP): 0 ~ 2 ~ 4s.
 - First Meaningful Paint (FMP)
+- First Contentful Paint (FCP): 0 ~ 2 ~ 4s.
 - Largest Contentful Paint (LCP): 0 ~ 2.5 ~ 4s.
+- Interaction to Next Paint (INP): 0 ~ 0.2 ~ 0.5s.
+- Cumulative Layout Shift (CLS): 0 ~ 0.1 ~ 0.25.
 - Time to Interactive (TTI): 0 ~ 3.8 ~ 7.3s.
-- First Input Delay (FID): 0 ~ 0.1 ~ 0.3s.
 
 ### Monitoring Report Dimension
 
@@ -1370,6 +1371,20 @@ Load 也不一定代表用户看到主要内容.
 - Prefer `visibilitychange`/`pagehide` event.
   `unload`/`beforeunload` event not precise for mobile users:
   e.g switch to another app not trigger `unload` event.
+
+```ts
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOM 挂载时间: ', Date.now() - timerStart)
+
+  // 性能日志上报...
+})
+
+window.addEventListener('load', () => {
+  console.log('所有资源加载完成时间: ', Date.now() - timerStart)
+
+  // 性能日志上报...
+})
+```
 
 ### GIF Image Beacon
 
@@ -1409,45 +1424,6 @@ performance.mark('mainThread-start')
 expensiveCalculation()
 performance.mark('mainThread-stop')
 performance.measure('mainThread', 'mainThread-start', 'mainThread-stop')
-```
-
-### FP
-
-First paint time:
-
-```ts
-function entryHandler(list) {
-  for (const entry of list.getEntries()) {
-    if (entry.name === 'first-paint')
-      observer.disconnect()
-
-    console.log(entry)
-  }
-}
-
-const observer = new PerformanceObserver(entryHandler)
-observer.observe({ type: 'paint', buffered: true })
-
-// {
-//   duration: 0,
-//   entryType: "paint",
-//   name: "first-paint",
-//   startTime: 359,
-// }
-```
-
-```ts
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('DOM 挂载时间: ', Date.now() - timerStart)
-
-  // 性能日志上报...
-})
-
-window.addEventListener('load', () => {
-  console.log('所有资源加载完成时间: ', Date.now() - timerStart)
-
-  // 性能日志上报...
-})
 ```
 
 ```ts
@@ -1542,6 +1518,31 @@ const responseTime = pageNav.responseEnd - pageNav.responseStart
 const requestResponseTime = pageNav.responseEnd - pageNav.requestStart
 ```
 
+### FP
+
+First paint time:
+
+```ts
+function entryHandler(list) {
+  for (const entry of list.getEntries()) {
+    if (entry.name === 'first-paint')
+      observer.disconnect()
+
+    console.log(entry)
+  }
+}
+
+const observer = new PerformanceObserver(entryHandler)
+observer.observe({ type: 'paint', buffered: true })
+
+// {
+//   duration: 0,
+//   entryType: "paint",
+//   name: "first-paint",
+//   startTime: 359,
+// }
+```
+
 ### FCP
 
 First Contentful Paint:
@@ -1615,6 +1616,18 @@ observer.observe({ type: 'largest-contentful-paint', buffered: true })
 // }
 ```
 
+### INP
+
+[![Interaction to Next Paint](./figures/InteractionToNextPaint.webp)](https://frontendmasters.com/blog/understanding-inp)
+
+Interaction to Next Paint (INP) 已取代 FID,
+[成为 Core Web Vitals 的一部分](https://web.dev/blog/inp-cwv-launch):
+
+- It considers the time between user's interaction and the next paint.
+- Input delay: callback queue blocked by other higher priority tasks.
+- Processing delay: event handler execution time.
+- Presentation delay: rendering and compositing time.
+
 ### CLS
 
 Cumulative Layout Shift:
@@ -1687,17 +1700,16 @@ observer.observe({ type: 'layout-shift', buffered: true })
 
 ### Core Web Vitals
 
-Google Core Web Vitals:
+Google [Core Web Vitals](https://web.dev/articles/vitals):
 
 - 加载 (Loading): LCP.
-- 交互 (Interactivity): FID.
+- 交互 (Interactivity): INP.
 - 视觉稳定 (Visual Stability): CLS.
 
 ### Web Vitals Reference
 
-- FID tracking [tool](https://github.com/GoogleChromeLabs/first-input-delay).
-- FID optimization [guide](https://web.dev/optimize-fid).
 - LCP optimization [guide](https://web.dev/optimize-lcp).
+- INP optimization [guide](https://web.dev/explore/how-to-optimize-inp).
 - CLS optimization [guide](https://web.dev/optimize-cls).
 - Web vitals measurement [best practices](https://web.dev/vitals-field-measurement-best-practices).
 - Web vitals field data debugging [guide](https://web.dev/debug-web-vitals-in-the-field).
