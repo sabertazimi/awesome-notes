@@ -128,7 +128,7 @@ tags: [Web, CSS]
 
 ![Layer Priority](./figures/LayerPriority.png 'Layer Priority')
 
-### CSS Scope
+### Scope
 
 [`@scope`](https://developer.mozilla.org/en-US/docs/Web/CSS/@scope):
 
@@ -162,6 +162,19 @@ tags: [Web, CSS]
 
   :scope img {
     background-color: red;
+  }
+}
+```
+
+### Nesting
+
+[`&` nesting](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_nesting):
+
+```css
+ul {
+  & + & {
+    font-weight: bold;
+    color: red;
   }
 }
 ```
