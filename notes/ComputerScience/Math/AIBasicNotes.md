@@ -397,6 +397,120 @@ $$
 \end{bmatrix}_{d\times{1}}
 $$
 
+## LLM
+
+### LangChain
+
+[LangChain](https://upstash.com/blog/langchain-explained)
+aims to make programming with LLMs easier.
+
+[![LangChain Modules](./figures/LangChain.png)](https://github.com/langchain-ai/langchainjs)
+
+Model I/O module
+normalize LLM inputs (e.g. prompts), APIs, and outputs (e.g. completions):
+
+![LangChain Model I/O Module](./figures/LangChainModelIO.png 'LangChain Model I/O Module')
+
+```ts
+import { PromptTemplate } from '@langchain/core/prompts'
+import { OpenAI } from '@langchain/openai'
+import { CommaSeparatedListOutputParser } from '@langchain/core/output_parsers'
+
+const template = PromptTemplate.fromTemplate(
+  'List 10 {subject}.\n{format_instructions}'
+)
+const model = new OpenAI({ temperature: 0 })
+const listParser = new CommaSeparatedListOutputParser()
+
+const prompt = await template.format({
+  subject: 'countries',
+  format_instructions: listParser.getFormatInstructions(),
+})
+
+const result = await model.invoke(prompt)
+
+const listResult = await parser.parse(result)
+```
+
+Retrieval module
+help to process data alongside the user inputs,
+making it easier to retrieve relevant information:
+
+![LangChain Retrieval Module](./figures/LangChainRetrieval.png 'LangChain Retrieval Module')
+
+> [Quality in, quality out.](https://github.blog/2024-04-04-what-is-retrieval-augmented-generation-and-what-does-it-do-for-generative-ai)
+
+```ts
+import { CSVLoader } from 'langchain/document_loaders/fs/csv'
+import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter'
+import { OpenAIEmbeddings } from '@langchain/openai'
+import { UpstashVectorStore } from '@langchain/community/vectorstores/upstash'
+import { ScoreThresholdRetriever } from 'langchain/retrievers/score_threshold'
+
+// CSV data.
+const loader = new CSVLoader('path/to/example.csv')
+const docs = await loader.load()
+
+// Text splitter.
+const splitter = new RecursiveCharacterTextSplitter({
+  chunkSize: 10,
+  chunkOverlap: 1,
+})
+const docs = await splitter.createDocuments(['...'])
+
+// Embeddings and vector store.
+const vectorStore = new UpstashVectorStore(new OpenAIEmbeddings())
+await vectorStore.addDocuments(docs)
+const retriever = ScoreThresholdRetriever.fromVectorStore(vectorStore, {
+  minSimilarityScore: 0.9,
+})
+const result = await retriever.getRelevantDocuments('...?')
+```
+
+Chains module
+link tasks together:
+
+![LangChain Chains Module](./figures/LangChainChains.png 'LangChain Chains Module')
+
+```ts
+import { PromptTemplate } from '@langchain/core/prompts'
+import { RunnableSequence } from '@langchain/core/runnables'
+import { OpenAI } from '@langchain/openai'
+import { CommaSeparatedListOutputParser } from '@langchain/core/output_parsers'
+
+const template = PromptTemplate.fromTemplate(
+  'List 10 {subject}.\n{format_instructions}'
+)
+const model = new OpenAI({ temperature: 0 })
+const listParser = new CommaSeparatedListOutputParser()
+
+const chain = RunnableSequence.from([template, model, listParser])
+
+const result = await chain.invoke({
+  subject: 'countries',
+  format_instructions: listParser.getFormatInstructions(),
+})
+```
+
+Agents module
+is chains with a list of functions (called tools) it can execute,
+while chains are hardcoded,
+agents choose their actions with the help of an LLM:
+
+![LangChain Agents Module](./figures/LangChainAgents.png 'LangChain Agents Module')
+
+```ts
+import { VectorStoreToolkit, createVectorStoreAgent } from 'langchain/agents'
+
+const toolkit = new VectorStoreToolkit(
+  { name: 'Demo Data', vectorStore },
+  model
+)
+const agent = createVectorStoreAgent(model, toolkit)
+
+const result = await agent.invoke({ input: '...' })
+```
+
 ## AI Platform
 
 - OpenAI GPT [API](https://platform.openai.com).
