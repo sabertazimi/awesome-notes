@@ -1298,11 +1298,10 @@ tags: [Web, Framework, Library]
 
 ## Back-end Server
 
-- [Parse Server](https://github.com/parse-community/parse-server)
-
 ### Middlewares
 
 - [Body Parser](https://github.com/expressjs/body-parser)
+- [Parse Server](https://github.com/parse-community/parse-server)
 - [Cross Origin Resource Sharing](https://github.com/expressjs/cors)
 - [Cross Site Request Forgery Protection](https://github.com/expressjs/csurf)
 - [Cookie Parser](https://github.com/expressjs/cookie-parser)
@@ -1332,20 +1331,24 @@ tags: [Web, Framework, Library]
 - [Swagger UI: Generate Beautiful Documentation from Swagger-compliant API](https://github.com/swagger-api/swagger-ui)
 - [DevDocs](https://github.com/freeCodeCamp/devdocs)
 
-### Security
+## Security
 
-#### Crypto
+### Crypto
 
 - [NanoID](https://github.com/ai/nanoid)
 - [MD5](https://github.com/blueimp/JavaScript-MD5)
 - [Base64](https://github.com/dankogai/js-base64)
 
-#### Auth
+### Auth
 
 - [SuperTokens: Open Source Alternative to Auth0 / Firebase Auth / AWS Cognito](https://github.com/supertokens/supertokens-website)
 - [NextAuth: Next.js Authentication](https://github.com/nextauthjs/next-auth)
 - [Lucia Auth: Simple Session Authentication](https://github.com/lucia-auth/lucia)
 - [Oslo: Collection of Auth-related Utilities](https://github.com/pilcrowonpaper/oslo)
+
+### XSS
+
+- [DOMPurify: DOM-only, super-fast, uber-tolerant XSS sanitizer for HTML, MathML and SVG](https://github.com/cure53/DOMPurify)
 
 ## AI
 
