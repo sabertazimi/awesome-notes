@@ -1488,7 +1488,7 @@ tags: [Web, Framework, Library]
 - [Retoggle: Component Inspector](https://github.com/Raathigesh/retoggle)
 - [OpenReplay: Session Replay Tool](https://github.com/openreplay/openreplay)
 
-### Monitoring Tools
+### Analytics and Monitoring Tools
 
 - [Plausible Analytics](https://github.com/plausible/analytics)
 - [NetData](https://github.com/netdata/netdata)
@@ -1497,6 +1497,7 @@ tags: [Web, Framework, Library]
 - [Sentry: Application Monitoring Focus on Error Reporting](https://github.com/getsentry/sentry)
 - [OpenTelemetry: Traces and Metrics Framework](https://github.com/open-telemetry/opentelemetry-js)
 - [Grafana: Open and Composable Observability and Data Visualization Platform](https://github.com/grafana/grafana)
+- [CounterScale: Free Scalable Web Analytics Running on Cloudflare](https://github.com/benvinegar/counterscale)
 
 ### Performance Tools
 
