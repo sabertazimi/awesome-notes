@@ -710,7 +710,7 @@ tags: [Web, Framework, Library]
 - [React Transition Group](https://github.com/reactjs/react-transition-group)
 - [Airbnb AE Solution](https://github.com/airbnb/lottie-web)
 - [Animate.css](https://github.com/daneden/animate.css)
-- [Barba.js: Smooth Transition between Pages](https://github.com/luruke/barba.js)
+- [Barba.js: Pages Smooth Transition](https://github.com/luruke/barba.js)
 - [Tilt: Smooth 3D Tilt JavaScript Library](https://github.com/micku7zu/vanilla-tilt.js)
 - [CountUp: Count Up Animation](https://github.com/glennreyes/react-countup)
 - [TheatreJS: 3D Scene and Motion Design Editor](https://github.com/theatre-js/theatre)
@@ -861,6 +861,7 @@ tags: [Web, Framework, Library]
 
 - [PhotoSwipe: JavaScript Image Gallery and LightBox](https://github.com/dimsemenov/PhotoSwipe)
 - [LightGallery: Customizable, Modular, Responsive, LightBox Gallery Plugin](https://github.com/sachinchoolur/lightGallery)
+- [ReactLightBox: Modern React LightBox component](https://github.com/igordanchenko/yet-another-react-lightbox)
 - [Viewer.js: Images Viewer Gallery](https://github.com/fengyuanchen/viewerjs)
 - [PhotoView: Exquisite React Photo Preview Component](https://github.com/MinJieLiu/react-photo-view)
 - [Zoom: Medium Style Image Zoom for React](https://github.com/rpearce/react-medium-image-zoom)
