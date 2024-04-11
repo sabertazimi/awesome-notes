@@ -3809,6 +3809,8 @@ assert.equal(copy instanceof MyClass, false)
 
 #### Object Deep Clone
 
+Recursively copy all properties of an object:
+
 ```ts
 function deepClone(original) {
   if (Array.isArray(original)) {
@@ -3846,6 +3848,50 @@ function deepUpdate(original, keys, value) {
     return original
   }
 }
+```
+
+Using `JSON.parse(JSON.stringify(obj))`:
+
+- Not copy prototype (`__proto__`).
+- Not copy getter and setter.
+- Not copy non-enumerable properties.
+- Not copy Symbol properties.
+- Not copy circular references.
+- Not copy `undefined`, `function`, `symbol`.
+
+```ts
+const obj = { a: 1, b: { c: 2 } }
+const clone = JSON.parse(JSON.stringify(obj))
+console.log(clone) // { a: 1, b: { c: 2 } }
+```
+
+Using [`window.structuredClone()`](https://developer.mozilla.org/en-US/docs/Web/API/structuredClone):
+
+```ts
+// Create an object with a value and a circular reference to itself.
+const original = { name: 'MDN' }
+original.itself = original
+
+// Clone it
+const clone = structuredClone(original)
+
+console.assert(clone !== original) // the objects are not the same (not same identity)
+console.assert(clone.name === 'MDN') // they do have the same values
+console.assert(clone.itself === clone) // and the circular reference is preserved
+```
+
+```ts
+const room1 = {
+  people: ['Alan', 'Bob'],
+}
+
+const room2 = structuredClone(room1)
+
+room2.people.push('Charlie')
+room1.people.pop()
+
+console.log(room2.people) // ["Alan", "Bob", "Charlie"]
+console.log(room1.people) // ["Alan"]
 ```
 
 ### Object Inheritance
