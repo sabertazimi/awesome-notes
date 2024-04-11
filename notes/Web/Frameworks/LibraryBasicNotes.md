@@ -1033,8 +1033,10 @@ tags: [Web, Framework, Library]
 
 ### DaaS and BaaS
 
+- [Firebase: App Development Platform](https://github.com/firebase/quickstart-js)
 - [Open Source Firebase Alternative](https://github.com/supabase/supabase)
 - [Convex: Backend-as-a-Service for Fullstack App Development](https://github.com/get-convex/convex-backend)
+- [AirTable: Google Sheets Alternative](https://github.com/Airtable/airtable.js)
 
 ## Search
 
