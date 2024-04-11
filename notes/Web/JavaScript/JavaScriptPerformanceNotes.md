@@ -1398,6 +1398,7 @@ beacon.src = `http://www.example.com/logger/beacon.gif?page=${encodeURI(
 
 - Performance monitoring data collection and report [case](https://zhuanlan.zhihu.com/p/420330110).
 - Performance monitoring real world [case](https://juejin.cn/post/7078512301665419295).
+- Dangerous performance cheating [hacks](https://performance.shopify.com/blogs/blog/don-t-get-scammed-by-fake-performance-experts-and-apps).
 
 ## Web Vitals
 
