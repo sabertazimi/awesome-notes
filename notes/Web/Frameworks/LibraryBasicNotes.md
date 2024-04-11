@@ -619,8 +619,6 @@ tags: [Web, Framework, Library]
 
 - [Spectacle: React Based Presentation Slides](https://github.com/FormidableLabs/spectacle)
 - [Reveal: HTML Presentation Framework](https://github.com/hakimel/reveal.js)
-- [MDX Deck](https://github.com/jxnblk/mdx-deck)
-- [Surfer: Highlighting, Zooming, Scrolling, Focusing and Morphing Code Slides](https://github.com/pomber/code-surfer)
 - [SliDev: Vue Based Presentation Slides](https://github.com/slidevjs/slidev)
 - [Impress: Prezi-like Presentation Slides](https://github.com/impress/impress.js)
 - [PPTX: TypeScript PowerPoint Presentations](https://github.com/gitbrent/PptxGenJS)
