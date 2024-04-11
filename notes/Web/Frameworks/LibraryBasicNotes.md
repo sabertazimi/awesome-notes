@@ -1221,13 +1221,11 @@ tags: [Web, Framework, Library]
 
 ### Terminal
 
-- [React Terminal](https://github.com/rohanchandra/react-terminal-component)
-- [React Console Emulator](https://github.com/js-rcon/react-console-emulator)
 - [Hyper: Electron Terminal](https://github.com/vercel/hyper)
-- [Xterm.js: Xterm Terminal](https://github.com/xtermjs/xterm.js)
-- [Jay: Supercharged JavaScript REPL](https://github.com/nikersify/jay)
-- [Fig: Terminal Autocomplete](https://github.com/withfig/autocomplete)
+- [Xterm.js: Xterm Terminal for Web](https://github.com/xtermjs/xterm.js)
+- [Fig: IDE-style Autocomplete for Terminal and Shell](https://github.com/withfig/autocomplete)
 - [Eruda: Console for Mobile Browsers](https://github.com/liriliri/eruda)
+- [Warp: Modern and Rust-based AI Terminal](https://github.com/warpdotdev/Warp)
 
 ## Daemon
 
