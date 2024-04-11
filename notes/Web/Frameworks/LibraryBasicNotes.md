@@ -882,12 +882,6 @@ tags: [Web, Framework, Library]
 
 ## Canvas
 
-- [React Three Fiber: React Renderer for Three.js](https://github.com/pmndrs/react-three-fiber)
-- [PixiJS: Create Beautiful Digital Content with Fast and Flexible 2D WebGL Renderer](https://github.com/pixijs/pixijs)
-- [HTML2Canvas](https://github.com/niklasvh/html2canvas)
-- [Rough.js](https://github.com/pshihn/rough)
-- [Canvas Manipulation](https://github.com/meltingice/CamanJS)
-
 ### Particles
 
 - [HTML5 Particles](https://github.com/MapleRecall/html5-particles)
@@ -898,14 +892,18 @@ tags: [Web, Framework, Library]
 
 - [Obelisk.js](https://github.com/nosir/obelisk.js)
 
+### 2D Engine
+
+- [PixiJS: Create Beautiful Digital Content with Fast and Flexible 2D WebGL Renderer](https://github.com/pixijs/pixijs)
+- [HTML2Canvas](https://github.com/niklasvh/html2canvas)
+- [Rough.js](https://github.com/pshihn/rough)
+
 ### 3D Engine
 
-- [CSS 3D Engine](https://github.com/shrekshrek/css3d-engine)
-- [Three.js](https://github.com/mrdoob/three.js)
-- [Krpano](https://krpano.com/docu/js)
-- [React Three Fiber](https://github.com/pmndrs/react-three-fiber)
-- [Oasis: Web-first and Mobile-first High-performance Real-time Development Platform](https://github.com/oasis-engine/engine)
+- [React Three Fiber: React Renderer for Three.js](https://github.com/pmndrs/react-three-fiber)
+- [P5.js: Utilize P5 Sketches within React Apps](https://github.com/P5-wrapper/react)
 - [Babylon.js: Powerful, Beautiful, Simple, and Open Game and Rendering Engine](https://github.com/BabylonJS/Babylon.js)
+- [Gala: Web-first and Mobile-first High-performance Real-time Development Platform](https://github.com/galacean/engine)
 
 ## Media
 
