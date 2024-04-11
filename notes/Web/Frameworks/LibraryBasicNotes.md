@@ -359,6 +359,7 @@ tags: [Web, Framework, Library]
 #### Gradient Tools
 
 - [PostCSS Gradient Plugin](https://github.com/larsenwork/postcss-easing-gradients)
+- [Neat: Build Awesome Gradients Using 3d Shaders](https://github.com/FireCMSco/neat)
 
 #### Gradient Editor
 
