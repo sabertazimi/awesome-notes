@@ -501,7 +501,6 @@ export default function SSRPage({ dateTime }: SSRPageProps) {
   )
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const getServerSideProps: GetServerSideProps = async () => {
   const res = await axios.get('https://worldtimeapi.org/api/ip')
 
@@ -578,7 +577,6 @@ export default function SSGPage({ dateTime }: SSGPageProps) {
   )
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const getStaticProps: GetStaticProps = async () => {
   const res = await axios.get('https://worldtimeapi.org/api/ip')
 
@@ -608,7 +606,6 @@ export default function ISR20Page({ dateTime }: ISR20PageProps) {
   )
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const getStaticProps: GetStaticProps = async () => {
   const res = await axios.get('https://worldtimeapi.org/api/ip')
 
