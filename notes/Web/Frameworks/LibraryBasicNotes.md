@@ -158,7 +158,6 @@ tags: [Web, Framework, Library]
 - [Rematch: Redux Framework](https://github.com/rematch/rematch)
 - [Reselect: Selector Library for Redux](https://github.com/reduxjs/reselect)
 - [ImmerJS: Create Next Immutable State by Mutating Current One](https://github.com/immerjs/immer)
-- [ReduxObservable: RxJS Middleware for Redux](https://github.com/redux-observable/redux-observable)
 
 ### Atom State Management
 
@@ -172,23 +171,21 @@ tags: [Web, Framework, Library]
 ### Reactive State Management
 
 - [XState: State Machines and State Charts for Modern Web](https://github.com/statelyai/xstate)
-- [RxJS Middleware](https://github.com/redux-observable/redux-observable)
-- [React Resolver](https://github.com/ericclemmons/react-resolver)
-- [Baobab](https://github.com/Yomguithereal/baobab)
+- [ReduxObservable: RxJS Middleware for Redux](https://github.com/redux-observable/redux-observable)
 
 ### Server State Management
 
 - [RTK Query: Redux Toolkit Server State Solution](https://redux-toolkit.js.org/rtk-query/overview)
-- [React Query: Fetching, Caching, Synchronizing and Updating Server State](https://github.com/tannerlinsley/react-query)
+- [TanStack Query: Fetching, Caching, Synchronizing and Updating Server State](https://github.com/TanStack/query)
 - [SWR: React Hooks for Remote Data Fetching](https://github.com/vercel/swr)
 - [Apollo GraphQL: Fully-featured, Production Ready Caching GraphQL Client](https://github.com/apollographql/apollo-client)
-- [URQL: Highly Customizable and Versatile GraphQL Client](https://github.com/FormidableLabs/urql)
+- [URQL: Highly Customizable and Versatile GraphQL Client](https://github.com/urql-graphql/urql)
 - [Evolution: Local-first Platform for Privacy and Ease of Use](https://github.com/evoluhq/evolu)
 
 ### Router State Management
 
+- [Router: Minimalist-friendly Router for React and Preact](https://github.com/molefrog/wouter)
 - [Navigo: Simple Vanilla Router](https://github.com/krasimir/navigo)
-- [Minimalist-friendly Router for React and Preact](https://github.com/molefrog/wouter)
 
 ## Hooks
 
