@@ -1595,7 +1595,7 @@ tags: [Web, Framework, Library]
 
 - [ChangeSets: Manage Monorepo Versioning and Changelogs](https://github.com/atlassian/changesets)
 - [Commitizen: Conventional Commits CLI Tool](https://github.com/commitizen/cz-cli)
-- [Semantic Release: Fully Automated Version Management and Package Publishing](https://github.com/semantic-release/semantic-release)
+- [Semantic Release: Fully Automated Version Management and Package Publishing](https://github.com/cycjimmy/semantic-release-action)
 - [Google Release Bot](https://github.com/googleapis/release-please)
 - [BeachBall: Sunniest Semantic Version Bumper](https://github.com/microsoft/beachball)
 - [Release It: Automate Versioning and Package Publishing](https://github.com/release-it/release-it)
