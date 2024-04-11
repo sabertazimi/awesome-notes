@@ -1449,9 +1449,9 @@ tags: [Web, Framework, Library]
 - [Babel](https://github.com/babel/babel)
 - [Acorn](https://github.com/acornjs/acorn)
 - [AST Explorer](https://github.com/fkling/astexplorer)
-- [CodeCrumbs](https://github.com/Bogdan-Lyashenko/codecrumbs)
 - [PMD: Extensible Multi-language Static Code Analyzer](https://github.com/pmd/pmd)
 - [Java SpotBugs](https://github.com/spotbugs/spotbugs)
+- [Madge: Create Graphs from AMD, CJS or ESM Dependencies](https://github.com/pahen/madge)
 - [Code2Flow: Call Graphs Generation for Dynamic Languages](https://github.com/scottrogowski/code2flow)
 
 ### Code Coverage Tools
