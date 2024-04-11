@@ -128,6 +128,44 @@ tags: [Web, CSS]
 
 ![Layer Priority](./figures/LayerPriority.png 'Layer Priority')
 
+### CSS Scope
+
+[`@scope`](https://developer.mozilla.org/en-US/docs/Web/CSS/@scope):
+
+- 局部上下文: 生效元素必须为 `@scope` 的子元素
+- 规则完整性: 规则中的每一行代码, 必须属于一个完整的规则, 不能是一条单独的 CSS 声明.
+
+```html
+<section class="scope-root">
+  <h3>Scope Root</h3>
+  <p>Paragraph 1</p>
+  <!-- Selected -->
+  <img src="image.jpg" alt="Image" />
+  <p>Paragraph 2</p>
+  <figure class="scope-limit">
+    <!-- Not selected -->
+    <img src="image.jpg" alt="Image" />
+    <figcaption>Figure Caption</figcaption>
+  </figure>
+</section>
+```
+
+```css
+@scope (.scope-root) to (.scope-limit) {
+  img {
+    background-color: red;
+  }
+
+  & img {
+    background-color: red;
+  }
+
+  :scope img {
+    background-color: red;
+  }
+}
+```
+
 ### Specificity
 
 [Specificity](https://developer.mozilla.org/docs/Web/CSS/Specificity)
