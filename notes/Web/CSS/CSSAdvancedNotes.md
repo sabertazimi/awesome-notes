@@ -854,6 +854,7 @@ body {
 .image-container {
   position: relative;
   padding-bottom: calc(2 / 3) * 100%; /* (height / width) ratio */
+  overflow: hidden;
 }
 
 .image-container > img {
@@ -868,6 +869,21 @@ body {
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+}
+
+.flexbox-container {
+  display: flex;
+  gap: var(--space-gutter-s);
+  align-items: flex-start;
+  font-size: var(--text-size-meta);
+}
+
+.flexbox-container img.aspect-ratio {
+  flex-shrink: 0;
+  width: clamp(4rem, 30%, 6rem);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
 }
 ```
 
