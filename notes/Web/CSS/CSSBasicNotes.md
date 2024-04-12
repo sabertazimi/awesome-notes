@@ -2016,6 +2016,33 @@ module.exports = {
 
 <!-- markdownlint-enable line-length -->
 
+```css
+:root {
+  /* Fluid type scale */
+  --size-step-minus-2: clamp(0.6944rem, 0.6376rem + 0.284vi, 0.84rem);
+  --size-step-minus-1: clamp(0.8333rem, 0.7488rem + 0.4228vi, 1.05rem);
+  --size-step-0: clamp(1rem, 0.878rem + 0.6098vi, 1.3125rem);
+  --size-step-1: clamp(1.2rem, 1.028rem + 0.8598vi, 1.6406rem);
+  --size-step-2: clamp(1.44rem, 1.2016rem + 1.1918vi, 2.0508rem);
+  --size-step-3: clamp(1.728rem, 1.402rem + 1.6302vi, 2.5635rem);
+  --size-step-4: clamp(2.0736rem, 1.6323rem + 2.2063vi, 3.2043rem);
+  --size-step-5: clamp(2.4883rem, 1.8963rem + 2.9602vi, 4.0054rem);
+  --size-step-6: clamp(2.986rem, 2.1974rem + 3.943vi, 5.0068rem);
+  --size-step-7: clamp(3.5832rem, 2.5392rem + 5.2201vi, 6.2585rem);
+
+  /* Fluid space scale */
+  --space-3xs: clamp(0.25rem, 0.2256rem + 0.122vi, 0.3125rem);
+  --space-2xs: clamp(0.5rem, 0.4268rem + 0.3659vi, 0.6875rem);
+  --space-xs: clamp(0.75rem, 0.6524rem + 0.4878vi, 1rem);
+  --space-s: clamp(1rem, 0.878rem + 0.6098vi, 1.3125rem);
+  --space-m: clamp(1.5rem, 1.3049rem + 0.9756vi, 2rem);
+  --space-l: clamp(2rem, 1.7561rem + 1.2195vi, 2.625rem);
+  --space-xl: clamp(3rem, 2.6341rem + 1.8293vi, 3.9375rem);
+  --space-2xl: clamp(4rem, 3.5122rem + 2.439vi, 5.25rem);
+  --space-3xl: clamp(6rem, 5.2683rem + 3.6585vi, 7.875rem);
+}
+```
+
 ## CSS Text
 
 ### Text Alignment
