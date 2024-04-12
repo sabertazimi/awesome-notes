@@ -1134,7 +1134,7 @@ tags: [Web, Framework, Library]
 - [Espree: Esprima-compatible JavaScript Parser](https://github.com/eslint/espree)
 - [ReactDocGen TypeScript: React TypeScript Components Properties Parser](https://github.com/styleguidist/react-docgen-typescript)
 - [Boa: Embed JavaScript Engine Written in Rust](https://github.com/boa-dev/boa)
-- [QuickJS: Small and Embeddable Javascript Engine](https://github.com/bellard/quickjs)
+- [QuickJS: Small and Embedded Javascript Engine](https://github.com/bellard/quickjs)
 
 ### Markdown Parser and Render
 
@@ -1397,6 +1397,7 @@ tags: [Web, Framework, Library]
 - [GrammarLy: Free Writing and Grammar Checker Copilot](https://microsoftedge.microsoft.com/addons/detail/cnlefmmeadmemmdciolhbnfeacpdfbkd)
 - [DeepL: Free Translation Copilot](https://microsoftedge.microsoft.com/addons/detail/fancfknaplihpclbhbpclnmmjcjanbaf)
 - [ZipZap: Multilingual Translation Copilot](https://microsoftedge.microsoft.com/addons/detail/efjbjbiikanoebecldljpjddfhjfmnob)
+- [Codium: GitHub Copilot Alternative](https://github.com/Codium-ai)
 
 ### AI Agent
 
