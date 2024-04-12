@@ -426,6 +426,126 @@ Implementing design tokens in your workflow:
   - Test your components to ensure the changes are applied correctly.
   - Use version control to track changes.
 
+#### CSS Design Tokens
+
+[Theming with modern CSS](https://piccalil.li/blog/how-were-approaching-theming-with-modern-css):
+
+```css
+:root {
+  /* Fluid type scale core tokens */
+  --size-step-minus-2: clamp(0.6944rem, 0.6376rem + 0.284vi, 0.84rem);
+  --size-step-minus-1: clamp(0.8333rem, 0.7488rem + 0.4228vi, 1.05rem);
+  --size-step-0: clamp(1rem, 0.878rem + 0.6098vi, 1.3125rem);
+  --size-step-1: clamp(1.2rem, 1.028rem + 0.8598vi, 1.6406rem);
+  --size-step-2: clamp(1.44rem, 1.2016rem + 1.1918vi, 2.0508rem);
+  --size-step-3: clamp(1.728rem, 1.402rem + 1.6302vi, 2.5635rem);
+  --size-step-4: clamp(2.0736rem, 1.6323rem + 2.2063vi, 3.2043rem);
+  --size-step-5: clamp(2.4883rem, 1.8963rem + 2.9602vi, 4.0054rem);
+  --size-step-6: clamp(2.986rem, 2.1974rem + 3.943vi, 5.0068rem);
+  --size-step-7: clamp(3.5832rem, 2.5392rem + 5.2201vi, 6.2585rem);
+
+  /* Fluid space scale core tokens */
+  --space-3xs: clamp(0.25rem, 0.2256rem + 0.122vi, 0.3125rem);
+  --space-2xs: clamp(0.5rem, 0.4268rem + 0.3659vi, 0.6875rem);
+  --space-xs: clamp(0.75rem, 0.6524rem + 0.4878vi, 1rem);
+  --space-s: clamp(1rem, 0.878rem + 0.6098vi, 1.3125rem);
+  --space-m: clamp(1.5rem, 1.3049rem + 0.9756vi, 2rem);
+  --space-l: clamp(2rem, 1.7561rem + 1.2195vi, 2.625rem);
+  --space-xl: clamp(3rem, 2.6341rem + 1.8293vi, 3.9375rem);
+  --space-2xl: clamp(4rem, 3.5122rem + 2.439vi, 5.25rem);
+  --space-3xl: clamp(6rem, 5.2683rem + 3.6585vi, 7.875rem);
+
+  /* Colors core tokens */
+  --color-light: #fff;
+  --color-light-shade: #f3f5f7;
+  --color-dark: #000;
+  --color-mid: #ebebeb;
+  --color-mid-shade: #dedede;
+  --color-midnight: #4a4e69;
+  --color-midnight-shade: #22223b;
+  --color-eggshell: #f2e9e4;
+  --color-blue: #3b71fe;
+  --color-blue-glare: #eef6fd;
+  --color-slate: #4f5563;
+
+  /* Abstract into more specific, semantic variables */
+  --leading: 1.5;
+  --leading-short: 1.3;
+  --leading-fine: 1.1;
+  --leading-flat: 1;
+  --leading-loose: 1.7;
+  --kerning: normal;
+  --kerning-tight: -0.04ch;
+  --kerning-loose: 0.1ch;
+  --text-size-base: var(--size-step-0);
+  --text-size-meta: var(--size-step-minus-1);
+  --text-size-heading-1: var(--size-step-5);
+  --text-size-heading-2: var(--size-step-4);
+  --text-size-heading-3: var(--size-step-3);
+  --text-size-heading-4: var(--size-step-2);
+  --text-size-prose: var(--text-size-base);
+  --space-gutter: var(--space-m);
+  --space-gutter-s: var(--space-s);
+  --space-gutter-l: var(--space-l);
+  --space-regions: var(--space-xl);
+  --size-wrapper-max-width: 1135px;
+  --color-global-bg: var(--color-light);
+  --color-global-text: var(--color-dark);
+  --color-surface-bg: var(--color-mid);
+  --color-surface-bg-interact: var(--color-mid-shade);
+  --color-surface-text: var(--color-dark);
+  --color-surface-text-interact: var(--color-dark);
+  --font-base: -apple-system, 'BlinkMacSystemFont', avenir next, avenir,
+    segoe ui, helvetica neue, helvetica, cantarell, ubuntu, roboto, noto, arial,
+    sans-serif;
+  --font-display: var(--font-base);
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+  --focus-ring: 2px solid currentcolor;
+  --focus-ring-offset: 2px;
+}
+
+body {
+  font-family: var(--font-base);
+  font-size: var(--text-size-base);
+  line-height: var(--leading);
+  color: var(--color-global-text);
+  background: var(--color-global-bg);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(
+    var(--grid-placement, auto-fill),
+    minmax(var(--grid-min-item-size, 16rem), 1fr)
+  );
+  gap: var(--space-gutter, var(--space-s-l));
+}
+
+.button {
+  display: inline-flex;
+  gap: var(--button-gap, var(--space-gutter));
+  padding: var(--button-padding, 0.8em 1.5em);
+  font-weight: var(--button-font-weight, var(--font-weight-medium));
+  line-height: var(--button-leading, var(--leading-fine));
+  color: var(--button-text, var(--color-surface-text));
+  text-decoration: none;
+  text-transform: var(--button-text-transform, uppercase);
+  letter-spacing: var(--button-kerning, var(--kerning-loose));
+  background: var(--button-bg, var(--color-surface-bg));
+  border-radius: var(--button-radius, 0);
+}
+
+.button:hover {
+  color: var(--button-interact-text, var(--color-surface-text-interact));
+  background: var(--button-interact-bg, var(--color-surface-bg-interact));
+}
+```
+
+#### React Design Variants
+
 ```tsx
 import React, { ButtonHTMLAttributes } from 'react'
 
@@ -587,7 +707,7 @@ NNGroup article [homepage design principles](https://www.nngroup.com/articles/ho
   - Place the most important content above the fold,
     and lead users down the page when there is more content to see.
   - Provide specific examples of your site's content.
-- Prompt Actions and Navigations:
+- Prompt Actions and Navigation:
   - Include clear, descriptive link labels that resonate with your users.
   - Emphasize high-priority tasks with a clear visual hierarchy.
   - Locate primary navigation in a highly noticeable place.
