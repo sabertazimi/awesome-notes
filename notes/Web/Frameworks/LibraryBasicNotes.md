@@ -1486,13 +1486,12 @@ tags: [Web, Framework, Library]
 
 ### Analytics and Monitoring Tools
 
-- [Plausible Analytics](https://github.com/plausible/analytics)
-- [NetData](https://github.com/netdata/netdata)
-- [Source Buster](https://github.com/alexfedoseev/sourcebuster-js)
-- [Uptime Status](https://github.com/yb/uptime-status)
-- [Sentry: Application Monitoring Focus on Error Reporting](https://github.com/getsentry/sentry)
-- [OpenTelemetry: Traces and Metrics Framework](https://github.com/open-telemetry/opentelemetry-js)
+- [Plausible: Open Source, Lightweight and Privacy-friendly Alternative to Google Analytics](https://github.com/plausible/analytics)
+- [NetData: Open Source Observability Platform](https://github.com/netdata/netdata)
+- [OneUptime: Complete Open Source Observability Platform](https://github.com/OneUptime/oneuptime)
 - [Grafana: Open and Composable Observability and Data Visualization Platform](https://github.com/grafana/grafana)
+- [Sentry: Developer-first Error Tracking and Performance Monitoring](https://github.com/getsentry/sentry)
+- [OpenTelemetry: Traces and Metrics Framework](https://github.com/open-telemetry/opentelemetry-js)
 - [CounterScale: Free Scalable Web Analytics Running on Cloudflare](https://github.com/benvinegar/counterscale)
 
 ### Performance Tools
