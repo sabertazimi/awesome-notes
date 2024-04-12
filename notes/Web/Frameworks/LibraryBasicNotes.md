@@ -252,9 +252,9 @@ tags: [Web, Framework, Library]
 
 ### Functional Programming Utils
 
-- [Immer](https://github.com/immerjs/immer)
+- [ImmerJS: Create Next Immutable State by Mutating Current One](https://github.com/immerjs/immer)
 - [Proxy Memoize: Intuitive Magical Memoization with Proxy and WeakMap](https://github.com/dai-shi/proxy-memoize)
-- [MemoizeOne: Latest Invocation Memoization](https://github.com/alexreardon/memoize-one)
+- [Mutative: Blazing fast Immutable Updates](https://github.com/unadlib/mutative)
 
 ### IOC and DI Utils
 
