@@ -426,6 +426,50 @@ Implementing design tokens in your workflow:
   - Test your components to ensure the changes are applied correctly.
   - Use version control to track changes.
 
+```tsx
+import React, { ButtonHTMLAttributes } from 'react'
+
+type ButtonVariant = 'filled' | 'outlined'
+
+export type ButtonProps = {
+  /**
+   * the variant of the button to use
+   * @default 'outlined'
+   */
+  variant?: ButtonVariant
+} & ButtonHTMLAttributes<HTMLButtonElement>
+
+const ButtonStyles: { [key in ButtonVariant]: React.CSSProperties } = {
+  filled: {
+    backgroundColor: 'blue', // Change this to your filled button color
+    color: 'white',
+  },
+  outlined: {
+    border: '2px solid blue', // Change this to your outlined button color
+    backgroundColor: 'transparent',
+    color: 'blue',
+  },
+}
+
+export function Button({ variant = 'outlined', children, style, ...rest }: ButtonProps) {
+  return (
+    <button
+      type="button"
+      style={{
+        ...ButtonStyles[variant],
+        padding: '10px 20px',
+        borderRadius: '5px',
+        cursor: 'pointer',
+        ...style
+      }}
+      {...rest}
+    >
+      {children}
+    </button>
+  )
+}
+```
+
 ## Design Principles
 
 ### Cicada Principle
