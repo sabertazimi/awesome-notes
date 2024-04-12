@@ -3738,7 +3738,9 @@ frontCanvasContext.drawImage(bufferCanvas, 0, 0)
 const ctx = canvas.getContext('2d', { alpha: false })
 ```
 
-Offscreen canvas:
+[Offscreen canvas and web workers](https://dbushell.com/2024/04/02/offscreen-canvas-and-web-workers):
+
+`transferControlToOffscreen` method:
 
 ```ts
 // index.js
@@ -3751,6 +3753,57 @@ worker.postMessage({ canvas: offscreen }, [offscreen])
 onmessage = function (event) {
   canvas = event.data.canvas
   context = canvas.getContext('2d')
+}
+```
+
+`OffscreenCanvas` in service workers:
+
+```js
+// Create reusable canvas
+const offscreen = new OffscreenCanvas(512, 512)
+const context = offscreen.getContext('2d')
+
+// eslint-disable-next-line no-restricted-globals -- Service worker.
+self.addEventListener('fetch', (ev) => {
+  // Only handle image requests
+  const url = new URL(ev.request.url)
+
+  if (url.pathname.startsWith('/artwork/'))
+    ev.respondWith(artwork(ev))
+})
+
+async function artwork(ev) {
+  const cache = await caches.open('artwork')
+
+  // 1. Return from cache
+  let response = await cache.match(ev.request)
+  if (response)
+    return response
+
+  // 2. Or fetch from network
+  response = await fetch(ev.request)
+  if (!response.ok || response.status !== 200)
+    return response
+
+  // 3. Use canvas to resize
+  let blob = await response.blob()
+  context.drawImage(await createImageBitmap(blob), 0, 0, 512, 512)
+  blob = await offscreen.convertToBlob({ type: 'image/png' })
+
+  // 4. Create new headers
+  const headers = new Headers(response.headers)
+  headers.set('content-type', blob.type)
+  headers.set('content-length', blob.size)
+
+  // 5. Create new response
+  const { status, statusText } = response
+  response = new Response(await blob.arrayBuffer(), {
+    status,
+    statusText,
+    headers
+  })
+  await cache.put(ev.request, response.clone())
+  return response
 }
 ```
 
