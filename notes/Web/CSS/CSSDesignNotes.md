@@ -451,7 +451,12 @@ const ButtonStyles: { [key in ButtonVariant]: React.CSSProperties } = {
   },
 }
 
-export function Button({ variant = 'outlined', children, style, ...rest }: ButtonProps) {
+export function Button({
+  variant = 'outlined',
+  children,
+  style,
+  ...rest
+}: ButtonProps) {
   return (
     <button
       type="button"
@@ -460,7 +465,7 @@ export function Button({ variant = 'outlined', children, style, ...rest }: Butto
         padding: '10px 20px',
         borderRadius: '5px',
         cursor: 'pointer',
-        ...style
+        ...style,
       }}
       {...rest}
     >
