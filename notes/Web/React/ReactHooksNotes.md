@@ -2679,18 +2679,35 @@ function useUnmount(fn) {
 componentDidUpdate:
 
 ```ts
-function useUpdate(fn) {
+function useUpdate(effectCallback) {
   const mounting = useRef(true)
 
   useEffect(() => {
-    if (mounting.current) {
-      // first get called for componentDidMount lifecycle
-      // so skip it
+    // First get called for componentDidMount lifecycle,
+    // so skip it.
+    if (mounting.current)
       mounting.current = false
-    } else {
-      fn()
-    }
+    else
+      return effectCallback()
   })
+}
+
+function useUpdateDeps(effectCallback, deps) {
+  const mounting = useRef(true)
+
+  React.useEffect(() => {
+    return () => {
+      mounting.current = true
+    }
+  }, [])
+
+  React.useEffect(() => {
+    // Do not execute effectCallback for the first time.
+    if (mounting.current)
+      mounting.current = false
+    else
+      return effectCallback()
+  }, deps)
 }
 ```
 
