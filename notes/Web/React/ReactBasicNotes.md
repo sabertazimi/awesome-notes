@@ -3010,7 +3010,7 @@ As far as React is concerned, this output is immutable, and will never change:
 import db from 'imaginary-db'
 
 export default async function Homepage() {
-  const link = db.connect('localhost', 'root', 'passw0rd')
+  const link = db.connect('localhost', 'root', 'pass0w0rd')
   const data = await db.query(link, 'SELECT * FROM products')
 
   return (
