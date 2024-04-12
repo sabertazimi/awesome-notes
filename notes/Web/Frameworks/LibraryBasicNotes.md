@@ -1344,6 +1344,7 @@ tags: [Web, Framework, Library]
 
 ### BaaS
 
+- [AwesomeCloudflare: Cloudflare Free Toolkits and Resources](https://github.com/zhuima/awesome-cloudflare)
 - [Firebase: App Development Platform](https://github.com/firebase/quickstart-js)
 - [Open Source Firebase Alternative](https://github.com/supabase/supabase)
 - [Convex: Backend-as-a-Service for Fullstack App Development](https://github.com/get-convex/convex-backend)
