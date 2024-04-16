@@ -1398,7 +1398,7 @@ tags: [Web, Framework, Library]
 - [GrammarLy: Free Writing and Grammar Checker Copilot](https://microsoftedge.microsoft.com/addons/detail/cnlefmmeadmemmdciolhbnfeacpdfbkd)
 - [DeepL: Free Translation Copilot](https://microsoftedge.microsoft.com/addons/detail/fancfknaplihpclbhbpclnmmjcjanbaf)
 - [ZipZap: Multilingual Translation Copilot](https://microsoftedge.microsoft.com/addons/detail/efjbjbiikanoebecldljpjddfhjfmnob)
-- [Codium: GitHub Copilot Alternative](https://github.com/Codium-ai)
+- [AwesomeCodeAI: Coding Copilot Awesome List](https://github.com/sourcegraph/awesome-code-ai)
 
 ### AI Agent
 
