@@ -1862,6 +1862,53 @@ listExpander.addEventListener('click', (e) => {
 })
 ```
 
+#### Dialog ARIA Role
+
+```html
+<div id="dialog_layer" class="dialogs">
+  <div
+    id="dialog1"
+    role="dialog"
+    aria-labelledby="dialog1_label"
+    aria-describedby="dialog1_desc"
+    aria-modal="true"
+    class="hidden"
+  >
+    <h2 id="dialog1_label" class="dialog_label">Address Added</h2>
+    <p id="dialog1_desc" class="dialog_desc">
+      The address you provided has been added to your list of delivery
+      addresses. It is ready for immediate use. If you wish to remove it, you
+      can do so from
+      <a href="#" onclick="openDialog('dialog2', this)"> your profile. </a>
+    </p>
+    <div class="dialog_form_actions">
+      <button type="button" id="dialog1_close_btn" onclick="closeDialog(this)">
+        OK
+      </button>
+    </div>
+  </div>
+  <div
+    id="dialog2"
+    role="dialog"
+    aria-labelledby="dialog2_label"
+    aria-describedby="dialog2_desc"
+    aria-modal="true"
+    class="hidden"
+  >
+    <h2 id="dialog2_label" class="dialog_label">End of the Road!</h2>
+    <p id="dialog2_desc" class="dialog_desc">
+      You activated a fake link or button that goes nowhere! The link or button
+      is present for demonstration purposes only.
+    </p>
+    <div class="dialog_form_actions">
+      <button type="button" id="dialog2_close_btn" onclick="closeDialog(this)">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+```
+
 ### HTML First over ARIA
 
 ```html
