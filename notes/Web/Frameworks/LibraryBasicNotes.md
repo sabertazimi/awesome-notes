@@ -324,17 +324,18 @@ tags: [Web, Framework, Library]
 - [PostCSS Preset: Use Modern CSS](https://github.com/csstools/postcss-plugins)
 - [Tailwind Viewer: Local Tool for Visualizing Tailwind Configuration](https://github.com/rogden/tailwind-config-viewer)
 
-### CSS in JS Utils
+### CSS-in-JS Utils
 
-- [Classnames](https://github.com/JedWatson/classnames)
+- [Classnames: Conditionally Joining ClassNames Together](https://github.com/JedWatson/classnames)
+- [CLSX: Constructing ClassName Strings Conditionally](https://github.com/lukeed/clsx)
 - [Tailwind Merge: Merge Tailwind CSS Classes without Style Conflicts](https://github.com/dcastil/tailwind-merge)
-- [Styled Components](https://github.com/styled-components/styled-components)
-- [StyledJSX](https://github.com/vercel/styled-jsx)
-- [Stitches: Near Zero-runtime, SSR, Multi-variant Support](https://github.com/modulz/stitches)
-- [Linaria: Zero-runtime CSS-in-TypeScript Library](https://github.com/callstack/linaria)
-- [Vanilla Extract: Zero-runtime CSS-in-TypeScript](https://github.com/seek-oss/vanilla-extract)
-- [Compiled: Performant Compile Time CSS-in-TypeScript Library](https://github.com/atlassian-labs/compiled)
 - [TWind: Smallest, Fastest, Most Feature Complete Tailwind-in-JS Solution](https://github.com/tw-in-js/twind)
+- [Styled Components: Runtime Visual Primitives](https://github.com/styled-components/styled-components)
+- [Linaria: Zero-runtime CSS-in-TypeScript Library](https://github.com/callstack/linaria)
+- [Vanilla Extract: Zero-runtime CSS-in-TypeScript](https://github.com/vanilla-extract-css/vanilla-extract)
+- [Panda: Universal, Type-Safe, CSS-in-JS Tailwind-style Framework](https://github.com/chakra-ui/panda)
+- [Compiled: Performant Compile Time CSS-in-TypeScript Library](https://github.com/atlassian-labs/compiled)
+- [CVA: Class Variance Authority](https://github.com/joe-bell/cva)
 
 ### Color Utils
 
