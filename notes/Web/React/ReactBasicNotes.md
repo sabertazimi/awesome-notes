@@ -3083,6 +3083,23 @@ it re-uses that description instead of re-generating it:
 </html>
 ```
 
+#### Use Client Directive
+
+`'use client'` [directive](https://demystifying-rsc.vercel.app/client-components/no-ssr):
+
+- It tells the bundler to output this code as a separate file with its own url
+  so it can be loaded lazily in the browser.
+- It tells the compiler when this code is needed,
+  it should add code to load the js file for this component.
+- It tells RSC that the Virtual DOM it generates
+  should contain a placeholder reference to this Client Component,
+  rather than the component's html output.
+- It still runs on the server, `'use client'` does not disable SSR.
+
+![Use Client Directive](./figures/RSCUseClient.png 'Use Client Directive')
+
+#### React Server Components API
+
 | Features                    | Server | Client |
 | --------------------------- | :----: | :----: |
 | Backend Resources           |   o    |   x    |
