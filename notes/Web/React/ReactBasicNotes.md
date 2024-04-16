@@ -3110,6 +3110,13 @@ it re-uses that description instead of re-generating it:
 | State and Lifecycle Effects |   x    |   o    |
 | Browser-only APIs           |   x    |   o    |
 
+#### React Server Components Reference
+
+- React Server Components in [Next.js](https://vercel.com/blog/understanding-react-server-components).
+- React Server Components [introduction](https://www.joshwcomeau.com/react/server-components).
+- Demystifying React Server Components [series](https://demystifying-rsc.vercel.app).
+- React Server Components [devtools](https://www.alvar.dev/blog/creating-devtools-for-react-server-components).
+
 ## React Performance
 
 ### React Performance Mental Model
