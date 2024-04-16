@@ -4339,6 +4339,43 @@ const Box = styled('div', {
 })
 ```
 
+### Demystifying Styled Components
+
+Styled components [under the hood](https://www.joshwcomeau.com/react/demystifying-styled-components):
+
+```tsx
+interface Props {
+  className?: string
+}
+
+function styled(Tag) {
+  return (rawStyles, ...interpolations) => {
+    return function NewComponent(props: Props) {
+      // Compute the styles from the template string,
+      // the interpolation functions, and the provided React props.
+      const styles = reconcileStyles(
+        rawStyles,
+        interpolations,
+        props
+      )
+
+      const uniqueClassName = comeUpWithUniqueName(styles)
+      const processedStyles = runStylesThroughUtils(styles)
+
+      createAndInjectCSSClass(uniqueClassName, processedStyles)
+
+      const combinedClasses = [uniqueClassName, props.className].join(' ')
+
+      return <Tag {...props} className={combinedClasses} />
+    }
+  }
+}
+
+styled.h1 = styled('h1')
+styled.button = styled('button')
+// ...And so on, for all DOM nodes!
+```
+
 ## Create React App
 
 - [Custom React Scripts](https://auth0.com/blog/how-to-configure-create-react-app/)
