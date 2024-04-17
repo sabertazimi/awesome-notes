@@ -496,14 +496,15 @@ tags: [Web, Framework, Library]
 ### Form
 
 - [React Hook Form](https://github.com/react-hook-form/react-hook-form)
-- [React Final Form](https://github.com/final-form/react-final-form)
 - [React Formik](https://github.com/formium/formik)
 - [React JSON Schema Form](https://github.com/rjsf-team/react-jsonschema-form)
+- [TanStack Form](https://github.com/tanstack/form)
 - [Vue FormKit](https://github.com/formkit/formkit)
-- [Formily: Alibaba Unified Form Solution for React and Vue](https://github.com/alibaba/formily)
+- [Formily: Alibaba Unified Form Builder for React and Vue](https://github.com/alibaba/formily)
 - [XRender: Alibaba Low-Code Form/Table/Chart Render](https://github.com/alibaba/x-render)
-- [Form Boilerplate](https://github.com/andybelldesign/boilerform)
 - [HeyForm: Low-code Engaging Conversational Form Builder](https://github.com/heyform/heyform)
+- [SurveyJS: Free JavaScript Form Builder Library](https://github.com/surveyjs/survey-library)
+- [FormIO: Form and Data Management Platform for Progressive Web Applications](https://github.com/formio/formio)
 
 #### Input
 
