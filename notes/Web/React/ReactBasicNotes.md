@@ -3100,7 +3100,9 @@ it re-uses that description instead of re-generating it:
 
 ![Use Client Directive](./figures/RSCUseClient.png 'Use Client Directive')
 
-#### React Server Components API
+#### React Server Components Composition Pattern
+
+Server Components and Client Components are [different](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns#when-to-use-server-and-client-components):
 
 | Features                    | Server | Client |
 | --------------------------- | :----: | :----: |
@@ -3109,6 +3111,60 @@ it re-uses that description instead of re-generating it:
 | Event Handlers              |   x    |   o    |
 | State and Lifecycle Effects |   x    |   o    |
 | Browser-only APIs           |   x    |   o    |
+
+Client Boundaries:
+
+- All of components within client boundary are implicitly converted to Client Components.
+  (Once the component became client-side, its nested components are client-side too).
+- Client Components can only import other Client Components.
+- Moving Client Components down the tree, to reduce Client JavaScript bundle size.
+
+[![Client Boundaries](./figures/RSCClientBoundaries.png)](https://www.joshwcomeau.com/react/server-components/#boundaries-6)
+
+You can't import Server Components inside Client Components directly,
+but can passing Server Components to Client Components as `Props`:
+
+```tsx
+// app/ColorProvider.tsx
+'use client'
+
+import { DARK_COLORS, LIGHT_COLORS } from '@/constants'
+
+export default function ColorProvider(
+  { children }: { children: React.ReactNode }
+) {
+  const [colorTheme, setColorTheme] = React.useState('light')
+  const colorVariables = colorTheme === 'light'
+    ? LIGHT_COLORS
+    : DARK_COLORS
+
+  return (
+    <body style={colorVariables}>
+      {children}
+    </body>
+  )
+}
+```
+
+```tsx
+// app/page.tsx
+import ColorProvider from './ColorProvider'
+import ServerComponent from './ServerComponent'
+
+// Pages in Next.js are Server Components by default
+export default function Page() {
+  return (
+    <ColorProvider>
+      <ServerComponent />
+    </ColorProvider>
+  )
+}
+```
+
+[3rd party Client Components](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns#advice-for-library-authors):
+
+- Wrap them into a wrapper component using `'use client'`.
+- Library authors [add `'use client'` to components](https://github.com/ant-design/antd-tools/blob/050a91cfeaba87c2892bf19d721665a3770ebde0/lib/gulpfile.js#L197-L213).
 
 #### React Server Components Reference
 
