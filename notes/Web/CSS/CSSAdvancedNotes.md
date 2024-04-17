@@ -3596,3 +3596,4 @@ will lead to class purged.
 - OOCSS: [object oriented CSS](https://www.smashingmagazine.com/2011/12/an-introduction-to-object-oriented-css-oocss).
 - SMACSS: [scalable and modular CSS architecture](https://www.toptal.com/css/smacss-scalable-modular-architecture-css).
 - ITCSS: [inverted triangle CSS layers](https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture).
+- A source of inspiration for [class naming](https://github.com/paulrobertlloyd/classnames).
