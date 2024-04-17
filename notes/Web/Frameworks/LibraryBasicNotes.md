@@ -303,7 +303,7 @@ tags: [Web, Framework, Library]
 - [Ant Design Pro: Out-of-box UI Solution for Enterprise Applications](https://github.com/ant-design/ant-design-pro)
 - [Refine: React-based Framework for Building Internal Tools](https://github.com/pankod/refine)
 - [ReactAdmin: Frontend Framework for Building B2B Applications](https://github.com/marmelab/react-admin)
-- [Tremor: Build Dashboards Fast](https://github.com/tremorlabs/tremor)
+- [Tremor: React Components to Build Charts and Dashboards](https://github.com/tremorlabs/tremor)
 - [Vuestic: Vue Admin Components](https://github.com/epicmaxco/vuestic-admin)
 
 ## CSS Utils
@@ -334,6 +334,7 @@ tags: [Web, Framework, Library]
 - [Styled Components: Runtime Visual Primitives](https://github.com/styled-components/styled-components)
 - [Linaria: Zero-runtime CSS-in-TypeScript Library](https://github.com/callstack/linaria)
 - [Vanilla Extract: Zero-runtime CSS-in-TypeScript](https://github.com/vanilla-extract-css/vanilla-extract)
+- [StyleX: Styling System Powers Facebook](https://github.com/facebook/stylex)
 - [Panda: Universal, Type-Safe, CSS-in-JS Tailwind-style Framework](https://github.com/chakra-ui/panda)
 - [Compiled: Performant Compile Time CSS-in-TypeScript Library](https://github.com/atlassian-labs/compiled)
 - [CVA: Class Variance Authority](https://github.com/joe-bell/cva)
@@ -629,7 +630,8 @@ tags: [Web, Framework, Library]
 
 ### Picker
 
-- [React Roulette](https://github.com/effectussoftware/react-custom-roulette)
+- [DatePicker: Simple and Reusable DatePicker React Component](https://github.com/Hacker0x01/react-datepicker)
+- [Roulette: Customizable React Roulette Wheel with Spinning Animation](https://github.com/effectussoftware/react-custom-roulette)
 
 ### Clipboard
 
