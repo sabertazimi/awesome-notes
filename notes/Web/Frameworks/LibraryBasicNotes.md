@@ -45,53 +45,6 @@ tags: [Web, Framework, Library]
 - [Plasmo: Browser Extension Framework](https://github.com/PlasmoHQ/plasmo)
 - [Browser Extension Vite Starter](https://github.com/antfu/vitesse-webext)
 
-## UI Framework
-
-### CSS UI Framework
-
-- [Bootstrap.css](https://github.com/twbs/bootstrap)
-- [Pico.css](https://github.com/picocss/pico)
-- [MVP.css](https://github.com/andybrewer/mvp)
-- [Paper.css](https://github.com/papercss/papercss)
-
-### Utility UI Framework
-
-- [Tailwind](https://github.com/tailwindlabs/tailwindcss)
-- [Daisy: Tailwind Components Plugin](https://github.com/saadeghi/daisyui)
-- [Elements: Tailwind Components Collection](https://github.com/mdbootstrap/Tailwind-Elements)
-- [Form](https://github.com/tailwindlabs/tailwindcss-forms)
-- [Typography](https://github.com/tailwindlabs/tailwindcss-typography)
-- [Aspect Ratio](https://github.com/tailwindlabs/tailwindcss-aspect-ratio)
-- [Line Clamp](https://github.com/tailwindlabs/tailwindcss-line-clamp)
-
-### Headless UI Framework
-
-- [Headless: Completely Un-styled and Fully Accessible Tailwind React Components](https://github.com/tailwindlabs/headlessui)
-- [Radix: Build High-quality and Accessible Design Systems](https://github.com/radix-ui/primitives)
-- [ShadCN: Accessible and Customizable Components can Copy and Paste](https://github.com/shadcn-ui/ui)
-- [Spectrum: Build Adaptive, Accessible and Robust User Experiences](https://github.com/adobe/react-spectrum)
-- [AriaKit: Accessible React Components](https://github.com/ariakit/ariakit)
-
-### Components UI Framework
-
-- [Ant Design](https://github.com/ant-design/ant-design)
-- [Material](https://github.com/mui-org/material-ui)
-- [Chakra](https://github.com/chakra-ui/chakra-ui)
-- [Next: Beautiful, Fast and Modern React UI Library](https://github.com/nextui-org/nextui)
-- [Mantine](https://github.com/mantinedev/mantine)
-- [BluePrint](https://github.com/palantir/blueprint)
-- [Primer: GitHub Primer Design System](https://github.com/primer/react)
-- [Luna: Operating System Components](https://github.com/liriliri/luna)
-- [Molecule: Lightweight Web IDE UI Framework](https://github.com/DTStack/molecule)
-
-### Admin and Dashboard UI Framework
-
-- [Ant Design Pro: Out-of-box UI Solution for Enterprise Applications](https://github.com/ant-design/ant-design-pro)
-- [Refine: React-based Framework for Building Internal Tools](https://github.com/pankod/refine)
-- [ReactAdmin: Frontend Framework for Building B2B Applications](https://github.com/marmelab/react-admin)
-- [Tremor: Build Dashboards Fast](https://github.com/tremorlabs/tremor)
-- [Vuestic: Vue Admin Components](https://github.com/epicmaxco/vuestic-admin)
-
 ## Framework and Solution
 
 ### Front-end Solution
@@ -304,6 +257,54 @@ tags: [Web, Framework, Library]
 - [Morph](https://github.com/nadeesha/ts-morph)
 - [Morpher](https://github.com/LinbuduLab/morpher)
 - [Prune](https://github.com/nadeesha/ts-prune)
+
+## UI Framework
+
+### CSS UI Framework
+
+- [Bootstrap.css](https://github.com/twbs/bootstrap)
+- [Pico.css](https://github.com/picocss/pico)
+- [MVP.css](https://github.com/andybrewer/mvp)
+- [Paper.css](https://github.com/papercss/papercss)
+
+### Utility UI Framework
+
+- [Tailwind](https://github.com/tailwindlabs/tailwindcss)
+- [Daisy: Tailwind Components Plugin](https://github.com/saadeghi/daisyui)
+- [Elements: Tailwind Components Collection](https://github.com/mdbootstrap/Tailwind-Elements)
+- [TailwindMaterial](https://github.com/creativetimofficial/material-tailwind)
+- [Form](https://github.com/tailwindlabs/tailwindcss-forms)
+- [Typography](https://github.com/tailwindlabs/tailwindcss-typography)
+- [Aspect Ratio](https://github.com/tailwindlabs/tailwindcss-aspect-ratio)
+- [Line Clamp](https://github.com/tailwindlabs/tailwindcss-line-clamp)
+
+### Headless UI Framework
+
+- [Headless: Completely Un-styled and Fully Accessible Tailwind React Components](https://github.com/tailwindlabs/headlessui)
+- [Radix: Build High-quality and Accessible Design Systems](https://github.com/radix-ui/primitives)
+- [ShadCN: Accessible and Customizable Components can Copy and Paste](https://github.com/shadcn-ui/ui)
+- [Spectrum: Build Adaptive, Accessible and Robust User Experiences](https://github.com/adobe/react-spectrum)
+- [AriaKit: Accessible React Components](https://github.com/ariakit/ariakit)
+
+### Components UI Framework
+
+- [Ant Design](https://github.com/ant-design/ant-design)
+- [Material](https://github.com/mui-org/material-ui)
+- [Chakra](https://github.com/chakra-ui/chakra-ui)
+- [Next: Beautiful, Fast and Modern React UI Library](https://github.com/nextui-org/nextui)
+- [Mantine](https://github.com/mantinedev/mantine)
+- [BluePrint](https://github.com/palantir/blueprint)
+- [Primer: GitHub Primer Design System](https://github.com/primer/react)
+- [Luna: Operating System Components](https://github.com/liriliri/luna)
+- [Molecule: Lightweight Web IDE UI Framework](https://github.com/DTStack/molecule)
+
+### Admin and Dashboard UI Framework
+
+- [Ant Design Pro: Out-of-box UI Solution for Enterprise Applications](https://github.com/ant-design/ant-design-pro)
+- [Refine: React-based Framework for Building Internal Tools](https://github.com/pankod/refine)
+- [ReactAdmin: Frontend Framework for Building B2B Applications](https://github.com/marmelab/react-admin)
+- [Tremor: Build Dashboards Fast](https://github.com/tremorlabs/tremor)
+- [Vuestic: Vue Admin Components](https://github.com/epicmaxco/vuestic-admin)
 
 ## CSS Utils
 
