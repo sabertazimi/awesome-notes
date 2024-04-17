@@ -489,24 +489,24 @@ npm i -D eslint -w package-c
 
 #### Exports Field
 
-`exports` can define public API:
+`exports` can define [public API](https://zellwk.com/blog/npm-exports):
 
 ```json
 {
   "exports": {
     ".": {
-      "types": "index.d.ts",
-      "module": "index.mjs",
-      "import": "index.mjs",
-      "require": "index.cjs",
-      "default": "index.mjs"
+      "types": "./dist/index.d.ts",
+      "module": "./dist/index.mjs",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.mjs"
     },
     "./package.json": "./package.json"
   },
-  "types": "index.d.ts",
-  "browser": "index.mjs",
-  "module": "index.mjs",
-  "main": "index.cjs"
+  "types": "./dist/index.d.ts",
+  "browser": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "main": "./dist/index.cjs"
 }
 ```
 
@@ -517,28 +517,26 @@ can be imported via `@github/rest/gen/util/regexp-tools`:
 - Don't need to mention directory `build`/`dist` in module specifiers.
 - Don't need to mention `.js`/`.ts` in module specifiers.
 
-> `typesVersions` for TypeScript finds type definitions (`.d.ts` files).
-
 ```json
 {
   "name": "@github/rest",
   "private": true,
   "exports": {
-    "./gen/*": "./build/gen/*.js",
-    "./client/*": "./build/client/*.js",
-    "./contract": "./build/contract.js",
-    "./state": "./build/state.js",
+    "./": "./dist/index.js",
+    "./gen/*": "./dist/gen/*.js",
+    "./client/*": "./dist/client/*.js",
+    "./contract": "./dist/contract.js",
+    "./state": "./dist/state.js",
     "./package.json": "./package.json"
-  },
-  "typesVersions": {
-    "*": {
-      "gen/*": ["build/gen/*"],
-      "client/*": ["build/client/*"],
-      "contract": ["build/contract.d.ts"],
-      "state": ["build/state.d.ts"]
-    }
   }
 }
+```
+
+```js
+import octokit from '@github/rest'
+import utils from '@github/rest/gen/utils'
+import { Contract } from '@github/rest/contract'
+import state from '@github/rest/state'
 ```
 
 ### Package Lockfile
