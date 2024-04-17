@@ -684,6 +684,7 @@ tags: [Web, Framework, Library]
 - [AnyTouch: Small Touch Gesture Library Compatible with PC and Mobile](https://github.com/any86/any-touch)
 - [Allotment: Resizable Split Views](https://github.com/johnwalley/allotment)
 - [TransMat: Share Data beyond Boundaries of Browser](https://github.com/google/transmat)
+- [Craft.js: Building Extensible Drag and Drop Page Editors](https://github.com/prevwong/craft.js)
 
 ### Cursor Utils
 
