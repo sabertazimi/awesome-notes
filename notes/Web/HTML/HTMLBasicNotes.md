@@ -721,6 +721,17 @@ if (checkbox.indeterminate) {
 
 ### Dialog
 
+Native [`dialog`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog):
+
+```html
+<dialog open>
+  <p>Greetings, one and all!</p>
+  <form method="dialog">
+    <button>OK</button>
+  </form>
+</dialog>
+```
+
 ```html
 <button class="btn" data-toggle="#dialog">Open modal</button>
 
@@ -1285,6 +1296,15 @@ Embed [best practice](https://web.dev/embed-best-practices):
 ### Command
 
 ## Information
+
+### Popover
+
+[Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API):
+
+```html
+<button popovertarget="mypopover">Toggle the popover</button>
+<div id="mypopover" popover>Popover content</div>
+```
 
 ### Time
 
