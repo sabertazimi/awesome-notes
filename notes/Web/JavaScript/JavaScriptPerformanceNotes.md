@@ -876,8 +876,8 @@ They interrupt one or more of the steps:
 
 ### Responsive Images
 
-Responsive images provide 3 ~ 5 different sizes
-reduce image transfer sizes by average of **~20%**:
+[Responsive images](https://danburzo.ro/responsive-images-html)
+provide 3 ~ 5 different sizes reduce image transfer sizes by average of **~20%**:
 
 ```html
 <picture>
