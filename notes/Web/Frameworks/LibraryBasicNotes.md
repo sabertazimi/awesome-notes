@@ -844,7 +844,7 @@ tags: [Web, Framework, Library]
 ### Image Utils
 
 - [PSD: Fast Zero-dependency PSD Parser](https://github.com/webtoon/psd)
-- [ImageMagick: ImageMagick Bindings](https://github.com/elad/node-imagemagick-native)
+- [ImageMagick: Create, Edit, Compose, or Convert Digital Images](https://github.com/imagemagick/imagemagick)
 - [ImageLoader: Load Images JavaScript Utils](https://github.com/blueimp/JavaScript-Load-Image)
 - [ICO](https://github.com/kevva/to-ico)
 - [HTML2Image](https://github.com/bubkoo/html-to-image)
