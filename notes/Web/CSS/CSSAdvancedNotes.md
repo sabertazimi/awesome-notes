@@ -2147,15 +2147,24 @@ const svgRectElement = document.createElementNS(
 - `dark`.
 
 ```css
+html {
+  color-scheme: light dark; /* This site supports both light and dark mode */
+}
+
 :root {
   /* light styles */
   color-scheme: var(--color-scheme, light);
+
+  --primary-color: black;
+  --primary-background: white;
 
   /* page preference is "dark" */
   &:has(#color-scheme option[value='dark']:checked) {
     --color-scheme: dark;
 
     /* any additional dark styles */
+    --primary-color: white;
+    --primary-background: black;
   }
 
   /* page preference is "system", and system preference is "dark" */
@@ -2164,8 +2173,15 @@ const svgRectElement = document.createElementNS(
       --color-scheme: dark;
 
       /* any additional dark styles, again */
+      --primary-color: white;
+      --primary-background: black;
     }
   }
+}
+
+body {
+  color: var(--primary-color);
+  background: var(--primary-background);
 }
 ```
 
@@ -2217,6 +2233,54 @@ function main() {
     colorSchemeSelectorEl.addEventListener('input', storeColorSchemePreference)
   }
 }
+```
+
+3 mode switch:
+
+```html
+<select name="color-scheme-">
+  <option value="system">System</option>
+  <option value="light">Forced Light</option>
+  <option value="dark">Forced Dark</option>
+</select>
+
+<script>
+  document.querySelector('color-scheme').addEventListener('change', (e) => {
+    document.documentElement.setAttribute(
+      'data-force-color-mode',
+      e.target.value,
+    )
+    localStorage.setItem('preferredColorScheme', e.target.value)
+  })
+
+  const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+  mediaQuery.addListener(() => {
+    // Make sure the dropdown is up-to-date based on mediaQuery.matches
+  })
+</script>
+
+<style>
+  :root,
+  :root[data-force-color-mode='light'] {
+    /* Default Light Mode colors + Forced Light Mode */
+    --primary-color: black;
+    --primary-background: white;
+  }
+
+  /* Dark Color Scheme (System Preference) */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --primary-color: white;
+      --primary-background: black;
+    }
+  }
+
+  /* Dark Color Scheme (Override) */
+  :root[data-force-color-mode='dark'] {
+    --primary-color: white;
+    --primary-background: black;
+  }
+</style>
 ```
 
 ### Reduced Motion Query
