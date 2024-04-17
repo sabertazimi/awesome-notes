@@ -1301,6 +1301,61 @@ sudo nginx -t
 sudo systemctl restart nginx
 ```
 
+### A/B Testing
+
+[A/B testing](https://rahulsuresh.net/blog/ab-testing-millions-of-users-using-aws-lambda-edge):
+
+- Improves customer experience:
+  by testing different options,
+  businesses can find out what their customers prefer
+  and make their websites or products more enjoyable to use.
+- Increases sales:
+  if a business knows which version of a webpage leads to more sales or sign-ups,
+  they can use that version for everyone, potentially making more money.
+- Reduces risks:
+  before making big changes, like redesigning a website,
+  businesses can test small changes to see how people react.
+  This way, they avoid making big investments that might not pay off.
+- Informs decisions:
+  Instead of relying on gut feelings,
+  businesses can make informed decisions that are backed up by actual user behavior.
+
+```tsx
+// A/B test causing Flash of Unstyled Content (FoUC):
+// - SEO impact.
+// - User experience impact.
+// - Web performance impact.
+import { useEffect, useState } from 'react'
+
+const imageUrlA = 'https://fakeimg.pl/150x150/0000FF/808080?text=Variant+A'
+const imageUrlB = 'https://fakeimg.pl/150x150/FF0000/FFFFFF?text=Variant+B'
+
+const VariantA = () => <img src={imageUrlA} alt="Variant A" />
+const VariantB = () => <img src={imageUrlB} alt="Variant B" />
+
+export default function ABTestComponent() {
+  const [variant, setVariant] = useState('loading')
+
+  useEffect(() => {
+    // Simulate reading from localStorage with a delay
+    setTimeout(() => {
+      const randomVariant = Math.random() < 0.5 ? 'A' : 'B'
+      const storedVariant = localStorage.getItem('userVariant') ?? randomVariant
+      localStorage.setItem('userVariant', storedVariant)
+      setVariant(storedVariant)
+    }, 500) // 500ms second delay to simulate a flicker effect
+  }, [])
+
+  return (
+    <div>
+      {variant === 'loading' && <div>Loading variant...</div>}
+      {variant === 'A' && <VariantA />}
+      {variant === 'B' && <VariantB />}
+    </div>
+  )
+}
+```
+
 ### Blue Green Deployment
 
 两套系统, 一套稳定的绿色系统, 一套即将发布的蓝色系统.
