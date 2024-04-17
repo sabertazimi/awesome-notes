@@ -4609,6 +4609,7 @@ Simple global store based on:
 
 - Subscribe pattern.
 - UseState hook.
+- Atomic state library: e.g [Jotai](https://blog.axlight.com/posts/jotai-tips).
 
 ```ts
 import type { Dispatch, MutableRefObject, SetStateAction } from 'react'
