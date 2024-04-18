@@ -1029,11 +1029,12 @@ tags: [Web, Framework, Library]
 ### Database
 
 - [Prisma: Next-generation ORM](https://github.com/prisma/prisma)
-- [Mikro: TypeScript ORM](https://github.com/mikro-orm/mikro-orm)
 - [Sequelize: Easy-to-use and Promise-based Multi SQL Dialects ORM Tool](https://github.com/sequelize/sequelize)
-- [LowDB: Simple JSON Database](https://github.com/typicode/lowdb)
-- [NocoDB: No Code Database](https://github.com/nocodb/nocodb)
+- [Drizzle: Headless TypeScript ORM](https://github.com/drizzle-team/drizzle-orm)
+- [Mikro: TypeScript ORM Based on Data Mapper, Unit of Work and Identity Map patterns](https://github.com/mikro-orm/mikro-orm)
+- [NocoDB: Open Source AirTable Alternative](https://github.com/nocodb/nocodb)
 - [Directus: No-code Data Collaboration App for SQL Database](https://github.com/directus/directus)
+- [LowDB: Simple JSON Database](https://github.com/typicode/lowdb)
 
 ## Search
 
