@@ -2490,7 +2490,48 @@ module.exports = {
 
 #### Tree Shaking
 
-Live code inclusion (AST analysis) + dead code elimination:
+Webpack tree shaking [includes](https://github.com/orgs/web-infra-dev/discussions/17):
+
+- `usedExports` Optimization:
+  Remove unused export variables from modules,
+  thereby further eliminating related side-effect-free statements.
+  In `lib.js`, variable `b` is unused,
+  so related code is removed from the final output.
+- `sideEffects` Optimization:
+  Remove modules from the module graph where export variables are not used.
+  In `util.js`, no export variables are used and entire module are side-effect-free.
+  so `util.js` module is removed from the final output.
+- DCE (Dead Code Elimination) Optimization:
+  Remove dead code by by general minification tools.
+  In `bootstrap.js`, the `console.log('bad')` statement will not execute,
+  so related code is removed from the final output.
+
+```ts
+// index.js
+import { a } from './lib'
+import { c } from './util'
+import './bootstrap'
+
+console.log(a)
+
+// lib.js
+export const a = 1
+export const b = 2
+
+// util.js
+export const c = 3
+export const d = 4
+
+// bootstrap.js
+console.log('bootstrap')
+
+if (false)
+  console.log('bad')
+else
+  console.log('good')
+```
+
+Write tree-shakable code:
 
 - 避免无意义的赋值.
 - 尽量不写带有副作用的代码: 诸如编写了立即执行函数, 在函数里又使用了外部变量等.
