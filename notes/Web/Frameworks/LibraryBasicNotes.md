@@ -906,6 +906,7 @@ tags: [Web, Framework, Library]
 - [P5.js: Utilize P5 Sketches within React Apps](https://github.com/P5-wrapper/react)
 - [Babylon.js: Powerful, Beautiful, Simple, and Open Game and Rendering Engine](https://github.com/BabylonJS/Babylon.js)
 - [Gala: Web-first and Mobile-first High-performance Real-time Development Platform](https://github.com/galacean/engine)
+- [Drei: Collection of Useful Helpers and Fully Functional Abstractions for @react-three/fiber](https://github.com/pmndrs/drei)
 
 ## Media
 
