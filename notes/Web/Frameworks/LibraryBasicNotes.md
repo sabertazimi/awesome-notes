@@ -1023,24 +1023,27 @@ tags: [Web, Framework, Library]
 
 ### Loading Effect Animation
 
+#### Spinner
+
+- [UIBall](https://github.com/GriffinJohnston/ldrs):
+  Modern, tree-shakeable loader and spinner web components.
+- [Spinners](https://github.com/davidhu2000/react-spinners):
+  Loading spinner components for React.
+- [Epic](https://github.com/epicmaxco/epic-spinners):
+  Easy to use CSS spinners collection with Vue.js integration.
+
 #### Progress Bar
 
-- [NProgress.js](https://github.com/rstacruz/nprogress).
+- [NProgress](https://github.com/rstacruz/nprogress).
 - [Pace](https://github.com/CodeByZach/pace):
   Site progress bar.
 
 #### Skeleton
 
-- [React Skeleton](https://github.com/danilowoz/react-content-loader).
-- [Vue Skeleton](https://github.com/egoist/vue-content-loader).
-
-#### Spinner
-
-- [React Spinners](https://github.com/davidhu2000/react-spinners).
-- [Epic Spinners](https://github.com/epicmaxco/epic-spinners).
-- [Loading IO](https://loading.io).
-- [UIBall](https://github.com/GriffinJohnston/uiball-loaders):
-  Modern, tree-shakeable loaders and spinners for React.
+- [ReactContentLoader](https://github.com/danilowoz/react-content-loader):
+  SVG-powered skeleton for React.
+- [VueContentLoader](https://github.com/egoist/vue-content-loader):
+  SVG-powered skeleton for Vue.
 
 ## Time Utils
 
