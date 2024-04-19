@@ -80,6 +80,7 @@ tags: [Web, Framework, Library]
 - [LoopBack: Build Modern API Applications](https://github.com/loopbackio/loopback-next)
 - [Aleph: Full-stack Framework in Deno](https://github.com/alephjs/aleph.js)
 - [Remult: CRUD Framework for Full Stack TypeScript](https://github.com/remult/remult)
+- [HoNo: Web Framework Built on Web Standards](https://github.com/honojs/hono)
 
 ### Headless CMS
 
