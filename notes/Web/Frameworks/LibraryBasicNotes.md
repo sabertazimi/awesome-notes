@@ -10,1358 +10,1830 @@ tags: [Web, Framework, Library]
 
 ## Indexing Tools
 
-- [LibHunt](https://www.libhunt.com)
-- [Rising Stars](https://github.com/bestofjs/javascript-risingstars)
-- [Star History](https://github.com/star-history/star-history)
-- [Best of JS](https://github.com/bestofjs/bestofjs-webui)
-- [Moiva](https://github.com/aantipov/moiva)
-- [NPM Package Advisor](https://snyk.io/advisor)
-- [NPM Package Analytics](https://npm.devtool.tech)
-- [NPM Package Comparator](https://npmcompare.com)
-- [NPM Package Cost](https://github.com/pastelsky/bundlephobia)
-- [NPM Package Trends](https://github.com/johnmpotter/npm-trends)
-- [NPM Package Explorer](https://github.com/FormidableLabs/runpkg)
+- [LibHunt](https://www.libhunt.com).
+- [RisingStars](https://github.com/bestofjs/javascript-risingstars).
+- [StarHistory](https://github.com/star-history/star-history).
+- [BestofJS](https://github.com/bestofjs/bestofjs-webui).
+- [Moiva](https://github.com/aantipov/moiva).
+- [Snyk](https://snyk.io/advisor):
+  NPM package advisor.
+- [NPMCompare](https://npmcompare.com):
+  NPM package comparator.
+- [BundlePhobia](https://github.com/pastelsky/bundlephobia):
+  NPM package cost analyzer.
+- [RunPKG](https://github.com/FormidableLabs/runpkg):
+  NPM package online explorer.
+- [NPMTrends](https://github.com/johnmpotter/npm-trends).
 
 ## Web Boilerplate
 
 ### Generators and CLI Tools
 
-- [Create Vue App](https://github.com/vuejs/create-vue)
-- [Create React Native App](https://github.com/expo/expo)
-- [Create T3 App: Create Full-stack and Type-safe Next.js App](https://github.com/t3-oss/create-t3-app)
-- [Modern: Meta-framework Suite Designed for Frontend-focused Modern Web Development](https://github.com/modern-js-dev/modern.js)
-- [Projen: New Generation of Project Generators](https://github.com/projen/projen)
-- [Hygen: Component Generator](https://github.com/jondot/hygen)
-- [Plop Generator](https://github.com/plopjs/plop)
-- [UnBuild: Unified JavaScript Build System](https://github.com/unjs/unbuild)
+- [Expo](https://github.com/expo/expo):
+  Create React Native app.
+- [T3](https://github.com/t3-oss/create-t3-app):
+  Create full-stack and type-safe Next.js app.
+- [Vue](https://github.com/vuejs/create-vue):
+  Create Vue app.
+- [Modern](https://github.com/modern-js-dev/modern.js):
+  Meta-framework suite designed for frontend-focused modern web development.
+- [Projen](https://github.com/projen/projen):
+  New generation of project generators.
+- [Hygen](https://github.com/jondot/hygen):
+  Component generator.
+- [Plop Generator](https://github.com/plopjs/plop).
+- [UnBuild](https://github.com/unjs/unbuild):
+  Unified JavaScript build system.
 
 ### Boilerplate and Templates
 
-- [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
-- [React Next.js Boilerplate](https://github.com/BearStudio/start-ui-web)
-- [React Electron Boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate)
-- [React Starter Kit](https://github.com/kriasoft/react-starter-kit)
-- [React Vite Starter](https://github.com/wtchnm/Vitamin)
-- [Plasmo: Browser Extension Framework](https://github.com/PlasmoHQ/plasmo)
-- [Browser Extension Vite Starter](https://github.com/antfu/vitesse-webext)
+- [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate).
+- [React Next.js Boilerplate](https://github.com/BearStudio/start-ui-web).
+- [React Electron Boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate).
+- [React Starter Kit](https://github.com/kriasoft/react-starter-kit).
+- [React Vite Starter](https://github.com/wtchnm/Vitamin).
+- [Plasmo](https://github.com/PlasmoHQ/plasmo):
+  Browser extension framework.
+- [Browser Extension Vite Starter](https://github.com/antfu/vitesse-webext).
 
 ## Framework and Solution
 
 ### Front-end Solution
 
-- [Next](https://github.com/vercel/next.js)
-- [Nuxt](https://github.com/nuxt/nuxt.js)
-- [Remix: Full Stack Web Framework](https://github.com/remix-run/remix)
-- [Gatsby](https://github.com/gatsbyjs/gatsby)
-- [UMI](https://github.com/umijs/umi)
-- [IceWorks](https://github.com/alibaba/ice)
-- [Blitz: Full Stack React Framework](https://github.com/blitz-js/blitz)
-- [Hydrogen: React-based Framework for Building Shopify-powered Custom Storefronts](https://github.com/Shopify/hydrogen)
+- [Next](https://github.com/vercel/next.js).
+- [Nuxt](https://github.com/nuxt/nuxt.js).
+- [Remix](https://github.com/remix-run/remix):
+  Full-stack web framework.
+- [Gatsby](https://github.com/gatsbyjs/gatsby).
+- [UMI](https://github.com/umijs/umi).
+- [IceWorks](https://github.com/alibaba/ice).
+- [Blitz](https://github.com/blitz-js/blitz):
+  Full-stack React framework.
+- [Hydrogen](https://github.com/Shopify/hydrogen):
+  React-based framework for building Shopify-powered custom storefronts.
 
 ### Micro Front-ends Solution
 
-- [QianKun](https://github.com/umijs/qiankun)
-- [Bit](https://github.com/teambit/bit)
-- [IceStark](https://github.com/ice-lab/icestark)
-- [Garfish: ByteDance Micro Front-end Framework](https://github.com/bytedance/garfish)
-- [Single SPA](https://github.com/single-spa/single-spa)
+- [QianKun](https://github.com/umijs/qiankun).
+- [Bit](https://github.com/teambit/bit).
+- [IceStark](https://github.com/ice-lab/icestark).
+- [Garfish](https://github.com/bytedance/garfish):
+  ByteDance micro front-ends framework.
+- [Single SPA](https://github.com/single-spa/single-spa).
 
 ### Back-end Solution
 
-- [Nest: Enterprise-grade Server-side Applications on Top of TypeScript](https://github.com/nestjs/nest)
-- [Fastify: Fast and Low Overhead Web Framework](https://github.com/fastify/fastify)
-- [Feathers.js: Real-time Applications Framework Based on Socket.IO](https://github.com/feathersjs/feathers)
-- [Egg.js](https://github.com/eggjs/egg)
-- [Midway: Serverless Framework for Front-end Developers](https://github.com/midwayjs/midway)
-- [Koa: Expressive Middleware using ES2017 Async Functions](https://github.com/koajs/koa)
-- [Sails: Realtime MVC Framework](https://github.com/balderdashy/sails)
-- [RedWood: App Framework for Startups](https://github.com/redwoodjs/redwood)
-- [Amplication: Low-Code but High Quality Applications](https://github.com/amplication/amplication)
-- [LoopBack: Build Modern API Applications](https://github.com/loopbackio/loopback-next)
-- [Aleph: Full-stack Framework in Deno](https://github.com/alephjs/aleph.js)
-- [Remult: CRUD Framework for Full Stack TypeScript](https://github.com/remult/remult)
-- [HoNo: Web Framework Built on Web Standards](https://github.com/honojs/hono)
+- [Nest](https://github.com/nestjs/nest):
+  Enterprise-grade server-side applications on top of TypeScript.
+- [Fastify](https://github.com/fastify/fastify):
+  Fast and low overhead web framework.
+- [Feathers.js](https://github.com/feathersjs/feathers):
+  Real-time applications framework based on Socket.io.
+- [Egg.js](https://github.com/eggjs/egg).
+- [Midway](https://github.com/midwayjs/midway):
+  Serverless framework for front-end developers.
+- [Koa](https://github.com/koajs/koa):
+  Expressive middleware using ES2017 async functions.
+- [Sails](https://github.com/balderdashy/sails):
+  Realtime MVC framework.
+- [RedWood](https://github.com/redwoodjs/redwood):
+  App framework for startups.
+- [Amplication](https://github.com/amplication/amplication):
+  Low-code but high quality applications.
+- [LoopBack](https://github.com/loopbackio/loopback-next):
+  Build modern API applications.
+- [Aleph](https://github.com/alephjs/aleph.js):
+  Full-stack framework in Deno.
+- [Remult](https://github.com/remult/remult):
+  CRUD framework for full-stack TypeScript.
+- [HoNo](https://github.com/honojs/hono):
+  Web framework built on web standards.
 
 ### Headless CMS
 
-- [StrAPI](https://github.com/strapi/strapi)
-- [Ghost](https://github.com/TryGhost/Ghost)
-- [Netlify](https://github.com/netlify/netlify-cms)
-- [KeyStone](https://github.com/keystonejs/keystone)
-- [TinaCMS](https://github.com/tinacms/tinacms)
-- [Payload](https://github.com/payloadcms/payload)
+- [StrAPI](https://github.com/strapi/strapi).
+- [Ghost](https://github.com/TryGhost/Ghost).
+- [Netlify](https://github.com/netlify/netlify-cms).
+- [KeyStone](https://github.com/keystonejs/keystone).
+- [TinaCMS](https://github.com/tinacms/tinacms).
+- [Payload](https://github.com/payloadcms/payload).
 
 ### Desktop Solution
 
-- [Electron](https://github.com/electron/electron)
-- [Tauri: Smaller, Faster and More Secure Rust Application](https://github.com/tauri-apps/tauri)
-- [Neutralino: Portable and Lightweight Cross-platform C++ Application](https://github.com/neutralinojs/neutralinojs)
-- [WasmER: Leading Wasm Runtime](https://github.com/wasmerio/wasmer)
+- [Electron](https://github.com/electron/electron).
+- [Tauri](https://github.com/tauri-apps/tauri):
+  Smaller, faster and more secure Rust application.
+- [Neutralino](https://github.com/neutralinojs/neutralinojs):
+  Portable and lightweight cross-platform C++ application.
+- [WasmER](https://github.com/wasmerio/wasmer):
+  Leading WASM runtime.
 
 ### Mobile Solution
 
-- [Expo: Making Universal Native Apps with React on Android, iOS and Web](https://github.com/expo/expo)
-- [Uni APP: Vue for Mobile Development](https://github.com/dcloudio/uni-app)
-- [Taro: Cross-Platform and Cross-Framework Solution to Develop Mini-programs](https://github.com/NervJS/taro)
+- [Expo](https://github.com/expo/expo):
+  Making universal native apps with React on Android, iOS and web.
+- [Uni APP](https://github.com/dcloudio/uni-app):
+  Vue for mobile development.
+- [Taro](https://github.com/NervJS/taro):
+  Cross-platform and cross-framework solution to develop mini-programs.
 
 ## State Management
 
 ### Redux State Management
 
-- [Redux ToolKit: Official Core Set for Efficient Redux Development](https://github.com/reduxjs/redux-toolkit)
-- [Rematch: Redux Framework](https://github.com/rematch/rematch)
-- [Reselect: Selector Library for Redux](https://github.com/reduxjs/reselect)
-- [ImmerJS: Create Next Immutable State by Mutating Current One](https://github.com/immerjs/immer)
+- [Redux ToolKit](https://github.com/reduxjs/redux-toolkit):
+  Official core set for efficient Redux development.
+- [Rematch](https://github.com/rematch/rematch):
+  Redux framework.
+- [Reselect](https://github.com/reduxjs/reselect):
+  Selector library for Redux.
+- [ImmerJS](https://github.com/immerjs/immer):
+  Create next immutable state by mutating current one.
 
 ### Atom State Management
 
-- [Zustand: Small, Fast and Scalable Bear-bones State-management Solution](https://github.com/pmndrs/zustand)
-- [JoTai: Primitive and Flexible State Management Library](https://github.com/pmndrs/jotai)
-- [Valtio: Proxy-state Simple for React and VanillaJS](https://github.com/pmndrs/valtio)
-- [NanoStores: Atomic Tree-Shakable Stores](https://github.com/nanostores/nanostores)
-- [Signals: Vue-style and Performant State Management Library](https://github.com/preactjs/signals)
-- [Pinia: Next Generation Vue Store](https://github.com/vuejs/pinia)
+- [Zustand](https://github.com/pmndrs/zustand):
+  Small, fast and scalable bear-bones state-management solution.
+- [JoTai](https://github.com/pmndrs/jotai):
+  Primitive and flexible state management library.
+- [Valtio](https://github.com/pmndrs/valtio):
+  Proxy-state simple for React and VanillaJS.
+- [NanoStores](https://github.com/nanostores/nanostores):
+  Atomic tree-shakable stores.
+- [Signals](https://github.com/preactjs/signals):
+  Vue-style and performant state management library.
+- [Pinia](https://github.com/vuejs/pinia):
+  Next generation Vue store.
 
 ### Reactive State Management
 
-- [XState: State Machines and State Charts for Modern Web](https://github.com/statelyai/xstate)
-- [ReduxObservable: RxJS Middleware for Redux](https://github.com/redux-observable/redux-observable)
+- [XState](https://github.com/statelyai/xstate):
+  State machines and state charts for modern web.
+- [ReduxObservable](https://github.com/redux-observable/redux-observable):
+  RxJS middleware for Redux.
 
 ### Server State Management
 
-- [RTK Query: Redux Toolkit Server State Solution](https://redux-toolkit.js.org/rtk-query/overview)
-- [TanStack Query: Fetching, Caching, Synchronizing and Updating Server State](https://github.com/TanStack/query)
-- [SWR: React Hooks for Remote Data Fetching](https://github.com/vercel/swr)
-- [Apollo GraphQL: Fully-featured, Production Ready Caching GraphQL Client](https://github.com/apollographql/apollo-client)
-- [URQL: Highly Customizable and Versatile GraphQL Client](https://github.com/urql-graphql/urql)
-- [Evolution: Local-first Platform for Privacy and Ease of Use](https://github.com/evoluhq/evolu)
+- [RTK Query](https://redux-toolkit.js.org/rtk-query/overview):
+  Redux toolkit server state solution.
+- [TanStack Query](https://github.com/TanStack/query):
+  Fetching, caching, synchronizing and updating server state.
+- [SWR](https://github.com/vercel/swr):
+  React hooks for remote data fetching.
+- [Apollo GraphQL](https://github.com/apollographql/apollo-client):
+  Fully-featured, production ready caching GraphQL client.
+- [URQL](https://github.com/urql-graphql/urql):
+  Highly customizable and versatile GraphQL client.
+- [Evolution](https://github.com/evoluhq/evolu):
+  Local-first platform for privacy and ease of use.
 
 ### Router State Management
 
-- [Router: Minimalist-friendly Router for React and Preact](https://github.com/molefrog/wouter)
-- [Navigo: Simple Vanilla Router](https://github.com/krasimir/navigo)
+- [Router](https://github.com/molefrog/wouter):
+  Minimalist-friendly router for React and Preact.
+- [Navigo](https://github.com/krasimir/navigo):
+  Simple vanilla router.
 
 ## Hooks
 
-- [ReactUse Hooks](https://github.com/streamich/react-use)
-- [Alibaba Hooks](https://github.com/alibaba/hooks)
-- [JavaScript Hooks](https://github.com/uidotdev/usehooks)
-- [TypeScript Hooks](https://github.com/juliencrn/useHooks-ts)
-- [VueUse](https://github.com/vueuse/vueuse)
+- [ReactUse Hooks](https://github.com/streamich/react-use).
+- [Alibaba Hooks](https://github.com/alibaba/hooks).
+- [JavaScript Hooks](https://github.com/uidotdev/usehooks).
+- [TypeScript Hooks](https://github.com/juliencrn/useHooks-ts).
+- [VueUse](https://github.com/vueuse/vueuse).
 
 ### State Hooks
 
-- [Optimistic State Hooks](https://github.com/perceived-dev/optimistic-state)
+- [Optimistic State Hooks](https://github.com/perceived-dev/optimistic-state).
 
 ### Sensor Hooks
 
-- [React Media Query Hook](https://github.com/yocontra/react-responsive)
+- [React Media Query Hook](https://github.com/yocontra/react-responsive).
 
 ### Timer Hooks
 
-- [IdleTimer: User Activity Timer Component](https://github.com/SupremeTechnopriest/react-idle-timer)
+- [IdleTimer](https://github.com/SupremeTechnopriest/react-idle-timer):
+  User activity timer component.
 
 ## JavaScript Utils
 
-- [Cash: jQuery Lite](https://github.com/fabiospampinato/cash)
-- [HappyDOM: Browser Native API](https://github.com/capricorn86/happy-dom)
-- [ConstructJS: Byte Level Data Structures](https://github.com/francisrstokes/construct-js)
-- [Node.js Toolbox](https://nodejstoolbox.com)
+- [Cash](https://github.com/fabiospampinato/cash):
+  jQuery lite.
+- [HappyDOM](https://github.com/capricorn86/happy-dom):
+  Browser native API.
+- [ConstructJS](https://github.com/francisrstokes/construct-js):
+  Byte-level data structures.
+- [Node.js Toolbox](https://nodejstoolbox.com).
 
 ### Math Utils
 
-- [HyperFormula: Excel-like Calculation Engine](https://github.com/handsontable/hyperformula)
-- [DanFoJS: High Performance Structured Data Manipulating and Processing](https://github.com/javascriptdata/danfojs)
+- [HyperFormula](https://github.com/handsontable/hyperformula):
+  Excel-like calculation engine.
+- [DanFoJS](https://github.com/javascriptdata/danfojs):
+  High performance structured data manipulating and processing.
 
 ### String Utils
 
-- [String Manipulation](https://github.com/dleitee/strman)
-- [Fuzzy String Matching](https://github.com/nol13/fuzzball.js)
-- [UrlUnShort: Short Links Expander](https://github.com/nodeca/url-unshort)
+- [String Manipulation](https://github.com/dleitee/strman).
+- [Fuzzy String Matching](https://github.com/nol13/fuzzball.js).
+- [UrlUnShort](https://github.com/nodeca/url-unshort):
+  Short links expander.
 
 #### Glob Utils
 
-- [Glob: Glob Functionality](https://github.com/isaacs/node-glob)
-- [Minimatch: Glob Matcher](https://github.com/isaacs/minimatch)
-- [FastGlob: Fast and Efficient Glob Library](https://github.com/mrmlnc/fast-glob)
+- [Glob](https://github.com/isaacs/node-glob):
+  Glob functionality.
+- [Minimatch](https://github.com/isaacs/minimatch):
+  Glob matcher.
+- [FastGlob](https://github.com/mrmlnc/fast-glob):
+  Fast and efficient glob library.
 
 #### Regular Expression Utils
 
-- [Validator: Common RegExp Patterns](https://github.com/validatorjs/validator.js)
-- [Regex101](https://github.com/firasdib/Regex101)
-- [Regex Visualization](https://github.com/Bowen7/regex-vis)
-- [XRegExp: Extended JavaScript Regular Expressions](https://github.com/slevithan/xregexp)
-- [RE2: Fast, Safe Alternative to Backtracking Regular Expression Engines](https://github.com/uhop/node-re2)
+- [Validator](https://github.com/validatorjs/validator.js):
+  Common RegExp patterns.
+- [Regex101](https://github.com/firasdib/Regex101).
+- [Regex Visualization](https://github.com/Bowen7/regex-vis).
+- [XRegExp](https://github.com/slevithan/xregexp):
+  Extended JavaScript regular expressions.
+- [RE2](https://github.com/uhop/node-re2):
+  Fast, safe alternative to backtracking regular expression engines.
 
 ### Concurrent and Parallel Programming Utils
 
-- [Threads.js](https://github.com/andywer/threads.js)
-- [WorkerPool](https://github.com/josdejong/workerpool)
-- [TinyPool: Minimal and Tiny Worker Thread Pool](https://github.com/tinylibs/tinypool)
-- [PartyTown: Relocate Resource Intensive scripts into Web Workers](https://github.com/BuilderIO/partytown)
-- [Comlink: Shared Class between Web Workers](https://github.com/GoogleChromeLabs/comlink)
-- [GRFN: Executes Dependency Graph of Async Functions Concurrently](https://github.com/TomerAberbach/grfn)
-- [Bull: Premium Queue Package for Handling Distributed Jobs and Messages](https://github.com/OptimalBits/bull)
-- [BreeJS: Job Scheduler](https://github.com/breejs/bree)
+- [Threads.js](https://github.com/andywer/threads.js).
+- [WorkerPool](https://github.com/josdejong/workerpool).
+- [TinyPool](https://github.com/tinylibs/tinypool):
+  Minimal and tiny worker thread pool.
+- [PartyTown](https://github.com/BuilderIO/partytown):
+  Relocate resource intensive scripts into web workers.
+- [Comlink](https://github.com/GoogleChromeLabs/comlink):
+  Shared class between web workers.
+- [GRFN](https://github.com/TomerAberbach/grfn):
+  Executes dependency graph of async functions concurrently.
+- [Bull](https://github.com/OptimalBits/bull):
+  Premium queue package for handling distributed jobs and messages.
+- [BreeJS](https://github.com/breejs/bree):
+  Job scheduler.
 
 ### Functional Programming Utils
 
-- [ImmerJS: Create Next Immutable State by Mutating Current One](https://github.com/immerjs/immer)
-- [Proxy Memoize: Intuitive Magical Memoization with Proxy and WeakMap](https://github.com/dai-shi/proxy-memoize)
-- [Mutative: Blazing fast Immutable Updates](https://github.com/unadlib/mutative)
+- [ImmerJS](https://github.com/immerjs/immer):
+  Create next immutable state by mutating current one.
+- [Proxy Memoize](https://github.com/dai-shi/proxy-memoize):
+  Intuitive magical memoization with proxy and weakmap.
+- [Mutative](https://github.com/unadlib/mutative):
+  Blazing fast immutable updates.
 
 ### IOC and DI Utils
 
-- [InversifyJS: Powerful and Lightweight Inversion of Control Container](https://github.com/inversify/InversifyJS)
-- [Awilix: Powerful Inversion of Control Container](https://github.com/jeffijoe/awilix)
-- [TypeDI: Powerful Dependency Injection Tool](https://github.com/typestack/typedi)
+- [InversifyJS](https://github.com/inversify/InversifyJS):
+  Powerful and lightweight inversion of control container.
+- [Awilix](https://github.com/jeffijoe/awilix):
+  Powerful inversion of control container.
+- [TypeDI](https://github.com/typestack/typedi):
+  Powerful dependency injection tool.
 
 ### Browser Utils
 
-- [Modernizr: HTML5 and CSS3 Browser Feature Detection](https://github.com/Modernizr/Modernizr)
-- [Browser: Browser Platform Detection](https://github.com/lancedikson/bowser)
-- [UAParser: User-Agent Data Parser](https://github.com/faisalman/ua-parser-js)
+- [Modernizr](https://github.com/Modernizr/Modernizr):
+  HTML5 and CSS3 browser feature detection.
+- [Browser](https://github.com/lancedikson/bowser):
+  Browser platform detection.
+- [UAParser](https://github.com/faisalman/ua-parser-js):
+  User-agent data parser.
 
 ## TypeScript Utils
 
 ### TypeScript Basic Utils
 
-- [TypeScript Configuration](https://github.com/tsconfig/bases)
-- [TypeScript Node](https://github.com/TypeStrong/ts-node)
-- [TypeScript Jest](https://github.com/kulshekhar/ts-jest)
-- [Type Testing](https://github.com/SamVerschueren/tsd)
-- [Type Coverage](https://github.com/plantain-00/type-coverage)
-- [DefinitelyTyped: High Quality TypeScript Type Definitions](https://github.com/DefinitelyTyped/DefinitelyTyped)
-- [DefinitelyTyped Tools: Infrastructure for DefinitelyTyped](https://github.com/microsoft/DefinitelyTyped-tools)
-- [DTSGen: Creates Starter TypeScript Definition Files for Any Module or Library](https://github.com/microsoft/dts-gen)
+- [TypeScript Configuration](https://github.com/tsconfig/bases).
+- [TypeScript Node](https://github.com/TypeStrong/ts-node).
+- [TypeScript Jest](https://github.com/kulshekhar/ts-jest).
+- [Type Testing](https://github.com/SamVerschueren/tsd).
+- [Type Coverage](https://github.com/plantain-00/type-coverage).
+- [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped):
+  High quality TypeScript type definitions.
+- [DefinitelyTyped Tools](https://github.com/microsoft/DefinitelyTyped-tools):
+  Infrastructure for DefinitelyTyped.
+- [DTSGen](https://github.com/microsoft/dts-gen):
+  Creates starter TypeScript definition files for any module or library.
 
 ### TypeScript Utility Types
 
-- [TypeFest](https://github.com/sindresorhus/type-fest)
-- [UtilityTypes](https://github.com/piotrwitek/utility-types)
-- [ToolBelt](https://github.com/millsp/ts-toolbelt)
-- [Guards: Comprehensive Collection of Type Guards](https://github.com/sniptt-official/guards)
-- [TSReset: Improving Types for Common JavaScript APIs](https://github.com/total-typescript/ts-reset)
+- [TypeFest](https://github.com/sindresorhus/type-fest).
+- [UtilityTypes](https://github.com/piotrwitek/utility-types).
+- [ToolBelt](https://github.com/millsp/ts-toolbelt).
+- [Guards](https://github.com/sniptt-official/guards):
+  Comprehensive collection of type guards.
+- [TSReset](https://github.com/total-typescript/ts-reset):
+  Improving types for common JavaScript APIs.
 
 ### TypeScript Schema Utils
 
-- [Zod: TypeScript-first Schema Validation with Static Type Inference](https://github.com/colinhacks/zod)
-- [TypeBox: JSON Schema Type Builder](https://github.com/sinclairzx81/typebox)
-- [Effect: Fully-fledged Functional Effect System for TypeScript](https://github.com/Effect-TS/effect)
-- [AutoMapper: Object to Object Auto Mapper](https://github.com/nartc/mapper)
-- [OW: Function Argument Validation for Humans](https://github.com/sindresorhus/ow)
-- [SuperJSON](https://github.com/blitz-js/superjson)
-- [TSPattern: Pattern Matching Library (Rust/Haskell) for TypeScript](https://github.com/gvergnaud/ts-pattern)
+- [Zod](https://github.com/colinhacks/zod):
+  TypeScript-first schema validation with static type inference.
+- [TypeBox](https://github.com/sinclairzx81/typebox):
+  JSON schema type builder.
+- [Effect](https://github.com/Effect-TS/effect):
+  Fully-fledged functional effect system for TypeScript.
+- [AutoMapper](https://github.com/nartc/mapper):
+  Object to object auto mapper.
+- [OW](https://github.com/sindresorhus/ow):
+  Function argument validation for humans.
+- [SuperJSON](https://github.com/blitz-js/superjson).
+- [TSPattern](https://github.com/gvergnaud/ts-pattern):
+  Pattern matching library (Rust/Haskell) for TypeScript.
 
 ### TypeScript AST Utils
 
-- [Morph](https://github.com/nadeesha/ts-morph)
-- [Morpher](https://github.com/LinbuduLab/morpher)
-- [Prune](https://github.com/nadeesha/ts-prune)
+- [Morph](https://github.com/nadeesha/ts-morph).
+- [Morpher](https://github.com/LinbuduLab/morpher).
+- [Prune](https://github.com/nadeesha/ts-prune).
 
 ## UI Framework
 
 ### CSS UI Framework
 
-- [Bootstrap.css](https://github.com/twbs/bootstrap)
-- [Pico.css](https://github.com/picocss/pico)
-- [MVP.css](https://github.com/andybrewer/mvp)
-- [Paper.css](https://github.com/papercss/papercss)
+- [Bootstrap.css](https://github.com/twbs/bootstrap).
+- [Pico.css](https://github.com/picocss/pico).
+- [MVP.css](https://github.com/andybrewer/mvp).
+- [Paper.css](https://github.com/papercss/papercss).
 
 ### Utility UI Framework
 
-- [Tailwind](https://github.com/tailwindlabs/tailwindcss)
-- [Daisy: Tailwind Components Plugin](https://github.com/saadeghi/daisyui)
-- [Elements: Tailwind Components Collection](https://github.com/mdbootstrap/Tailwind-Elements)
-- [TailwindMaterial](https://github.com/creativetimofficial/material-tailwind)
-- [Form](https://github.com/tailwindlabs/tailwindcss-forms)
-- [Typography](https://github.com/tailwindlabs/tailwindcss-typography)
-- [Aspect Ratio](https://github.com/tailwindlabs/tailwindcss-aspect-ratio)
-- [Line Clamp](https://github.com/tailwindlabs/tailwindcss-line-clamp)
+- [Tailwind](https://github.com/tailwindlabs/tailwindcss).
+- [Daisy](https://github.com/saadeghi/daisyui):
+  Tailwind components plugin.
+- [Elements](https://github.com/mdbootstrap/Tailwind-Elements):
+  Tailwind components collection.
+- [TailwindMaterial](https://github.com/creativetimofficial/material-tailwind).
+- [Form](https://github.com/tailwindlabs/tailwindcss-forms).
+- [Typography](https://github.com/tailwindlabs/tailwindcss-typography).
+- [Aspect Ratio](https://github.com/tailwindlabs/tailwindcss-aspect-ratio).
+- [Line Clamp](https://github.com/tailwindlabs/tailwindcss-line-clamp).
 
 ### Headless UI Framework
 
-- [Headless: Completely Un-styled and Fully Accessible Tailwind React Components](https://github.com/tailwindlabs/headlessui)
-- [Radix: Build High-quality and Accessible Design Systems](https://github.com/radix-ui/primitives)
-- [ShadCN: Accessible and Customizable Components can Copy and Paste](https://github.com/shadcn-ui/ui)
-- [Spectrum: Build Adaptive, Accessible and Robust User Experiences](https://github.com/adobe/react-spectrum)
-- [AriaKit: Accessible React Components](https://github.com/ariakit/ariakit)
+- [Headless](https://github.com/tailwindlabs/headlessui):
+  Completely un-styled and fully accessible Tailwind React components.
+- [Radix](https://github.com/radix-ui/primitives):
+  Build high-quality and accessible design systems.
+- [ShadCN](https://github.com/shadcn-ui/ui):
+  Accessible and customizable components can copy and paste.
+- [Spectrum](https://github.com/adobe/react-spectrum):
+  Build adaptive, accessible and robust user experiences.
+- [AriaKit](https://github.com/ariakit/ariakit):
+  Accessible React components.
 
 ### Components UI Framework
 
-- [Ant Design](https://github.com/ant-design/ant-design)
-- [Material](https://github.com/mui-org/material-ui)
-- [Chakra](https://github.com/chakra-ui/chakra-ui)
-- [Mantine](https://github.com/mantinedev/mantine)
-- [BluePrint](https://github.com/palantir/blueprint)
-- [Tamagui: Style and UI for React Meet Optimizing Compiler](https://github.com/tamagui/tamagui)
-- [Next: Beautiful, Fast and Modern React UI Library](https://github.com/nextui-org/nextui)
-- [Primer: GitHub Primer Design System](https://github.com/primer/react)
-- [Luna: Operating System Components](https://github.com/liriliri/luna)
-- [Molecule: Lightweight Web IDE UI Framework](https://github.com/DTStack/molecule)
+- [Ant Design](https://github.com/ant-design/ant-design).
+- [Material](https://github.com/mui-org/material-ui).
+- [Chakra](https://github.com/chakra-ui/chakra-ui).
+- [Mantine](https://github.com/mantinedev/mantine).
+- [BluePrint](https://github.com/palantir/blueprint).
+- [Tamagui](https://github.com/tamagui/tamagui):
+  Style and UI for React meet optimizing compiler.
+- [Next](https://github.com/nextui-org/nextui):
+  Beautiful, fast and modern React UI library.
+- [Primer](https://github.com/primer/react):
+  GitHub Primer design system.
+- [Luna](https://github.com/liriliri/luna):
+  Operating system components.
+- [Molecule](https://github.com/DTStack/molecule):
+  Lightweight web IDE UI framework.
 
 ### Admin and Dashboard UI Framework
 
-- [Ant Design Pro: Out-of-box UI Solution for Enterprise Applications](https://github.com/ant-design/ant-design-pro)
-- [Refine: React-based Framework for Building Internal Tools](https://github.com/pankod/refine)
-- [ReactAdmin: Frontend Framework for Building B2B Applications](https://github.com/marmelab/react-admin)
-- [Tremor: React Components to Build Charts and Dashboards](https://github.com/tremorlabs/tremor)
-- [Vuestic: Vue Admin Components](https://github.com/epicmaxco/vuestic-admin)
+- [Ant Design Pro](https://github.com/ant-design/ant-design-pro):
+  Out-of-box UI solution for enterprise applications.
+- [Refine](https://github.com/pankod/refine):
+  React-based framework for building internal tools.
+- [ReactAdmin](https://github.com/marmelab/react-admin):
+  Frontend framework for building B2B applications.
+- [Tremor](https://github.com/tremorlabs/tremor):
+  React components to build charts and dashboards.
+- [Vuestic](https://github.com/epicmaxco/vuestic-admin):
+  Vue admin components.
 
 ## CSS Utils
 
 ### CSS Design Tools
 
-- [Awesome Design Tools](https://github.com/LisaDziuba/Awesome-Design-Tools)
-- [CodyHouse Components](https://codyhouse.co)
-- [CC Create](https://cccreate.co)
-- [Need Design Resources](https://neede.co)
-- [Interface Design Resources](https://interfacer.xyz)
+- [Awesome Design Tools](https://github.com/LisaDziuba/Awesome-Design-Tools).
+- [CodyHouse Components](https://codyhouse.co).
+- [CC Create](https://cccreate.co).
+- [Need Design Resources](https://neede.co).
+- [Interface Design Resources](https://interfacer.xyz).
 
 ### Ordinary CSS Utils
 
-- [Normalize: Modern Normalize Browser Default Style](https://github.com/sindresorhus/modern-normalize)
-- [Reset: Modern Bare-bones CSS Reset for Modern Web Development](https://github.com/hankchizljaw/modern-css-reset)
-- [Sanitize: Best-practices CSS Foundation](https://github.com/csstools/sanitize.css)
-- [Normalize: Modern Alternative to CSS Resets](https://github.com/necolas/normalize.css)
-- [PostCSS Preset: Use Modern CSS](https://github.com/csstools/postcss-plugins)
-- [Tailwind Viewer: Local Tool for Visualizing Tailwind Configuration](https://github.com/rogden/tailwind-config-viewer)
+- [Normalize](https://github.com/sindresorhus/modern-normalize):
+  Modern normalize browser default style.
+- [Reset](https://github.com/hankchizljaw/modern-css-reset):
+  Modern bare-bones CSS reset for modern web development.
+- [Sanitize](https://github.com/csstools/sanitize.css):
+  Best-practices CSS foundation.
+- [Normalize](https://github.com/necolas/normalize.css):
+  Modern alternative to CSS resets.
+- [PostCSS Preset](https://github.com/csstools/postcss-plugins):
+  Use modern CSS.
+- [Tailwind Viewer](https://github.com/rogden/tailwind-config-viewer):
+  Local tool for visualizing Tailwind configuration.
 
 ### CSS-in-JS Utils
 
-- [Classnames: Conditionally Joining ClassNames Together](https://github.com/JedWatson/classnames)
-- [CLSX: Constructing ClassName Strings Conditionally](https://github.com/lukeed/clsx)
-- [Tailwind Merge: Merge Tailwind CSS Classes without Style Conflicts](https://github.com/dcastil/tailwind-merge)
-- [TWind: Smallest, Fastest, Most Feature Complete Tailwind-in-JS Solution](https://github.com/tw-in-js/twind)
-- [Styled Components: Runtime Visual Primitives](https://github.com/styled-components/styled-components)
-- [Linaria: Zero-runtime CSS-in-TypeScript Library](https://github.com/callstack/linaria)
-- [Vanilla Extract: Zero-runtime CSS-in-TypeScript](https://github.com/vanilla-extract-css/vanilla-extract)
-- [StyleX: Styling System Powers Facebook](https://github.com/facebook/stylex)
-- [Panda: Universal, Type-Safe, CSS-in-JS Tailwind-style Framework](https://github.com/chakra-ui/panda)
-- [Compiled: Performant Compile Time CSS-in-TypeScript Library](https://github.com/atlassian-labs/compiled)
-- [CVA: Class Variance Authority](https://github.com/joe-bell/cva)
+- [Classnames](https://github.com/JedWatson/classnames):
+  Conditionally joining classNames together.
+- [CLSX](https://github.com/lukeed/clsx):
+  Constructing className strings conditionally.
+- [Tailwind Merge](https://github.com/dcastil/tailwind-merge):
+  Merge Tailwind CSS classes without style conflicts.
+- [TWind](https://github.com/tw-in-js/twind):
+  Smallest, fastest, most feature complete Tailwind-in-JS solution.
+- [Styled Components](https://github.com/styled-components/styled-components):
+  Runtime visual primitives.
+- [Linaria](https://github.com/callstack/linaria):
+  Zero-runtime CSS-in-TypeScript library.
+- [Vanilla Extract](https://github.com/vanilla-extract-css/vanilla-extract):
+  Zero-runtime CSS-in-TypeScript.
+- [StyleX](https://github.com/facebook/stylex):
+  Styling system powers Facebook.
+- [Panda](https://github.com/chakra-ui/panda):
+  Universal, type-safe, CSS-in-JS Tailwind-style framework.
+- [Compiled](https://github.com/atlassian-labs/compiled):
+  Performant compile time CSS-in-TypeScript library.
+- [CVA](https://github.com/joe-bell/cva):
+  Class variance authority.
 
 ### Color Utils
 
-- [Color.js: Color Conversion and Manipulation Library](https://github.com/color-js/color.js)
-- [Prism: GitHub Color Palettes Creating and Maintaining Tool](https://github.com/primer/prism)
-- [Color2K: Color Parsing and Manipulation](https://github.com/ricokahler/color2k)
-- [Chroma: All Kinds of Color Manipulations](https://github.com/gka/chroma.js)
-- [Color: Color Conversion and Manipulation](https://github.com/Qix-/color)
-- [Culori: Color Conversion, Interpolation, Difference Formulas, Blending Functions](https://github.com/Evercoder/culori)
-- [ColorThief: Image Color Palette Grab Tool](https://github.com/lokesh/color-thief)
+- [Color.js](https://github.com/color-js/color.js):
+  Color conversion and manipulation library.
+- [Prism](https://github.com/primer/prism):
+  GitHub color palettes creating and maintaining tool.
+- [Color2K](https://github.com/ricokahler/color2k):
+  Color parsing and manipulation.
+- [Chroma](https://github.com/gka/chroma.js):
+  All kinds of color manipulations.
+- [Color](https://github.com/Qix-/color):
+  Color conversion and manipulation.
+- [Culori](https://github.com/Evercoder/culori):
+  Color conversion, interpolation, difference formulas, blending functions.
+- [ColorThief](https://github.com/lokesh/color-thief):
+  Image color palette grab tool.
 
 ### Gradient Utils
 
 #### Gradient Collection
 
-- [Web Gradient](https://github.com/itmeo/webgradients)
-- [Gradient Magic](https://www.gradientmagic.com)
+- [Web Gradient](https://github.com/itmeo/webgradients).
+- [Gradient Magic](https://www.gradientmagic.com).
 
 #### Gradient Tools
 
-- [PostCSS Gradient Plugin](https://github.com/larsenwork/postcss-easing-gradients)
-- [Neat: Build Awesome Gradients Using 3d Shaders](https://github.com/FireCMSco/neat)
+- [PostCSS Gradient Plugin](https://github.com/larsenwork/postcss-easing-gradients).
+- [Neat](https://github.com/FireCMSco/neat):
+  Build awesome gradients using 3D shaders.
 
 #### Gradient Editor
 
-- [Gradient Generator](https://www.joshwcomeau.com/gradient-generator)
-- [CSS Gradient](https://cssgradient.io)
-- [Easing Gradient](https://larsenwork.com/easing-gradients/#editor)
-- [Gradient Art](https://github.com/GradientArt/issues)
+- [Gradient Generator](https://www.joshwcomeau.com/gradient-generator).
+- [CSS Gradient](https://cssgradient.io).
+- [Easing Gradient](https://larsenwork.com/easing-gradients/#editor).
+- [Gradient Art](https://github.com/GradientArt/issues).
 
 ### Box Shadow Utils
 
-- [Neumorphism: Generate CSS for Neumorphic Soft UI Design](https://github.com/adamgiebl/neumorphism)
-- [Box Shadows: Cross-browser Collection of CSS Box-shadows](https://github.com/madeas/box-shadows.css)
-- [ShadowPalette: Shadow Generator](https://www.joshwcomeau.com/shadow-palette)
+- [Neumorphism](https://github.com/adamgiebl/neumorphism):
+  Generate CSS for neumorphic soft UI design.
+- [Box Shadows](https://github.com/madeas/box-shadows.css):
+  Cross-browser collection of CSS box-shadows.
+- [ShadowPalette](https://www.joshwcomeau.com/shadow-palette):
+  Shadow generator.
 
 ### Background Utils
 
-- [Doodle: Web Component for Drawing Patterns Based on CSS Grids](https://github.com/css-doodle/css-doodle)
-- [Clippy: Clip-Path Maker](https://github.com/bennettfeely/Clippy)
-- [Wicked Background](https://wickedbackgrounds.com/backgrounds.html)
+- [Doodle](https://github.com/css-doodle/css-doodle):
+  Web component for drawing patterns based on CSS grids.
+- [Clippy](https://github.com/bennettfeely/Clippy):
+  Clip-path maker.
+- [Wicked Background](https://wickedbackgrounds.com/app).
 
 ### Clip and Shapes Utils
 
-- [Clippy: Clip-path Editor](https://github.com/bennettfeely/Clippy)
-- [Fancy Border Radius](https://github.com/9elements/fancy-border-radius)
-- [React CSS Shape](https://github.com/ashutosh1919/react-awesome-shapes)
-- [CSSGenerators: Generate Borders, Corners, Dividers and Shapes](https://css-generators.com)
+- [Clippy](https://github.com/bennettfeely/Clippy):
+  Clip-path editor.
+- [Fancy Border Radius](https://github.com/9elements/fancy-border-radius).
+- [React CSS Shape](https://github.com/ashutosh1919/react-awesome-shapes).
+- [CSSGenerators](https://css-generators.com):
+  Generate borders, corners, dividers and shapes.
 
 ## Components
 
 ### Layout
 
-- [Full Page Layout](https://github.com/alvarotrigo/fullPage.js)
-- [One Page Layout](https://github.com/davist11/jQuery-One-Page-Nav)
-- [React Panel Group](https://github.com/DanFessler/react-panelgroup)
-- [Bricks Layout](https://github.com/callmecavs/bricks.js)
-- [Brick Layer](https://github.com/ademilter/bricklayer)
-- [InfiniteGrid](https://github.com/naver/egjs-infinitegrid)
-- [Tether: Positioning Engine to Make Overlays, Tooltips and Dropdowns Better](https://github.com/shipshapecode/tether)
-- [SplitJS](https://github.com/nathancahill/Split.js)
-- [Teleport: Teleport React Components in Same React Tree](https://github.com/gregberge/react-teleporter)
+- [Full Page Layout](https://github.com/alvarotrigo/fullPage.js).
+- [One Page Layout](https://github.com/davist11/jQuery-One-Page-Nav).
+- [React Panel Group](https://github.com/DanFessler/react-panelgroup).
+- [Bricks Layout](https://github.com/callmecavs/bricks.js).
+- [Brick Layer](https://github.com/ademilter/bricklayer).
+- [InfiniteGrid](https://github.com/naver/egjs-infinitegrid).
+- [Tether](https://github.com/shipshapecode/tether):
+  Positioning engine to make overlays, tooltips and dropdowns better.
+- [SplitJS](https://github.com/nathancahill/Split.js).
+- [Teleport](https://github.com/gregberge/react-teleporter):
+  Teleport React components in same React tree.
 
 ### Navigation
 
-- [Hamburger: Animated Hamburger Menu Icons for React](https://github.com/luukdv/hamburger-react)
-- [Hamburgers: Tasty CSS-animated Hamburgers](https://github.com/jonsuh/hamburgers)
-- [PageMap](https://github.com/lrsjng/pagemap)
-- [ReactProSidebar: Customizable and Responsive Sidebar with Dropdown Menus and Nested Submenus](https://github.com/azouaoui-med/react-pro-sidebar)
+- [Hamburger](https://github.com/luukdv/hamburger-react):
+  Animated hamburger menu icons for React.
+- [Hamburgers](https://github.com/jonsuh/hamburgers):
+  Tasty CSS-animated hamburgers.
+- [PageMap](https://github.com/lrsjng/pagemap).
+- [ReactProSidebar](https://github.com/azouaoui-med/react-pro-sidebar):
+  Customizable and responsive sidebar with dropdown menus and nested submenus.
 
 ### Landing Page
 
-- [Video Landing Page](https://github.com/rishabhp/bideo.js)
+- [Video Landing Page](https://github.com/rishabhp/bideo.js).
 
 ### Button
 
-- [React Awesome 3D Button](https://github.com/rcaferati/react-awesome-button)
-- [Tiny Fab](https://github.com/dericgw/react-tiny-fab)
-- [Tailwind Buttons](https://devdojo.com/tailwindcss/buttons)
-- [Button Generator](https://markodenic.com/tools/buttons-generator)
-- [CSS Buttons](https://cssbuttons.io)
+- [React Awesome 3D Button](https://github.com/rcaferati/react-awesome-button).
+- [Tiny Fab](https://github.com/dericgw/react-tiny-fab).
+- [Tailwind Buttons](https://devdojo.com/tailwindcss/buttons).
+- [Button Generator](https://markodenic.com/tools/buttons-generator).
+- [CSS Buttons](https://cssbuttons.io).
 
 ### Card
 
-- [GitHub Information Card](https://github.com/lepture/github-cards)
-- [Bootcards](https://github.com/bootcards/bootcards)
+- [GitHub Information Card](https://github.com/lepture/github-cards).
+- [Bootcards](https://github.com/bootcards/bootcards).
 
 ### Chat
 
-- [React Chat Widget](https://github.com/Wolox/react-chat-widget)
-- [Matrix](https://github.com/matrix-org/matrix-react-sdk)
-- [JsSIP: Chat Library](https://github.com/versatica/JsSIP)
-- [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
-- [AdvancedChat: Beautiful Chat Rooms Web Component](https://github.com/antoine92190/vue-advanced-chat)
+- [React Chat Widget](https://github.com/Wolox/react-chat-widget).
+- [Matrix](https://github.com/matrix-org/matrix-react-sdk).
+- [JsSIP](https://github.com/versatica/JsSIP):
+  Chat library.
+- [GalGame ChatView](https://github.com/webcyou/MessageViewJS).
+- [AdvancedChat](https://github.com/antoine92190/vue-advanced-chat):
+  Beautiful chat rooms web component.
 
 ### Comments
 
-- [Giscus: Comment System Powered by GitHub Discussion](https://github.com/giscus/giscus)
-- [GitTalk: Modern Comment Component Based on Github Issue and Preact](https://github.com/gitalk/gitalk)
-- [Utterances: Lightweight Comments Widget Built on GitHub Issues](https://github.com/utterance/utterances)
-- [Waline: Simple, Safe Comment System Inspired by Valine](https://github.com/walinejs/waline)
-- [Cusdis: Lightweight, Privacy-friendly Alternative to Disqus](https://github.com/djyde/cusdis)
-- [Disqus](https://github.com/disqus/disqus-react)
+- [Giscus](https://github.com/giscus/giscus):
+  Comment system powered by GitHub discussion.
+- [GitTalk](https://github.com/gitalk/gitalk):
+  Modern comment component based on GitHub issue and Preact.
+- [Utterances](https://github.com/utterance/utterances):
+  Lightweight comments widget built on GitHub issues.
+- [Waline](https://github.com/walinejs/waline):
+  Simple, safe comment system inspired by Valine.
+- [Cusdis](https://github.com/djyde/cusdis):
+  Lightweight, privacy-friendly alternative to Disqus.
+- [Disqus](https://github.com/disqus/disqus-react).
 
 ### Modal
 
-- [Golden: Multi Window Layout Manager](https://github.com/golden-layout/golden-layout)
-- [WinBox: HTML5 Window Manager](https://github.com/nextapps-de/winbox)
-- [NiceModal: eBay React Modal Manager](https://github.com/eBay/nice-modal-react)
+- [Golden](https://github.com/golden-layout/golden-layout):
+  Multi window layout manager.
+- [WinBox](https://github.com/nextapps-de/winbox):
+  HTML5 window manager.
+- [NiceModal](https://github.com/eBay/nice-modal-react):
+  Ebay React modal manager.
 
 ### Information and Message
 
 #### Page Progress Indicator
 
-- [React Snakke](https://github.com/diogomoretti/react-snakke)
+- [React Snakke](https://github.com/diogomoretti/react-snakke).
 
 #### Prompt and Toast
 
-- [Sweet Alert 2](https://github.com/sweetalert2/sweetalert2)
-- [React Toastify](https://github.com/fkhadra/react-toastify)
-- [React Hot Toast](https://github.com/timolins/react-hot-toast)
-- [NotiStack: Highly Customizable Notification Snack Bars](https://github.com/iamhosseindhv/notistack)
-- [Push.js: Browser Notification Framework](https://github.com/Nickersoft/push.js)
-- [Notifier: Native Desktop Notification](https://github.com/mikaelbr/node-notifier)
-- [Novu: Notification Infrastructure for Developers](https://github.com/novuhq/novu)
-- [Sonner: Opinionated Toast](https://github.com/emilkowalski/sonner)
+- [Sweet Alert 2](https://github.com/sweetalert2/sweetalert2).
+- [React Toastify](https://github.com/fkhadra/react-toastify).
+- [React Hot Toast](https://github.com/timolins/react-hot-toast).
+- [NotiStack](https://github.com/iamhosseindhv/notistack):
+  Highly customizable notification snack bars.
+- [Push.js](https://github.com/Nickersoft/push.js):
+  Browser notification framework.
+- [Notifier](https://github.com/mikaelbr/node-notifier):
+  Native desktop notification.
+- [Novu](https://github.com/novuhq/novu):
+  Notification infrastructure for developers.
+- [Sonner](https://github.com/emilkowalski/sonner):
+  Opinionated toast.
 
 #### Tooltip
 
-- [FloatingUI: Low-level Toolkit to Create Floating Elements](https://github.com/floating-ui/floating-ui)
-- [React Tippy](https://github.com/tvkhoa/react-tippy)
-- [Tippy.js](https://github.com/atomiks/tippyjs)
-- [Popper.js](https://github.com/popperjs/popper-core)
-- [Balloon Hovering Tooltips](https://github.com/kazzkiq/balloon.css)
-- [Hint.css Tooltips](https://github.com/chinchang/hint.css)
+- [FloatingUI](https://github.com/floating-ui/floating-ui):
+  Low-level toolkit to create floating elements.
+- [React Tippy](https://github.com/tvkhoa/react-tippy).
+- [Tippy.js](https://github.com/atomiks/tippyjs).
+- [Popper.js](https://github.com/popperjs/popper-core).
+- [Balloon Hovering Tooltips](https://github.com/kazzkiq/balloon.css).
+- [Hint.css Tooltips](https://github.com/chinchang/hint.css).
 
 ### Guide
 
-- [Onboard: Onboarding Wizard Flow for Next.js Powered by Framer Motion](https://github.com/uixmat/onborda)
-- [JoyRide: Awesome Guided Tours](https://github.com/gilbarbara/react-joyride)
-- [Shepherd: Guide Tour Library](https://github.com/shipshapecode/react-shepherd)
-- [Intro.js](https://github.com/usablica/intro.js)
-- [Driver.js](https://github.com/kamranahmedse/driver.js)
-- [Wizard: React Stepper Guide](https://github.com/devrnt/react-use-wizard)
-- [LuSift: Product Walk Through for Web App](https://github.com/lusift/lusift)
+- [Onboard](https://github.com/uixmat/onborda):
+  Onboarding wizard flow for Next.js powered by framer motion.
+- [JoyRide](https://github.com/gilbarbara/react-joyride):
+  Awesome guided tours.
+- [Shepherd](https://github.com/shipshapecode/react-shepherd):
+  Guide tour library.
+- [Intro.js](https://github.com/usablica/intro.js).
+- [Driver.js](https://github.com/kamranahmedse/driver.js).
+- [Wizard](https://github.com/devrnt/react-use-wizard):
+  React stepper guide.
+- [LuSift](https://github.com/lusift/lusift):
+  Product walk through for web app.
 
 ### Rating
 
-- [ReactRating](https://github.com/awran5/react-simple-star-rating)
+- [ReactRating](https://github.com/awran5/react-simple-star-rating).
 
 ### Timeline
 
-- [ReactChrono: Modern Timeline Component](https://github.com/prabhuignoto/react-chrono)
-- [PlanBy: Electronic Program Guide (EPG) based Timeline](https://github.com/karolkozer/planby)
-- [Frappe: Interactive and Modern Gantt Chart](https://github.com/frappe/gantt)
-- [MarkWhen: Cascading Timeline from Markdown-like Text](https://github.com/kochrt/markwhen)
+- [ReactChrono](https://github.com/prabhuignoto/react-chrono):
+  Modern timeline component.
+- [PlanBy](https://github.com/karolkozer/planby):
+  Electronic program guide (EPG) based timeline.
+- [Frappe](https://github.com/frappe/gantt):
+  Interactive and modern gantt chart.
+- [MarkWhen](https://github.com/kochrt/markwhen):
+  Cascading timeline from Markdown-like text.
 
 ### Form
 
-- [React Hook Form](https://github.com/react-hook-form/react-hook-form)
-- [React Formik](https://github.com/formium/formik)
-- [React JSON Schema Form](https://github.com/rjsf-team/react-jsonschema-form)
-- [TanStack Form](https://github.com/tanstack/form)
-- [Vue FormKit](https://github.com/formkit/formkit)
-- [Formily: Alibaba Unified Form Builder for React and Vue](https://github.com/alibaba/formily)
-- [XRender: Alibaba Low-Code Form/Table/Chart Render](https://github.com/alibaba/x-render)
-- [HeyForm: Low-code Engaging Conversational Form Builder](https://github.com/heyform/heyform)
-- [SurveyJS: Free JavaScript Form Builder Library](https://github.com/surveyjs/survey-library)
-- [FormIO: Form and Data Management Platform for Progressive Web Applications](https://github.com/formio/formio)
+- [React Hook Form](https://github.com/react-hook-form/react-hook-form).
+- [React Formik](https://github.com/formium/formik).
+- [React JSON Schema Form](https://github.com/rjsf-team/react-jsonschema-form).
+- [TanStack Form](https://github.com/tanstack/form).
+- [Vue FormKit](https://github.com/formkit/formkit).
+- [Formily](https://github.com/alibaba/formily):
+  Alibaba unified form builder for React and Vue.
+- [XRender](https://github.com/alibaba/x-render):
+  Alibaba low-code form/table/chart render.
+- [HeyForm](https://github.com/heyform/heyform):
+  Low-code engaging conversational form builder.
+- [SurveyJS](https://github.com/surveyjs/survey-library):
+  Free JavaScript form builder library.
+- [FormIO](https://github.com/formio/formio):
+  Form and data management platform for progressive web applications.
 
 #### Input
 
-- [IMask.js: Input Mask](https://github.com/uNmAnNeR/imaskjs)
-- [Super Placeholder](https://github.com/chinchang/superplaceholder.js)
-- [AutoComplete.js](https://github.com/TarekRaafat/autoComplete.js)
-- [PinField: PIN Codes Input](https://github.com/soywod/react-pin-field)
+- [IMask.js](https://github.com/uNmAnNeR/imaskjs):
+  Input mask.
+- [Super Placeholder](https://github.com/chinchang/superplaceholder.js).
+- [AutoComplete.js](https://github.com/TarekRaafat/autoComplete.js).
+- [PinField](https://github.com/soywod/react-pin-field):
+  Pin codes input.
 
 #### Switch
 
-- [React Switch: Draggable Toggle-switch Component](https://github.com/markusenglund/react-switch)
+- [React Switch](https://github.com/markusenglund/react-switch):
+  Draggable toggle-switch component.
 
 #### Select
 
-- [React Select](https://github.com/JedWatson/react-select)
-- [Choices.js: Customizable Select Text Input](https://github.com/Choices-js/Choices)
-- [Select.css](https://github.com/filamentgroup/select-css)
-- [Chosen: Awesome Select Widget](https://github.com/harvesthq/chosen)
+- [React Select](https://github.com/JedWatson/react-select).
+- [Choices.js](https://github.com/Choices-js/Choices):
+  Customizable select text input.
+- [Select.css](https://github.com/filamentgroup/select-css).
+- [Chosen](https://github.com/harvesthq/chosen):
+  Awesome select widget.
 
 #### Textarea
 
-- [Textarea: Grows with Content](https://github.com/Andarist/react-textarea-autosize)
+- [Textarea](https://github.com/Andarist/react-textarea-autosize):
+  Grows with content.
 
 #### Validator
 
-- [Promise Validator](https://github.com/poppinss/indicative)
-- [Async Validator](https://github.com/yiminghe/async-validator)
-- [Cleave.js: Input Format Checker](https://github.com/nosir/cleave.js)
-- [Joi: Powerful Data Validation Library](https://github.com/sideway/joi)
-- [Yup: Schema Validator](https://github.com/jquense/yup)
-- [jQuery Form Validator](https://github.com/victorjonsson/jQuery-Form-Validator)
+- [Promise Validator](https://github.com/poppinss/indicative).
+- [Async Validator](https://github.com/yiminghe/async-validator).
+- [Cleave.js](https://github.com/nosir/cleave.js):
+  Input format checker.
+- [Joi](https://github.com/sideway/joi):
+  Powerful data validation library.
+- [Yup](https://github.com/jquense/yup):
+  Schema validator.
+- [jQuery Form Validator](https://github.com/victorjonsson/jQuery-Form-Validator).
 
 ### List
 
-- [Sortable](https://github.com/RubaXa/Sortable)
+- [Sortable](https://github.com/RubaXa/Sortable).
 
 #### List Virtualized Windowing
 
-- [TanStack Virtual: Headless UI for Virtualizing Large Element Lists](https://github.com/TanStack/virtual)
-- [ReactVirtualized](https://github.com/bvaughn/react-virtualized)
-- [ReactWindow: Brand New React Virtualized](https://github.com/bvaughn/react-window)
-- [React Virtualized Auto Sizer](https://github.com/bvaughn/react-virtualized-auto-sizer)
-- [React Virtuoso](https://github.com/petyosi/react-virtuoso)
-- [Vue Virtual Scroller](https://github.com/Akryum/vue-virtual-scroller)
+- [TanStack Virtual](https://github.com/TanStack/virtual):
+  Headless UI for virtualizing large element lists.
+- [ReactVirtualized](https://github.com/bvaughn/react-virtualized).
+- [ReactWindow](https://github.com/bvaughn/react-window):
+  Brand new React virtualized.
+- [React Virtualized Auto Sizer](https://github.com/bvaughn/react-virtualized-auto-sizer).
+- [React Virtuoso](https://github.com/petyosi/react-virtuoso).
+- [Vue Virtual Scroller](https://github.com/Akryum/vue-virtual-scroller).
 
 ### Table
 
-- [TanStack Table: Headless UI for Building Powerful Tables and DataGrids](https://github.com/TanStack/table)
-- [Mantine Table: Fully Featured Mantine Implementation of TanStack React Table](https://github.com/KevinVandy/mantine-react-table)
-- [React DataSheet: Excel-like Data Tables and Grids component](https://github.com/nadbm/react-datasheet)
-- [Glide Data Grid](https://github.com/glideapps/glide-data-grid)
-- [MUI DataTable: Data Tables for React using Material UI](https://github.com/gregnb/mui-datatables)
-- [Bootstrap Table](https://github.com/wenzhixin/bootstrap-table)
-- [Tabulator: Interactive Tables and Data Grids](https://github.com/olifolkerd/tabulator)
-- [SheetJS: Spreadsheet Data Toolkit](https://github.com/SheetJS/sheetjs)
-- [FortuneSheet: Rich Excel and Google Sheets Features Spreadsheet library](https://github.com/ruilisi/fortune-sheet)
-- [HyperFormula: Complete Excel-like Calculation Engine Written in TypeScript](https://github.com/handsontable/hyperformula)
+- [TanStack Table](https://github.com/TanStack/table):
+  Headless UI for building powerful tables and data grids.
+- [Mantine Table](https://github.com/KevinVandy/mantine-react-table):
+  Fully featured Mantine implementation of TanStack React table.
+- [React DataSheet](https://github.com/nadbm/react-datasheet):
+  Excel-like data tables and grids component.
+- [Glide Data Grid](https://github.com/glideapps/glide-data-grid).
+- [MUI DataTable](https://github.com/gregnb/mui-datatables):
+  Data tables for React using Material UI.
+- [Bootstrap Table](https://github.com/wenzhixin/bootstrap-table).
+- [Tabulator](https://github.com/olifolkerd/tabulator):
+  Interactive tables and data grids.
+- [SheetJS](https://github.com/SheetJS/sheetjs):
+  Spreadsheet data toolkit.
+- [FortuneSheet](https://github.com/ruilisi/fortune-sheet):
+  Rich Excel and Google sheets features spreadsheet library.
+- [HyperFormula](https://github.com/handsontable/hyperformula):
+  Complete Excel-like calculation engine written in TypeScript.
 
 ### Grid
 
-- [ReactGridLayout: Drag and Drop Grid Layout](https://github.com/react-grid-layout/react-grid-layout)
-- [VueGridLayout: Drag and Drop Grid Layout](https://github.com/jbaysolutions/vue-grid-layout)
+- [ReactGridLayout](https://github.com/react-grid-layout/react-grid-layout):
+  Drag and drop grid layout for React.
+- [VueGridLayout](https://github.com/jbaysolutions/vue-grid-layout):
+  Drag and drop grid layout for Vue.
 
 ### Tree
 
-- [Arborist: React Sortable, Virtual and Customizable Tree Component](https://github.com/brimdata/react-arborist)
-- [TreeView: Draggable and Droppable React TreeView Component](https://github.com/minop1205/react-dnd-treeview)
-- [ComplexTree: Accessible Tree Component with Multi-Select and Drag-And-Drop](https://github.com/lukasbach/react-complex-tree)
+- [Arborist](https://github.com/brimdata/react-arborist):
+  React sortable, virtual and customizable tree component.
+- [TreeView](https://github.com/minop1205/react-dnd-treeview):
+  Draggable and droppable React tree-view component.
+- [ComplexTree](https://github.com/lukasbach/react-complex-tree):
+  Accessible tree component with multi-select and drag-and-drop.
 
 ### Charts Visualization
 
-- [D3: Bring Data to Life with SVG, Canvas and HTML](https://github.com/d3/d3)
-- [ECharts: Powerful, Interactive Charting and Data Visualization](https://github.com/apache/echarts)
-- [Chart.js: HTML5 Canvas Charts](https://github.com/chartjs/Chart.js)
-- [AntV: React Chart Library Based on G2Plot, G6, X6, L7](https://github.com/ant-design/ant-design-charts)
-- [ReCharts: Redefined Chart Library Built with React and D3](https://github.com/recharts/recharts)
-- [HighCharts: TypeScript Charting Framework](https://github.com/highcharts/highcharts)
-- [XYFlow: Building Interactive Node-based UIs, Editors, Flow Charts and Diagrams](https://github.com/xyflow/xyflow)
-- [ReaFlow: Building Workflow Editors, Flow Charts and Diagrams](https://github.com/reaviz/reaflow)
-- [Sigma: Dedicated to Graph Drawing](https://github.com/jacomyal/sigma.js)
-- [Plotly.js: Charting Library behind Plotly and Dash](https://github.com/plotly/plotly.js)
-- [JSXGraph: Interactive Geometry, Function Plotting, Charting and Data Visualization in Browser](https://github.com/jsxgraph/jsxgraph)
-- [Cytoscape.js: Graph Theory (Network) Library for Visualization and Analysis](https://github.com/cytoscape/cytoscape.js)
-- [Airbnb: Visualization Components](https://github.com/airbnb/visx)
-- [NeoVis.js: Graph Visualization with Data from Neo4j](https://github.com/neo4j-contrib/neovis.js)
-- [Perspective: Data Visualization and Analytics Component for Large Streaming Datasets](https://github.com/finos/perspective)
-- [Tremor: Build Charts and Dashboards](https://github.com/tremorlabs/tremor)
+- [D3](https://github.com/d3/d3):
+  Bring data to life with SVG, canvas and HTML.
+- [ECharts](https://github.com/apache/echarts):
+  Powerful, interactive charting and data visualization.
+- [Chart.js](https://github.com/chartjs/Chart.js):
+  HTML5 canvas charts.
+- [AntV](https://github.com/ant-design/ant-design-charts):
+  React chart library based on G2Plot, G6, X6, L7.
+- [ReCharts](https://github.com/recharts/recharts):
+  Redefined chart library built with React and D3.
+- [HighCharts](https://github.com/highcharts/highcharts):
+  TypeScript charting framework.
+- [XYFlow](https://github.com/xyflow/xyflow):
+  Building interactive node-based UIs, editors, flow charts and diagrams.
+- [ReaFlow](https://github.com/reaviz/reaflow):
+  Building workflow editors, flow charts and diagrams.
+- [Sigma](https://github.com/jacomyal/sigma.js):
+  Dedicated to graph drawing.
+- [Plotly.js](https://github.com/plotly/plotly.js):
+  Charting library behind Plotly and Dash.
+- [JSXGraph](https://github.com/jsxgraph/jsxgraph):
+  Interactive geometry, function plotting, charting and data visualization in browser.
+- [Cytoscape.js](https://github.com/cytoscape/cytoscape.js):
+  Graph theory (network) library for visualization and analysis.
+- [Airbnb](https://github.com/airbnb/visx):
+  Visualization components.
+- [NeoVis.js](https://github.com/neo4j-contrib/neovis.js):
+  Graph visualization with data from Neo4j.
+- [Perspective](https://github.com/finos/perspective):
+  Data visualization and analytics component for large streaming datasets.
+- [Tremor](https://github.com/tremorlabs/tremor):
+  Build charts and dashboards.
 
 ### Charts Draw Utils
 
-- [ExCaliDraw: Virtual Whiteboard for Sketching Hand-drawn](https://github.com/excalidraw/excalidraw)
-- [iDraw: Simple JavaScript Framework for Drawing on Web](https://github.com/idrawjs/idraw)
+- [ExCaliDraw](https://github.com/excalidraw/excalidraw):
+  Virtual whiteboard for sketching hand-drawn.
+- [iDraw](https://github.com/idrawjs/idraw):
+  Simple JavaScript framework for drawing on web.
 
 ### Math
 
-- [MathLive: Web Component for LaTeX Math Input](https://github.com/arnog/mathlive)
-- [MathJax: Beautiful and Accessible Math in All Browsers](https://github.com/mathjax/MathJax)
+- [MathLive](https://github.com/arnog/mathlive):
+  Web component for LaTeX math input.
+- [MathJax](https://github.com/mathjax/MathJax):
+  Beautiful and accessible math in all browsers.
 
 ### Carousel
 
-- [Swiper: Modern Mobile Touch Slider with Hardware Accelerated Transitions](https://github.com/nolimits4web/swiper)
-- [Nuka: Pure React Carousel Component](https://github.com/FormidableLabs/nuka-carousel)
-- [Embla: Lightweight Carousel Library with Fluid Motion and Great Swipe Precision](https://github.com/davidjerleke/embla-carousel)
-- [ReactSlick: React Carousel Component](https://github.com/akiran/react-slick)
-- [React Responsive Carousel](https://github.com/leandrowd/react-responsive-carousel)
-- [Flicking: Reliable, Flexible and Extendable Carousel](https://github.com/naver/egjs-flicking)
-- [Glider.js: Native Scrolling Carousel](https://github.com/NickPiscitelli/Glider.js)
-- [ReactSimplyCarousel: Lightweight, Responsive, Touch Enabled and Fully Controlled Isomorphic (SSR Support)](https://github.com/vadymshymko/react-simply-carousel)
+- [Swiper](https://github.com/nolimits4web/swiper):
+  Modern mobile touch slider with hardware accelerated transitions.
+- [Nuka](https://github.com/FormidableLabs/nuka-carousel):
+  Pure React carousel component.
+- [Embla](https://github.com/davidjerleke/embla-carousel):
+  Lightweight carousel library with fluid motion and great swipe precision.
+- [ReactSlick](https://github.com/akiran/react-slick):
+  React carousel component.
+- [React Responsive Carousel](https://github.com/leandrowd/react-responsive-carousel).
+- [Flicking](https://github.com/naver/egjs-flicking):
+  Reliable, flexible and extendable carousel.
+- [Glider.js](https://github.com/NickPiscitelli/Glider.js):
+  Native scrolling carousel.
+- [ReactSimplyCarousel](https://github.com/vadymshymko/react-simply-carousel):
+  Lightweight, responsive, touch enabled and fully controlled isomorphic (SSR support).
 
 ### Scrollbar
 
-- [OverlayScrollbar: Custom Style-able Overlay Scrollbar](https://github.com/KingSora/OverlayScrollbars)
+- [OverlayScrollbar](https://github.com/KingSora/OverlayScrollbars):
+  Custom style-able overlay scrollbar.
 
 ### Slides and Presentation
 
-- [Spectacle: React Based Presentation Slides](https://github.com/FormidableLabs/spectacle)
-- [Reveal: HTML Presentation Framework](https://github.com/hakimel/reveal.js)
-- [SliDev: Vue Based Presentation Slides](https://github.com/slidevjs/slidev)
-- [Impress: Prezi-like Presentation Slides](https://github.com/impress/impress.js)
-- [PPTX: TypeScript PowerPoint Presentations](https://github.com/gitbrent/PptxGenJS)
+- [Spectacle](https://github.com/FormidableLabs/spectacle):
+  React based presentation slides.
+- [Reveal](https://github.com/hakimel/reveal.js):
+  HTML presentation framework.
+- [SliDev](https://github.com/slidevjs/slidev):
+  Vue based presentation slides.
+- [Impress](https://github.com/impress/impress.js):
+  Prezi-like presentation slides.
+- [PPTX](https://github.com/gitbrent/PptxGenJS):
+  TypeScript powerpoint presentations.
 
 ### Picker
 
-- [DatePicker: Simple and Reusable DatePicker React Component](https://github.com/Hacker0x01/react-datepicker)
-- [Roulette: Customizable React Roulette Wheel with Spinning Animation](https://github.com/effectussoftware/react-custom-roulette)
+- [DatePicker](https://github.com/Hacker0x01/react-datepicker):
+  Simple and reusable date picker React component.
+- [Roulette](https://github.com/effectussoftware/react-custom-roulette):
+  Customizable React roulette wheel with spinning animation.
 
 ### Clipboard
 
-- [Clipboard.js](https://github.com/zenorocha/clipboard.js)
+- [Clipboard.js](https://github.com/zenorocha/clipboard.js).
 
 ### Keyboard
 
-- [HotKey: Trigger Action on Element with Keyboard Shortcut](https://github.com/github/hotkey)
-- [KBar: Fast, Portable and Extensible Command K Interface](https://github.com/timc1/kbar)
-- [NinjaKeys: Keyboard Shortcuts Interface](https://github.com/ssleptsov/ninja-keys)
-- [CommandK: Headless Command Menu](https://github.com/pacocoursey/cmdk)
-- [ReactCMDKeyboard: Fast, Accessible and Pretty Command Palette](https://github.com/albingroen/react-cmdk)
-- [KMenu: Animated and Accessible Command Palette Menu](https://github.com/harshhhdev/kmenu)
+- [HotKey](https://github.com/github/hotkey):
+  Trigger action on element with keyboard shortcut.
+- [KBar](https://github.com/timc1/kbar):
+  Fast, portable and extensible command-K interface.
+- [NinjaKeys](https://github.com/ssleptsov/ninja-keys):
+  Keyboard shortcuts interface.
+- [CommandK](https://github.com/pacocoursey/cmdk):
+  Headless command menu.
+- [ReactCMDKeyboard](https://github.com/albingroen/react-cmdk):
+  Fast, accessible and pretty command palette.
+- [KMenu](https://github.com/harshhhdev/kmenu):
+  Animated and accessible command palette menu.
 
 ### iFrame
 
-- [ReactEmbed: Embed 3rd Party Widgets](https://github.com/streamich/react-embed)
-- [Postmate](https://github.com/dollarshaveclub/postmate)
+- [ReactEmbed](https://github.com/streamich/react-embed):
+  Embed 3rd-party widgets.
+- [Postmate](https://github.com/dollarshaveclub/postmate).
 
 ## Viewport Utils
 
-- [Viewport Events](https://github.com/robb0wen/tornis)
-- [React Device Detect: Render View According to Detected Device Type](https://github.com/duskload/react-device-detect)
-- [Robot.js: Desktop Automation](https://github.com/octalmage/robotjs)
+- [Viewport Events](https://github.com/robb0wen/tornis).
+- [React Device Detect](https://github.com/duskload/react-device-detect):
+  Render view according to detected device type.
+- [Robot.js](https://github.com/octalmage/robotjs):
+  Desktop automation.
 
 ### Scroll Utils
 
-- [ReactScrollParallax](https://github.com/jscottsmith/react-scroll-parallax)
-- [ScrollReveal](https://github.com/jlmakes/scrollreveal)
-- [AOS: Scroll Animation](https://github.com/michalsnik/aos)
-- [Lax: Scroll Animation](https://github.com/alexfoxy/laxxx)
-- [Rellax: Lightweight, Vanilla JavaScript Parallax Library](https://github.com/dixonandmoe/rellax)
-- [Scroll Bar Detection](https://github.com/idiotWu/smooth-scrollbar)
-- [Atropos: 3D Parallax Effects](https://github.com/nolimits4web/atropos)
-- [Snap: Scroll Snap Utils](https://github.com/lucafalasco/scroll-snap)
-- [ScrollEX: Build Beautiful Scroll Experiences](https://github.com/malerba118/scrollex)
-- [PushIn: Dolly or PushIn Effect when User scrolls](https://github.com/nateplusplus/pushin)
-- [BetterScroll](https://github.com/ustbhuangyi/better-scroll)
+- [ReactScrollParallax](https://github.com/jscottsmith/react-scroll-parallax).
+- [ScrollReveal](https://github.com/jlmakes/scrollreveal).
+- [AOS](https://github.com/michalsnik/aos):
+  Scroll animation.
+- [Lax](https://github.com/alexfoxy/laxxx):
+  Scroll animation.
+- [Rellax](https://github.com/dixonandmoe/rellax):
+  Lightweight, vanilla JavaScript parallax library.
+- [Scroll Bar Detection](https://github.com/idiotWu/smooth-scrollbar).
+- [Atropos](https://github.com/nolimits4web/atropos):
+  3D parallax effects.
+- [Snap](https://github.com/lucafalasco/scroll-snap):
+  Scroll snap utils.
+- [ScrollEX](https://github.com/malerba118/scrollex):
+  Build beautiful scroll experiences.
+- [PushIn](https://github.com/nateplusplus/pushin):
+  Dolly or push-in effect when user scrolls.
+- [BetterScroll](https://github.com/ustbhuangyi/better-scroll).
 
 ### Mouse and Touch Utils
 
-- [UseGesture: Component-tied Mouse and Touch Gestures](https://github.com/pmndrs/use-gesture)
-- [React DnD: Drag and Drop](https://github.com/react-dnd/react-dnd)
-- [React Beautiful DnD](https://github.com/atlassian/react-beautiful-dnd)
-- [DFlex: Sophisticated Drag and Drop Library](https://github.com/dflex-js/dflex)
-- [Spacers: Drag for More Space](https://github.com/actuallyakash/spacers)
-- [Moveable: Drag, Resize, Scala, Rotate, Warp, Pinch, Group, Snap](https://github.com/daybrush/moveable)
-- [Interact.js: Drag and Drop, Resizing and Multi-touch Gestures](https://github.com/taye/interact.js)
-- [ReactZoom: Multi-touch Gestures for Zooming and Dragging](https://github.com/retyui/react-quick-pinch-zoom)
-- [AnyTouch: Small Touch Gesture Library Compatible with PC and Mobile](https://github.com/any86/any-touch)
-- [Allotment: Resizable Split Views](https://github.com/johnwalley/allotment)
-- [TransMat: Share Data beyond Boundaries of Browser](https://github.com/google/transmat)
-- [Craft.js: Building Extensible Drag and Drop Page Editors](https://github.com/prevwong/craft.js)
+- [UseGesture](https://github.com/pmndrs/use-gesture):
+  Component-tied mouse and touch gestures.
+- [React DnD](https://github.com/react-dnd/react-dnd):
+  Drag and drop.
+- [React Beautiful DnD](https://github.com/atlassian/react-beautiful-dnd).
+- [DFlex](https://github.com/dflex-js/dflex):
+  Sophisticated drag and drop library.
+- [Spacers](https://github.com/actuallyakash/spacers):
+  Drag for more space.
+- [Moveable](https://github.com/daybrush/moveable):
+  Drag, resize, scala, rotate, warp, pinch, group, snap.
+- [Interact.js](https://github.com/taye/interact.js):
+  Drag and drop, resizing and multi-touch gestures.
+- [ReactZoom](https://github.com/retyui/react-quick-pinch-zoom):
+  Multi-touch gestures for zooming and dragging.
+- [AnyTouch](https://github.com/any86/any-touch):
+  Small touch gesture library compatible with PC and mobile.
+- [Allotment](https://github.com/johnwalley/allotment):
+  Resizable split views.
+- [TransMat](https://github.com/google/transmat):
+  Share data beyond boundaries of browser.
+- [Craft.js](https://github.com/prevwong/craft.js):
+  Building extensible drag and drop page editors.
 
 ### Cursor Utils
 
-- [Blobity: Next Level Cursor Style Library](https://github.com/gmrchk/blobity)
+- [Blobity](https://github.com/gmrchk/blobity):
+  Next level cursor style library.
 
 ## Social Utils
 
 ### Social Sharing
 
-- [Share.js: One-Key Share](https://github.com/overtrue/share.js)
-- [Sharing](https://github.com/mxstbr/sharing)
-- [Social Share URLs](https://github.com/bradvin/social-share-urls)
+- [Share.js](https://github.com/overtrue/share.js):
+  One-key share.
+- [Sharing](https://github.com/mxstbr/sharing).
+- [Social Share URLs](https://github.com/bradvin/social-share-urls).
 
 ### Social Forum
 
-- [NodeBB](https://github.com/NodeBB/NodeBB)
+- [NodeBB](https://github.com/NodeBB/NodeBB).
 
 ## Animation
 
-- [Framer Motion](https://github.com/framer/motion)
-- [React Spring](https://github.com/pmndrs/react-spring)
-- [GSAP: GreenSock Animation Platform](https://github.com/greensock/GSAP)
-- [Popmotion](https://github.com/popmotion/popmotion)
-- [TweenJS: TypeScript Animation Engine](https://github.com/tweenjs/tween.js)
-- [React Transition Group](https://github.com/reactjs/react-transition-group)
-- [Airbnb AE Solution](https://github.com/airbnb/lottie-web)
-- [Animate.css](https://github.com/daneden/animate.css)
-- [Barba.js: Pages Smooth Transition](https://github.com/luruke/barba.js)
-- [Tilt: Smooth 3D Tilt JavaScript Library](https://github.com/micku7zu/vanilla-tilt.js)
-- [CountUp: Count Up Animation](https://github.com/glennreyes/react-countup)
-- [TheatreJS: 3D Scene and Motion Design Editor](https://github.com/theatre-js/theatre)
-- [AutoAnimate: Zero-config and Drop-in Animation Utility](https://github.com/formkit/auto-animate)
+- [Framer Motion](https://github.com/framer/motion).
+- [React Spring](https://github.com/pmndrs/react-spring).
+- [GSAP](https://github.com/greensock/GSAP):
+  Greensock animation platform.
+- [Popmotion](https://github.com/popmotion/popmotion).
+- [TweenJS](https://github.com/tweenjs/tween.js):
+  TypeScript animation engine.
+- [React Transition Group](https://github.com/reactjs/react-transition-group).
+- [Airbnb AE Solution](https://github.com/airbnb/lottie-web).
+- [Animate.css](https://github.com/daneden/animate.css).
+- [Barba.js](https://github.com/luruke/barba.js):
+  Pages smooth transition.
+- [Tilt](https://github.com/micku7zu/vanilla-tilt.js):
+  Smooth 3D tilt JavaScript library.
+- [CountUp](https://github.com/glennreyes/react-countup):
+  Count up animation.
+- [TheatreJS](https://github.com/theatre-js/theatre):
+  3D scene and motion design editor.
+- [AutoAnimate](https://github.com/formkit/auto-animate):
+  Zero-config and drop-in animation utility.
 
 ### CLI Animation
 
-- [CLI Animation](https://github.com/neatsoftware/term-sheets)
+- [CLI Animation](https://github.com/neatsoftware/term-sheets).
 
 ### Transform Animation
 
-- [AnimateGrid](https://github.com/aholachek/animate-css-grid)
-- [React Page Transition](https://github.com/Steveeeie/react-page-transition)
-- [Animista: Animation Editor](https://animista.net)
+- [AnimateGrid](https://github.com/aholachek/animate-css-grid).
+- [React Page Transition](https://github.com/Steveeeie/react-page-transition).
+- [Animista](https://animista.net):
+  Animation editor.
 
 ### MicroInteraction Animation
 
-- [ReactRewards](https://github.com/thedevelobear/react-rewards)
-- [RoughNotation: Create and Animate Hand-drawn Annotations](https://github.com/rough-stuff/rough-notation)
-- [CanvasConfetti: On-demand Confetti Gun](https://github.com/catdad/canvas-confetti)
+- [ReactRewards](https://github.com/thedevelobear/react-rewards).
+- [RoughNotation](https://github.com/rough-stuff/rough-notation):
+  Create and animate hand-drawn annotations.
+- [CanvasConfetti](https://github.com/catdad/canvas-confetti):
+  On-demand confetti gun.
 
 ### Typing Effect Animation
 
-- [React Typewriter Animation](https://github.com/maxeth/react-type-animation)
-- [Typed.js](https://github.com/mattboldt/typed.js)
-- [TypeIt](https://github.com/alexmacarthur/typeit)
+- [React Typewriter Animation](https://github.com/maxeth/react-type-animation).
+- [Typed.js](https://github.com/mattboldt/typed.js).
+- [TypeIt](https://github.com/alexmacarthur/typeit).
 
 ### Hover Effect Animation
 
-- [Image Hover](http://imagehover.io)
-- [Hovering Button Effects](https://github.com/IanLunn/Hover)
+- [Image Hover](http://imagehover.io).
+- [Hovering Button Effects](https://github.com/IanLunn/Hover).
 
 ### Loading Effect Animation
 
 #### Progress Bar
 
-- [NProgress.js](https://github.com/rstacruz/nprogress)
-- [Pace: Site Progress Bar](https://github.com/CodeByZach/pace)
+- [NProgress.js](https://github.com/rstacruz/nprogress).
+- [Pace](https://github.com/CodeByZach/pace):
+  Site progress bar.
 
 #### Skeleton
 
-- [React Skeleton](https://github.com/danilowoz/react-content-loader)
-- [Vue Skeleton](https://github.com/egoist/vue-content-loader)
+- [React Skeleton](https://github.com/danilowoz/react-content-loader).
+- [Vue Skeleton](https://github.com/egoist/vue-content-loader).
 
 #### Spinner
 
-- [React Spinners](https://github.com/davidhu2000/react-spinners)
-- [Epic Spinners](https://github.com/epicmaxco/epic-spinners)
-- [Loading IO](https://loading.io)
-- [UIBall: Modern, Tree-shakeable Loaders and Spinners for React](https://github.com/GriffinJohnston/uiball-loaders)
+- [React Spinners](https://github.com/davidhu2000/react-spinners).
+- [Epic Spinners](https://github.com/epicmaxco/epic-spinners).
+- [Loading IO](https://loading.io).
+- [UIBall](https://github.com/GriffinJohnston/uiball-loaders):
+  Modern, tree-shakeable loaders and spinners for React.
 
 ## Time Utils
 
 ### Date Utils
 
-- [Date-FNS: Modern TypeScript Date Utility](https://github.com/date-fns/date-fns)
-- [Day.js: 2kB Immutable Date-time Library Alternative to Moment.js with Same Modern API](https://github.com/iamkun/dayjs)
-- [Time Table](https://github.com/flightplan-tool/timetable-fns)
-- [Moment.js](https://github.com/moment/moment)
+- [Date-FNS](https://github.com/date-fns/date-fns):
+  Modern TypeScript date utility.
+- [Day.js](https://github.com/iamkun/dayjs):
+  2kb immutable date-time library alternative to Moment.js with same modern API.
+- [Time Table](https://github.com/flightplan-tool/timetable-fns).
+- [Moment.js](https://github.com/moment/moment).
 
 ### Calendar Utils
 
-- [Big Calendar](https://github.com/intljusticemission/react-big-calendar)
-- [React Calendar](https://github.com/moodydev/react-calendar)
-- [GitHub Style Calendar](https://github.com/DKirwan/calendar-heatmap)
+- [Big Calendar](https://github.com/intljusticemission/react-big-calendar).
+- [React Calendar](https://github.com/moodydev/react-calendar).
+- [GitHub Style Calendar](https://github.com/DKirwan/calendar-heatmap).
 
 ## Internationalization Utils
 
-- [FormatJS](https://github.com/formatjs/formatjs)
-- [React i18n](https://github.com/i18next/react-i18next)
-- [Globalize: Leverages Official Unicode CLDR JSON Data](https://github.com/globalizejs/globalize)
-- [Dinero: Create, Calculate and Format Money in TypeScript](https://github.com/dinerojs/dinero.js)
-- [AutoNumeric: Numbers and Currencies](https://github.com/autoNumeric/autoNumeric)
-- [Kiwi: Alibaba i18n Solution](https://github.com/alibaba/kiwi)
+- [FormatJS](https://github.com/formatjs/formatjs).
+- [React i18n](https://github.com/i18next/react-i18next).
+- [Globalize](https://github.com/globalizejs/globalize):
+  Leverages official unicode CLDR JSON data.
+- [Dinero](https://github.com/dinerojs/dinero.js):
+  Create, calculate and format money in TypeScript.
+- [AutoNumeric](https://github.com/autoNumeric/autoNumeric):
+  Numbers and currencies.
+- [Kiwi](https://github.com/alibaba/kiwi):
+  Alibaba i18n solution.
 
 ## Accessibility Tools
 
-- [AXE DevTools](https://github.com/dequelabs/axe-core)
-- [JestAXE: Custom Jest Matcher for AXE](https://github.com/nickcolley/jest-axe)
-- [Cypress AXE](https://github.com/component-driven/cypress-axe)
-- [ESLint JSX a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
-- [React a11y](https://github.com/reactjs/react-a11y)
-- [AriaKit: Accessible React Components](https://github.com/ariakit/ariakit)
+- [AXE DevTools](https://github.com/dequelabs/axe-core).
+- [JestAXE](https://github.com/nickcolley/jest-axe):
+  Custom Jest matcher for AXE.
+- [Cypress AXE](https://github.com/component-driven/cypress-axe).
+- [ESLint JSX a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y).
+- [React a11y](https://github.com/reactjs/react-a11y).
+- [AriaKit](https://github.com/ariakit/ariakit):
+  Accessible React components.
 
 ## Fonts
 
-- [FontMin](https://github.com/ecomfe/fontmin)
-- [FontSpider: Chinese WebFont Zip](https://github.com/aui/font-spider)
-- [Fonts.css](https://github.com/zenozeng/fonts.css)
-- [Poppins](https://fonts.google.com/specimen/Poppins)
-- [Raleway](https://fonts.google.com/specimen/Raleway)
-- [Operator](https://www.typography.com/fonts/operator/styles)
+- [FontMin](https://github.com/ecomfe/fontmin).
+- [FontSpider](https://github.com/aui/font-spider):
+  Chinese web font zip.
+- [Fonts.css](https://github.com/zenozeng/fonts.css).
+- [Poppins](https://fonts.google.com/specimen/Poppins).
+- [Raleway](https://fonts.google.com/specimen/Raleway).
+- [Operator](https://www.typography.com/fonts/operator/styles).
 
 ## Image
 
 ### Avatar
 
-- [DiceBear: Random Avatar Generation Library](https://github.com/dicebear/dicebear)
-- [ReactAvatarEditor: Avatar Resize and Crop Component](https://github.com/mosch/react-avatar-editor)
-- [BoringAvatars: React SVG Avatar Generator from Username and Palette](https://github.com/boringdesigners/boring-avatars)
+- [DiceBear](https://github.com/dicebear/dicebear):
+  Random avatar generation library.
+- [ReactAvatarEditor](https://github.com/mosch/react-avatar-editor):
+  Avatar resize and crop component.
+- [BoringAvatars](https://github.com/boringdesigners/boring-avatars):
+  React SVG avatar generator from username and palette.
 
 ### Emoji
 
-- [OpenEmoji: Open Source Emoji](https://github.com/hfg-gmuend/openmoji)
-- [Twitter Emoji](https://github.com/twitter/twemoji)
-- [Emoji Mart: Emoji Picker](https://github.com/missive/emoji-mart)
+- [OpenEmoji](https://github.com/hfg-gmuend/openmoji):
+  Open source emoji.
+- [Twitter Emoji](https://github.com/twitter/twemoji).
+- [Emoji Mart](https://github.com/missive/emoji-mart):
+  Emoji picker.
 
 ### Icon
 
-- [LucideIcons: Beautiful and Consistent Icon Toolkit](https://github.com/lucide-icons/lucide)
-- [FeatherIcons: Simply Beautiful Icons](https://github.com/feathericons/feather)
-- [ReactIcons: SVG Icons of Popular Icon Packs](https://github.com/react-icons/react-icons)
-- [RemixIcons: Neutral Style Icon System](https://github.com/Remix-Design/remixicon)
-- [SimpleIcons: Popular Brand SVG Icons](https://github.com/simple-icons/simple-icons)
-- [FlagIcons: Country Flag SVG Icons](https://github.com/lipis/flag-icons)
-- [HealthIcons: Public Health Projects](https://github.com/resolvetosavelives/healthicons)
-- [BioIcons: Science Illustrations in Biology and Chemistry](https://github.com/duerrsimon/bioicons)
-- [PeepsIcons: Open Peeps Hand Drawn Illustration](https://github.com/CeamKrier/react-peeps)
+- [LucideIcons](https://github.com/lucide-icons/lucide):
+  Beautiful and consistent icon toolkit.
+- [FeatherIcons](https://github.com/feathericons/feather):
+  Simply beautiful icons.
+- [ReactIcons](https://github.com/react-icons/react-icons):
+  SVG icons of popular icon packs.
+- [RemixIcons](https://github.com/Remix-Design/remixicon):
+  Neutral style icon system.
+- [SimpleIcons](https://github.com/simple-icons/simple-icons):
+  Popular brand SVG icons.
+- [FlagIcons](https://github.com/lipis/flag-icons):
+  Country flag SVG icons.
+- [HealthIcons](https://github.com/resolvetosavelives/healthicons):
+  Public health projects.
+- [BioIcons](https://github.com/duerrsimon/bioicons):
+  Science illustrations in biology and chemistry.
+- [PeepsIcons](https://github.com/CeamKrier/react-peeps):
+  Open peeps hand drawn illustration.
 
 ### SVG
 
-- [React SVG Components](https://github.com/miukimiu/react-kawaii)
-- [SVG.js](https://github.com/svgdotjs/svg.js)
-- [ReSVG.js: High-performance Rust SVG Renderer and Toolkit](https://github.com/yisibl/resvg-js)
-- [SVG Optimizer](https://github.com/svg/svgo)
-- [SVG Gallery](https://gallery.manypixels.co)
-- [SVG Logos](https://github.com/gilbarbara/logos)
-- [SVG Icons](https://iconsvg.xyz)
-- [DVI2SVG](https://github.com/mgieseki/dvisvgm)
-- [SVG Parser](https://github.com/sebmarkbage/art)
-- [Random SVG Geometry](https://www.blobbb.fun)
+- [React SVG Components](https://github.com/miukimiu/react-kawaii).
+- [SVG.js](https://github.com/svgdotjs/svg.js).
+- [ReSVG.js](https://github.com/yisibl/resvg-js):
+  High-performance Rust SVG renderer and toolkit.
+- [SVG Optimizer](https://github.com/svg/svgo).
+- [SVG Gallery](https://gallery.manypixels.co).
+- [SVG Logos](https://github.com/gilbarbara/logos).
+- [SVG Icons](https://iconsvg.xyz).
+- [DVI2SVG](https://github.com/mgieseki/dvisvgm).
+- [SVG Parser](https://github.com/sebmarkbage/art).
+- [Random SVG Geometry](https://www.blobbb.fun).
 
 ### Image Utils
 
-- [PSD: Fast Zero-dependency PSD Parser](https://github.com/webtoon/psd)
-- [ImageMagick: Create, Edit, Compose, or Convert Digital Images](https://github.com/imagemagick/imagemagick)
-- [ImageLoader: Load Images JavaScript Utils](https://github.com/blueimp/JavaScript-Load-Image)
-- [ICO](https://github.com/kevva/to-ico)
-- [HTML2Image](https://github.com/bubkoo/html-to-image)
+- [PSD](https://github.com/webtoon/psd):
+  Fast zero-dependency PSD parser.
+- [ImageMagick](https://github.com/imagemagick/imagemagick):
+  Create, edit, compose, or convert digital images.
+- [ImageLoader](https://github.com/blueimp/JavaScript-Load-Image):
+  Load images JavaScript utils.
+- [ICO](https://github.com/kevva/to-ico).
+- [HTML2Image](https://github.com/bubkoo/html-to-image).
 
 ### Image Size
 
-- [Sharp: Image Optimization](https://github.com/lovell/sharp)
-- [Variant Size Pictures](https://github.com/imulus/retinajs)
-- [Carver: Content-aware Image Resizer and Object Remover Based on Seam Carving Algorithm](https://github.com/trekhleb/js-image-carver)
+- [Sharp](https://github.com/lovell/sharp):
+  Image optimization.
+- [Variant Size Pictures](https://github.com/imulus/retinajs).
+- [Carver](https://github.com/trekhleb/js-image-carver):
+  Content-aware image resizer and object remover based on seam carving algorithm.
 
 ### Image Gallery
 
-- [PhotoSwipe: JavaScript Image Gallery and LightBox](https://github.com/dimsemenov/PhotoSwipe)
-- [LightGallery: Customizable, Modular, Responsive, LightBox Gallery Plugin](https://github.com/sachinchoolur/lightGallery)
-- [ReactLightBox: Modern React LightBox component](https://github.com/igordanchenko/yet-another-react-lightbox)
-- [Viewer.js: Images Viewer Gallery](https://github.com/fengyuanchen/viewerjs)
-- [PhotoView: Exquisite React Photo Preview Component](https://github.com/MinJieLiu/react-photo-view)
-- [Zoom: Medium Style Image Zoom for React](https://github.com/rpearce/react-medium-image-zoom)
+- [PhotoSwipe](https://github.com/dimsemenov/PhotoSwipe):
+  JavaScript image gallery and lightbox.
+- [LightGallery](https://github.com/sachinchoolur/lightGallery):
+  Customizable, modular, responsive, lightbox gallery plugin.
+- [ReactLightBox](https://github.com/igordanchenko/yet-another-react-lightbox):
+  Modern React lightbox component.
+- [Viewer.js](https://github.com/fengyuanchen/viewerjs):
+  Images viewer gallery.
+- [PhotoView](https://github.com/MinJieLiu/react-photo-view):
+  Exquisite React photo preview component.
+- [Zoom](https://github.com/rpearce/react-medium-image-zoom):
+  Medium style image zoom for React.
 
 ### Image Filter
 
-- [Pictures Color Style Filter](https://github.com/we-are-next/cssco)
-- [Rainy Day Effect](https://github.com/maroslaw/rainyday.js)
-- [Image Difference Library](https://github.com/HumbleSoftware/js-imagediff)
+- [Pictures Color Style Filter](https://github.com/we-are-next/cssco).
+- [Rainy Day Effect](https://github.com/maroslaw/rainyday.js).
+- [Image Difference Library](https://github.com/HumbleSoftware/js-imagediff).
 
 ### Image Editor
 
-- [React Advanced Cropper](https://github.com/advanced-cropper/react-advanced-cropper)
-- [ImageCrop: React Image Cropping Tool](https://github.com/DominicTobias/react-image-crop)
-- [EasyCrop: Crop Images and Videos with Easy Interactions](https://github.com/ValentinH/react-easy-crop)
-- [Slider: Image Comparison Slider](https://github.com/sneas/img-comparison-slider)
-- [Cropper.js: JavaScript Image Cropper](https://github.com/fengyuanchen/cropperjs)
+- [React Advanced Cropper](https://github.com/advanced-cropper/react-advanced-cropper).
+- [ImageCrop](https://github.com/DominicTobias/react-image-crop):
+  React image cropping tool.
+- [EasyCrop](https://github.com/ValentinH/react-easy-crop):
+  Crop images and videos with easy interactions.
+- [Slider](https://github.com/sneas/img-comparison-slider):
+  Image comparison slider.
+- [Cropper.js](https://github.com/fengyuanchen/cropperjs):
+  JavaScript image cropper.
 
 ## Canvas
 
 ### Particles
 
-- [HTML5 Particles](https://github.com/MapleRecall/html5-particles)
-- [React Particle Animation](https://github.com/transitive-bullshit/react-particle-animation)
-- [React Particle Button](https://github.com/transitive-bullshit/react-particle-effect-button)
+- [HTML5 Particles](https://github.com/MapleRecall/html5-particles).
+- [React Particle Animation](https://github.com/transitive-bullshit/react-particle-animation).
+- [React Particle Button](https://github.com/transitive-bullshit/react-particle-effect-button).
 
 ### Blocks
 
-- [Obelisk.js](https://github.com/nosir/obelisk.js)
+- [Obelisk.js](https://github.com/nosir/obelisk.js).
 
 ### 2D Engine
 
-- [PixiJS: Create Beautiful Digital Content with Fast and Flexible 2D WebGL Renderer](https://github.com/pixijs/pixijs)
-- [HTML2Canvas](https://github.com/niklasvh/html2canvas)
-- [Rough.js](https://github.com/pshihn/rough)
-- [NewCar: Modern Animation Engine Based on CanvasKit-WASM](https://github.com/dromara/newcar)
+- [PixiJS](https://github.com/pixijs/pixijs):
+  Create beautiful digital content with fast and flexible 2D WebGL renderer.
+- [HTML2Canvas](https://github.com/niklasvh/html2canvas).
+- [Rough.js](https://github.com/pshihn/rough).
+- [NewCar](https://github.com/dromara/newcar):
+  Modern animation engine based on CanvasKit-WASM.
 
 ### 3D Engine
 
-- [React Three Fiber: React Renderer for Three.js](https://github.com/pmndrs/react-three-fiber)
-- [P5.js: Utilize P5 Sketches within React Apps](https://github.com/P5-wrapper/react)
-- [Babylon.js: Powerful, Beautiful, Simple, and Open Game and Rendering Engine](https://github.com/BabylonJS/Babylon.js)
-- [Gala: Web-first and Mobile-first High-performance Real-time Development Platform](https://github.com/galacean/engine)
-- [Drei: Collection of Useful Helpers and Fully Functional Abstractions for @react-three/fiber](https://github.com/pmndrs/drei)
+- [React Three Fiber](https://github.com/pmndrs/react-three-fiber):
+  React renderer for Three.js.
+- [P5.js](https://github.com/P5-wrapper/react):
+  Utilize P5 sketches within React apps.
+- [Babylon.js](https://github.com/BabylonJS/Babylon.js):
+  Powerful, beautiful, simple, and open game and rendering engine.
+- [Gala](https://github.com/galacean/engine):
+  Web-first and mobile-first high-performance real-time development platform.
+- [Drei](https://github.com/pmndrs/drei):
+  Collection of useful helpers and fully functional abstractions for `@react-three/fiber`.
 
 ## Media
 
 ### Audio
 
-- [Howler.js](https://github.com/goldfire/howler.js)
-- [Audio.ts: Agnostic Library Easy to Work with AudioContext and Create Audio Playlists](https://github.com/EvandroLG/ts-audio)
-- [Meyda: Audio Feature Extraction](https://github.com/meyda/meyda)
-- [WaveSurfer: Navigable Waveform Built on Web Audio and Canvas](https://github.com/katspaugh/wavesurfer.js)
-- [Peaks: JavaScript UI Component for Interacting with Audio Waveforms](https://github.com/bbc/peaks.js)
-- [Tonal: functional music theory library](https://github.com/tonaljs/tonal)
+- [Howler.js](https://github.com/goldfire/howler.js).
+- [Audio.ts](https://github.com/EvandroLG/ts-audio):
+  Agnostic library easy to work with `AudioContext` and create audio playlists.
+- [Meyda](https://github.com/meyda/meyda):
+  Audio feature extraction.
+- [WaveSurfer](https://github.com/katspaugh/wavesurfer.js):
+  Navigable waveform built on web audio and canvas.
+- [Peaks](https://github.com/bbc/peaks.js):
+  JavaScript UI component for interacting with audio waveforms.
+- [Tonal](https://github.com/tonaljs/tonal):
+  Functional music theory library.
 
 ### Video
 
-- [Video.js](https://github.com/videojs/video.js)
-- [Griffith: ZhiHu Web Video Player](https://github.com/zhihu/griffith)
-- [Plyr](https://github.com/selz/plyr)
-- [FLV.js](https://github.com/bilibili/flv.js)
-- [ReactPlayer: Playing Variety of URLs](https://github.com/cookpete/react-player)
-- [React Youtube Player](https://github.com/tjallingt/react-youtube)
-- [VDX: FFmpeg CLI](https://github.com/yuanqing/vdx)
-- [Remotion: Create Videos Programmatically in React](https://github.com/remotion-dev/remotion)
-- [Liqvid: React Interactive Video Library](https://github.com/liqvidjs/liqvid)
-- [Shaka: Adaptive Media Formats Player Library](https://github.com/shaka-project/shaka-player)
+- [Video.js](https://github.com/videojs/video.js).
+- [Griffith](https://github.com/zhihu/griffith):
+  ZhiHu web video player.
+- [Plyr](https://github.com/selz/plyr).
+- [FLV.js](https://github.com/bilibili/flv.js).
+- [ReactPlayer](https://github.com/cookpete/react-player):
+  Playing variety of URLs.
+- [React Youtube Player](https://github.com/tjallingt/react-youtube).
+- [VDX](https://github.com/yuanqing/vdx):
+  FFmpeg CLI.
+- [Remotion](https://github.com/remotion-dev/remotion):
+  Create videos programmatically in React.
+- [Liqvid](https://github.com/liqvidjs/liqvid):
+  React interactive video library.
+- [Shaka](https://github.com/shaka-project/shaka-player):
+  Adaptive media formats player library.
 
 ### Camera
 
-- [React Web Camera](https://github.com/mozmorris/react-webcam)
+- [React Web Camera](https://github.com/mozmorris/react-webcam).
 
 ### Geolocation
 
-- [React MapBox](https://github.com/visgl/react-map-gl)
-- [Turf: Modular Geospatial Engine](https://github.com/Turfjs/turf)
-- [React Leaflet Map](https://github.com/PaulLeCam/react-leaflet)
+- [React MapBox](https://github.com/visgl/react-map-gl).
+- [Turf](https://github.com/Turfjs/turf):
+  Modular geospatial engine.
+- [React Leaflet Map](https://github.com/PaulLeCam/react-leaflet).
 
 ## SMS
 
 ### Phone
 
-- [Twilio](https://github.com/twilio/twilio-node)
-- [Fonoster: Open Source Alternative to Twilio](https://github.com/fonoster/fonoster)
-- [Wechaty: Conversational RPA SDK for Chatbot Makers](https://github.com/wechaty/wechaty)
+- [Twilio](https://github.com/twilio/twilio-node).
+- [Fonoster](https://github.com/fonoster/fonoster):
+  Open source alternative to Twilio.
+- [Wechaty](https://github.com/wechaty/wechaty):
+  Conversational RPA SDK for chatbot makers.
 
 ### Email
 
-- [MJ-ML: Responsive Email Framework](https://github.com/mjmlio/mjml)
-- [Mailing: React Emails](https://github.com/successor-software/mailing)
-- [Node Emailer](https://github.com/nodemailer/nodemailer)
-- [Email Parser](https://github.com/nodemailer/mailparser)
-- [Email Generator](https://github.com/eladnava/mailgen)
-- [IMAP](https://github.com/mscdex/node-imap)
-- [MailSpring](https://github.com/Foundry376/Mailspring)
-- [Email Status](https://github.com/reacherhq/check-if-email-exists)
+- [MJ-ML](https://github.com/mjmlio/mjml):
+  Responsive email framework.
+- [Mailing](https://github.com/successor-software/mailing):
+  React emails.
+- [Node Emailer](https://github.com/nodemailer/nodemailer).
+- [Email Parser](https://github.com/nodemailer/mailparser).
+- [Email Generator](https://github.com/eladnava/mailgen).
+- [IMAP](https://github.com/mscdex/node-imap).
+- [MailSpring](https://github.com/Foundry376/Mailspring).
+- [Email Status](https://github.com/reacherhq/check-if-email-exists).
 
 ### Robot
 
-- [GrammY: Telegram Bot Framework](https://github.com/grammyjs/grammY)
-- [Discord: Create Discord Bot with TypeScript and Decorators](https://github.com/oceanroleplay/discord.ts)
-- [UrbanBot: Universal React ChatBot Library](https://github.com/urban-bot/urban-bot)
+- [GrammY](https://github.com/grammyjs/grammY):
+  Telegram bot framework.
+- [Discord](https://github.com/oceanroleplay/discord.ts):
+  Create Discord bot with TypeScript and decorators.
+- [UrbanBot](https://github.com/urban-bot/urban-bot):
+  Universal React chatbot library.
 
 ## File
 
 ### File Uploader
 
-- [React Filepond](https://github.com/pqina/react-filepond)
-- [Vue Filepond](https://github.com/pqina/vue-filepond)
-- [Uppy Uploader](https://github.com/transloadit/uppy)
-- [TypeScript Slice Uploader](https://github.com/shadowings-zy/easy-file-uploader)
-- [SpaceDrive: Open Source Cross-platform File Explorer Powered by Virtual Distributed Filesystem](https://github.com/spacedriveapp/spacedrive)
+- [React Filepond](https://github.com/pqina/react-filepond).
+- [Vue Filepond](https://github.com/pqina/vue-filepond).
+- [Uppy Uploader](https://github.com/transloadit/uppy).
+- [TypeScript Slice Uploader](https://github.com/shadowings-zy/easy-file-uploader).
+- [SpaceDrive](https://github.com/spacedriveapp/spacedrive):
+  Open source cross-platform file explorer powered by virtual distributed filesystem.
 
 ### File Downloader
 
-- [FileSaver: HTML5 SaveAs implementation](https://github.com/eligrey/FileSaver.js)
-- [You Get](https://github.com/soimort/you-get)
-- [Motrix](https://github.com/agalwood/Motrix)
+- [FileSaver](https://github.com/eligrey/FileSaver.js):
+  HTML5 save-as implementation.
+- [You Get](https://github.com/soimort/you-get).
+- [Motrix](https://github.com/agalwood/Motrix).
 
 ### File Utils
 
-- [FS Extra](https://github.com/jprichardson/node-fs-extra)
-- [Graceful FS](https://github.com/isaacs/node-graceful-fs)
-- [MemFS: In-memory Node File System](https://github.com/streamich/memfs)
-- [Globby](https://github.com/sindresorhus/globby)
-- [Chokidar: Efficient Cross-platform File Watching Library](https://github.com/paulmillr/chokidar)
-- [Mkdirp](https://github.com/isaacs/node-mkdirp)
-- [RimRaf](https://github.com/isaacs/rimraf)
-- [Steno: Specialized Fast Async File Writer](https://github.com/typicode/steno)
-- [File Type](https://github.com/sindresorhus/file-type)
-- [File Size](https://github.com/avoidwork/filesize.js)
-- [Zip File](https://github.com/Stuk/jszip)
-- [Binary File](https://github.com/gjtorikian/isBinaryFile)
-- [SimpleGit: Light Weight Interface for Running Git Commands](https://github.com/steveukx/git-js)
+- [FS Extra](https://github.com/jprichardson/node-fs-extra).
+- [Graceful FS](https://github.com/isaacs/node-graceful-fs).
+- [MemFS](https://github.com/streamich/memfs):
+  In-memory file system for Node.js.
+- [Globby](https://github.com/sindresorhus/globby).
+- [Chokidar](https://github.com/paulmillr/chokidar):
+  Efficient cross-platform file watching library.
+- [Mkdirp](https://github.com/isaacs/node-mkdirp).
+- [RimRaf](https://github.com/isaacs/rimraf).
+- [Steno](https://github.com/typicode/steno):
+  Specialized fast async file writer.
+- [File Type](https://github.com/sindresorhus/file-type).
+- [File Size](https://github.com/avoidwork/filesize.js).
+- [Zip File](https://github.com/Stuk/jszip).
+- [Binary File](https://github.com/gjtorikian/isBinaryFile).
+- [SimpleGit](https://github.com/steveukx/git-js):
+  Light weight interface for running git commands.
 
 ### PDF Utils
 
-- [React PDF](https://github.com/wojtekmaj/react-pdf)
-- [PDF.js](https://github.com/mozilla/pdf.js)
-- [jsPDF: Client-side JavaScript PDF Generation](https://github.com/MrRio/jsPDF)
-- [PDFMake](https://github.com/bpampuch/pdfmake)
-- [PDFKit](https://github.com/foliojs/pdfkit)
-- [Docx: Easily Generate Docx Files with TypeScript](https://github.com/dolanmiu/docx)
+- [React PDF](https://github.com/wojtekmaj/react-pdf).
+- [PDF.js](https://github.com/mozilla/pdf.js).
+- [jsPDF](https://github.com/MrRio/jsPDF):
+  Client-side JavaScript PDF generation.
+- [PDFMake](https://github.com/bpampuch/pdfmake).
+- [PDFKit](https://github.com/foliojs/pdfkit).
+- [Docx](https://github.com/dolanmiu/docx):
+  Easily generate `.docx` files with TypeScript.
 
 ## Persistent Storage
 
 ### Cookie
 
-- [JSCookie](https://github.com/js-cookie/js-cookie)
-- [React Cookie](https://github.com/reactivestack/cookies)
-- [Nookies: Next.js Cookie Helpers](https://github.com/maticzav/nookies)
+- [JSCookie](https://github.com/js-cookie/js-cookie).
+- [React Cookie](https://github.com/reactivestack/cookies).
+- [Nookies](https://github.com/maticzav/nookies):
+  Next.js cookie helpers.
 
 ### Web Storage
 
-- [Storage: Web Storage API Wrapper](https://github.com/KID-joker/stokado)
-- [PouchDB: Pocket-sized and Offline-first Database for Browser](https://github.com/pouchdb/pouchdb)
-- [ImmortalDB: Relentless Key-value Store for Browser](https://github.com/gruns/ImmortalDB)
-- [RxDB: Fast, Offline-first, Reactive Database](https://github.com/pubkey/rxdb)
-- [TinyBase: Reactive Data Store for Local‑first Apps](https://github.com/tinyplex/tinybase)
-- [Origin Private File System Tool](https://github.com/hughfenghen/opfs-tools)
+- [Storage](https://github.com/KID-joker/stokado):
+  Web storage API wrapper.
+- [PouchDB](https://github.com/pouchdb/pouchdb):
+  Pocket-sized and offline-first database for browser.
+- [ImmortalDB](https://github.com/gruns/ImmortalDB):
+  Relentless key-value store for browser.
+- [RxDB](https://github.com/pubkey/rxdb):
+  Fast, offline-first, reactive database.
+- [TinyBase](https://github.com/tinyplex/tinybase):
+  Reactive data store for local‑first apps.
+- [Origin Private File System Tool](https://github.com/hughfenghen/opfs-tools).
 
 ### Database
 
-- [Prisma: Next-generation ORM](https://github.com/prisma/prisma)
-- [Sequelize: Easy-to-use and Promise-based Multi SQL Dialects ORM Tool](https://github.com/sequelize/sequelize)
-- [Drizzle: Headless TypeScript ORM](https://github.com/drizzle-team/drizzle-orm)
-- [Mikro: TypeScript ORM Based on Data Mapper, Unit of Work and Identity Map patterns](https://github.com/mikro-orm/mikro-orm)
-- [NocoDB: Open Source AirTable Alternative](https://github.com/nocodb/nocodb)
-- [Directus: No-code Data Collaboration App for SQL Database](https://github.com/directus/directus)
-- [LowDB: Simple JSON Database](https://github.com/typicode/lowdb)
+- [Prisma](https://github.com/prisma/prisma):
+  Next-generation ORM tool.
+- [Sequelize](https://github.com/sequelize/sequelize):
+  Easy-to-use and promise-based multi SQL dialects ORM tool.
+- [Drizzle](https://github.com/drizzle-team/drizzle-orm):
+  Headless TypeScript ORM tool.
+- [Mikro](https://github.com/mikro-orm/mikro-orm):
+  TypeScript ORM based on data mapper, unit of work and identity map patterns.
+- [NocoDB](https://github.com/nocodb/nocodb):
+  Open source AirTable alternative.
+- [Directus](https://github.com/directus/directus):
+  No-code data collaboration app for SQL database.
+- [LowDB](https://github.com/typicode/lowdb):
+  Simple JSON database.
 
 ## Search
 
 ### Search UI Components
 
-- [React InstanceSearch DOM](https://github.com/algolia/react-instantsearch)
-- [SearchKit](https://github.com/searchkit/searchkit)
+- [InstanceSearch](https://github.com/algolia/react-instantsearch):
+  Building performant and instant search experiences with Algolia.
+- [SearchKit](https://github.com/searchkit/searchkit):
+  Search UI for Elasticsearch and OpenSearch.
 
 ### Search Engine
 
-- [TypeSense: Open Source Alternative to Algolia and Easier-to-Use Alternative to ElasticSearch](https://github.com/typesense/typesense)
-- [Lunr.js: Full Text Search Engine](https://github.com/olivernn/lunr.js)
-- [Solr: Solr Client](https://github.com/lbdremy/solr-node-client)
-- [JieBa: Chinese Text Segmentation](https://github.com/yanyiwu/nodejieba)
-- [Docusaurus Plugin: Local Search Plugin Based on Lunr.js](https://github.com/easyops-cn/docusaurus-search-local)
-- [Fuse: Lightweight Fuzzy Search JavaScript Library](https://github.com/krisk/fuse)
-- [MiniSearch: Powerful In-memory Full-text Search Engine](https://github.com/lucaong/minisearch)
+- [TypeSense](https://github.com/typesense/typesense):
+  Open source alternative to Algolia and easier-to-use alternative to ElasticSearch.
+- [Lunr.js](https://github.com/olivernn/lunr.js):
+  Full text search engine.
+- [Solr](https://github.com/lbdremy/solr-node-client):
+  Solr client.
+- [JieBa](https://github.com/yanyiwu/nodejieba):
+  Chinese text segmentation.
+- [Docusaurus Plugin](https://github.com/easyops-cn/docusaurus-search-local):
+  Local search plugin based on Lunr.js.
+- [Fuse](https://github.com/krisk/fuse):
+  Lightweight fuzzy search JavaScript library.
+- [MiniSearch](https://github.com/lucaong/minisearch):
+  Powerful in-memory full-text search engine.
 
 ### SEO
 
-- [React Helmet: Document Head Manager](https://github.com/nfl/react-helmet)
-- [NextSEO: Next.js SEO Management](https://github.com/garmeeh/next-seo)
-- [Vue Meta: Components HTML Metadata Manager with SSR Support](https://github.com/nuxt/vue-meta)
+- [React Helmet](https://github.com/nfl/react-helmet):
+  Document head manager.
+- [NextSEO](https://github.com/garmeeh/next-seo):
+  Next.js SEO management.
+- [Vue Meta](https://github.com/nuxt/vue-meta):
+  Components HTML metadata manager with SSR support.
 
 ## Editor
 
 ### Rich Text Editor
 
-- [Quill: Modern WYSIWYG Editor Built for Compatibility and Extensibility](https://github.com/quilljs/quill)
-- [Slate: Customizable Rich Text Editor Framework](https://github.com/ianstormtaylor/slate)
-- [EditorJS: Block-styled Rich Text Editor](https://github.com/codex-team/editor.js)
-- [TinyMCE: World #1 JavaScript Library for Rich Text Editing](https://github.com/tinymce/tinymce)
-- [Lexical: Draft.js alternatives](https://github.com/facebook/lexical)
-- [Verbum: Fully Flexible Text Editor Based on Lexical Framework](https://github.com/ozanyurtsever/verbum)
-- [TipTap: Collaborative and Headless WYSIWYG Text Editor Framework](https://github.com/ueberdosis/tiptap)
-- [ProseMirror: Collaborative and Semantic Rich Text Editing](https://github.com/ProseMirror/prosemirror-view)
-- [ReactPage: Highly Customizable WYSIWYG Content Editor](https://github.com/react-page/react-page)
+- [Quill](https://github.com/quilljs/quill):
+  Modern WYSIWYG editor built for compatibility and extensibility.
+- [Slate](https://github.com/ianstormtaylor/slate):
+  Customizable rich text editor framework.
+- [EditorJS](https://github.com/codex-team/editor.js):
+  Block-styled rich text editor.
+- [TinyMCE](https://github.com/tinymce/tinymce):
+  World #1 JavaScript library for rich text editing.
+- [Lexical](https://github.com/facebook/lexical):
+  Draft.js alternatives.
+- [Verbum](https://github.com/ozanyurtsever/verbum):
+  Fully flexible text editor based on Lexical framework.
+- [TipTap](https://github.com/ueberdosis/tiptap):
+  Collaborative and headless WYSIWYG text editor framework.
+- [ProseMirror](https://github.com/ProseMirror/prosemirror-view):
+  Collaborative and semantic rich text editing.
+- [ReactPage](https://github.com/react-page/react-page):
+  Highly customizable WYSIWYG content editor.
 
 ### Markdown Editor
 
-- [MilkDown: Plugin Driven WYSIWYG Markdown Editor Framework](https://github.com/Saul-Mirone/milkdown)
-- [ByteMD: Hackable Markdown Editor Component](https://github.com/bytedance/bytemd)
-- [Vditor: Multiple Mode Markdown Editor](https://github.com/Vanessa219/vditor)
-- [React Markdown Component](https://github.com/remarkjs/react-markdown)
-- [LetsMarkdown: Minimal Collaborative Markdown Editor](https://github.com/Cveinnt/LetsMarkdown.com)
+- [MilkDown](https://github.com/Saul-Mirone/milkdown):
+  Plugin driven WYSIWYG Markdown editor framework.
+- [ByteMD](https://github.com/bytedance/bytemd):
+  Hackable Markdown editor component.
+- [Vditor](https://github.com/Vanessa219/vditor):
+  Multiple mode Markdown editor.
+- [React Markdown Component](https://github.com/remarkjs/react-markdown).
+- [LetsMarkdown](https://github.com/Cveinnt/LetsMarkdown.com):
+  Minimal collaborative Markdown editor.
 
 ### Code Editor
 
-- [Monaco: Powers VS Code](https://github.com/microsoft/monaco-editor)
-- [React Monaco](https://github.com/suren-atoyan/monaco-react)
-- [ACE Editor](https://github.com/ajaxorg/ace)
-- [React ACE](https://github.com/securingsincity/react-ace)
-- [Code Mirror](https://github.com/codemirror/CodeMirror)
-- [Xi: Code Editor Philosophy](https://github.com/xi-editor/xi-editor)
-- [React Simple Code Editor](https://github.com/react-simple-code-editor/react-simple-code-editor)
+- [Monaco](https://github.com/microsoft/monaco-editor):
+  Powers VS Code.
+- [React Monaco](https://github.com/suren-atoyan/monaco-react).
+- [ACE Editor](https://github.com/ajaxorg/ace).
+- [React ACE](https://github.com/securingsincity/react-ace).
+- [Code Mirror](https://github.com/codemirror/CodeMirror).
+- [Xi](https://github.com/xi-editor/xi-editor):
+  Code editor philosophy.
+- [React Simple Code Editor](https://github.com/react-simple-code-editor/react-simple-code-editor).
 
 ### Live Editor and Playground
 
-- [SandPack: Toolkit for creating live-running code editing experiences](https://github.com/codesandbox/sandpack)
-- [React Live: Flexible Playground for Live Editing React Components](https://github.com/FormidableLabs/react-live)
-- [React Runner](https://github.com/nihgwu/react-runner)
-- [Histoire: Fast and Beautiful Interactive Component Playground Powered by Vite](https://github.com/histoire-dev/histoire)
-- [SyncedStore: CRDT for Building Live and Collaborative Applications](https://github.com/yousefed/SyncedStore)
-- [YJS: Shared CRDT Data Types for Building Collaborative Software](https://github.com/yjs/yjs)
-- [AutoMerge: Fast Implementations of Several Different CRDTs](https://github.com/automerge/automerge)
+- [SandPack](https://github.com/codesandbox/sandpack):
+  Toolkit for creating live-running code editing experiences.
+- [React Live](https://github.com/FormidableLabs/react-live):
+  Flexible playground for live editing React components.
+- [React Runner](https://github.com/nihgwu/react-runner).
+- [Histoire](https://github.com/histoire-dev/histoire):
+  Fast and beautiful interactive component playground powered by Vite.
+- [SyncedStore](https://github.com/yousefed/SyncedStore):
+  CRDT for building live and collaborative applications.
+- [YJS](https://github.com/yjs/yjs):
+  Shared CRDT data types for building collaborative software.
+- [AutoMerge](https://github.com/automerge/automerge):
+  Fast implementations of several different CRDTs.
 
 ### Web IDE
 
-- [CodeServer: VS Code in Browser](https://github.com/coder/code-server)
-- [Theia: Cloud IDE framework](https://github.com/eclipse-theia/theia)
-- [Utopia: React IDE](https://github.com/concrete-utopia/utopia)
+- [CodeServer](https://github.com/coder/code-server):
+  VS Code in browser.
+- [Theia](https://github.com/eclipse-theia/theia):
+  Cloud IDE framework.
+- [Utopia](https://github.com/concrete-utopia/utopia):
+  React IDE.
 
 ### Low-Code Editor
 
-- [LowCodeEngine: Enterprise-class Low-code Technology Stack](https://github.com/alibaba/lowcode-engine)
-- [TMagic: Tencent Low-Code Editor](https://github.com/Tencent/tmagic-editor)
-- [ToolJet: Extensible Low-code Framework for Building Business Applications](https://github.com/ToolJet/ToolJet)
-- [AppSmith: Low-Code Project to Build Admin Panels, Internal Tools, and Dashboards](https://github.com/appsmithorg/appsmith)
-- [BuildBase: Low-code Platform for Creating Internal Apps, Workflows, and Admin Panels](https://github.com/Budibase/budibase)
-- [NocoBase: Scalability-first Low-code Development Platform](https://github.com/nocobase/nocobase)
-- [SunMao: Low-code Developing Framework](https://github.com/smartxworks/sunmao-ui)
-- [ReactType: Prototyping Tool for Exporting React Applications](https://github.com/open-source-labs/ReacType)
+- [LowCodeEngine](https://github.com/alibaba/lowcode-engine):
+  Enterprise-class low-code technology stack.
+- [TMagic](https://github.com/Tencent/tmagic-editor):
+  Tencent low-code editor.
+- [ToolJet](https://github.com/ToolJet/ToolJet):
+  Extensible low-code framework for building business applications.
+- [AppSmith](https://github.com/appsmithorg/appsmith):
+  Low-code project to build admin panels, internal tools, and dashboards.
+- [BuildBase](https://github.com/Budibase/budibase):
+  Low-code platform for creating internal apps, workflows, and admin panels.
+- [NocoBase](https://github.com/nocobase/nocobase):
+  Scalability-first low-code development platform.
+- [SunMao](https://github.com/smartxworks/sunmao-ui):
+  Low-code developing framework.
+- [ReactType](https://github.com/open-source-labs/ReacType):
+  Prototyping tool for exporting React applications.
 
 ## Compiler
 
 ### Language Parser
 
-- [UnifiedJS: Interface for Parsing, Inspecting, Transforming and Serializing Content through Syntax Trees](https://github.com/unifiedjs/unified)
-- [HTML Parser](https://github.com/fb55/htmlparser2)
-- [YAML Parser](https://github.com/jonschlinkert/gray-matter)
-- [XML Parser](https://github.com/TobiasNickel/tXml)
-- [SVG Parser](https://github.com/sebmarkbage/art)
-- [Crontab Parser](https://github.com/harrisiirak/cron-parser)
-- [Domain Parser](https://github.com/peerigon/parse-domain)
-- [URL Parser](https://github.com/remusao/tldts)
-- [Git URL Parser](https://github.com/IonicaBizau/git-url-parse)
-- [SemVer Parser](https://github.com/npm/node-semver)
-- [INI Parser](https://github.com/npm/ini)
-- [RSS Parser](https://github.com/rbren/rss-parser)
+- [UnifiedJS](https://github.com/unifiedjs/unified):
+  Interface for parsing, inspecting, transforming
+  and serializing content through syntax trees.
+- [HTML Parser](https://github.com/fb55/htmlparser2).
+- [YAML Parser](https://github.com/jonschlinkert/gray-matter).
+- [XML Parser](https://github.com/TobiasNickel/tXml).
+- [SVG Parser](https://github.com/sebmarkbage/art).
+- [Crontab Parser](https://github.com/harrisiirak/cron-parser).
+- [Domain Parser](https://github.com/peerigon/parse-domain).
+- [URL Parser](https://github.com/remusao/tldts).
+- [Git URL Parser](https://github.com/IonicaBizau/git-url-parse).
+- [SemVer Parser](https://github.com/npm/node-semver).
+- [INI Parser](https://github.com/npm/ini).
+- [RSS Parser](https://github.com/rbren/rss-parser).
 
 ### JavaScript Parser and Engine
 
-- [Babel: Compiler for Writing Next Generation JavaScript](https://github.com/babel/babel)
-- [Sucrase: Super-fast Alternative to Babel Targeting Modern JS Runtime](https://github.com/alangpierce/sucrase)
-- [Acorn: Small, Fast, JavaScript-based JavaScript Parser](https://github.com/acornjs/acorn)
-- [Espree: Esprima-compatible JavaScript Parser](https://github.com/eslint/espree)
-- [ReactDocGen TypeScript: React TypeScript Components Properties Parser](https://github.com/styleguidist/react-docgen-typescript)
-- [Boa: Embed JavaScript Engine Written in Rust](https://github.com/boa-dev/boa)
-- [QuickJS: Small and Embedded Javascript Engine](https://github.com/bellard/quickjs)
+- [Babel.js](https://github.com/babel/babel):
+  Compiler for writing next generation JavaScript.
+- [Sucrase](https://github.com/alangpierce/sucrase):
+  Super-fast alternative to Babel.js targeting modern JavaScript runtime.
+- [Acorn](https://github.com/acornjs/acorn):
+  Small, fast, JavaScript-based JavaScript parser.
+- [Espree](https://github.com/eslint/espree):
+  Esprima-compatible JavaScript parser.
+- [ReactDocGen TypeScript](https://github.com/styleguidist/react-docgen-typescript):
+  React TypeScript components properties parser.
+- [Boa](https://github.com/boa-dev/boa):
+  Embed JavaScript engine written in Rust.
+- [QuickJS](https://github.com/bellard/quickjs):
+  Small and embedded JavaScript engine.
 
 ### Markdown Parser and Render
 
-- [MDX](https://github.com/mdx-js/mdx)
-- [Marked](https://github.com/markedjs/marked)
-- [MarkdownIt](https://github.com/markdown-it/markdown-it)
-- [Remark](https://github.com/remarkjs/remark)
-- [Remark Plugin for Code Block](https://github.com/expressive-code/expressive-code)
-- [Yozora: TypeScript Markdown Parser](https://github.com/yozorajs/yozora)
-- [Prism React Renderer](https://github.com/FormidableLabs/prism-react-renderer)
-- [Shiki: Modern Powerful Syntax Highlighter](https://github.com/shikijs/shiki)
+- [MDX](https://github.com/mdx-js/mdx).
+- [Marked](https://github.com/markedjs/marked).
+- [MarkdownIt](https://github.com/markdown-it/markdown-it).
+- [Remark](https://github.com/remarkjs/remark).
+- [Remark Plugin for Code Block](https://github.com/expressive-code/expressive-code).
+- [Yozora](https://github.com/yozorajs/yozora):
+  TypeScript Markdown parser.
+- [Prism React Renderer](https://github.com/FormidableLabs/prism-react-renderer).
+- [Shiki](https://github.com/shikijs/shiki):
+  Modern powerful syntax highlighter.
 
 ## CLI
 
 ### CLI Solution
 
-- [Oclif: Open CLI Framework](https://github.com/oclif/oclif)
-- [Ink: React CLI App](https://github.com/vadimdemedes/ink)
-- [ZX: Node Bash Wrapper](https://github.com/google/zx)
-- [Nexe: Node EXE Wrapper](https://github.com/nexe/nexe)
+- [Oclif](https://github.com/oclif/oclif):
+  Open CLI framework.
+- [Ink](https://github.com/vadimdemedes/ink):
+  React CLI app.
+- [ZX](https://github.com/google/zx):
+  Bash wrapper for Node.js.
+- [Nexe](https://github.com/nexe/nexe):
+  EXE wrapper for Node.js.
 
 ### CLI Utils
 
 #### CLI Input Utils
 
-- [CLI Panion: Type-safe CLI Library with No Runtime Dependencies](https://github.com/arcanis/clipanion)
-- [Commander](https://github.com/tj/commander.js)
-- [Yargs](https://github.com/yargs/yargs)
-- [Inquirer](https://github.com/SBoudrias/Inquirer.js)
-- [Prompts](https://github.com/terkelg/prompts)
+- [CLI Panion](https://github.com/arcanis/clipanion):
+  Type-safe CLI library with no runtime dependencies.
+- [Commander](https://github.com/tj/commander.js).
+- [Yargs](https://github.com/yargs/yargs).
+- [Inquirer](https://github.com/SBoudrias/Inquirer.js).
+- [Prompts](https://github.com/terkelg/prompts).
 
 #### CLI Output Utils
 
-- [Consola](https://github.com/unjs/consola)
-- [Chalk](https://github.com/chalk/chalk)
-- [ORA Spinner](https://github.com/sindresorhus/ora)
-- [Progress](https://github.com/bvaughn/progress-estimator)
-- [Code Frame: Pointing to Source Locations](https://github.com/babel/babel/tree/main/packages/babel-code-frame)
-- [Tasuku: Minimal Task Runner Built on Ink React CLI](https://github.com/privatenumber/tasuku)
+- [Consola](https://github.com/unjs/consola).
+- [Chalk](https://github.com/chalk/chalk).
+- [ORA Spinner](https://github.com/sindresorhus/ora).
+- [Progress](https://github.com/bvaughn/progress-estimator).
+- [Code Frame](https://github.com/babel/babel/tree/main/packages/babel-code-frame):
+  Pointing to source locations.
+- [Tasuku](https://github.com/privatenumber/tasuku):
+  Minimal task runner built on Ink React CLI.
 
 #### Node Utils
 
-- [ShellJS: Portable Unix Shell Commands](https://github.com/shelljs/shelljs)
-- [Cross Spawn](https://github.com/moxystudio/node-cross-spawn)
-- [Execa](https://github.com/sindresorhus/execa)
-- [Node Fetch](https://github.com/node-fetch/node-fetch)
-- [Undici: HTTP/1.1 Client](https://github.com/nodejs/undici)
-- [FS Extra](https://github.com/jprichardson/node-fs-extra)
-- [Graceful FS](https://github.com/isaacs/node-graceful-fs)
-- [MemFS: In-memory Node File System](https://github.com/streamich/memfs)
-- [Globby](https://github.com/sindresorhus/globby)
-- [Chokidar: Efficient Cross-platform File Watching Library](https://github.com/paulmillr/chokidar)
-- [Mkdirp](https://github.com/isaacs/node-mkdirp)
-- [RimRaf](https://github.com/isaacs/rimraf)
-- [ReNamer: Rename Files in Bulk](https://github.com/75lb/renamer)
-- [ImportLocal: Use Locally Installed Version](https://github.com/sindresorhus/import-local)
-- [Patch: Fix Broken Node Modules Instantly](https://github.com/ds300/patch-package)
+- [ShellJS](https://github.com/shelljs/shelljs):
+  Portable UNIX shell commands.
+- [Cross Spawn](https://github.com/moxystudio/node-cross-spawn).
+- [Execa](https://github.com/sindresorhus/execa).
+- [Node Fetch](https://github.com/node-fetch/node-fetch).
+- [Undici](https://github.com/nodejs/undici):
+  HTTP/1.1 client.
+- [FS Extra](https://github.com/jprichardson/node-fs-extra).
+- [Graceful FS](https://github.com/isaacs/node-graceful-fs).
+- [MemFS](https://github.com/streamich/memfs):
+  In-memory file system for Node.js.
+- [Globby](https://github.com/sindresorhus/globby).
+- [Chokidar](https://github.com/paulmillr/chokidar):
+  Efficient cross-platform file watching library.
+- [Mkdirp](https://github.com/isaacs/node-mkdirp).
+- [RimRaf](https://github.com/isaacs/rimraf).
+- [ReNamer](https://github.com/75lb/renamer):
+  Rename files in bulk.
+- [ImportLocal](https://github.com/sindresorhus/import-local):
+  Use locally installed version.
+- [Patch](https://github.com/ds300/patch-package):
+  Fix broken Node.js modules instantly.
 
 ### CLI Cheat Sheet
 
-- [TLDR: Help Pages for Command-line Tools](https://github.com/tldr-pages/tldr)
+- [TLDR](https://github.com/tldr-pages/tldr):
+  Help pages for command-line tools.
 
 ### CLI Tools
 
 #### CLI Compiler
 
-- [NCC](https://github.com/vercel/ncc)
+- [NCC](https://github.com/vercel/ncc).
 
 #### CLI Packager
 
-- [PKG](https://github.com/vercel/pkg)
+- [PKG](https://github.com/vercel/pkg).
 
 ### Terminal
 
-- [Hyper: Electron Terminal](https://github.com/vercel/hyper)
-- [Xterm.js: Xterm Terminal for Web](https://github.com/xtermjs/xterm.js)
-- [Fig: IDE-style Autocomplete for Terminal and Shell](https://github.com/withfig/autocomplete)
-- [Eruda: Console for Mobile Browsers](https://github.com/liriliri/eruda)
-- [Warp: Modern and Rust-based AI Terminal](https://github.com/warpdotdev/Warp)
+- [Hyper](https://github.com/vercel/hyper):
+  Electron terminal.
+- [Xterm.js](https://github.com/xtermjs/xterm.js):
+  Xterm terminal for web.
+- [Fig](https://github.com/withfig/autocomplete):
+  IDE-style autocomplete for terminal and shell.
+- [Eruda](https://github.com/liriliri/eruda):
+  Console for mobile browsers.
+- [Warp](https://github.com/warpdotdev/Warp):
+  Modern and Rust-based AI terminal.
 
 ## Daemon
 
-- [PM2](https://github.com/Unitech/pm2)
-- [Nodemon](https://github.com/remy/nodemon)
+- [PM2](https://github.com/Unitech/pm2).
+- [Nodemon](https://github.com/remy/nodemon).
 
 ## Network
 
 ### Network Protocols
 
-- [TelNet](https://github.com/mkozjak/node-telnet-client)
-- [IMAP](https://github.com/mscdex/node-imap)
-- [SSH2: SSH2 Client and Server Modules](https://github.com/mscdex/ssh2)
+- [TelNet](https://github.com/mkozjak/node-telnet-client).
+- [IMAP](https://github.com/mscdex/node-imap).
+- [SSH2](https://github.com/mscdex/ssh2):
+  SSH2 client and server modules.
 
 ### HTTP
 
-- [MKCert: Make Locally Trusted Development Certificates](https://github.com/FiloSottile/mkcert)
+- [MKCert](https://github.com/FiloSottile/mkcert):
+  Make locally trusted development certificates.
 
 ### WebSocket
 
-- [Socket.IO](https://github.com/socketio/socket.io)
-- [WebSockets](https://github.com/websockets/ws)
-- [uWebSockets: Simple, Secure and Standards Compliant Sockets](https://github.com/uNetworking/uWebSockets)
-- [SocketCluster: Highly Scalable Realtime Framework](https://github.com/SocketCluster/socketcluster)
-- [Soketi: Fast and Resilient WebSockets Server](https://github.com/soketi/soketi)
+- [Socket.IO](https://github.com/socketio/socket.io).
+- [WebSockets](https://github.com/websockets/ws).
+- [uWebSockets](https://github.com/uNetworking/uWebSockets):
+  Simple, secure and standards compliant WebSockets.
+- [SocketCluster](https://github.com/SocketCluster/socketcluster):
+  Highly scalable realtime framework.
+- [Soketi](https://github.com/soketi/soketi):
+  Fast and resilient WebSockets server.
 
 ### WebRTC
 
-- [Meet: Secure, Simple and Scalable Video Conferences](https://github.com/jitsi/jitsi-meet)
-- [PeerJS: Simple Peer-to-peer with WebRTC](https://github.com/peers/peerjs)
-- [LiveKit](https://github.com/livekit/components-js)
+- [Meet](https://github.com/jitsi/jitsi-meet):
+  Secure, simple and scalable video conferences.
+- [PeerJS](https://github.com/peers/peerjs):
+  Simple peer-to-peer with WebRTC.
+- [LiveKit](https://github.com/livekit/components-js).
 
-### P2P
+### Prefetch
 
-- [FireFox Send](https://github.com/mozilla/send)
-
-### Pre-Fetch
-
-- [Google QuickLink](https://github.com/GoogleChromeLabs/quicklink)
+- [QuickLink](https://github.com/GoogleChromeLabs/quicklink):
+  Faster subsequent page-loads by prefetching in-viewport links during idle time.
 
 ### Lazy Loading
 
-- [System.js](https://github.com/systemjs/systemjs)
-- [Lazyload.js](https://github.com/rgrove/lazyload)
-- [LAB.js: Await/Async Lazy Loading](https://github.com/getify/LABjs)
+- [System.js](https://github.com/systemjs/systemjs).
+- [Lazyload.js](https://github.com/rgrove/lazyload).
+- [LAB.js](https://github.com/getify/LABjs):
+  Await-async lazy loading.
 
 ### Network Benchmark
 
-- [HTTP/HTTPS Troubleshooting and Profiling](https://github.com/trimstray/htrace.sh)
-- [HTTP/HTTPS Benchmarking Tool](https://github.com/mcollina/autocannon)
+- [HTTP/HTTPS Troubleshooting and Profiling](https://github.com/trimstray/htrace.sh).
+- [HTTP/HTTPS Benchmarking Tool](https://github.com/mcollina/autocannon).
 
 ### Network Debugging
 
-- [Whistle](https://github.com/avwo/whistle)
+- [Whistle](https://github.com/avwo/whistle).
 
 ### PWA
 
-- [Workbox: Progressive Web Apps Toolbox](https://github.com/GoogleChrome/workbox)
-- [PartyTown: 3rd Scripts Web Worker](https://github.com/BuilderIO/partytown)
+- [Workbox](https://github.com/GoogleChrome/workbox):
+  Progressive web apps toolbox.
+- [PartyTown](https://github.com/BuilderIO/partytown):
+  3rd-party scripts web worker.
 
 ## Web3
 
-- [TypeChain: Ethereum Smart Contracts Bindings](https://github.com/dethcrypto/TypeChain)
-- [Web3.js: Ethereum API](https://github.com/ChainSafe/web3.js)
-- [Ethers.js: Complete Ethereum Library and Wallet](https://github.com/ethers-io/ethers.js)
-- [Foundry: Blazing fast, Portable and Modular Ethereum Application Development Toolkit](https://github.com/foundry-rs/foundry)
-- [Truffle: Smart Contracts Development Toolkit](https://github.com/trufflesuite/truffle)
-- [HardHat: Ethereum Software Development Environment](https://github.com/NomicFoundation/hardhat)
-- [Waffle: Writing and Testing Smart Contracts](https://github.com/TrueFiEng/Waffle)
-- [Remix: Browser-based Ethereum Smart Contracts Development IDE](https://github.com/ethereum/remix-project)
-- [Web3UI: Lightweight Reusable Web3 UI Components](https://github.com/web3ui/web3uikit)
-- [Moralis: Moralis React Hooks and Components](https://github.com/MoralisWeb3/react-moralis)
-- [ThirdWeb: Ultimate Web3 React Hooks Collection](https://github.com/thirdweb-dev/react)
-- [MetaMask: Ethereum Blockchain Apps Browser Extension](https://github.com/MetaMask/metamask-extension)
+- [TypeChain](https://github.com/dethcrypto/TypeChain):
+  Ethereum smart contracts bindings.
+- [Web3.js](https://github.com/ChainSafe/web3.js):
+  Ethereum API.
+- [Ethers.js](https://github.com/ethers-io/ethers.js):
+  Complete Ethereum library and wallet.
+- [Foundry](https://github.com/foundry-rs/foundry):
+  Blazing fast, portable and modular Ethereum application development toolkit.
+- [Truffle](https://github.com/trufflesuite/truffle):
+  Smart contracts development toolkit.
+- [HardHat](https://github.com/NomicFoundation/hardhat):
+  Ethereum software development environment.
+- [Waffle](https://github.com/TrueFiEng/Waffle):
+  Writing and testing smart contracts.
+- [Remix](https://github.com/ethereum/remix-project):
+  Browser-based Ethereum smart contracts development IDE.
+- [Web3UI](https://github.com/web3ui/web3uikit):
+  Lightweight reusable Web3 UI components.
+- [Moralis](https://github.com/MoralisWeb3/react-moralis):
+  Moralis React hooks and components.
+- [ThirdWeb](https://github.com/thirdweb-dev/react):
+  Ultimate Web3 React hooks collection.
+- [MetaMask](https://github.com/MetaMask/metamask-extension):
+  Ethereum blockchain apps browser extension.
 
 ## Security
 
 ### Crypto
 
-- [NanoID](https://github.com/ai/nanoid)
-- [MD5](https://github.com/blueimp/JavaScript-MD5)
-- [Base64](https://github.com/dankogai/js-base64)
+- [NanoID](https://github.com/ai/nanoid).
+- [MD5](https://github.com/blueimp/JavaScript-MD5).
+- [Base64](https://github.com/dankogai/js-base64).
 
 ### Auth
 
-- [SuperTokens: Open Source Alternative to Auth0 / Firebase Auth / AWS Cognito](https://github.com/supertokens/supertokens-website)
-- [NextAuth: Next.js Authentication](https://github.com/nextauthjs/next-auth)
-- [Lucia Auth: Simple Session Authentication](https://github.com/lucia-auth/lucia)
-- [Oslo: Collection of Auth-related Utilities](https://github.com/pilcrowonpaper/oslo)
+- [SuperTokens](https://github.com/supertokens/supertokens-website):
+  Open source alternative to Auth0 / Firebase Auth / AWS Cognito.
+- [NextAuth](https://github.com/nextauthjs/next-auth):
+  Next.js authentication.
+- [Lucia Auth](https://github.com/lucia-auth/lucia):
+  Simple session authentication.
+- [Oslo](https://github.com/pilcrowonpaper/oslo):
+  Collection of auth-related utilities.
 
 ### XSS
 
-- [DOMPurify: DOM-only, super-fast, uber-tolerant XSS sanitizer for HTML, MathML and SVG](https://github.com/cure53/DOMPurify)
+- [DOMPurify](https://github.com/cure53/DOMPurify):
+  DOM-only, super-fast, uber-tolerant XSS sanitizer for HTML, MathML and SVG.
 
 ## Back-end Server
 
 ### Middlewares
 
-- [Body Parser](https://github.com/expressjs/body-parser)
-- [Parse Server](https://github.com/parse-community/parse-server)
-- [Cross Origin Resource Sharing](https://github.com/expressjs/cors)
-- [Cross Site Request Forgery Protection](https://github.com/expressjs/csurf)
-- [Cookie Parser](https://github.com/expressjs/cookie-parser)
-- [Cookie Session](https://github.com/expressjs/cookie-session)
-- [JWT](https://github.com/auth0/node-jsonwebtoken)
-- [PassportJS: Simple, Unobtrusive Authentication](https://github.com/jaredhanson/passport)
-- [Compression](https://github.com/expressjs/compression)
-- [File Upload](https://github.com/richardgirges/express-fileupload)
-- [Morgan: Express Official Logger](https://github.com/expressjs/morgan)
-- [Pino: Super Fast, All Natural JSON Logger](https://github.com/pinojs/pino)
-- [HTTP Proxy](https://github.com/chimurai/http-proxy-middleware)
-- [Helmet: Secure Express Apps with Various HTTP Headers](https://github.com/helmetjs/helmet)
-- [Express Rate Limiter](https://github.com/nfriedly/express-rate-limit)
-- [Node Rate Limier](https://github.com/animir/node-rate-limiter-flexible)
-- [Graceful Shutdown](https://github.com/godaddy/terminus)
+- [BodyParser](https://github.com/expressjs/body-parser).
+- [ParseServer](https://github.com/parse-community/parse-server).
+- [CORS](https://github.com/expressjs/cors).
+- [CookieSession](https://github.com/expressjs/cookie-session).
+- [JWT](https://github.com/auth0/node-jsonwebtoken).
+- [PassportJS](https://github.com/jaredhanson/passport):
+  Simple, unobtrusive authentication.
+- [FileUpload](https://github.com/richardgirges/express-fileupload).
+- [HTTPProxy](https://github.com/chimurai/http-proxy-middleware).
+- [Helmet](https://github.com/helmetjs/helmet):
+  Secure Express apps with various HTTP headers.
+- [ExpressRateLimiter](https://github.com/nfriedly/express-rate-limit):
+  Basic rate-limiting middleware for Express web server.
+- [NodeRateLimier](https://github.com/animir/node-rate-limiter-flexible):
+  Atomic counters and rate limiting tools.
+- [Terminus](https://github.com/godaddy/terminus):
+  Graceful shutdown and Kubernetes readiness / liveness checks.
 
 ### Serverless
 
-- [Serverless Framework](https://github.com/serverless/serverless)
-- [SpaceCloud: Kubernetes Based Serverless Platform](https://github.com/spacecloud-io/space-cloud)
+- [Serverless](https://github.com/serverless/serverless).
+- [SpaceCloud](https://github.com/spacecloud-io/space-cloud):
+  Kubernetes based serverless platform.
 
 ### API Development
 
-- [tRPC: End-to-end Type-safe APIs Server](https://github.com/trpc/trpc)
-- [HopScotch: Open Source API Development Ecosystem](https://github.com/hoppscotch/hoppscotch)
-- [Swagger Codegen: Template-driven Engine to Generate Documentation, API Clients and Server Stubs](https://github.com/swagger-api/swagger-codegen)
-- [Swagger UI: Generate Beautiful Documentation from Swagger-compliant API](https://github.com/swagger-api/swagger-ui)
-- [DevDocs](https://github.com/freeCodeCamp/devdocs)
+- [tRPC](https://github.com/trpc/trpc):
+  End-to-end type-safe APIs server.
+- [HopScotch](https://github.com/hoppscotch/hoppscotch):
+  Open source API development ecosystem.
+- [SwaggerCodegen](https://github.com/swagger-api/swagger-codegen):
+  Template-driven engine to generate documentation, API clients and server stubs.
+- [SwaggerUI](https://github.com/swagger-api/swagger-ui):
+  Generate beautiful documentation from Swagger-compliant API.
+- [DevDocs](https://github.com/freeCodeCamp/devdocs).
 
 ### BaaS
 
-- [AwesomeCloudflare: Cloudflare Free Toolkits and Resources](https://github.com/zhuima/awesome-cloudflare)
-- [Firebase: App Development Platform](https://github.com/firebase/quickstart-js)
-- [Open Source Firebase Alternative](https://github.com/supabase/supabase)
-- [Convex: Backend-as-a-Service for Fullstack App Development](https://github.com/get-convex/convex-backend)
-- [AirTable: Google Sheets Alternative](https://github.com/Airtable/airtable.js)
-- [ValTown: Collaborative, Flexible Environment for Creating and Running JavaScript](https://github.com/val-town)
+- [AwesomeCloudflare](https://github.com/zhuima/awesome-cloudflare):
+  Cloudflare free toolkits and resources.
+- [Firebase](https://github.com/firebase/quickstart-js):
+  App development platform.
+- [SuperBase](https://github.com/supabase/supabase):
+  Open source Firebase alternative.
+- [Convex](https://github.com/get-convex/convex-backend):
+  Backend-as-a-service for fullstack app development.
+- [AirTable](https://github.com/Airtable/airtable.js):
+  Google sheets alternative.
+- [ValTown](https://github.com/val-town):
+  Collaborative, flexible environment for creating and running JavaScript.
 
 ## AI
 
@@ -1376,343 +1848,457 @@ tags: [Web, Framework, Library]
 
 ### CV
 
-- [Tesseract: Image Recognition Tesseract OCR Engine](https://github.com/naptha/tesseract.js)
+- [Tesseract](https://github.com/naptha/tesseract.js):
+  Image recognition Tesseract OCR engine.
 
 ### LLM
 
-- [LangChain: LLM Framework](https://github.com/langchain-ai/langchainjs)
-- [Vercel.ai: Build AI-powered Web Applications](https://github.com/vercel/ai)
-- [TypeChat: Makes it Easy to Build Natural Language Interfaces](https://github.com/microsoft/TypeChat)
-- [Jan: Offline Local ChatGPT Open Source Alternative](https://github.com/janhq/jan)
+- [LangChain](https://github.com/langchain-ai/langchainjs):
+  LLM framework.
+- [Vercel.ai](https://github.com/vercel/ai):
+  Build AI-powered web applications.
+- [TypeChat](https://github.com/microsoft/TypeChat):
+  Makes it easy to build natural language interfaces.
+- [Jan](https://github.com/janhq/jan):
+  Offline local ChatGPT open source alternative.
 
 ### AIaaS
 
-- [JinaAI: Build MultiModal AI Applications with Cloud-native Stack](https://github.com/jina-ai/jina)
-- [LeptonAI: Simplify AI Service Building](https://github.com/leptonai/leptonai)
+- [JinaAI](https://github.com/jina-ai/jina):
+  Build multimodal AI applications with cloud-native stack.
+- [LeptonAI](https://github.com/leptonai/leptonai):
+  Simplify AI service building.
 
 ### AI Search
 
-- [ChatGPT](https://chat.openai.com)
-- [BingAI](https://www.bing.com/chat)
-- [GeminiAI](https://gemini.google.com)
-- [PhindAI](https://www.phind.com)
-- [PerplexityAI](https://www.perplexity.ai)
-- [PoeAI: Quora ChatBots Aggregator](https://poe.com)
-- [KimiAI](https://kimi.moonshot.cn)
-- [ChatGLM](https://chatglm.cn)
-- [TongYi QianWen](https://tongyi.aliyun.com/qianwen)
+- [ChatGPT](https://chat.openai.com).
+- [BingAI](https://www.bing.com/chat).
+- [GeminiAI](https://gemini.google.com).
+- [PhindAI](https://www.phind.com).
+- [PerplexityAI](https://www.perplexity.ai).
+- [PoeAI](https://poe.com):
+  Quora chatbot aggregator.
+- [KimiAI](https://kimi.moonshot.cn).
+- [ChatGLM](https://chatglm.cn).
+- [TongYi QianWen](https://tongyi.aliyun.com/qianwen).
 
 ### AI Copilot
 
-- [CopilotKit: Building Custom AI Copilots](https://github.com/CopilotKit/CopilotKit)
-- [ChatHub: All-in-one Chatbot Client](https://github.com/chathub-dev/chathub)
-- [WebChatGPT: Augments ChatGPT Prompts with Web Results](https://github.com/interstellard/chatgpt-advanced)
-- [C4G: ChatGPT for Google](https://microsoftedge.microsoft.com/addons/detail/ilphilpfaejmgdkapaijljgcigibggam)
-- [Sider: ChatGPT4-driven Browser Copilot](https://microsoftedge.microsoft.com/addons/detail/dhoenijjpgpeimemopealfcbiecgceod)
-- [Monica: ChatGPT4-driven Browser Copilot](https://microsoftedge.microsoft.com/addons/detail/fhimbbbmdjiifimnepkibjfjbppnjble)
-- [Merlin: 1-Click access Browser Copilot](https://chromewebstore.google.com/detail/camppjleccjaphfdbohjdohecfnoikec)
-- [Max: 1-Click access Browser Copilot](https://microsoftedge.microsoft.com/addons/detail/ngphehpfehdmjellohmlojkplilekadg)
-- [TinaMind: ChatGPT-driven Free Browser Copilot](https://chromewebstore.google.com/detail/befflofjcniongenjmbkgkoljhgliihe)
-- [Glarity: Summaries Copilot](https://github.com/sparticleinc/chatgpt-google-summary-extension)
-- [GrammarLy: Free Writing and Grammar Checker Copilot](https://microsoftedge.microsoft.com/addons/detail/cnlefmmeadmemmdciolhbnfeacpdfbkd)
-- [DeepL: Free Translation Copilot](https://microsoftedge.microsoft.com/addons/detail/fancfknaplihpclbhbpclnmmjcjanbaf)
-- [ZipZap: Multilingual Translation Copilot](https://microsoftedge.microsoft.com/addons/detail/efjbjbiikanoebecldljpjddfhjfmnob)
-- [AwesomeCodeAI: Coding Copilot Awesome List](https://github.com/sourcegraph/awesome-code-ai)
+- [CopilotKit](https://github.com/CopilotKit/CopilotKit):
+  Building custom AI copilots.
+- [ChatHub](https://github.com/chathub-dev/chathub):
+  All-in-one chatbot client.
+- [WebChatGPT](https://github.com/interstellard/chatgpt-advanced):
+  Augments ChatGPT prompts with web results.
+- [C4G](https://microsoftedge.microsoft.com/addons/detail/ilphilpfaejmgdkapaijljgcigibggam):
+  ChatGPT for Google.
+- [Sider](https://microsoftedge.microsoft.com/addons/detail/dhoenijjpgpeimemopealfcbiecgceod):
+  ChatGPT4-driven browser copilot.
+- [Monica](https://microsoftedge.microsoft.com/addons/detail/fhimbbbmdjiifimnepkibjfjbppnjble):
+  ChatGPT4-driven browser copilot.
+- [Merlin](https://chromewebstore.google.com/detail/camppjleccjaphfdbohjdohecfnoikec):
+  1-click access browser copilot.
+- [Max](https://microsoftedge.microsoft.com/addons/detail/ngphehpfehdmjellohmlojkplilekadg):
+  1-click access browser copilot.
+- [TinaMind](https://chromewebstore.google.com/detail/befflofjcniongenjmbkgkoljhgliihe):
+  ChatGPT-driven free browser copilot.
+- [Glarity](https://github.com/sparticleinc/chatgpt-google-summary-extension):
+  Summaries copilot.
+- [GrammarLy](https://microsoftedge.microsoft.com/addons/detail/cnlefmmeadmemmdciolhbnfeacpdfbkd):
+  Free writing and grammar checker copilot.
+- [DeepL](https://microsoftedge.microsoft.com/addons/detail/fancfknaplihpclbhbpclnmmjcjanbaf):
+  Free translation copilot.
+- [ZipZap](https://microsoftedge.microsoft.com/addons/detail/efjbjbiikanoebecldljpjddfhjfmnob):
+  Multilingual translation copilot.
+- [AwesomeCodeAI](https://github.com/sourcegraph/awesome-code-ai):
+  Coding copilot awesome list.
 
 ### AI Agent
 
-- [PRAgent: Codium AI-Powered Tool for Automated Pull Request Analysis, Feedback and Suggestions](https://github.com/Codium-ai/pr-agent)
-- [SWEAgent: Princeton GitHub Issues Auto-Fixer](https://github.com/princeton-nlp/SWE-agent)
+- [PRAgent](https://github.com/Codium-ai/pr-agent):
+  Codium AI-powered tool for automated pull request analysis, feedback and suggestions.
+- [SWEAgent](https://github.com/princeton-nlp/SWE-agent):
+  Princeton GitHub issues auto-fixer.
 
 ## Debugging and Testing
 
 ### Unit Testing
 
-- [Vitest: Fast Vite-native Test Framework](https://github.com/vitest-dev/vitest)
-- [Jest](https://github.com/facebook/jest)
-- [Jest UI](https://github.com/Raathigesh/majestic)
-- [React Testing Library](https://github.com/testing-library/react-testing-library)
-- [Mocha](https://github.com/mochajs/mocha)
-- [Jasmine](https://github.com/jasmine/jasmine)
-- [Assert](https://github.com/power-assert-js/power-assert)
-- [Testem](https://github.com/testem/testem)
-- [Malabi: Tracing Based JavaScript Assertions](https://github.com/aspecto-io/malabi)
-- [FastCheck: Property Based Testing](https://github.com/dubzzz/fast-check)
-- [Stryker: Mutation Testing](https://github.com/stryker-mutator/stryker-js)
+- [Vitest](https://github.com/vitest-dev/vitest):
+  Fast Vite-native test framework.
+- [Jest](https://github.com/facebook/jest).
+- [TestingLibrary](https://github.com/testing-library/react-testing-library).
+- [Mocha](https://github.com/mochajs/mocha).
+- [Jasmine](https://github.com/jasmine/jasmine).
+- [Assert](https://github.com/power-assert-js/power-assert).
+- [Testem](https://github.com/testem/testem).
+- [Malabi](https://github.com/aspecto-io/malabi):
+  Tracing based JavaScript assertions.
+- [FastCheck](https://github.com/dubzzz/fast-check):
+  Property based testing.
+- [Stryker](https://github.com/stryker-mutator/stryker-js):
+  Mutation testing.
 
 ### Visual Testing
 
-- [Chromatic: Automate Visual Testing](https://github.com/chromaui/chromatic-cli)
+- [Chromatic](https://github.com/chromaui/chromatic-cli):
+  Automate visual testing.
 
 ### End to End Testing
 
-- [Cypress](https://github.com/cypress-io/cypress)
-- [PlayWright: Automate Chromium, Firefox and WebKit with Single API](https://github.com/microsoft/playwright)
-- [NightWatch: End to End Testing Framework](https://github.com/nightwatchjs/nightwatch)
-- [WebDriver: Next Generation Browser and Mobile Automation Test Framework](https://github.com/webdriverio/webdriverio)
-- [WebHint](https://github.com/webhintio/hint)
-- [TestCafe: Automate End-to-End Web Testing](https://github.com/DevExpress/testcafe)
+- [PlayWright](https://github.com/microsoft/playwright):
+  Automate Chromium, Firefox and Webkit with single API.
+- [Cypress](https://github.com/cypress-io/cypress).
+- [NightWatch](https://github.com/nightwatchjs/nightwatch):
+  End to end testing framework.
+- [WebDriver](https://github.com/webdriverio/webdriverio):
+  Next generation browser and mobile automation test framework.
+- [WebHint](https://github.com/webhintio/hint).
+- [TestCafe](https://github.com/DevExpress/testcafe):
+  Automate end-to-end web testing.
 
 ### Headless Automation Tools
 
-- [Puppeteer: Headless Chrome Tools](https://github.com/puppeteer/puppeteer)
-- [PuppeteerExtra: Modular Plugin Framework for Puppeteer](https://github.com/berstend/puppeteer-extra)
-- [RRWeb: Record and Replay Web](https://github.com/rrweb-io/rrweb)
-- [Webkit API](https://github.com/ariya/phantomjs)
-- [Selenium](https://github.com/SeleniumHQ/selenium)
-- [Appium](https://github.com/appium/appium)
-- [Cheerio: jQuery Server Tools](https://github.com/cheeriojs/cheerio)
-- [Crawlee: Web Scraping and Browser Automation Library](https://github.com/apify/crawlee)
-- [X-Crawl: Flexible Node.js AI-assisted Crawler Library](https://github.com/coder-hxl/x-crawl)
-- [CRI: Chrome Remote Interface for Chrome DevTools Protocol](https://github.com/cyrus-and/chrome-remote-interface)
+- [Puppeteer](https://github.com/puppeteer/puppeteer):
+  Headless Chrome tools.
+- [PuppeteerExtra](https://github.com/berstend/puppeteer-extra):
+  Modular plugin framework for Puppeteer.
+- [RRWeb](https://github.com/rrweb-io/rrweb):
+  Record and replay web.
+- [Selenium](https://github.com/SeleniumHQ/selenium).
+- [Appium](https://github.com/appium/appium).
+- [Cheerio](https://github.com/cheeriojs/cheerio):
+  jQuery server tools.
+- [Crawlee](https://github.com/apify/crawlee):
+  Web scraping and browser automation library.
+- [X-Crawl](https://github.com/coder-hxl/x-crawl):
+  Flexible Node.js AI-assisted crawler library.
+- [CRI](https://github.com/cyrus-and/chrome-remote-interface):
+  Chrome remote interface for Chrome devtools protocol.
 
 ### Code Analysis Tools
 
-- [SourceGraph: Universal Code Search](https://github.com/sourcegraph/sourcegraph)
-- [SonarSource: Static Source Code Analyzer](https://github.com/SonarSource/SonarJS)
-- [AST Explorer](https://github.com/fkling/astexplorer)
-- [PMD: Extensible Multi-language Static Code Analyzer](https://github.com/pmd/pmd)
-- [Java SpotBugs](https://github.com/spotbugs/spotbugs)
-- [Madge: Create Graphs from AMD, CJS or ESM Dependencies](https://github.com/pahen/madge)
-- [Code2Flow: Call Graphs Generation for Dynamic Languages](https://github.com/scottrogowski/code2flow)
+- [SourceGraph](https://github.com/sourcegraph/sourcegraph):
+  Universal code search.
+- [SonarSource](https://github.com/SonarSource/SonarJS):
+  Static source code analyzer.
+- [ASTExplorer](https://github.com/fkling/astexplorer).
+- [PMD](https://github.com/pmd/pmd):
+  Extensible multi-language static code analyzer.
+- [Java SpotBugs](https://github.com/spotbugs/spotbugs).
+- [Madge](https://github.com/pahen/madge):
+  Create graphs from AMD, CJS or ESM dependencies.
+- [Code2Flow](https://github.com/scottrogowski/code2flow):
+  Call graphs generation for dynamic languages.
 
 ### Code Coverage Tools
 
-- [Istanbul Coverage](https://github.com/gotwarlost/istanbul)
-- [Karma Coverage](https://github.com/karma-runner/karma-coverage)
-- [TypeScript Unused Exports Detection](https://github.com/pzavolinsky/ts-unused-exports)
+- [Istanbul](https://github.com/istanbuljs/istanbuljs):
+  Test instrumentation.
+- [Karma](https://github.com/karma-runner/karma-coverage).
+- [TypeScript](https://github.com/pzavolinsky/ts-unused-exports):
+  TypeScript unused exports detection.
 
 ### Code Quality Tools
 
-- [Front End CheckList](https://github.com/thedaviddias/Front-End-Checklist)
-- [HTML Head Checklist](https://github.com/joshbuchea/HEAD)
-- [CSS Stats Tools](https://github.com/cssstats/cssstats)
-- [CSS Stats CLI](https://github.com/projectwallace/wallace-cli)
-- [ESLint Node Security](https://github.com/nodesecurity/eslint-plugin-security)
-- [TextLint](https://github.com/textlint/textlint)
-- [JSCPD: Copy Paste Detector](https://github.com/kucherenko/jscpd)
-- [Size Limit: Calculate Real Cost to Keep Good Performance](https://github.com/ai/size-limit)
-- [Java CheckStyle](https://github.com/checkstyle/checkstyle)
-- [Knip: Find Unused Files, Dependencies and Exports in JavaScript and TypeScript](https://github.com/webpro/knip)
+- [CSSStats](https://github.com/cssstats/cssstats):
+  Visualize various stats about CSS.
+- [Wallace](https://github.com/projectwallace/wallace-cli):
+  Pretty CSS analytics on the CLI.
+- [TextLint](https://github.com/textlint/textlint):
+  Natural language linter for text and Markdown.
+- [JSCPD](https://github.com/kucherenko/jscpd):
+  Copy paste detector.
+- [SizeLimit](https://github.com/ai/size-limit):
+  Calculate real cost to keep good performance.
+- [Knip](https://github.com/webpro/knip):
+  Find unused files, dependencies and exports in JavaScript and TypeScript.
 
 ### Inspect Tools
 
-- [NDB](https://github.com/GoogleChromeLabs/ndb)
-- [Reactotron](https://github.com/infinitered/reactotron)
-- [React Tracking](https://github.com/nytimes/react-tracking)
-- [React Render Tracker](https://github.com/lahmatiy/react-render-tracker)
-- [ReactTracked: State Usage Tracking with Proxies](https://github.com/dai-shi/react-tracked)
-- [React Component Hierarchy](https://github.com/team-gryff/react-monocle)
-- [Retoggle: Component Inspector](https://github.com/Raathigesh/retoggle)
-- [OpenReplay: Session Replay Tool](https://github.com/openreplay/openreplay)
+- [NDB](https://github.com/GoogleChromeLabs/ndb).
+- [Reactotron](https://github.com/infinitered/reactotron).
+- [React Tracking](https://github.com/nytimes/react-tracking).
+- [React Render Tracker](https://github.com/lahmatiy/react-render-tracker).
+- [ReactTracked](https://github.com/dai-shi/react-tracked):
+  State usage tracking with proxies.
+- [React Component Hierarchy](https://github.com/team-gryff/react-monocle).
+- [Retoggle](https://github.com/Raathigesh/retoggle):
+  Component inspector.
+- [OpenReplay](https://github.com/openreplay/openreplay):
+  Session replay tool.
 
 ### Analytics and Monitoring Tools
 
-- [Plausible: Open Source, Lightweight and Privacy-friendly Alternative to Google Analytics](https://github.com/plausible/analytics)
-- [NetData: Open Source Observability Platform](https://github.com/netdata/netdata)
-- [OneUptime: Complete Open Source Observability Platform](https://github.com/OneUptime/oneuptime)
-- [Grafana: Open and Composable Observability and Data Visualization Platform](https://github.com/grafana/grafana)
-- [Sentry: Developer-first Error Tracking and Performance Monitoring](https://github.com/getsentry/sentry)
-- [OpenTelemetry: Traces and Metrics Framework](https://github.com/open-telemetry/opentelemetry-js)
-- [CounterScale: Free Scalable Web Analytics Running on Cloudflare](https://github.com/benvinegar/counterscale)
+- [Plausible](https://github.com/plausible/analytics):
+  Open source, lightweight and privacy-friendly alternative to Google Analytics.
+- [NetData](https://github.com/netdata/netdata):
+  Open source observability platform.
+- [OneUptime](https://github.com/OneUptime/oneuptime):
+  Complete open source observability platform.
+- [Grafana](https://github.com/grafana/grafana):
+  Open and composable observability and data visualization platform.
+- [Sentry](https://github.com/getsentry/sentry):
+  Developer-first error tracking and performance monitoring.
+- [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-js):
+  Traces and metrics framework.
+- [CounterScale](https://github.com/benvinegar/counterscale):
+  Free scalable web analytics running on Cloudflare.
 
 ### Performance Tools
 
-- [LightHouse](https://github.com/GoogleChrome/lighthouse)
-- [WebPageTest](https://github.com/WPO-Foundation/webpagetest-github-action)
-- [WebVitals: Google Essential Metrics for Healthy Site](https://github.com/GoogleChrome/web-vitals)
-- [MemLab: Memory Leaks and Heap Snapshots Analysis Framework](https://github.com/facebookincubator/memlab)
-- [PerfumeJS: Measuring Performance Vitals Metrics](https://github.com/zizzamia/perfume.js)
-- [Node Clinic](https://github.com/clinicjs/node-clinic)
-- [Perf Tools](https://github.com/brendangregg/perf-tools)
-- [0x: Single-command FlameGraph Profiling](https://github.com/davidmarkclements/0x)
-- [HyperFine: CLI Benchmark Tool](https://github.com/sharkdp/hyperfine)
-- [ByteHound: Memory Profiler](https://github.com/koute/bytehound)
-- [React Re-Rendering Alert](https://github.com/welldone-software/why-did-you-render)
-- [React Benchmark Component](https://github.com/paularmstrong/react-component-benchmark)
-- [ReactGeiger: Audio React Performance](https://github.com/kristiandupont/react-geiger)
-- [V8 Compile Cache](https://github.com/zertosh/v8-compile-cache)
-- [Brotli Compression Format](https://github.com/google/brotli)
+- [LightHouse](https://github.com/GoogleChrome/lighthouse).
+- [WebPageTest](https://github.com/WPO-Foundation/webpagetest-github-action).
+- [WebVitals](https://github.com/GoogleChrome/web-vitals):
+  Google essential metrics for healthy site.
+- [MemLab](https://github.com/facebookincubator/memlab):
+  Memory leaks and heap snapshots analysis framework.
+- [PerfumeJS](https://github.com/zizzamia/perfume.js):
+  Measuring performance vitals metrics.
+- [Node Clinic](https://github.com/clinicjs/node-clinic).
+- [Perf Tools](https://github.com/brendangregg/perf-tools).
+- [0x](https://github.com/davidmarkclements/0x):
+  Single-command flame graph profiling.
+- [HyperFine](https://github.com/sharkdp/hyperfine):
+  CLI benchmark tool.
+- [ByteHound](https://github.com/koute/bytehound):
+  Memory profiler.
+- [React Re-Rendering Alert](https://github.com/welldone-software/why-did-you-render).
+- [React Benchmark Component](https://github.com/paularmstrong/react-component-benchmark).
+- [ReactGeiger](https://github.com/kristiandupont/react-geiger):
+  Audio React performance.
+- [V8 Compile Cache](https://github.com/zertosh/v8-compile-cache).
+- [Brotli Compression Format](https://github.com/google/brotli).
 
 ### Log Tools
 
-- [Winston Logger](https://github.com/winstonjs/winston)
-- [Pino: Super Fast, All Natural JSON Logger](https://github.com/pinojs/pino)
-- [Log4.js](https://github.com/nomiddlename/log4js-node)
-- [GoAccess: Real-time Web Log Analyzer and Interactive Viewer](https://github.com/allinurl/goaccess)
-- [Morgan: Express HTTP Logger](https://github.com/expressjs/morgan)
-- [Stacktrace.js: Generate, Parse and Enhance JavaScript Stack Traces in Web Browsers](https://github.com/stacktracejs/stacktrace.js)
+- [Winston Logger](https://github.com/winstonjs/winston).
+- [Pino](https://github.com/pinojs/pino):
+  Super fast, all natural JSON logger.
+- [Log4.js](https://github.com/nomiddlename/log4js-node).
+- [GoAccess](https://github.com/allinurl/goaccess):
+  Real-time web log analyzer and interactive viewer.
+- [Stacktrace.js](https://github.com/stacktracejs/stacktrace.js):
+  Generate, parse and enhance JavaScript stack traces in web browsers.
 
 ### Mock Tools
 
 #### Mock Servers
 
-- [SuperTest: Super-agent Driven HTTP Servers Integration Testing](https://github.com/visionmedia/supertest)
-- [JSON Server](https://github.com/typicode/json-server)
-- [JSON GraphQL Server](https://github.com/marmelab/json-graphql-server)
-- [Prism: Mocking and Contract Testing with OpenAPI](https://github.com/stoplightio/prism)
+- [SuperTest](https://github.com/visionmedia/supertest):
+  Super-agent driven HTTP servers integration testing.
+- [JSON Server](https://github.com/typicode/json-server).
+- [JSON GraphQL Server](https://github.com/marmelab/json-graphql-server).
+- [Prism](https://github.com/stoplightio/prism):
+  Mocking and contract testing with OpenAPI.
 
 #### Mock Utils
 
-- [Nock: HTTP Server Mocking and Expectations Library](https://github.com/nock/nock)
-- [MSW: Seamless REST/GraphQL API Mocking Service Worker](https://github.com/mswjs/msw)
-- [Faker.js: Generate Massive Amounts of Realistic Fake Data](https://github.com/faker-js/faker)
-- [Axios Mock Adapter](https://github.com/ctimmerm/axios-mock-adapter)
-- [Mockery Function](https://github.com/mfncooper/mockery)
-- [MemFS: In-memory Node File System](https://github.com/streamich/memfs)
-- [MockRTC: Powerful Friendly WebRTC Mock Proxy](https://github.com/httptoolkit/mockrtc)
+- [Nock](https://github.com/nock/nock):
+  HTTP server mocking and expectations library.
+- [MSW](https://github.com/mswjs/msw):
+  Seamless REST/GraphQL API mocking service worker.
+- [Faker.js](https://github.com/faker-js/faker):
+  Generate massive amounts of realistic fake data.
+- [Axios Mock Adapter](https://github.com/ctimmerm/axios-mock-adapter).
+- [Mockery Function](https://github.com/mfncooper/mockery).
+- [MemFS](https://github.com/streamich/memfs):
+  In-memory file system for Node.js.
+- [MockRTC](https://github.com/httptoolkit/mockrtc):
+  Powerful friendly WebRTC mock proxy.
 
 #### Mock APIs
 
-- [YAPI](https://github.com/ymfe/yapi)
-- [Public APIs](https://github.com/public-apis/public-apis)
-- [Pokemon API](https://github.com/PokeAPI/pokeapi)
-- [Images API](http://source.unsplash.com/random)
+- [YAPI](https://github.com/ymfe/yapi).
+- [Public APIs](https://github.com/public-apis/public-apis).
+- [Pokemon API](https://github.com/PokeAPI/pokeapi).
+- [Images API](http://source.unsplash.com/random).
 
 ### Security Tools
 
-- [MetaSploit: Penetration Testing Framework](https://github.com/rapid7/metasploit-framework)
-- [SqlMap](https://github.com/sqlmapproject/sqlmap)
-- [Zaproxy](https://github.com/zaproxy/zaproxy)
-- [Arachni](https://github.com/Arachni/arachni)
-- [Naughty Input Strings](https://github.com/minimaxir/big-list-of-naughty-strings)
-- [FatRat](https://github.com/Screetsec/TheFatRat)
-- [Spoof](https://github.com/feross/spoof)
-- [Snyk: NPM Package Security](https://github.com/marketplace/snyk)
-- [Socket: NPM Package Security](https://github.com/apps/socket-security)
-- [NCU: NPM Dependencies Updater](https://github.com/raineorshine/npm-check-updates)
-- [AllStar: Set and Enforce Security Policies](https://github.com/ossf/allstar)
+- [MetaSploit](https://github.com/rapid7/metasploit-framework):
+  Penetration testing framework.
+- [SQLMap](https://github.com/sqlmapproject/sqlmap).
+- [Zaproxy](https://github.com/zaproxy/zaproxy).
+- [Arachni](https://github.com/Arachni/arachni).
+- [Naughty Input Strings](https://github.com/minimaxir/big-list-of-naughty-strings).
+- [FatRat](https://github.com/Screetsec/TheFatRat).
+- [Spoof](https://github.com/feross/spoof).
+- [Snyk](https://github.com/marketplace/snyk):
+  NPM package security.
+- [Socket](https://github.com/apps/socket-security):
+  NPM package security.
+- [NCU](https://github.com/raineorshine/npm-check-updates):
+  NPM dependencies updater.
+- [AllStar](https://github.com/ossf/allstar):
+  Set and enforce security policies.
 
 ### UML Tools
 
-- [Mermaid: Generation of Diagram and Flowchart from Text or Markdown](https://github.com/mermaid-js/mermaid)
-- [Draw.io](https://github.com/jgraph/drawio)
-- [FlowChart: Draws Simple SVG Flow Chart Diagrams from Textual Representation of Diagram](https://github.com/adrai/flowchart.js)
-- [PlantUML: Generate UML Diagram from Textual Description](https://github.com/plantuml/plantuml)
+- [Mermaid](https://github.com/mermaid-js/mermaid):
+  Generation of diagram and flowchart from text or Markdown.
+- [Draw.io](https://github.com/jgraph/drawio).
+- [FlowChart](https://github.com/adrai/flowchart.js):
+  Draws simple SVG flow chart diagrams from textual representation of diagram.
+- [PlantUML](https://github.com/plantuml/plantuml):
+  Generate UML diagram from textual description.
 
 ## DevOps Tools
 
 ### DevOps Platform
 
-- [Lens: Kubernetes Platform](https://github.com/lensapp/lens)
-- [KubeSphere](https://github.com/kubesphere/kubesphere)
-- [Cat: MeiTuan Application Performance Monitoring System](https://github.com/dianping/cat)
-- [SkyWalking: Apache Application Performance Monitoring System](https://github.com/apache/skywalking)
+- [Lens](https://github.com/lensapp/lens):
+  Kubernetes platform.
+- [KubeSphere](https://github.com/kubesphere/kubesphere).
+- [Cat](https://github.com/dianping/cat):
+  MeiTuan application performance monitoring system.
+- [SkyWalking](https://github.com/apache/skywalking):
+  Apache application performance monitoring system.
 
 ### DevOps Project and MonoRepo Tools
 
-- [NX](https://github.com/nrwl/nx)
-- [TurboRepo: High-performance Build System](https://github.com/vercel/turborepo)
-- [RushStack](https://github.com/microsoft/rushstack)
-- [Projen: New Generation of Project Generators](https://github.com/projen/projen)
-- [Bit](https://github.com/teambit/bit)
-- [Lerna](https://github.com/lerna/lerna)
+- [NX](https://github.com/nrwl/nx).
+- [TurboRepo](https://github.com/vercel/turborepo):
+  High-performance build system.
+- [RushStack](https://github.com/microsoft/rushstack).
+- [Projen](https://github.com/projen/projen):
+  New generation of project generators.
+- [Bit](https://github.com/teambit/bit).
+- [Lerna](https://github.com/lerna/lerna).
 
 ### DevOps Version Tools
 
-- [ChangeSets: Manage Monorepo Versioning and Changelogs](https://github.com/atlassian/changesets)
-- [Commitizen: Conventional Commits CLI Tool](https://github.com/commitizen/cz-cli)
-- [Semantic Release: Fully Automated Version Management and Package Publishing](https://github.com/cycjimmy/semantic-release-action)
-- [Google Release Bot](https://github.com/googleapis/release-please)
-- [BeachBall: Sunniest Semantic Version Bumper](https://github.com/microsoft/beachball)
-- [Release It: Automate Versioning and Package Publishing](https://github.com/release-it/release-it)
-- [Standard Version: Automate Versioning and Changelog Generation](https://github.com/conventional-changelog/standard-version)
-- [Commit Lint](https://github.com/conventional-changelog/commitlint)
+- [ChangeSets](https://github.com/atlassian/changesets):
+  Manage monorepo versioning and changelogs.
+- [Commitizen](https://github.com/commitizen/cz-cli):
+  Conventional commits CLI tool.
+- [SemanticRelease](https://github.com/cycjimmy/semantic-release-action):
+  Fully automated version management and package publishing.
+- [ReleasePlease](https://github.com/googleapis/release-please).
+- [BeachBall](https://github.com/microsoft/beachball):
+  Sunniest semantic version bumper.
+- [ReleaseIt](https://github.com/release-it/release-it):
+  Automate versioning and package publishing.
+- [StandardVersion](https://github.com/conventional-changelog/standard-version):
+  Automate versioning and changelog generation.
+- [CommitLint](https://github.com/conventional-changelog/commitlint).
 
 ### DevOps Automation CI and CD Tools
 
-- [Probot: Framework for Building GitHub Apps to Automate Workflow](https://github.com/probot/probot)
-- [Actions Toolkit: Building GitHub Actions](https://github.com/JasonEtco/actions-toolkit)
-- [Chokidar: Minimal Cross-platform File Watching Library](https://github.com/paulmillr/chokidar)
-- [ACT: Local GitHub Action Runner](https://github.com/nektos/act)
-- [TerraForm](https://github.com/hashicorp/terraform)
+- [Probot](https://github.com/probot/probot):
+  Framework for building GitHub apps to automate workflow.
+- [ActionsToolkit](https://github.com/JasonEtco/actions-toolkit):
+  Building GitHub actions.
+- [Chokidar](https://github.com/paulmillr/chokidar):
+  Minimal cross-platform file watching library.
+- [ACT](https://github.com/nektos/act):
+  Local GitHub action runner.
+- [TerraForm](https://github.com/hashicorp/terraform).
 
 ### GitHub Actions
 
-- [Action Toolkit](https://github.com/actions-cool)
+- [Action Toolkit](https://github.com/actions-cool).
 
 #### Basic Actions
 
-- [Cancel Workflow](https://github.com/styfle/cancel-workflow-action)
-- [Checkout](https://github.com/actions/checkout)
-- [Node](https://github.com/actions/setup-node)
-- [NPM Installation](https://github.com/bahmutov/npm-install)
-- [Add and Commit](https://github.com/EndBug/add-and-commit)
-- [Workflow Scripts](https://github.com/actions/github-script)
+- [Cancel](https://github.com/styfle/cancel-workflow-action).
+- [Checkout](https://github.com/actions/checkout).
+- [Node](https://github.com/actions/setup-node).
+- [NPM](https://github.com/bahmutov/npm-install).
+- [Commit](https://github.com/EndBug/add-and-commit).
+- [GitHubScript](https://github.com/actions/github-script):
+  Write workflows scripting the GitHub API in JavaScript.
 
 #### Project Actions
 
-- [Lock Threads](https://github.com/dessant/lock-threads)
-- [Stale Bot](https://github.com/actions/stale)
-- [Issues Helper](https://github.com/actions-cool/issues-helper)
-- [Pull Request Creator](https://github.com/peter-evans/create-pull-request)
-- [Semantic Pull Request](https://github.com/amannn/action-semantic-pull-request)
-- [Approve Review](https://github.com/hmarr/auto-approve-action)
-- [Approve Workflow](https://github.com/mheap/automatic-approve-action)
+- [Locker](https://github.com/dessant/lock-threads).
+- [Stale](https://github.com/actions/stale).
+- [Issues](https://github.com/actions-cool/issues-helper).
+- [PullRequest](https://github.com/peter-evans/create-pull-request):
+  Create a pull request for changes to repository in the actions workspace.
+- [Semantic](https://github.com/amannn/action-semantic-pull-request):
+  Ensures that PR title matches the Conventional Commits specification.
+- [Approve](https://github.com/hmarr/auto-approve-action).
 
 #### Testing Actions
 
-- [Cypress E2E Testing](https://github.com/cypress-io/github-action)
-- [LightHouse Report](https://github.com/treosh/lighthouse-ci-action)
+- [Cypress](https://github.com/cypress-io/github-action).
+- [LightHouse](https://github.com/treosh/lighthouse-ci-action).
 
 #### Analysis Actions
 
-- [ReviewDog ESLint](https://github.com/reviewdog/action-eslint)
-- [ReviewDog StyleLint](https://github.com/reviewdog/action-stylelint)
-- [ReviewDog MarkdownLint](https://github.com/reviewdog/action-markdownlint)
-- [CodeQL Analysis](https://github.com/github/codeql-action)
-- [SonarSource Cloud Analysis](https://github.com/SonarSource/sonarcloud-github-action)
-- [Compressed Bundle Size](https://github.com/preactjs/compressed-size-action)
-- [Limit Bundle Size](https://github.com/andresz1/size-limit-action)
-- [License Compliance](https://github.com/fossas/fossa-action)
-- [Review Dependency](https://github.com/actions/dependency-review-action)
+- [ESLint](https://github.com/reviewdog/action-eslint).
+- [StyleLint](https://github.com/reviewdog/action-stylelint).
+- [MarkdownLint](https://github.com/reviewdog/action-markdownlint).
+- [CodeQL](https://github.com/github/codeql-action).
+- [SonarSource](https://github.com/SonarSource/sonarcloud-github-action).
+- [BundleSize](https://github.com/andresz1/size-limit-action).
+- [License](https://github.com/fossas/fossa-action).
+- [Dependency](https://github.com/actions/dependency-review-action).
 
 #### Building Actions
 
-- [LaTeX](https://github.com/xu-cheng/latex-action)
+- [LaTeX](https://github.com/xu-cheng/latex-action).
 
 #### Deployment Actions
 
-- [GitHub Release](https://github.com/softprops/action-gh-release)
-- [GitHub Pages](https://github.com/peaceiris/actions-gh-pages)
-- [NPM Publish](https://github.com/JS-DevTools/npm-publish)
-- [Vercel Deployment](https://github.com/amondnet/vercel-action)
+- [Release](https://github.com/softprops/action-gh-release).
+- [Pages](https://github.com/peaceiris/actions-gh-pages).
+- [NPM](https://github.com/JS-DevTools/npm-publish).
+- [Vercel](https://github.com/amondnet/vercel-action).
 
 ### DevOps Config Tools
 
-- [DotEnv](https://github.com/motdotla/dotenv)
-- [CosmiConfig: Find and Load Configuration](https://github.com/davidtheclark/cosmiconfig)
-- [EnvInfo: Generate Report about Development Environment for Debugging and Issue Reporting](https://github.com/tabrindle/envinfo)
-- [Unleash: Open Source Feature Toggle Service](https://github.com/Unleash/unleash)
+- [DotEnv](https://github.com/motdotla/dotenv).
+- [CosmiConfig](https://github.com/davidtheclark/cosmiconfig):
+  Find and load configuration.
+- [EnvInfo](https://github.com/tabrindle/envinfo):
+  Generate report about development environment for debugging and issue reporting.
+- [Unleash](https://github.com/Unleash/unleash):
+  Open source feature toggle service.
 
 ### DevOps Registry and Mirrors
 
-- [Verdaccio: Lightweight Private Proxy Registry Build in Node](https://github.com/verdaccio/verdaccio)
+- [Verdaccio](https://github.com/verdaccio/verdaccio):
+  Lightweight private proxy registry build in Node.js.
 
 ## Documentation
 
 ### Changelog
 
-- [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog)
+- [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog).
 
 ### Markdown Documentation
 
-- [Docusaurus: Easy to Maintain Documentation Websites with React Stack](https://github.com/facebook/docusaurus)
-- [Nextra: Next.js Documentation Static Site Generator](https://github.com/shuding/nextra)
-- [VuePress: Minimalistic Vue-powered Static Site Generator](https://github.com/vuejs/vuepress)
-- [Wiki.js: Modern and Powerful Wiki App](https://github.com/Requarks/wiki)
+- [Docusaurus](https://github.com/facebook/docusaurus):
+  Easy to maintain documentation websites with React stack.
+- [Nextra](https://github.com/shuding/nextra):
+  Next.js documentation static site generator.
+- [VuePress](https://github.com/vuejs/vuepress):
+  Minimalistic Vue-powered static site generator.
+- [Wiki.js](https://github.com/Requarks/wiki):
+  Modern and powerful wiki app.
 
 ### JavaScript Documentation
 
-- [JSDoc: JavaScript Documentation Generator](https://github.com/jsdoc/jsdoc)
-- [TypeDoc: TypeScript Documentation Generator](https://github.com/TypeStrong/typedoc)
-- [Documentation.js: Modern JavaScript Documentation](https://github.com/documentationjs/documentation)
+- [JSDoc](https://github.com/jsdoc/jsdoc):
+  JavaScript documentation generator.
+- [TypeDoc](https://github.com/TypeStrong/typedoc):
+  TypeScript documentation generator.
+- [Documentation.js](https://github.com/documentationjs/documentation):
+  Modern JavaScript documentation.
 
 ### React Documentation
 
-- [React Storybook: Live Component Documentation](https://github.com/storybooks/storybook)
-- [Docz: React Component Documentation Tool Built on Gatsby](https://github.com/pedronauck/docz)
-- [StyleGuidist: Isolated React Component Development Environment with Living Style Guide](https://github.com/styleguidist/react-styleguidist)
-- [DUmi: Documentation Generator of React Component](https://github.com/umijs/dumi)
-- [Ladle: Faster Storybook](https://github.com/tajo/ladle)
-- [ReactDocGen: Extract React Component Information for Documentation Generation Purposes](https://github.com/reactjs/react-docgen)
+- [Storybook](https://github.com/storybooks/storybook):
+  Live component documentation.
+- [Docz](https://github.com/pedronauck/docz):
+  React component documentation tool built on Gatsby.
+- [StyleGuidist](https://github.com/styleguidist/react-styleguidist):
+  Isolated React component development environment with living style guide.
+- [DUmi](https://github.com/umijs/dumi):
+  Documentation generator of React component.
+- [Ladle](https://github.com/tajo/ladle):
+  Faster Storybook.
+- [ReactDocGen](https://github.com/reactjs/react-docgen):
+  Extract React component information for documentation generation purposes.
