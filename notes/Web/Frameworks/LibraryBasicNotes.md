@@ -1454,6 +1454,7 @@ tags: [Web, Framework, Library]
 - [Appium](https://github.com/appium/appium)
 - [Cheerio: jQuery Server Tools](https://github.com/cheeriojs/cheerio)
 - [Crawlee: Web Scraping and Browser Automation Library](https://github.com/apify/crawlee)
+- [X-Crawl: Flexible Node.js AI-assisted Crawler Library](https://github.com/coder-hxl/x-crawl)
 - [CRI: Chrome Remote Interface for Chrome DevTools Protocol](https://github.com/cyrus-and/chrome-remote-interface)
 
 ### Code Analysis Tools
