@@ -1020,10 +1020,10 @@ tags: [Web, Framework, Library]
 
 ### Web Storage
 
-- [LocalForage: IndexedDB, WebSQL and LocalStorage API Wrapper](https://github.com/localForage/localForage)
-- [RxDB: Fast, Offline-first, Reactive Database](https://github.com/pubkey/rxdb)
+- [Storage: Web Storage API Wrapper](https://github.com/KID-joker/stokado)
 - [PouchDB: Pocket-sized and Offline-first Database for Browser](https://github.com/pouchdb/pouchdb)
 - [ImmortalDB: Relentless Key-value Store for Browser](https://github.com/gruns/ImmortalDB)
+- [RxDB: Fast, Offline-first, Reactive Database](https://github.com/pubkey/rxdb)
 - [TinyBase: Reactive Data Store for Local‑first Apps](https://github.com/tinyplex/tinybase)
 - [Origin Private File System Tool](https://github.com/hughfenghen/opfs-tools)
 
