@@ -294,7 +294,7 @@ tags: [Web, Framework, Library]
 - [Chakra](https://github.com/chakra-ui/chakra-ui)
 - [Mantine](https://github.com/mantinedev/mantine)
 - [BluePrint](https://github.com/palantir/blueprint)
-- [Tamagui: Style and UI for React Meet an Optimizing Compiler](https://github.com/tamagui/tamagui)
+- [Tamagui: Style and UI for React Meet Optimizing Compiler](https://github.com/tamagui/tamagui)
 - [Next: Beautiful, Fast and Modern React UI Library](https://github.com/nextui-org/nextui)
 - [Primer: GitHub Primer Design System](https://github.com/primer/react)
 - [Luna: Operating System Components](https://github.com/liriliri/luna)
@@ -901,6 +901,7 @@ tags: [Web, Framework, Library]
 - [PixiJS: Create Beautiful Digital Content with Fast and Flexible 2D WebGL Renderer](https://github.com/pixijs/pixijs)
 - [HTML2Canvas](https://github.com/niklasvh/html2canvas)
 - [Rough.js](https://github.com/pshihn/rough)
+- [NewCar: Modern Animation Engine Based on CanvasKit-WASM](https://github.com/dromara/newcar)
 
 ### 3D Engine
 
