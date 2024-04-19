@@ -154,8 +154,14 @@ git mv old_path new_path
 Remove untracked files from the working tree:
 
 ```bash
-# Recursive force clean
-git clean -df
+# Remove untracked files:
+git clean -f
+
+# Remove untracked files and folders:
+git clean -fd
+
+# Dry run:
+git clean -n
 ```
 
 ## Commit
