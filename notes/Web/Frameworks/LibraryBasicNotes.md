@@ -2001,6 +2001,8 @@ tags: [Web, Framework, Library]
 
 ### Code Quality Tools
 
+- [Checklist](https://github.com/thedaviddias/Front-End-Checklist):
+  Perfect frontend checklist for modern websites and meticulous developers.
 - [CSSStats](https://github.com/cssstats/cssstats):
   Visualize various stats about CSS.
 - [Wallace](https://github.com/projectwallace/wallace-cli):

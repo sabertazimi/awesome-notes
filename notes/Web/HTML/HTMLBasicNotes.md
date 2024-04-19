@@ -190,7 +190,7 @@ but also can every `<article>` and `<section>` element.
 
 ## Head
 
-`Meta` data list in
+`meta` data list in
 [HEAD](https://github.com/joshbuchea/HEAD).
 
 ### Favicon
