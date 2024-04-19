@@ -1302,8 +1302,8 @@ Embed [best practice](https://web.dev/embed-best-practices):
 [Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API):
 
 ```html
-<button popovertarget="mypopover">Toggle the popover</button>
-<div id="mypopover" popover>Popover content</div>
+<button popovertarget="my-popover">Toggle the popover</button>
+<div id="my-popover" popover>Popover content</div>
 ```
 
 ### Time
