@@ -1365,6 +1365,15 @@ tags: [Web, Framework, Library]
 
 ## AI
 
+### Vectors and Embeddings
+
+- [OpenCLIP](https://github.com/mlfoundations/open_clip):
+  Encodes images and text into numerical vectors.
+- [Chroma](https://github.com/chroma-core/chroma):
+  AI-native embedding database.
+- [FaISS](https://github.com/facebookresearch/faiss):
+  Similarity searching and dense vectors clustering library.
+
 ### CV
 
 - [Tesseract: Image Recognition Tesseract OCR Engine](https://github.com/naptha/tesseract.js)
