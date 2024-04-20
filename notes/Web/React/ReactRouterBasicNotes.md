@@ -204,7 +204,7 @@ class Login {
 
     return (
       <div>
-        <button onClick={this.login}>Login</button>
+        <button type="button" onClick={this.login}>Login</button>
       </div>
     )
   }
@@ -224,16 +224,14 @@ export default function App() {
   const history = useHistory()
   return (
     <ConnectedRouter history={history} basename="/react-boilerplate">
-      <Fragment>
-        <Switch>
-          <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
-          <Route path={`${process.env.PUBLIC_URL}/about`} component={About} />
-          <Route
-            path={`${process.env.PUBLIC_URL}/404`}
-            render={() => <Redirect to={`${process.env.PUBLIC_URL}/`} />}
-          />
-        </Switch>
-      </Fragment>
+      <Switch>
+        <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
+        <Route path={`${process.env.PUBLIC_URL}/about`} component={About} />
+        <Route
+          path={`${process.env.PUBLIC_URL}/404`}
+          render={() => <Redirect to={`${process.env.PUBLIC_URL}/`} />}
+        />
+      </Switch>
     </ConnectedRouter>
   )
 }

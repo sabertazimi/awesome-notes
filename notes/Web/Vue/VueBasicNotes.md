@@ -2492,16 +2492,14 @@ app.use(store, key)
 app.mount('#app')
 ```
 
-```ts
-// in a vue component
-import { useAppStore } from './store'
+```html
+<script setup lang="ts">
+  // in a vue component
+  import { useAppStore } from './store'
 
-export default {
-  setup() {
-    const store = useAppStore()
-    const count = store.state.count // typed as number
-  },
-}
+  const store = useAppStore()
+  const count = store.state.count // typed as number
+</script>
 ```
 
 ## Vite

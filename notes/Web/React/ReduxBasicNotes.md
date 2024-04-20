@@ -1338,7 +1338,7 @@ export function PostsList() {
   return (
     <section className="posts-list">
       <h2>Posts</h2>
-      <button onClick={refetch}>Refetch Posts</button>
+      <button type="button" onClick={refetch}>Refetch Posts</button>
       {content}
     </section>
   )

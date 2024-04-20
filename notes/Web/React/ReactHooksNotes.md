@@ -731,11 +731,12 @@ export default function Example() {
     <div>
       <p>
         You clicked
+        {' '}
         {count}
         {' '}
         times
       </p>
-      <button onClick={() => setCount(count + 1)}>Click me</button>
+      <button type="button" onClick={() => setCount(count + 1)}>Click me</button>
     </div>
   )
 }
@@ -1102,7 +1103,7 @@ export default function Button({
   )
 
   return (
-    <button className={`Button-${color} Button-text-${textColor}`}>
+    <button type="button" className={`Button-${color} Button-text-${textColor}`}>
       {children}
     </button>
   )
@@ -1239,14 +1240,14 @@ export default function Example() {
   when the values are to be updated multiple times within a second.
 
 ```tsx
-export default function UserAvatar(props: { src: string, name: string }) {
-  return <img src={props.src} alt="User Avatar" />
+export default function UserAvatar({ src }: { src: string }) {
+  return <img src={src} alt="User Avatar" />
 }
 ```
 
 ```tsx
-export default function Username(props: { name: string }) {
-  return <span>{props.name}</span>
+export default function Username({ name }: { name: string }) {
+  return <span>{name}</span>
 }
 ```
 
@@ -1326,8 +1327,8 @@ export default function Stopwatch() {
         Time passed:
         {secondsPassed.toFixed(3)}
       </h1>
-      <button onClick={handleStart}>Start</button>
-      <button onClick={handleStop}>Stop</button>
+      <button type="button" onClick={handleStart}>Start</button>
+      <button type="button" onClick={handleStop}>Stop</button>
     </>
   )
 }
@@ -1338,7 +1339,6 @@ import { forwardRef, useImperativeHandle, useRef } from 'react'
 
 interface Props {}
 
-// eslint-disable-next-line react/display-name
 const MyInput = forwardRef((props: Props, ref) => {
   const realInputRef = useRef(null)
   useImperativeHandle(ref, () => ({
@@ -1360,7 +1360,7 @@ export default function Form() {
   return (
     <>
       <MyInput ref={inputRef} />
-      <button onClick={handleClick}>Focus the input</button>
+      <button type="button" onClick={handleClick}>Focus the input</button>
     </>
   )
 }
@@ -1830,6 +1830,7 @@ export default function useCustomCompareEffect<TDeps extends DependencyList>(
   if (!ref.current || !depsEqual(deps, ref.current))
     ref.current = deps
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(effect, ref.current)
 }
 ```
@@ -1930,11 +1931,12 @@ export default function Counter() {
     <div>
       <p>
         You clicked
+        {' '}
         {count}
         {' '}
         times
       </p>
-      <button onClick={() => setCount(count + 1)}>Click me</button>
+      <button type="button" onClick={() => setCount(count + 1)}>Click me</button>
     </div>
   )
 }
@@ -1963,11 +1965,12 @@ class Counter {
       <div>
         <p>
           You clicked
+          {' '}
           {count}
           {' '}
           times
         </p>
-        <button onClick={() => this.setState(count + 1)}>Click me</button>
+        <button type="button" onClick={() => this.setState(count + 1)}>Click me</button>
       </div>
     )
   }
@@ -2555,7 +2558,7 @@ function Counter() {
   return (
     <div>
       {count}
-      <button onClick={handleClick}>+1</button>
+      <button type="button" onClick={handleClick}>+1</button>
     </div>
   )
 }
@@ -2664,6 +2667,7 @@ and non-reactive parts (which only read their latest values).
 
 ```ts
 function useMount(fn) {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => fn(), [])
 }
 ```
@@ -2672,6 +2676,7 @@ componentWillUnmount:
 
 ```ts
 function useUnmount(fn) {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => fn, [])
 }
 ```
@@ -2707,6 +2712,7 @@ function useUpdateDeps(effectCallback, deps) {
       mounting.current = false
     else
       return effectCallback()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps)
 }
 ```
@@ -2752,6 +2758,7 @@ function useIsMounted() {
       setIsMount(true)
 
     return () => setIsMount(false)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return isMount
@@ -3050,6 +3057,7 @@ function useLockedBody(initialLocked = false): ReturnType {
   useEffect(() => {
     if (locked !== initialLocked)
       setLocked(initialLocked)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialLocked])
 
   return [locked, setLocked]
@@ -3547,6 +3555,7 @@ export default function useStateParams<T>(
     // Updates state when user navigates backwards or forwards in browser history
     if (existingValue && deserialize(existingValue) !== state)
       setState(deserialize(existingValue))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [existingValue])
 
   const onChange = (s: T) => {
@@ -3922,7 +3931,7 @@ export default function App() {
 
   return (
     <div>
-      <button onClick={handleToggle}>Toggle</button>
+      <button type="button" onClick={handleToggle}>Toggle</button>
       {isOpen && <div>Content</div>}
     </div>
   )
@@ -3973,11 +3982,11 @@ interface Props {
     name: string
   }
 }
-export default function FriendListItem(props: Props) {
-  const isOnline = useFriendStatus(props.friend.id)
+export default function FriendListItem({ friend }: Props) {
+  const isOnline = useFriendStatus(friend.id)
 
   return (
-    <li style={{ color: isOnline ? 'green' : 'black' }}>{props.friend.name}</li>
+    <li style={{ color: isOnline ? 'green' : 'black' }}>{friend.name}</li>
   )
 }
 ```
@@ -4029,7 +4038,7 @@ function App() {
   )
 
   return (
-    <Fragment>
+    <>
       <form
         onSubmit={event =>
           doGet(event, `http://hn.algolia.com/api/v1/search?query=${query}`)}
@@ -4057,7 +4066,7 @@ function App() {
             ))}
           </ul>
           )}
-    </Fragment>
+    </>
   )
 }
 
@@ -4148,6 +4157,7 @@ function useFetch<T = unknown>(
     return () => {
       cancelRequest.current = true
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url])
 
   return state
