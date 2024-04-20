@@ -1044,7 +1044,6 @@ fooReadonly.bar = 456 // Error: bar 属性只读
 class Something extends React.Component<{ foo: number }, { baz: number }> {
   someMethod() {
     this.props.foo = 123 // Error: props 是不可变的
-
     this.state.baz = 456 // Error: 你应该使用 this.setState()
   }
 }

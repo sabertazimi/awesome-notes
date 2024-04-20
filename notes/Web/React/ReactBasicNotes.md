@@ -514,11 +514,17 @@ export default function App() {
 ```
 
 ```tsx
-function RadioGroup(props: { name: string, children: ReactElement }) {
+function RadioGroup({
+  name,
+  children,
+}: {
+  name: string
+  children: ReactElement
+}) {
   const RenderChildren = () =>
-    React.Children.map(props.children, (child) => {
+    React.Children.map(children, (child) => {
       return React.cloneElement(child, {
-        name: props.name,
+        name,
       })
     })
 
@@ -529,15 +535,19 @@ function RadioGroup(props: { name: string, children: ReactElement }) {
   )
 }
 
-function RadioButton(props: {
+function RadioButton({
+  value,
+  name,
+  children,
+}: {
   value: string
   name: string
   children: ReactElement
 }) {
   return (
     <label>
-      <input type="radio" value={props.value} name={props.name} />
-      {props.children}
+      <input type="radio" value={value} name={name} />
+      {children}
     </label>
   )
 }
@@ -712,12 +722,10 @@ class CssThemeProvider extends React.PureComponent<Props> {
 ```tsx
 class Foo extends Component {
   render() {
-    // eslint-disable-next-line react/no-string-refs
     return <input onClick={() => this.action()} ref="input" />
   }
 
   action() {
-    // eslint-disable-next-line react/no-string-refs
     console.log(this.refs.input.value)
   }
 }
@@ -748,10 +756,10 @@ Ref forwarding 是一个特性,
 
 ```tsx
 // functional component
-function Button(props: { children: ReactElement }, ref) {
+function Button({ children }: { children: ReactElement }, ref) {
   return (
-    <button ref={ref} className="CustomButton">
-      {props.children}
+    <button type="button" ref={ref} className="CustomButton">
+      {children}
     </button>
   )
 }
@@ -770,13 +778,12 @@ export default function App() {
 type Ref = HTMLButtonElement
 interface Props {
   children: React.ReactNode
-  type: 'submit' | 'button'
 }
 
-function Button(props: Props, ref: Ref) {
+function Button({ children }: Props, ref: Ref) {
   return (
-    <button ref={ref} className="MyClassName" type={props.type}>
-      {props.children}
+    <button type="button" ref={ref} className="MyClassName">
+      {children}
     </button>
   )
 }
@@ -1405,15 +1412,15 @@ class Toggleable extends React.Component<Props> {
   }
 }
 
-export default function ToggleableMenu(props: Props) {
+export default function ToggleableMenu({ title, children }: Props) {
   return (
     <Toggleable>
       {(show, onClick) => (
         <div>
           <div onClick={onClick}>
-            <h1>{props.title}</h1>
+            <h1>{title}</h1>
           </div>
-          {show && props.children}
+          {show && children}
         </div>
       )}
     </Toggleable>
@@ -1860,11 +1867,15 @@ export default function App() {
           <div>
             I&apos;m a modal!
             {' '}
-            <button onClick={() => setShowModal(false)}>close</button>
+            <button type="button" onClick={() => setShowModal(false)}>
+              close
+            </button>
           </div>
         </Modal>
       )}
-      <button onClick={() => setShowModal(true)}>show Modal</button>
+      <button type="button" onClick={() => setShowModal(true)}>
+        show Modal
+      </button>
     </div>
   )
 }
@@ -1990,10 +2001,16 @@ export default function Counter() {
       Count:
       {' '}
       {state.count}
-      <button onClick={() => dispatch({ type: 'decrement', payload: '5' })}>
+      <button
+        type="button"
+        onClick={() => dispatch({ type: 'decrement', payload: '5' })}
+      >
         -
       </button>
-      <button onClick={() => dispatch({ type: 'increment', payload: 5 })}>
+      <button
+        type="button"
+        onClick={() => dispatch({ type: 'increment', payload: 5 })}
+      >
         +
       </button>
     </>
@@ -2039,7 +2056,7 @@ export default function Foo() {
 
   // The ref is not passed to any element's "ref" prop
   return (
-    <button onClick={() => clearInterval(intervalRef.current)}>
+    <button type="button" onClick={() => clearInterval(intervalRef.current)}>
       Cancel timer
     </button>
   )
@@ -2063,8 +2080,6 @@ export function useLoading() {
   return [isLoading, load] as const
 }
 ```
-
-More hooks
 
 ```ts
 import type { Dispatch, SetStateAction } from 'react'
@@ -2212,6 +2227,7 @@ function useFetch<T = unknown>(
     return () => {
       cancelRequest.current = true
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url])
 
   return state
@@ -2304,7 +2320,7 @@ class Component extends React.Component {
   }
 
   render() {
-    return <div>Component</div>
+    return <div>{this.state.foo}</div>
   }
 }
 ```
@@ -2504,11 +2520,11 @@ class ErrorBoundary extends React.Component<{ children: ReactElement }> {
 class Items extends React.Component {
   render() {
     return (
-      <React.Fragment>
+      <>
         <Fruit />
         <Beverages />
         <Drinks />
-      </React.Fragment>
+      </>
     )
   }
 }
@@ -2595,7 +2611,11 @@ class Modal extends React.Component<Props> {
               <div className="modal-content">
                 <div className="box">
                   <h2 className="subtitle">{children}</h2>
-                  <button onClick={toggle} className="closeButton button is-info">
+                  <button
+                    type="button"
+                    onClick={toggle}
+                    className="closeButton button is-info"
+                  >
                     Close
                   </button>
                 </div>
@@ -2624,7 +2644,11 @@ class App extends React.Component {
     return (
       <div className="box">
         <h1 className="subtitle">Hello, I am the parent!</h1>
-        <button onClick={this.toggleModal} className="button is-black">
+        <button
+          type="button"
+          onClick={this.toggleModal}
+          className="button is-black"
+        >
           Toggle Modal
         </button>
         <Modal on={showModal} toggle={this.toggleModal}>
@@ -3130,19 +3154,15 @@ but can passing Server Components to Client Components as `Props`:
 
 import { DARK_COLORS, LIGHT_COLORS } from '@/constants'
 
-export default function ColorProvider(
-  { children }: { children: React.ReactNode }
-) {
+export default function ColorProvider({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   const [colorTheme, setColorTheme] = React.useState('light')
-  const colorVariables = colorTheme === 'light'
-    ? LIGHT_COLORS
-    : DARK_COLORS
+  const colorVariables = colorTheme === 'light' ? LIGHT_COLORS : DARK_COLORS
 
-  return (
-    <body style={colorVariables}>
-      {children}
-    </body>
-  )
+  return <body style={colorVariables}>{children}</body>
 }
 ```
 
@@ -3215,15 +3235,12 @@ use `React.PureComponent`/`React.memo` for a performance boost in some cases.
 ```tsx
 import React, { PureComponent } from 'react'
 
-function Unstable(props: { value: string }) {
+function Unstable({ value }: { value: string }) {
   console.log(' Rendered Unstable component ')
 
   return (
     <div>
-      <p>
-        {' '}
-        {props.value}
-      </p>
+      <p>{value}</p>
     </div>
   )
 }
@@ -3256,15 +3273,12 @@ export default App
 ```tsx
 import React, { Component } from 'react'
 
-function Unstable(props: { value: string }) {
+function Unstable({ value }: { value: string }) {
   console.log(' Rendered this component ')
 
   return (
     <div>
-      <p>
-        {' '}
-        {props.value}
-      </p>
+      <p>{value}</p>
     </div>
   )
 }
@@ -3494,7 +3508,15 @@ export default class App extends Component {
 
     return (
       <div className="app">
-        {Form ? <Form /> : <button onClick={this.showForm}>Show form</button>}
+        {Form
+          ? (
+            <Form />
+            )
+          : (
+            <button type="button" onClick={this.showForm}>
+              Show form
+            </button>
+            )}
       </div>
     )
   }
@@ -4023,7 +4045,6 @@ class Component {
 // bad
 // deprecated
 export default function Component() {
-  // eslint-disable-next-line react/no-string-refs
   return <Foo ref="myRef" />
 }
 ```
@@ -4406,21 +4427,17 @@ interface Props {
 
 function styled(Tag) {
   return (rawStyles, ...interpolations) => {
-    return function NewComponent(props: Props) {
+    return function NewComponent({ className }: Props) {
       // Compute the styles from the template string,
       // the interpolation functions, and the provided React props.
-      const styles = reconcileStyles(
-        rawStyles,
-        interpolations,
-        props
-      )
+      const styles = reconcileStyles(rawStyles, interpolations, props)
 
       const uniqueClassName = comeUpWithUniqueName(styles)
       const processedStyles = runStylesThroughUtils(styles)
 
       createAndInjectCSSClass(uniqueClassName, processedStyles)
 
-      const combinedClasses = [uniqueClassName, props.className].join(' ')
+      const combinedClasses = [uniqueClassName, className].join(' ')
 
       return <Tag {...props} className={combinedClasses} />
     }
