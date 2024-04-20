@@ -2222,7 +2222,7 @@ tags: [Web, Framework, Library]
 - [Docusaurus](https://github.com/facebook/docusaurus):
   Easy to maintain documentation websites with React stack.
 - [Nextra](https://github.com/shuding/nextra):
-  Next.js documentation static site generator.
+  Next.js MDX documentation static site generator.
 - [VuePress](https://github.com/vuejs/vuepress):
   Minimalistic Vue-powered static site generator.
 - [Wiki.js](https://github.com/Requarks/wiki):
