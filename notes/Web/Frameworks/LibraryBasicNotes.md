@@ -406,8 +406,10 @@ tags: [Web, Framework, Library]
 
 ### Components UI Framework
 
-- [AntDesign](https://github.com/ant-design/ant-design).
-- [Material](https://github.com/mui-org/material-ui).
+- [Antd](https://github.com/ant-design/ant-design):
+  Ant group design system.
+- [Material](https://github.com/mui-org/material-ui):
+  Material UI for React.
 - [Chakra](https://github.com/chakra-ui/chakra-ui).
 - [Mantine](https://github.com/mantinedev/mantine).
 - [BluePrint](https://github.com/palantir/blueprint).
@@ -424,11 +426,11 @@ tags: [Web, Framework, Library]
 
 ### Admin and Dashboard UI Framework
 
-- [AntDesignPro](https://github.com/ant-design/ant-design-pro):
+- [AntdPro](https://github.com/ant-design/ant-design-pro):
   Out-of-box UI solution for enterprise applications.
 - [Refine](https://github.com/pankod/refine):
   React-based framework for building internal tools.
-- [ReactAdmin](https://github.com/marmelab/react-admin):
+- [Admin](https://github.com/marmelab/react-admin):
   Frontend framework for building B2B applications.
 - [Tremor](https://github.com/tremorlabs/tremor):
   React components to build charts and dashboards.
