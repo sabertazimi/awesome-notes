@@ -4449,6 +4449,11 @@ styled.button = styled('button')
 // ...And so on, for all DOM nodes!
 ```
 
+### Components Styling Reference
+
+- [Tao](https://alexkondov.com/full-stack-tao-styling) of styling:
+  How to Style a React Application.
+
 ## Create React App
 
 - [Custom React Scripts](https://auth0.com/blog/how-to-configure-create-react-app/)
