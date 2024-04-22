@@ -566,7 +566,7 @@ tags: [Web, Framework, Library]
 - [Tether](https://github.com/shipshapecode/tether):
   Positioning engine to make overlays, tooltips and dropdowns better.
 - [Split](https://github.com/nathancahill/split):
-  Un-opinionated utilities for resizeable split views.
+  Un-opinionated utilities for resizable split views.
 - [Teleport](https://github.com/gregberge/react-teleporter):
   Teleport React components in same React tree.
 
@@ -1347,6 +1347,8 @@ tags: [Web, Framework, Library]
   No-code data collaboration app for SQL database.
 - [LowDB](https://github.com/typicode/lowdb):
   Simple JSON database.
+- [CR-SQLite](https://github.com/vlcn-io/cr-sqlite):
+  Convergent and replicated SQLite with multi-writer and CRDT support.
 
 ## Search
 
