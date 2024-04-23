@@ -806,6 +806,8 @@ tags: [Web, Framework, Library]
   Data visualization and analytics component for large streaming datasets.
 - [Tremor](https://github.com/tremorlabs/tremor):
   Build charts and dashboards.
+- [Ripple](https://github.com/andrewcourtice/ripl):
+  Unified API for high performance 2D graphics rendering and interactive data visualization.
 
 ### Charts Draw Utils
 
