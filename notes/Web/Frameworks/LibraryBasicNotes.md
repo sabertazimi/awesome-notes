@@ -1354,7 +1354,7 @@ tags: [Web, Framework, Library]
 
 ## Search
 
-### Search UI Components
+### Search UI
 
 - [InstanceSearch](https://github.com/algolia/react-instantsearch):
   Building performant and instant search experiences with Algolia.
