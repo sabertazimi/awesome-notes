@@ -1201,6 +1201,8 @@ tags: [Web, Framework, Library]
   React interactive video library.
 - [Shaka](https://github.com/shaka-project/shaka-player):
   Adaptive media formats player library.
+- [HLS.js](https://github.com/video-dev/hls.js):
+  Play HLS (HTTP Live Streaming) in browsers with support for MSE (MediaSource Extensions).
 
 ### Camera
 
