@@ -4434,15 +4434,31 @@ dtfEnglish.formatRange(start, end) // => 'May 7 - 9, 2019'
 
 ## Functional JavaScript
 
-- Predictable (pure and immutable).
-- Safe (pure and immutable).
-- Transparent (pure and immutable).
-- Modular (composite).
+- Predictable: pure and immutable.
+- Safe: pure and immutable.
+- Transparent: pure and immutable.
+- Modular: composite with currying and monads.
 
 :::tip Functional JavaScript
 
 Functional programming is the art of composing higher-order functions
-to advance the state of a program in a pure manner.
+to advance the state of a program in a pure manner:
+
+- Pure Functions and Immutability:
+  Pure functions ensure that functions have no side effects
+  and return the same output for the same inputs,
+  which is complemented by immutability that prevents data from being changed unexpectedly.
+  Together, they ensure a predictable and stable code base.
+- Currying and Memoization:
+  Currying allows functions to be broken down into simpler, single-argument functions
+  that are easier to manage and memoize.
+  Memoization can then be applied to these curried functions to cache their results,
+  optimizing the application's performance by avoiding repeated calculations.
+- Monads and Pure Functions:
+  Monads help manage side effects in a controlled manner,
+  which allows pure functions to remain pure
+  even when dealing with operations like I/O or state transitions.
+  This encapsulation of side effects preserves the integrity of the functional architecture.
 
 :::
 
