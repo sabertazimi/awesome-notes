@@ -349,8 +349,6 @@ tags: [Web, Framework, Library]
 
 ### TypeScript Schema Utils
 
-- [Zod](https://github.com/colinhacks/zod):
-  TypeScript-first schema validation with static type inference.
 - [TypeBox](https://github.com/sinclairzx81/typebox):
   JSON schema type builder.
 - [Effect](https://github.com/Effect-TS/effect):
@@ -715,14 +713,16 @@ tags: [Web, Framework, Library]
 - [Textarea](https://github.com/Andarist/react-textarea-autosize):
   Grows with content.
 
-#### Validator
+#### Schema Validator
 
-- [Cleave.js](https://github.com/nosir/cleave.js):
-  Input format checker.
-- [Joi](https://github.com/sideway/joi):
-  Powerful data validation library.
+- [Zod](https://github.com/colinhacks/zod):
+  TypeScript-first schema validation with static type inference.
 - [Yup](https://github.com/jquense/yup):
   Dead simple Object schema validation.
+- [Joi](https://github.com/sideway/joi):
+  Powerful data validation library.
+- [Cleave](https://github.com/nosir/cleave-zen):
+  Input format checker.
 
 ### List
 
