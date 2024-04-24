@@ -32,7 +32,7 @@ tags: [Web, Framework, Library]
 - [Expo](https://github.com/expo/expo):
   Create React Native app.
 - [T3](https://github.com/t3-oss/create-t3-app):
-  Create full-stack and type-safe Next.js app.
+  Create fullstack and type-safe Next.js app.
 - [Vue](https://github.com/vuejs/create-vue):
   Create Vue app.
 - [Modern](https://github.com/modern-js-dev/modern.js):
@@ -68,12 +68,12 @@ tags: [Web, Framework, Library]
 - [Next](https://github.com/vercel/next.js).
 - [Nuxt](https://github.com/nuxt/nuxt.js).
 - [Remix](https://github.com/remix-run/remix):
-  Full-stack web framework.
+  Fullstack web framework.
 - [Gatsby](https://github.com/gatsbyjs/gatsby).
 - [UMI](https://github.com/umijs/umi).
 - [IceWorks](https://github.com/alibaba/ice).
 - [Blitz](https://github.com/blitz-js/blitz):
-  Full-stack React framework.
+  Fullstack React framework.
 - [Hydrogen](https://github.com/Shopify/hydrogen):
   React-based framework for building Shopify-powered custom storefronts.
 
@@ -109,11 +109,13 @@ tags: [Web, Framework, Library]
 - [LoopBack](https://github.com/loopbackio/loopback-next):
   Build modern API applications.
 - [Aleph](https://github.com/alephjs/aleph.js):
-  Full-stack framework in Deno.
+  Fullstack framework in Deno.
 - [Remult](https://github.com/remult/remult):
-  CRUD framework for full-stack TypeScript.
+  CRUD framework for fullstack TypeScript.
 - [HoNo](https://github.com/honojs/hono):
   Web framework built on web standards.
+- [Wasp](https://github.com/wasp-lang/wasp):
+  Fastest way to develop fullstack web apps with React and Node.js.
 
 ### Headless CMS
 
