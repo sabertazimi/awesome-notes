@@ -2583,6 +2583,12 @@ body {
 }
 ```
 
+#### Icon Font Family
+
+- Complete [guide](https://blog.streamlinehq.com/choosing-the-perfect-icons-for-your-typeface)
+  on how to pair icons and typefaces to create consistent visual language
+  (including awesome fonts list).
+
 #### Math Font Family
 
 - `Cambria Math`: Windows 中的数学字体.
