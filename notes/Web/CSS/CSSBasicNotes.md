@@ -2043,6 +2043,21 @@ module.exports = {
 }
 ```
 
+Create fluid typography with [`clamp()`](https://www.sitepoint.com/fluid-typography-css-clamp-function):
+
+- Calculating factor:
+  factor = `(max-value - min-value ) / (max-viewport-width - min-viewport-width)`.
+- Calculating relative value:
+  relative-value = `min-value - min-viewport-width * factor`.
+- Calculating preferred value:
+  fluid-value (`vw`) = `100vw * factor`.
+
+```css
+.fluid-typography {
+  --fluid-value: clamp(min-value, relative-value + fluid-value, max-value);
+}
+```
+
 ## CSS Text
 
 ### Text Alignment
