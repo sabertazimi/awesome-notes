@@ -1711,6 +1711,7 @@ Google [Core Web Vitals](https://web.dev/articles/vitals):
 - LCP optimization [guide](https://web.dev/optimize-lcp).
 - INP optimization [guide](https://web.dev/explore/how-to-optimize-inp).
 - CLS optimization [guide](https://web.dev/optimize-cls).
+- Web latency [guide](https://vercel.com/blog/latency-numbers-every-web-developer-should-know).
 - Web vitals measurement [best practices](https://web.dev/vitals-field-measurement-best-practices).
 - Web vitals field data debugging [guide](https://web.dev/debug-web-vitals-in-the-field).
 - Web vitals real world [case](https://mp.weixin.qq.com/s/zJMM4SF7pc6LZPCsQfWOxw).
@@ -1782,4 +1783,5 @@ Speed tools [list](https://web.dev/speed-tools):
 
 ## Performance Reference
 
-- `web.dev` performance complete [guide](https://web.dev/fast).
+- `web.dev` performance optimization [guide](https://web.dev/explore/fast).
+- `web.dev` performance newbie [course](https://web.dev/learn/performance).
