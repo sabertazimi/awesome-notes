@@ -2146,6 +2146,7 @@ tags: [Web, Framework, Library]
   New generation of project generators.
 - [Bit](https://github.com/teambit/bit).
 - [Lerna](https://github.com/lerna/lerna).
+- [LernaLite](https://github.com/lerna-lite/lerna-lite).
 
 ### DevOps Version Tools
 
@@ -2160,7 +2161,7 @@ tags: [Web, Framework, Library]
   Sunniest semantic version bumper.
 - [ReleaseIt](https://github.com/release-it/release-it):
   Automate versioning and package publishing.
-- [StandardVersion](https://github.com/conventional-changelog/standard-version):
+- [StandardVersion](https://github.com/absolute-version/commit-and-tag-version):
   Automate versioning and changelog generation.
 - [CommitLint](https://github.com/conventional-changelog/commitlint).
 
