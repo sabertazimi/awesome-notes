@@ -2652,15 +2652,6 @@ and non-reactive parts (which only read their latest values).
 
 ## Custom Hooks
 
-- [ReactUse Hooks](https://github.com/streamich/react-use)
-- [LibReact](https://github.com/streamich/libreact)
-- [Alibaba Hooks](https://github.com/alibaba/hooks)
-- [Platform Hooks: Browser APIs turned into Hooks](https://github.com/jaredpalmer/the-platform)
-- [TypeScript Hooks](https://github.com/juliencrn/useHooks.ts)
-- [Optimistic state hook](https://github.com/perceived-dev/optimistic-state)
-- [Use Hooks Gallery](https://github.com/uidotdev/usehooks)
-- [React Hooks Gallery](https://github.com/nikgraf/react-hooks)
-
 ### Custom LifeCycle Hooks
 
 `componentDidMount`:
@@ -4682,6 +4673,115 @@ export function useAtomValue<T>(atom: Atom<T>) {
 
 export function setAtomValue<T>(atom: Atom<T>) {
   return (nextState: T) => atom.setState(nextState)
+}
+```
+
+### Custom Zustand Hook
+
+Zustand [internals](https://gist.github.com/arkatsy/7ff5b6cd95fe94b5e480972a0d116aeb):
+
+```ts
+/**
+ * For more on the useSyncExternalStore hook.
+ * @see https://react.dev/reference/react/useSyncExternalStore
+ */
+import { useSyncExternalStore } from 'react'
+
+// https://github.com/pmndrs/zustand/blob/fe47d3e6c6671dbfb9856fda52cb5a3a855d97a6/src/vanilla.ts#L57-L94
+function createStore(createState) {
+  let state
+  let initialState
+  const listeners = new Set()
+
+  const setState = (partial) => {
+    const nextState = typeof partial === 'function' ? partial(state) : partial
+
+    if (!Object.is(nextState, state)) {
+      const previousState = state
+      state = Object.assign({}, state, nextState)
+      listeners.forEach(listener => listener(state, previousState))
+    }
+  }
+
+  const getState = () => state
+  const getInitialState = () => initialState
+
+  const subscribe = (listener) => {
+    listeners.add(listener)
+    return () => listeners.delete(listener)
+  }
+
+  const api = { setState, getState, getInitialState, subscribe }
+  initialState = state = createState(setState, getState, api)
+
+  return api
+}
+
+// https://github.com/pmndrs/zustand/blob/fe47d3e6c6671dbfb9856fda52cb5a3a855d97a6/src/react.ts#L21
+const identity = state => state
+
+// https://github.com/pmndrs/zustand/blob/fe47d3e6c6671dbfb9856fda52cb5a3a855d97a6/src/react.ts#L29-L40
+function useStore(api, selector = identity) {
+  const slice = useSyncExternalStore(
+    api.subscribe,
+    () => selector(api.getState()),
+    () => selector(api.getInitialState())
+  )
+
+  return slice
+}
+
+// https://github.com/pmndrs/zustand/blob/fe47d3e6c6671dbfb9856fda52cb5a3a855d97a6/src/react.ts#L56-L64
+function create(createState) {
+  const api = createStore(createState)
+  const useBoundStore = selector => useStore(api, selector)
+  Object.assign(useBoundStore, api)
+
+  return useBoundStore
+}
+
+// Usage
+const useCountStore = create(set => ({
+  count: 0,
+  increment: () => set(state => ({ count: state.count + 1 })),
+  decrement: () => set(state => ({ count: state.count - 1 })),
+}))
+```
+
+```tsx
+function App() {
+  return (
+    <div>
+      <Counter1 />
+      <Counter2 />
+    </div>
+  )
+}
+
+function Counter1() {
+  const { count, increment, decrement } = useCountStore()
+
+  return (
+    <div>
+      <h2>Counter1</h2>
+      <div>{count}</div>
+      <button type="button" onClick={decrement}>-</button>
+      <button type="button" onClick={increment}>+</button>
+    </div>
+  )
+}
+
+function Counter2() {
+  const { count, increment, decrement } = useCountStore()
+
+  return (
+    <div>
+      <h2>Counter2</h2>
+      <div>{count}</div>
+      <button type="button" onClick={decrement}>-</button>
+      <button type="button" onClick={increment}>+</button>
+    </div>
+  )
 }
 ```
 
