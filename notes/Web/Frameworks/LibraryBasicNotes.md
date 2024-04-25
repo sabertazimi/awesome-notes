@@ -1764,6 +1764,10 @@ tags: [Web, Framework, Library]
   Fix broken Node.js modules instantly.
 - [ImportLocal](https://github.com/sindresorhus/import-local):
   Use locally installed version.
+- [ENV](https://github.com/flexdinesh/browser-or-node):
+  Check code running environment.
+- [CI](https://github.com/watson/ci-info):
+  Get details about current continuous integration environment.
 
 ### Serverless
 
