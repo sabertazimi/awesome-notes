@@ -268,13 +268,14 @@ tags: [Web, Framework, Library]
 
 - [Validator](https://github.com/validatorjs/validator.js):
   Common RegExp patterns.
-- [Regex101](https://github.com/firasdib/Regex101).
-- [RegexVis](https://github.com/Bowen7/regex-vis):
-  Regular expression visualization.
-- [XRegExp](https://github.com/slevithan/xregexp):
-  Extended JavaScript regular expressions.
 - [RE2](https://github.com/uhop/node-re2):
   Fast, safe alternative to backtracking regular expression engines.
+- [RegExr](https://github.com/gskinner/regexr):
+  Creating, testing and learning about regular expressions.
+- [Regex101](https://github.com/firasdib/Regex101):
+  Build, test and debug regular expressions.
+- [RegexVis](https://github.com/Bowen7/regex-vis):
+  Regex visualizer and editor.
 
 ### Concurrent and Parallel Programming Utils
 
