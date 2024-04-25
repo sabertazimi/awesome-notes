@@ -1352,11 +1352,11 @@ though they may have no effect on some elements:
 - `accesskey`.
 - `autocapitalize`.
 - `autofocus`.
-- `contenteditable`.
+- `contenteditable`: boolean.
 - `dir`.
 - `draggable`.
 - `enterkeyhint`.
-- `hidden`.
+- `hidden`: boolean.
 - `inert`.
 - `inputmode`.
 - `is`.
@@ -1368,7 +1368,7 @@ though they may have no effect on some elements:
 - `lang`.
 - `nonce`.
 - `popover`.
-- `spellcheck`.
+- `spellcheck`: boolean.
 - `style`.
 - `tabindex`.
 - `title`.
@@ -1382,18 +1382,6 @@ for the `class`, `id`, and `slot` attributes for any element in any namespace.
 The `class`, `id`, and `slot` attributes may be specified on all HTML elements.
 
 :::
-
-#### ContentEditable
-
--boolean
-
-#### Hidden
-
-boolean
-
-#### Spellcheck
-
-boolean
 
 #### Tabindex
 
@@ -1513,6 +1501,68 @@ details.open = 'hello'
 console.log(details.getAttribute('open')) // ''
 console.log(details.open) // true
 ```
+
+:::caution `input.defaultValue` and `input.value` property
+
+[`input.defaultValue` property](https://html.spec.whatwg.org/multipage/input.html#dom-input-defaultvalue)
+reflects HTML `value` attribute,
+[`input.value` property](https://html.spec.whatwg.org/multipage/input.html#dom-input-value)
+doesn't reflect any attribute:
+
+```ts
+class HTMLInputElement extends HTMLElement {
+  get defaultValue() {
+    return this.getAttribute('value') ?? ''
+  }
+
+  set defaultValue(newValue) {
+    this.setAttribute('value', String(newValue))
+  }
+
+  #value = undefined
+
+  get value() {
+    return this.#value ?? this.defaultValue
+  }
+
+  set value(newValue) {
+    this.#value = String(newValue)
+  }
+
+  // This happens when the associated form resets
+  formResetCallback() {
+    this.#value = undefined
+  }
+}
+
+// <input type="text" value="default" />
+const input = document.querySelector('input')
+
+console.log(input.getAttribute('value')) // 'default'
+console.log(input.value) // 'default'
+console.log(input.defaultValue) // 'default'
+
+input.defaultValue = 'new default'
+
+console.log(input.getAttribute('value')) // 'new default'
+console.log(input.value) // 'new default'
+console.log(input.defaultValue) // 'new default'
+
+// Here comes the mode switch:
+input.value = 'hello!'
+
+console.log(input.getAttribute('value')) // 'new default'
+console.log(input.value) // 'hello!'
+console.log(input.defaultValue) // 'new default'
+
+input.setAttribute('value', 'another new default')
+
+console.log(input.getAttribute('value')) // 'another new default'
+console.log(input.value) // 'hello!'
+console.log(input.defaultValue) // 'another new default'
+```
+
+:::
 
 ## Accessibility
 
