@@ -1445,6 +1445,35 @@ console.log(div.TeSt) // 'value'
 console.log(div.test) // undefined
 ```
 
+For convenience, most specs will create a property equivalent for every defined attribute.
+Here's the spec for [`<ol>`](https://html.spec.whatwg.org/multipage/grouping-content.html#the-ol-element).
+The `Content attributes` section defines the HTML attributes
+(`reversed`, `start`, `type`),
+and the `DOM interface` defines the DOM properties:
+
+```ts
+interface OListElement extends HTMLElement {
+  reversed: boolean
+  start: long
+  type: DOMString
+};
+```
+
+If attribute (e.g `foo=bar`) isn't a spec-defined attribute,
+then there isn't a spec-defined `foo` property that reflects it:
+
+```ts
+const div = document.querySelector('div[foo=bar]')
+
+console.log(div.getAttribute('foo')) // 'bar'
+console.log(div.foo) // undefined
+
+div.foo = 'hello world'
+
+console.log(div.getAttribute('foo')) // 'bar'
+console.log(div.foo) // 'hello world'
+```
+
 ## Accessibility
 
 ### Semantic HTML
