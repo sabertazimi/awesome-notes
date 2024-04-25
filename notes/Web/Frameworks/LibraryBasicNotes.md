@@ -809,8 +809,8 @@ tags: [Web, Framework, Library]
   Interactive geometry, function plotting, charting and data visualization in browser.
 - [Cytoscape.js](https://github.com/cytoscape/cytoscape.js):
   Graph theory (network) library for visualization and analysis.
-- [Airbnb](https://github.com/airbnb/visx):
-  Visualization components.
+- [VisX](https://github.com/airbnb/visx):
+  Collection of expressive, low-level visualization primitives for React.
 - [NeoVis.js](https://github.com/neo4j-contrib/neovis.js):
   Graph visualization with data from Neo4j.
 - [Perspective](https://github.com/finos/perspective):
