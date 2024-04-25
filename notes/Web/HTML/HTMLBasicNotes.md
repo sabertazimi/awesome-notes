@@ -1344,6 +1344,45 @@ function onChange(event) {
 
 ### Global Attributes
 
+[Global attributes](https://html.spec.whatwg.org/multipage/dom.html#global-attributes)
+are attributes common to all HTML elements,
+they can be used on all elements,
+though they may have no effect on some elements:
+
+- `accesskey`.
+- `autocapitalize`.
+- `autofocus`.
+- `contenteditable`.
+- `dir`.
+- `draggable`.
+- `enterkeyhint`.
+- `hidden`.
+- `inert`.
+- `inputmode`.
+- `is`.
+- `itemid`.
+- `itemprop`.
+- `itemref`.
+- `itemscope`.
+- `itemtype`.
+- `lang`.
+- `nonce`.
+- `popover`.
+- `spellcheck`.
+- `style`.
+- `tabindex`.
+- `title`.
+- `translate`.
+- `on*` [event handler content attributes](https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-content-attributes).
+
+:::tip
+
+DOM defines the user agent requirements
+for the `class`, `id`, and `slot` attributes for any element in any namespace.
+The `class`, `id`, and `slot` attributes may be specified on all HTML elements.
+
+:::
+
 #### ContentEditable
 
 -boolean
