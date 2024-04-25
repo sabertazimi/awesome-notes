@@ -201,6 +201,8 @@ tags: [Web, Framework, Library]
 
 ### Router State Management
 
+- [TanStackRouter](https://github.com/TanStack/router):
+  Fully type-safe router for React built-in caching with 1st class search-param APIs.
 - [Router](https://github.com/molefrog/wouter):
   Minimalist-friendly router for React and Preact.
 - [Navigo](https://github.com/krasimir/navigo):
