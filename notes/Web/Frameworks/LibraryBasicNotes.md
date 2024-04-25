@@ -878,16 +878,12 @@ tags: [Web, Framework, Library]
 
 ### Keyboard
 
-- [HotKey](https://github.com/github/hotkey):
-  Trigger action on element with keyboard shortcut.
+- [CommandK](https://github.com/pacocoursey/cmdk):
+  Fast, unstyled headless command menu React component.
 - [KBar](https://github.com/timc1/kbar):
   Fast, portable and extensible command-K interface.
-- [NinjaKeys](https://github.com/ssleptsov/ninja-keys):
-  Keyboard shortcuts interface.
-- [CommandK](https://github.com/pacocoursey/cmdk):
-  Headless command menu.
-- [ReactCMDKeyboard](https://github.com/albingroen/react-cmdk):
-  Fast, accessible and pretty command palette.
+- [HotKey](https://github.com/github/hotkey):
+  Trigger action on element with keyboard shortcut.
 - [KMenu](https://github.com/harshhhdev/kmenu):
   Animated and accessible command palette menu.
 
