@@ -114,6 +114,10 @@ tags: [Web, Framework, Library]
   CRUD framework for fullstack TypeScript.
 - [HoNo](https://github.com/honojs/hono):
   Web framework built on web standards.
+- [ElySia](https://github.com/elysiajs/elysia):
+  Ergonomic framework for humans supercharged by Bun.
+- [Oak](https://github.com/oakserver/oak):
+  Middleware framework for handling HTTP with Deno, Bun and Cloudflare Workers.
 - [Wasp](https://github.com/wasp-lang/wasp):
   Fastest way to develop fullstack web apps with React and Node.js.
 
