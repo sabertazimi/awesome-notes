@@ -1387,7 +1387,9 @@ The `class`, `id`, and `slot` attributes may be specified on all HTML elements.
 
 **-1**: 编程可获得焦点，tab 键不可获得焦点
 
-### HTML Attributes
+### HTML Attributes and DOM Properties
+
+#### DOM Properties Differences
 
 HTML attributes vs DOM properties [differs in](https://jakearchibald.com/2024/attributes-vs-properties):
 
@@ -1433,35 +1435,6 @@ console.log(div.TeSt) // 'value'
 console.log(div.test) // undefined
 ```
 
-For convenience, most specs will create a property equivalent for every defined attribute.
-Here's the spec for [`<ol>`](https://html.spec.whatwg.org/multipage/grouping-content.html#the-ol-element).
-The `Content attributes` section defines the HTML attributes
-(`reversed`, `start`, `type`),
-and the `DOM interface` defines the DOM properties:
-
-```ts
-interface OListElement extends HTMLElement {
-  reversed: boolean
-  start: long
-  type: DOMString
-};
-```
-
-If attribute (e.g `foo=bar`) isn't a spec-defined attribute,
-then there isn't a spec-defined `foo` property that reflects it:
-
-```ts
-const div = document.querySelector('div[foo=bar]')
-
-console.log(div.getAttribute('foo')) // 'bar'
-console.log(div.foo) // undefined
-
-div.foo = 'hello world'
-
-console.log(div.getAttribute('foo')) // 'bar'
-console.log(div.foo) // 'hello world'
-```
-
 DOM properties come with validation and defaults, whereas HTML attributes don't:
 
 - Omit invalid value: `input.type`.
@@ -1500,6 +1473,37 @@ details.open = 'hello'
 
 console.log(details.getAttribute('open')) // ''
 console.log(details.open) // true
+```
+
+#### DOM Properties Reflection
+
+For convenience, most specs will create a property equivalent for every defined attribute.
+Here's the spec for [`<ol>`](https://html.spec.whatwg.org/multipage/grouping-content.html#the-ol-element).
+The `Content attributes` section defines the HTML attributes
+(`reversed`, `start`, `type`),
+and the `DOM interface` defines the DOM properties:
+
+```ts
+interface OListElement extends HTMLElement {
+  reversed: boolean
+  start: long
+  type: DOMString
+};
+```
+
+If attribute (e.g `foo=bar`) isn't a spec-defined attribute,
+then there isn't a spec-defined `foo` property that reflects it:
+
+```ts
+const div = document.querySelector('div[foo=bar]')
+
+console.log(div.getAttribute('foo')) // 'bar'
+console.log(div.foo) // undefined
+
+div.foo = 'hello world'
+
+console.log(div.getAttribute('foo')) // 'bar'
+console.log(div.foo) // 'hello world'
 ```
 
 :::caution `input.defaultValue` and `input.value` property

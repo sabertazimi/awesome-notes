@@ -701,6 +701,9 @@ alert(element.getAttributeNode('align').value) // "left"
 alert(element.getAttribute('align')) // "left"
 ```
 
+Further reading:
+[DOM properties reflection on HTML attributes](../HTML/HTMLBasicNotes.md#dom-properties-reflection).
+
 #### DOM Text Node
 
 Text node methods:
