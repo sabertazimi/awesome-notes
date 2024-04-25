@@ -454,14 +454,16 @@ tags: [Web, Framework, Library]
 
 ### Ordinary CSS Utils
 
-- [Normalize](https://github.com/sindresorhus/modern-normalize):
+- [Modern](https://github.com/sindresorhus/modern-normalize):
   Modern normalize browser default style.
-- [Reset](https://github.com/hankchizljaw/modern-css-reset):
-  Modern bare-bones CSS reset for modern web development.
-- [Sanitize](https://github.com/csstools/sanitize.css):
-  Best-practices CSS foundation.
-- [Normalize](https://github.com/necolas/normalize.css):
-  Modern alternative to CSS resets.
+- [Normalize](https://github.com/csstools/normalize.css):
+  Cross-browser CSS foundation.
+- [New](https://github.com/elad2412/the-new-css-reset):
+  New simple and lighter CSS reset.
+- [ReSS](https://github.com/filipelinhares/ress):
+  Modern CSS reset.
+- [DeStyle.css](https://github.com/nicolas-cusan/destyle.css):
+  Opinionated reset stylesheet that provides clean slate for styling html.
 - [Preset](https://github.com/csstools/postcss-plugins):
   Use modern CSS by PostCSS.
 - [Viewer](https://github.com/rogden/tailwind-config-viewer):
