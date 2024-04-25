@@ -1093,6 +1093,8 @@ tags: [Web, Framework, Library]
   Science illustrations in biology and chemistry.
 - [PeepsIcons](https://github.com/CeamKrier/react-peeps):
   Open peeps hand drawn illustration.
+- [PhosphorIcons](https://github.com/phosphor-icons/react):
+  Flexible icon family for React.
 
 ### SVG
 
