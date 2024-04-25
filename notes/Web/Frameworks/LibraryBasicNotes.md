@@ -1429,9 +1429,12 @@ tags: [Web, Framework, Library]
   Powers VS Code.
 - [ACE](https://github.com/securingsincity/react-ace):
   Ajax.org Cloud9 editor.
-- [CodeMirror](https://github.com/codemirror/CodeMirror).
+- [CodeMirror](https://github.com/codemirror/dev):
+  In-browser code editor.
+- [Zed](https://github.com/zed-industries/zed):
+  High-performance, multiplayer code editor written in Rust.
 - [Xi](https://github.com/xi-editor/xi-editor):
-  Code editor philosophy.
+  Modern editor with a backend written in Rust.
 - [Simple](https://github.com/react-simple-code-editor/react-simple-code-editor):
   React simple code editor.
 
