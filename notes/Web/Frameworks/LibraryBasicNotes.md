@@ -766,6 +766,8 @@ tags: [Web, Framework, Library]
   Rich Excel and Google sheets features spreadsheet library.
 - [HyperFormula](https://github.com/handsontable/hyperformula):
   Complete Excel-like calculation engine written in TypeScript.
+- [TypedXLSX](https://github.com/ChronicStone/typed-xlsx):
+  Effortlessly export any data into XLSX sheets with type-safety and awesome DX.
 
 ### Grid
 
