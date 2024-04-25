@@ -1474,6 +1474,46 @@ console.log(div.getAttribute('foo')) // 'bar'
 console.log(div.foo) // 'hello world'
 ```
 
+DOM properties come with validation and defaults, whereas HTML attributes don't:
+
+- Omit invalid value: `input.type`.
+- Normalize boolean value: `details.open`.
+- Convert incoming value to number and coerce negative values to 0: `img.height`.
+
+```ts
+// Omit invalid type:
+const input = document.createElement('input')
+
+console.log(input.getAttribute('type')) // null
+console.log(input.type) // 'text'
+
+input.type = 'number'
+
+console.log(input.getAttribute('type')) // 'number'
+console.log(input.type) // 'number'
+
+input.type = 'foo'
+
+console.log(input.getAttribute('type')) // 'foo'
+console.log(input.type) // 'text'
+
+// Normalize non-empty string to true value:
+const details = document.querySelector('details')
+
+console.log(details.getAttribute('open')) // ''
+console.log(details.open) // true
+
+details.open = false
+
+console.log(details.getAttribute('open')) // null
+console.log(details.open) // false
+
+details.open = 'hello'
+
+console.log(details.getAttribute('open')) // ''
+console.log(details.open) // true
+```
+
 ## Accessibility
 
 ### Semantic HTML
