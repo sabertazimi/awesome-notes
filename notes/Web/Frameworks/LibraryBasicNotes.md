@@ -704,7 +704,7 @@ tags: [Web, Framework, Library]
 #### Input
 
 - [IMask.js](https://github.com/uNmAnNeR/imaskjs):
-  Input mask.
+  Vanilla JavaScript input mask.
 - [AutoComplete.js](https://github.com/TarekRaafat/autoComplete.js):
   Simple autocomplete pure vanilla JavaScript library.
 - [PinField](https://github.com/soywod/react-pin-field):
