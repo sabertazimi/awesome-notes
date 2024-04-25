@@ -1487,6 +1487,8 @@ tags: [Web, Framework, Library]
   Low-code developing framework.
 - [ReactType](https://github.com/open-source-labs/ReacType):
   Prototyping tool for exporting React applications.
+- [Puck](https://github.com/measuredco/puck):
+  Visual editor for React.
 
 ## Compiler
 
