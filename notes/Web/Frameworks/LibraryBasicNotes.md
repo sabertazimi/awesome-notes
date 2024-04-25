@@ -1789,6 +1789,8 @@ tags: [Web, Framework, Library]
   Google sheets alternative.
 - [ValTown](https://github.com/val-town):
   Collaborative, flexible environment for creating and running JavaScript.
+- [libSQL](https://github.com/tursodatabase/libsql):
+  Fully managed database platform.
 
 ## AI
 
