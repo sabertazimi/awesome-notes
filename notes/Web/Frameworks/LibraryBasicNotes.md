@@ -1304,6 +1304,8 @@ tags: [Web, Framework, Library]
   Generate a human readable String describing the file size.
 - [SimpleGit](https://github.com/steveukx/git-js):
   Lightweight interface for running git commands.
+- [WebDAV](https://github.com/perry-mitchell/webdav-client):
+  WebDAV client written in TypeScript for Node.js and browser.
 
 ### PDF Utils
 
