@@ -2339,33 +2339,68 @@ not affected by concurrent features.
 
 External stores affected by concurrent features including:
 
-- Global variables:
-  - `document.body`.
+- Global variables: `document.body`.
 - Date.
 - Redux store.
 - Zustand store.
 
 `useSyncExternalStore` allows external stores to support concurrent reads
-by forcing updates to the store to be synchronous.
+by forcing updates to the store to be synchronous:
+
+- Caching data from external APIs:
+  As this hook is mostly used to subscribe external third-party data sources,
+  caching that data gets simpler as well.
+  You can keep your app's data in sync with the external data source
+  and later can also use it for offline support.
+- WebSocket connection:
+  As a WebSocket is a "continuous" connection,
+  you can use this hook to manage the WebSocket connection state data in real-time.
+- Managing browser storage:
+  In such cases where you need to sync data
+  between the web browser's storage and the application's state,
+  you can use `useSyncExternalStore` to subscribe to updates in the external store.
 
 ```ts
-type UseSyncExternalStore = (
+type UseSyncExternalStore = <State>(
   subscribe: (callback: Callback) => Unsubscribe,
-  getSnapshot: () => State
+  getSnapshot: () => State,
+  getServerSnapshot?: () => State,
 ) => State
+
+export function useSyncExternalStore<Snapshot>(
+  subscribe: (onStoreChange: () => void) => () => void,
+  getSnapshot: () => Snapshot,
+  getServerSnapshot?: () => Snapshot,
+): Snapshot
 ```
+
+`subscribe` method should subscribe to store changes,
+and it should return function to unsubscribe from store changes.
+Ensure `onStoreChange` is called whenever store changes,
+will trigger re-render of component.
+
+`getSnapshot` method would return a snapshot of data from store.
+While store has not changed, repeated calls to getSnapshot must return same value.
+If store changes and returned value is different (as compared by Object.is),
+React re-renders component.
+
+`getServerSnapshot` method would return **initial** snapshot of data from server.
+It will be used only during server rendering
+and during hydration of server-rendered content on client.
+The server snapshot must be the same between client and server,
+and is usually serialized and passed from server to client.
 
 ### Sync Browser API
 
 Sync navigator `online` API:
 
 ```ts
-function subscribe(callback) {
-  window.addEventListener('online', callback)
-  window.addEventListener('offline', callback)
+function subscribe(onStoreChange) {
+  window.addEventListener('online', onStoreChange)
+  window.addEventListener('offline', onStoreChange)
   return () => {
-    window.removeEventListener('online', callback)
-    window.removeEventListener('offline', callback)
+    window.removeEventListener('online', onStoreChange)
+    window.removeEventListener('offline', onStoreChange)
   }
 }
 
