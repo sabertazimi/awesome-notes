@@ -1326,7 +1326,7 @@ boolean 代表当前`<time>`表示整个网页的时间
 
 ## Attributes
 
-### dataset
+### Dataset
 
 ```html
 <td data-row="1" data-column="1"></td>
@@ -1344,21 +1344,67 @@ function onChange(event) {
 
 ### Global Attributes
 
-#### contentEditable
+#### ContentEditable
 
 -boolean
 
-#### hidden
+#### Hidden
 
 boolean
 
-#### spellcheck
+#### Spellcheck
 
 boolean
 
-#### tabindex
+#### Tabindex
 
 **-1**: 编程可获得焦点，tab 键不可获得焦点
+
+### HTML Attributes
+
+HTML attributes vs DOM properties [differs in](https://jakearchibald.com/2024/attributes-vs-properties):
+
+- HTML serialization:
+  attributes serialize to HTML, whereas properties don't.
+- Value types:
+  attribute values are always strings, whereas properties can be any type.
+- Case sensitivity:
+  attribute names are case-insensitive, whereas property names are case-sensitive.
+
+```ts
+// 1. HTML serialization:
+const div = document.createElement('div')
+
+div.setAttribute('foo', 'bar')
+div.hello = 'world'
+
+console.log(div.outerHTML) // '<div foo="bar"></div>'
+
+// 2. Value types:
+const div = document.createElement('div')
+const obj = { foo: 'bar' }
+
+div.setAttribute('foo', obj)
+console.log(typeof div.getAttribute('foo')) // 'string'
+console.log(div.getAttribute('foo')) // '[object Object]'
+
+div.hello = obj
+console.log(typeof div.hello) // 'object'
+console.log(div.hello) // { foo: 'bar' }
+
+// 3. Case sensitivity:
+// <div id="test" HeLlO="world"></div>
+const div = document.querySelector('#test')
+
+console.log(div.getAttributeNames()) // ['id', 'hello']
+
+div.setAttribute('FOO', 'bar')
+console.log(div.getAttributeNames()) // ['id', 'hello', 'foo']
+
+div.TeSt = 'value'
+console.log(div.TeSt) // 'value'
+console.log(div.test) // undefined
+```
 
 ## Accessibility
 

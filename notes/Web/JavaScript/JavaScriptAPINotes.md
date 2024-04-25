@@ -1126,7 +1126,7 @@ for (
 
 #### Attributes DOM Node
 
-HTML attributes 设置对应的 DOM properties 初始值.
+HTML attributes 设置对应的 DOM properties 初始值:
 
 ```ts
 alert(div.getAttribute('id')) // "myDiv" default div.id
