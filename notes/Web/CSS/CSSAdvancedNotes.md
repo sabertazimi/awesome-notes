@@ -2312,6 +2312,32 @@ function main() {
 }
 ```
 
+### Scripting Query
+
+[`scripting`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/scripting):
+
+```css
+@media (scripting: enabled) {
+  .my-element {
+    /* enhanced styles if JS is available */
+  }
+}
+
+@media (scripting: none) {
+  .my-element {
+    /* fallback styles when JS is not supported */
+  }
+}
+
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  /* JS available and motion OK */
+}
+
+@media (scripting: none), (prefers-reduced-motion) {
+  /* JS disabled or reduced motion enabled */
+}
+```
+
 ### Media Query Support Detection
 
 Detecting media query support in CSS:
