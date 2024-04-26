@@ -112,6 +112,8 @@ tags: [Web, Framework, Library]
   Fullstack framework in Deno.
 - [Remult](https://github.com/remult/remult):
   CRUD framework for fullstack TypeScript.
+- [Adonis](https://github.com/adonisjs/core):
+  TypeScript-first web framework with support for testing and modern tooling.
 - [HoNo](https://github.com/honojs/hono):
   Web framework built on web standards.
 - [ElySia](https://github.com/elysiajs/elysia):
