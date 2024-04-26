@@ -1810,10 +1810,14 @@ tags: [Web, Framework, Library]
   Backend-as-a-service for fullstack app development.
 - [AirTable](https://github.com/Airtable/airtable.js):
   Google sheets alternative.
-- [ValTown](https://github.com/val-town):
-  Collaborative, flexible environment for creating and running JavaScript.
 - [libSQL](https://github.com/tursodatabase/libsql):
   Fully managed database platform.
+- [PlanetScale](https://github.com/planetscale/database-js):
+  Ultimate MySQL database platform.
+- [Chat2DB](https://github.com/chat2db/Chat2DB):
+  AI-driven data management platform.
+- [ValTown](https://github.com/val-town):
+  Collaborative, flexible environment for creating and running JavaScript.
 
 ## AI
 
