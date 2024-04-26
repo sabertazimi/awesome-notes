@@ -2681,8 +2681,8 @@ Universal module definition:
     root.myPlugin = factory(root)
   }
 })(
-  typeof gloablThis !== 'undefined'
-    ? gloablThis
+  typeof globalThis !== 'undefined'
+    ? globalThis
     : typeof window !== 'undefined'
       ? window
       : this,

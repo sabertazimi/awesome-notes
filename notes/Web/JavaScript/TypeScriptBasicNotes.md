@@ -1995,7 +1995,7 @@ strongly **reconsider** if actually need it.
   just like `switch case` statement.
 - Distributive conditional types
   just like `map` statement (`loop` statement) on `union` type.
-- Conditional types make `TypeScript` become real programing type system:
+- Conditional types make `TypeScript` become real programming type system:
   `TypeScript` type system is [Turing Complete](https://github.com/microsoft/TypeScript/issues/14833).
 
 ### Basic Conditional Types
