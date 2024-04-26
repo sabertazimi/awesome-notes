@@ -975,9 +975,12 @@ gpg --full-generate-key
 # List GPG keys
 gpg --list-secret-keys --keyid-format=long
 
-# Generate GPG public key string
+# Export GPG public key as an ASCII armored version
 gpg --armor --export <pub-keyID>
 # Copy output to GitHub GPG textarea
+
+# Export GPG private key as an ASCII armored version
+# gpg --armor --export-secret-key sabertazimi@gmail.com -w0
 
 # Git global configuration for GPG signature commits
 git config --global commit.gpgsign true
