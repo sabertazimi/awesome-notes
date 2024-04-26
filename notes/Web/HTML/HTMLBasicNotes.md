@@ -1302,8 +1302,26 @@ Embed [best practice](https://web.dev/embed-best-practices):
 [Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API):
 
 ```html
-<button popovertarget="my-popover">Toggle the popover</button>
-<div id="my-popover" popover>Popover content</div>
+<button popovertarget="my-popover">Toggle Popover</button>
+<div id="my-popover" popover>Popover Content</div>
+```
+
+```html
+<button popovertarget="my-popover" class="toggle-btn">Toggle Popover</button>
+
+<div id="my-popover" popover="manual">
+  <p>I am a popover with more information.</p>
+  <p>
+    <button
+      popovertarget="my-popover"
+      popovertargetaction="hide"
+      class="close-btn"
+    >
+      <span aria-hidden="true">❌</span>
+      <span class="sr-only">Close</span>
+    </button>
+  </p>
+</div>
 ```
 
 ### Time
