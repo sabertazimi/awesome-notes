@@ -287,20 +287,18 @@ tags: [Web, Framework, Library]
 
 ### Concurrent and Parallel Programming Utils
 
-- [Threads.js](https://github.com/andywer/threads.js).
-- [WorkerPool](https://github.com/josdejong/workerpool).
-- [TinyPool](https://github.com/tinylibs/tinypool):
-  Minimal and tiny worker thread pool.
-- [PartyTown](https://github.com/BuilderIO/partytown):
-  Relocate resource intensive scripts into web workers.
-- [Comlink](https://github.com/GoogleChromeLabs/comlink):
-  Shared class between web workers.
-- [GRFN](https://github.com/TomerAberbach/grfn):
-  Executes dependency graph of async functions concurrently.
 - [Bull](https://github.com/OptimalBits/bull):
   Premium queue package for handling distributed jobs and messages.
-- [BreeJS](https://github.com/breejs/bree):
-  Job scheduler.
+- [Bree](https://github.com/breejs/bree):
+  JavaScript job task scheduler with worker threads, cron, Date, and human syntax.
+- [WorkerPool](https://github.com/josdejong/workerpool):
+  Offload tasks to a pool of workers on Node.js and in the browser.
+- [TinyPool](https://github.com/tinylibs/tinypool):
+  Minimal and tiny worker thread pool.
+- [Scheduling](https://github.com/astoilkov/main-thread-scheduling):
+  Fast and consistently responsive apps using a single function call.
+- [GRFN](https://github.com/TomerAberbach/grfn):
+  Executes dependency graph of async functions concurrently.
 
 ### Functional Programming Utils
 
@@ -1689,12 +1687,14 @@ tags: [Web, Framework, Library]
 
 - [Whistle](https://github.com/avwo/whistle).
 
-### PWA
+### PWA and Web Workers
 
 - [Workbox](https://github.com/GoogleChrome/workbox):
   Progressive web apps toolbox.
 - [PartyTown](https://github.com/BuilderIO/partytown):
-  3rd-party scripts web worker.
+  Relocate resource intensive third-party scripts into web worker.
+- [Comlink](https://github.com/GoogleChromeLabs/comlink):
+  Shared class between web workers.
 
 ## Web3
 
