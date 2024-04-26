@@ -2212,6 +2212,7 @@ tags: [Web, Framework, Library]
 - [Node](https://github.com/actions/setup-node).
 - [NPM](https://github.com/bahmutov/npm-install).
 - [Commit](https://github.com/EndBug/add-and-commit).
+- [GPG](https://github.com/crazy-max/ghaction-import-gpg).
 - [GitHubScript](https://github.com/actions/github-script):
   Write workflows scripting the GitHub API in JavaScript.
 
