@@ -146,6 +146,14 @@ window.addEventListener('resize', () => {
 })
 ```
 
+### Box Aspect Ratio
+
+Things can break [`aspect-ratio`](https://frontendmasters.com/blog/things-that-can-break-aspect-ratio-in-css):
+
+- Setting both dimensions: setting `inline-size` and `block-size` simultaneously.
+- Stretching element: `align-items: stretch`.
+- Content that forces height: inner elements may force the height of the parent.
+
 ### Box Margin
 
 #### Auto Margin
