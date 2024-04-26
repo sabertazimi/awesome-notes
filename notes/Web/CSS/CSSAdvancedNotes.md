@@ -2959,6 +2959,21 @@ e.g `.main > .button` vs `.sidebar > .button`,
 </style>
 ```
 
+Use `@container` style query to
+[implement `toggle()` function](https://kizu.dev/alternating-style-queries):
+
+```css
+:is(i, em, blockquote, code) {
+  font-style: var(--font-style);
+
+  --font-style: italic;
+
+  @container style(--font-style: italic) {
+    --font-style: normal;
+  }
+}
+```
+
 ### Container Query Reference
 
 - An interactive and comprehensive CSS container queries [guide](https://ishadeed.com/article/css-container-query-guide).
