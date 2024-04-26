@@ -1866,6 +1866,8 @@ tags: [Web, Framework, Library]
 - [KimiAI](https://kimi.moonshot.cn).
 - [ChatGLM](https://chatglm.cn).
 - [QianWen](https://tongyi.aliyun.com/qianwen).
+- [Local](https://github.com/nilsherzig/LLocalSearch):
+  Completely locally running search aggregator using LLM Agents.
 
 ### AI Copilot
 
