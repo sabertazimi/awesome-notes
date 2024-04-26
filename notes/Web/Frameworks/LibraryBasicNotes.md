@@ -390,11 +390,14 @@ tags: [Web, Framework, Library]
 ### Utility UI Framework
 
 - [Tailwind](https://github.com/tailwindlabs/tailwindcss).
-- [Daisy](https://github.com/saadeghi/daisyui):
-  Tailwind components plugin.
+- [Material](https://github.com/creativetimofficial/material-tailwind):
+  Easy-to-use components library for Tailwind CSS and Material Design.
 - [Elements](https://github.com/mdbootstrap/Tailwind-Elements):
   Tailwind components collection.
-- [TailwindMaterial](https://github.com/creativetimofficial/material-tailwind).
+- [Daisy](https://github.com/saadeghi/daisyui):
+  Tailwind components plugin.
+- [FranKen](https://github.com/sveltecult/franken-ui):
+  Tailwind components plugin based on ShadCN UI.
 - [Form](https://github.com/tailwindlabs/tailwindcss-forms).
 - [Typography](https://github.com/tailwindlabs/tailwindcss-typography).
 - [AspectRatio](https://github.com/tailwindlabs/tailwindcss-aspect-ratio).
