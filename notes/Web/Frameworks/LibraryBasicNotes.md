@@ -1189,7 +1189,8 @@ tags: [Web, Framework, Library]
 
 ### Audio
 
-- [Howler.js](https://github.com/goldfire/howler.js).
+- [Howler.js](https://github.com/goldfire/howler.js):
+  JavasScript audio library for modern web.
 - [Audio.ts](https://github.com/EvandroLG/ts-audio):
   Agnostic library easy to work with `AudioContext` and create audio playlists.
 - [Meyda](https://github.com/meyda/meyda):
