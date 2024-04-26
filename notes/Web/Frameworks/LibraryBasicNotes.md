@@ -2130,6 +2130,8 @@ tags: [Web, Framework, Library]
   Draws simple SVG flow chart diagrams from textual representation of diagram.
 - [PlantUML](https://github.com/plantuml/plantuml):
   Generate UML diagram from textual description.
+- [DrawDB](https://github.com/drawdb-io/drawdb):
+  Simple and intuitive online database design tool and SQL generator.
 
 ## DevOps Tools
 
