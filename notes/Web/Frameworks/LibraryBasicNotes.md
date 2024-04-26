@@ -2029,6 +2029,10 @@ tags: [Web, Framework, Library]
   Traces and metrics framework.
 - [CounterScale](https://github.com/benvinegar/counterscale):
   Free scalable web analytics running on Cloudflare.
+- [Clarity](https://github.com/microsoft/clarity):
+  Behavioral analytics library that uses DOM mutations and user interactions.
+- [BetterStack](https://github.com/BetterStackHQ):
+  Uptime and logging platform.
 
 ### Performance Tools
 
