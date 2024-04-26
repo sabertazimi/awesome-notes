@@ -2926,7 +2926,9 @@ class MyComponent extends React.Component<Props, State> {
 - 装饰器模式是 Class 继承的一个替代模式.
   (类似于组合模式)
 
-### Class Decorators
+### Legacy Stage 2 Decorators
+
+#### Class Decorators
 
 ```ts
 function classDecorator(options: any[]) {
@@ -2965,7 +2967,7 @@ class MyComponent extends React.Component<Props> {
 }
 ```
 
-### Class Properties Decorators
+#### Class Properties Decorators
 
 first parameter `target` will be
 `class prototype` for normal properties
@@ -2989,7 +2991,7 @@ class MyComponent extends React.Component<Props> {
 }
 ```
 
-### Method Parameters Decorators
+#### Method Parameters Decorators
 
 `@uppercase`/`@lowercase` for string parameters,
 `@rounded` for number parameters.
@@ -3006,7 +3008,7 @@ class MyComponent extends React.Component<Props> {
 }
 ```
 
-### Methods Decorators
+#### Methods Decorators
 
 - `target` parameter will class prototype
 - `propertyKey` will be a string containing the name of the method.
@@ -3050,6 +3052,83 @@ class MyComponent extends React.Component {
     // ...
   }
 }
+```
+
+### Modern Stage 3 Decorators
+
+```ts
+type Decorator = (value: Input, context: {
+  kind: string
+  name: string | symbol
+  access: {
+    get?: () => unknown
+    set?: (value: unknown) => void
+  }
+  private?: boolean
+  static?: boolean
+  addInitializer: (initializer: () => void) => void
+}) => Output | void
+
+type ClassDecorator = (value: Function, context: {
+  kind: 'class'
+  name: string | undefined
+  addInitializer: (initializer: () => void) => void
+}) => Function | void
+
+type ClassMethodDecorator = (value: Function, context: {
+  kind: 'method'
+  name: string | symbol
+  access: { get: () => unknown }
+  static: boolean
+  private: boolean
+  addInitializer: (initializer: () => void) => void
+}) => Function | void
+
+type ClassGetterDecorator = (value: Function, context: {
+  kind: 'getter'
+  name: string | symbol
+  access: { get: () => unknown }
+  static: boolean
+  private: boolean
+  addInitializer: (initializer: () => void) => void
+}) => Function | void
+
+type ClassSetterDecorator = (value: Function, context: {
+  kind: 'setter'
+  name: string | symbol
+  access: { set: (value: unknown) => void }
+  static: boolean
+  private: boolean
+  addInitializer: (initializer: () => void) => void
+}) => Function | void
+
+type ClassFieldDecorator = (value: undefined, context: {
+  kind: 'field'
+  name: string | symbol
+  access: { get: () => unknown, set: (value: unknown) => void }
+  static: boolean
+  private: boolean
+  addInitializer: (initializer: () => void) => void
+}) => (initialValue: unknown) => unknown | void
+
+type ClassAutoAccessorDecorator = (
+  value: {
+    get: () => unknown
+    set: (value: unknown) => void
+  },
+  context: {
+    kind: 'accessor'
+    name: string | symbol
+    access: { get: () => unknown, set: (value: unknown) => void }
+    static: boolean
+    private: boolean
+    addInitializer: (initializer: () => void) => void
+  }
+) => {
+  get?: () => unknown
+  set?: (value: unknown) => void
+  init?: (initialValue: unknown) => unknown
+} | void
 ```
 
 ### Decorators Execution Order
@@ -3123,31 +3202,62 @@ class Example {
 IoC and DI implementation:
 
 ```ts
-type Constructor<T = any> = new (...args: any[]) => T
+const INJECTIONS = new WeakMap()
 
-const Injectable = (): ClassDecorator => (target) => {}
+function createInjections() {
+  const injections = []
 
-class OtherService {
-  a = 1
+  function injectable(Class) {
+    INJECTIONS.set(Class, injections)
+  }
+
+  function inject(injectionKey) {
+    return function applyInjection(v, context) {
+      injections.push({ injectionKey, set: context.access.set })
+    }
+  }
+
+  return { injectable, inject }
 }
 
-@Injectable()
-class TestService {
-  constructor(public readonly otherService: OtherService) {}
+class Container {
+  registry = new Map()
 
-  testMethod() {
-    console.log(this.otherService.a)
+  register(injectionKey, value) {
+    this.registry.set(injectionKey, value)
+  }
+
+  lookup(injectionKey) {
+    this.registry.get(injectionKey)
+  }
+
+  create(Class) {
+    const instance = new Class()
+
+    for (const { injectionKey, set } of INJECTIONS.get(Class) || [])
+      set.call(instance, this.lookup(injectionKey))
+
+    return instance
   }
 }
 
-function Factory<T>(Target: Constructor<T>): T {
-  // 获取所有注入的服务
-  const providers = Reflect.getMetadata('design:paramtypes', target) // [OtherService]
-  const args = providers.map((Provider: Constructor) => new Provider())
-  return new Target(...args)
+class Store {}
+
+const { injectable, inject } = createInjections()
+
+@injectable
+class C {
+  @inject('store') store
 }
 
-Factory(TestService).testMethod() // 1
+const container = new Container()
+const store = new Store()
+
+container.register('store', store)
+
+const c = container.create(C)
+
+c.store === store // true
 ```
 
 AOP programming:
