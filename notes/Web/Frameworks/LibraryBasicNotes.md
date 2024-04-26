@@ -2015,24 +2015,26 @@ tags: [Web, Framework, Library]
 
 ### Analytics and Monitoring Tools
 
-- [Plausible](https://github.com/plausible/analytics):
-  Lightweight and privacy-friendly alternative to Google Analytics.
 - [NetData](https://github.com/netdata/netdata):
   Monitor servers, containers, and applications in high-resolution and in real-time.
-- [OneUptime](https://github.com/OneUptime/oneuptime):
-  Comprehensive solution for monitoring and managing online services.
 - [Grafana](https://github.com/grafana/grafana):
   Open and composable observability and data visualization platform.
+- [Plausible](https://github.com/plausible/analytics):
+  Lightweight and privacy-friendly alternative to Google Analytics.
+- [UptimeKuma](https://github.com/louislam/uptime-kuma):
+  Fancy self-hosted monitoring tool.
+- [OneUptime](https://github.com/OneUptime/oneuptime):
+  Comprehensive solution for monitoring and managing online services.
+- [BetterStack](https://github.com/BetterStackHQ):
+  Uptime and logging platform.
 - [Sentry](https://github.com/getsentry/sentry):
   Developer-first error tracking and performance monitoring.
 - [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-js):
   Traces and metrics framework.
-- [CounterScale](https://github.com/benvinegar/counterscale):
-  Free scalable web analytics running on Cloudflare.
 - [Clarity](https://github.com/microsoft/clarity):
   Behavioral analytics library that uses DOM mutations and user interactions.
-- [BetterStack](https://github.com/BetterStackHQ):
-  Uptime and logging platform.
+- [CounterScale](https://github.com/benvinegar/counterscale):
+  Free scalable web analytics running on Cloudflare.
 
 ### Performance Tools
 
