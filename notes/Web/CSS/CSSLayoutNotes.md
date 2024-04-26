@@ -1016,7 +1016,39 @@ Floating won't work inside `fixed` or `absolute` `div` unless specify width:
 #### Absolute Three Column
 
 Position `.left` and `.right` with `absolute`,
-add `margin-left` and `margin-right` to `.middle`.
+add `margin-left` and `margin-right` to `.middle`:
+
+```html
+<div class="container">
+  <div class="left"></div>
+  <div class="middle"></div>
+  <div class="right"></div>
+</div>
+
+<style>
+  .container {
+    position: relative;
+  }
+
+  .left,
+  .right {
+    position: absolute;
+    width: 200px;
+  }
+
+  .middle {
+    margin: 0 200px;
+  }
+
+  .left {
+    left: 0;
+  }
+
+  .right {
+    right: 0;
+  }
+</style>
+```
 
 #### Float Three Column
 
@@ -1103,6 +1135,27 @@ For `float` element:
   width: 200px;
   margin-right: -200px;
   background-color: red;
+}
+```
+
+#### Grid Three Column
+
+Three column layout allows [full-width content](https://www.joshwcomeau.com/css/full-bleed):
+
+```css
+.container {
+  display: grid;
+  grid-template-columns: 1fr min(60ch, calc(100% - 64px)) 1fr;
+  grid-column-gap: 32px;
+}
+
+.container > * {
+  grid-column: 2;
+}
+
+.full-bleed {
+  grid-column: 1 / -1;
+  width: 100%;
 }
 ```
 
