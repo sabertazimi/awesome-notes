@@ -4011,9 +4011,7 @@ const pattern = /([^&=]+)=([^&]*)/g
 
 `/(?<=\|\w+) /g`: second place to insert `|`.
 
-## JavaScript API
-
-### Strict Mode
+## Strict Mode
 
 [Strict Mode](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Strict_mode):
 
@@ -4030,7 +4028,7 @@ const pattern = /([^&=]+)=([^&]*)/g
 - ES6 classes are automatically in strict mode.
 - ES6 modules are automatically in strict mode.
 
-### Timer
+## Timer
 
 - setTimeout.
 - setImmediate.
@@ -4085,7 +4083,7 @@ function runAnimation(frameFunc) {
 }
 ```
 
-### Math
+## Math
 
 - `Math.max`.
 - `Math.min()`.
@@ -4177,7 +4175,7 @@ function randomInt(a = 1, b = 0) {
 | `Math.round` | -3   | -2   | -2   | 2   | 3   | 3   |
 | `Math.trunc` | -2   | -2   | -2   | 2   | 2   | 2   |
 
-### Atomics
+## Atomics
 
 [Atomics API](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Atomics):
 
@@ -4199,7 +4197,95 @@ Atomics.exchange(dataView, index, 4)
 Atomics.compareExchange(dataView, index, expect, 6)
 ```
 
-### URI and URL
+## Signals
+
+[Signals](https://github.com/tc39/proposal-signals)
+create a universal standard for state management across frameworks.
+It use the so-called `pull-push` model:
+
+- `push` phase:
+  When Signal becomes `dirty` (its value has changed),
+  it recursively passes `dirty` state to all dependent Signals.
+- `pull` phase:
+  All potential recalculations are deferred until value of Signal is explicitly requested.
+
+Lazy evaluation brings:
+
+- Automated tracking:
+  Eliminates complexity of manual updates and enhances reactive programming capabilities.
+- Performance optimization:
+  Calculated only when necessary avoiding unnecessary computations and updates.
+- Consistency:
+  State is updated synchronously in corresponding UI render or any dependency evaluation.
+- Easy integration:
+  Signals can be easily integrated into various JavaScript libraries and frameworks.
+
+```ts
+const counter = new Signal.State(0)
+const isEven = new Signal.Computed(() => (counter.get() & 1) === 0)
+const parity = new Signal.Computed(() => isEven.get() ? 'even' : 'odd')
+
+effect(() => element.textContent = parity.get())
+```
+
+```ts
+/**
+ * Class auto-accessor decorator
+ * @see https://github.com/tc39/proposal-decorators?tab=readme-ov-file#class-auto-accessors
+ */
+function signal(target) {
+  const { get } = target
+
+  return {
+    init(value) {
+      return new Signal.State(value)
+    },
+    get() {
+      return get.call(this).get()
+    },
+    set(value) {
+      get.call(this).set(value)
+    },
+  }
+}
+
+class Counter {
+  @signal
+  count = 0 // This will be automatically turned into a Signal state.
+
+  increment() {
+    this.count++ // Behind the scenes, this updates the Signal's value.
+  }
+
+  decrement() {
+    this.count-- // Similarly, this updates the Signal's value.
+  }
+
+  @signal
+  get isEven() {
+    return this.count % 2 === 0
+  }
+
+  @signal
+  get parity() {
+    return this.isEven ? 'even' : 'odd'
+  }
+}
+
+// Usage
+const myCounter = new Counter()
+console.log(myCounter.count) // Outputs: 0
+
+myCounter.increment()
+console.log(myCounter.count) // Outputs: 1
+console.log(myCounter.parity) // Outputs: "odd"
+
+myCounter.increment()
+console.log(myCounter.count) // Outputs: 2
+console.log(myCounter.isEven) // Outputs: true
+```
+
+## URI and URL
 
 - `encodeURI()`: 不会编码属于 URL 组件的特殊字符, 比如冒号/斜杠/问号.
 - `encodeURIComponent()`: 编码它发现的所有非标准字符.
@@ -4292,7 +4378,7 @@ searchParams.delete('q')
 alert(searchParams.toString()) // " num=10&page=3"
 ```
 
-### Encoding and Decoding
+## Encoding and Decoding
 
 [TextEncoder API](https://developer.mozilla.org/docs/Web/API/TextEncoder):
 
@@ -4366,13 +4452,13 @@ for await (const decodedChunk of decodedStream)
   console.log(decodedChunk)
 ```
 
-### Web Stream
+## Web Stream
 
-- Web streams [API](https://2ality.com/2022/06/web-streams-nodejs.html).
+- Web streams complete [guide](https://2ality.com/2022/06/web-streams-nodejs.html).
 
-### Internationalization
+## Internationalization
 
-#### Number i18n
+### Number i18n
 
 ```ts
 const nfFrench = new Intl.NumberFormat('fr')
@@ -4380,7 +4466,7 @@ nf.format(12345678901234567890n)
 // => 12 345 678 901 234 567 890
 ```
 
-#### String i18n
+### String i18n
 
 ```ts
 const lfEnglish = new Intl.ListFormat('en')
@@ -4408,7 +4494,7 @@ console.log(formatter3.format(vehicles))
 // expected output: "Motorcycle Bus Car"
 ```
 
-#### Time i18n
+### Time i18n
 
 ```ts
 const rtfEnglish = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
