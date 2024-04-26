@@ -653,6 +653,8 @@ tags: [Web, Framework, Library]
 
 - [Floating](https://github.com/floating-ui/floating-ui):
   Low-level toolkit to create interactive floating elements.
+- [Tooltip](https://github.com/ReactTooltip/react-tooltip):
+  React tooltip component.
 - [Hint.css](https://github.com/chinchang/hint.css):
   CSS only tooltip library.
 
