@@ -1342,6 +1342,8 @@ tags: [Web, Framework, Library]
 
 ### Web Storage
 
+- [DeXie](https://github.com/dexie/Dexie.js):
+  Minimalistic wrapper for IndexedDB.
 - [Storage](https://github.com/KID-joker/stokado):
   Web storage API wrapper.
 - [PouchDB](https://github.com/pouchdb/pouchdb):
@@ -1418,7 +1420,7 @@ tags: [Web, Framework, Library]
 - [TinyMCE](https://github.com/tinymce/tinymce):
   World #1 JavaScript library for rich text editing.
 - [Lexical](https://github.com/facebook/lexical):
-  Draft.js alternatives.
+  Extensible text editor framework that provides reliability, accessibility and performance.
 - [Verbum](https://github.com/ozanyurtsever/verbum):
   Fully flexible text editor based on Lexical framework.
 - [TipTap](https://github.com/ueberdosis/tiptap):
