@@ -52,6 +52,14 @@ $lg: $base * $ratio;
 $xl: $base * $ratio * ratio;
 ```
 
+### Font Typeface
+
+Prefer [web fonts](https://pimpmytype.com/web-safe-fonts):
+
+- Especially in headings, because of consistency.
+- Keep it to 2 to 5 font files or below 100 kb.
+- Use system fonts for body text or UI text, if you have to.
+
 ### Spacing
 
 Make text breathe:
