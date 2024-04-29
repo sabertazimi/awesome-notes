@@ -1628,6 +1628,15 @@ Interaction to Next Paint (INP) 已取代 FID,
 - Processing delay: event handler execution time.
 - Presentation delay: rendering and compositing time.
 
+Improve INP in [Next.js](https://www.thisdot.co/blog/improving-inp-in-react-and-next-js):
+
+- Concurrent rendering with `useTransition` hook.
+- Leverage automatic batching.
+- Selective hydration [pattern](https://www.patterns.dev/react/react-selective-hydration).
+- Leverage SSG and ISR for static content.
+- Offloading heavy computations to [Web Workers](https://partytown.builder.io/nextjs).
+- Prevent unnecessary re-renders with `Forget Compiler` and state management library.
+
 ### CLS
 
 Cumulative Layout Shift:
