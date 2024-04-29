@@ -2187,6 +2187,12 @@ listExpander.addEventListener('click', (e) => {
 
 A11y audit [list](https://web.dev/lighthouse-accessibility):
 
+- Keyboard-only navigation.
+- Voice control.
+- Screen reader.
+- High contrast mode.
+- Dark mode.
+- Browser zoom.
 - Don't use `aria-hidden` on the `<body>` element.
 - Complete meta header:
   - Add missing languages.
