@@ -1590,12 +1590,13 @@ console.log(input.defaultValue) // 'another new default'
 
 ### Semantic HTML
 
-- [Definitive Guide](https://css-tricks.com/how-to-section-your-html)
-- [Semantic HTML Presentation](http://justineo.github.io/slideshows/semantic-html/#/)
+- Semantical HTML section [guide](https://css-tricks.com/how-to-section-your-html).
+- Semantic HTML [presentation](http://justineo.github.io/slideshows/semantic-html/#/).
+- Semantic [search element](https://www.sarasoueidan.com/blog/in-quest-of-search).
 
 ### Structure Accessibility
 
-- [Semantics Section Reference](http://www.html5jscss.com/html5-semantics-section.html)
+- Semantics section [reference](http://www.html5jscss.com/html5-semantics-section.html).
 - `<header>`: `role="banner"`
 - `<nav>`: `role="navigation"`
 - `<main>`: `role="main"`
