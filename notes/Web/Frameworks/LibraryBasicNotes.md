@@ -1176,6 +1176,8 @@ tags: [Web, Framework, Library]
 
 - [ReactThreeFiber](https://github.com/pmndrs/react-three-fiber):
   React renderer for Three.js.
+- [Rapier](https://github.com/pmndrs/react-three-rapier):
+  Rapier physics in React.
 - [P5.js](https://github.com/P5-wrapper/react):
   Utilize P5 sketches within React apps.
 - [Babylon.js](https://github.com/BabylonJS/Babylon.js):
@@ -1184,6 +1186,8 @@ tags: [Web, Framework, Library]
   Web-first and mobile-first high-performance real-time development platform.
 - [Drei](https://github.com/pmndrs/drei):
   Collection of useful helpers and fully functional abstractions for `@react-three/fiber`.
+- [Mesh](https://github.com/pmndrs/meshline):
+  Mesh replacement for `THREE.Line`.
 
 ## Media
 
