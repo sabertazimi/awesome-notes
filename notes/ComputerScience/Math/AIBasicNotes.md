@@ -25,10 +25,20 @@ $$
 Time to frequency transform:
 
 $$
-\hat{f}(\xi)=\int_{-\infty}^{\infty}f(t)e^{-2\pi i\xi t}dt
+\begin{equation}
+  \hat{f}(\xi)=\int_{-\infty}^{\infty}f(t)e^{-2\pi i\xi t}dt
+\end{equation}
+$$
+
+$$
+\begin{equation}
+  X[k]=\sum\limits_{n=0}^{N-1}x_n e^{-\frac{i2\pi}{N}kn}
+\end{equation}
 $$
 
 [![Fourier Transform](./figures/FourierTransform.png)](https://www.youtube.com/watch?v=spUNpyF58BY)
+
+![Discrete Fourier Transform](./figures/DiscreteFourierTransform.png)
 
 ## Linear Algebra
 
