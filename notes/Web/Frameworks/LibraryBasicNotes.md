@@ -359,7 +359,7 @@ tags: [Web, Framework, Library]
 - [TypeBox](https://github.com/sinclairzx81/typebox):
   JSON schema type builder.
 - [Effect](https://github.com/Effect-TS/effect):
-  Fully-fledged functional effect system for TypeScript.
+  Fully-fledged functional effect system for TypeScript with a rich standard library.
 - [AutoMapper](https://github.com/nartc/mapper):
   Object to object auto mapper.
 - [OW](https://github.com/sindresorhus/ow):
