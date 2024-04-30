@@ -75,6 +75,42 @@ $c_i=\sum\limits_{j=0}^{i}a_j\cdot{b_{i-j}}$.
 For matrix,
 $B(i, j) = \sum\limits_{m=0}^{M_k-1}\sum\limits_{n=0}^{N_k-1} K(m, n) A(i-m, j-n)$.
 
+### Convolutional Neural Networks
+
+CNNs are a class of deep neural networks,
+most commonly applied to analyzing visual imagery.
+They are also known as ConvNets.
+
+- Convolutional Layer:
+  apply a convolution operation to the input,
+  passing the results to the next layer.
+- Pooling Layer:
+  down-samples the input representation,
+  reducing its dimensionality.
+- Fully Connected Layer:
+  compute the class scores,
+  resulting in a volume of size `1x1x10`,
+  where each of the 10 numbers represents a class.
+
+### Convolutional Layer
+
+Convolutional Layer is the first layer to extract features from an input image.
+The layer's parameters consist of a set of learnable filters (or kernels),
+which have a small receptive field but extend through full depth of input volume.
+
+### Pooling Layer
+
+Pooling Layer is used to reduce the spatial dimensions of the input volume.
+It helps to reduce the amount of parameters and computation in the network,
+and hence to also control over-fitting.
+
+### Fully Connected Layer
+
+Fully Connected Layer is a traditional Multilayer Perceptron (MLP) layer.
+It is used to compute the class scores,
+resulting in a volume of size `1x1x10`,
+where each of the 10 numbers represents a class.
+
 ## Residual Architecture
 
 ResNet 通过残差学习解决了深度网络的退化问题 (深度网络的训练问题),
