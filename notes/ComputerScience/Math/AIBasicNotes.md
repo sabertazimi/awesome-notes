@@ -49,6 +49,22 @@ $$
   引入非线性特性, 使得网络可以学习和模拟复杂函数.
 - 它通过调整内部连接权重来学习和改进其预测能力.
 
+## Convolutional Architecture
+
+### Convolution
+
+Convolution is a mathematical operation
+that combines two functions to produce a third function:
+
+$$(f*g)(t):=\int_{-\infty}^{\infty} f(\tau)g(t-\tau)d\tau$$
+
+Given $\boldsymbol{a}$ and $\boldsymbol{b}$, then:
+$(\boldsymbol{a}*\boldsymbol{b})_n=\sum\limits_{\substack{i,j\\i+j=n}}a_i\cdot{b_j}$,
+e.g $(1,2,3)*(4,5,6)=(4,13,28,27,18)_{0\dots{4}}$.
+
+For matrix,
+$B(i, j) = \sum\limits_{m=0}^{M_k-1}\sum\limits_{n=0}^{N_k-1} K(m, n) A(i-m, j-n)$.
+
 ## Residual Architecture
 
 ResNet 通过残差学习解决了深度网络的退化问题 (深度网络的训练问题),
