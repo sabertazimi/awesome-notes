@@ -1216,6 +1216,8 @@ tags: [Web, Framework, Library]
   Simple HTML5 YouTube and Vimeo player.
 - [Player](https://github.com/cookpete/react-player):
   Playing variety of URLs.
+- [YouTube.js](https://github.com/LuanRT/YouTube.js):
+  Full-featured wrapper around InnerTube API.
 - [Remotion](https://github.com/remotion-dev/remotion):
   Create videos programmatically in React.
 - [Liqvid](https://github.com/liqvidjs/liqvid):
