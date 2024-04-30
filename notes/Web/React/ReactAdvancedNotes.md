@@ -638,8 +638,14 @@ function workLoop(hasTimeRemaining, initialTime) {
 
 ## React Fiber
 
-React Fiber 的目标是提高其在动画、布局和手势等领域的适用性.
-它的主要特性是 `Incremental Rendering` : 将渲染任务拆分为小的任务块并将任务分配到多个帧上的能力.
+[React Fiber](https://tigerabrodi.blog/reacts-evolution-from-hooks-to-concurrent-react#heading-react-fiber)
+的目标是提高其在动画、布局和手势等领域的适用性:
+
+- 它的主要特性是 `Incremental Rendering`:
+  将渲染任务拆分为小的任务块并将任务分配到多个帧上的能力.
+- Ability to pause and resume rendering.
+- Ability to prioritize updates.
+- Ability to work on multiple tasks concurrently.
 
 ### React Fiber Type
 
