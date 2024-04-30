@@ -70,7 +70,7 @@ $C(x)=\sum\limits_{i=0}^{M+N-2}c_i\cdot{x^i}$,
 $c_i=\sum\limits_{j=0}^{i}a_j\cdot{b_{i-j}}$.
 可以运用快速傅里叶变换 (FFT) 以 $O(N\log N)$ 的时间复杂度求解 $c_i$ 的值, 从而实现快速卷积运算.
 
-![Convolution](./figures/Convolution.png)
+[![Convolution](./figures/Convolution.png)](https://www.youtube.com/watch?v=KuXjwB4LzSA)
 
 For matrix,
 $B(i, j) = \sum\limits_{m=0}^{M_k-1}\sum\limits_{n=0}^{N_k-1} K(m, n) A(i-m, j-n)$.
