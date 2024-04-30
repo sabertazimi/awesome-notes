@@ -1521,7 +1521,7 @@ tags: [Web, Framework, Library]
 - [YAML](https://github.com/jonschlinkert/gray-matter).
 - [XML](https://github.com/TobiasNickel/tXml).
 - [SVG](https://github.com/sebmarkbage/art).
-- [Crontab](https://github.com/harrisiirak/cron-parser).
+- [Crontab](https://github.com/P4sca1/cron-schedule).
 - [Domain](https://github.com/peerigon/parse-domain).
 - [URL](https://github.com/remusao/tldts).
 - [GitURL](https://github.com/IonicaBizau/git-url-parse).
