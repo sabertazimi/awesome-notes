@@ -1655,7 +1655,8 @@ tags: [Web, Framework, Library]
 ### WebSocket
 
 - [Socket.IO](https://github.com/socketio/socket.io).
-- [WebSockets](https://github.com/websockets/ws).
+- [WebSockets](https://github.com/websockets/ws):
+  Blazing fast and thoroughly tested WebSocket client and server for Node.js
 - [uWebSockets](https://github.com/uNetworking/uWebSockets):
   Simple, secure and standards compliant WebSockets.
 - [SocketCluster](https://github.com/SocketCluster/socketcluster):
