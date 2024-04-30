@@ -1844,6 +1844,8 @@ tags: [Web, Framework, Library]
 
 - [LangChain](https://github.com/langchain-ai/langchainjs):
   LLM framework.
+- [Transformers](https://github.com/xenova/transformers.js):
+  Run HuggingFace transformers directly in browser.
 - [Vercel.ai](https://github.com/vercel/ai):
   Build AI-powered web applications.
 - [TypeChat](https://github.com/microsoft/TypeChat):
