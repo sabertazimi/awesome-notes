@@ -1773,6 +1773,47 @@ const q = queue()
 q.enqueue(crawlTask, url)
 ```
 
+Web scraping with [impersonation](https://lev.engineer/blog/web-scraping-like-a-pro-unlocking-the-power-of-impersonation):
+
+```ts
+const puppeteer = require('puppeteer-extra')
+const StealthPlugin = require('puppeteer-extra-plugin-stealth')
+
+puppeteer.use(StealthPlugin());
+
+(async () => {
+  const browser = await puppeteer.launch()
+  const page = await browser.newPage()
+  await page.goto('https://example.com')
+
+  // Now your Puppeteer script is enhanced with advanced evasion techniques
+  // Proceed with your web scraping tasks
+
+  await browser.close()
+})()
+
+const { chromium, devices } = require('playwright')
+const iPhone11 = devices['iPhone 11'];
+
+(async () => {
+  const browser = await chromium.launch()
+  const context = await browser.newContext({
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
+    + '(KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36',
+    geolocation: { latitude: 48.8584, longitude: 2.2945 }, // Paris, France
+    permissions: ['geolocation'],
+    locale: 'fr-FR',
+    ...iPhone11,
+  })
+  const page = await context.newPage()
+  await page.goto('https://example.com')
+
+  // Your scraping logic here
+
+  await browser.close()
+})()
+```
+
 ## Deno
 
 - Node.js library to Deno [guide](https://www.edgedb.com/blog/how-we-converted-our-node-js-library-to-deno-using-deno).
