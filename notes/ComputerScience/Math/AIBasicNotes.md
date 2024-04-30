@@ -15,7 +15,9 @@ tags: [CS, Math, AI]
 复数平面 (Complex Plane) 上的圆周运动:
 
 $$
-e^{ix}=\cos{x}+i\sin{x}
+\begin{equation}
+  e^{ix}=\cos{x}+i\sin{x}
+\end{equation}
 $$
 
 ### Fourier Transform
@@ -56,24 +58,36 @@ $$
 Convolution is a mathematical operation
 that combines two functions to produce a third function:
 
-$$(f*g)(t):=\int_{-\infty}^{\infty} f(\tau)g(t-\tau)d\tau$$
+$$
+\begin{equation}
+  (f*g)(t):=\int_{-\infty}^{\infty} f(\tau)g(t-\tau)d\tau
+\end{equation}
+$$
 
 Given $\boldsymbol{a}$ and $\boldsymbol{b}$, then:
 $(\boldsymbol{a}*\boldsymbol{b})_n=\sum\limits_{\substack{i,j\\i+j=n}}a_i\cdot{b_j}$,
 e.g $(1,2,3)*(4,5,6)=(4,13,28,27,18)_{0\dots{4}}$.
-
 上述计算可以转换为多项式相乘的形式:
-$A(x)=\sum\limits_{i=0}^{M-1}a_i\cdot{x^i}$,
-$B(x)=\sum\limits_{i=0}^{N-1}b_i\cdot{x^i}$,
-$C(x)=A(x)\cdot{B(x)}$,
-$C(x)=\sum\limits_{i=0}^{M+N-2}c_i\cdot{x^i}$,
-$c_i=\sum\limits_{j=0}^{i}a_j\cdot{b_{i-j}}$.
+
+$$
+\begin{split}
+  A(x)&=\sum\limits_{i=0}^{M-1}a_i\cdot{x^i}   \\
+  B(x)&=\sum\limits_{i=0}^{N-1}b_i\cdot{x^i}   \\
+  C(x)&=A(x)\cdot{B(x)}                        \\
+  C(x)&=\sum\limits_{i=0}^{M+N-2}c_i\cdot{x^i} \\
+  c_i&=\sum\limits_{j=0}^{i}a_j\cdot{b_{i-j}}
+\end{split}
+$$
+
 可以运用快速傅里叶变换 (FFT) 以 $O(N\log N)$ 的时间复杂度求解 $c_i$ 的值, 从而实现快速卷积运算.
 
 [![Convolution](./figures/Convolution.png)](https://www.youtube.com/watch?v=KuXjwB4LzSA)
 
-For matrix,
-$B(i, j) = \sum\limits_{m=0}^{M_k-1}\sum\limits_{n=0}^{N_k-1} K(m, n) A(i-m, j-n)$.
+For matrix:
+
+$$
+B(i,j)=\sum\limits_{m=0}^{M_k-1}\sum\limits_{n=0}^{N_k-1} K(m, n) A(i-m, j-n)
+$$
 
 ### Convolutional Neural Networks
 
