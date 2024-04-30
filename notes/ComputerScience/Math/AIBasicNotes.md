@@ -46,6 +46,9 @@ $$
 
 ### Central Limit Theorem
 
+在自然界与生产中, 一些现象受到许多**相互独立**的随机因素的影响,
+如果每个因素所产生的影响都很微小时, 总的影响可以看作服从正态分布.
+
 ## Multilayer Perceptron
 
 ![Multilayer Perceptron](./figures/MultilayerPerceptron.avif 'Multilayer Perceptron')
