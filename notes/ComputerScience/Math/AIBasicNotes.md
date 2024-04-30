@@ -8,6 +8,32 @@ tags: [CS, Math, AI]
 
 # AI Basic Notes
 
+## Calculus and Mathematical Analysis
+
+### Euler's Formula
+
+复数平面 (Complex Plane) 上的圆周运动:
+
+$$
+e^{ix}=\cos{x}+i\sin{x}
+$$
+
+### Fourier Transform
+
+Time to frequency transform:
+
+$$
+\hat{f}(\xi)=\int_{-\infty}^{\infty}f(t)e^{-2\pi i\xi t}dt
+$$
+
+[![Fourier Transform](./figures/FourierTransform.png)](https://www.youtube.com/watch?v=spUNpyF58BY)
+
+## Linear Algebra
+
+## Probability Theory and Mathematical Statistics
+
+### Central Limit Theorem
+
 ## Multilayer Perceptron
 
 ![Multilayer Perceptron](./figures/MultilayerPerceptron.avif 'Multilayer Perceptron')
@@ -156,7 +182,7 @@ $XX^T$ 为行向量分别与自己和其他两个行向量做内积 (点乘),
 
 :::
 
-Softmaxed([$\sigma(z_i)=\frac{e^{z_i}}{\sum_{j=1}^K{e^{z_j}}}$](https://en.wikipedia.org/wiki/Softmax_function))
+Softmaxed([$\sigma(z_i)=\frac{e^{z_i}}{\sum\limits_{j=1}^K{e^{z_j}}}$](https://en.wikipedia.org/wiki/Softmax_function))
 attention scores, $\text{softmax}(\frac{QK^T}{\sqrt{d_k}})$:
 
 ```python
@@ -303,20 +329,20 @@ class Self_Attention(nn.Module):
         V = self.v(x)  # V: batch_size * seq_len * dim_v
 
         # Q * K.T() # batch_size * seq_len * seq_len
-        atten = nn.Softmax(dim=-1)(torch.bmm(Q, K.permute(0, 2, 1))) * self._norm_fact
+        attention = nn.Softmax(dim=-1)(torch.bmm(Q, K.permute(0, 2, 1))) * self._norm_fact
 
         # Q * K.T() * V # batch_size * seq_len * dim_v
-        output = torch.bmm(atten, V)
+        output = torch.bmm(attention, V)
 
         return output
 
-class Self_Attention_Muti_Head(nn.Module):
+class Self_Attention_Multiple_Head(nn.Module):
     # input : batch_size * seq_len * input_dim
     # q : batch_size * input_dim * dim_k
     # k : batch_size * input_dim * dim_k
     # v : batch_size * input_dim * dim_v
     def __init__(self, input_dim, dim_k, dim_v, nums_head):
-        super(Self_Attention_Muti_Head, self).__init__()
+        super(Self_Attention_Multiple_Head, self).__init__()
         assert dim_k % nums_head == 0
         assert dim_v % nums_head == 0
         self.q = nn.Linear(input_dim, dim_k)
@@ -336,10 +362,10 @@ class Self_Attention_Muti_Head(nn.Module):
         print(Q.size())
 
         # Q * K.T() # batch_size * seq_len * seq_len
-        atten = nn.Softmax(dim=-1)(torch.matmul(Q, K.permute(0, 1, 3, 2)))
+        attention = nn.Softmax(dim=-1)(torch.matmul(Q, K.permute(0, 1, 3, 2)))
 
         # Q * K.T() * V # batch_size * seq_len * dim_v
-        output = torch.matmul(atten, V).reshape(x.shape[0], x.shape[1], -1)
+        output = torch.matmul(attention, V).reshape(x.shape[0], x.shape[1], -1)
 
         return output
 ```
