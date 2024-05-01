@@ -209,6 +209,11 @@ It is used to compute the class scores,
 resulting in a volume of size `1x1x10`,
 where each of the 10 numbers represents a class.
 
+## Recurrent Architecture
+
+CNNs 常用于处理空间结构的数据,
+RNNs 常用于处理时序关系的数据.
+
 ## Residual Architecture
 
 ResNet 通过残差学习解决了深度网络的退化问题 (深度网络的训练问题),
