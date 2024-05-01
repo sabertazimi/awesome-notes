@@ -1625,8 +1625,21 @@ Interaction to Next Paint (INP) 已取代 FID,
 
 - It considers the time between user's interaction and the next paint.
 - Input delay: callback queue blocked by other higher priority tasks.
-- Processing delay: event handler execution time.
+- Processing time: event handler execution time.
 - Presentation delay: rendering and compositing time.
+
+Improve INP for Vanilla.js:
+
+- Reduce:
+  减少不必要的代码,
+  e.g Useless polyfills, redundant animation and transition effects.
+- Defer:
+  推迟不需要在下一个绘制之前运行的代码,
+  e.g Lazy loading, code splitting,
+  defer irrelevant expensive calculations (`requestIdleCallback()`).
+- Optimize:
+  优化必须在下一个绘制之前运行的代码,
+  e.g Debounce, throttle, virtualized Window, time slicing (`yieldToMain()`).
 
 Improve INP in [Next.js](https://www.thisdot.co/blog/improving-inp-in-react-and-next-js):
 
