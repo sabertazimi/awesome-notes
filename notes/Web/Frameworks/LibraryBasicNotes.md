@@ -884,6 +884,8 @@ tags: [Web, Framework, Library]
 
 - [DatePicker](https://github.com/Hacker0x01/react-datepicker):
   Simple and reusable date picker React component.
+- [DatePicker](https://github.com/wojtekmaj/react-date-picker):
+  Moment.js free date picker for React app.
 - [Roulette](https://github.com/effectussoftware/react-custom-roulette):
   Customizable React roulette wheel with spinning animation.
 
@@ -1033,6 +1035,8 @@ tags: [Web, Framework, Library]
 
 ### Calendar Utils
 
+- [Calendar](https://github.com/wojtekmaj/react-calendar):
+  Ultimate calendar for React app.
 - [BigCalendar](https://github.com/intljusticemission/react-big-calendar):
   Google/Outlook like calendar component for React.
 
@@ -1334,7 +1338,7 @@ tags: [Web, Framework, Library]
 ### PDF Utils
 
 - [PDF](https://github.com/wojtekmaj/react-pdf):
-  Display PDFs in React app.
+  Display PDFs in React app as easily as if they were images.
 - [PDF.js](https://github.com/mozilla/pdf.js):
   PDF reader in JavaScript.
 - [PDFMake](https://github.com/bpampuch/pdfmake):
