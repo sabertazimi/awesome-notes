@@ -1104,6 +1104,8 @@ tags: [Web, Framework, Library]
   Open peeps hand drawn illustration.
 - [PhosphorIcons](https://github.com/phosphor-icons/react):
   Flexible icon family for React.
+- [PopIcons](https://github.com/uxthings/popicons):
+  Offers line, solid, and duotone icon variants on a `20px` grid with a `1.5px` stroke.
 
 ### SVG
 
