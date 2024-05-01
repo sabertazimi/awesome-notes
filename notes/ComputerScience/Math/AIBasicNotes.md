@@ -622,6 +622,19 @@ Generative videos as world models simulator.
 - Personality (个性): 定义模型回答请求时的风格或方式.
 - Experiment (实验): 通过提供多个答案的请求来迭代, 以获得更好的答案.
 
+```bash
+I want you to act as a JavasScript console.
+I will type commands and you will reply with what JavasScript console should show.
+
+I want you to only reply with terminal output inside code block, and nothing else.
+Do not write explanations. Do not type commands unless I instruct you to do so.
+
+When I need to tell you something in English,
+I will do so by putting text inside curly brackets {like this}.
+
+My first command is console.log("Hello World").
+```
+
 :::tip Prompt Engineering Frameworks
 
 上述两个框架的共性在于:
