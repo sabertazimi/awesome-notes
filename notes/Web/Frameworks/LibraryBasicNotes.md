@@ -581,12 +581,12 @@ tags: [Web, Framework, Library]
 
 - [FullPage](https://github.com/alvarotrigo/fullPage.js):
   Create full screen pages fast and simple.
-- [InfiniteGrid](https://github.com/naver/egjs-infinitegrid):
-  Arrange card elements including content infinitely on a grid layout.
-- [Tether](https://github.com/shipshapecode/tether):
-  Positioning engine to make overlays, tooltips and dropdowns better.
 - [Split](https://github.com/nathancahill/split):
   Un-opinionated utilities for resizable split views.
+- [InfiniteGrid](https://github.com/naver/egjs-infinitegrid):
+  Arrange card elements including content infinitely on a grid layout.
+- [Spaces](https://github.com/aeagle/react-spaces):
+  Divide page or container into nestable anchored, scrollable and resizable spaces.
 - [Teleport](https://github.com/gregberge/react-teleporter):
   Teleport React components in same React tree.
 
@@ -1087,10 +1087,10 @@ tags: [Web, Framework, Library]
 
 ### Emoji
 
-- [OpenEmoji](https://github.com/hfg-gmuend/openmoji).
 - [TwitterEmoji](https://github.com/twitter/twemoji).
 - [EmojiMart](https://github.com/missive/emoji-mart):
   Emoji picker.
+- [OpenEmoji](https://github.com/hfg-gmuend/openmoji).
 
 ### Icon
 
