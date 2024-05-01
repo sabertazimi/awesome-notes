@@ -5794,7 +5794,7 @@ console.log('glob2')
 
 #### V8 Object Shape
 
-[Shapes and Inline Caches](https://mathiasbynens.be/notes/shapes-ics):
+V8 object [shapes](https://mathiasbynens.be/notes/shapes-ics):
 
 ```ts
 // o1 and o2 have the same shape
@@ -5827,7 +5827,8 @@ Array shape: `Shape('length'), 'length' => 0 Offset, Writable`.
 
 #### V8 Inline Cache
 
-V8 use ICs to memorize information (same shape) where to find properties on objects:
+V8 use [ICs](https://blog.frontend-almanac.com/js-optimisation-ic)
+to memorize information (same shape) where to find properties on objects:
 
 - always initialize objects in the same way (generate the same shape)
 - don't add property to objects dynamically (invalid inline cache)
