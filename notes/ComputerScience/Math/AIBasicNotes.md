@@ -101,6 +101,10 @@ $$
 
 [![Central Limit Theorem](./figures/CentralLimitTheorem.png)](https://www.youtube.com/watch?v=zeJD6dqJ5lo)
 
+更一般化的中心极限定理,
+可参见林德伯格中心极限定理 ([Lindeberg CLT](https://en.wikipedia.org/wiki/Central_limit_theorem#Lindeberg_CLT))
+etc.
+
 ## Multilayer Perceptron
 
 ![Multilayer Perceptron](./figures/MultilayerPerceptron.avif 'Multilayer Perceptron')
