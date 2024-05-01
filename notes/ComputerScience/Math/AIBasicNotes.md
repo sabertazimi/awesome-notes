@@ -38,7 +38,7 @@ $$
 
 [![Fourier Transform](./figures/FourierTransform.png)](https://www.youtube.com/watch?v=spUNpyF58BY)
 
-![Discrete Fourier Transform](./figures/DiscreteFourierTransform.png)
+![Discrete Fourier Transform](./figures/DiscreteFourierTransform.png 'Discrete Fourier Transform')
 
 ## Linear Algebra
 
@@ -61,6 +61,21 @@ $$
 
 正态分布 (又称 Gaussian Distribution) 是一种连续概率分布.
 当 $\mu$ 为 0, $\sigma$ 为 1 时, 称为标准正态分布 (Standard Normal Distribution).
+
+### Gaussian Integral
+
+$$
+\begin{equation}
+  \int_{-\infty}^{\infty}e^{-x^2}dx=\sqrt{\pi}
+\end{equation}
+$$
+
+[高维空间求解](https://zhuanlan.zhihu.com/p/651305078)高斯积分:
+
+[![Gaussian Integral](./figures/GaussianIntegral.png)](https://www.youtube.com/watch?v=cy8r7WSuT1I)
+
+对于正态分布, 系数 $\frac{1}{\sqrt{\pi}}$ 使得概率密度函数的积分为 1,
+即 $\int_{-\infty}^{\infty}f(x)dx=1$, 使其成为有意义的概率分布.
 
 ### Central Limit Theorem
 
