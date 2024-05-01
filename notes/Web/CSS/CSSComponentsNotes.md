@@ -1261,6 +1261,44 @@ Pseudo element switch from circle to circle:
 }
 ```
 
+## TreeView
+
+GitHub tree view [component](https://ishadeed.com/article/tree-view-css-indent):
+
+```html
+<div class="tree-view-item">
+  <div class="spacer"></div>
+  <div class="toggle"></div>
+  <div class="content">
+    <div class="visual"></div>
+    <span class="text">ReactART-test.js.snap</span>
+  </div>
+</div>
+
+<style scoped>
+  .tree-view-item {
+    --toggle-width: 1rem;
+    --spacer-col: calc(calc(var(--level) - 1) * (var(--toggle-width) / 2));
+
+    display: grid;
+    grid-template-areas: 'spacer toggle content';
+    grid-template-columns: var(--spacer-col) var(--toggle-width) 1fr;
+  }
+
+  .spacer {
+    grid-area: spacer;
+  }
+
+  .toggle {
+    grid-area: toggle;
+  }
+
+  .content {
+    grid-area: content;
+  }
+</style>
+```
+
 ## Scroll Effect
 
 ### Parallax Effect
