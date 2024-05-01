@@ -616,7 +616,7 @@ Generative videos as world models simulator.
 
 [CRISPE framework](https://github.com/mattnigh/ChatGPT3-Free-Prompt-List):
 
-- Capacity and role (能力和角色): 定义模型应扮演的角色, 如专家, 创意作家或喜剧演员.
+- Capacity and role (能力和角色): 定义模型应扮演的角色 (`Act as`), 如专家, 创意作家或喜剧演员.
 - Insight (洞察): 提供模型理解请求所需的背景信息和上下文.
 - Statement (声明): 明确模型执行的特定任务.
 - Personality (个性): 定义模型回答请求时的风格或方式.
@@ -645,7 +645,7 @@ Generative videos as world models simulator.
 简化的综合框架:
 
 - 明确任务: 直接指出你需要模型做什么. 例如: "写一个故事", "回答一个问题", "解释一个概念".
-- 设定角色和风格: 简短描述模型应采用的角色和风格. 例如: "像专家一样", "幽默地", "正式地".
+- 设定角色和风格: 简短描述模型应采用的角色和风格 (`Act as`). 例如: "像专家一样", "幽默地", "正式地".
 - 提供背景信息: 给出足够的信息, 让模型了解任务的上下文. 例如: "关于环保", "在古罗马背景下".
 - 指定输出格式: 告诉模型你期望的回答形式. 例如: "一段文本", "列表", "步骤说明".
 
