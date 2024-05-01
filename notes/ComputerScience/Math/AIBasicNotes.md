@@ -800,6 +800,10 @@ Film types:
 - Schlieren, Disposable camera, Polaroid, Instax, Lomo, Pinhole photography.
 - VistaVision, Technirama, Techniscope, Panavision, Ambrotype.
 
+### Prompt Engineering Reference
+
+- [Awesome](https://github.com/f/awesome-chatgpt-prompts) ChatGPT prompts.
+
 ## LLM Toolchain
 
 ### LangChain
