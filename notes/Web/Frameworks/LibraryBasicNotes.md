@@ -58,6 +58,8 @@ tags: [Web, Framework, Library]
   React Vite boilerplate.
 - [Plasmo](https://github.com/PlasmoHQ/plasmo):
   Browser extension framework.
+- [Extension.js](https://github.com/cezaraugusto/extension.js):
+  Plug-and-play, zero-config, cross-browser extension development tool.
 - [ViteSSE](https://github.com/antfu/vitesse-webext):
   Browser Extension Vite starter.
 
