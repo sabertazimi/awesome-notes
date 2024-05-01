@@ -67,6 +67,40 @@ $$
 在自然界与生产中, 一些现象受到许多**相互独立**的随机因素的影响,
 如果每个因素所产生的影响都很微小时, **总影响** (Sum) 可以看作服从正态分布.
 
+相互独立的正态分布, 其和也是正态分布.
+总体正态分布的均值等于各个分布的均值之和,
+$E(X_1+\dots+X_n)=E(X_1)+\dots+E(X_n)=n\mu$.
+假设协方差为 0, 则总体正态分布的方差等于各个分布的方差之和,
+${Var(X_1+\dots+X_n)}={Var(X_1)+\dots+Var(X_n)}={n}\sigma^2$,
+可以得到总体正态分布的标准差为 $\sqrt{n}\sigma$.
+
+设随机变量 $X_1,X_2,\dots,X_n$ 独立同分布(Independent Identically Distribution),
+且均值为 $E(X_i)=\mu$, 方差为 $D(X_i)=\sigma^2$,
+对于任意 $x$, 其分布函数为
+
+$$
+F_n(x)=P\left\{\frac{\sum_{i=1}^n{X_i}-n\mu}{\sqrt{n}\sigma}\leq{x}\right\}
+$$
+
+满足
+
+$$
+\begin{equation}
+  \lim_{n\to\infty}F_n(x)
+  =\lim_{n\to\infty}P\left\{\frac{\sum_{i=1}^n{X_i}-n\mu}{\sqrt{n}\sigma}\leq{x}\right\}
+  =\frac{1}{\sqrt{2\pi}}\int_{-\infty}^x{e^{-\frac{t^2}{2}}dt}
+  =\varnothing(x)
+\end{equation}
+$$
+
+独立同分布的中心极限定理说明, 当 $n$ 足够大时,
+随机变量 $X_n=\sum\limits_{i=1}^n{X_i}$
+近似服从正态分布 $N(n\mu,n\sigma^2)$;
+标准化后的随机变量 $Y_n=\frac{\sum_{i=1}^n{X_i}-n\mu}{\sqrt{n}\sigma}$
+近似服从标准正态分布 $N(0,1)$.
+
+[![Central Limit Theorem](./figures/CentralLimitTheorem.png)](https://www.youtube.com/watch?v=zeJD6dqJ5lo)
+
 ## Multilayer Perceptron
 
 ![Multilayer Perceptron](./figures/MultilayerPerceptron.avif 'Multilayer Perceptron')
