@@ -2000,6 +2000,8 @@ tags: [Web, Framework, Library]
   Create graphs from AMD, CJS or ESM dependencies.
 - [Code2Flow](https://github.com/scottrogowski/code2flow):
   Call graphs generation for dynamic languages.
+- [ASTGrep](https://github.com/ast-grep/ast-grep):
+  Rust CLI tool for code structural search, lint and rewriting.
 
 ### Code Coverage Tools
 
