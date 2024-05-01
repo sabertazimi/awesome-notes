@@ -675,6 +675,254 @@ To improve the relevance and quality of a generative AI output,
 you need to [improve the relevance and quality of the input](https://github.blog/2024-04-04-what-is-retrieval-augmented-generation-and-what-does-it-do-for-generative-ai):
 "Quality in, quality out".
 
+### Image Prompts
+
+Themes:
+
+- Realistic.
+- Realism.
+- Surreal.
+- Surrealism.
+- Unrealistic.
+- Science fiction.
+- Dreamy.
+- Dreampunk.
+- Otherworldly.
+- Abstraction.
+- Fantasy.
+- Dark fantasy.
+- Illusion.
+- Retro.
+- Vintage.
+- Cyberpunk.
+- Rustic.
+- Historic.
+- Futuristic.
+- Sci-fi.
+- Cartoon.
+- Marvel comics.
+- Kawaii.
+- Anime.
+
+Design styles:
+
+- Simple.
+- Detailed.
+- Complex.
+- Multiplex.
+- Chaotic.
+- Surface detail.
+- Minimalist.
+- Maximalist.
+- Ukiyo-e.
+- Ukiyo-e flat design.
+- Patterns.
+- Polka dot.
+- Halftone.
+- 20s, 30s.
+- 1940s, 1950s.
+- Decor, 60s.
+- 1800s, 2020s, 4000s.
+- Pop-art.
+- Hi-fi.
+- Gothic.
+- Painting/Graffiti By artists,
+  e.g `By Van Gogh`, `By Pablo Picasso`, `By Leonardo Da Vinci`, `Graffiti By Banksy`.
+
+Engines:
+
+- Unreal engine.
+- Cinema4D.
+- 4k, 8k, 16k.
+- Ultra-HD.
+- 2-bit, 4-bit, 8-bit, 16-bit.
+- Disney.
+- Pixar.
+- Dreamworks.
+- IMAX.
+- Pixomondo.
+- Vector graphics.
+- 3D model.
+- Lowpoly.
+- Holographic.
+- Digital art.
+- Pixel art.
+- NFT.
+- Clip art.
+- Character design.
+- Wallpaper.
+
+Drawing and art mediums:
+
+- Sketch.
+- Drawing.
+- Hand-drawn.
+- Dot art.
+- Line art.
+- Caricature.
+- Illustration.
+- Pencil art.
+- Charcoal art.
+- Pastel art.
+- Acrylic painting.
+- Oil painting.
+- Watercolor painting.
+- Graffiti.
+- Spray paint.
+- Sticker.
+- Blueprint.
+- Mosaic.
+- Coloring book.
+- Chibi.
+- Paper cut craft.
+
+Colors and palettes:
+
+- Red.
+- Orange.
+- Light-gray.
+- Light-purple.
+- Neutral.
+- Multicolored.
+- Black and white.
+- Monochromatic.
+- Sepia.
+- Dark mode.
+
+Time of the day:
+
+- Golden hour.
+- High noon.
+- Afternoon.
+- Mid-morning.
+- Blue hour.
+- Sunset.
+- Sunrise.
+- Nighttime.
+
+Material properties:
+
+- Transparent.
+- Opaque.
+- Polarized.
+- Prismatic.
+- Glitter.
+- Glowing.
+- Glossy.
+- Shiny.
+- Polished.
+- Melting.
+- Squishy.
+- Dirty.
+
+Materials and textures:
+
+- Stone:
+  pebbles, cobblestone, rock, bedrock, sandstone,
+  marble, gypsum, granite, diorite, andesite.
+- Mineral:
+  coal, sulfur, sodalime, geyserite, ceramic,
+  enamel, asbestos, fossil, perlite, vermiculite,
+  slag, minium, travertine, fulgurite, graphene.
+- Wood:
+  wooden, plywood, particle board, hardboard, lumber, planks,
+  wooden planks, nailed-wood, wood veneer, petrified wood, oak wood,
+  maple wood, acacia-wood, pine-wood, cherry-wood, birch-wood, cedar-wood.
+- Paper:
+  cardboard, corrugated fibre-board, paperboard, construction paper,
+  card-stock, tracing paper, glassine, tissue paper, kraft paper,
+  papyrus, parchment, hemp paper, tar paper.
+- Metal:
+  metallic, rusty, foil, tarnish, tin,
+  copper, pewter, aluminum, bronze, brass,
+  iron, steel, titanium, silver, bismuth.
+- Glass:
+  stained glass, sea-grass, obsidian, fiberglass, crystalline,
+  borax crystal, amethyst, quartz, rose quartz.
+
+Lighting:
+
+- Spotlight.
+- Sunlight.
+- Starlight.
+- Nightlight.
+- Neon lamp.
+- Dot matrix display.
+- Warm light.
+- Hard light.
+- Soft light.
+- Cold light.
+- Neon light.
+
+Geography and culture:
+
+- French-style.
+- Turkish-style.
+- Mayan.
+- Arabic.
+- Nordic mythology.
+
+Shot types:
+
+- Extreme long shot.
+- Long shot.
+- Medium shot.
+- Close-up shot.
+- Extreme close-up shot.
+- Low angle shot.
+- High angle shot.
+- Night shot.
+- Silhouette shot.
+- Wide shot.
+- Overhead shot.
+- Side-view shot.
+- Centered shot.
+- Back-view shot.
+- Selfie.
+
+Views:
+
+- Top-view.
+- Side-view.
+- Satellite-view.
+- View from an airplane.
+- Closeup.
+- Extreme closeup.
+- Epic wide shot.
+- First-person view.
+- Third-person view.
+- Full body.
+- Portrait.
+- Front-view.
+- Bird-view.
+- Macro shot.
+- Macro view.
+- Microscopic.
+- 360 panorama.
+- Ultra-wide angle.
+- 360 angle.
+
+Film types:
+
+- DSLR.
+- Night vision.
+- Drone photography.
+- GoPro video.
+- Unregistered Hypercan 2.
+- Hyper-special imaging.
+- Multi-special imaging.
+- Schlieren.
+- Disposable camera.
+- Polaroid.
+- Instax.
+- Lomo.
+- Pinhole photography.
+- VistaVision.
+- Technirama.
+- Techniscope.
+- Panavision.
+- Ambrotype.
+
 ## LLM Toolchain
 
 ### LangChain
