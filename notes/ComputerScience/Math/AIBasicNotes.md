@@ -588,7 +588,94 @@ $$
 \end{bmatrix}_{d\times{1}}
 $$
 
-## LLM
+## Generative AI
+
+### Generative Video
+
+Generative videos as world models simulator.
+
+## Prompt Engineering
+
+### Elvis Saravia Framework
+
+[Elvis Saravia framework](https://github.com/dair-ai/Prompt-Engineering-Guide):
+
+- Instruction (指令):
+  明确模型需要执行的特定任务, 如生成文本, 翻译语言或创作不同类型的内容.
+- Context (上下文):
+  为模型提供理解请求所需的背景信息.
+  例如, 在要求模型生成特定主题的文本时, 提供有关该主题的信息.
+- Input Data (输入数据):
+  模型处理的具体数据.
+  例如, 在翻译任务中, 提供要翻译的英文句子.
+- Output Indicator (输出指示):
+  指示期望的输出类型或格式.
+  例如, 在文本生成任务中, 指定输出为一段文字.
+
+### CRISPE Framework
+
+[CRISPE framework](https://github.com/mattnigh/ChatGPT3-Free-Prompt-List):
+
+- Capacity and role (能力和角色): 定义模型应扮演的角色, 如专家, 创意作家或喜剧演员.
+- Insight (洞察): 提供模型理解请求所需的背景信息和上下文.
+- Statement (声明): 明确模型执行的特定任务.
+- Personality (个性): 定义模型回答请求时的风格或方式.
+- Experiment (实验): 通过提供多个答案的请求来迭代, 以获得更好的答案.
+
+:::tip Prompt Engineering Frameworks
+
+上述两个框架的共性在于:
+
+- 清晰指示: 任务和角色.
+- 重视上下文信息.
+- 指定输出格式.
+
+:::
+
+### Simple Framework
+
+简化的综合框架:
+
+- 明确任务: 直接指出你需要模型做什么. 例如: "写一个故事", "回答一个问题", "解释一个概念".
+- 设定角色和风格: 简短描述模型应采用的角色和风格. 例如: "像专家一样", "幽默地", "正式地".
+- 提供背景信息: 给出足够的信息, 让模型了解任务的上下文. 例如: "关于环保", "在古罗马背景下".
+- 指定输出格式: 告诉模型你期望的回答形式. 例如: "一段文本", "列表", "步骤说明".
+
+操作指南:
+
+- 步骤1 (明确任务): 思考你需要模型完成的具体任务, 尽量具体. 例如: "请写一个关于节约用水的短故事".
+- 步骤2 (设定角色和风格): 考虑任务最适合的表达方式和语气. 例如: "用一个小孩的视角, 轻松幽默地讲述".
+- 步骤3 (提供背景信息): 如果任务涉及特定的主题或需要特定知识, 提供相关的背景信息. 例如: "在一个干旱的城市里".
+- 步骤4 (指定输出格式): 明确你想要的输出类型. 例如: "三段话, 每段不超过五句话".
+
+```bash
+我要写一个英语学习计划, 请根据下列规则生成一个合适的 Prompt, 然后再输出内容:
+明确任务: 直接指出你需要模型做什么. 例如: "写一个故事", "回答一个问题", "解释一个概念".
+设定角色和风格: 简短描述模型应采用的角色和风格. 例如: "像专家一样", "幽默地", "正式地".
+提供背景信息: 给出足够的信息, 让模型了解任务的上下文. 例如: "关于环保", "在古罗马背景下".
+指定输出格式: 告诉模型你期望的回答形式. 例如: "一段文本", "列表", "步骤说明".
+
+ChatGPT:
+任务: 创建一个学习英语的计划.
+角色和风格: 请像一位经验丰富的语言教师一样, 正式而清晰地提供指导.
+背景信息: 这个计划是为了帮助一个成年人从初级水平提高到中级水平. 他们每周可以投入约 10 小时的学习时间, 目标是提高口语和听力技能.
+输出格式: 请以清晰的列表形式提供, 包括每周的具体学习活动和目标.
+
+我现在是高中水平的英语, 想要通过雅思考试.
+每一部分提供具体的学习资料.
+```
+
+### Prompt Context
+
+检索增强生成, 通常称为 RAG, 是一种强大的聊天机器人的设计模式.
+其中, 检索系统实时获取与查询相关的经过验证的源 / 文档, 并将其输入生成模型 (例如 GPT-4) 以生成响应.
+
+Context is everything when it comes to getting the most out of an AI tool.
+To improve the relevance and quality of a generative AI output,
+you need to [improve the relevance and quality of the input](https://github.blog/2024-04-04-what-is-retrieval-augmented-generation-and-what-does-it-do-for-generative-ai):
+"Quality in, quality out".
+
+## LLM Toolchain
 
 ### LangChain
 
@@ -702,7 +789,7 @@ const agent = createVectorStoreAgent(model, toolkit)
 const result = await agent.invoke({ input: '...' })
 ```
 
-## AI Platform
+### LLM Platform
 
 - OpenAI GPT [API](https://platform.openai.com).
 - Google Gemini [API](https://ai.google.dev).
