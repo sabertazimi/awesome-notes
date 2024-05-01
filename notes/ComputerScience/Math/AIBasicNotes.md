@@ -626,9 +626,16 @@ Generative videos as world models simulator.
 
 上述两个框架的共性在于:
 
-- 清晰指示: 任务和角色.
-- 重视上下文信息.
-- 指定输出格式.
+- Clarity:
+  Clear and concise, ensure LLMs understands topics and generate appropriate responses.
+  Avoid using overly complex or ambiguous language.
+- Focus:
+  Clear purpose and focus, helping to guide the conversation and keep it on track.
+  Avoid using overly broad or open-ended prompts.
+- Relevance:
+  Relevant to the user and the conversation.
+  Avoid introducing unrelated topics that can distract from main focus.
+- 清晰指示任务和角色, 重视上下文信息, 指定输出格式.
 
 :::
 
