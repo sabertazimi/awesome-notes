@@ -398,10 +398,16 @@ tags: [Web, Framework, Library]
   Tailwind components plugin.
 - [FranKen](https://github.com/sveltecult/franken-ui):
   Tailwind components plugin based on ShadCN UI.
-- [Form](https://github.com/tailwindlabs/tailwindcss-forms).
-- [Typography](https://github.com/tailwindlabs/tailwindcss-typography).
-- [AspectRatio](https://github.com/tailwindlabs/tailwindcss-aspect-ratio).
-- [LineClamp](https://github.com/tailwindlabs/tailwindcss-line-clamp).
+- [Form](https://github.com/tailwindlabs/tailwindcss-forms):
+  Basic reset for form styles.
+- [Typography](https://github.com/tailwindlabs/tailwindcss-typography):
+  Beautiful typographic defaults.
+- [AspectRatio](https://github.com/tailwindlabs/tailwindcss-aspect-ratio):
+  Provides composable API for giving elements a fixed aspect ratio.
+- [LineClamp](https://github.com/tailwindlabs/tailwindcss-line-clamp):
+  Provides utilities for visually truncating text after a fixed number of lines.
+- [Fluid](https://github.com/barvian/fluid-tailwind):
+  Fluid `clamp()` plugin for Tailwind that works with every utility.
 
 ### Headless UI Framework
 
