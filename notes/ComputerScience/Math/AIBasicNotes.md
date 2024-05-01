@@ -44,10 +44,28 @@ $$
 
 ## Probability Theory and Mathematical Statistics
 
+### Normal Distribution
+
+若随机变量 $X$ 服从一个位置参数为 $\mu$, 尺度参数为 $\sigma$ 的概率分布,
+且其概率密度函数 (Probability Density Function, PDF) 为:
+
+$$
+\begin{equation}
+  f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
+\end{equation}
+$$
+
+则这个随机变量称为正态随机变量, 正态随机变量服从的分布称为正态分布,
+记作 $X \sim N(\mu,\sigma^2)$, 读作 $X$ 服从 $N(\mu,\sigma^2)$ (正态分布).
+其中 $\mu$ 为均值 (数学期望 Mean), $\sigma$ 为标准差 (Standard Deviation).
+
+正态分布 (又称 Gaussian Distribution) 是一种连续概率分布.
+当 $\mu$ 为 0, $\sigma$ 为 1 时, 称为标准正态分布 (Standard Normal Distribution).
+
 ### Central Limit Theorem
 
 在自然界与生产中, 一些现象受到许多**相互独立**的随机因素的影响,
-如果每个因素所产生的影响都很微小时, 总的影响可以看作服从正态分布.
+如果每个因素所产生的影响都很微小时, **总影响** (Sum) 可以看作服从正态分布.
 
 ## Multilayer Perceptron
 
