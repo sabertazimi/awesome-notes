@@ -1188,8 +1188,12 @@ tags: [Web, Framework, Library]
 
 ### 3D Engine
 
-- [ReactThreeFiber](https://github.com/pmndrs/react-three-fiber):
-  React renderer for Three.js.
+- [Three](https://github.com/pmndrs/react-three-fiber):
+  React renderer `@react-three/fiber` for Three.js.
+- [Drei](https://github.com/pmndrs/drei):
+  Collection of useful helpers and fully functional abstractions for `@react-three/fiber`.
+- [UIKit](https://github.com/pmndrs/uikit):
+  User interfaces for `@react-three/fiber`.
 - [Rapier](https://github.com/pmndrs/react-three-rapier):
   Rapier physics in React.
 - [P5.js](https://github.com/P5-wrapper/react):
@@ -1198,8 +1202,6 @@ tags: [Web, Framework, Library]
   Powerful, beautiful, simple, and open game and rendering engine.
 - [Gala](https://github.com/galacean/engine):
   Web-first and mobile-first high-performance real-time development platform.
-- [Drei](https://github.com/pmndrs/drei):
-  Collection of useful helpers and fully functional abstractions for `@react-three/fiber`.
 - [Mesh](https://github.com/pmndrs/meshline):
   Mesh replacement for `THREE.Line`.
 
