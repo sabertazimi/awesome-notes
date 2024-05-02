@@ -42,14 +42,14 @@ outcomes
 
 $$
 \begin{bmatrix}
-  1 & 1 & 1 & \dots  & 1 \\
+  1 & 1 & 1 & \dots & 1 \\
   1 & e^{\frac{2\pi i}{n}} & e^{\frac{2\pi i(2)}{n}}
-  & \dots  & e^{\frac{2\pi i(n-1)}{n}} \\
+  & \dots & e^{\frac{2\pi i(n-1)}{n}} \\
   1 & e^{\frac{2\pi i(2)}{n}} & e^{\frac{2\pi i(4)}{n}}
-  & \dots  & e^{\frac{2\pi i(2)(n-1)}{n}} \\
+  & \dots & e^{\frac{2\pi i(2)(n-1)}{n}} \\
   \vdots & \vdots & \vdots & \ddots & \vdots \\
   1 & e^{\frac{2\pi i(n-1)}{n}} & e^{\frac{2\pi i(2)(n-1)}{n}}
-  & \dots  & e^{\frac{2\pi i(n-1)(n-1)}{n}} \\
+  & \dots & e^{\frac{2\pi i(n-1)(n-1)}{n}}
 \end{bmatrix}
 $$
 
@@ -141,14 +141,52 @@ etc.
 
 多层感知机是一种前馈神经网络 (Feedforward Neural Network)
 就像是一个模拟大脑处理信息的过程,
-通过多层处理, 从原始数据中提取特征, 并做出预测或分类:
+通过多层处理 (输入层, 隐藏层, 输出层),
+从原始数据中提取特征, 并做出预测或分类,
+它通过调整内部连接权重来学习和改进其预测能力.
 
-- 线性变换:
-  $H=w*x+b$.
-- 激活函数:
-  $y=\sigma(H)$, e.g ReLU (Rectified Linear Unit), Sigmoid,
-  引入非线性特性, 使得网络可以学习和模拟复杂函数.
-- 它通过调整内部连接权重来学习和改进其预测能力.
+### 线性变换
+
+$H=WX+B$:
+
+- $w_{ij}^l$ (`weight`): 第 $l$ 层第 $i$ 个节点与上一层第 $j$ 个节点连接的权重.
+- $b_i^l$ (`bias`): 第 $l$ 层第 $i$ 个节点的偏置.
+
+$$
+H=\begin{bmatrix}
+  w_{00}^l & w_{01}^l & \dots & w_{0n}^l \\
+  w_{10}^l & w_{11}^l & \dots & w_{1n}^l \\
+  \vdots & \vdots & \ddots & \vdots \\
+  w_{k0}^l & w_{k1}^l & \dots & w_{kn}^l
+\end{bmatrix}
+\begin{bmatrix}
+  x_0^{l-1} \\
+  x_1^{l-1} \\
+  \vdots \\
+  x_n^{l-1}
+\end{bmatrix}
++\begin{bmatrix}
+  b_0^l \\
+  b_1^l \\
+  \vdots \\
+  b_k^l
+\end{bmatrix}
+$$
+
+:::tip Learning
+
+Learning is the process of finding the right weights and biases.
+
+:::
+
+### 激活函数
+
+激活函数 $y=\sigma(H)$:
+
+- 引入非线性特性, 使得网络可以学习和模拟复杂函数.
+- ReLU: Rectified Linear Unit.
+- Sigmoid: $\sigma(x)=\frac{1}{1+e^{-x}}$.
+  归一化函数, 使得输出值在 0 到 1 之间, 可以使得整个网络成为概率模型.
 
 ## Convolutional Architecture
 
