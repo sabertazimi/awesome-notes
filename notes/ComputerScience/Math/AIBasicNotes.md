@@ -30,15 +30,30 @@ $$
 \end{equation}
 $$
 
+Discrete Fourier Transform (DFT):
+
 $$
 \begin{equation}
   X[k]=\sum\limits_{n=0}^{N-1}x_n e^{-\frac{i2\pi}{N}kn}
 \end{equation}
 $$
 
-[![Fourier Transform](./figures/FourierTransform.png)](https://www.youtube.com/watch?v=spUNpyF58BY)
+outcomes
 
-![Discrete Fourier Transform](./figures/DiscreteFourierTransform.png 'Discrete Fourier Transform')
+$$
+\begin{bmatrix}
+  1 & 1 & 1 & \dots  & 1 \\
+  1 & e^{\frac{2\pi i}{n}} & e^{\frac{2\pi i(2)}{n}}
+  & \dots  & e^{\frac{2\pi i(n-1)}{n}} \\
+  1 & e^{\frac{2\pi i(2)}{n}} & e^{\frac{2\pi i(4)}{n}}
+  & \dots  & e^{\frac{2\pi i(2)(n-1)}{n}} \\
+  \vdots & \vdots & \vdots & \ddots & \vdots \\
+  1 & e^{\frac{2\pi i(n-1)}{n}} & e^{\frac{2\pi i(2)(n-1)}{n}}
+  & \dots  & e^{\frac{2\pi i(n-1)(n-1)}{n}} \\
+\end{bmatrix}
+$$
+
+[![Fourier Transform](./figures/FourierTransform.png)](https://www.youtube.com/watch?v=spUNpyF58BY)
 
 ## Linear Algebra
 
