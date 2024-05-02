@@ -817,6 +817,81 @@ li:first-child:nth-last-child(n + 2):nth-last-child(-n + 6) ~ li {
 }
 ```
 
+Use `:has()` selector for [conditional styling](https://www.smashingmagazine.com/2024/05/combining-css-has-html-select-conditional-styling):
+
+```css
+:root {
+  &:has(.size-selector [value='xs']:checked) {
+    --font-size: 0.8em;
+  }
+
+  &:has(.size-selector [value='s']:checked) {
+    --font-size: 0.9em;
+  }
+
+  &:has(.size-selector [value='m']:checked) {
+    --font-size: 1em;
+  }
+
+  &:has(.size-selector [value='l']:checked) {
+    --font-size: 1.2em;
+  }
+
+  &:has(.size-selector [value='xl']:checked) {
+    --font-size: 1.5em;
+  }
+
+  &:has(.theme-selector [value='dark']:checked) {
+    --background: #000;
+    --color: #fff;
+    --line-color: hotpink;
+  }
+
+  &:has(.theme-selector [value='light']:checked) {
+    --background: #ddd;
+    --color: #000;
+    --line-color: darkgoldenrod;
+    --button-background: #0001;
+  }
+
+  &:has(.theme-selector [value='colorful']:checked) {
+    --background: linear-gradient(60deg, maroon, darkblue);
+    --color: #aff;
+    --line-color: #f55;
+    --content-background: #0004;
+  }
+}
+
+body {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  margin: 0;
+  font-size: var(--font-size, 1em);
+  color: var(--color);
+  background: var(--background);
+}
+
+h1 {
+  text-decoration: underline;
+  text-decoration-color: var(--line-color, currentcolor);
+}
+
+button {
+  padding: 1em 2em;
+  color: var(--color);
+  background-color: var(--button-background, #fff3);
+  border: 2px solid var(--line-color, currentcolor);
+}
+
+section {
+  width: 100%;
+  max-width: 50ch;
+  padding: 2em;
+  background-color: var(--content-background, none);
+}
+```
+
 ### Linguistic Pseudo Class
 
 - `:dir(ltr)`/`:dir(rtl)`.
