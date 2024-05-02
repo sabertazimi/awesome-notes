@@ -459,8 +459,8 @@ tags: [Web, Framework, Library]
 
 ### CSS Design Tools
 
-- [Awesome](https://github.com/LisaDziuba/Awesome-Design-Tools):
-  Awesome design tools.
+- [Tools](https://github.com/LisaDziuba/Awesome-Design-Tools):
+  Curated list of design tools.
 - [CodyHouse](https://codyhouse.co):
   CodyHouse components.
 - [Create](https://cccreate.co).
@@ -1824,7 +1824,7 @@ tags: [Web, Framework, Library]
 
 ### BaaS
 
-- [AwesomeCloudflare](https://github.com/zhuima/awesome-cloudflare):
+- [Cloudflare](https://github.com/zhuima/awesome-cloudflare):
   Cloudflare free toolkits and resources.
 - [Firebase](https://github.com/firebase/quickstart-js):
   App development platform.
@@ -1865,10 +1865,16 @@ tags: [Web, Framework, Library]
   LLM framework.
 - [Transformers](https://github.com/xenova/transformers.js):
   Run HuggingFace transformers directly in browser.
+- [OLlamaUI](https://github.com/open-webui/open-webui):
+  User-friendly web UI for LLMs.
 - [Vercel.ai](https://github.com/vercel/ai):
   Build AI-powered web applications.
 - [TypeChat](https://github.com/microsoft/TypeChat):
   Makes it easy to build natural language interfaces.
+- [LocalLLMs](https://github.com/vince-lam/awesome-local-llms):
+  Curated list of locally running LLMs.
+- [OLlama](https://github.com/ollama/ollama):
+  Get up and running large language models locally.
 - [Jan](https://github.com/janhq/jan):
   Offline local ChatGPT.
 
@@ -1922,8 +1928,8 @@ tags: [Web, Framework, Library]
   Free translation copilot.
 - [ZipZap](https://microsoftedge.microsoft.com/addons/detail/efjbjbiikanoebecldljpjddfhjfmnob):
   Multilingual translation copilot.
-- [AwesomeCodeAI](https://github.com/sourcegraph/awesome-code-ai):
-  Coding copilot awesome list.
+- [CodeAI](https://github.com/sourcegraph/awesome-code-ai):
+  Curated list of coding copilot.
 
 ### AI Agent
 
