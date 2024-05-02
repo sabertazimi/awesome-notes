@@ -232,16 +232,21 @@ CNNs are a class of deep neural networks,
 most commonly applied to analyzing visual imagery.
 They are also known as ConvNets.
 
-- Convolutional Layer:
-  apply a convolution operation to the input,
-  passing the results to the next layer.
-- Pooling Layer:
-  down-samples the input representation,
-  reducing its dimensionality.
-- Fully Connected Layer:
-  compute the class scores,
-  resulting in a volume of size `1x1x10`,
-  where each of the 10 numbers represents a class.
+- Input Layer (输入层):
+  raw pixel values of an image.
+- Hidden Layers (隐藏层):
+  - Convolutional Layer (卷积层):
+    apply a convolution operation to the input,
+    passing the results to the next layer.
+  - Pooling Layer (池化层):
+    down-samples the input representation,
+    reducing its dimensionality.
+  - Fully Connected Layer (全连接层):
+    compute the class scores,
+    resulting in a volume of size `1x1x10`,
+    where each of the 10 numbers represents a class.
+- Output Layer (输出层):
+  class scores.
 
 ### Convolutional Layer
 
