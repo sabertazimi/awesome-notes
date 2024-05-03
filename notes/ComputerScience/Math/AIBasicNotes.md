@@ -242,13 +242,13 @@ $$
 &=\delta_i^l\cdot\sigma'(z_i^l) \\
 
 \frac{\partial{L}}{\partial{x_j^{l-1}}}
-&=\sum\limits_{i=0}^{n_l-1}\frac{\partial{L}}{\partial{x_i^l}}\cdot
+&=\sum\limits_{i=0}^{N_l-1}\frac{\partial{L}}{\partial{x_i^l}}\cdot
   \frac{\partial{x_i^l}}{\partial{z_i^l}}\cdot
   \frac{\partial{z_i^l}}{\partial{x_j^{l-1}}} \\
-&=\sum\limits_{i=0}^{n_l-1}\frac{\partial{L}}{\partial{x_i^l}}\cdot
+&=\sum\limits_{i=0}^{N_l-1}\frac{\partial{L}}{\partial{x_i^l}}\cdot
   \frac{\partial{\sigma(z_i^l)}}{\partial{z_i^l}}\cdot
   \frac{\partial(W_i^lX^{l-1}+b_i^l)}{\partial{x_j^{l-1}}} \\
-&=\sum\limits_{i=0}^{n_l-1}\delta_i^l\cdot\sigma'(z_i^l)\cdot{w_{ij}^l}
+&=\sum\limits_{i=0}^{N_l-1}\delta_i^l\cdot\sigma'(z_i^l)\cdot{w_{ij}^l}
 \end{split}
 $$
 
@@ -563,14 +563,46 @@ $XX^T$ 为行向量分别与自己和其他两个行向量做内积 (点乘),
 表征一个向量在另一个向量上的投影,
 投影的值大, 说明两个向量相关度高 (Relevance/Similarity).
 
+$$
+\begin{bmatrix}
+v_1 \\ v_2 \\ v_3 \\ \vdots \\ v_n
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+w_1 \\ w_2 \\ w_3 \\ \vdots \\ w_n
+\end{bmatrix}
+=v_1w_1+v_2w_2+v_3w_3+\dots+v_nw_n
+$$
+
 :::
 
-Softmaxed([$\sigma(z_i)=\frac{e^{z_i}}{\sum\limits_{j=1}^K{e^{z_j}}}$](https://en.wikipedia.org/wiki/Softmax_function))
-attention scores, $\text{softmax}(\frac{QK^T}{\sqrt{d_k}})$:
+Softmaxed attention scores,
+$\text{softmax}(\frac{QK^T}{\sqrt{d_k}})$:
 
 ```python
 softmax([2, 4, 4]) = [0.0, 0.5, 0.5]
 ```
+
+:::tip Softmax
+
+[`softmax`](https://en.wikipedia.org/wiki/Softmax_function) function:
+
+$$
+\begin{equation}
+  \sigma(z_i)=\frac{e^{z_i/T}}{\sum_{j=1}^K{e^{z_j/T}}}
+\end{equation}
+$$
+
+其中, $T$ 为温度参数 (Temperature Parameter),
+用于控制 `softmax` 函数的输出分布的`陡峭`程度:
+
+- $T=1$ 时, `softmax` 函数退化为标准形式.
+- $T>1$ 时, `softmax` 函数输出分布更加`平缓`.
+- $T<1$ 时, `softmax` 函数输出分布更加`陡峭`.
+- $T\to0$ 时, `softmax` 函数退化为 `argmax` 函数,
+  输出分布中只有一个元素为 1, 其他元素为 0.
+
+:::
 
 :::tip $\sqrt{d_k}$
 
@@ -601,7 +633,9 @@ Output 3: [2.0, 7.8, 0.3]
 :::tip $QK^TV$
 
 Self-attention 中的 $QKV$ 思想,
-另一个层面是想要构建一个具有全局语义整合功能的数据库.
+另一个层面是想要构建一个具有全局语义 (Context) 整合功能的数据库,
+使得 Context Size 内的每个元素都能够`看到`其他元素的信息,
+从而能够更好地进行决策.
 
 :::
 
