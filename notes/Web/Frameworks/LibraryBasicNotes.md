@@ -1204,6 +1204,8 @@ tags: [Web, Framework, Library]
   Web-first and mobile-first high-performance real-time development platform.
 - [Mesh](https://github.com/pmndrs/meshline):
   Mesh replacement for `THREE.Line`.
+- [Threlte](https://github.com/threlte/threlte):
+  3D framework for Svelte.
 
 ## Media
 
