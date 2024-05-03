@@ -1284,16 +1284,18 @@ tags: [Web, Framework, Library]
 
 - [MJ-ML](https://github.com/mjmlio/mjml):
   Responsive email framework.
+- [Email](https://github.com/resend/react-email):
+  Modern, high-quality and unstyled React components for creating emails.
 - [Mailing](https://github.com/successor-software/mailing):
   Build, test, send emails with React.
-- [MailSpring](https://github.com/Foundry376/Mailspring):
-  Beautiful, fast and fully mail client for macOS, Windows and Linux.
 - [Mailer](https://github.com/nodemailer/nodemailer):
   Send emails with Node.js.
 - [MailParser](https://github.com/nodemailer/mailparser):
   Decode mime formatted emails.
 - [MailGen](https://github.com/eladnava/mailgen):
   Generates clean, responsive HTML emails with Node.js
+- [MailSpring](https://github.com/Foundry376/Mailspring):
+  Beautiful, fast and fully mail client for macOS, Windows and Linux.
 - [Exists](https://github.com/reacherhq/check-if-email-exists):
   Check if an email address exists without sending any email, written in Rust.
 
