@@ -165,7 +165,7 @@ tags: [Web, Framework, Library]
   Redux framework.
 - [Reselect](https://github.com/reduxjs/reselect):
   Selector library for Redux.
-- [ImmerJS](https://github.com/immerjs/immer):
+- [Immer](https://github.com/immerjs/immer):
   Create next immutable state by mutating current one.
 
 ### Atom State Management
@@ -246,7 +246,7 @@ tags: [Web, Framework, Library]
   jQuery lite.
 - [HappyDOM](https://github.com/capricorn86/happy-dom):
   Browser native API.
-- [ConstructJS](https://github.com/francisrstokes/construct-js):
+- [Construct](https://github.com/francisrstokes/construct-js):
   Byte-level data structures.
 - [Toolbox](https://github.com/Maximization/nodejs-toolbox-catalog):
   Catalog of categories and libraries for Node.js.
@@ -255,7 +255,7 @@ tags: [Web, Framework, Library]
 
 - [HyperFormula](https://github.com/handsontable/hyperformula):
   Excel-like calculation engine.
-- [DanFoJS](https://github.com/javascriptdata/danfojs):
+- [DanFo.js](https://github.com/javascriptdata/danfojs):
   High performance structured data manipulating and processing.
 
 ### String Utils
@@ -306,7 +306,7 @@ tags: [Web, Framework, Library]
 
 ### Functional Programming Utils
 
-- [ImmerJS](https://github.com/immerjs/immer):
+- [Immer](https://github.com/immerjs/immer):
   Create next immutable state by mutating current one.
 - [ProxyMemoize](https://github.com/dai-shi/proxy-memoize):
   Intuitive magical memoization with proxy and weakmap.
@@ -973,7 +973,7 @@ tags: [Web, Framework, Library]
 - [GSAP](https://github.com/greensock/GSAP):
   Greensock animation platform.
 - [Popmotion](https://github.com/popmotion/popmotion).
-- [TweenJS](https://github.com/tweenjs/tween.js):
+- [Tween.js](https://github.com/tweenjs/tween.js):
   TypeScript animation engine.
 - [Lottie](https://github.com/airbnb/lottie-web):
   Airbnb AE solution.
@@ -984,7 +984,7 @@ tags: [Web, Framework, Library]
   Smooth 3D tilt JavaScript library.
 - [CountUp](https://github.com/glennreyes/react-countup):
   Count up animation.
-- [TheatreJS](https://github.com/theatre-js/theatre):
+- [Theatre.js](https://github.com/theatre-js/theatre):
   3D scene and motion design editor.
 - [AutoAnimate](https://github.com/formkit/auto-animate):
   Zero-config and drop-in animation utility.
@@ -1453,20 +1453,20 @@ tags: [Web, Framework, Library]
   Modern WYSIWYG editor built for compatibility and extensibility.
 - [Slate](https://github.com/ianstormtaylor/slate):
   Customizable rich text editor framework.
-- [EditorJS](https://github.com/codex-team/editor.js):
+- [Editor.js](https://github.com/codex-team/editor.js):
   Block-styled rich text editor.
-- [TinyMCE](https://github.com/tinymce/tinymce):
-  World #1 JavaScript library for rich text editing.
+- [TipTap](https://github.com/ueberdosis/tiptap):
+  Collaborative and headless WYSIWYG text editor framework.
 - [Lexical](https://github.com/facebook/lexical):
   Extensible text editor framework that provides reliability, accessibility and performance.
 - [Verbum](https://github.com/ozanyurtsever/verbum):
   Fully flexible text editor based on Lexical framework.
-- [TipTap](https://github.com/ueberdosis/tiptap):
-  Collaborative and headless WYSIWYG text editor framework.
-- [ProseMirror](https://github.com/ProseMirror/prosemirror-view):
-  Collaborative and semantic rich text editing.
+- [TinyMCE](https://github.com/tinymce/tinymce):
+  World #1 JavaScript library for rich text editing.
 - [ReactPage](https://github.com/react-page/react-page):
   Highly customizable WYSIWYG content editor.
+- [ProseMirror](https://github.com/ProseMirror/prosemirror-view):
+  Collaborative and semantic rich text editing.
 
 ### Markdown Editor
 
@@ -1547,7 +1547,7 @@ tags: [Web, Framework, Library]
 
 ### Language Parser
 
-- [UnifiedJS](https://github.com/unifiedjs/unified):
+- [Unified](https://github.com/unifiedjs/unified):
   Interface for parsing, inspecting, transforming
   and serializing content through syntax trees.
 - [HTML](https://github.com/fb55/htmlparser2).
@@ -1797,7 +1797,7 @@ tags: [Web, Framework, Library]
 - [CORS](https://github.com/expressjs/cors).
 - [CookieSession](https://github.com/expressjs/cookie-session).
 - [JWT](https://github.com/auth0/node-jsonwebtoken).
-- [PassportJS](https://github.com/jaredhanson/passport):
+- [Passport](https://github.com/jaredhanson/passport):
   Simple, unobtrusive authentication.
 - [FileUpload](https://github.com/richardgirges/express-fileupload).
 - [HTTPProxy](https://github.com/chimurai/http-proxy-middleware).
@@ -2098,7 +2098,7 @@ tags: [Web, Framework, Library]
 - [WebPageTest](https://github.com/WPO-Foundation/webpagetest-github-action).
 - [MemLab](https://github.com/facebookincubator/memlab):
   Memory leaks and heap snapshots analysis framework.
-- [PerfumeJS](https://github.com/zizzamia/perfume.js):
+- [Perfume.js](https://github.com/zizzamia/perfume.js):
   Measuring performance vitals metrics.
 - [Clinic](https://github.com/clinicjs/node-clinic):
   Diagnoses Node.js performance issues.
