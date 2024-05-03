@@ -1982,7 +1982,7 @@ tags: [Web, Framework, Library]
   Next generation browser and mobile automation test framework.
 - [WebHint](https://github.com/webhintio/hint).
 - [TestCafe](https://github.com/DevExpress/testcafe):
-  Automate end-to-end web testing.
+  Automate end-to-end web testing for Node.js.
 
 ### Headless Automation Tools
 
