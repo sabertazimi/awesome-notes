@@ -638,9 +638,7 @@ tags: [Web, Framework, Library]
 - [NiceModal](https://github.com/eBay/nice-modal-react):
   Ebay React modal manager.
 
-### Information and Message
-
-#### Prompt and Toast
+### Prompt and Toast
 
 - [SweetAlert](https://github.com/sweetalert2/sweetalert2):
   Responsive, highly customizable and accessible (WAI-ARIA) alert.
@@ -655,7 +653,7 @@ tags: [Web, Framework, Library]
 - [Novu](https://github.com/novuhq/novu):
   Notification infrastructure for developers.
 
-#### Tooltip
+### Tooltip
 
 - [Floating](https://github.com/floating-ui/floating-ui):
   Low-level toolkit to create interactive floating elements.
@@ -663,6 +661,11 @@ tags: [Web, Framework, Library]
   React tooltip component.
 - [Hint.css](https://github.com/chinchang/hint.css):
   CSS only tooltip library.
+
+### Tag
+
+- [Tagify](https://github.com/yaireo/tagify):
+  Lightweight, efficient Tags input component.
 
 ### Guide
 
