@@ -577,19 +577,6 @@ tags: [Web, Framework, Library]
 
 ## Components
 
-### Layout
-
-- [FullPage](https://github.com/alvarotrigo/fullPage.js):
-  Create full screen pages fast and simple.
-- [Split](https://github.com/nathancahill/split):
-  Un-opinionated utilities for resizable split views.
-- [InfiniteGrid](https://github.com/naver/egjs-infinitegrid):
-  Arrange card elements including content infinitely on a grid layout.
-- [Spaces](https://github.com/aeagle/react-spaces):
-  Divide page or container into nestable anchored, scrollable and resizable spaces.
-- [Teleport](https://github.com/gregberge/react-teleporter):
-  Teleport React components in same React tree.
-
 ### Navigation
 
 - [Hamburger](https://github.com/luukdv/hamburger-react):
@@ -665,7 +652,7 @@ tags: [Web, Framework, Library]
 ### Tag
 
 - [Tagify](https://github.com/yaireo/tagify):
-  Lightweight, efficient Tags input component.
+  Lightweight, efficient tags input component.
 
 ### Guide
 
@@ -749,6 +736,28 @@ tags: [Web, Framework, Library]
 - [Cleave](https://github.com/nosir/cleave-zen):
   Input format checker.
 
+### Layout
+
+- [FullPage](https://github.com/alvarotrigo/fullPage.js):
+  Create full screen pages fast and simple.
+- [Split](https://github.com/nathancahill/split):
+  Un-opinionated utilities for resizable split views.
+- [Allotment](https://github.com/johnwalley/allotment):
+  Resizable split views.
+- [Spaces](https://github.com/aeagle/react-spaces):
+  Divide page or container into nestable anchored, scrollable and resizable spaces.
+- [Teleport](https://github.com/gregberge/react-teleporter):
+  Teleport React components in same React tree.
+
+### Grid
+
+- [InfiniteGrid](https://github.com/naver/egjs-infinitegrid):
+  Arrange card elements including content infinitely on a grid layout.
+- [ReactGridLayout](https://github.com/react-grid-layout/react-grid-layout):
+  Drag and drop grid layout for React.
+- [VueGridLayout](https://github.com/jbaysolutions/vue-grid-layout):
+  Drag and drop grid layout for Vue.
+
 ### List
 
 - [Sortable](https://github.com/RubaXa/Sortable).
@@ -784,13 +793,6 @@ tags: [Web, Framework, Library]
   Complete Excel-like calculation engine written in TypeScript.
 - [TypedXLSX](https://github.com/ChronicStone/typed-xlsx):
   Effortlessly export any data into XLSX sheets with type-safety and awesome DX.
-
-### Grid
-
-- [ReactGridLayout](https://github.com/react-grid-layout/react-grid-layout):
-  Drag and drop grid layout for React.
-- [VueGridLayout](https://github.com/jbaysolutions/vue-grid-layout):
-  Drag and drop grid layout for Vue.
 
 ### Tree
 
