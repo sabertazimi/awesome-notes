@@ -936,26 +936,28 @@ tags: [Web, Framework, Library]
 
 ### Mouse and Touch Utils
 
-- [UseGesture](https://github.com/pmndrs/use-gesture):
-  Component-tied mouse and touch gestures.
 - [DnD](https://github.com/react-dnd/react-dnd):
   Drag and drop for React.
-- [BeautifulDnD](https://github.com/atlassian/react-beautiful-dnd):
-  Beautiful and accessible drag and drop for lists with React.
-- [Craft.js](https://github.com/prevwong/craft.js):
-  Building extensible drag and drop page editors.
+- [Draggable](https://github.com/Shopify/draggable):
+  JavaScript drag and drop library.
+- [DnDKit](https://github.com/clauderic/dnd-kit):
+  Modern, lightweight, performant, accessible and extensible drag and drop toolkit.
+- [PragmaticDnD](https://github.com/atlassian/pragmatic-drag-and-drop):
+  Fast drag and drop for any experience on any tech stack.
+- [UseGesture](https://github.com/pmndrs/use-gesture):
+  Component-tied mouse and touch gestures.
 - [Interact.js](https://github.com/taye/interact.js):
   Drag and drop, resizing and multi-touch gestures.
 - [Moveable](https://github.com/daybrush/moveable):
   Drag, resize, scala, rotate, warp, pinch, group, snap.
+- [Craft.js](https://github.com/prevwong/craft.js):
+  Building extensible drag and drop page editors.
 - [DFlex](https://github.com/dflex-js/dflex):
   Sophisticated drag and drop library.
 - [AnyTouch](https://github.com/any86/any-touch):
   Small touch gesture library compatible with PC and mobile.
 - [Zoom](https://github.com/retyui/react-quick-pinch-zoom):
   Multi-touch gestures for zooming and dragging for React.
-- [Allotment](https://github.com/johnwalley/allotment):
-  Resizable split views.
 
 ### Cursor Utils
 
