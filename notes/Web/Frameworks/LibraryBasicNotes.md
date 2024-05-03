@@ -1403,6 +1403,8 @@ tags: [Web, Framework, Library]
   Simple JSON database.
 - [CR-SQLite](https://github.com/vlcn-io/cr-sqlite):
   Convergent and replicated SQLite with multi-writer and CRDT support.
+- [SQLite3](https://github.com/WiseLibs/better-sqlite3):
+  Fastest and simplest library for SQLite3 in Node.js.
 
 ## Search
 
