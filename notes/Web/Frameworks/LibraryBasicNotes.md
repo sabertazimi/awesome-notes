@@ -801,7 +801,7 @@ tags: [Web, Framework, Library]
 - [ComplexTree](https://github.com/lukasbach/react-complex-tree):
   Accessible tree component with multi-select and drag-and-drop.
 
-### Charts Visualization
+### Chart Visualization
 
 - [D3](https://github.com/d3/d3):
   Bring data to life with SVG, canvas and HTML.
@@ -837,6 +837,8 @@ tags: [Web, Framework, Library]
   Build charts and dashboards.
 - [Ripple](https://github.com/andrewcourtice/ripl):
   Unified API for high performance 2D graphics rendering and interactive data visualization.
+- [LayerCake](https://github.com/mhkeller/layercake):
+  Graphics framework for Svelte.
 
 ### Charts Draw Utils
 
