@@ -145,9 +145,9 @@ etc.
 从原始数据中提取特征, 并做出预测或分类,
 它通过调整内部连接权重来学习和改进其预测能力.
 
-### 线性变换
+### Linear Mapping
 
-$H=WX+B$:
+线性变换 $H^l=W^lX^{l-1}+B^l$:
 
 - $w_{ij}^l$ (`weight`): 第 $l$ 层第 $i$ 个节点与上一层第 $j$ 个节点连接的权重.
 - $b_i^l$ (`bias`): 第 $l$ 层第 $i$ 个节点的偏置.
@@ -173,18 +173,18 @@ H=\begin{bmatrix}
 \end{bmatrix}
 $$
 
-### 激活函数
+### Activation Function
 
-激活函数 $y=\sigma(H)$:
+激活函数 $y=\sigma(H)$, $X^l=\sigma(H^l)$:
 
 - 引入非线性特性, 使得网络可以学习和模拟复杂函数.
 - ReLU (Rectified Linear Unit, 线性整流单元): $\sigma(H)=\max(0,H)$.
 - Sigmoid: $\sigma(H)=\frac{1}{1+e^{-H}}$.
 - e.g 归一化函数, 使得输出值在 0 到 1 之间, 可以使得整个网络成为概率模型.
 
-### 损失函数
+### Loss Function
 
-损失函数 (Loss Function) $L(y,\hat{y})$:
+损失函数 $L(y,\hat{y})$:
 
 - 用于衡量真实值(或人工标注值) $y$ 与模型预测值 $\hat{y}$ 之间的差异.
 - 常见的损失函数有均方误差 (Mean Squared Error, MSE) 和交叉熵 (Cross Entropy).
@@ -198,9 +198,10 @@ finally find out the right weights and biases.
 
 :::
 
-### 梯度下降
+### Gradient Descent
 
-通过梯度下降 (Gradient Descent) 算法, 优化损失函数, 使其最小化:
+通过[梯度下降算法](https://www.3blue1brown.com/lessons/gradient-descent),
+优化损失函数, 使其最小化 (沿梯度下降方向, 调整 W 和 B):
 
 $$
 \begin{equation}
@@ -211,13 +212,59 @@ $$
 其中, $\alpha$ 为学习率, $L$ 为损失函数, $\nabla{L}$ 为损失函数的梯度,
 $\theta$ 为模型参数, $t$ 为迭代次数.
 
-### 反向传播
+### Backpropagation
 
-反向传播 (Backpropagation) 算法:
-通过链式法则, 计算梯度.
-从最小化损失函数出发, 由输出层到输入层, 计算每一层的梯度, 从而更新权重和偏置.
+[反向传播算法](https://www.3blue1brown.com/lessons/backpropagation-calculus):
+从最小化损失函数出发, 由输出层到输入层, 通过链式法则, 计算每一层的梯度, 从而更新权重和偏置.
 
-[![Backpropagation](./figures/Backpropagation.png)](https://www.3blue1brown.com/lessons/backpropagation-calculus)
+![Backpropagation](./figures/Backpropagation.png 'Backpropagation')
+
+Chain rule (链式法则):
+
+$$
+\begin{split}
+\frac{\partial{L}}{\partial{w_{ij}^l}}
+&=\frac{\partial{L}}{\partial{x_i^l}}\cdot
+  \frac{\partial{x_i^l}}{\partial{z_i^l}}\cdot
+  \frac{\partial{z_i^l}}{\partial{w_{ij}^l}} \\
+&=\frac{\partial{L}}{\partial{x_i^l}}\cdot
+  \frac{\partial{\sigma(z_i^l)}}{\partial{z_i^l}}\cdot
+  \frac{\partial(X^{l-1}W_i^l+b_i^l)}{\partial{w_{ij}^l}} \\
+&=\delta_i^l\cdot\sigma'(z_i^l)\cdot{x_j^{l-1}} \\
+
+\frac{\partial{L}}{\partial{b_i^l}}
+&=\frac{\partial{L}}{\partial{x_i^l}}\cdot
+  \frac{\partial{x_i^l}}{\partial{z_i^l}}\cdot
+  \frac{\partial{z_i^l}}{\partial{b_i^l}} \\
+&=\frac{\partial{L}}{\partial{x_i^l}}\cdot
+  \frac{\partial{\sigma(z_i^l)}}{\partial{z_i^l}}\cdot
+  \frac{\partial(b_i^l+W_i^lX^{l-1})}{\partial{b_i^l}} \\
+&=\delta_i^l\cdot\sigma'(z_i^l) \\
+
+\frac{\partial{L}}{\partial{x_j^{l-1}}}
+&=\sum\limits_{i=0}^{n_l-1}\frac{\partial{L}}{\partial{x_i^l}}\cdot
+  \frac{\partial{x_i^l}}{\partial{z_i^l}}\cdot
+  \frac{\partial{z_i^l}}{\partial{x_j^{l-1}}} \\
+&=\sum\limits_{i=0}^{n_l-1}\frac{\partial{L}}{\partial{x_i^l}}\cdot
+  \frac{\partial{\sigma(z_i^l)}}{\partial{z_i^l}}\cdot
+  \frac{\partial(W_i^lX^{l-1}+b_i^l)}{\partial{x_j^{l-1}}} \\
+&=\sum\limits_{i=0}^{n_l-1}\delta_i^l\cdot\sigma'(z_i^l)\cdot{w_{ij}^l}
+\end{split}
+$$
+
+outcomes
+
+$$
+\begin{equation}
+\nabla{L}=\begin{bmatrix}
+  \frac{\partial{L}}{\partial{w^1}} \\[0.8em]
+  \frac{\partial{L}}{\partial{b^1}} \\[0.5em]
+  \vdots \\[0.5em]
+  \frac{\partial{L}}{\partial{w^l}} \\[0.8em]
+  \frac{\partial{L}}{\partial{b^l}}
+\end{bmatrix}
+\end{equation}
+$$
 
 ```python
 class Network(object):
@@ -746,15 +793,15 @@ outcomes
 
 $$
 \vec{p_t} = \begin{bmatrix}
-\sin({\omega_1}\cdot{t})\\
-\cos({\omega_1}\cdot{t})\\
+\sin({\omega_1}\cdot{t}) \\
+\cos({\omega_1}\cdot{t}) \\
 \\
-\sin({\omega_2}\cdot{t})\\
-\cos({\omega_2}\cdot{t})\\
+\sin({\omega_2}\cdot{t}) \\
+\cos({\omega_2}\cdot{t}) \\
 \\
-\vdots\\
+\vdots \\
 \\
-\sin({\omega_{d/2}}\cdot{t})\\
+\sin({\omega_{d/2}}\cdot{t}) \\
 \cos({\omega_{d/2}}\cdot{t})
 \end{bmatrix}_{d\times{1}}
 $$
