@@ -143,6 +143,8 @@ tags: [Web, Framework, Library]
   Portable and lightweight cross-platform C++ application.
 - [WasmER](https://github.com/wasmerio/wasmer):
   Leading WASM runtime.
+- [DioXus](https://github.com/dioxuslabs/dioxus):
+  Fullstack GUI library for web, desktop, mobile, and more.
 
 ### Mobile Solution
 
