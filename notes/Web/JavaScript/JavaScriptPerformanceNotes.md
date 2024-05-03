@@ -733,8 +733,7 @@ self.addEventListener('fetch', (event) => {
 
 ### HTTP Cache
 
-浏览器缓存,也称
-[HTTP 缓存](https://web.dev/http-cache),
+浏览器缓存, 也称 [HTTP 缓存](https://web.dev/http-cache),
 分为强缓存和协商缓存.
 优先级较高的是强缓存,
 在命中强缓存失败的情况下或者
@@ -764,13 +763,59 @@ Cache-Control: max-age=31536000
 - `max-age=<time>`: 资源过期时间 (浏览器计算), 比 `Expires` 精准 (服务器计算).
 - `s-maxage=<time>`: 代理服务器的资源过期时间.
 - `max-stale=<time>`: 允许使用过期资源, 指定允许时间.
-- `stale-while-revalidate=<time>`: 在验证 (协商) 期间, 返回过期的资源.
+- `stale-while-revalidate=<time>`:
+  在验证 (协商) 期间, 返回过期的资源.
+  If the cached page has expired,
+  then it will send a stale version while it revalidate the page in the background.
+  The page load is never blocked for the user,
+  though it won't be perfectly fresh for everyone.
 - `stale-if-error=<time>`: 验证 (协商) 出错的话, 返回过期的资源.
 - `must-revalidate`: 强缓存过期后, 强制等待协商缓存, 不允许使用过期资源.
 - `no-store`: 禁止强缓存和协商缓存.
 - `no-cache`: 禁止强缓存, 允许协商缓存.
 
 ![Cache Control](./figures/CacheControl.webp 'Cache Control')
+
+Cache the response of the API request, serve the cached version to any visitor,
+but automatically [revalidate the cached object in the background](https://developers.netlify.com/guides/how-to-make-edge-rendering-fast):
+
+```ts
+export default async () => {
+  const resp = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json')
+  const ids = await resp.json()
+
+  const stories = await Promise.all(
+    ids.slice(0, 100).map(async (id) => {
+      const story = await fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
+      return story.json()
+    })
+  )
+
+  return new Response(JSON.stringify(stories), {
+    headers: {
+      'content-type': 'application/json',
+      'netlify-cdn-cache-control': 'public, max-age=0, stale-while-revalidate=86400',
+    },
+  })
+}
+```
+
+Page is stale after 5 minutes,
+but tells the CDN to return the stale response
+and [regenerate it in the background unless it’s over a week old](https://developers.netlify.com/guides/how-to-do-advanced-caching-and-isr-with-astro).
+A popular page will always be fresh, but a rarely-visited one will not keep re-rendering:
+
+```ts
+// Tell the browser to always check the freshness of the cache
+Astro.response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate')
+
+// Tell the CDN to treat it as fresh for 5 minutes,
+// then return a stale version while it revalidate.
+Astro.response.headers.set(
+  'Netlify-CDN-Cache-Control',
+  'public, s-maxage=604800, stale-while-revalidate=604800'
+)
+```
 
 #### Server Cache
 
