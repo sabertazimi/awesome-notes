@@ -55,8 +55,6 @@ $$
 
 [![Fourier Transform](./figures/FourierTransform.png)](https://www.youtube.com/watch?v=spUNpyF58BY)
 
-## Linear Algebra
-
 ## Probability Theory and Mathematical Statistics
 
 ### Normal Distribution
@@ -135,6 +133,8 @@ $$
 可参见林德伯格中心极限定理 ([Lindeberg CLT](https://en.wikipedia.org/wiki/Central_limit_theorem#Lindeberg_CLT))
 etc.
 
+## Linear Algebra
+
 ## Multilayer Perceptron
 
 ![Multilayer Perceptron](./figures/MultilayerPerceptron.avif 'Multilayer Perceptron')
@@ -173,20 +173,51 @@ H=\begin{bmatrix}
 \end{bmatrix}
 $$
 
-:::tip Learning
-
-Learning is the process of finding the right weights and biases.
-
-:::
-
 ### 激活函数
 
 激活函数 $y=\sigma(H)$:
 
 - 引入非线性特性, 使得网络可以学习和模拟复杂函数.
-- ReLU: Rectified Linear Unit.
-- Sigmoid: $\sigma(x)=\frac{1}{1+e^{-x}}$.
-  归一化函数, 使得输出值在 0 到 1 之间, 可以使得整个网络成为概率模型.
+- ReLU (Rectified Linear Unit, 线性整流单元): $\sigma(H)=\max(0,H)$.
+- Sigmoid: $\sigma(H)=\frac{1}{1+e^{-H}}$.
+- e.g 归一化函数, 使得输出值在 0 到 1 之间, 可以使得整个网络成为概率模型.
+
+### 损失函数
+
+损失函数 (Loss Function) $L(y,\hat{y})$:
+
+- 用于衡量真实值(或人工标注值) $y$ 与模型预测值 $\hat{y}$ 之间的差异.
+- 常见的损失函数有均方误差 (Mean Squared Error, MSE) 和交叉熵 (Cross Entropy).
+- MSE: $L(y,\hat{y})=\frac{1}{n}\sum\limits_{i=1}^n(y_i-\hat{y}_i)^2$.
+- Cross Entropy: $L(y,\hat{y})=-\sum\limits_{i=1}^n{y_i\log(\hat{y}_i)}$.
+
+:::tip Learning
+
+Learning is the process of minimizing loss function,
+finally find out the right weights and biases.
+
+:::
+
+### 梯度下降
+
+通过梯度下降 (Gradient Descent) 算法, 优化损失函数, 使其最小化:
+
+$$
+\begin{equation}
+  \theta_{t+1}=\theta_t-\alpha\nabla{L}
+\end{equation}
+$$
+
+其中, $\alpha$ 为学习率, $L$ 为损失函数, $\nabla{L}$ 为损失函数的梯度,
+$\theta$ 为模型参数, $t$ 为迭代次数.
+
+### 反向传播
+
+反向传播 (Backpropagation) 算法:
+通过链式法则, 计算梯度.
+从最小化损失函数出发, 由输出层到输入层, 计算每一层的梯度, 从而更新权重和偏置.
+
+[![Backpropagation](./figures/Backpropagation.png)](https://www.youtube.com/watch?v=Ilg3gGewQ5U)
 
 ## Convolutional Architecture
 
