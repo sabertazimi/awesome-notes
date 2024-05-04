@@ -8,7 +8,30 @@ tags: [CS, Math, AI]
 
 # AI Basic Notes
 
-## Calculus and Mathematical Analysis
+## Mathematical Analysis
+
+### Series
+
+级数:
+
+$$
+\begin{split}
+  \frac{1}{1-x}&=\sum\limits_{n=0}^{\infty}x^n \\
+               &=1+x+x^2+x^3+\dots \\
+  e^x&=\sum\limits_{n=0}^{\infty}\frac{x^n}{n!} \\
+     &=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\dots \\
+  \sin(x)&=\sum\limits_{n=1}^{\infty}\frac{(-1)^{n-1}}{(2n-1)!}x^{2n-1} \\
+         &=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+\dots \\
+  \cos(x)&=\sum\limits_{n=0}^{\infty}\frac{(-1)^n}{(2n)!}x^{2n} \\
+         &=1-\frac{x^2}{2!}+\frac{x^4}{4!}-\frac{x^6}{6!}+\dots \\
+  \ln(1+x)&=\sum\limits_{n=1}^{\infty}\frac{(-1)^{n-1}}{n}x^n \\
+          &=x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+\dots \\
+  \tan^{-1}(x)&=\sum\limits_{n=0}^{\infty}\frac{(-1)^n}{2n+1}x^{2n+1} \\
+              &=x-\frac{x^3}{3}+\frac{x^5}{5}-\frac{x^7}{7}+\dots \\
+  f(x)&=\sum\limits_{n=0}^{\infty}\frac{f^{(n)(x_0)}}{n!}(x-x_0)^n \\
+      &=f(x_0)+f'(x_0)(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\dots
+\end{split}
+$$
 
 ### Euler's Formula
 
@@ -55,7 +78,7 @@ $$
 
 [![Fourier Transform](./figures/FourierTransform.png)](https://www.3blue1brown.com/lessons/fourier-transforms)
 
-## Probability Theory and Mathematical Statistics
+## Mathematical Statistics
 
 ### Normal Distribution
 
