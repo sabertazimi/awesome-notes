@@ -221,7 +221,7 @@ $\det(A)=0$ 时, 表示该变换将空间压缩到一个低维空间,
 称矩阵 $A$ 为奇异矩阵 (Singular Matrix):
 
 - 矩阵 $A$ 列向量线性相关.
-- 矩阵 $A$ 不满秩.
+- 矩阵 $A$ 不满秩 (Not full rank).
 - 矩阵 $A$ 不可逆.
 
 Determinant for 2d matrix:
@@ -251,6 +251,25 @@ $$
 \begin{equation}
   \det(A_1A_2)=\det(A_1)\det(A_2)
 \end{equation}
+$$
+
+### Gaussian Elimination
+
+高斯消元法求解线性方程组 (Linear System Of Equations):
+
+首先第一行的第一个元素化为 1,
+下面每行减去第一行乘以该行第一个元素的倍数,
+从而把第一列除第一行外的全部元素都化为 0,
+进而把第二列除前两个元素之外的元素都化为 0,
+最后把矩阵化为上三角矩阵.
+类似地, 从最后一行开始, 逐行把上三角矩阵化为单位矩阵.
+
+$$
+\begin{split}
+  A\vec{x}&=\vec{v} \\
+  A^{-1}A\vec{x}&=A^{-1}\vec{v} \\
+  \vec{x}&=A^{-1}\vec{v}
+\end{split}
 $$
 
 ### Eigenvalue and Eigenvector
