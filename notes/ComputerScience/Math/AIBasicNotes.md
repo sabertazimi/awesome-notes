@@ -174,6 +174,85 @@ $$
 \end{equation}
 $$
 
+[Matrix representation](https://www.3blue1brown.com/lessons/matrix-multiplication):
+
+$$
+\begin{split}
+  \vec{v}&=x\vec{i}+y\vec{j} \\
+         &=\begin{bmatrix}x \\ y\end{bmatrix} \\
+
+  A\vec{v}&=x\hat{i}+y\hat{j} \\
+          &=x\begin{bmatrix}a \\ c\end{bmatrix}\vec{i}
+            +y\begin{bmatrix}b \\ d\end{bmatrix}\vec{j} \\
+          &=\begin{bmatrix}a & b \\ c & d\end{bmatrix}
+            \begin{bmatrix}x \\ y\end{bmatrix} \\
+
+  A_2A_1&=A_2\hat{i}+A_2\hat{j} \\
+        &=(\begin{bmatrix}a_2 & b_2 \\ c_2 & d_2\end{bmatrix}
+          \begin{bmatrix}a_1 \\ c_1 \end{bmatrix})\vec{i}
+          +(\begin{bmatrix}a_2 & b_2 \\ c_2 & d_2\end{bmatrix}
+          \begin{bmatrix}b_1 \\ d_1\end{bmatrix})\vec{j} \\
+        &=(a_1\begin{bmatrix}a_2 \\ c_2\end{bmatrix}
+          +c_1\begin{bmatrix}b_2 \\ d_2\end{bmatrix})\vec{i}
+          +(b_1\begin{bmatrix}a_2 \\ c_2\end{bmatrix}
+          +d_1\begin{bmatrix}b_2 \\ d_2\end{bmatrix})\vec{j} \\
+        &=\begin{bmatrix}
+            a_2a_1+b_2c_1 & a_2b_1+b_2d_1 \\
+            c_2a_1+d_2c_1 & c_2b_1+d_2d_1
+          \end{bmatrix}
+\end{split}
+$$
+
+:::tip Matrix Multiplication
+
+左乘矩阵相当于对列向量进行线性变换,
+右乘矩阵相当于对行向量进行线性变换.
+
+:::
+
+### Determinant
+
+$\det(A)$ 表示矩阵 A 的[行列式](https://www.3blue1brown.com/lessons/determinant),
+表示该变换对空间的缩放因子:
+
+[![Determinant](./figures/Determinant.svg)](https://www.3blue1brown.com/lessons/determinant)
+
+$\det(A)=0$ 时, 表示该变换将空间压缩到一个低维空间,
+称矩阵 $A$ 为奇异矩阵 (Singular Matrix):
+
+- 矩阵 $A$ 列向量线性相关.
+- 矩阵 $A$ 不满秩.
+- 矩阵 $A$ 不可逆.
+
+Determinant for 2d matrix:
+
+$$
+\begin{equation}
+  \begin{vmatrix}a & b \\ c & d\end{vmatrix}=ad-bc
+\end{equation}
+$$
+
+![Determinant Diagram](./figures/DeterminantDiagram.svg 'Determinant Diagram')
+
+Determinant for 3d matrix:
+
+$$
+\begin{equation}
+  \begin{vmatrix}a & b & c \\ d & e & f \\ g & h & i\end{vmatrix}
+  =a\begin{vmatrix}e & f \\ h & i\end{vmatrix}
+   -b\begin{vmatrix}d & f \\ g & i\end{vmatrix}
+   +c\begin{vmatrix}d & e \\ g & h\end{vmatrix}
+\end{equation}
+$$
+
+Determinant for matrix multiplication:
+
+$$
+\begin{equation}
+  \det(A_1A_2)=\det(A_1)\det(A_2)
+\end{equation}
+$$
+
 ### Eigenvalue and Eigenvector
 
 $\begin{bmatrix}
@@ -186,7 +265,7 @@ $$
 \begin{split}
   \lambda&=m\pm\sqrt{m^2-p} \\
          &=\frac{\lambda_1+\lambda_2}{2}
-         \pm\sqrt{(\frac{\lambda_1+\lambda_2}{2})^2-\lambda_1\lambda_2} \\
+           \pm\sqrt{(\frac{\lambda_1+\lambda_2}{2})^2-\lambda_1\lambda_2} \\
          &=\frac{a+d}{2}\pm\sqrt{(\frac{a+d}{2})^2-(ad-bc)}
 \end{split}
 $$
