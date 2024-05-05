@@ -160,8 +160,19 @@ etc.
 
 ### Linear Space
 
-[向量空间](https://www.3blue1brown.com/lessons/span)
-的一组基是张成 (span) 该空间的一个线性无关 (linearly independent) 向量集.
+[向量空间](https://www.3blue1brown.com/lessons/span)的一组基:
+张成 (span) 该空间的一个线性无关 (linearly independent) 向量集.
+
+### Linear Transformation
+
+[线性变换](https://www.3blue1brown.com/lessons/linear-transformations)是指一个向量空间到另一个向量空间的映射,
+满足加法和数乘运算的线性性质:
+
+$$
+\begin{equation}
+  L(\alpha\vec{v}+\beta\vec{w})=\alpha{L(\vec{v})}+\beta{L(\vec{w})}
+\end{equation}
+$$
 
 ### Eigenvalue and Eigenvector
 
