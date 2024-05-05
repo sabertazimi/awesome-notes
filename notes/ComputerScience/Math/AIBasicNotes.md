@@ -539,7 +539,8 @@ $$
 ### Self-Attention Mechanism
 
 In layman's terms,
-a self-attention module takes in n inputs and returns n outputs:
+a [self-attention](https://www.3blue1brown.com/lessons/attention)
+module takes in n inputs and returns n outputs:
 
 - Self: allows the inputs to interact with each other
 - Attention: find out who they should pay more attention to.
