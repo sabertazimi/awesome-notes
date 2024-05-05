@@ -158,6 +158,28 @@ etc.
 
 ## Linear Algebra
 
+### Linear Space
+
+[向量空间](https://www.3blue1brown.com/lessons/span)
+的一组基是张成 (span) 该空间的一个线性无关 (linearly independent) 向量集.
+
+### Eigenvalue and Eigenvector
+
+$\begin{bmatrix}
+  a & b \\
+  c & d
+\end{bmatrix}$
+eigenvalue [quick calculation](https://www.3blue1brown.com/lessons/quick-eigen):
+
+$$
+\begin{split}
+  \lambda&=m\pm\sqrt{m^2-p} \\
+         &=\frac{\lambda_1+\lambda_2}{2}
+         \pm\sqrt{(\frac{\lambda_1+\lambda_2}{2})^2-\lambda_1\lambda_2} \\
+         &=\frac{a+d}{2}\pm\sqrt{(\frac{a+d}{2})^2-(ad-bc)}
+\end{split}
+$$
+
 ## Multilayer Perceptron
 
 ![Multilayer Perceptron](./figures/MultilayerPerceptron.avif 'Multilayer Perceptron')
