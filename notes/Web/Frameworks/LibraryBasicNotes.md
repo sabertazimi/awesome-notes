@@ -356,11 +356,12 @@ tags: [Web, Framework, Library]
 
 ### TypeScript Utility Types
 
-- [TypeFest](https://github.com/sindresorhus/type-fest).
-- [UtilityTypes](https://github.com/piotrwitek/utility-types).
-- [ToolBelt](https://github.com/millsp/ts-toolbelt).
-- [Guards](https://github.com/sniptt-official/guards):
-  Comprehensive collection of type guards.
+- [Effect](https://github.com/Effect-TS/effect):
+  Ecosystem of tools to build robust applications in TypeScript.
+- [TypeFest](https://github.com/sindresorhus/type-fest):
+  Collection of essential TypeScript types.
+- [Utility](https://github.com/piotrwitek/utility-types):
+  Collection of utility types.
 - [TSReset](https://github.com/total-typescript/ts-reset):
   Improving types for common JavaScript APIs.
 
@@ -368,8 +369,6 @@ tags: [Web, Framework, Library]
 
 - [TypeBox](https://github.com/sinclairzx81/typebox):
   JSON schema type builder.
-- [Effect](https://github.com/Effect-TS/effect):
-  Fully-fledged functional effect system for TypeScript with a rich standard library.
 - [AutoMapper](https://github.com/nartc/mapper):
   Object to object auto mapper.
 - [OW](https://github.com/sindresorhus/ow):
