@@ -218,6 +218,15 @@ $A_{m\times n}$ 表示 n 维空间到 m 维空间的线性变换:
   向量点乘 (Dot Product) $\vec{v} \cdot \vec{w}$ 可以理解为
   $\vec{w}$ 通过 $V_{1\times n}$ 变换到一维空间后的投影.
 
+:::tip Dot Product and Cross Product
+
+- Dot Product: $\vec{v} \cdot \vec{w}=\|\vec{v}\|\|\vec{w}\|\cos{\theta}$.
+- Cross Product: $\|\vec{v} \times \vec{w}\|=\|\vec{v}\|\|\vec{w}\|\sin{\theta}$.
+- $\vec{v}\cdot(\vec{v}\times\vec{w})=0$,
+  $\vec{w}\cdot(\vec{v}\times\vec{w})=0$.
+
+:::
+
 ### Determinant
 
 $\det(A)$ 表示矩阵 A 的[行列式](https://www.3blue1brown.com/lessons/determinant),
