@@ -312,6 +312,8 @@ tags: [Web, Framework, Library]
 
 - [Immer](https://github.com/immerjs/immer):
   Create next immutable state by mutating current one.
+- [FP](https://github.com/gcanti/fp-ts):
+  Functional programming in TypeScript.
 - [ProxyMemoize](https://github.com/dai-shi/proxy-memoize):
   Intuitive magical memoization with proxy and weakmap.
 - [Mutative](https://github.com/unadlib/mutative):
