@@ -303,6 +303,10 @@ tags: [Web, Framework, Library]
   Fast and consistently responsive apps using a single function call.
 - [GRFN](https://github.com/TomerAberbach/grfn):
   Executes dependency graph of async functions concurrently.
+- [PQueue](https://github.com/sindresorhus/p-queue):
+  Promise queue with concurrency control.
+- [PMap](https://github.com/sindresorhus/p-map):
+  Map over promises concurrently.
 
 ### Functional Programming Utils
 
