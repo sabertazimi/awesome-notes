@@ -2229,9 +2229,10 @@ A11y audit [list](https://web.dev/lighthouse-accessibility):
 ### Accessibility Reference
 
 - `WAI-ARIA`: improve website’s accessibility with [`WAI-ARIA`](https://www.sitepoint.com/wai-aria).
-- `ARIA`: W3C official [examples](https://github.com/w3c/aria-practices).
+- `ARIA`: W3C [official examples](https://github.com/w3c/aria-practices).
 - `WebAIM`: Million [project](https://webaim.org/projects/million).
 - A11y community: learn about [a11y](https://www.ta11y.org/learning).
 - Cognitive a11y [resources](https://stephaniewalter.design/blog/neurodiversity-and-ux-essential-resources-for-cognitive-accessibility).
-- PDF a11y [guide](https://blog.pope.tech/2024/04/25/how-to-check-and-fix-pdf-accessibility-issues).
-- Design system a11y [guide].
+- A11y for [PDF](https://blog.pope.tech/2024/04/25/how-to-check-and-fix-pdf-accessibility-issues).
+- A11y for [design system](https://cerovac.com/a11y/2024/04/make-sure-that-your-design-system-is-accessible).
+- Assistive technology for [readers](https://veroniiiica.com/a-to-z-of-assistive-technology-for-reading).
