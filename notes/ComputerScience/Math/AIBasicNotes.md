@@ -227,6 +227,12 @@ $A_{m\times n}$ 表示 n 维空间到 m 维空间的线性变换:
 
 :::
 
+Basis changes, [translating transformations](https://www.3blue1brown.com/lessons/change-of-basis#translating-transformations):
+
+$$
+\vec{v_p}=P^{-1}AP\vec{w_p}
+$$
+
 ### Determinant
 
 $\det(A)$ 表示矩阵 A 的[行列式](https://www.3blue1brown.com/lessons/determinant),
@@ -291,11 +297,11 @@ $$
 
 ### Eigenvalue and Eigenvector
 
-$\begin{bmatrix}
+$A=\begin{bmatrix}
   a & b \\
   c & d
 \end{bmatrix}$
-eigenvalue [quick calculation](https://www.3blue1brown.com/lessons/quick-eigen):
+eigenvalue $A\vec{v}=\lambda\vec{v}$ [quick calculation](https://www.3blue1brown.com/lessons/quick-eigen):
 
 $$
 \begin{split}
