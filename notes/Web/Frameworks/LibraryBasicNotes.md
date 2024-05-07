@@ -451,10 +451,8 @@ tags: [Web, Framework, Library]
 
 ### Admin and Dashboard UI Framework
 
-- [AntdPro](https://github.com/ant-design/ant-design-pro):
-  Out-of-box UI solution for enterprise applications.
 - [Refine](https://github.com/pankod/refine):
-  React-based framework for building internal tools.
+  Building internal tools, admin panels, dashboards & B2B apps with unmatched flexibility.
 - [Admin](https://github.com/marmelab/react-admin):
   Frontend framework for building B2B applications.
 - [Tremor](https://github.com/tremorlabs/tremor):
