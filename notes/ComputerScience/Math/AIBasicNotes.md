@@ -10,11 +10,35 @@ tags: [CS, Math, AI]
 
 ## Mathematical Analysis
 
-### Series
+### Derivative
 
-级数:
+常见导数:
 
 $$
+\begin{equation}
+\begin{split}
+  \frac{d}{dx}x^n&=nx^{n-1} \\
+  \frac{d}{dx}\sin{x}&=\cos{x} \\
+  \frac{d}{dx}\cos{x}&=-\sin{x} \\
+  \frac{d}{dx}a^x&=a^x\ln{a} \\
+  \frac{d}{dx}e^x&=e^x \\
+  \frac{d}{dx}\log_a{x}&=\frac{1}{x\ln{a}} \\
+  \frac{d}{dx}\ln{x}&=\frac{1}{x} \\
+  \frac{d}{dx}(g(x)+h(x))&=g'(x)+h'(x) \\
+  \frac{d}{dx}(g(x)h(x))&=g'(x)h(x)+g(x)h'(x) \\
+  \frac{d}{dx}f(g(x))&=f'(g(x))g'(x) \\
+  \frac{d}{dx}f^{-1}(x)&=\frac{1}{f'(f^{-1}(x))} \\
+  \frac{d}{dx}\int_{a(x)}^{b(x)}f(t)dt&=f(b(x))b'(x)-f(a(x))a'(x)
+\end{split}
+\end{equation}
+$$
+
+### Series
+
+常见级数:
+
+$$
+\begin{equation}
 \begin{split}
   \frac{1}{1-x}&=\sum\limits_{n=0}^{\infty}x^n \\
                &=1+x+x^2+x^3+\dots \\
@@ -31,6 +55,7 @@ $$
   f(x)&=\sum\limits_{n=0}^{\infty}\frac{f^{(n)(x_0)}}{n!}(x-x_0)^n \\
       &=f(x_0)+f'(x_0)(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\dots
 \end{split}
+\end{equation}
 $$
 
 ### Euler's Formula
@@ -396,7 +421,7 @@ $\theta$ 为模型参数, $t$ 为迭代次数.
 
 ![Backpropagation](./figures/Backpropagation.png 'Backpropagation')
 
-Chain rule (链式法则):
+Derivative chain rule (链式法则):
 
 $$
 \begin{split}
