@@ -661,18 +661,18 @@ tags: [Web, Framework, Library]
 
 ### Guide
 
+- [Intro.js](https://github.com/usablica/intro.js):
+  Lightweight, user-friendly onboarding tour library.
+- [Driver.js](https://github.com/kamranahmedse/driver.js):
+  Zero-dependency and vanilla JavaScript engine to drive user's focus across page.
+- [Shepherd](https://github.com/shepherd-pro/shepherd):
+  Guide users through tour of apps.
+- [JoyRide](https://github.com/gilbarbara/react-joyride):
+  Create guided tours in your apps.
+- [Wizard](https://github.com/devrnt/react-use-wizard):
+  React wizard (stepper) builder without hassle.
 - [Onboard](https://github.com/uixmat/onborda):
   Onboarding wizard flow for Next.js powered by framer motion.
-- [JoyRide](https://github.com/gilbarbara/react-joyride):
-  Awesome guided tours.
-- [Shepherd](https://github.com/shipshapecode/react-shepherd):
-  Guide tour library.
-- [Intro.js](https://github.com/usablica/intro.js).
-- [Driver.js](https://github.com/kamranahmedse/driver.js).
-- [Wizard](https://github.com/devrnt/react-use-wizard):
-  React stepper guide.
-- [LuSift](https://github.com/lusift/lusift):
-  Product walk through for web app.
 
 ### Rating
 
