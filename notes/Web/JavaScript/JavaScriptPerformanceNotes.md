@@ -926,10 +926,47 @@ provide 3 ~ 5 different sizes reduce image transfer sizes by average of **~20%**
 
 ```html
 <picture>
-  <source srcset="keyboard.avif" type="image/avif" />
-  <source srcset="keyboard.webp" type="image/webp" />
-  <source srcset="keyboard.jpg" type="image/jpeg" />
-  <img src="keyboard.jpg" alt="Omg a keyboard" />
+  <source
+    srcset="
+      /media/filename.avif  300w,
+      /media/filename.avif  500w,
+      /media/filename.avif 2000w
+    "
+    type="image/avif"
+    sizes="(max-width: 360px) 300px, (max-width: 720px) 500px, 2000px"
+  />
+  <source
+    srcset="
+      /media/filename.webp  300w,
+      /media/filename.webp  500w,
+      /media/filename.webp 2000w
+    "
+    type="image/webp"
+    sizes="(max-width: 360px) 300px, (max-width: 720px) 500px, 2000px"
+  />
+  <source
+    srcset="
+      /media/filename.jpg  300w,
+      /media/filename.jpg  500w,
+      /media/filename.jpg 2000w
+    "
+    type="image/jpeg"
+    sizes="(max-width: 360px) 300px, (max-width: 720px) 500px, 2000px"
+  />
+  <img
+    src="/media/filename.jpg"
+    srcset="
+      /media/filename.jpg  300w,
+      /media/filename.jpg  500w,
+      /media/filename.jpg 2000w
+    "
+    sizes="(max-width: 360px) 300px, (max-width: 720px) 500px, 2000px"
+    alt="Description of the image."
+    width="2000"
+    height="1333"
+    loading="lazy"
+    decoding="async"
+  />
 </picture>
 ```
 
