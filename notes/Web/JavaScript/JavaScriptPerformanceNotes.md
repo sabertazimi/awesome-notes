@@ -1698,6 +1698,51 @@ observer.observe({ type: 'largest-contentful-paint', buffered: true })
 // }
 ```
 
+Emulate slow third-party resources with [Playwright](https://www.checklyhq.com/blog/how-playwright-can-monitor-third-party-resources):
+
+```ts
+import { expect, test } from '@playwright/test'
+
+test('works with slows resources', async ({ page }) => {
+  page.route(
+    '**',
+    route =>
+      new Promise((resolve) => {
+        const requestURL = route.request().url()
+
+        if (requestURL.match(/http:\/\/localhost:8080/)) {
+          resolve(route.continue())
+        } else {
+          setTimeout(() => {
+            console.log(`Delaying ${requestURL}`)
+            resolve(route.continue())
+          }, 10000)
+        }
+      })
+  )
+  await page.goto('http://localhost:8080')
+
+  const largestContentfulPaint = await page.evaluate(() => {
+    return new Promise((resolve) => {
+      new PerformanceObserver((l) => {
+        const entries = l.getEntries()
+        // the last entry is the largest contentful paint
+        const largestPaintEntry = entries.at(-1)
+        resolve(largestPaintEntry.startTime)
+      }).observe({
+        type: 'largest-contentful-paint',
+        buffered: true,
+      })
+    })
+  })
+
+  console.log(`CLP: ${Number.parseFloat(largestContentfulPaint)}ms`)
+
+  // Expect a title "to contain" a substring.
+  await expect(page).toHaveTitle(/Frontend downtime/)
+})
+```
+
 ### INP
 
 [![Interaction to Next Paint](./figures/InteractionToNextPaint.webp)](https://frontendmasters.com/blog/understanding-inp)
