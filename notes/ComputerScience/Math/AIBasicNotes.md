@@ -1279,7 +1279,7 @@ import { OpenAI } from '@langchain/openai'
 import { CommaSeparatedListOutputParser } from '@langchain/core/output_parsers'
 
 const template = PromptTemplate.fromTemplate(
-  'List 10 {subject}.\n{format_instructions}'
+  'List 10 {subject}.\n{format_instructions}',
 )
 const model = new OpenAI({ temperature: 0 })
 const listParser = new CommaSeparatedListOutputParser()
@@ -1341,7 +1341,7 @@ import { OpenAI } from '@langchain/openai'
 import { CommaSeparatedListOutputParser } from '@langchain/core/output_parsers'
 
 const template = PromptTemplate.fromTemplate(
-  'List 10 {subject}.\n{format_instructions}'
+  'List 10 {subject}.\n{format_instructions}',
 )
 const model = new OpenAI({ temperature: 0 })
 const listParser = new CommaSeparatedListOutputParser()
@@ -1366,7 +1366,7 @@ import { VectorStoreToolkit, createVectorStoreAgent } from 'langchain/agents'
 
 const toolkit = new VectorStoreToolkit(
   { name: 'Demo Data', vectorStore },
-  model
+  model,
 )
 const agent = createVectorStoreAgent(model, toolkit)
 
