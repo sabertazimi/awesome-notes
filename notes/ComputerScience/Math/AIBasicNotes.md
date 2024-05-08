@@ -51,23 +51,16 @@ $$
 
 ### Series
 
-常见级数:
+泰勒级数利用函数在某点的各阶导数, 近似该点附近函数的值:
 
 $$
 \begin{equation}
 \begin{split}
-  \frac{1}{1-x}&=\sum\limits_{n=0}^{\infty}x^n \\
-               &=1+x+x^2+x^3+\dots \\
+  \frac{1}{1-x}&=\sum\limits_{n=0}^{\infty}x^n \quad |x|\lt1 \\
   e^x&=\sum\limits_{n=0}^{\infty}\frac{x^n}{n!} \\
-     &=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\dots \\
-  \sin(x)&=\sum\limits_{n=1}^{\infty}\frac{(-1)^{n-1}}{(2n-1)!}x^{2n-1} \\
-         &=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+\dots \\
+  \ln(1+x)&=\sum\limits_{n=1}^{\infty}\frac{(-1)^{n-1}}{n}x^n \quad x\in(-1,1] \\
+  \sin(x)&=\sum\limits_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1} \\
   \cos(x)&=\sum\limits_{n=0}^{\infty}\frac{(-1)^n}{(2n)!}x^{2n} \\
-         &=1-\frac{x^2}{2!}+\frac{x^4}{4!}-\frac{x^6}{6!}+\dots \\
-  \ln(1+x)&=\sum\limits_{n=1}^{\infty}\frac{(-1)^{n-1}}{n}x^n \\
-          &=x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+\dots \\
-  \tan^{-1}(x)&=\sum\limits_{n=0}^{\infty}\frac{(-1)^n}{2n+1}x^{2n+1} \\
-              &=x-\frac{x^3}{3}+\frac{x^5}{5}-\frac{x^7}{7}+\dots \\
   f(x)&=\sum\limits_{n=0}^{\infty}\frac{f^{(n)(x_0)}}{n!}(x-x_0)^n \\
       &=f(x_0)+f'(x_0)(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\dots
 \end{split}
