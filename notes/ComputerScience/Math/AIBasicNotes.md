@@ -10,6 +10,22 @@ tags: [CS, Math, AI]
 
 ## Mathematical Analysis
 
+### Limit
+
+洛必达法则是求解分数形式的未定型极限 $\lim_{x\to{a}}\frac{0}{0}$ 的有效方法之一:
+
+$$
+\begin{equation}
+\begin{split}
+  \lim_{x\to{a}}\frac{f(x)}{g(x)}
+  &=\lim_{x\to{a}}\frac{df(x)}{dg(x)} \\
+  &=\lim_{x\to{a}}\frac{\frac{df}{dx}(a)dx}{\frac{dg}{dx}(a)dx} \\
+  &=\lim_{x\to{a}}\frac{\frac{df}{dx}(a)}{\frac{dg}{dx}(a)} \\
+  &=\lim_{x\to{a}}\frac{f'(a)}{g'(a)}
+\end{split}
+\end{equation}
+$$
+
 ### Derivative
 
 常见导数:
