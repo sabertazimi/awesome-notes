@@ -539,6 +539,20 @@ import { Contract } from '@github/rest/contract'
 import state from '@github/rest/state'
 ```
 
+#### Resolutions
+
+Besides `git bisect` for debugging broken version,
+revert to last working version with `resolutions` field
+will help to [fix broken version too](https://github.com/ant-design/ant-design/pull/48829):
+
+```json
+{
+  "resolutions": {
+    "rc-field-form": "1.44.0"
+  }
+}
+```
+
 ### Package Lockfile
 
 [Dependency pinning](https://docs.renovatebot.com/dependency-pinning):
