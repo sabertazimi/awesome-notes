@@ -3109,6 +3109,11 @@ it re-uses that description instead of re-generating it:
 </html>
 ```
 
+[RSCs](https://www.smashingmagazine.com/2024/05/forensics-react-server-components):
+
+- Addresses SEO and loading time issues in CSR.
+- Improves SSR by reducing server load.
+
 #### Use Client Directive
 
 `'use client'` [directive](https://demystifying-rsc.vercel.app/client-components/no-ssr):
