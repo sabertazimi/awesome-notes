@@ -1466,6 +1466,16 @@ window.addEventListener('load', () => {
 
   // 性能日志上报...
 })
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden') {
+    const obj = { user: 1 }
+    const blob = new Blob([JSON.stringify(obj, null, 2)], {
+      type: 'application/json',
+    })
+    navigator.sendBeacon('/log', blob)
+  }
+})
 ```
 
 ### GIF Image Beacon
@@ -1487,7 +1497,7 @@ const thisPage = window.location.href
 const referringPage = document.referrer ? document.referrer : 'none'
 const beacon = new Image()
 beacon.src = `http://www.example.com/logger/beacon.gif?page=${encodeURI(
-  thisPage
+  thisPage,
 )}&ref=${encodeURI(referringPage)}`
 ```
 
@@ -1718,7 +1728,7 @@ test('works with slows resources', async ({ page }) => {
             resolve(route.continue())
           }, 10000)
         }
-      })
+      }),
   )
   await page.goto('http://localhost:8080')
 
