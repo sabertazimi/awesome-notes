@@ -1195,8 +1195,10 @@ tags: [Web, Framework, Library]
 
 - [PixiJS](https://github.com/pixijs/pixijs):
   Create beautiful digital content with fast and flexible 2D WebGL renderer.
-- [HTML2Canvas](https://github.com/niklasvh/html2canvas).
-- [Rough.js](https://github.com/pshihn/rough).
+- [Fabric.js](https://github.com/fabricjs/fabric.js):
+  JavaScript canvas library and SVG2Canvas parser.
+- [Rough.js](https://github.com/pshihn/rough):
+  Create graphics with a hand-drawn, sketchy, appearance.
 - [NewCar](https://github.com/dromara/newcar):
   Modern animation engine based on CanvasKit-WASM.
 
