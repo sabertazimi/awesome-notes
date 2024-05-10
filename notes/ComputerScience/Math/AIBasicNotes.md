@@ -114,7 +114,12 @@ $$
 
 ### Differential Equation
 
-一阶常微分方程 (First Order Differential Equation):
+微分方程 (Differential Equation) 是描述变量之间关系的方程,
+通常包含未知函数及其导数, 用于描述物理现象和自然规律.
+
+#### First Order Differential Equation
+
+一阶微分方程:
 
 $$
 \begin{equation}
@@ -139,6 +144,62 @@ $$
   &=M\vec{v}(t)
 \end{split}
 $$
+
+#### Second Order Differential Equation
+
+$$
+\begin{equation}
+  \ddot{x}(t)=-\mu\dot{x}(t)-\omega x(t)
+\end{equation}
+$$
+
+#### Force Equation
+
+Gravitational force equation:
+
+$$
+\begin{split}
+  \ddot{y}(t)=-g, \quad &
+  \dot{y}(t)=-gt+v_0
+  \\
+  \frac{d\vec{x}_1}{dt}=\vec{v}_1, \quad &
+  \frac{d\vec{v}_1}{dt}=Gm_2\Big(\frac{\vec{x}_2-\vec{x}_1}{\|\vec{x}_2-\vec{x}_1\|}\Big)\Big(\frac{1}{\|\vec{x}_2-\vec{x}_1\|^2}\Big)
+  \\
+  & \ddot{\theta}(t)=-\mu\dot{\theta}(t)-\frac{g}{L}\sin\big({\theta}(t)\big)
+\end{split}
+$$
+
+#### Phase Space
+
+相空间是描述系统状态的空间,
+每个点代表系统的一个状态, 点的轨迹描述了系统的演化.
+
+```python
+import numpy as np
+
+# Physical constants
+g = 9.8
+L = 2
+mu = 0.1
+
+THETA_0 = np.pi / 3  # 60 degrees
+THETA_DOT_0 = 0  # No initial angular velocity
+
+# Definition of ODE
+def get_theta_double_dot(theta, theta_dot):
+    return -mu * theta_dot - (g / L) * np.sin(theta)
+
+# Solution to the differential equation (numerically)
+def theta(t):
+    theta = THETA_0
+    theta_dot = THETA_DOT_0
+    delta_t = 0.01  # Time step
+    for _ in np.arange(0, t, delta_t):
+        theta_double_dot = get_theta_double_dot(theta, theta_dot)
+        theta += theta_dot * delta_t
+        theta_dot += theta_double_dot * delta_t
+    return theta
+```
 
 ## Mathematical Statistics
 
