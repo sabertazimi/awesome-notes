@@ -1477,14 +1477,10 @@ tags: [Web, Framework, Library]
 
 - [MilkDown](https://github.com/Saul-Mirone/milkdown):
   Plugin driven WYSIWYG Markdown editor framework.
-- [ByteMD](https://github.com/bytedance/bytemd):
-  Hackable Markdown editor component.
 - [Vditor](https://github.com/Vanessa219/vditor):
-  Multiple mode Markdown editor.
+  Multiple mode Markdown editor: WYSIWYG, instant rendering and split view modes.
 - [Markdown](https://github.com/remarkjs/react-markdown):
   Markdown component for React.
-- [LetsMarkdown](https://github.com/Cveinnt/LetsMarkdown.com):
-  Minimal collaborative Markdown editor.
 
 ### Code Editor
 
