@@ -112,6 +112,34 @@ $$
 
 [![Fourier Transform](./figures/FourierTransform.png)](https://www.3blue1brown.com/lessons/fourier-transforms)
 
+### Differential Equation
+
+一阶常微分方程 (First Order Differential Equation):
+
+$$
+\begin{equation}
+  \frac{d}{dt}\begin{bmatrix}x(t)\\y(t)\end{bmatrix}
+  =\begin{bmatrix}a&b\\c&d\end{bmatrix}\begin{bmatrix}x(t)\\y(t)\end{bmatrix}
+  \Rightarrow
+  \begin{bmatrix}x(t)\\y(t)\end{bmatrix}
+  =e^{\begin{bmatrix}a&b\\c&d\end{bmatrix}t}\begin{bmatrix}x(0)\\y(0)\end{bmatrix}
+\end{equation}
+$$
+
+$$
+\begin{split}
+\text{if} \quad \vec{v}(t)&=e^{Mt}\vec{v}_0 \\
+\text{then} \quad
+  \frac{d}{dt}\vec{v}(t)
+  &=\frac{d}{dt}e^{Mt}\vec{v}_0 \\
+  &=\frac{d}{dt}\sum\limits_{n=0}^{\infty}\frac{M^n}{n!}t^n\vec{v}_0 \\
+  &=\sum\limits_{n=0}^{\infty}\frac{M^n}{n!}nt^{n-1}\vec{v}_0 \\
+  &=M\sum\limits_{n=0}^{\infty}\frac{M^{n-1}}{(n-1)!}t^{n-1}\vec{v}_0 \\
+  &=Me^{Mt}\vec{v}_0 \\
+  &=M\vec{v}(t)
+\end{split}
+$$
+
 ## Mathematical Statistics
 
 ### Normal Distribution
