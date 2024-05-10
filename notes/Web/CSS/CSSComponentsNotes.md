@@ -3142,5 +3142,6 @@ h1 {
 
 - CSS [tricks](https://github.com/l-hammer/You-need-to-know-css).
 - CSS [inspiration](https://github.com/chokcoco/CSS-Inspiration).
-- Background patterns [gallery](https://github.com/LeaVerou/css3patterns).
+- Gallery for [background patterns](https://github.com/LeaVerou/css3patterns).
+- Modern CSS [shapes](https://www.smashingmagazine.com/2024/05/modern-guide-making-css-shapes).
 - Pure CSS [icons](https://github.com/wentin/cssicon).
