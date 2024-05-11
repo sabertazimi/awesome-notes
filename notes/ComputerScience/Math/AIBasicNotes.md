@@ -285,6 +285,20 @@ $$
 可参见林德伯格中心极限定理 ([Lindeberg CLT](https://en.wikipedia.org/wiki/Central_limit_theorem#Lindeberg_CLT))
 etc.
 
+### Bayes Theorem
+
+[Bayes theorem](https://www.3blue1brown.com/lessons/bayes-theorem):
+
+$$
+P(A \cap B)=P(A|B)P(B)=P(B|A)P(A)\Rightarrow
+$$
+
+$$
+\begin{equation}
+  P(A|B)=\frac{P(B|A)P(A)}{P(B)}
+\end{equation}
+$$
+
 ## Linear Algebra
 
 ### Linear Space
