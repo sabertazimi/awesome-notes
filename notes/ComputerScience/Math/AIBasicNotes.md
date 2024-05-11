@@ -233,21 +233,6 @@ $$
 正态分布 (又称 Gaussian Distribution) 是一种连续概率分布.
 当 $\mu$ 为 0, $\sigma$ 为 1 时, 称为标准正态分布 (Standard Normal Distribution).
 
-### Gaussian Integral
-
-$$
-\begin{equation}
-  \int_{-\infty}^{\infty}e^{-x^2}dx=\sqrt{\pi}
-\end{equation}
-$$
-
-[高维空间求解](https://zhuanlan.zhihu.com/p/651305078)高斯积分:
-
-[![Gaussian Integral](./figures/GaussianIntegral.png)](https://www.3blue1brown.com/lessons/gaussian-integral)
-
-对于正态分布, 系数 $\frac{1}{\sqrt{\pi}}$ 使得概率密度函数的积分为 1,
-即 $\int_{-\infty}^{\infty}f(x)dx=1$, 使其成为有意义的概率分布.
-
 ### Central Limit Theorem
 
 在自然界与生产中, 一些现象受到许多**相互独立**的随机因素的影响,
@@ -290,6 +275,31 @@ $$
 更一般化的中心极限定理,
 可参见林德伯格中心极限定理 ([Lindeberg CLT](https://en.wikipedia.org/wiki/Central_limit_theorem#Lindeberg_CLT))
 etc.
+
+### Gaussian Integral
+
+$$
+\begin{equation}
+  \int_{-\infty}^{\infty}e^{-x^2}dx=\sqrt{\pi}
+\end{equation}
+$$
+
+[高维空间求解](https://zhuanlan.zhihu.com/p/651305078)高斯积分:
+
+[![Gaussian Integral](./figures/GaussianIntegral.png)](https://www.3blue1brown.com/lessons/gaussian-integral)
+
+对于正态分布, 系数 $\frac{1}{\sqrt{\pi}}$ 使得概率密度函数的积分为 1,
+即 $\int_{-\infty}^{\infty}f(x)dx=1$, 使其成为有意义的概率分布.
+
+### Binomial Distribution
+
+重复 n 次独立的伯努利试验, $X \sim B(n,p)$, 期望值 $E(X)=np$, 方差 $D(X)=np(1-p)$:
+
+$$
+\begin{equation}
+  P(X=k)=C_n^kp^k(1-p)^{n-k}
+\end{equation}
+$$
 
 ### Bayes Theorem
 
