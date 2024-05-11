@@ -175,6 +175,12 @@ $$
 \frac{\partial{T}}{\partial{t}}(x,t)=\alpha\frac{\partial^2{T}}{\partial{x^2}}(x,t)
 $$
 
+Black-Scholes / Merton equation:
+
+$$
+\frac{\partial{V}}{\partial{t}}+rS\frac{\partial{V}}{\partial{S}}+\frac{1}{2}\sigma^2S^2\frac{\partial^2{V}}{\partial{S^2}}-rV=0
+$$
+
 #### Phase Space
 
 相空间是描述系统状态的空间,
