@@ -153,8 +153,6 @@ $$
 \end{equation}
 $$
 
-#### Force Equation
-
 Gravitational force equation:
 
 $$
@@ -167,6 +165,14 @@ $$
   \\
   & \ddot{\theta}(t)=-\mu\dot{\theta}(t)-\frac{g}{L}\sin\big({\theta}(t)\big)
 \end{split}
+$$
+
+#### Partial Differential Equation
+
+[热传导方程](https://www.3blue1brown.com/lessons/heat-equation):
+
+$$
+\frac{\partial{T}}{\partial{t}}(x,t)=\alpha\frac{\partial^2{T}}{\partial{x^2}}(x,t)
 $$
 
 #### Phase Space
