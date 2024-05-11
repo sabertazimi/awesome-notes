@@ -311,8 +311,16 @@ $$
 
 $$
 \begin{equation}
-  P(A|B)=\frac{P(B|A)P(A)}{P(B)}
+  P(A|B)=\frac{P(B|A)P(A)}{P(B)}=\frac{P(B|A)P(A)}{P(B|A)P(A)+P(B|\neg{A})P(\neg{A})}
 \end{equation}
+$$
+
+![Bayes Theorem](./figures/BayesTheorem.png 'Bayes Theorem')
+
+其中, $\frac{P(B|A)}{P(B|\neg{A})}$ 称为[贝叶斯系数 (Bayes Factor)](https://www.3blue1brown.com/lessons/better-bayes):
+
+$$
+O(A|B)=\frac{P(A|B)}{P(\neg{A}|B)}=\frac{P(A|B)P(B)}{P(\neg{A}|B)P(B)}=\frac{P(B|A)P(A)}{P(B|\neg{A})P(\neg{A})}=O(A)\frac{P(B|A)}{P(B|\neg{A})}
 $$
 
 ## Linear Algebra
