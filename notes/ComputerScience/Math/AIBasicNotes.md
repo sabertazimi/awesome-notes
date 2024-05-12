@@ -479,6 +479,10 @@ $$
 \end{split}
 $$
 
+### Linear Algebra Reference
+
+- Interactive book: [impressive linear algebra](https://immersivemath.com/ila/index.html).
+
 ## Multilayer Perceptron
 
 ![Multilayer Perceptron](./figures/MultilayerPerceptron.avif 'Multilayer Perceptron')
