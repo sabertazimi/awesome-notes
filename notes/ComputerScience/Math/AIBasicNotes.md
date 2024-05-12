@@ -483,6 +483,19 @@ $$
 O(A|B)=\frac{P(A|B)}{P(\neg{A}|B)}=\frac{P(A|B)P(B)}{P(\neg{A}|B)P(B)}=\frac{P(B|A)P(A)}{P(B|\neg{A})P(\neg{A})}=O(A)\frac{P(B|A)}{P(B|\neg{A})}
 $$
 
+### Information Entropy
+
+[信息熵](https://www.3blue1brown.com/lessons/wordle)
+是对信息量的度量 ($E[I]$),
+概率小的事件发生所带来的信息量大, 概率大的事件发生所带来的信息量小,
+即概率小, 出现机会小, 不确定性大, 信息熵大, 信息量大:
+
+$$
+\begin{equation}
+  H(X)=E[-\log_2{P(x_i)}]=-\sum\limits_{i=1}^n{P(x_i)\log_2{P(x_i)}}
+\end{equation}
+$$
+
 ## Multilayer Perceptron
 
 ![Multilayer Perceptron](./figures/MultilayerPerceptron.avif 'Multilayer Perceptron')
