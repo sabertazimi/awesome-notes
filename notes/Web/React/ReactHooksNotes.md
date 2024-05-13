@@ -2284,6 +2284,36 @@ export default function App() {
 }
 ```
 
+`useDeferredValue` only works when `SlowComponent` has been wrapped with `React.memo()`.
+Without `React.memo()`,
+`SlowComponent` would re-render whenever its parent component re-renders,
+regardless of whether props has changed or not.
+
+```tsx
+import { useDeferredValue, useState } from 'react'
+
+export default function App() {
+  const [count, setCount] = useState(0)
+  const deferredCount = useDeferredValue(count)
+  const isBusyRecalculating = count !== deferredCount
+
+  return (
+    <>
+      <ImportantStuff count={count} />
+      <SlowWrapper
+        style={{ opacity: isBusyRecalculating ? 0.5 : 1 }}
+      >
+        <SlowStuff count={deferredCount} />
+        {isBusyRecalculating && <Spinner />}
+      </SlowWrapper>
+      <button type="button" onClick={() => setCount(count + 1)}>
+        Increment
+      </button>
+    </>
+  )
+}
+```
+
 ## UseTransition Hook
 
 `startTransition` 回调中的更新都会被认为是**非紧急处理**,
