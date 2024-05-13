@@ -496,6 +496,28 @@ $$
 \end{equation}
 $$
 
+## Machine Learning
+
+### Regression
+
+Output a scalar:
+
+- Linear regression: $y=w_1x_1+w_2x_2+\dots+w_nx_n+b$.
+- Polynomial regression: $y=w_1x+w_2x^2+\dots+w_nx^n+b$.
+
+### Classification
+
+- Binary classification: $y=\sigma(Wx+b)$,
+  e.g spam filtering.
+- Multi-class classification: $y=\text{softmax}(Wx+b)$,
+  e.g document classification.
+- Non-linear model:
+  - Deep learning: $y=\text{softmax}(\text{ReLU}(Wx+b))$,
+    e.g image recognition, game playing.
+  - Support vector machine (SVM): $y=\text{sign}(Wx+b)$.
+  - Decision tree: $y=\text{vote}(\text{leaves}(x))$.
+  - K-nearest neighbors (KNN): $y=\text{vote}(\text{neighbors}(x))$.
+
 ## Multilayer Perceptron
 
 ![Multilayer Perceptron](./figures/MultilayerPerceptron.avif 'Multilayer Perceptron')
