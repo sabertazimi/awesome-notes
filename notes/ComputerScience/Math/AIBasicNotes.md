@@ -542,7 +542,7 @@ $$
 
 ### Classification
 
-- Binary classification: $y=\delta(Wx+b)$,
+- Binary classification: $y=\delta(Wx+b), L=\sum\limits_{i=1}^n\delta(y_i\ne\hat{y}_i)$,
   e.g spam filtering.
 - Multi-class classification: $y=\text{softmax}(Wx+b)$,
   e.g document classification.
