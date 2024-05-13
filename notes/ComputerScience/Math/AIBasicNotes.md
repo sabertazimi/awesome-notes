@@ -623,12 +623,54 @@ finally find out the right weights and biases.
 
 $$
 \begin{equation}
-  \theta_{t+1}=\theta_t-\alpha\nabla{L}
+  \theta_{t+1}=\theta_t-\eta\nabla{L}
 \end{equation}
 $$
 
-其中, $\alpha$ 为学习率, $L$ 为损失函数, $\nabla{L}$ 为损失函数的梯度,
+其中, $\eta$ 为学习率, $L$ 为损失函数, $\nabla{L}$ 为损失函数的梯度,
 $\theta$ 为模型参数, $t$ 为迭代次数.
+
+![Gradient Descent](./figures/GradientDescent.png 'Gradient Descent')
+
+```python
+def convex_function(x):
+    return x**2
+
+def gradient_descent(initial_x, learning_rate, num_iterations):
+    x_values = [initial_x]
+    y_values = [convex_function(initial_x)]
+
+    x = initial_x
+
+    for i in range(num_iterations):
+        gradient = 2 * x  # 函数 f(x) = x^2 的导数为 f'(x) = 2x
+        x -= learning_rate * gradient
+
+        x_values.append(x)
+        y_values.append(convex_function(x))
+
+    return x_values, y_values
+```
+
+:::tip Learning Rate
+
+必要时需要调整学习率, 使得梯度下降更快收敛:
+
+- 如果学习率过大, 可能会导致梯度下降不稳定, 甚至发散.
+- 如果学习率过小, 可能会导致梯度下降收敛速度过慢.
+- 常见的学习率调整策略有:
+  - 阶梯衰减 (Step Decay): $\eta_t=\frac{\eta}{\sqrt{t+1}}$.
+  - 线性衰减 (Linear Decay): $\eta_t=\eta(1-\frac{t}{T})$.
+  - 指数衰减 (Exponential Decay): $\eta_t=\eta{e^{-kt}}$.
+  - 余弦衰减 (Cosine Decay): $\eta_t=\eta\frac{1+\cos(\frac{\pi{t}}{T})}{2}$.
+  - [RMSprop](https://pytorch.org/docs/stable/generated/torch.optim.RMSprop.html):
+    root mean square propagation.
+  - [Adam](https://arxiv.org/abs/1412.6980):
+    adaptive moment estimation.
+  - [AdaGrad](https://jmlr.org/papers/v12/duchi11a.html):
+    $w_{t+1}=w_t-\frac{\frac{\eta}{\sqrt{t+1}}}{\sqrt{\frac{1}{t+1}\sum_{i=0}^t{g_i^2}}}g_t=w_t-\frac{\eta}{\sqrt{\sum_{i=0}^t{g_i^2}}}g_t$.
+
+:::
 
 ### Backpropagation
 
