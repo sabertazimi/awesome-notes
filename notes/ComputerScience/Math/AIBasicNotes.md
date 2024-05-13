@@ -630,6 +630,22 @@ $$
 其中, $\eta$ 为学习率, $L$ 为损失函数, $\nabla{L}$ 为损失函数的梯度,
 $\theta$ 为模型参数, $t$ 为迭代次数.
 
+$$
+\begin{split}
+  \min{L(\theta)}&=L(a,b)+\frac{\partial{L(a,b)}}{\partial{\theta_1}}(\theta_1-a)+\frac{\partial{L(a,b)}}{\partial{\theta_2}}(\theta_2-b)\\
+  &+\dots+\frac{1}{n!}\frac{\partial^n{L(a,b)}}{\partial{\theta_1^n}}(\theta_1-a)^n+\frac{1}{n!}\frac{\partial^n{L(a,b)}}{\partial{\theta_2^n}}(\theta_2-b)^n\\
+  &\approx{L(a,b)}+\frac{\partial{L(a,b)}}{\partial{\theta_1}}(\theta_1-a)+\frac{\partial{L(a,b)}}{\partial{\theta_2}}(\theta_2-b)
+  \\
+  &\Rightarrow
+  \begin{bmatrix}\theta_1-a\\\theta_2-b\end{bmatrix}
+  =-\eta\begin{bmatrix}\frac{\partial{L(a,b)}}{\partial{\theta_1}}\\\frac{\partial{L(a,b)}}{\partial{\theta_2}}\end{bmatrix}
+  \\
+  &\Rightarrow
+  \begin{bmatrix}\theta_1 \\ \theta_2\end{bmatrix}
+  =\begin{bmatrix}a\\b\end{bmatrix}-\eta\begin{bmatrix}\frac{\partial{L(a,b)}}{\partial{\theta_1}}\\\frac{\partial{L(a,b)}}{\partial{\theta_2}}\end{bmatrix}
+\end{split}
+$$
+
 ![Gradient Descent](./figures/GradientDescent.png 'Gradient Descent')
 
 ```python
