@@ -505,6 +505,20 @@ Output a scalar:
 - Linear regression: $y=w_1x_1+w_2x_2+\dots+w_nx_n+b$.
 - Polynomial regression: $y=w_1x+w_2x^2+\dots+w_nx^n+b$.
 
+If model can't even fit training data,
+then model have large bias (underfitting).
+If model can fit training data but not testing data,
+then model have large variance (overfitting).
+
+:::tip Underfitting
+
+To prevent underfitting, we can:
+
+- Add more features as input.
+- Use more complex model.
+
+:::
+
 :::tip Overfitting
 
 More complex model does not always lead to better performance
@@ -517,6 +531,12 @@ on testing data or new data.
 | $x^3$ |           15.3 |          18.1 |
 | $x^4$ |           14.9 |          28.2 |
 | $x^5$ |           12.8 |         232.1 |
+
+Regularization can help to prevent overfitting:
+
+$$
+L(w)=\sum\limits_{i=1}^n(y_i-\hat{y}_i)^2+\lambda\sum\limits_{i=1}^n{w_i^2}
+$$
 
 :::
 
