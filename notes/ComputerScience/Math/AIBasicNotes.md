@@ -505,6 +505,21 @@ Output a scalar:
 - Linear regression: $y=w_1x_1+w_2x_2+\dots+w_nx_n+b$.
 - Polynomial regression: $y=w_1x+w_2x^2+\dots+w_nx^n+b$.
 
+:::tip Overfitting
+
+More complex model does not always lead to better performance
+on testing data or new data.
+
+| Model | Training Error | Testing Error |
+| :---: | -------------: | ------------: |
+|  $x$  |           31.9 |          35.0 |
+| $x^2$ |           15.4 |          18.4 |
+| $x^3$ |           15.3 |          18.1 |
+| $x^4$ |           14.9 |          28.2 |
+| $x^5$ |           12.8 |         232.1 |
+
+:::
+
 ### Classification
 
 - Binary classification: $y=\sigma(Wx+b)$,
