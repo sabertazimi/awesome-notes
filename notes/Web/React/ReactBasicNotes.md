@@ -3226,8 +3226,8 @@ export default function Page() {
 
 ### Re-rendering Problem
 
-React will recursively render **all child components** inside of it
-(because `props.children` is always a new reference when parent re-rendering).
+React will [recursively render **all child components**](https://blog.isquaredsoftware.com/2020/05/blogged-answers-a-mostly-complete-guide-to-react-rendering-behavior)
+inside of it (because `props.children` is always a new reference when parent re-rendering).
 
 The major difference is that
 `React.Component` doesn’t implement `shouldComponentUpdate()` lifecycle method
