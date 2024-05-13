@@ -522,7 +522,7 @@ on testing data or new data.
 
 ### Classification
 
-- Binary classification: $y=\sigma(Wx+b)$,
+- Binary classification: $y=\delta(Wx+b)$,
   e.g spam filtering.
 - Multi-class classification: $y=\text{softmax}(Wx+b)$,
   e.g document classification.
