@@ -5355,8 +5355,23 @@ if (a && b && c) {
 
 ### Comments Style
 
-- 上方插入空行.
-- 与下方语句统一缩进.
+`JSDoc` [best practice](https://deno.com/blog/document-javascript-package):
+
+- 插入空行与统一缩进.
+- Write a concise summary:
+  First paragraph comment should be concise description helping quick understanding.
+- Provide good type information.
+- Use tags:
+  Tags like `@param`, `@returns`, and `@typeParam` provide more information.
+- Add examples:
+  Examples `@example` help users quickly understand how to use your library.
+- Document everything:
+  Document every symbol exposing to users.
+- Link internally:
+  Use `@link`, `@linkcode`, and `@linkplain` to link to other parts of documentation.
+- Test documentation:
+  Use `deno test --doc` to type check,
+  and `deno doc --lint` to check for rest issues.
 
 ```ts
 /**
