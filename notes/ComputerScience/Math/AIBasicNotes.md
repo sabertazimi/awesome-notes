@@ -656,6 +656,21 @@ $$
 \end{split}
 $$
 
+:::tip Gradient
+
+一个优秀的梯度下降算法, 需要满足以下几个条件:
+
+- 高效性: 梯度下降算法的迭代次数尽可能少.
+- 稳定性: 梯度下降算法的迭代过程尽可能稳定.
+- 鲁棒性: 梯度下降算法对于初始值的选择不敏感.
+
+当距离最小值较远时, $\nabla{L}\gg0$,
+当距离最小值较近时, $\nabla{L}\to0$,
+这样的梯度下降算法可以更快地收敛.
+反之, 当距离最小值较远时, $\nabla{L}\to0$, 这样的梯度下降算法更慢收敛.
+
+:::
+
 ![Gradient Descent](./figures/GradientDescent.png 'Gradient Descent')
 
 ```python
