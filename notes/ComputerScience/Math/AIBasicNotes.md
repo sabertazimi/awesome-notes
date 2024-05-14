@@ -767,6 +767,16 @@ $$
 \end{equation}
 $$
 
+:::tip Mini-Batch
+
+Utilize parallel computing (GPU) to speed up training process:
+
+- Divide training data into mini-batches.
+- Update weights and biases for each mini-batch.
+- Repeat until convergence.
+
+:::
+
 ```python
 class Network(object):
     def SGD(self, training_data, epochs, mini_batch_size, eta, test_data=None):
