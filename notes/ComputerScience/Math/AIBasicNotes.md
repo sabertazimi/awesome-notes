@@ -502,8 +502,14 @@ $$
 
 Output a scalar:
 
-- Linear regression: $y=w_1x_1+w_2x_2+\dots+w_nx_n+b$.
-- Polynomial regression: $y=w_1x+w_2x^2+\dots+w_nx^n+b$.
+- Linear regression:
+  $y=Wx+b=\sum\limits_{i=1}^n{w_ix_i}+b$,
+  $L=\sum\limits_{i=1}^n(y_i-\hat{y}_i)^2$.
+- Polynomial regression:
+  $y=\sum\limits_{i=1}^n{w_ix^i}+b$.
+- Logistic regression (output probability):
+  $y=\sigma(Wx+b)=\frac{1}{1+e^{-\sum\limits_{i=1}^n{w_ix_i}-b}}$,
+  $L=-\sum\limits_{i=1}^n{y_i\log(\hat{y}_i)}$.
 
 If model can't even fit training data,
 then model have large bias (underfitting).
@@ -542,9 +548,13 @@ $$
 
 ### Classification
 
-- Binary classification: $y=\delta(Wx+b), L=\sum\limits_{i=1}^n\delta(y_i\ne\hat{y}_i)$,
+- Binary classification:
+  $y=\delta(Wx+b)$,
+  $L=\sum\limits_{i=1}^n\delta(y_i\ne\hat{y}_i)$,
   e.g spam filtering.
-- Multi-class classification: $y=\text{softmax}(Wx+b)$,
+- Multi-class classification:
+  $y=\text{softmax}(Wx+b)$,
+  $L=-\sum\limits_{i=1}^n{y_i\log(\hat{y}_i)}$,
   e.g document classification.
 - Non-linear model:
   - Deep learning: $y=\text{softmax}(\text{ReLU}(Wx+b))$,
@@ -606,8 +616,8 @@ $$
 
 - 用于衡量真实值(或人工标注值) $y$ 与模型预测值 $\hat{y}$ 之间的差异.
 - 常见的损失函数有均方误差 (Mean Squared Error, MSE) 和交叉熵 (Cross Entropy).
-- MSE: $L(y,\hat{y})=\frac{1}{n}\sum\limits_{i=1}^n(y_i-\hat{y}_i)^2$.
-- Cross Entropy: $L(y,\hat{y})=-\sum\limits_{i=1}^n{y_i\log(\hat{y}_i)}$.
+  - 均方误差: $L(y,\hat{y})=\frac{1}{n}\sum\limits_{i=1}^n(y_i-\hat{y}_i)^2$.
+  - 交叉熵: $L(y,\hat{y})=-\sum\limits_{i=1}^n{y_i\log(\hat{y}_i)}$.
 
 :::tip Learning
 
