@@ -541,7 +541,13 @@ on testing data or new data.
 Regularization can help to prevent overfitting:
 
 $$
-L(w)=\sum\limits_{i=1}^n(y_i-\hat{y}_i)^2+\lambda\sum\limits_{i=1}^n{w_i^2}
+\begin{split}
+  L(w)&=\sum\limits_{i=1}^n(y_i-\hat{y}_i)^2+\lambda\sum\limits_{i=1}^n{w_i^2}\\
+  w_{t+1}&=w_t-\eta\nabla{L(w)}\\
+  &=w_t-\eta(\frac{\partial{L}}{\partial{w}}+\lambda{w_t})\\
+  &=(1-\eta\lambda)w_t-\eta\frac{\partial{L}}{\partial{w}}
+  \quad (\text{Weight Decay})
+\end{split}
 $$
 
 :::
