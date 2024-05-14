@@ -623,7 +623,13 @@ $$
 :::tip Learning
 
 Learning is the process of minimizing loss function,
-finally find out the right weights and biases.
+finally find out the right weights and biases:
+
+- Early stopping.
+- Regularization.
+- Dropout.
+- New activation function.
+- Adaptive learning rate.
 
 :::
 
@@ -661,14 +667,18 @@ $$
 
 一个优秀的梯度下降算法, 需要满足以下几个条件:
 
-- 高效性: 梯度下降算法的迭代次数尽可能少.
-- 稳定性: 梯度下降算法的迭代过程尽可能稳定.
-- 鲁棒性: 梯度下降算法对于初始值的选择不敏感.
-
-当距离最小值较远时, $\nabla{L}\gg0$,
-当距离最小值较近时, $\nabla{L}\to0$,
-这样的梯度下降算法可以更快地收敛.
-反之, 当距离最小值较远时, $\nabla{L}\to0$, 这样的梯度下降算法更慢收敛.
+- 高效性:
+  梯度下降算法的迭代次数尽可能少.
+  当距离最小值较远时, $\nabla{L}\gg0$,
+  当距离最小值较近时, $\nabla{L}\to0$,
+  这样的梯度下降算法可以更快地收敛.
+  反之, 当距离最小值较远时, $\nabla{L}\to0$, 这样的梯度下降算法更慢收敛.
+- 稳定性:
+  梯度下降算法的迭代过程尽可能稳定.
+  [Maxout](https://proceedings.mlr.press/v28/goodfellow13) 激活函数拟合能力非常强, 可以拟合任意的凸函数.
+- 鲁棒性:
+  梯度下降算法对于`初始值的选择`或者`特定的线索片段`不敏感.
+  [Dropout](https://arxiv.org/abs/1207.0580) 策略减少神经元之间复杂的共适应关系, 迫使网络去学习更加鲁棒的特征.
 
 :::
 

@@ -1037,6 +1037,7 @@
     "matmul",
     "Matplotlib",
     "maxage",
+    "maxout",
     "Mbit",
     "MCMXCIV",
     "mconcat",
