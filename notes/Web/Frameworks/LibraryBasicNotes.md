@@ -1603,6 +1603,8 @@ tags: [Web, Framework, Library]
   Open CLI framework.
 - [Ink](https://github.com/vadimdemedes/ink):
   React CLI app.
+- [Execa](https://github.com/sindresorhus/execa):
+  Process execution for humans.
 - [ZX](https://github.com/google/zx):
   Bash wrapper for Node.js.
 - [ShellJS](https://github.com/shelljs/shelljs):
@@ -1614,8 +1616,6 @@ tags: [Web, Framework, Library]
 
 #### CLI Process Utils
 
-- [Execa](https://github.com/sindresorhus/execa):
-  Process execution for humans.
 - [PM2](https://github.com/Unitech/pm2).
 - [Nodemon](https://github.com/remy/nodemon).
 
