@@ -1488,6 +1488,13 @@ $Z=\text{Encoder}(X), X'=\text{Decoder}(Z), \text{Min Loss}(X',X)$.
 
 ![Variational Auto-Encoders](./figures/VariationalAutoEncoders.webp 'Variational Auto-Encoders')
 
+### Generative Adversarial Networks
+
+生成对抗网络 (GANs) 由两个网络组成: 生成器 (Generator) 和判别器 (Discriminator).
+生成器的目标是生成尽可能逼真的数据, 判别器的目标是尽可能准确地区分真实数据和生成数据.
+两个网络相互对抗, 生成器生成数据 (decoder in VAE), 判别器判断数据真伪 ($1/0$ classification neural network),
+生成器根据判别器的判断结果调整生成数据的策略, 不断提升生成数据的逼真程度.
+
 ### Generative Video
 
 Generative videos as world models simulator.
