@@ -605,6 +605,38 @@ $$
 词嵌入是自然语言处理 (NLP) 中的一种技术,
 将词汇映射到实数向量空间, 使得词汇之间的语义关系可以通过向量空间中的距离来表示.
 
+## Structured Learning
+
+### Unified Framework
+
+#### Training
+
+Find a function $F$:
+
+$$
+F:X\times{Y}\to{R}
+$$
+
+$F(x, y)$ evaluates how well $y$ fits $x$ (object compatible).
+
+#### Inference
+
+Given an object $x$:
+
+$$
+\tilde{y}=\arg\max\limits_{y\in{Y}}F(x, y)
+$$
+
+![Structured Learning](./figures/StructuredLearning.png 'Structured Learning')
+
+:::tip Three Problems
+
+- Evaluation: what does $F(X, y)$ look like.
+- Inference: how to solve $\argmax$ problem.
+- Training: how to find $F(x, y)$ with given training data.
+
+:::
+
 ## Multilayer Perceptron
 
 ![Multilayer Perceptron](./figures/MultilayerPerceptron.avif 'Multilayer Perceptron')
