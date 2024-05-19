@@ -1129,6 +1129,28 @@ $$
 
 ![Recurrent Neural Networks](./figures/RecurrentNeuralNetworks.png 'Recurrent Neural Networks')
 
+### Long Short-Term Memory
+
+长短期记忆网络 (LSTM) 是一种特殊的 RNN,
+通过引入门控机制 (Gate Mechanism) 来控制信息的流动,
+解决了长序列训练过程中的梯度消失和梯度爆炸问题.
+
+$$
+\begin{equation}
+\begin{split}
+  f_t&=\sigma(W_f\cdot[h_{t-1},x_t]+b_f) \\
+  i_t&=\sigma(W_i\cdot[h_{t-1},x_t]+b_i) \\
+  \tilde{C}_t&=\tanh(W_C\cdot[h_{t-1},x_t]+b_C) \\
+  C_t&=f_t*{C_{t-1}}+i_t*\tilde{C}_t \\
+  o_t&=\sigma(W_o\cdot[h_{t-1},x_t]+b_o) \\
+  h_t&=o_t*\tanh(C_t) \\
+  y_t&=\sigma(W_yh_t+b_y)
+\end{split}
+\end{equation}
+$$
+
+![Long Short-Term Memory](./figures/LongShortTermMemory.png 'Long Short-Term Memory')
+
 ## Residual Architecture
 
 ResNet 通过残差学习解决了深度网络的退化问题 (深度网络的训练问题),
