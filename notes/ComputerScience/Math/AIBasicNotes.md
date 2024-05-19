@@ -605,6 +605,23 @@ $$
 词嵌入是自然语言处理 (NLP) 中的一种技术,
 将词汇映射到实数向量空间, 使得词汇之间的语义关系可以通过向量空间中的距离来表示.
 
+## Reinforcement Learning
+
+强化学习是一种机器学习方法, 通过智能体与环境交互,
+智能体根据环境的反馈调整策略, 利用梯度上升算法 (Gradient Ascent), 最大化长期奖励 (learn from mistakes).
+
+$$
+\begin{equation}
+\begin{split}
+  \theta^*&=\arg\max\limits_\theta\bar{R}_\theta=\arg\max\limits_\theta\sum\limits_{\tau}R(\tau)P(\tau|\theta)\\
+  \theta_{t+1}&=\theta_t+\eta\nabla\bar{R}_\theta\\
+  \nabla\bar{R}_\theta&=\begin{bmatrix}\frac{\partial\bar{R}_\theta}{\partial{w_1}}\\\frac{\partial\bar{R}_\theta}{\partial{w_2}}\\\vdots\\\frac{\partial\bar{R}_\theta}{\partial{b_1}}\\\vdots\end{bmatrix}
+\end{split}
+\end{equation}
+$$
+
+![Reinforcement Learning](./figures/ReinforcementLearning.gif 'Reinforcement Learning')
+
 ## Structured Learning
 
 ### Unified Framework
@@ -632,7 +649,7 @@ $$
 :::tip Three Problems
 
 - Evaluation: what does $F(X, y)$ look like.
-- Inference: how to solve $\argmax$ problem.
+- Inference: how to solve $\arg\max$ problem.
 - Training: how to find $F(x, y)$ with given training data.
 
 :::
@@ -734,7 +751,7 @@ $\theta$ 为模型参数, $t$ 为迭代次数.
 
 $$
 \begin{split}
-  \min{L(\theta)}&=L(a,b)+\frac{\partial{L(a,b)}}{\partial{\theta_1}}(\theta_1-a)+\frac{\partial{L(a,b)}}{\partial{\theta_2}}(\theta_2-b)\\
+  \arg\min{L(\theta)}&=L(a,b)+\frac{\partial{L(a,b)}}{\partial{\theta_1}}(\theta_1-a)+\frac{\partial{L(a,b)}}{\partial{\theta_2}}(\theta_2-b)\\
   &+\dots+\frac{1}{n!}\frac{\partial^n{L(a,b)}}{\partial{\theta_1^n}}(\theta_1-a)^n+\frac{1}{n!}\frac{\partial^n{L(a,b)}}{\partial{\theta_2^n}}(\theta_2-b)^n\\
   &\approx{L(a,b)}+\frac{\partial{L(a,b)}}{\partial{\theta_1}}(\theta_1-a)+\frac{\partial{L(a,b)}}{\partial{\theta_2}}(\theta_2-b)
   \\
