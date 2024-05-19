@@ -1108,8 +1108,26 @@ where each of the $n$ numbers represents a class.
 
 ## Recurrent Architecture
 
-CNNs 常用于处理空间结构的数据,
-RNNs 常用于处理时序关系的数据.
+### Recurrent Neural Networks
+
+循环神经网络 (RNNs) 是一种具有循环结构的神经网络,
+可以处理序列数据, 例如时间序列数据, 自然语言文本等.
+
+当序列数据输入到 RNNs 中时, 每个时间步都会产生一个输出,
+并将隐藏状态 (Hidden State) 传递到下一个时间步.
+因此, 当改变输入序列的顺序时, RNNs 会产生不同的输出
+(Changing sequence order will change output).
+
+$$
+\begin{equation}
+\begin{split}
+  h_t&=\sigma(W_hh_{t-1}+W_ix_t+b_h) \\
+  y_t&=\sigma(W_oh_t+b_y)
+\end{split}
+\end{equation}
+$$
+
+![Recurrent Neural Networks](./figures/RecurrentNeuralNetworks.png 'Recurrent Neural Networks')
 
 ## Residual Architecture
 
