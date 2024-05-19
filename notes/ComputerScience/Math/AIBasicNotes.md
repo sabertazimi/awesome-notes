@@ -569,6 +569,37 @@ $$
   - Decision tree: $y=\text{vote}(\text{leaves}(x))$.
   - K-nearest neighbors (KNN): $y=\text{vote}(\text{neighbors}(x))$.
 
+## Unsupervised Learning
+
+### Principal Component Analysis
+
+主成分分析 (PCA) 是一种常用的数据降维方法, 将 $m$ 个 $n$ 维向量降为 $k$ 维,
+其目标是选择 $k$ 个单位 (模为 $1$) 正交基, 使得原始数据变换到这组基上后,
+各字段两两间协方差为 $0$ (各字段完全独立), 各字段的方差尽可能大 (各字段降维后分布尽可能分散),
+即在正交的约束下, 取最大的 $k$ 个方差:
+
+$$
+\begin{equation}
+  C=\frac{1}{m}XX^T=\frac{1}{m}\begin{bmatrix}
+    \sum_{i=1}^m(x_i^1)^2&\sum_{i=1}^m{x_i^1x_i^2}&\dots&\sum_{i=1}^m{x_i^1x_i^n}\\
+    \sum_{i=1}^m{x_i^2x_i^1}&\sum_{i=1}^m(x_i^2)^2&\dots&\sum_{i=1}^m{x_i^2x_i^n}\\
+    \vdots&\vdots&\ddots&\vdots\\
+    \sum_{i=1}^m{x_i^nx_i^1}&\sum_{i=1}^m{x_i^nx_i^2}&\dots&\sum_{i=1}^m(x_i^n)^2
+  \end{bmatrix}
+\end{equation}
+$$
+
+协方差矩阵 $C$ 是一个对称矩阵, 其对角线分别为各字段的方差,
+其第 $i$ 行 $j$ 列和第 $j$ 行 $i$ 列元素相同, 表示 $i$ 和 $j$ 两个字段的协方差.
+将协方差矩阵对角化, 得到基于矩阵运算的 PCA 算法如下:
+
+- 将原始数据按列组成 $n$ 行 $m$ 列矩阵 $X$.
+- 将 $X$ 的每一行 (代表一个属性字段) 进行零均值化, 即减去这一行的均值,
+  使得 $\bar{x}=0$, 方便方差与协方差的计算.
+- 求出协方差矩阵 $C=\frac{1}{m}XX^T$ 的特征值及对应的特征向量.
+- 将特征向量按对应特征值大小从上到下按行排列成矩阵, 取前 $k$ 行组成矩阵 $P$.
+- $Y=PX$ 即为降维到 $k$ 维后的数据.
+
 ## Multilayer Perceptron
 
 ![Multilayer Perceptron](./figures/MultilayerPerceptron.avif 'Multilayer Perceptron')
