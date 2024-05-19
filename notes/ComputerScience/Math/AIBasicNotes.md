@@ -1477,7 +1477,16 @@ $$
 \end{bmatrix}_{d\times{1}}
 $$
 
-## Generative AI
+## Generative Architecture
+
+### Variational Auto-Encoders
+
+变分自编码器 (VAEs) 是一种生成模型, 通过学习数据的潜在分布来生成新的数据:
+$Z=\text{Encoder}(X), X'=\text{Decoder}(Z), \text{Min Loss}(X',X)$.
+变分自动编码器学习的是隐变量 (特征) $Z$ 的概率分布, $z\sim N(0, I), x|z\sim N\big(\mu(z), \sigma(z)\big)$,
+通过深度网络来学习 $q(z|x)$ 的参数, 一步步优化 $q$ 使其与 $p(z|x)$ 十分相似, 便可用它来对复杂的分布进行近似的推理.
+
+![Variational Auto-Encoders](./figures/VariationalAutoEncoders.webp 'Variational Auto-Encoders')
 
 ### Generative Video
 
