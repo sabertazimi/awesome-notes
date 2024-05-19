@@ -637,6 +637,17 @@ $$
 
 :::
 
+### Structured Linear Model
+
+$$
+\begin{split}
+  F(x, y)&=\sum\limits_{i=1}^n{w_i\phi_i(x, y)} \\
+  &=\begin{bmatrix}w_1\\w_2\\w_3\\\vdots\\w_n\end{bmatrix}\cdot
+    \begin{bmatrix}\phi_1(x, y)\\\phi_2(x, y)\\\phi_3(x, y)\\\vdots\\\phi_n(x, y)\end{bmatrix}\\
+  &=W\cdot\Phi(x, y)
+\end{split}
+$$
+
 ## Multilayer Perceptron
 
 ![Multilayer Perceptron](./figures/MultilayerPerceptron.avif 'Multilayer Perceptron')
