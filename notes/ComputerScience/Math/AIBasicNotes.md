@@ -646,6 +646,26 @@ $$
 词嵌入是自然语言处理 (NLP) 中的一种技术,
 将词汇映射到实数向量空间, 使得词汇之间的语义关系可以通过向量空间中的距离来表示.
 
+### Variational Auto-Encoders
+
+变分自编码器 (VAEs) 是一种生成模型, 通过学习数据的潜在分布来生成新的数据:
+$Z=\text{Encoder}(X), X'=\text{Decoder}(Z), \text{Min Loss}(X',X)$.
+变分自动编码器学习的是隐变量 (特征) $Z$ 的概率分布, $z\sim N(0, I), x|z\sim N\big(\mu(z), \sigma(z)\big)$,
+通过深度网络来学习 $q(z|x)$ 的参数, 一步步优化 $q$ 使其与 $p(z|x)$ 十分相似, 便可用它来对复杂的分布进行近似的推理.
+
+![Variational Auto-Encoders](./figures/VariationalAutoEncoders.webp 'Variational Auto-Encoders')
+
+### Generative Adversarial Networks
+
+生成对抗网络 (GANs) 由两个网络组成: 生成器 (Generator) 和判别器 (Discriminator).
+生成器的目标是生成尽可能逼真的数据, 判别器的目标是尽可能准确地区分真实数据和生成数据.
+两个网络相互对抗, 生成器生成数据 (decoder in VAE), 判别器判断数据真伪 ($1/0$ classification neural network),
+生成器根据判别器的判断结果调整生成数据的策略, 不断提升生成数据的逼真程度.
+
+## Self-supervised Learning
+
+Pre-trained model + fine-tuning.
+
 ## Reinforcement Learning
 
 强化学习是一种机器学习方法, 通过智能体与环境交互,
@@ -1576,22 +1596,6 @@ $$
 $$
 
 ## Generative Architecture
-
-### Variational Auto-Encoders
-
-变分自编码器 (VAEs) 是一种生成模型, 通过学习数据的潜在分布来生成新的数据:
-$Z=\text{Encoder}(X), X'=\text{Decoder}(Z), \text{Min Loss}(X',X)$.
-变分自动编码器学习的是隐变量 (特征) $Z$ 的概率分布, $z\sim N(0, I), x|z\sim N\big(\mu(z), \sigma(z)\big)$,
-通过深度网络来学习 $q(z|x)$ 的参数, 一步步优化 $q$ 使其与 $p(z|x)$ 十分相似, 便可用它来对复杂的分布进行近似的推理.
-
-![Variational Auto-Encoders](./figures/VariationalAutoEncoders.webp 'Variational Auto-Encoders')
-
-### Generative Adversarial Networks
-
-生成对抗网络 (GANs) 由两个网络组成: 生成器 (Generator) 和判别器 (Discriminator).
-生成器的目标是生成尽可能逼真的数据, 判别器的目标是尽可能准确地区分真实数据和生成数据.
-两个网络相互对抗, 生成器生成数据 (decoder in VAE), 判别器判断数据真伪 ($1/0$ classification neural network),
-生成器根据判别器的判断结果调整生成数据的策略, 不断提升生成数据的逼真程度.
 
 ### Generative Video
 
