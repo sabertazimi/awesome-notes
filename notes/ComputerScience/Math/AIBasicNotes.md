@@ -496,7 +496,7 @@ $$
 \end{equation}
 $$
 
-## Machine Learning
+## Supervised Learning
 
 ### Regression
 
@@ -569,6 +569,47 @@ $$
   - Decision tree: $y=\text{vote}(\text{leaves}(x))$.
   - K-nearest neighbors (KNN): $y=\text{vote}(\text{neighbors}(x))$.
 
+### Structured Learning
+
+#### Training
+
+Find a function $F$:
+
+$$
+F:X\times{Y}\to{R}
+$$
+
+$F(x, y)$ evaluates how well $y$ fits $x$ (object compatible).
+
+#### Inference
+
+Given an object $x$:
+
+$$
+\tilde{y}=\arg\max\limits_{y\in{Y}}F(x, y)
+$$
+
+![Structured Learning](./figures/StructuredLearning.png 'Structured Learning')
+
+:::tip Three Problems
+
+- Evaluation: what does $F(X, y)$ look like.
+- Inference: how to solve $\arg\max$ problem.
+- Training: how to find $F(x, y)$ with given training data.
+
+:::
+
+#### Structured Linear Model
+
+$$
+\begin{split}
+  F(x, y)&=\sum\limits_{i=1}^n{w_i\phi_i(x, y)} \\
+  &=\begin{bmatrix}w_1\\w_2\\w_3\\\vdots\\w_n\end{bmatrix}\cdot
+    \begin{bmatrix}\phi_1(x, y)\\\phi_2(x, y)\\\phi_3(x, y)\\\vdots\\\phi_n(x, y)\end{bmatrix}\\
+  &=W\cdot\Phi(x, y)
+\end{split}
+$$
+
 ## Unsupervised Learning
 
 ### Principal Component Analysis
@@ -621,49 +662,6 @@ $$
 $$
 
 ![Reinforcement Learning](./figures/ReinforcementLearning.gif 'Reinforcement Learning')
-
-## Structured Learning
-
-### Unified Framework
-
-#### Training
-
-Find a function $F$:
-
-$$
-F:X\times{Y}\to{R}
-$$
-
-$F(x, y)$ evaluates how well $y$ fits $x$ (object compatible).
-
-#### Inference
-
-Given an object $x$:
-
-$$
-\tilde{y}=\arg\max\limits_{y\in{Y}}F(x, y)
-$$
-
-![Structured Learning](./figures/StructuredLearning.png 'Structured Learning')
-
-:::tip Three Problems
-
-- Evaluation: what does $F(X, y)$ look like.
-- Inference: how to solve $\arg\max$ problem.
-- Training: how to find $F(x, y)$ with given training data.
-
-:::
-
-### Structured Linear Model
-
-$$
-\begin{split}
-  F(x, y)&=\sum\limits_{i=1}^n{w_i\phi_i(x, y)} \\
-  &=\begin{bmatrix}w_1\\w_2\\w_3\\\vdots\\w_n\end{bmatrix}\cdot
-    \begin{bmatrix}\phi_1(x, y)\\\phi_2(x, y)\\\phi_3(x, y)\\\vdots\\\phi_n(x, y)\end{bmatrix}\\
-  &=W\cdot\Phi(x, y)
-\end{split}
-$$
 
 ## Multilayer Perceptron
 
