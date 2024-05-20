@@ -669,7 +669,8 @@ Pre-trained model + fine-tuning.
 ## Reinforcement Learning
 
 强化学习是一种机器学习方法, 通过智能体与环境交互,
-智能体根据环境的反馈调整策略, 利用梯度上升算法 (Gradient Ascent), 最大化长期奖励 (learn from mistakes).
+智能体根据环境的反馈调整策略, 利用梯度上升算法 (Gradient Ascent),
+最大化长期奖励 (learn from rewards and mistakes).
 
 $$
 \begin{equation}
