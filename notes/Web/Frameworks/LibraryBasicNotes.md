@@ -1239,6 +1239,8 @@ tags: [Web, Framework, Library]
   JavaScript UI component for interacting with audio waveforms.
 - [Tonal](https://github.com/tonaljs/tonal):
   Functional music theory library.
+- [AlphaTab](https://github.com/CoderLine/alphaTab):
+  Cross platform music notation and guitar tablature rendering library.
 
 ### Video
 
