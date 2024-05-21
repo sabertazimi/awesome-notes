@@ -1399,6 +1399,8 @@ tags: [Web, Framework, Library]
   Reactive data store for local‑first apps.
 - [OPfsTools](https://github.com/hughfenghen/opfs-tools):
   Origin private file system API wrapper.
+- [PGLite](https://github.com/electric-sql/pglite):
+  Lightweight Postgres packaged as WASM into TypeScript library for Web.
 
 ### Database
 
