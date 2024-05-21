@@ -516,16 +516,14 @@ then model have large bias (underfitting).
 If model can fit training data but not testing data,
 then model have large variance (overfitting).
 
-:::tip Underfitting
+#### Underfitting
 
 To prevent underfitting, we can:
 
 - Add more features as input.
 - Use more complex and flexible model.
 
-:::
-
-:::tip Overfitting
+#### Overfitting
 
 More complex model does not always lead to better performance
 on testing data or new data.
@@ -557,8 +555,8 @@ To prevent overfitting, we can:
 - Constrained model:
   - Less parameters, sharing parameters.
   - Less features.
-  - Dropout.
   - Early stopping.
+  - Dropout.
   - Regularization.
 
 $$
@@ -570,8 +568,6 @@ $$
   \quad (\text{Regularization: Weight Decay})
 \end{split}
 $$
-
-:::
 
 ### Classification
 
@@ -770,8 +766,8 @@ Learning is the process of minimizing loss function,
 finally find out the right weights and biases:
 
 - Early stopping.
-- Regularization.
 - Dropout.
+- Regularization.
 - New activation function.
 - Adaptive learning rate.
 
@@ -807,26 +803,6 @@ $$
 \end{split}
 $$
 
-:::tip Gradient
-
-一个优秀的梯度下降算法, 需要满足以下几个条件:
-
-- 高效性:
-  梯度下降算法的迭代次数尽可能少.
-  当距离最小值较远时, $\nabla{L}\gg0$,
-  当距离最小值较近时, $\nabla{L}\to0$,
-  这样的梯度下降算法可以更快地收敛.
-  反之, 当距离最小值较远时, $\nabla{L}\to0$, 这样的梯度下降算法更慢收敛.
-- 稳定性:
-  梯度下降算法的迭代过程尽可能稳定.
-  [Maxout](https://proceedings.mlr.press/v28/goodfellow13) 激活函数拟合能力非常强, 可以拟合任意的凸函数.
-- 鲁棒性:
-  梯度下降算法对于`初始值的选择`或者`特定的线索片段`不敏感.
-  [Dropout](https://arxiv.org/abs/1207.0580) 策略减少神经元之间复杂的共适应关系 (每个神经元有 $p\%$ 概率不被激活),
-  迫使网络去学习更加鲁棒的特征, 缓解过拟合问题, 提高模型的泛化能力.
-
-:::
-
 ![Gradient Descent](./figures/GradientDescent.png 'Gradient Descent')
 
 ```python
@@ -849,7 +825,25 @@ def gradient_descent(initial_x, learning_rate, num_iterations):
     return x_values, y_values
 ```
 
-:::tip Learning Rate
+#### Gradient
+
+一个优秀的梯度下降算法, 需要满足以下几个条件:
+
+- 高效性:
+  梯度下降算法的迭代次数尽可能少.
+  当距离最小值较远时, $\nabla{L}\gg0$,
+  当距离最小值较近时, $\nabla{L}\to0$,
+  这样的梯度下降算法可以更快地收敛.
+  反之, 当距离最小值较远时, $\nabla{L}\to0$, 这样的梯度下降算法更慢收敛.
+- 稳定性:
+  梯度下降算法的迭代过程尽可能稳定.
+  [Maxout](https://proceedings.mlr.press/v28/goodfellow13) 激活函数拟合能力非常强, 可以拟合任意的凸函数.
+- 鲁棒性:
+  梯度下降算法对于`初始值的选择`或者`特定的线索片段`不敏感.
+  [Dropout](https://arxiv.org/abs/1207.0580) 策略减少神经元之间复杂的共适应关系 (每个神经元有 $p\%$ 概率不被激活),
+  迫使网络去学习更加鲁棒的特征, 缓解过拟合问题, 提高模型的泛化能力.
+
+#### Learning Rate
 
 必要时需要调整学习率, 使得梯度下降更快收敛:
 
@@ -871,7 +865,28 @@ def gradient_descent(initial_x, learning_rate, num_iterations):
   - [Adam](https://arxiv.org/abs/1412.6980):
     adaptive moment estimation (RMSprop + Momentum).
 
-:::
+#### Critical Point
+
+当遇到 $\nabla{L}=0$ 的情况时, 可能是以下几种情况:
+
+- 局部最小值 (Local Minimum).
+- 局部最大值 (Local Maximum).
+- 鞍点 (Saddle Point).
+
+此时利用泰勒级数展开, 可以得到:
+
+$$
+\begin{split}
+L(\theta)&\approx{L(\theta_0)}+\nabla{L(\theta_0)}(\theta-\theta_0)+\frac{1}{2}(\theta-\theta_0)^T\nabla^2{L(\theta_0)}(\theta-\theta_0)\\
+&=L(\theta_0)+\frac{1}{2}(\theta-\theta_0)^T\nabla^2{L(\theta_0)}(\theta-\theta_0)
+\end{split}
+$$
+
+其中, $\nabla^2{L(\theta_0)}$ 为 Hessian 矩阵, 为二阶导数矩阵:
+
+- 当 $\nabla^2{L(\theta_0)}$ 为正定矩阵时, $\theta_0$ 为局部最小值.
+- 当 $\nabla^2{L(\theta_0)}$ 为负定矩阵时, $\theta_0$ 为局部最大值.
+- 当 $\nabla^2{L(\theta_0)}$ 为不定矩阵时, $\theta_0$ 为鞍点.
 
 ### Backpropagation
 
