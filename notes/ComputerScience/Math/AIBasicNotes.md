@@ -538,6 +538,18 @@ on testing data or new data.
 | $x^4$ |           14.9 |          28.2 |
 | $x^5$ |           12.8 |         232.1 |
 
+A extreme example,
+such function obtains $0$ training loss, but large testing loss:
+
+$$
+\begin{align*}
+  f(x)=\begin{cases}
+    y_i, & \exists{x_i}\in{X} \\
+    \text{random}, & \text{otherwise}
+  \end{cases}
+\end{align*}
+$$
+
 Regularization can help to prevent overfitting:
 
 $$
@@ -1567,7 +1579,7 @@ then $f:\mathbb{N}\to\mathbb{R}^d$
 
 $$
 \begin{align}
-  \vec{p_t}^{(i)}=f(t)^{(i)}&:=
+  \vec{p_t}^{(i)}=f(t)^{(i)}:=
   \begin{cases}
       \sin({\omega_k}\cdot{t}), &\text{if}\ i=2k \\
       \cos({\omega_k}\cdot{t}), &\text{if}\ i=2k+1
