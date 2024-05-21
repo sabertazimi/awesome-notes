@@ -888,6 +888,13 @@ $$
 - 当 $\nabla^2{L(\theta_0)}$ 为负定矩阵时, $\theta_0$ 为局部最大值.
 - 当 $\nabla^2{L(\theta_0)}$ 为不定矩阵时, $\theta_0$ 为鞍点.
 
+:::tip Saddle Point
+
+在高维空间中, 鞍点的数量远远多于局部最小值.
+深度神经网络拥有大量的参数, 使得其损失函数的鞍点数量远远多于局部最小值.
+
+:::
+
 ### Backpropagation
 
 [反向传播算法](https://www.3blue1brown.com/lessons/backpropagation-calculus):
