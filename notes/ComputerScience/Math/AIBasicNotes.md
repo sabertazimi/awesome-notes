@@ -726,11 +726,13 @@ $$
 
 激活函数 $y=\sigma(H)$, $X^l=\sigma(H^l)$:
 
-- 引入非线性特性, 使得网络可以学习和模拟复杂函数.
+- 引入非线性特性, 使得网络可以学习和拟合复杂函数.
 - ReLU (Rectified Linear Unit, 线性整流单元): $\sigma(H)=\max(0,H)$,
   可以解决梯度消失问题 (越靠近输入层的神经元梯度越接近 0), 加速收敛.
 - Sigmoid: $\sigma(H)=\frac{1}{1+e^{-H}}$.
 - e.g 归一化函数, 使得输出值在 0 到 1 之间, 可以使得整个网络成为概率模型.
+
+![Activation Function](./figures/ActivationFunction.png 'Activation Function')
 
 ### Loss Function
 
