@@ -550,7 +550,16 @@ $$
 \end{align*}
 $$
 
-Regularization can help to prevent overfitting:
+To prevent overfitting, we can:
+
+- More training data.
+- Data augmentation: crop, flip, rotate, cutout, mixup.
+- Constrained model:
+  - Less parameters, sharing parameters.
+  - Less features.
+  - Dropout.
+  - Early stopping.
+  - Regularization.
 
 $$
 \begin{split}
@@ -558,7 +567,7 @@ $$
   w_{t+1}&=w_t-\eta\nabla{L(w)}\\
   &=w_t-\eta(\frac{\partial{L}}{\partial{w}}+\lambda{w_t})\\
   &=(1-\eta\lambda)w_t-\eta\frac{\partial{L}}{\partial{w}}
-  \quad (\text{Weight Decay})
+  \quad (\text{Regularization: Weight Decay})
 \end{split}
 $$
 
