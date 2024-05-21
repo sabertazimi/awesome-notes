@@ -521,7 +521,7 @@ then model have large variance (overfitting).
 To prevent underfitting, we can:
 
 - Add more features as input.
-- Use more complex model.
+- Use more complex and flexible model.
 
 :::
 
