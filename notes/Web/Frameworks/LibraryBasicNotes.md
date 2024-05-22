@@ -584,7 +584,7 @@ tags: [Web, Framework, Library]
 
 ### Navigation
 
-- [Hamburger](https://github.com/luukdv/hamburger-react):
+- [Hamburger](https://github.com/cyntler/hamburger-react):
   Animated hamburger menu icons for React.
 - [Hamburgers](https://github.com/jonsuh/hamburgers):
   Tasty CSS-animated hamburgers.
@@ -2101,6 +2101,8 @@ tags: [Web, Framework, Library]
 - [WebVitals](https://github.com/GoogleChrome/web-vitals):
   Google essential metrics for healthy site.
 - [WebPageTest](https://github.com/WPO-Foundation/webpagetest-github-action).
+- [Million.js](https://github.com/aidenybai/million):
+  Fast and lightweight optimizing compiler that make components up to 70% faster.
 - [MemLab](https://github.com/facebookincubator/memlab):
   Memory leaks and heap snapshots analysis framework.
 - [Perfume.js](https://github.com/zizzamia/perfume.js):
