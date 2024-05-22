@@ -1465,14 +1465,17 @@ $$
 Alignment vectors (yellow vectors) addition to output:
 
 $$
-o_1^1=0.0*\begin{bmatrix}1&2&3\end{bmatrix}
-=\begin{bmatrix}0.0&0.0&0.0\end{bmatrix}\\[1em]
-o_1^2=0.5*\begin{bmatrix}2&8&0\end{bmatrix}
-=\begin{bmatrix}1.0&4.0&0.0\end{bmatrix}\\[1em]
-o_1^3=0.5*\begin{bmatrix}2&6&3\end{bmatrix}
-=\begin{bmatrix}1.0&3.0&1.5\end{bmatrix}\\[1em]
-o_1=\begin{bmatrix}0.0&0.0&0.0\end{bmatrix}+\begin{bmatrix}1.0&4.0&0.0\end{bmatrix}+\begin{bmatrix}1.0&3.0&1.5\end{bmatrix}
-=\begin{bmatrix}2.0&7.0&1.5\end{bmatrix}
+\begin{split}
+o_1&=\sum\limits_{i=1}^{3}\alpha_{1i}v_i \\
+&=\alpha_{11}v_1+\alpha_{12}v_2+\alpha_{13}v_3 \\
+&=0.0\begin{bmatrix}1&2&3\end{bmatrix}
+  +0.5\begin{bmatrix}2&8&0\end{bmatrix}
+  +0.5\begin{bmatrix}2&6&3\end{bmatrix} \\
+&=\begin{bmatrix}0.0&0.0&0.0\end{bmatrix}
+  +\begin{bmatrix}1.0&4.0&0.0\end{bmatrix}
+  +\begin{bmatrix}1.0&3.0&1.5\end{bmatrix} \\
+&=\begin{bmatrix}2.0&7.0&1.5\end{bmatrix}
+\end{split}
 $$
 
 Repeat for every input:
