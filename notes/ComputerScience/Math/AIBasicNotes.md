@@ -957,6 +957,17 @@ Utilize parallel computing (GPU) to speed up training process:
 - Update weights and biases for each mini-batch.
 - Repeat until convergence.
 
+| Batch Size         | Small  | Large  |
+| ------------------ | ------ | ------ |
+| Speed (Sequential) | Faster | Slower |
+| Speed (Parallel)   | Same   | Same   |
+| One Epoch Time     | Slower | Faster |
+| Gradient           | Noisy  | Stable |
+| Optimization       | Better | Worse  |
+| Generalization     | Better | Worse  |
+
+![Mini-Batch](./figures/MiniBatch.png 'Mini-Batch')
+
 :::
 
 ```python
