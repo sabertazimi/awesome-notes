@@ -859,17 +859,20 @@ def gradient_descent(initial_x, learning_rate, num_iterations):
   - 线性衰减 (Linear Decay): $\eta_t=\eta(1-\frac{t}{T})$.
   - 指数衰减 (Exponential Decay): $\eta_t=\eta{e^{-kt}}$.
   - 余弦衰减 (Cosine Decay): $\eta_t=\eta\frac{1+\cos(\frac{\pi{t}}{T})}{2}$.
-- Warm up: increase and then decrease learning rate.
-- [AdaGrad](https://jmlr.org/papers/v12/duchi11a.html):
-  adaptive sub-gradient method,
-  $w_{t+1}=w_t-\frac{\frac{\eta}{\sqrt{t+1}}}{\sqrt{\frac{1}{t+1}\sum_{i=0}^t{g_i^2}}}g_t=w_t-\frac{\eta}{\sqrt{\sum_{i=0}^t{g_i^2}}}g_t$.
-- [RMSprop](https://pytorch.org/docs/stable/generated/torch.optim.RMSprop.html):
-  root mean square propagation,
-  $w_{t+1}=w_t-\frac{\eta}{\sigma_t}g_t=w_t-\frac{\eta}{\sqrt{\alpha\sigma_{t-1}^2}+(1-\alpha)g_t^2}g_t$,
-- [Momentum](https://proceedings.mlr.press/v28/sutskever13.html):
+- Warm up learning rate: increase and then decrease learning rate.
+- SGD with [momentum](https://proceedings.mlr.press/v28/sutskever13.html):
   $w_{t+1}=w_t+v_{t+1}=w_t+\lambda{v_t}-\eta{g_t}$.
-- [Adam](https://arxiv.org/abs/1412.6980):
-  adaptive moment estimation (RMSprop + Momentum).
+- Adaptive learning rate:
+  - [AdaGrad](https://jmlr.org/papers/v12/duchi11a.html):
+    adaptive sub-gradient method,
+    $w_{t+1}=w_t-\frac{\frac{\eta}{\sqrt{t+1}}}{\sqrt{\frac{1}{t+1}\sum_{i=0}^t{g_i^2}}}g_t=w_t-\frac{\eta}{\sqrt{\sum_{i=0}^t{g_i^2}}}g_t$.
+  - [RMSprop](https://pytorch.org/docs/stable/generated/torch.optim.RMSprop.html):
+    root mean square propagation,
+    $w_{t+1}=w_t-\frac{\eta}{\sigma_t}g_t=w_t-\frac{\eta}{\sqrt{\alpha\sigma_{t-1}^2}+(1-\alpha)g_t^2}g_t$,
+  - [Adam](https://arxiv.org/abs/1412.6980):
+    adaptive moment estimation (Momentum + RMSprop).
+  - [RAdam](https://arxiv.org/abs/1908.03265):
+    start with SGDM, then switch to Adam.
 
 #### Critical Point
 
