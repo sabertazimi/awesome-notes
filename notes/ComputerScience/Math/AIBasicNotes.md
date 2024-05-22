@@ -1224,6 +1224,21 @@ It is used to compute the class scores,
 resulting in a volume of size $1\times1\times{n}$,
 where each of the $n$ numbers represents a class.
 
+### Spatial Transformer Networks
+
+传统的池化方式 (Max Pooling/Average Pooling)
+所带来卷积网络的位移不变性和旋转不变性只是局部的和固定的,
+且池化并不擅长处理其它形式的仿射变换.
+
+Spatial transformer networks (STNs) allow a neural network to learn
+how to perform spatial transformations on the input image
+in order to enhance the geometric invariance of the model.
+STNs 可以学习一种变换, 这种变换可以将仿射变换后的图像进行矫正,
+保证 CNNs 在输入图像发生变换时, 仍然能够保持稳定的输出
+(可视为总是输入未变换的图像).
+
+![Spatial Transformer Networks](./figures/SpatialTransformerNetworks.gif 'Spatial Transformer Networks')
+
 ## Recurrent Architecture
 
 ### Recurrent Neural Networks
