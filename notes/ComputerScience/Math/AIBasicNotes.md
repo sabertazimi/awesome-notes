@@ -762,6 +762,19 @@ $$
   - 交叉熵:
     $L(y,\hat{y})=-\sum\limits_{i=1}^n{y_i\log(\hat{y}_i)}$, 常用于 classification 任务.
 
+:::tip Deep
+
+$|\mathcal{H}|$ is the size of hypothesis space,
+larger $|\mathcal{H}|$ means deeper model:
+
+![Why Deep Learning?](./figures/DeepLearning.png 'Why Deep Learning?')
+
+Deep model need less neurons (parameters) to represent same function,
+means deep model has smaller $|\mathcal{H}|$,
+flat/shallow model has larger $|\mathcal{H}|$.
+
+:::
+
 :::tip Learning
 
 Learning is the process of minimizing loss function,
