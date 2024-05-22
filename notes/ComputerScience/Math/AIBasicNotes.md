@@ -1121,6 +1121,8 @@ They are also known as ConvNets:
 - Output Layer (输出层):
   class scores.
 
+![Convolutional Neural Networks](./figures/ConvolutionalNeuralNetworks.png 'Convolutional Neural Networks')
+
 ```python
 # Load the data and split it between train and test sets
 (x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
@@ -1193,6 +1195,8 @@ predictions = model.predict(x_test)
 Convolutional Layer is the first layer to extract features from an input image.
 The layer's parameters consist of a set of learnable filters (or kernels),
 which have a small receptive field but extend through full depth of input volume.
+
+![Convolutional Layer](./figures/ConvolutionalLayer.png 'Convolutional Layer')
 
 ### Pooling Layer
 
