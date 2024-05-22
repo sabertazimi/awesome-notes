@@ -1355,59 +1355,55 @@ The illustrations are divided into the following steps:
 - Prepare inputs.
 - Weights initialization (Constant/Random/Xavier/Kaiming Initialization).
 - Derive query, key and value.
-- Calculate attention scores for Input 1.
+- Calculate attention scores for input.
 - Calculate softmax.
 - Multiply scores with values.
-- Sum weighted values to get Output 1.
-- Repeat steps 4–7 for Input 2 & Input 3.
+- Sum weighted values to get output.
 
-```python
-Input 1: [1, 0, 1, 0]
-Input 2: [0, 2, 0, 2]
-Input 3: [1, 1, 1, 1]
-```
+$$
+I=\begin{bmatrix}i_1\\i_2\\i_3\end{bmatrix}
+ =\begin{bmatrix}1&0&1&0\\0&2&0&2\\1&1&1&1\end{bmatrix}
+$$
 
 Weights for query, key and value
 (these weights are usually small numbers,
 initialized randomly using an appropriate random distribution
 like Gaussian, Xavier and Kaiming distributions):
 
-```python
-[[1, 0, 1], [[0, 0, 1], [[0, 2, 0],
- [1, 0, 0],  [1, 1, 0],  [0, 3, 0],
- [0, 0, 1],  [0, 1, 0],  [1, 0, 3],
- [0, 1, 1]]  [1, 1, 0]]  [1, 1, 0]]
-```
+$$
+W_Q=\begin{bmatrix}q_1&q_2&q_3\end{bmatrix}
+   =\begin{bmatrix}1&0&1\\1&0&0\\0&0&1\\0&1&1\end{bmatrix}\\[1em]
+W_K=\begin{bmatrix}k_1&k_2&k_3\end{bmatrix}
+   =\begin{bmatrix}0&0&1\\1&1&0\\0&1&0\\1&1&0\end{bmatrix}\\[1em]
+W_V=\begin{bmatrix}v_1&v_2&v_3\end{bmatrix}
+   =\begin{bmatrix}0&2&0\\0&3&0\\1&0&3\\1&1&0\end{bmatrix}
+$$
 
 Derive query, key and value:
 
-```python
-Query representations for every input:
-               [1, 0, 1]
-[1, 0, 1, 0]   [1, 0, 0]   [1, 0, 2]
-[0, 2, 0, 2] x [0, 0, 1] = [2, 2, 2]
-[1, 1, 1, 1]   [0, 1, 1]   [2, 1, 3]
+$$
+Q=IW_Q
+ =\begin{bmatrix}1&0&1&0\\0&2&0&2\\1&1&1&1\end{bmatrix}
+  \begin{bmatrix}1&0&1\\1&0&0\\0&0&1\\0&1&1\end{bmatrix}
+ =\begin{bmatrix}1&0&2\\2&2&2\\2&1&3\end{bmatrix}\\[1em]
+K=IW_K
+ =\begin{bmatrix}1&0&1&0\\0&2&0&2\\1&1&1&1\end{bmatrix}
+  \begin{bmatrix}0&0&1\\1&1&0\\0&1&0\\1&1&0\end{bmatrix}
+ =\begin{bmatrix}0&1&1\\4&4&0\\2&3&1\end{bmatrix}\\[1em]
+V=IW_V
+ =\begin{bmatrix}1&0&1&0\\0&2&0&2\\1&1&1&1\end{bmatrix}
+  \begin{bmatrix}0&2&0\\0&3&0\\1&0&3\\1&1&0\end{bmatrix}
+ =\begin{bmatrix}1&2&3\\2&8&0\\2&6&3\end{bmatrix}\\[1em]
+$$
 
-Key representations for every input:
-               [0, 0, 1]
-[1, 0, 1, 0]   [1, 1, 0]   [0, 1, 1]
-[0, 2, 0, 2] x [0, 1, 0] = [4, 4, 0]
-[1, 1, 1, 1]   [1, 1, 0]   [2, 3, 1]
+Calculate attention scores $QK^T$ for input:
 
-Value representations for every input:
-               [0, 2, 0]
-[1, 0, 1, 0]   [0, 3, 0]   [1, 2, 3]
-[0, 2, 0, 2] x [1, 0, 3] = [2, 8, 0]
-[1, 1, 1, 1]   [1, 1, 0]   [2, 6, 3]
-```
-
-$QK^T$ for Input 1:
-
-```python
-            [0, 4, 2]
-[1, 0, 2] x [1, 4, 3] = [2, 4, 4]
-            [1, 0, 1]
-```
+$$
+QK^T
+=\begin{bmatrix}1&0&2\\2&2&2\\2&1&3\end{bmatrix}
+ \begin{bmatrix}0&4&2\\1&4&3\\1&0&1\end{bmatrix}
+=\begin{bmatrix}2&4&4\\4&16&12\\4&12&10\end{bmatrix}
+$$
 
 :::tip $XX^T$
 
@@ -1429,12 +1425,13 @@ $$
 
 :::
 
-Softmaxed attention scores,
-$\text{softmax}(\frac{QK^T}{\sqrt{d_k}})$:
+Softmaxed attention scores $\text{softmax}(\frac{QK^T}{\sqrt{d_k}})$:
 
-```python
-softmax([2, 4, 4]) = [0.0, 0.5, 0.5]
-```
+$$
+\text{softmax}(QK^T)
+=\text{softmax}\Bigg(\begin{bmatrix}2&4&4\\4&16&12\\4&12&10\end{bmatrix}\Bigg)
+=\begin{bmatrix}0.0&0.5&0.5\\0.0&1.0&0.0\\0.0&0.9&0.1\end{bmatrix}
+$$
 
 :::tip Softmax
 
@@ -1465,23 +1462,34 @@ $$
 
 :::
 
-Alignment vectors (yellow vectors) addition to Output 1,
-$\text{softmax}(\frac{QK^T}{\sqrt{d_k}})V$:
+Alignment vectors (yellow vectors) addition to output:
 
-```python
-1: 0.0 * [1, 2, 3] = [0.0, 0.0, 0.0]
-2: 0.5 * [2, 8, 0] = [1.0, 4.0, 0.0]
-3: 0.5 * [2, 6, 3] = [1.0, 3.0, 1.5]
+$$
+o_1^1=0.0*\begin{bmatrix}1&2&3\end{bmatrix}
+=\begin{bmatrix}0.0&0.0&0.0\end{bmatrix}\\[1em]
+o_1^2=0.5*\begin{bmatrix}2&8&0\end{bmatrix}
+=\begin{bmatrix}1.0&4.0&0.0\end{bmatrix}\\[1em]
+o_1^3=0.5*\begin{bmatrix}2&6&3\end{bmatrix}
+=\begin{bmatrix}1.0&3.0&1.5\end{bmatrix}\\[1em]
+o_1=\begin{bmatrix}0.0&0.0&0.0\end{bmatrix}+\begin{bmatrix}1.0&4.0&0.0\end{bmatrix}+\begin{bmatrix}1.0&3.0&1.5\end{bmatrix}
+=\begin{bmatrix}2.0&7.0&1.5\end{bmatrix}
+$$
 
-[0.0, 0.0, 0.0] + [1.0, 4.0, 0.0] + [1.0, 3.0, 1.5] = [2.0, 7.0, 1.5]
-```
+Repeat for every input:
 
-Repeat for Input 2 & Input 3:
+$$
+o_2=\begin{bmatrix}2.0&8.0&0.0\end{bmatrix},
+o_3=\begin{bmatrix}2.0&7.8&0.3\end{bmatrix}
+$$
 
-```python
-Output 2: [2.0, 8.0, 0.0]
-Output 3: [2.0, 7.8, 0.3]
-```
+Calculate $\text{softmax}(\frac{QK^T}{\sqrt{d_k}})V$ by matrix multiplication:
+
+$$
+\text{softmax}(QK^T)V
+=\begin{bmatrix}0.0&0.5&0.5\\0.0&1.0&0.0\\0.0&0.9&0.1\end{bmatrix}
+\begin{bmatrix}1&2&3\\2&8&0\\2&6&3\end{bmatrix}
+=\begin{bmatrix}2.0&7.0&1.5\\2.0&8.0&0.0\\2.0&7.8&0.3\end{bmatrix}
+$$
 
 :::tip $QK^TV$
 
