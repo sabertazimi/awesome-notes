@@ -3198,6 +3198,52 @@ export default function Page() {
 - Demystifying React Server Components [series](https://demystifying-rsc.vercel.app).
 - React Server Components [devtools](https://www.alvar.dev/blog/creating-devtools-for-react-server-components).
 
+### React Compiler
+
+React compiler use `useMemoCache` hook to
+memoize variables, handlers and elements automatically.
+
+```tsx
+export default function Hello() {
+  const name = 'Jack'
+
+  return (
+    <div>
+      <p>
+        Hi:
+        {name}
+      </p>
+      <strong>Static Content</strong>
+    </div>
+  )
+}
+```
+
+Compiles to:
+
+```tsx
+import { unstable_useMemoCache as useMemoCache } from 'react'
+
+export default function Hello() {
+  const $ = useMemoCache(1)
+  let t0
+
+  if ($[0] === Symbol.for('react.memo_cache_sentinel')) {
+    t0 = __jsx(
+      'div',
+      null,
+      __jsx('p', null, 'Hi:', 'Jack'),
+      __jsx('strong', null, 'Static Content')
+    )
+    $[0] = t0
+  } else {
+    t0 = $[0]
+  }
+
+  return t0
+}
+```
+
 ## React Performance
 
 ### React Performance Mental Model
