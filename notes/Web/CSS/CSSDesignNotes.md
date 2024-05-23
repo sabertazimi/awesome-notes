@@ -603,6 +603,10 @@ export function Button({
 }
 ```
 
+### Design Tokens Naming Convention
+
+- Naming [best practices](https://www.smashingmagazine.com/2024/05/naming-best-practices).
+
 ## Design Principles
 
 ### Cicada Principle
