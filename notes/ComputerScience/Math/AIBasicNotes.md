@@ -1361,7 +1361,7 @@ The illustrations are divided into the following steps:
 - Sum weighted values to get output.
 
 $$
-I=\begin{bmatrix}i_1\\i_2\\i_3\end{bmatrix}
+X=\begin{bmatrix}x_1\\x_2\\x_3\end{bmatrix}
  =\begin{bmatrix}1&0&1&0\\0&2&0&2\\1&1&1&1\end{bmatrix}
 $$
 
@@ -1382,15 +1382,15 @@ $$
 Derive query, key and value:
 
 $$
-Q=IW_Q
+Q=XW_Q
  =\begin{bmatrix}1&0&1&0\\0&2&0&2\\1&1&1&1\end{bmatrix}
   \begin{bmatrix}1&0&1\\1&0&0\\0&0&1\\0&1&1\end{bmatrix}
  =\begin{bmatrix}1&0&2\\2&2&2\\2&1&3\end{bmatrix}\\[1em]
-K=IW_K
+K=XW_K
  =\begin{bmatrix}1&0&1&0\\0&2&0&2\\1&1&1&1\end{bmatrix}
   \begin{bmatrix}0&0&1\\1&1&0\\0&1&0\\1&1&0\end{bmatrix}
  =\begin{bmatrix}0&1&1\\4&4&0\\2&3&1\end{bmatrix}\\[1em]
-V=IW_V
+V=XW_V
  =\begin{bmatrix}1&0&1&0\\0&2&0&2\\1&1&1&1\end{bmatrix}
   \begin{bmatrix}0&2&0\\0&3&0\\1&0&3\\1&1&0\end{bmatrix}
  =\begin{bmatrix}1&2&3\\2&8&0\\2&6&3\end{bmatrix}\\[1em]
@@ -1466,14 +1466,11 @@ Alignment vectors (yellow vectors) addition to output:
 
 $$
 \begin{split}
-o_1&=\sum\limits_{i=1}^{3}\alpha_{1i}v_i \\
+y_1&=\sum\limits_{i=1}^{3}\alpha_{1i}v_i \\
 &=\alpha_{11}v_1+\alpha_{12}v_2+\alpha_{13}v_3 \\
 &=0.0\begin{bmatrix}1&2&3\end{bmatrix}
   +0.5\begin{bmatrix}2&8&0\end{bmatrix}
   +0.5\begin{bmatrix}2&6&3\end{bmatrix} \\
-&=\begin{bmatrix}0.0&0.0&0.0\end{bmatrix}
-  +\begin{bmatrix}1.0&4.0&0.0\end{bmatrix}
-  +\begin{bmatrix}1.0&3.0&1.5\end{bmatrix} \\
 &=\begin{bmatrix}2.0&7.0&1.5\end{bmatrix}
 \end{split}
 $$
@@ -1481,8 +1478,8 @@ $$
 Repeat for every input:
 
 $$
-o_2=\begin{bmatrix}2.0&8.0&0.0\end{bmatrix},
-o_3=\begin{bmatrix}2.0&7.8&0.3\end{bmatrix}
+y_2=\begin{bmatrix}2.0&8.0&0.0\end{bmatrix},
+y_3=\begin{bmatrix}2.0&7.8&0.3\end{bmatrix}
 $$
 
 Calculate $\text{softmax}(\frac{QK^T}{\sqrt{d_k}})V$ by matrix multiplication:
