@@ -698,7 +698,16 @@ $$
 
 ## Self-supervised Learning
 
-Pre-trained model + fine-tuning.
+Pre-trained model + fine-tuning (downstream task).
+
+### BERT
+
+Bidirectional Encoder Representations from Transformers 是一种预训练模型,
+通过大规模无监督学习, 学习文本的语义信息, 用于下游任务的微调:
+
+- Masked token prediction: 随机遮挡输入文本中的一些词, 预测被遮挡的词.
+- Next sentence prediction: 预测两个句子的顺序关系.
+- Fine-tuning: process downstream tasks.
 
 ## Reinforcement Learning
 
