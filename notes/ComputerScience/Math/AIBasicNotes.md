@@ -687,6 +687,15 @@ $Z=\text{Encoder}(X), X'=\text{Decoder}(Z), \text{Min Loss}(X',X)$.
 两个网络相互对抗, 生成器生成数据 (decoder in VAE), 判别器判断数据真伪 ($1/0$ classification neural network),
 生成器根据判别器的判断结果调整生成数据的策略, 不断提升生成数据的逼真程度.
 
+$$
+\begin{split}
+G^*&=\arg\min_G\max_DV(G,D)\\
+D^*&=\arg\max_DV(D,G)
+\end{split}
+$$
+
+![Generative Adversarial Networks](./figures/GenerativeAdversarialNetworks.png 'Generative Adversarial Networks')
+
 ## Self-supervised Learning
 
 Pre-trained model + fine-tuning.
