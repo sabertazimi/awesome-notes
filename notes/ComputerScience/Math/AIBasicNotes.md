@@ -1376,7 +1376,7 @@ $$
 \end{equation}
 $$
 
-[![Self-Attention Mechanism](./figures/Self-Attention.gif)](https://towardsdatascience.com/illustrated-self-attention-2d627e33b20a)
+[![Self-Attention Mechanism](./figures/SelfAttention.gif)](https://towardsdatascience.com/illustrated-self-attention-2d627e33b20a)
 
 The illustrations are divided into the following steps:
 
