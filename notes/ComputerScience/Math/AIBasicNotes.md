@@ -674,9 +674,26 @@ $$
 ### Variational Auto-Encoders
 
 变分自编码器 (VAEs) 是一种生成模型, 通过学习数据的潜在分布来生成新的数据:
-$Z=\text{Encoder}(X), X'=\text{Decoder}(Z), \text{Min Loss}(X',X)$.
+
+$$
+\begin{split}
+  Z&=\text{Encoder}(X) \\
+  X'&=\text{Decoder}(Z) \\
+  L&=\text{Min Loss}(X',X)
+\end{split}
+$$
+
 变分自动编码器学习的是隐变量 (特征) $Z$ 的概率分布, $z\sim N(0, I), x|z\sim N\big(\mu(z), \sigma(z)\big)$,
-通过深度网络来学习 $q(z|x)$ 的参数, 一步步优化 $q$ 使其与 $p(z|x)$ 十分相似, 便可用它来对复杂的分布进行近似的推理.
+通过深度网络来学习 $q(z|x)$ 的参数, 一步步优化 $q$ 使其与 $p(z|x)$ 十分相似, 便可用它来对复杂的分布进行近似的推理:
+
+- Feature disentangle:
+  voice conversion.
+- Discrete representation:
+  unsupervised classification, unsupervised summarization.
+- Anomaly detection:
+  face detection, fraud detection, disease detection, network intrusion detection.
+- Compression and decompression.
+- Generator.
 
 ![Variational Auto-Encoders](./figures/VariationalAutoEncoders.webp 'Variational Auto-Encoders')
 
@@ -707,7 +724,6 @@ Bidirectional Encoder Representations from Transformers 是一种预训练模型
 
 - Masked token prediction: 随机遮挡输入文本中的一些词, 预测被遮挡的词.
 - Next sentence prediction: 预测两个句子的顺序关系.
-- Fine-tuning: process downstream tasks.
 
 ![Bidirectional Encoder Representations from Transformers](./figures/BERT.png 'Bidirectional Encoder Representations from Transformers')
 
