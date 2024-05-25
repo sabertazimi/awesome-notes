@@ -751,7 +751,13 @@ $$
 \end{equation}
 $$
 
+### Actor-Critic Model
+
 ![Actor-Critic Model](./figures/ActorCriticModel.png 'Actor-Critic Model')
+
+### Inverse Reinforcement Learning
+
+![Inverse Reinforcement Learning](./figures/InverseReinforcementLearning.png 'Inverse Reinforcement Learning')
 
 ## Multilayer Perceptron
 
