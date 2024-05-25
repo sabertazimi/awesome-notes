@@ -715,7 +715,12 @@ $$
 
 ## Self-supervised Learning
 
-Pre-trained models + fine-tuning (downstream tasks).
+Pre-trained models + fine-tuning (downstream tasks):
+
+- Cross lingual.
+- Cross discipline.
+- Pre-training with artificial data.
+- Long context window.
 
 ### BERT
 
