@@ -738,6 +738,8 @@ Bidirectional Encoder Representations from Transformers 是一种预训练模型
 智能体根据环境的反馈调整策略, 利用梯度上升算法 (Gradient Ascent),
 最大化长期奖励 (learn from rewards and mistakes).
 
+![Reinforcement Learning](./figures/ReinforcementLearning.gif 'Reinforcement Learning')
+
 $$
 \begin{equation}
 \begin{split}
@@ -749,7 +751,7 @@ $$
 \end{equation}
 $$
 
-![Reinforcement Learning](./figures/ReinforcementLearning.gif 'Reinforcement Learning')
+![Actor-Critic Model](./figures/ActorCriticModel.png 'Actor-Critic Model')
 
 ## Multilayer Perceptron
 
