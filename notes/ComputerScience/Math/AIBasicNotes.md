@@ -1781,6 +1781,15 @@ Explain the whole model
 
 ## Generative AI
 
+### ChatGPT
+
+Fine-tuned GPT model on conversational data:
+
+- 学习文字接龙: 学习大规模资料, 生成下一个单词.
+- 人工文字接龙: 人工标注部分问题的答案, 引导模型生成的方向.
+- Teacher model: 负责评价模型生成的答案, 提供反馈.
+- Reinforcement learning: 以 teacher model 的评价分数为 reward, 通过强化学习优化模型.
+
 ### Generative Video
 
 Generative videos as world models simulator.
