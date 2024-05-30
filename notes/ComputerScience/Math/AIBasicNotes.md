@@ -1781,6 +1781,24 @@ Explain the whole model
 
 ## Generative AI
 
+### Generative Model
+
+- Autoregressive (AR) model:
+  generate output one token at a time, conditioned on previous tokens.
+- Non-autoregressive (NAR) model:
+  generate output all at once parallel, without conditioning on previous tokens.
+
+|             | AR Model | NAR Model |
+| ----------- | :------: | :-------: |
+| Parallelism |   Low    |   High    |
+| Speed       |   Slow   |   Fast    |
+| Quality     |   High   |    Low    |
+
+结合上述两种方法:
+
+- 用 AR model 生成中间向量, 用 NAR model 生成最终输出.
+- 用 NAR model 多次生成, 逐步优化输出.
+
 ### ChatGPT
 
 Fine-tuned GPT model on conversational data:
