@@ -746,12 +746,6 @@ Make model can understand human instructions not appear in training data:
 
 [![Instruction-tuning](./figures/InstructionTuning.png)](https://iclr.cc/virtual/2022/7102)
 
-#### In-Context Learning
-
-Given examples, generate output:
-
-[![In-Context Learning](./figures/InContextLearning.png)](https://nips.cc/virtual/2023/76728)
-
 ## Reinforcement Learning
 
 强化学习是一种机器学习方法, 通过智能体与环境交互,
@@ -1835,6 +1829,84 @@ Generative videos as world models simulator.
 
 ## Prompt Engineering
 
+### In-Context Learning Prompting
+
+Given examples, generate output:
+
+[![In-Context Learning](./figures/InContextLearning.png)](https://nips.cc/virtual/2023/76728)
+
+### Chain-of-Thought Prompting
+
+[CoT prompting](https://nips.cc/virtual/2022/54087) elicits reasoning in LLMs:
+a series of intermediate reasoning steps
+significantly improves ability of LLMs to perform complex reasoning.
+
+Few shot CoT:
+
+```bash
+Q: Roger has 5 tennis balls.
+He buys 2 more cans of tennis balls.
+Each can has 3 tennis balls.
+How many tennis balls does he have now?
+
+A: Roger started with 5 balls.
+2 cans of 3 tennis balls each is 6 tennis balls.
+5 + 6 = 11. The answer is 11.
+
+Q: The cafeteria had 23 apples.
+If they used 20 to make lunch and bought 6 more,
+how many apples do they have?
+
+A:
+------
+
+(Output) The cafeteria had 23 apples originally.
+They used 20 to make lunch. So they had 23 - 20 = 3.
+They bought 6 more apples, so they have 3 + 6 = 9. The answer is 9.
+```
+
+Zero shot CoT:
+
+```bash
+Q: A juggler can juggle 16 balls.
+Half of the balls are golf balls,
+and half of the golf balls are blue.
+How many blue golf balls are there?
+
+A: Let's think step by step.
+------
+
+(Output) There are 16 balls in total.
+Half of the balls are golf balls.
+That means that there are 8 golf balls.
+Half of the golf balls are blue.
+That means that there are 4 blue golf balls.
+```
+
+### Machine Prompting
+
+利用机器生成 prompts:
+
+- Soft prompt:
+  将向量作为输入, 与文字合并成一个完整的 prompt,
+  作用类似于 BERT adapter.
+- Reinforcement learning prompting:
+  通过强化学习训练一个模型, 负责生成 prompts.
+- [LLM prompting](https://iclr.cc/virtual/2023/10850):
+  通过 LLM 自身生成 prompts.
+
+[![Automatic Prompting Engineer](./figures/AutomaticPromptEngineer.png)](https://github.com/keirp/automatic_prompt_engineer)
+
+### Prompt Context
+
+检索增强生成, 通常称为 RAG, 是一种强大的聊天机器人的设计模式.
+其中, 检索系统实时获取与查询相关的经过验证的源 / 文档, 并将其输入生成模型 (例如 GPT-4) 以生成响应.
+
+Context is everything when it comes to getting the most out of an AI tool.
+To improve the relevance and quality of a generative AI output,
+you need to [improve the relevance and quality of the input](https://github.blog/2024-04-04-what-is-retrieval-augmented-generation-and-what-does-it-do-for-generative-ai):
+"Quality in, quality out".
+
 ### Elvis Saravia Framework
 
 [Elvis Saravia framework](https://github.com/dair-ai/Prompt-Engineering-Guide):
@@ -1924,64 +1996,6 @@ ChatGPT:
 我现在是高中水平的英语, 想要通过雅思考试.
 每一部分提供具体的学习资料.
 ```
-
-### Chain-of-Thought Prompting
-
-[CoT prompting](https://nips.cc/virtual/2022/54087) elicits reasoning in LLMs:
-a series of intermediate reasoning steps
-significantly improves ability of LLMs to perform complex reasoning.
-
-Few shot CoT:
-
-```bash
-Q: Roger has 5 tennis balls.
-He buys 2 more cans of tennis balls.
-Each can has 3 tennis balls.
-How many tennis balls does he have now?
-
-A: Roger started with 5 balls.
-2 cans of 3 tennis balls each is 6 tennis balls.
-5 + 6 = 11. The answer is 11.
-
-Q: The cafeteria had 23 apples.
-If they used 20 to make lunch and bought 6 more,
-how many apples do they have?
-
-A:
-------
-
-(Output) The cafeteria had 23 apples originally.
-They used 20 to make lunch. So they had 23 - 20 = 3.
-They bought 6 more apples, so they have 3 + 6 = 9. The answer is 9.
-```
-
-Zero shot CoT:
-
-```bash
-Q: A juggler can juggle 16 balls.
-Half of the balls are golf balls,
-and half of the golf balls are blue.
-How many blue golf balls are there?
-
-A: Let's think step by step.
-------
-
-(Output) There are 16 balls in total.
-Half of the balls are golf balls.
-That means that there are 8 golf balls.
-Half of the golf balls are blue.
-That means that there are 4 blue golf balls.
-```
-
-### Prompt Context
-
-检索增强生成, 通常称为 RAG, 是一种强大的聊天机器人的设计模式.
-其中, 检索系统实时获取与查询相关的经过验证的源 / 文档, 并将其输入生成模型 (例如 GPT-4) 以生成响应.
-
-Context is everything when it comes to getting the most out of an AI tool.
-To improve the relevance and quality of a generative AI output,
-you need to [improve the relevance and quality of the input](https://github.blog/2024-04-04-what-is-retrieval-augmented-generation-and-what-does-it-do-for-generative-ai):
-"Quality in, quality out".
 
 ### Image Prompts
 
