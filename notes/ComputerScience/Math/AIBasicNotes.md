@@ -2103,6 +2103,7 @@ Film types:
 
 ### Prompt Engineering Reference
 
+- Prompt engineering [guide](https://github.com/dair-ai/Prompt-Engineering-Guide).
 - [Awesome](https://github.com/f/awesome-chatgpt-prompts) ChatGPT prompts.
 
 ## LLM Toolchain
