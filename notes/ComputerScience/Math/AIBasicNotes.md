@@ -740,9 +740,15 @@ Bidirectional Encoder Representations from Transformers 是一种预训练模型
 
 [![BERT Adapters](./figures/BERTAdapters.png)](https://arxiv.org/abs/2210.06175)
 
+#### Instruction-tuning
+
+Make model can understand human instructions not appear in training data:
+
+[![Instruction-tuning](./figures/InstructionTuning.png)](https://arxiv.org/abs/2110.08207)
+
 #### In-Context Learning
 
-Given exmaples, generate output:
+Given examples, generate output:
 
 [![In-Context Learning](./figures/InContextLearning.png)](https://arxiv.org/abs/2303.03846)
 
