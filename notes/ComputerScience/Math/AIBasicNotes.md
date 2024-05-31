@@ -722,7 +722,9 @@ Pre-trained models + fine-tuning (downstream tasks):
 - Pre-training with artificial data.
 - Long context window.
 
-### BERT
+### Pre-trained Models
+
+#### BERT
 
 Bidirectional Encoder Representations from Transformers 是一种预训练模型,
 通过大规模无监督学习, 学习文本的语义信息, 用于下游任务的微调:
@@ -731,6 +733,12 @@ Bidirectional Encoder Representations from Transformers 是一种预训练模型
 - Next sentence prediction: 预测两个句子的顺序关系.
 
 ![Bidirectional Encoder Representations from Transformers](./figures/BERT.png 'Bidirectional Encoder Representations from Transformers')
+
+### Fine-tuning
+
+#### BERT Adapters
+
+[![BERT Adapters](./figures/BERTAdapters.png)](https://arxiv.org/abs/2210.06175)
 
 ## Reinforcement Learning
 
