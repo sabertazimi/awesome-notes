@@ -740,6 +740,12 @@ Bidirectional Encoder Representations from Transformers 是一种预训练模型
 
 [![BERT Adapters](./figures/BERTAdapters.png)](https://arxiv.org/abs/2210.06175)
 
+#### In-Context Learning
+
+Given exmaples, generate output:
+
+[![In-Context Learning](./figures/InContextLearning.png)](https://arxiv.org/abs/2303.03846)
+
 ## Reinforcement Learning
 
 强化学习是一种机器学习方法, 通过智能体与环境交互,
