@@ -738,19 +738,19 @@ Bidirectional Encoder Representations from Transformers 是一种预训练模型
 
 #### BERT Adapters
 
-[![BERT Adapters](./figures/BERTAdapters.png)](https://arxiv.org/abs/2210.06175)
+[![BERT Adapters](./figures/BERTAdapters.png)](https://ieeexplore.ieee.org/document/10023274)
 
 #### Instruction-tuning
 
 Make model can understand human instructions not appear in training data:
 
-[![Instruction-tuning](./figures/InstructionTuning.png)](https://arxiv.org/abs/2110.08207)
+[![Instruction-tuning](./figures/InstructionTuning.png)](https://iclr.cc/virtual/2022/7102)
 
 #### In-Context Learning
 
 Given examples, generate output:
 
-[![In-Context Learning](./figures/InContextLearning.png)](https://arxiv.org/abs/2303.03846)
+[![In-Context Learning](./figures/InContextLearning.png)](https://nips.cc/virtual/2023/76728)
 
 ## Reinforcement Learning
 
@@ -935,7 +935,8 @@ def gradient_descent(initial_x, learning_rate, num_iterations):
   [Maxout](https://proceedings.mlr.press/v28/goodfellow13) 激活函数拟合能力非常强, 可以拟合任意的凸函数.
 - 鲁棒性:
   梯度下降算法对于`初始值的选择`或者`特定的线索片段`不敏感.
-  [Dropout](https://arxiv.org/abs/1207.0580) 策略减少神经元之间复杂的共适应关系 (每个神经元有 $p\%$ 概率不被激活),
+  [Dropout](https://jmlr.org/papers/v15/srivastava14a.html) 策略
+  减少神经元之间复杂的共适应关系 (每个神经元有 $p\%$ 概率不被激活),
   迫使网络去学习更加鲁棒的特征, 缓解过拟合问题, 提高模型的泛化能力.
 
 #### Learning Rate
@@ -962,9 +963,9 @@ def gradient_descent(initial_x, learning_rate, num_iterations):
   - [RMSprop](https://pytorch.org/docs/stable/generated/torch.optim.RMSprop.html):
     root mean square propagation,
     $w_{t+1}=w_t-\frac{\eta}{\sigma_t}g_t=w_t-\frac{\eta}{\sqrt{\alpha\sigma_{t-1}^2}+(1-\alpha)g_t^2}g_t$,
-  - [Adam](https://arxiv.org/abs/1412.6980):
+  - [Adam](https://pytorch.org/docs/stable/generated/torch.optim.Adam.html):
     adaptive moment estimation (Momentum + RMSprop).
-  - [RAdam](https://arxiv.org/abs/1908.03265):
+  - [RAdam](https://iclr.cc/virtual/2020/1812):
     start with SGDM, then switch to Adam.
 
 #### Critical Point
