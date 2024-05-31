@@ -1925,6 +1925,54 @@ ChatGPT:
 每一部分提供具体的学习资料.
 ```
 
+### Chain-of-Thought Prompting
+
+[CoT prompting](https://nips.cc/virtual/2022/54087) elicits reasoning in LLMs:
+a series of intermediate reasoning steps
+significantly improves ability of LLMs to perform complex reasoning.
+
+Few shot CoT:
+
+```bash
+Q: Roger has 5 tennis balls.
+He buys 2 more cans of tennis balls.
+Each can has 3 tennis balls.
+How many tennis balls does he have now?
+
+A: Roger started with 5 balls.
+2 cans of 3 tennis balls each is 6 tennis balls.
+5 + 6 = 11. The answer is 11.
+
+Q: The cafeteria had 23 apples.
+If they used 20 to make lunch and bought 6 more,
+how many apples do they have?
+
+A:
+------
+
+(Output) The cafeteria had 23 apples originally.
+They used 20 to make lunch. So they had 23 - 20 = 3.
+They bought 6 more apples, so they have 3 + 6 = 9. The answer is 9.
+```
+
+Zero shot CoT:
+
+```bash
+Q: A juggler can juggle 16 balls.
+Half of the balls are golf balls,
+and half of the golf balls are blue.
+How many blue golf balls are there?
+
+A: Let's think step by step.
+------
+
+(Output) There are 16 balls in total.
+Half of the balls are golf balls.
+That means that there are 8 golf balls.
+Half of the golf balls are blue.
+That means that there are 4 blue golf balls.
+```
+
 ### Prompt Context
 
 检索增强生成, 通常称为 RAG, 是一种强大的聊天机器人的设计模式.
