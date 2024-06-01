@@ -1824,6 +1824,16 @@ Fine-tuned GPT model on conversational data:
 - Reinforcement learning from human feedback (RLHF):
   以 teacher model 的评价分数为 reward, 通过强化学习优化模型.
 
+### Diffusion Model
+
+Forward process (diffusion) + reverse process (denoise):
+
+[![Diffusion Model](./figures/DiffusionModel.png)](https://arxiv.org/abs/2006.11239)
+
+Stable diffusion model:
+
+[![Stable Diffusion](./figures/StableDiffusion.png)](https://ieeexplore.ieee.org/document/9878449)
+
 ### Generative Video
 
 Generative videos as world models simulator.
