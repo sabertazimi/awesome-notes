@@ -1826,7 +1826,8 @@ Fine-tuned GPT model on conversational data:
 
 :::tip Alignment
 
-Fine-tuning process with supervised learning and reinforcement learning.
+Fine-tuning process with supervised learning (labelled data)
+and reinforcement learning (human feedback).
 
 :::
 
