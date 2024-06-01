@@ -1824,6 +1824,12 @@ Fine-tuned GPT model on conversational data:
 - Reinforcement learning from human feedback (RLHF):
   以 teacher model 的评价分数为 reward, 通过强化学习优化模型.
 
+:::tip Alignment
+
+Fine-tuning process with supervised learning and reinforcement learning.
+
+:::
+
 ### Diffusion Model
 
 Forward process (diffusion) + reverse process (denoise):
