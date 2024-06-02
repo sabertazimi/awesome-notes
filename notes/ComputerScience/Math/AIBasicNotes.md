@@ -1926,7 +1926,7 @@ That means that there are 4 blue golf balls.
 
 [![Automatic Prompting Engineer](./figures/AutomaticPromptEngineer.png)](https://github.com/keirp/automatic_prompt_engineer)
 
-- LLMs cooperation:
+- LLMs collaboration:
   - Utilize multiple LLMs, each with different strengths.
   - [EoT](https://aclanthology.org/2023.emnlp-main.936):
     exchange-of-thought, encourage divergent thinking
