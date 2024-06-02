@@ -1928,7 +1928,8 @@ That means that there are 4 blue golf balls.
 
 - LLMs cooperation:
   - Utilize multiple LLMs, each with different strengths.
-  - Encourage divergent thinking through multi-agent debate.
+  - [EoT](https://aclanthology.org/2023.emnlp-main.936):
+    exchange-of-thought, encourage divergent thinking through cross-model communication.
 
 ### Retrieval-Augmented Generation
 
