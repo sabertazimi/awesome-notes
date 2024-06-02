@@ -1926,6 +1926,10 @@ That means that there are 4 blue golf balls.
 
 [![Automatic Prompting Engineer](./figures/AutomaticPromptEngineer.png)](https://github.com/keirp/automatic_prompt_engineer)
 
+- LLMs cooperation:
+  - Utilize multiple LLMs, each with different strengths.
+  - Encourage divergent thinking through multi-agent debate.
+
 ### Retrieval-Augmented Generation
 
 检索增强生成, 通常称为 RAG (Retrieval-Augmented Generation),
