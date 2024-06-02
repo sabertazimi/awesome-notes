@@ -1917,8 +1917,10 @@ That means that there are 4 blue golf balls.
 
 ### Prompt Context
 
-检索增强生成, 通常称为 RAG, 是一种强大的聊天机器人的设计模式.
-其中, 检索系统实时获取与查询相关的经过验证的源 / 文档, 并将其输入生成模型 (例如 GPT-4) 以生成响应.
+检索增强生成, 通常称为 RAG (Retrieval-Augmented Generation),
+是一种强大的聊天机器人的设计模式.
+其中, 检索系统实时获取与查询相关的经过验证的源 / 文档,
+并将其输入生成模型 (例如 GPT-4) 以生成响应.
 
 Context is everything when it comes to getting the most out of an AI tool.
 To improve the relevance and quality of a generative AI output,
