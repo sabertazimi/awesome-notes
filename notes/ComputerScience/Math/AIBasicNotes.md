@@ -1835,7 +1835,7 @@ and reinforcement learning (human feedback).
 
 Forward process (diffusion) + reverse process (denoise):
 
-[![Diffusion Model](./figures/DiffusionModel.png)](https://arxiv.org/abs/2006.11239)
+[![Diffusion Model](./figures/DiffusionModel.png)](https://nips.cc/virtual/2020/protected/poster_4c5bcfec8584af0d967f1ab10179ca4b.html)
 
 Stable diffusion model:
 
@@ -1901,9 +1901,16 @@ Half of the golf balls are blue.
 That means that there are 4 blue golf balls.
 ```
 
-### Recursive Re-prompting and Revision
+### Task Decomposition Prompting
 
-将复杂的的任务拆解成多个简单的子任务 ([Re3](https://aclanthology.org/2022.emnlp-main.296)).
+将复杂任务拆解成多个子任务, 并不断修正错误:
+
+- [Re3](https://aclanthology.org/2022.emnlp-main.296):
+  recursive re-prompting and revision.
+- [ToT](https://nips.cc/virtual/2023/73874):
+  tree of thoughts.
+- [GoT](https://ojs.aaai.org/index.php/AAAI/article/view/29720):
+  graph of thoughts.
 
 ### Machine Prompting
 
