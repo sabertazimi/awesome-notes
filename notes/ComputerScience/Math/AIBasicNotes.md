@@ -1901,6 +1901,10 @@ Half of the golf balls are blue.
 That means that there are 4 blue golf balls.
 ```
 
+### Recursive Re-prompting and Revision
+
+将复杂的的任务拆解成多个简单的子任务 ([Re3](https://aclanthology.org/2022.emnlp-main.296)).
+
 ### Machine Prompting
 
 利用机器生成 prompts:
