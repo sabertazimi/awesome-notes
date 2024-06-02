@@ -1926,7 +1926,7 @@ That means that there are 4 blue golf balls.
 
 [![Automatic Prompting Engineer](./figures/AutomaticPromptEngineer.png)](https://github.com/keirp/automatic_prompt_engineer)
 
-### Prompt Context
+### Retrieval-Augmented Generation
 
 检索增强生成, 通常称为 RAG (Retrieval-Augmented Generation),
 是一种强大的聊天机器人的设计模式.
