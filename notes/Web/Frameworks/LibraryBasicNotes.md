@@ -1957,10 +1957,14 @@ tags: [Web, Framework, Library]
 
 ### AI Agent
 
-- [PRAgent](https://github.com/Codium-ai/pr-agent):
-  Codium AI-powered tool for automated pull request analysis, feedback and suggestions.
+- [MetaGPT](https://github.com/geekan/MetaGPT):
+  Multi-agent framework to form collaborative entity for complex tasks.
+- [ChatDev](https://github.com/OpenBMB/ChatDev):
+  Communicative agents for software development.
 - [SWEAgent](https://github.com/princeton-nlp/SWE-agent):
   Princeton GitHub issues auto-fixer.
+- [PRAgent](https://github.com/Codium-ai/pr-agent):
+  Codium AI-powered tool for automated pull request analysis, feedback and suggestions.
 
 ## Debugging and Testing
 
