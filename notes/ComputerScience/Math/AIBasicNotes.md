@@ -743,15 +743,15 @@ Bidirectional Encoder Representations from Transformers 是一种预训练模型
 
 ### Fine-tuning
 
+#### BERT Adapters
+
+[![BERT Adapters](./figures/BERTAdapters.png)](https://ieeexplore.ieee.org/document/10023274)
+
 #### Instruction-tuning
 
 Make model can understand human instructions not appear in training data:
 
 [![Instruction-tuning](./figures/InstructionTuning.png)](https://iclr.cc/virtual/2022/7102)
-
-#### BERT Adapters
-
-[![BERT Adapters](./figures/BERTAdapters.png)](https://ieeexplore.ieee.org/document/10023274)
 
 #### ChatGPT
 
