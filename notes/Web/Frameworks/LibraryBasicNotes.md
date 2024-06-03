@@ -902,6 +902,8 @@ tags: [Web, Framework, Library]
   Simple and reusable date picker React component.
 - [DatePicker](https://github.com/wojtekmaj/react-date-picker):
   Moment.js free date picker for React app.
+- [InclusiveDates](https://github.com/fymmot/inclusive-dates):
+  Human-friendly date picker.
 - [Roulette](https://github.com/effectussoftware/react-custom-roulette):
   Customizable React roulette wheel with spinning animation.
 
