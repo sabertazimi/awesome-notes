@@ -2149,6 +2149,13 @@ Film types:
 - Schlieren, Disposable camera, Polaroid, Instax, Lomo, Pinhole photography.
 - VistaVision, Technirama, Techniscope, Panavision, Ambrotype.
 
+### AI Agents
+
+AI agents powered by tricky LLMs prompting:
+
+- Generative [agent](https://github.com/joonspk-research/generative_agents).
+- Minecraft [agent](https://github.com/MineDojo/Voyager).
+
 ### Prompt Engineering Reference
 
 - Prompt engineering [guide](https://github.com/dair-ai/Prompt-Engineering-Guide).
