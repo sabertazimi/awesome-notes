@@ -743,15 +743,32 @@ Bidirectional Encoder Representations from Transformers 是一种预训练模型
 
 ### Fine-tuning
 
-#### BERT Adapters
-
-[![BERT Adapters](./figures/BERTAdapters.png)](https://ieeexplore.ieee.org/document/10023274)
-
 #### Instruction-tuning
 
 Make model can understand human instructions not appear in training data:
 
 [![Instruction-tuning](./figures/InstructionTuning.png)](https://iclr.cc/virtual/2022/7102)
+
+#### BERT Adapters
+
+[![BERT Adapters](./figures/BERTAdapters.png)](https://ieeexplore.ieee.org/document/10023274)
+
+#### ChatGPT
+
+Fine-tuned GPT model on conversational data:
+
+- 学习文字接龙: 学习大规模资料, 生成下一个单词.
+- 人工文字接龙: 人工标注部分问题的答案, 引导模型生成的方向.
+- Teacher model: 负责评价模型生成的答案, 提供反馈.
+- Reinforcement learning from human feedback (RLHF):
+  以 teacher model 的评价分数为 reward, 通过强化学习优化模型.
+
+:::tip Alignment
+
+Fine-tuning process with supervised learning (labelled data)
+and reinforcement learning (human feedback).
+
+:::
 
 ## Reinforcement Learning
 
@@ -1820,23 +1837,6 @@ Explain the whole model
 
 - 用 AR model 生成中间向量, 用 NAR model 生成最终输出.
 - 用 NAR model 多次生成, 逐步优化输出.
-
-### ChatGPT
-
-Fine-tuned GPT model on conversational data:
-
-- 学习文字接龙: 学习大规模资料, 生成下一个单词.
-- 人工文字接龙: 人工标注部分问题的答案, 引导模型生成的方向.
-- Teacher model: 负责评价模型生成的答案, 提供反馈.
-- Reinforcement learning from human feedback (RLHF):
-  以 teacher model 的评价分数为 reward, 通过强化学习优化模型.
-
-:::tip Alignment
-
-Fine-tuning process with supervised learning (labelled data)
-and reinforcement learning (human feedback).
-
-:::
 
 ### Diffusion Model
 
