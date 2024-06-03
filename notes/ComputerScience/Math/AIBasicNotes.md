@@ -1826,18 +1826,18 @@ Explain the whole model
 Fine-tuned GPT model on conversational data:
 
 - Pre-training:
-  学习文字接龙, 学习大规模资料, 生成下一个单词.
+  学习文字接龙, 学习大规模资料 (self-supervised learning), 生成下一个单词.
 - Instruction-tuning:
   人工文字接龙, 人工标注部分问题的答案 (supervised learning), 引导模型生成的方向.
-- Reward model:
-  负责评价模型生成的答案, 提供反馈.
 - Reinforcement learning from human feedback
-  ([RLHF](https://proceedings.nips.cc/paper_files/paper/2017/hash/d5e2c0adad503c91f91df240d0cd4e49-Abstract.html)):
+  ([RLHF](https://nips.cc/virtual/2022/52886)):
+  训练一个 reward model, 负责评价模型生成的答案, 提供人类反馈.
   以 reward model 的评价分数为 reward, 通过强化学习优化模型.
 
 :::tip Alignment
 
-Fine-tuning process with supervised learning (labelled data)
+Fine-tuning process
+with supervised learning (labelled data)
 and reinforcement learning (human feedback).
 
 :::
