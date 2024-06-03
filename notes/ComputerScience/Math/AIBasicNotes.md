@@ -724,6 +724,13 @@ Pre-trained models + fine-tuning (downstream tasks):
 
 ### Pre-trained Models
 
+#### Pre-trained Data
+
+- Content filtering: 去除有害内容.
+- Text extraction: 去除 HTML 标签.
+- Quality filtering: 去除低质量内容.
+- Document deduplication: 去除重复内容.
+
 #### BERT
 
 Bidirectional Encoder Representations from Transformers 是一种预训练模型,
