@@ -717,6 +717,8 @@ tags: [Web, Framework, Library]
   Simple autocomplete pure vanilla JavaScript library.
 - [PinField](https://github.com/soywod/react-pin-field):
   Pin codes input for React.
+- [OTP](https://github.com/guilhermerodz/input-otp)
+  Accessible and unstyled one time password input.
 
 #### Select
 
