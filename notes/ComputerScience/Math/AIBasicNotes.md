@@ -753,23 +753,6 @@ Make model can understand human instructions not appear in training data:
 
 [![Instruction-tuning](./figures/InstructionTuning.png)](https://iclr.cc/virtual/2022/7102)
 
-#### ChatGPT
-
-Fine-tuned GPT model on conversational data:
-
-- 学习文字接龙: 学习大规模资料, 生成下一个单词.
-- 人工文字接龙: 人工标注部分问题的答案, 引导模型生成的方向.
-- Teacher model: 负责评价模型生成的答案, 提供反馈.
-- Reinforcement learning from human feedback (RLHF):
-  以 teacher model 的评价分数为 reward, 通过强化学习优化模型.
-
-:::tip Alignment
-
-Fine-tuning process with supervised learning (labelled data)
-and reinforcement learning (human feedback).
-
-:::
-
 ## Reinforcement Learning
 
 强化学习是一种机器学习方法, 通过智能体与环境交互,
@@ -1837,6 +1820,27 @@ Explain the whole model
 
 - 用 AR model 生成中间向量, 用 NAR model 生成最终输出.
 - 用 NAR model 多次生成, 逐步优化输出.
+
+### ChatGPT
+
+Fine-tuned GPT model on conversational data:
+
+- Pre-training:
+  学习文字接龙, 学习大规模资料, 生成下一个单词.
+- Instruction-tuning:
+  人工文字接龙, 人工标注部分问题的答案 (supervised learning), 引导模型生成的方向.
+- Reward model:
+  负责评价模型生成的答案, 提供反馈.
+- Reinforcement learning from human feedback
+  ([RLHF](https://proceedings.nips.cc/paper_files/paper/2017/hash/d5e2c0adad503c91f91df240d0cd4e49-Abstract.html)):
+  以 reward model 的评价分数为 reward, 通过强化学习优化模型.
+
+:::tip Alignment
+
+Fine-tuning process with supervised learning (labelled data)
+and reinforcement learning (human feedback).
+
+:::
 
 ### Diffusion Model
 
