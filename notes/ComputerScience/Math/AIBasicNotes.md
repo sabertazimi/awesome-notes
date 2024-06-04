@@ -1820,6 +1820,9 @@ Explain the whole model
 
 - 用 AR model 生成中间向量, 用 NAR model 生成最终输出.
 - 用 NAR model 多次生成, 逐步优化输出.
+- Speculative decoding:
+  用 NAR model 快速生成若干个预测输出, 作为 AR model 的后续输入,
+  使得 AR model 可以同时输出多个结果.
 
 ![Generative Model](./figures/GenerativeModel.png 'Generative Model')
 
