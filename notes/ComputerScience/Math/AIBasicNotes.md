@@ -1816,10 +1816,12 @@ Explain the whole model
 | Speed       |   Slow   |   Fast    |
 | Quality     |   High   |    Low    |
 
-结合上述两种方法:
+结合上述两种方法 (Encoder + Decoder 架构):
 
 - 用 AR model 生成中间向量, 用 NAR model 生成最终输出.
 - 用 NAR model 多次生成, 逐步优化输出.
+
+![Generative Model](./figures/GenerativeModel.png 'Generative Model')
 
 ### ChatGPT
 
