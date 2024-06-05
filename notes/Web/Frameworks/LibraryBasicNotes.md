@@ -1026,6 +1026,8 @@ tags: [Web, Framework, Library]
 
 - [Hover.css](https://github.com/IanLunn/Hover):
   Collection of CSS3 powered hover effects to be applied to links, buttons, images.
+- [Glow](https://github.com/codaworks/react-glow):
+  Mouse-tracing glow effect.
 
 ### MicroInteraction Animation
 
