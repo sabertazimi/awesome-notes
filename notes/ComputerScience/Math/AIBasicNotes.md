@@ -1856,6 +1856,7 @@ Fine-tuned GPT model on conversational data:
   ([RLHF](https://nips.cc/virtual/2022/52886)):
   训练一个 reward model, 负责评价模型生成的答案, 提供人类反馈.
   以 reward model 的评价分数为 reward, 通过强化学习优化模型.
+  一般聚焦于三个方面：有用性, 诚实性, 无害性.
 
 :::tip Alignment
 
