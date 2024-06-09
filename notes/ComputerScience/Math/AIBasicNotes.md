@@ -1826,6 +1826,24 @@ Explain the whole model
 
 ![Generative Model](./figures/GenerativeModel.png 'Generative Model')
 
+### Scaling Law
+
+现有的预训练语言模型对于数据的需求量远高于扩展法则
+(e.g [Chinchilla](https://nips.cc/virtual/2022/53031)) 中所给出的估计规模.
+很多更小的模型也能够通过使用超大规模的预训练数据获得较大的模型性能提升.
+这种现象的一个重要原因是由于 Transformer 架构具有较好的数据扩展性.
+目前为止, 还没有实验能够有效验证特定参数规模语言模型的饱和数据规模
+(即随着数据规模的扩展，模型性能不再提升).
+
+### Emergent Ability
+
+大语言模型的涌现能力被非形式化定义为
+`在小型模型中不存在但在大模型中出现的能力`:
+
+- In-context learning.
+- Instruction following.
+- Step-by-step reasoning.
+
 ### ChatGPT
 
 Fine-tuned GPT model on conversational data:
@@ -1841,8 +1859,8 @@ Fine-tuned GPT model on conversational data:
 
 :::tip Alignment
 
-Fine-tuning with supervised learning on labelled data
-and reinforcement learning from human feedback.
+Instruction-tuning (IT) with supervised learning on labelled data
+and reinforcement learning from human feedback (RLHF).
 
 :::
 
@@ -1856,7 +1874,7 @@ Stable diffusion model:
 
 [![Stable Diffusion](./figures/StableDiffusion.png)](https://ieeexplore.ieee.org/document/9878449)
 
-### Generative Video
+### Video Model
 
 Generative videos as world models simulator.
 
