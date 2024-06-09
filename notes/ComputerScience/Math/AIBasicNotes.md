@@ -771,6 +771,9 @@ Make model can understand human instructions not appear in training data:
 
 [![Instruction-tuning](./figures/InstructionTuning.png)](https://iclr.cc/virtual/2022/7102)
 
+- 提高指令复杂性和多样性能够促进模型性能的提升.
+- 更大的参数规模有助于提升模型的指令遵循能力.
+
 ## Reinforcement Learning
 
 强化学习是一种机器学习方法, 通过智能体与环境交互,
