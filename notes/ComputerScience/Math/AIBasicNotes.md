@@ -1961,7 +1961,7 @@ Half of the golf balls are blue.
 That means that there are 4 blue golf balls.
 ```
 
-### Task Decomposition Prompting
+### Task Planning Prompting
 
 将复杂任务拆解成多个子任务, 并不断修正错误:
 
@@ -1971,6 +1971,18 @@ That means that there are 4 blue golf balls.
   tree of thoughts.
 - [GoT](https://ojs.aaai.org/index.php/AAAI/article/view/29720):
   graph of thoughts.
+
+```bash
+How to make a simple but delicious dish called "Scrambled eggs with tomatoes".
+Let’s break down this problem.
+```
+
+```bash
+Give me a solution to accelerate decoding speed of LLMs during inference?
+Let’s break down this problem and give me the solution with code format.
+```
+
+![Task Planning](./figures/TaskPlanning.png 'Task Planning')
 
 ### Machine Prompting
 
