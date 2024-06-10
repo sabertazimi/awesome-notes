@@ -2295,6 +2295,7 @@ AI agents powered by tricky LLMs prompting:
 - Prompt engineering [guide](https://github.com/dair-ai/Prompt-Engineering-Guide).
 - [Awesome](https://github.com/f/awesome-chatgpt-prompts) ChatGPT prompts.
 - Midjourney [cookbook](https://fka.gumroad.com/l/the-art-of-midjourney-ai-guide-to-creating-images-from-text).
+- LLM [book](https://github.com/LLMBook-zh/LLMBook-zh.github.io).
 
 ## LLM Toolchain
 
