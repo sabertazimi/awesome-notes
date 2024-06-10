@@ -2013,8 +2013,9 @@ Let’s break down this problem and give me the solution with code format.
 
 Context is everything when it comes to getting the most out of an AI tool.
 To improve the relevance and quality of a generative AI output,
-you need to [improve the relevance and quality of the input](https://github.blog/2024-04-04-what-is-retrieval-augmented-generation-and-what-does-it-do-for-generative-ai):
-"Quality in, quality out".
+you need to [improve the relevance and quality of the input](https://github.blog/2024-04-04-what-is-retrieval-augmented-generation-and-what-does-it-do-for-generative-ai).
+
+> [Quality in, quality out.](https://github.blog/2024-04-04-what-is-retrieval-augmented-generation-and-what-does-it-do-for-generative-ai)
 
 ![Retrieval-Augmented Generation](./figures/RetrievalAugmentedGeneration.png 'Retrieval-Augmented Generation')
 
@@ -2337,8 +2338,6 @@ help to process data alongside the user inputs,
 making it easier to retrieve relevant information:
 
 ![LangChain Retrieval Module](./figures/LangChainRetrieval.png 'LangChain Retrieval Module')
-
-> [Quality in, quality out.](https://github.blog/2024-04-04-what-is-retrieval-augmented-generation-and-what-does-it-do-for-generative-ai)
 
 ```ts
 import { CSVLoader } from 'langchain/document_loaders/fs/csv'
