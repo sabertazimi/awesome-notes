@@ -1859,7 +1859,7 @@ Explain the whole model
 很多更小的模型也能够通过使用超大规模的预训练数据获得较大的模型性能提升.
 这种现象的一个重要原因是由于 Transformer 架构具有较好的数据扩展性.
 目前为止, 还没有实验能够有效验证特定参数规模语言模型的饱和数据规模
-(即随着数据规模的扩展，模型性能不再提升).
+(即随着数据规模的扩展, 模型性能不再提升).
 
 ### Emergent Ability
 
@@ -1967,6 +1967,8 @@ That means that there are 4 blue golf balls.
 
 - [Re3](https://aclanthology.org/2022.emnlp-main.296):
   recursive re-prompting and revision.
+- [ReAct](https://iclr.cc/virtual/2023/11003):
+  reasoning and acting (thought-act-observation).
 - [ToT](https://nips.cc/virtual/2023/73874):
   tree of thoughts.
 - [GoT](https://ojs.aaai.org/index.php/AAAI/article/view/29720):
@@ -1980,6 +1982,26 @@ Let’s break down this problem.
 ```bash
 Give me a solution to accelerate decoding speed of LLMs during inference?
 Let’s break down this problem and give me the solution with code format.
+```
+
+```bash
+# ReAct
+问题 科罗拉多造山带东部区域延伸到的区域的海拔范围是多少?
+思考 1 我需要搜索科罗拉多造山带, 找到科罗拉多造山带东段延伸的区域, 然后找到该区域的海拔范围.
+操作 1 搜索 [科罗拉多造山带]
+观察 1 科罗拉多造山带是科罗拉多及其周边地区造山运动的一段.
+思考 2 它没有提到东部地区. 所以我需要查一下东部地区.
+操作 2 查找 [东部地区]
+观察 2 (结果 1 / 1) 东部区域延伸至高平原, 称为中原造山带.
+思考 3 科罗拉多造山运动的东部区域延伸到高平原. 所以我需要搜索高平原, 找到它的海拔范围.
+操作 3 搜索 [高平原]
+观察 3 高平原指的是两个截然不同的陆地区域之一.
+思考 4 我需要搜索高平原（美国）
+操作 4 搜索 [高平原（美国）]
+观察 4 高平原是大平原的一个分区. 从东到西, 高平原的海拔从 1800 到 7000 英尺 (550 到 2130 米) 不等.
+思考 5 高平原海拔高度从 1800 到 7000 英尺, 所以答案是 1800 到 7000 英尺.
+操作 5 结束 [1800 到 7000 英尺]
+...
 ```
 
 ```bash
