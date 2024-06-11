@@ -2240,7 +2240,7 @@ My first command is console.log("Hello World").
 
 ### Simple Framework
 
-简化的综合框架:
+简化的综合框架 (`Instruction`+`Context`+`Input Data`+`Output Indicator`):
 
 - 明确任务: 直接指出你需要模型做什么. 例如: "写一个故事", "回答一个问题", "解释一个概念".
 - 设定角色和风格: 简短描述模型应采用的角色和风格 (`Act as`). 例如: "像专家一样", "幽默地", "正式地".
