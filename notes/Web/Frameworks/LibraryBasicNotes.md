@@ -740,6 +740,8 @@ tags: [Web, Framework, Library]
   Dead simple Object schema validation.
 - [Joi](https://github.com/sideway/joi):
   Powerful data validation library.
+- [Bot](https://github.com/fabian-hiller/valibot):
+  Modular and type safe schema library for validating structural data.
 - [Cleave](https://github.com/nosir/cleave-zen):
   Input format checker.
 
