@@ -1994,6 +1994,65 @@ Let’s break down this problem and give me the solution with code format.
 
 ![Task Planning](./figures/TaskPlanning.png 'Task Planning')
 
+### Program-aided Prompting
+
+[Program-aided prompting](https://proceedings.mlr.press/v202/gao23f.html)
+make LLMs output code,
+then offloads solution step to programmatic runtime such as `Python interpreter`:
+
+```python
+import openai
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+import os
+from langchain.llms import OpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
+openai.api_key = os.getenv("OPENAI_API_KEY")
+os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+llm = OpenAI(model_name='text-davinci-003', temperature=0)
+
+question = """
+Today is 27 February 2023.
+I was born exactly 25 years ago. What is the date I was born in MM/DD/YYYY?
+""".strip() + '\n'
+
+DATE_UNDERSTANDING_PROMPT = """
+# Q: 2015 is coming in 36 hours. What is the date one week from today in MM/DD/YYYY?
+# If 2015 is coming in 36 hours, then today is 36 hours before.
+today = datetime(2015, 1, 1) - relativedelta(hours=36)
+# One week from today,
+one_week_from_today = today + relativedelta(weeks=1)
+# The answer formatted with %m/%d/%Y is
+one_week_from_today.strftime('%m/%d/%Y')
+# Q: Jane was born on the last day of February in 2001.
+# Today is her 16-year-old birthday. What is the date yesterday in MM/DD/YYYY?
+# If Jane was born on the last day of February in 2001
+# and today is her 16-year-old birthday, then today is 16 years later.
+today = datetime(2001, 2, 28) + relativedelta(years=16)
+# Yesterday,
+yesterday = today - relativedelta(days=1)
+# The answer formatted with %m/%d/%Y is
+yesterday.strftime('%m/%d/%Y')
+# Q: {question}
+""".strip() + '\n'
+
+"""
+llm_out:
+# If today is 27 February 2023 and I was born exactly 25 years ago,
+# then I was born 25 years before.
+today = datetime(2023, 2, 27)
+# I was born 25 years before,
+born = today - relativedelta(years=25)
+# The answer formatted with %m/%d/%Y is
+born.strftime('%m/%d/%Y')
+"""
+llm_out = llm(DATE_UNDERSTANDING_PROMPT.format(question=question))
+exec(llm_out)
+print(born)
+```
+
 ### Machine Prompting
 
 利用机器生成 prompts:
