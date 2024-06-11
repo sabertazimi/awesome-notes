@@ -1982,6 +1982,16 @@ Give me a solution to accelerate decoding speed of LLMs during inference?
 Let’s break down this problem and give me the solution with code format.
 ```
 
+```bash
+# Tree of thoughts
+假设三位不同的专家来回答这个问题.
+所有专家都写下他们思考这个问题的第一个步骤, 然后与大家分享.
+然后, 所有专家都写下他们思考的下一个步骤并分享.
+以此类推, 直到所有专家写完他们思考的所有步骤.
+只要大家发现有专家的步骤出错了, 就让这位专家离开.
+请问:
+```
+
 ![Task Planning](./figures/TaskPlanning.png 'Task Planning')
 
 ### Machine Prompting
