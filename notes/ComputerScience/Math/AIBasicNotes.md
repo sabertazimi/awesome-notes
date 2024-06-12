@@ -1907,6 +1907,40 @@ Generative videos as world models simulator.
 
 ## Prompt Engineering
 
+### Design Principles
+
+26 guiding principles designed to streamline process of querying and prompting LLMs:
+
+- 直接性: 无需对 LLM 使用礼貌用语, 直接了当.
+- 目标受众: 在提示中集成预期受众, 例如领域专家.
+- 任务分解: 将复杂任务分解为一系列简单提示.
+- 肯定指令: 使用肯定指令, 避免使用否定语言.
+- 概念解释: 使用简单术语解释特定主题, e.g 对11岁孩子或领域初学者解释.
+- 激励提示: 添加激励性语句, 如 `I'm going to tip $xxx for a better solution!`.
+- 少样本提示 (示例驱动提示).
+- 格式化: 使用特定的格式, 如以 `###Instruction###`/`###Question###`/`###Example###` 开始.
+- 任务指派: 使用短语 `Your task is` 和 `You MUST`.
+- 惩罚提示: 使用短语 `You will be penalized`.
+- 自然回答: 使用短语 `Answer a question given in a natural, human-like manner`.
+- 逐步思考: 使用短语 `think step by step`.
+- 避免偏见: 确保答案无偏见, 不依赖于刻板印象.
+- 模型询问细节: 允许模型通过提问来获取精确细节和要求.
+- 教学和测试:
+  `Teach me any [theorem/topic/rule name] and include a test at the end`,
+  `and let me know if my answers are correct after I respond`,
+  `without providing the answers beforehand`.
+- 角色分配: 为大型语言模型分配角色.
+- 使用分隔符.
+- 重复特定词汇: 在提示中多次重复特定单词或短语.
+- 思维链与少样本结合.
+- 输出引导: 使用预期输出的开始作为提示的结尾.
+- 详细写作: 写详细文章时, 添加所有必要信息.
+- 文本修正: 改进用户语法和词汇, 同时保持原文风格.
+- 复杂编码提示: 生成跨多个文件的代码时, 创建一个脚本.
+- 文本初始化: 使用特定单词, 短语或句子开始或继续文本.
+- 明确要求: 清晰陈述模型必须遵循的要求.
+- 文本相似性: 写类似于提供样本的文本时, 使用相同的语言风格.
+
 ### In-Context Learning Prompting
 
 Given examples, generate output:
