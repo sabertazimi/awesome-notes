@@ -1061,7 +1061,7 @@ tags: [Web, Framework, Library]
 
 - [Calendar](https://github.com/wojtekmaj/react-calendar):
   Ultimate calendar for React app.
-- [BigCalendar](https://github.com/intljusticemission/react-big-calendar):
+- [BigCalendar](https://github.com/jquense/react-big-calendar):
   Google/Outlook like calendar component for React.
 
 ## Internationalization Utils
@@ -1286,6 +1286,8 @@ tags: [Web, Framework, Library]
   Modular geospatial engine.
 - [Leaflet](https://github.com/PaulLeCam/react-leaflet):
   React components for Leaflet maps.
+- [GEO](https://github.com/terrestris/react-geo):
+  Geo related modules to use in combination with React, Ant Design and OpenLayers.
 
 ## SMS
 
