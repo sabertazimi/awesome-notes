@@ -1523,12 +1523,6 @@ tags: [Web, Framework, Library]
   Run React code on the go.
 - [Histoire](https://github.com/histoire-dev/histoire):
   Fast and beautiful interactive component playground powered by Vite.
-- [SyncedStore](https://github.com/yousefed/SyncedStore):
-  CRDT for building live and collaborative applications.
-- [YJS](https://github.com/yjs/yjs):
-  Shared CRDT data types for building collaborative software.
-- [AutoMerge](https://github.com/automerge/automerge):
-  Fast implementations of several different CRDTs.
 
 ### Web IDE
 
@@ -1753,6 +1747,17 @@ tags: [Web, Framework, Library]
   Relocate resource intensive third-party scripts into web worker.
 - [Comlink](https://github.com/GoogleChromeLabs/comlink):
   Shared class between web workers.
+
+### Collaborative Utils
+
+- [SyncedStore](https://github.com/yousefed/SyncedStore):
+  CRDT for building live and collaborative applications.
+- [YJS](https://github.com/yjs/yjs):
+  Shared CRDT data types for building collaborative software.
+- [AutoMerge](https://github.com/automerge/automerge):
+  Fast implementations of several different CRDTs.
+- [PartyKit](https://github.com/partykit/partykit):
+  Simplifies developing multiplayer applications.
 
 ## Web3
 
