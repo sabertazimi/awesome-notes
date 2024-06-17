@@ -2303,28 +2303,6 @@ export default Intl
 
 ## Modern React
 
-### ES6 Binding for This
-
-```tsx
-class Component extends React.Component {
-  state = {}
-  handleES6 = (event) => {}
-
-  constructor(props) {
-    super(props)
-    this.handleLegacy = this.handleLegacy.bind(this)
-  }
-
-  handleLegacy(event) {
-    this.setState(prev => ({ ...prev }))
-  }
-
-  render() {
-    return <div>{this.state.foo}</div>
-  }
-}
-```
-
 ### Context API
 
 Context API provide a Dependency Injection style method,
@@ -3197,6 +3175,120 @@ export default function Page() {
 - React Server Components [introduction](https://www.joshwcomeau.com/react/server-components).
 - Demystifying React Server Components [series](https://demystifying-rsc.vercel.app).
 - React Server Components [devtools](https://www.alvar.dev/blog/creating-devtools-for-react-server-components).
+
+### React Form
+
+#### Form Loading State
+
+`useActionState`:
+
+```tsx
+import { useActionState } from 'react'
+
+export default function App() {
+  const sendMessage = async (_actionState: null, formData: FormData) => {
+    const message = formData.get('message')
+
+    console.log(message)
+
+    // Artificial delay to simulate async operation
+    await new Promise(resolve => setTimeout(resolve, 2000))
+
+    // TODO: do call (e.g. API call) to send the message
+
+    return null
+  }
+
+  const [_actionState, action, isPending] = useActionState(sendMessage, null)
+
+  return (
+    <form action={action}>
+      <label htmlFor="message">Message:</label>
+      <input name="message" id="message" />
+
+      <button type="submit" disabled={isPending}>
+        {isPending ? 'Sending ...' : 'Send'}
+      </button>
+    </form>
+  )
+}
+```
+
+`useFormStatus`:
+
+```tsx
+import { useFormStatus } from 'react-dom'
+
+function SubmitButton() {
+  const { pending } = useFormStatus()
+
+  return (
+    <button type="submit" disabled={pending}>
+      {pending ? 'Sending ...' : 'Send'}
+    </button>
+  )
+}
+
+export default function App() {
+  const sendMessage = async (formData: FormData) => {
+    const message = formData.get('message')
+
+    console.log(message)
+
+    // Artificial delay to simulate async operation
+    await new Promise(resolve => setTimeout(resolve, 2000))
+
+    // TODO: do call (e.g. API call) to send the message
+  }
+
+  return (
+    <form action={sendMessage}>
+      <label htmlFor="message">Message:</label>
+      <input name="message" id="message" />
+
+      <SubmitButton />
+    </form>
+  )
+}
+```
+
+`useTransition`:
+
+```tsx
+import { useTransition } from 'react'
+
+export default function App() {
+  const sendMessage = async (formData: FormData) => {
+    const message = formData.get('message')
+
+    console.log(message)
+
+    // Artificial delay to simulate async operation
+    await new Promise(resolve => setTimeout(resolve, 2000))
+
+    // TODO: do call (e.g. API call) to send the message
+  }
+
+  const [isPending, startTransition] = useTransition()
+
+  const action = (formData: FormData) => {
+    startTransition(async () => {
+      await sendMessage(formData)
+    })
+  }
+
+  return (
+    <form action={action}>
+      <label htmlFor="message">Message:</label>
+      <input name="message" id="message" />
+
+      <button type="submit" disabled={isPending}>
+        {isPending ? 'Sending ...' : 'Send'}
+      </button>
+    </form>
+  )
+}
+```
 
 ### React Compiler
 
