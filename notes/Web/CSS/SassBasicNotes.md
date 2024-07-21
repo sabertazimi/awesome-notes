@@ -129,6 +129,7 @@ only assign when variables hadn't been assigned
 
 ```scss
 @mixin box-shadow($x, $y, $blur, $c) {
+  // stylelint-disable-next-line declaration-block-no-duplicate-properties
   box-shadow: $x, $y, $blur, $c;
   // stylelint-disable-next-line declaration-block-no-duplicate-properties
   box-shadow: $x, $y, $blur, $c;
