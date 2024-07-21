@@ -1316,8 +1316,9 @@ cy.intercept('POST', apiGraphQL, (req) => {
   if (
     Object.hasOwn(body, 'operationName')
     && body.operationName === 'CreateBankAccount'
-  )
+  ) {
     req.alias = 'gqlCreateBankAccountMutation'
+  }
 })
 ```
 
@@ -1863,8 +1864,9 @@ console.log(c)
     if (
       window.outerHeight - window.innerHeight > 200
       || window.outerWidth - window.innerWidth > 200
-    )
+    ) {
       document.body.innerHTML = 'Debug detected, please reload page!'
+    }
 
     setInterval(() => {
       ;(function () {

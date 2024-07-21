@@ -1957,8 +1957,9 @@ const KeepAlive = defineComponent({
         (include && (!name || !matches(include, name)))
         // excluded
         || (exclude && name && matches(exclude, name))
-      )
+      ) {
         return vnode
+      }
 
       const { cache, keys } = this
       // same constructor may get registered as different local components
@@ -2024,8 +2025,9 @@ const KeepAlive = {
         name
         && ((props.include && !props.include.test(name))
         || (props.exclude && props.exclude.test(name)))
-      )
+      ) {
         return rawVNode
+      }
 
       const cachedVNode = cache.get(rawVNode.type)
 

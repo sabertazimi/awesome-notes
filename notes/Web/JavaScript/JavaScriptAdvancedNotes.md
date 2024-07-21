@@ -661,14 +661,14 @@ it.next() // {value: 1, done: false}
 // the error will be handled and printed ("Error: Handled!"),
 // then the flow will continue, so we will get the
 // next yielded value as result.
-it.throw(Error('Handled!')) // {value: 2, done: false}
+it.throw(new Error('Handled!')) // {value: 2, done: false}
 
 it.next() // {value: 3, done: false}
 
 // now the generator instance is paused on the
 // third yield that is not inside a try-catch.
 // the error will be re-thrown out
-it.throw(Error('Not handled!')) // !!! Uncaught Error: Not handled! !!!
+it.throw(new Error('Not handled!')) // !!! Uncaught Error: Not handled! !!!
 
 // now the iterator is exhausted
 it.next() // {value: undefined, done: true}
@@ -1159,12 +1159,12 @@ setTimeout(console.log, 0, p8) // Promise <pending>
 setTimeout(console.log, 0, p9) // Promise <rejected>: undefined
 
 const p10 = p1.then(null, () => {
-  throw 'bar'
+  throw new Error('bar')
 })
 // Uncaught (in promise) bar
 setTimeout(console.log, 0, p10) // Promise <rejected>: bar
 
-const p11 = p1.then(null, () => Error('bar'))
+const p11 = p1.then(null, () => new Error('bar'))
 setTimeout(console.log, 0, p11) // Promise <resolved>: Error: bar
 ```
 
@@ -1209,7 +1209,7 @@ const p4 = p1.finally(() => {})
 const p5 = p1.finally(() => Promise.resolve())
 const p6 = p1.finally(() => 'bar')
 const p7 = p1.finally(() => Promise.resolve('bar'))
-const p8 = p1.finally(() => Error('bar'))
+const p8 = p1.finally(() => new Error('bar'))
 setTimeout(console.log, 0, p2) // Promise <resolved>: foo
 setTimeout(console.log, 0, p3) // Promise <resolved>: foo
 setTimeout(console.log, 0, p4) // Promise <resolved>: foo
@@ -1226,7 +1226,7 @@ const p10 = p1.finally(() => Promise.reject())
 // Uncaught (in promise): undefined
 setTimeout(console.log, 0, p10) // Promise <rejected>: undefined
 const p11 = p1.finally(() => {
-  throw 'bar'
+  throw new Error('bar')
 })
 // Uncaught (in promise) baz
 setTimeout(console.log, 0, p11) // Promise <rejected>: bar
@@ -1309,19 +1309,19 @@ console.log('bar') // 这一行不会执行
 ```
 
 ```ts
-Promise.reject(Error('foo'))
+Promise.reject(new Error('foo'))
 console.log('bar')
 // bar
 // Uncaught (in promise) Error: foo
 
-const p1 = new Promise((resolve, reject) => reject(Error('foo'))) // 1.
+const p1 = new Promise((resolve, reject) => reject(new Error('foo'))) // 1.
 const p2 = new Promise((resolve, reject) => {
   throw new Error('foo') // 2.
 })
 const p3 = Promise.resolve().then(() => {
   throw new Error('foo') // 4.
 })
-const p4 = Promise.reject(Error('foo')) // 3.
+const p4 = Promise.reject(new Error('foo')) // 3.
 // Uncaught (in promise) Error: foo
 //   at Promise (test.html:1)
 //   at new Promise (<anonymous>)
@@ -2282,7 +2282,7 @@ function usePostLoading() {
         if (response.ok)
           return response.json()
 
-        return Promise.reject(Error('The request failed.'))
+        return Promise.reject(new Error('The request failed.'))
       })
       .then((fetchedPost: Post) => {
         setPost(fetchedPost)
@@ -2321,7 +2321,7 @@ function wait(time: number, signal?: AbortSignal) {
     }, time)
     signal?.addEventListener('abort', () => {
       clearTimeout(timeoutId)
-      reject(Error('Aborted.'))
+      reject(new Error('Aborted.'))
     })
   })
 }
@@ -3679,7 +3679,7 @@ setInterval(() => {
 ## Regular Expression
 
 ```ts
-const re = /pattern/gim
+const re = /pattern/gi
 ```
 
 ### RegExp Flags
@@ -3768,7 +3768,7 @@ codePointLength(s) // 2
 
 ```ts
 const string = 'Favorite GitHub Repos: tc39/ecma262 v8/v8.dev'
-const regex = /\b(?<owner>[a-z0-9]+)\/(?<repo>[a-z0-9\.]+)\b/g
+const regex = /\b(?<owner>[a-z0-9]+)\/(?<repo>[a-z0-9.]+)\b/g
 
 for (const match of string.matchAll(regex)) {
   console.log(`${match[0]} at ${match.index} with '${match.input}'`)
@@ -3825,7 +3825,7 @@ RegExp [functions](https://exploringjs.com/impatient-js/ch_regexps.html#methods-
 #### RegExp Test
 
 ```ts
-;/[a-z|A-Z|0-9]/gim.test(str)
+;/[a-z|0-9]/i.test(str)
 ```
 
 ```ts
@@ -3910,11 +3910,11 @@ assert(
 ```
 
 ```ts
-const RE_DATE = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/
+const RE_DATE = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/
 console.log('1999-12-31'.replace(RE_DATE, '$<month>/$<day>/$<year>'))
 // 12/31/1999
 
-const RE_DATE = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/
+const RE_DATE = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/
 console.log(
   '1999-12-31'.replace(
     RE_DATE,
@@ -4665,7 +4665,7 @@ Immutable data structure:
 #### Immutable Array
 
 ```ts
-const RE_INDEX_PROP_KEY = /^[0-9]+$/
+const RE_INDEX_PROP_KEY = /^\d+$/
 const ALLOWED_PROPERTIES = new Set(['length', 'constructor', 'slice', 'concat'])
 
 function createImmutableArray(arrayLike, mapFn) {

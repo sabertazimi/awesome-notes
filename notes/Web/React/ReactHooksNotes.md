@@ -3521,8 +3521,9 @@ function createFormControl() {
               radioOrCheckbox
                 ? refs.find((option: Ref) => option === fieldRef)
                 : fieldRef === field._f.ref
-            )
+            ) {
               return
+            }
 
             set(_fields, name, {
               _f: {
@@ -4111,16 +4112,16 @@ function App() {
 
       {isLoading
         ? (
-          <div>Loading ...</div>
+            <div>Loading ...</div>
           )
         : (
-          <ul>
-            {data.hits.map(item => (
-              <li key={item.objectID}>
-                <a href={item.url}>{item.title}</a>
-              </li>
-            ))}
-          </ul>
+            <ul>
+              {data.hits.map(item => (
+                <li key={item.objectID}>
+                  <a href={item.url}>{item.title}</a>
+                </li>
+              ))}
+            </ul>
           )}
     </>
   )

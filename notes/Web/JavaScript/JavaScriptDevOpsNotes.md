@@ -1058,21 +1058,21 @@ export default function RootLayout() {
 
   const authNav = user
     ? (
-      <li>
-        <form action={signOut}>
-          <button type="submit">Sign Out</button>
-        </form>
-      </li>
+        <li>
+          <form action={signOut}>
+            <button type="submit">Sign Out</button>
+          </form>
+        </li>
       )
     : (
-      <>
-        <li>
-          <Link href="/sign-up">Sign Up</Link>
-        </li>
-        <li>
-          <Link href="/sign-in">Sign In</Link>
-        </li>
-      </>
+        <>
+          <li>
+            <Link href="/sign-up">Sign Up</Link>
+          </li>
+          <li>
+            <Link href="/sign-in">Sign In</Link>
+          </li>
+        </>
       )
 }
 ```
@@ -2432,7 +2432,7 @@ module.exports = {
 module.exports = {
   optimization: {
     splitChunks: {
-      chunks: chunk => !/^(polyfills|main|pages\/_app)$/.test(chunk.name),
+      chunks: chunk => !/^polyfills|main|pages\/_app$/.test(chunk.name),
       cacheGroups: {
         framework: {
           chunks: 'all',

@@ -97,14 +97,14 @@ export default function PrivateRoute({
         auth.isAuthenticated() === true
           ? (<Component {...props} />)
           : (
-            <Redirect
-              to={{
-                pathname: toAuth,
-                state: {
-                  from: props.location,
-                },
-              }}
-            />
+              <Redirect
+                to={{
+                  pathname: toAuth,
+                  state: {
+                    from: props.location,
+                  },
+                }}
+              />
             ))}
     />
   )

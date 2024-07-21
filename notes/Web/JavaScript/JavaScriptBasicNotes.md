@@ -447,7 +447,7 @@ interface RegExpMatchArray extends Array<string> {
 - `string.search(string | RegExp): number`.
 
 ```ts
-'a2b'.search(/[0-9]/)
+'a2b'.search(/\d/)
 // 1
 'a2b'.search('[0-9]')
 // 1
@@ -2104,7 +2104,7 @@ function typeOf(o) {
 
 ```ts
 function type(item) {
-  const reTypeOf = /(?:^\[object\s(.*?)\]$)/
+  const reTypeOf = /^\[object\s(.*?)\]$/
 
   return Object.prototype.toString
     .call(item)
@@ -2375,14 +2375,16 @@ function abstractEqualityComparison(x, y) {
   if (
     ['string', 'number', 'bigint', 'symbol'].includes(TypeOf(x))
     && TypeOf(y) === 'object'
-  )
+  ) {
     return abstractEqualityComparison(x, ToPrimitive(y))
+  }
 
   if (
     TypeOf(x) === 'object'
     && ['string', 'number', 'bigint', 'symbol'].includes(TypeOf(y))
-  )
+  ) {
     return abstractEqualityComparison(ToPrimitive(x), y)
+  }
 
   // Comparing a bigint with a number
   if (
@@ -2392,8 +2394,9 @@ function abstractEqualityComparison(x, y) {
     if (
       [Number.NaN, +Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY].includes(x)
       || [Number.NaN, +Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY].includes(y)
-    )
+    ) {
       return false
+    }
 
     if (isSameMathematicalValue(x, y))
       return true
@@ -3933,8 +3936,9 @@ const classSim = function (Parent, props) {
     if (
       Child.uber
       && Object.prototype.hasOwnProperty.call(Child.uber, '_construct')
-    )
+    ) {
       Child.uber._construct.apply(this, args)
+    }
 
     if (Object.prototype.hasOwnProperty.call(Child.prototype, '_construct'))
       Child.prototype._construct.apply(this, args)
@@ -5358,10 +5362,11 @@ const property = 'name'
 alert(obj[property])
 
 // Anti-pattern:
-
+// eslint-disable-next-line no-implied-eval
 setTimeout('myFunc()', 1000)
-
+// eslint-disable-next-line no-implied-eval
 setTimeout('myFunc(1, 2, 3)', 1000)
+
 // Preferred:
 setTimeout(myFunc, 1000)
 setTimeout(() => {

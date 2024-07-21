@@ -2448,11 +2448,11 @@ const typeSym = Symbol('type')
 const valueSym = Symbol('value')
 
 type Brand<B extends string, T> = T extends
-  | undefined
-  | null
-  | number
-  | boolean
-  | bigint
+| undefined
+| null
+| number
+| boolean
+| bigint
   ? { [typeSym]: B, [valueSym]: T }
   : T & { [typeSym]: B }
 

@@ -926,8 +926,9 @@ export function getNextLanes(root: FiberRoot, wipLanes: Lanes): Lanes {
     if (
       nextLane >= wipLane
       || (nextLane === DefaultLane && (wipLane & TransitionLanes) !== NoLanes)
-    )
+    ) {
       return wipLanes
+    }
   }
 
   if (
@@ -2176,8 +2177,9 @@ function commitRootImpl(
   if (
     includesSomeLane(pendingPassiveEffectsLanes, SyncLane)
     && root.tag !== LegacyRoot
-  )
+  ) {
     flushPassiveEffects()
+  }
 
   // If layout work was scheduled, flush it now.
   flushSyncCallbacks()
@@ -2601,8 +2603,9 @@ function commitLayoutEffectOnFiber(
         if (
           !enableSuspenseLayoutEffectSemantics
           || !offscreenSubtreeWasHidden
-        )
+        ) {
           commitHookEffectListMount(HookLayout | HookHasEffect, finishedWork)
+        }
 
         break
       }

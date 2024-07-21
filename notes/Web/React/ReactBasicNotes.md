@@ -598,26 +598,26 @@ function Breadcrumbs({ children }: { children: ReactElement }) {
           <>
             {child.props.link
               ? (
-                <a
-                  href={child.props.link}
-                  style={{
-                    display: 'inline-block',
-                    textDecoration: 'none',
-                  }}
-                >
+                  <a
+                    href={child.props.link}
+                    style={{
+                      display: 'inline-block',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    <div style={{ marginRight: '5px' }}>
+                      {cloneElement(child, {
+                        isLast,
+                      })}
+                    </div>
+                  </a>
+                )
+              : (
                   <div style={{ marginRight: '5px' }}>
                     {cloneElement(child, {
                       isLast,
                     })}
                   </div>
-                </a>
-                )
-              : (
-                <div style={{ marginRight: '5px' }}>
-                  {cloneElement(child, {
-                    isLast,
-                  })}
-                </div>
                 )}
             {!isLast && <div style={{ marginRight: '5px' }}></div>}
           </>
@@ -2584,21 +2584,21 @@ class Modal extends React.Component<Props> {
       <Portal>
         {on
           ? (
-            <div className="modal is-active">
-              <div className="modal-background" />
-              <div className="modal-content">
-                <div className="box">
-                  <h2 className="subtitle">{children}</h2>
-                  <button
-                    type="button"
-                    onClick={toggle}
-                    className="closeButton button is-info"
-                  >
-                    Close
-                  </button>
+              <div className="modal is-active">
+                <div className="modal-background" />
+                <div className="modal-content">
+                  <div className="box">
+                    <h2 className="subtitle">{children}</h2>
+                    <button
+                      type="button"
+                      onClick={toggle}
+                      className="closeButton button is-info"
+                    >
+                      Close
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
             )
           : null}
       </Portal>
@@ -3653,12 +3653,12 @@ export default class App extends Component {
       <div className="app">
         {Form
           ? (
-            <Form />
+              <Form />
             )
           : (
-            <button type="button" onClick={this.showForm}>
-              Show form
-            </button>
+              <button type="button" onClick={this.showForm}>
+                Show form
+              </button>
             )}
       </div>
     )
@@ -4061,7 +4061,7 @@ it('should throw when over 9000', () => {
     result.current.increment()
   })
 
-  expect(result.error).toEqual(Error('It\'s over 9000!'))
+  expect(result.error).toEqual(new Error('It\'s over 9000!'))
 })
 ```
 

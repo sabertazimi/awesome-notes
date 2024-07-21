@@ -1708,10 +1708,11 @@ document.addEventListener('readystatechange', (event) => {
   if (
     document.readyState === 'interactive'
     || document.readyState === 'complete'
-  )
+  ) {
     console.log('Content loaded')
-  else if (document.readyState === 'loading')
+  } else if (document.readyState === 'loading') {
     console.log('Loading')
+  }
 })
 ```
 
@@ -2903,14 +2904,14 @@ function getJSON(url) {
         if (this.status === 200)
           resolve(JSON.parse(this.response))
         else
-          reject(Error(`${this.status} ${this.statusText}`))
+          reject(new Error(`${this.status} ${this.statusText}`))
       } catch (e) {
         reject(e.message)
       }
     }
 
     request.onerror = function () {
-      reject(Error(`${this.status} ${this.statusText}`))
+      reject(new Error(`${this.status} ${this.statusText}`))
     }
 
     request.send()

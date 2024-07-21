@@ -1230,10 +1230,11 @@ export function mountComponent(
 function invokeInsertHook(vnode, queue, initial) {
   // delay insert hooks for component root nodes, invoke them after the
   // element is really inserted
-  if (isTrue(initial) && isDef(vnode.parent))
+  if (isTrue(initial) && isDef(vnode.parent)) {
     vnode.parent.data.pendingInsert = queue
-  else
+  } else {
     for (let i = 0; i < queue.length; ++i) queue[i].data.hook.insert(queue[i])
+  }
 }
 
 // core/vdom/create-component.js:
@@ -2048,16 +2049,17 @@ export function observe(value: any, asRootData: ?boolean): Observer | void {
 
   let ob: Observer | void
 
-  if (hasOwn(value, '__ob__') && value.__ob__ instanceof Observer)
+  if (hasOwn(value, '__ob__') && value.__ob__ instanceof Observer) {
     ob = value.__ob__
-  else if (
+  } else if (
     shouldObserve
     && !isServerRendering()
     && (Array.isArray(value) || isPlainObject(value))
     && Object.isExtensible(value)
     && !value._isVue
-  )
+  ) {
     ob = new Observer(value)
+  }
 
   if (asRootData && ob)
     ob.vmCount++

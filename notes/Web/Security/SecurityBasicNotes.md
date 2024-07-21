@@ -853,7 +853,7 @@ statement.executeQuery(sql, email, password);
 
 ```ts
 function isRelative(url) {
-  return url && url.match(/^\/[^\/\\]/)
+  return url && url.match(/^\/[^/\\]/)
 }
 ```
 
