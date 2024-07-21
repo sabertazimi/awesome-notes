@@ -281,7 +281,7 @@ wget https://aur.archlinux.org/packages.gz
 
 ### WSL Installation
 
-[Upgrade to WSL 2](https://docs.microsoft.com/windows/wsl/install-manual):
+[Upgrade to WSL2](https://docs.microsoft.com/windows/wsl/install-manual):
 
 ```bash
 # <!-- markdownlint-disable-next-line MD013 -->
@@ -298,10 +298,13 @@ wsl -l -v
 
 ### WSL Proxy Connection
 
-[Proxy for WSL 2](https://zinglix.xyz/2020/04/18/wsl2-proxy):
+[Network](https://learn.microsoft.com/windows/wsl/networking)
+and [proxy](https://zinglix.xyz/2020/04/18/wsl2-proxy)
+for WSL2:
 
 ```bash
-HostIP=$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')
+# HostIP=$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')
+HostIP=$(ip route show | grep -i default | awk '{ print $3}')
 WslIP=$(hostname -I | awk '{print $1}')
 Port=1080
 PROXY_SOCKS="socks5://${HostIP}:${Port}"
@@ -324,13 +327,13 @@ VLAN (或其他网络) 设备访问本地代理连接.
 
 ### WSL Remote Connection
 
-[Gzip for WSL 2](https://github.com/microsoft/WSL/issues/4461#issuecomment-1174011640):
+[Gzip for WSL2](https://github.com/microsoft/WSL/issues/4461#issuecomment-1174011640):
 
 ```bash
 echo -en '\x10' | sudo dd of=/usr/bin/gzip count=1 bs=1 conv=notrunc seek=$((0x189))
 ```
 
-[Network for WSL 2](https://github.com/microsoft/WSL/issues/4194):
+[Winsock for WSL2](https://github.com/microsoft/WSL/issues/4194):
 
 ```bash
 netsh winsock reset
@@ -1333,15 +1336,13 @@ ufw allow https
 
 ### nslookup
 
-`nslookup domain_name`查看 DNS 解析器:
-
-/etc/network/interfaces
+`nslookup domain_name` 查看 DNS 解析器: `/etc/network/interfaces`.
 
 主机名:
 
-- /etc/hostname
-- /etc/sysconfig/network
-- /etc/resolv.conf
+- `/etc/hostname`.
+- `/etc/sysconfig/network`.
+- `/etc/resolv.conf`.
 
 ### ping
 
