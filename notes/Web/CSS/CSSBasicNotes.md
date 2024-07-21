@@ -1232,6 +1232,7 @@ In `position`/`size`/`margin`/`padding`/`border`/`text alignment`:
 
 ```css
 .logical {
+  /* stylelint-disable shorthand-property-no-redundant-values */
   inset-block: 0 0;
   inset-inline: 0 0;
   inline-size: fit-content;
@@ -1248,6 +1249,7 @@ In `position`/`size`/`margin`/`padding`/`border`/`text alignment`:
   border-block-end: 1px solid blue;
   border-inline-start: 1px solid blue;
   border-inline-end: 1px solid blue;
+  /* stylelint-enable shorthand-property-no-redundant-values */
 }
 ```
 
