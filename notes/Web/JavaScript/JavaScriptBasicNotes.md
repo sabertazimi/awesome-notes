@@ -215,7 +215,8 @@ Infinity will be converted to `null` with `JSON.stringify()`.
 
 ```ts
 const largeNumber = 1.7976931348623157e308
-// eslint-disable-next-line ts/no-loss-of-precision
+
+// eslint-disable-next-line no-loss-of-precision -- Infinity
 const largerNumber = 1.7976931348623157e309
 
 console.log(largeNumber) // 1.7976931348623157e+308
@@ -223,7 +224,8 @@ console.log(largerNumber) // Infinity
 console.log(46 / 0) // Infinity
 console.log(Number.POSITIVE_INFINITY) // Infinity
 console.log(Number.MAX_VALUE) // Infinity
-// eslint-disable-next-line ts/no-loss-of-precision
+
+// eslint-disable-next-line no-loss-of-precision -- -Infinity
 console.log(-1.7976931348623157e309) // -Infinity
 console.log(-46 / 0) // -Infinity
 console.log(Number.NEGATIVE_INFINITY) // -Infinity
@@ -313,7 +315,7 @@ console.log(typeof goodString) // string
 console.log(goodString instanceof String) // false
 console.log(Object.prototype.toString.call(goodString)) // [object String]
 
-// eslint-disable-next-line no-new-wrappers
+// eslint-disable-next-line no-new-wrappers, unicorn/new-for-builtins
 const badString = new String('I\'ve been a naughty string')
 console.log(typeof badString) // object
 console.log(badString instanceof String) // true
@@ -1064,7 +1066,7 @@ is a useful way of coercing a value into a primitive type.
 
 ```ts
 // Not recommended (primitive object wrapper):
-// eslint-disable-next-line no-new-wrappers
+// eslint-disable-next-line no-new-wrappers, unicorn/new-for-builtins
 const objectType = typeof new String(37) // object
 
 // Safe (type coercion with wrapper function):
@@ -1075,14 +1077,14 @@ const stringType = typeof String(37) // string
 const truthy = '37' === '37' // true
 
 // Object-wrapped string:
-// eslint-disable-next-line no-new-wrappers
+// eslint-disable-next-line no-new-wrappers, unicorn/new-for-builtins
 const falsy = new String(37) === '37' // false
 
 // Type-coerced string:
 const truthy = String(37) === '37' // true
 
 // BAD!
-// eslint-disable-next-line no-new-wrappers
+// eslint-disable-next-line no-new-wrappers, unicorn/new-for-builtins
 const falseObject = new Boolean(false)
 const result = falseObject && true
 console.log(result) // true
@@ -1093,6 +1095,7 @@ const prim = true
 assert.equal(typeof prim, 'boolean')
 assert.equal(prim instanceof Boolean, false)
 
+// eslint-disable-next-line unicorn/new-for-builtins
 const wrapped = Object(prim)
 assert.equal(typeof wrapped, 'object')
 assert.equal(wrapped instanceof Boolean, true)
@@ -1135,7 +1138,7 @@ const undef = typeof greet.smile // "undefined"
 ```ts
 const numberType = typeof Number(1) // "number"
 const numberType = typeof Number('1') // "number"
-// eslint-disable-next-line no-new-wrappers
+// eslint-disable-next-line no-new-wrappers, unicorn/new-for-builtins
 const numberType = typeof Number(new Number()) // "number"
 const stringType = typeof String(1) // "string"
 const booleanType = typeof Boolean(1) // "boolean"
@@ -1160,7 +1163,7 @@ const booleanType = typeof Boolean(1) // "boolean"
 - 数组在数值运算环境中转化为 0 (空数组)/ num (单一元素数组)/NaN (多元素数组/NaN 数组).
 
 ```ts
-const array = [...Array(5).keys()] // => [0, 1, 2, 3, 4]
+const array = [...Array.from({ length: 5 }).keys()] // => [0, 1, 2, 3, 4]
 ```
 
 #### Array Length
@@ -1254,7 +1257,7 @@ Array.from([1, 2, 3], x => x * x)
 // [1, 4, 9]
 
 // random array generation
-Array.from(Array(5).keys())
+Array.from(Array.from({ length: 5 }).keys())
 // [0, 1, 2, 3, 4]
 
 // Typed array initialization
@@ -1595,9 +1598,9 @@ map.get('name') // 'Jean-Luc Picard'
 ```ts
 const map = new Map([])
 
-// eslint-disable-next-line no-new-wrappers
+// eslint-disable-next-line no-new-wrappers, unicorn/new-for-builtins
 const n1 = new Number(5)
-// eslint-disable-next-line no-new-wrappers
+// eslint-disable-next-line no-new-wrappers, unicorn/new-for-builtins
 const n2 = new Number(5)
 
 map.set(n1, 'One')
@@ -1819,7 +1822,7 @@ function nextMonth(year, month) {
 ```ts
 function getDateItemList(year, month) {
   const days = daysOfMonth(year, month)
-  const currentDateItemList = [...Array(days).keys()].map((index) => {
+  const currentDateItemList = [...Array.from({ length: days }).keys()].map((index) => {
     return DateItem(year, month, 1 + index)
   })
 
@@ -1830,7 +1833,7 @@ function getDateItemList(year, month) {
   const prefixFirstDay = lastMonthDays - prefixDays + 1
   const prefixYear = prevYear(year)
   const prefixMonth = prevMonth(year, month)
-  const prefixDateItemList = [...Array(prefixDays).keys()].map((index) => {
+  const prefixDateItemList = [...Array.from({ length: prefixDays }).keys()].map((index) => {
     return DateItem(prefixYear, prefixMonth, prefixFirstDay + index)
   })
 
@@ -1839,7 +1842,7 @@ function getDateItemList(year, month) {
   const suffixDays = lastDayWeekday === 6 ? 7 : 6 - lastDayWeekday
   const suffixYear = nextYear(year)
   const suffixMonth = nextMonth(year, month)
-  const suffixDateItemList = [...Array(suffixDays).keys()].map((index) => {
+  const suffixDateItemList = [...Array.from({ length: suffixDays }).keys()].map((index) => {
     return DateItem(suffixYear, suffixMonth, 1 + index)
   })
 
@@ -3054,7 +3057,7 @@ Object.prototype.toString = function () {
   return toString.call(this)
 }
 const a = {}
-// eslint-disable-next-line no-new-wrappers
+// eslint-disable-next-line no-new-wrappers, unicorn/new-for-builtins
 const b = new Boolean(false)
 
 if (a)

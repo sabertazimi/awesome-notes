@@ -1773,9 +1773,9 @@ Functions in `useEffect`:
 - For useCallback function, it should be in deps list `useEffect(() => {}, [callback])`
 
 ```ts
+import axios from 'axios'
 // https://www.robinwieruch.de/react-hooks-fetch-data
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 
 function useDataApi(initialUrl, initialData) {
   const [data, setData] = useState(initialData)
@@ -1837,8 +1837,8 @@ export default function useCustomCompareEffect<TDeps extends DependencyList>(
 
 ```ts
 import { DependencyList, EffectCallback } from 'react'
-import useCustomCompareEffect from './useCustomCompareEffect'
 import fastDeepEqual from './misc/fastDeepEqual'
+import useCustomCompareEffect from './useCustomCompareEffect'
 
 const isPrimitive = (val: any) => val !== Object(val)
 
@@ -3921,11 +3921,11 @@ function stringifyOptions(options) {
 function getCookie(name, initialValue = '') {
   return (
     (isBrowser
-    && document.cookie.split('; ').reduce((r, v) => {
-      const parts = v.split('=')
-      return parts[0] === name ? decodeURIComponent(parts[1]) : r
-    }, ''))
-    || initialValue
+      && document.cookie.split('; ').reduce((r, v) => {
+        const parts = v.split('=')
+        return parts[0] === name ? decodeURIComponent(parts[1]) : r
+      }, ''))
+      || initialValue
   )
 }
 
@@ -4049,8 +4049,8 @@ export default function FriendListItem({ friend }: Props) {
 ```
 
 ```ts
-import React, { Fragment, useEffect, useState } from 'react'
 import axios from 'axios'
+import React, { Fragment, useEffect, useState } from 'react'
 
 function useDataApi(initialUrl, initialData) {
   const [data, setData] = useState(initialData)
@@ -4133,10 +4133,10 @@ export default App
 TypeScript fetch hook with caches:
 
 ```ts
-import { useEffect, useReducer, useRef } from 'react'
-
 import type { AxiosRequestConfig } from 'axios'
+
 import axios from 'axios'
+import { useEffect, useReducer, useRef } from 'react'
 
 // State & hook output
 interface State<T> {
@@ -4226,12 +4226,12 @@ export default useFetch
 ### Custom Data Query Hook
 
 ```ts
-import firebase from 'firebase/app'
-import { useQuery, useQueryClient } from 'react-query'
 import type { UseQueryOptions } from 'react-query'
+import firebase from 'firebase/app'
+import { useEffect } from 'react'
+import { useQuery, useQueryClient } from 'react-query'
 import 'firebase/auth'
 import 'firebase/database'
-import { useEffect } from 'react'
 
 // This value is the default 403 code from firebase
 const PERMISSION_DENIED_STATUS_CODE = 'PERMISSION_DENIED'
@@ -4378,8 +4378,6 @@ export default function useStore() {
 Complex [implementation](https://github.com/timc1/kbar):
 
 ```ts
-import { deepEqual } from 'fast-equals'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type {
   Action,
   ActionId,
@@ -4388,6 +4386,8 @@ import type {
   KBarProviderProps,
   KBarState,
 } from './types'
+import { deepEqual } from 'fast-equals'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { VisualState } from './types'
 
 type useStoreProps = KBarProviderProps
@@ -4680,8 +4680,8 @@ Simple global store based on:
 
 ```ts
 import type { Dispatch, MutableRefObject, SetStateAction } from 'react'
-import { useEffect, useRef, useState } from 'react'
 import { nanoid } from 'nanoid'
+import { useEffect, useRef, useState } from 'react'
 
 const store = new Map<string, any>()
 

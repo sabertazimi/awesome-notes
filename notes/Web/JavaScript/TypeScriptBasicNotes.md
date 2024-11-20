@@ -531,7 +531,7 @@ enum AnimalFlags {
   CanFly = 1 << 1,
   EatsFish = 1 << 2,
   Endangered = 1 << 3,
-  // eslint-disable-next-line ts/prefer-literal-enum-member
+
   EndangeredFlyingClawedFishEating = HasClaws | CanFly | EatsFish | Endangered,
 }
 

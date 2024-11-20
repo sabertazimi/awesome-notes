@@ -148,8 +148,8 @@ Reconciler Work Loop (`Fiber` 构造循环) 负责实现 `Task`.
 ```ts
 // Legacy Mode
 import type { ReactElement } from 'react'
-import Reconciler from './reconciler'
 import type { Container } from './types'
+import Reconciler from './reconciler'
 
 const Renderer = {
   render: (
@@ -170,8 +170,8 @@ export default Renderer
 ```ts
 // Modern Mode
 import type { ReactElement } from 'react'
-import Reconciler from './reconciler'
 import type { Container, OpaqueRoot } from './types'
+import Reconciler from './reconciler'
 
 const Renderer = {
   createRoot: (
@@ -2103,11 +2103,11 @@ function commitRootImpl(
   // Check if there are any effects in the whole tree.
   const subtreeHasEffects
     = (finishedWork.subtreeFlags
-    & (BeforeMutationMask | MutationMask | LayoutMask | PassiveMask))
+      & (BeforeMutationMask | MutationMask | LayoutMask | PassiveMask))
     !== NoFlags
   const rootHasEffect
     = (finishedWork.flags
-    & (BeforeMutationMask | MutationMask | LayoutMask | PassiveMask))
+      & (BeforeMutationMask | MutationMask | LayoutMask | PassiveMask))
     !== NoFlags
 
   if (subtreeHasEffects || rootHasEffect) {

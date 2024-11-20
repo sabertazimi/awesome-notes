@@ -1537,9 +1537,7 @@ Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
 ### Global Context
 
 ```html
-<application android:name="com.example.networkTest.MyApplication">
-  ......
-</application>
+<application android:name="com.example.networkTest.MyApplication"> ...... </application>
 ```
 
 ```java

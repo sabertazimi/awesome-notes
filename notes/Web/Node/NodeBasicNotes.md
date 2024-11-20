@@ -154,9 +154,9 @@ Release script from VitePress:
 const fs = require('node:fs')
 const path = require('node:path')
 const chalk = require('chalk')
-const semver = require('semver')
 const { prompt } = require('enquirer')
 const execa = require('execa')
+const semver = require('semver')
 const currentVersion = require('../package.json').version
 
 const versionIncrements = ['patch', 'minor', 'major']
@@ -534,8 +534,8 @@ can be imported via `@github/rest/gen/util/regexp-tools`:
 
 ```js
 import octokit from '@github/rest'
-import utils from '@github/rest/gen/utils'
 import { Contract } from '@github/rest/contract'
+import utils from '@github/rest/gen/utils'
 import state from '@github/rest/state'
 ```
 
@@ -851,8 +851,8 @@ server.on('request', (req, res) => {
   `CommonJS` 模块的导入导出语句的位置会影响模块代码语句的执行结果.
 
 ```ts
-const path = require('node:path')
 const fs = require('node:fs')
+const path = require('node:path')
 const vm = require('node:vm')
 
 function Module(id) {
@@ -1385,8 +1385,8 @@ socket.end()
 ### Socket IO
 
 ```ts
-const http = require('node:http')
 const fs = require('node:fs')
+const http = require('node:http')
 const io = require('socket.io')
 const sockFile = fs.readFileSync('socket.html')
 
@@ -1676,8 +1676,8 @@ NODE_DEBUG=fs,net,stream yarn test
 
 ```ts
 const axios = require('axios')
-const playwright = require('playwright')
 const cheerio = require('cheerio')
+const playwright = require('playwright')
 
 const url = 'https://scrapeme.live/shop/page/1/'
 const useHeadless = false // "true" to use playwright
@@ -1813,7 +1813,7 @@ const iPhone11 = devices['iPhone 11'];
   const browser = await chromium.launch()
   const context = await browser.newContext({
     userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
-    + '(KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36',
+      + '(KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36',
     geolocation: { latitude: 48.8584, longitude: 2.2945 }, // Paris, France
     permissions: ['geolocation'],
     locale: 'fr-FR',

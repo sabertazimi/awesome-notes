@@ -86,12 +86,7 @@ tags: [Web, CSS]
 ```
 
 ```html
-<link
-  rel="stylesheet"
-  href="reset.css"
-  layer="reset"
-  media="supports(at-rule(@layer))"
-/>
+<link rel="stylesheet" href="reset.css" layer="reset" media="supports(at-rule(@layer))" />
 ```
 
 #### Layer Specificity
@@ -1499,9 +1494,7 @@ use variables to implement `if else` statement.
    * 亮度算法:
    * lightness = (red * 0.2126 + green * 0.7152 + blue * 0.0722) / 255
    */
-  --lightness: calc(
-    (var(--red) * 0.2126 + var(--green) * 0.7152 + var(--blue) * 0.0722) / 255
-  );
+  --lightness: calc((var(--red) * 0.2126 + var(--green) * 0.7152 + var(--blue) * 0.0722) / 255);
 }
 
 .button {
@@ -1510,10 +1503,7 @@ use variables to implement `if else` statement.
 
   /* 文字阴影, 黑色文字才会出现 */
   text-shadow: 1px 1px
-    rgb(
-      calc(var(--red) + 50) calc(var(--green) + 50) calc(var(--blue) + 50) /
-        calc((var(--lightness) - 0.5) * 9999)
-    );
+    rgb(calc(var(--red) + 50) calc(var(--green) + 50) calc(var(--blue) + 50) / calc((var(--lightness) - 0.5) * 9999));
 
   /* 背景颜色 */
   background: rgb(var(--red) var(--green) var(--blue));
@@ -1523,8 +1513,7 @@ use variables to implement `if else` statement.
 
   /* 边框样式, 亮度大于 0.8 才出现 */
   border-color: rgb(
-    calc(var(--red) - 50) calc(var(--green) - 50) calc(var(--blue) - 50) /
-      calc((var(--lightness) - 0.8) * 100)
+    calc(var(--red) - 50) calc(var(--green) - 50) calc(var(--blue) - 50) / calc((var(--lightness) - 0.8) * 100)
   );
 }
 ```
@@ -1662,11 +1651,7 @@ CSS 不支持背景渐变色的直接过渡动画,
 }
 
 .box {
-  background: linear-gradient(
-    45deg,
-    var(--houdini-color-a),
-    var(--houdini-color-b)
-  );
+  background: linear-gradient(45deg, var(--houdini-color-a), var(--houdini-color-b));
 
   /* stylelint-disable-next-line custom-property-no-missing-var-function */
   transition: 1s --houdini-color-a;
@@ -1702,12 +1687,7 @@ CSS 不支持背景渐变色的直接过渡动画,
 }
 
 .pie {
-  background: conic-gradient(
-    yellowgreen,
-    yellowgreen var(--per),
-    transparent var(--per),
-    transparent 100%
-  );
+  background: conic-gradient(yellowgreen, yellowgreen var(--per), transparent var(--per), transparent 100%);
 
   /* stylelint-disable-next-line custom-property-no-missing-var-function */
   transition: --per 300ms linear;
@@ -1868,11 +1848,7 @@ Creating color palettes with [`color-mix()`](https://developer.mozilla.org/en-US
 .palette > div {
   --color: var(--yellow);
 
-  background: color-mix(
-    in srgb,
-    var(--color),
-    var(--mix, var(--color)) var(--amount, 10%)
-  );
+  background: color-mix(in srgb, var(--color), var(--mix, var(--color)) var(--amount, 10%));
 
   &:nth-child(2) {
     --color: var(--peach);
@@ -2238,8 +2214,8 @@ p {
 
 ```css
 .formal-syntax {
-  text-decoration: < 'text-decoration-line' > || < 'text-decoration-style' > ||
-    < 'text-decoration-color' > || < 'text-decoration-thickness' >;
+  text-decoration: < 'text-decoration-line' > || < 'text-decoration-style' > || < 'text-decoration-color' > || <
+    'text-decoration-thickness' >;
 }
 ```
 
@@ -2366,9 +2342,9 @@ body {
   display: box;
   overflow: hidden;
   text-overflow: ellipsis;
+  -webkit-line-clamp: 4; /* 需要显示的行数 */
   word-break: break-all;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4; /* 需要显示的行数 */
 }
 ```
 
@@ -2641,8 +2617,7 @@ body {
 ```css
 @font-face {
   font-family: Emoji;
-  src: local('Apple Color Emoji'), local('Segoe UI Emoji'),
-    local('Segoe UI Symbol'), local('Noto Color Emoji');
+  src: local('Apple Color Emoji'), local('Segoe UI Emoji'), local('Segoe UI Symbol'), local('Noto Color Emoji');
   font-display: swap;
   unicode-range: U+1F000-1F644, U+203C-3299;
 }
@@ -2743,8 +2718,7 @@ math {
 }
 
 .tao-ux {
-  font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑',
-    Arial, sans-serif;
+  font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
 }
 
 .tao {
@@ -2775,8 +2749,8 @@ math {
 }
 
 .github {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
-    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji';
 }
 
 .font-sans-serif {
@@ -2796,14 +2770,12 @@ math {
 }
 
 .font-serif {
-  font-family: Georgia, Cambria, 'Iowan Old Style', 'Apple Garamond',
-    Baskerville, 'Times New Roman', 'Droid Serif', Times, 'Source Serif Pro',
-    serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-family: Georgia, Cambria, 'Iowan Old Style', 'Apple Garamond', Baskerville, 'Times New Roman', 'Droid Serif',
+    Times, 'Source Serif Pro', serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 
 .font-mono {
-  font-family: Menlo, Consolas, Monaco, 'Liberation Mono', 'Lucida Console',
-    'Courier New', monospace;
+  font-family: Menlo, Consolas, Monaco, 'Liberation Mono', 'Lucida Console', 'Courier New', monospace;
 }
 ```
 

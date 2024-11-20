@@ -1536,8 +1536,8 @@ export const { selectAll: selectAllUsers, selectById: selectUserById }
 
 ```ts
 import type { TypedUseSelectorHook } from 'react-redux'
-import { useDispatch, useSelector } from 'react-redux'
 import type store from './store'
+import { useDispatch, useSelector } from 'react-redux'
 
 type AppDispatch = typeof store.dispatch
 type RootState = ReturnType<typeof store.getState>
@@ -1557,9 +1557,9 @@ export default function useShallowEqualSelector(selector) {
 ```
 
 ```ts
-import { bindActionCreators } from 'redux'
-import { useDispatch } from 'react-redux'
 import { useMemo } from 'react'
+import { useDispatch } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 export default function useActions(actions) {
   const dispatch = useDispatch()
@@ -1603,8 +1603,8 @@ function myThunk() {
 ```tsx
 import React from 'react'
 import { hydrateRoot } from 'react-dom'
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
+import { createStore } from 'redux'
 import App from './containers/App'
 import counterApp from './reducers'
 
@@ -1630,10 +1630,10 @@ import Express from 'express'
 import qs from 'qs'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import counterApp from './reducers'
+import { createStore } from 'redux'
 import App from './containers/App'
+import counterApp from './reducers'
 
 const app = Express()
 const port = 3000

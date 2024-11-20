@@ -583,8 +583,8 @@ Object.values = () => []
 `vitest.config.ts`:
 
 ```ts
-import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [react()],
@@ -599,9 +599,9 @@ export default defineConfig({
 `tests/setup.ts`:
 
 ```ts
-import { afterEach, expect } from 'vitest'
-import { cleanup } from '@testing-library/react'
 import * as matchers from '@testing-library/jest-dom/matchers'
+import { cleanup } from '@testing-library/react'
+import { afterEach, expect } from 'vitest'
 
 expect.extend(matchers)
 
@@ -846,9 +846,9 @@ afterAll(() => {
 ```
 
 ```tsx
+import type { UserRoleType } from './apis/user'
 import { render, screen } from '@testing-library/react'
 import { rest } from 'msw'
-import type { UserRoleType } from './apis/user'
 import AuthButton from './components/AuthButton'
 import server from './mockServer/server'
 
@@ -999,8 +999,8 @@ Implement component testing with
 ```tsx
 import assert from 'node:assert'
 import test from 'node:test'
-import jsdom from 'jsdom'
 import { cleanup, render } from '@testing-library/react'
+import jsdom from 'jsdom'
 
 const j = new jsdom.JSDOM(undefined, {
   url: 'http://localhost', // Many APIs are confused without being "on a real URL"
@@ -1438,9 +1438,9 @@ Cypress.Commands.add('take', (input: string) => {
 Setup `TypeScript` to transpile tests:
 
 ```ts
+import wp from '@cypress/webpack-preprocessor'
 // cypress.config.ts
 import { defineConfig } from 'cypress'
-import wp from '@cypress/webpack-preprocessor'
 
 export default defineConfig({
   e2e: {

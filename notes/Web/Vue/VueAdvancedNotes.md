@@ -15,11 +15,11 @@ tags: [Web, Vue]
 ```ts
 // 从五个文件导入五个方法（不包括 warn）
 import { warn } from '../util/index'
-import { initMixin } from './init'
-import { stateMixin } from './state'
-import { renderMixin } from './render'
 import { eventsMixin } from './events'
+import { initMixin } from './init'
 import { lifecycleMixin } from './lifecycle'
+import { renderMixin } from './render'
+import { stateMixin } from './state'
 
 // 定义 Vue 构造函数
 function Vue(options) {
@@ -136,10 +136,10 @@ export function installRenderHelpers(target: any) {
 `core/index.js`:
 
 ```ts
-import { FunctionalRenderContext } from 'core/vdom/create-functional-component'
 import { isServerRendering } from 'core/util/env'
-import Vue from './instance/index'
+import { FunctionalRenderContext } from 'core/vdom/create-functional-component'
 import { initGlobalAPI } from './global-api/index'
+import Vue from './instance/index'
 
 initGlobalAPI(Vue)
 
@@ -166,11 +166,11 @@ export default Vue
 `runtime/index.js`:
 
 ```ts
-import Vue from 'core/index'
 import config from 'core/config'
-import { extend, noop } from 'shared/util'
+import Vue from 'core/index'
 import { mountComponent } from 'core/instance/lifecycle'
 import { devtools, inBrowser, isChrome } from 'core/util/index'
+import { extend, noop } from 'shared/util'
 
 import {
   getTagNamespace,
@@ -181,9 +181,9 @@ import {
   query,
 } from 'web/util/index'
 
-import { patch } from './patch'
-import platformDirectives from './directives/index'
 import platformComponents from './components/index'
+import platformDirectives from './directives/index'
+import { patch } from './patch'
 
 // Install platform specific utils.
 Vue.config.mustUseProp = mustUseProp
@@ -217,8 +217,8 @@ export default Vue
 import config from 'core/config'
 import { cached } from 'core/util/index'
 
-import Vue from './runtime/index'
 import { compileToFunctions } from './compiler/index'
+import Vue from './runtime/index'
 import {
   shouldDecodeNewlines,
   shouldDecodeNewlinesForHref,
@@ -447,8 +447,8 @@ Vue.extend = function (extendOptions: object): Function {
 
 ```ts
 import { noop } from 'shared/util'
-import { handleError } from './error'
 import { isIOS, isNative } from './env'
+import { handleError } from './error'
 
 const callbacks = []
 let pending = false
@@ -474,7 +474,7 @@ if (typeof setImmediate !== 'undefined' && isNative(setImmediate)) {
   typeof MessageChannel !== 'undefined'
   && (isNative(MessageChannel)
   // PhantomJS
-  || MessageChannel.toString() === '[object MessageChannelConstructor]')
+    || MessageChannel.toString() === '[object MessageChannelConstructor]')
 ) {
   const channel = new MessageChannel()
   const port = channel.port2
@@ -1650,12 +1650,12 @@ function isStatic(node: ASTNode): boolean {
   return !!(
     node.pre
     || (!node.hasBindings // no dynamic bindings
-    && !node.if
-    && !node.for // not v-if or v-for or v-else
-    && !isBuiltInTag(node.tag) // not a built-in
-    && isPlatformReservedTag(node.tag) // not a component
-    && !isDirectChildOfTemplateFor(node)
-    && Object.keys(node).every(isStaticKey))
+      && !node.if
+      && !node.for // not v-if or v-for or v-else
+      && !isBuiltInTag(node.tag) // not a built-in
+      && isPlatformReservedTag(node.tag) // not a component
+      && !isDirectChildOfTemplateFor(node)
+      && Object.keys(node).every(isStaticKey))
   )
 }
 
@@ -1932,8 +1932,8 @@ export default class Watcher {
 `core/observer/dep.js`:
 
 ```ts
-import { remove } from '../util/index'
 import type Watcher from './watcher'
+import { remove } from '../util/index'
 
 let uid = 0
 
