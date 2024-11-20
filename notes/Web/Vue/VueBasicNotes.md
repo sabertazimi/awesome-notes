@@ -29,16 +29,12 @@ tags: [Web, Vue]
     <li v-for="({ message }, index) in items">{{ message }} {{ index }}</li>
     <!-- nested list -->
     <li v-for="item in items">
-      <span v-for="childItem in item.children">
-        {{ item.message }} {{ childItem }}
-      </span>
+      <span v-for="childItem in item.children"> {{ item.message }} {{ childItem }} </span>
     </li>
     <!-- iterator list -->
     <li v-for="item of items">{{ item.message }}</li>
     <!-- object list -->
-    <li v-for="(value, key, index) in myObject">
-      {{ index }}. {{ key }}: {{ value }}
-    </li>
+    <li v-for="(value, key, index) in myObject">{{ index }}. {{ key }}: {{ value }}</li>
     <!-- range list -->
     <li v-for="n in 10">{{ n }}</li>
   </ul>
@@ -265,11 +261,7 @@ app.component('CustomForm', {
 ```
 
 ```html
-<custom-form
-  @click="handleClick"
-  @submit="handleSubmit"
-  @custom-event="handleEvent"
-></custom-form>
+<custom-form @click="handleClick" @submit="handleSubmit" @custom-event="handleEvent"></custom-form>
 ```
 
 Drag and Drop events:
@@ -277,12 +269,7 @@ Drag and Drop events:
 ```html
 <!-- Drag.vue -->
 <template>
-  <div
-    draggable="true"
-    @dragenter.prevent
-    @dragover.prevent
-    @dragstart.self="onDrag"
-  >
+  <div draggable="true" @dragenter.prevent @dragover.prevent @dragstart.self="onDrag">
     <slot />
   </div>
 </template>
@@ -386,10 +373,7 @@ Component `v-model` directive:
 
 ```html
 <CustomInput v-model="searchText" />
-<CustomInput
-  :modelValue="searchText"
-  @update:modelValue="newValue => searchText = newValue"
-/>
+<CustomInput :modelValue="searchText" @update:modelValue="newValue => searchText = newValue" />
 ```
 
 ```html
@@ -400,10 +384,7 @@ Component `v-model` directive:
 </script>
 
 <template>
-  <input
-    :value="modelValue"
-    @input="$emit('update:modelValue', $event.target.value)"
-  />
+  <input :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" />
 </template>
 ```
 
@@ -440,11 +421,7 @@ Custom component `v-model` name:
 </script>
 
 <template>
-  <input
-    type="text"
-    :value="title"
-    @input="$emit('update:title', $event.target.value)"
-  />
+  <input type="text" :value="title" @input="$emit('update:title', $event.target.value)" />
 </template>
 ```
 
@@ -1680,6 +1657,7 @@ Vue.component('AsyncExample', AsyncComp)
   - 当异步获取组件成功后, 通过 `forceRender` 强制重新渲染.
 
 ```ts
+import { currentRenderingInstance } from 'core/instance/render'
 import {
   hasSymbol,
   isDef,
@@ -1691,7 +1669,6 @@ import {
   remove,
 } from 'core/util/index'
 import { createEmptyVNode } from 'core/vdom/vnode'
-import { currentRenderingInstance } from 'core/instance/render'
 
 export function resolveAsyncComponent(
   factory: Function,
@@ -2024,7 +2001,7 @@ const KeepAlive = {
       if (
         name
         && ((props.include && !props.include.test(name))
-        || (props.exclude && props.exclude.test(name)))
+          || (props.exclude && props.exclude.test(name)))
       ) {
         return rawVNode
       }
@@ -2149,10 +2126,7 @@ Two methods to access route `params` in components:
 
 ```html
 <template>
-  <router-link
-    class="event-link"
-    :to="{ name: 'EventDetails', params: { id: event.id } }"
-  >
+  <router-link class="event-link" :to="{ name: 'EventDetails', params: { id: event.id } }">
     <div class="event-card">
       <span>@{{ event.time }} on {{ event.date }}</span>
       <h4>{{ event.title }}</h4>
@@ -2249,9 +2223,7 @@ const routes = [
 ```
 
 ```html
-<router-link :to="{ name: 'User', params: { username: 'sabertaz' }}">
-  User
-</router-link>
+<router-link :to="{ name: 'User', params: { username: 'sabertaz' }}"> User </router-link>
 ```
 
 ```ts
@@ -2510,8 +2482,8 @@ app.mount('#app')
 
 ```ts
 import path from 'node:path'
-import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
   base: '/awesome-web/vue-trello/',

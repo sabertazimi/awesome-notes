@@ -1001,8 +1001,8 @@ Floating won't work inside `fixed` or `absolute` `div` unless specify width:
 }
 
 .fifty-fifty-flex > * {
-  flex-basis: 250px;
   flex-grow: 1;
+  flex-basis: 250px;
 }
 
 .fifty-fifty-grid {
@@ -1434,8 +1434,8 @@ Aligning with [auto `margin`](https://www.w3.org/TR/css-flexbox-1/#auto-margins)
 ```css
 .layer {
   display: flex;
-  flex-direction: row;
   flex-grow: 1;
+  flex-direction: row;
   align-items: center;
   justify-content: flex-start;
   margin: 5px;
@@ -1696,10 +1696,7 @@ Children property:
   display: grid;
   grid-template-columns: fit-content(var(--sidebar-max, 20ch)) minmax(50%, 1fr);
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(min(100%, var(--grid-min, 30ch)), 1fr)
-  );
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-min, 30ch)), 1fr));
 }
 ```
 
@@ -2107,14 +2104,7 @@ selected elements in grid container:
   }
 
   /* a box's bottom borders */
-  input:nth-last-of-type(n + 8):checked
-    + *
-    + *
-    + *
-    + *
-    + *
-    + *
-    + input:checked::after {
+  input:nth-last-of-type(n + 8):checked + * + * + * + * + * + * + input:checked::after {
     background: limegreen;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
@@ -2128,15 +2118,7 @@ selected elements in grid container:
   }
 
   /* a box's adjacent (below) box's top borders */
-  input:not(:nth-of-type(7n)):checked
-    + *
-    + *
-    + *
-    + *
-    + *
-    + *
-    + input:checked
-    + input::before {
+  input:not(:nth-of-type(7n)):checked + * + * + * + * + * + * + input:checked + input::before {
     background: limegreen;
     border-top-left-radius: 0;
     border-top-right-radius: 0;

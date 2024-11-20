@@ -277,8 +277,8 @@ RxJS 提供了 pipe 辅助函数,
 它缓解了操作符不在原型上所带来的问题.
 
 ```ts
-import { map, take } from '@rxjs/operators'
 import { of } from '@rxjs/observable'
+import { map, take } from '@rxjs/operators'
 
 map.call(take.call(of(1, 2, 3), 2), val => val + 2)
 
@@ -376,8 +376,8 @@ of(1, 2, 3).pipe(
 `<router-outlet>` 会告诉路由器要在哪里显示路由的视图.
 
 ```ts
-import { NgModule } from '@angular/core'
 import type { Routes } from '@angular/router'
+import { NgModule } from '@angular/core'
 import { RouterModule } from '@angular/router'
 import { HeroesComponent } from './heroes/heroes.component'
 
@@ -432,9 +432,7 @@ export class AppRoutingModule {}
 same to `[ngStyle]`
 
 ```html
-<div [ngClass]="currentClasses">
-  This div is initially saveable, unchanged, and special
-</div>
+<div [ngClass]="currentClasses">This div is initially saveable, unchanged, and special</div>
 ```
 
 ```ts
@@ -461,7 +459,5 @@ class Component {
 <div [class.special]="isSpecial">The class binding is special</div>
 
 <!-- binding to `class.special` trumps the class attribute -->
-<div class="special" [class.special]="!isSpecial">
-  This one is not so special
-</div>
+<div class="special" [class.special]="!isSpecial">This one is not so special</div>
 ```

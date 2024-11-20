@@ -262,10 +262,7 @@ Basic CSP [usage](https://www.writesoftwarewell.com/content-security-policy):
 指示浏览器在发出网络请求之前升级不安全的 `URL`:
 
 ```html
-<meta
-  http-equiv="Content-Security-Policy"
-  content="upgrade-insecure-requests"
-/>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 ```
 
 `block-all-mixed-content`

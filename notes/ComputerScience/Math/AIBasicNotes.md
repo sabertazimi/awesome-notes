@@ -2461,9 +2461,9 @@ normalize LLM inputs (e.g. prompts), APIs, and outputs (e.g. completions):
 ![LangChain Model I/O Module](./figures/LangChainModelIO.png 'LangChain Model I/O Module')
 
 ```ts
+import { CommaSeparatedListOutputParser } from '@langchain/core/output_parsers'
 import { PromptTemplate } from '@langchain/core/prompts'
 import { OpenAI } from '@langchain/openai'
-import { CommaSeparatedListOutputParser } from '@langchain/core/output_parsers'
 
 const template = PromptTemplate.fromTemplate(
   'List 10 {subject}.\n{format_instructions}',
@@ -2488,11 +2488,11 @@ making it easier to retrieve relevant information:
 ![LangChain Retrieval Module](./figures/LangChainRetrieval.png 'LangChain Retrieval Module')
 
 ```ts
-import { CSVLoader } from 'langchain/document_loaders/fs/csv'
-import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter'
-import { OpenAIEmbeddings } from '@langchain/openai'
 import { UpstashVectorStore } from '@langchain/community/vectorstores/upstash'
+import { OpenAIEmbeddings } from '@langchain/openai'
+import { CSVLoader } from 'langchain/document_loaders/fs/csv'
 import { ScoreThresholdRetriever } from 'langchain/retrievers/score_threshold'
+import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter'
 
 // CSV data.
 const loader = new CSVLoader('path/to/example.csv')
@@ -2520,10 +2520,10 @@ link tasks together:
 ![LangChain Chains Module](./figures/LangChainChains.png 'LangChain Chains Module')
 
 ```ts
+import { CommaSeparatedListOutputParser } from '@langchain/core/output_parsers'
 import { PromptTemplate } from '@langchain/core/prompts'
 import { RunnableSequence } from '@langchain/core/runnables'
 import { OpenAI } from '@langchain/openai'
-import { CommaSeparatedListOutputParser } from '@langchain/core/output_parsers'
 
 const template = PromptTemplate.fromTemplate(
   'List 10 {subject}.\n{format_instructions}',
@@ -2547,7 +2547,7 @@ agents choose their actions with the help of an LLM:
 ![LangChain Agents Module](./figures/LangChainAgents.png 'LangChain Agents Module')
 
 ```ts
-import { VectorStoreToolkit, createVectorStoreAgent } from 'langchain/agents'
+import { createVectorStoreAgent, VectorStoreToolkit } from 'langchain/agents'
 
 const toolkit = new VectorStoreToolkit(
   { name: 'Demo Data', vectorStore },

@@ -927,39 +927,23 @@ provide 3 ~ 5 different sizes reduce image transfer sizes by average of **~20%**
 ```html
 <picture>
   <source
-    srcset="
-      /media/filename.avif  300w,
-      /media/filename.avif  500w,
-      /media/filename.avif 2000w
-    "
+    srcset="/media/filename.avif 300w, /media/filename.avif 500w, /media/filename.avif 2000w"
     type="image/avif"
     sizes="(max-width: 360px) 300px, (max-width: 720px) 500px, 2000px"
   />
   <source
-    srcset="
-      /media/filename.webp  300w,
-      /media/filename.webp  500w,
-      /media/filename.webp 2000w
-    "
+    srcset="/media/filename.webp 300w, /media/filename.webp 500w, /media/filename.webp 2000w"
     type="image/webp"
     sizes="(max-width: 360px) 300px, (max-width: 720px) 500px, 2000px"
   />
   <source
-    srcset="
-      /media/filename.jpg  300w,
-      /media/filename.jpg  500w,
-      /media/filename.jpg 2000w
-    "
+    srcset="/media/filename.jpg 300w, /media/filename.jpg 500w, /media/filename.jpg 2000w"
     type="image/jpeg"
     sizes="(max-width: 360px) 300px, (max-width: 720px) 500px, 2000px"
   />
   <img
     src="/media/filename.jpg"
-    srcset="
-      /media/filename.jpg  300w,
-      /media/filename.jpg  500w,
-      /media/filename.jpg 2000w
-    "
+    srcset="/media/filename.jpg 300w, /media/filename.jpg 500w, /media/filename.jpg 2000w"
     sizes="(max-width: 360px) 300px, (max-width: 720px) 500px, 2000px"
     alt="Description of the image."
     width="2000"
@@ -1019,10 +1003,7 @@ provide 3 ~ 5 different sizes reduce image transfer sizes by average of **~20%**
   sizes="(max-width: 640px) 400px, 800px"
   loading="lazy"
   decoding="async"
-  style="
-    background-image: url('data:image/svg+xml;base64,[svg text]');
-    background-size: cover;
-  "
+  style="background-image: url('data:image/svg+xml;base64,[svg text]'); background-size: cover"
 />
 ```
 
@@ -1098,13 +1079,7 @@ the preload scanner will discover and fetch the image resource more quickly.
 <link rel="modulepreload" href="critical-module.mjs" />
 <link rel="preload" as="script" href="critical.js" />
 <link rel="preload" as="fetch" href="..." crossorigin />
-<link
-  rel="preload"
-  as="font"
-  href="myFont.woff2"
-  type="font/woff2"
-  crossorigin
-/>
+<link rel="preload" as="font" href="myFont.woff2" type="font/woff2" crossorigin />
 <link
   rel="preload"
   as="image"
@@ -1156,12 +1131,7 @@ Pre-fetch and pre-render
 <script src="/js/live-chat.js" fetchpriority="high"></script>
 
 <!-- iframe: de-prioritize a third-party embed that’s not essential -->
-<iframe
-  src="https://example.com"
-  width="400"
-  height="400"
-  fetchpriority="low"
-></iframe>
+<iframe src="https://example.com" width="400" height="400" fetchpriority="low"></iframe>
 
 <script>
   // Critical Fetch request for article content

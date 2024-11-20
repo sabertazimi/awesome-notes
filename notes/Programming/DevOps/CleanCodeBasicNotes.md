@@ -891,7 +891,8 @@ const person = personBuilder.lives
   .at('ABC Road')
   .in('Multan')
   .withPostcode('66000')
-  .works.at('Beijing')
+  .works
+  .at('Beijing')
   .asA('Engineer')
   .earning(10000)
   .build()
@@ -2984,8 +2985,8 @@ c.action()
 #### Injection Container
 
 ```tsx
-import * as React from 'react'
 import type { IProvider } from './providers'
+import * as React from 'react'
 
 class Injector {
   private static container = new Map<string, any>()

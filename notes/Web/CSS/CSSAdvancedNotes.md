@@ -118,8 +118,7 @@ $$
 
 ```css
 .box {
-  border-image: url('./grid-nine.svg') 54 33.33% 33.33% 54 / 10px 20px 30px 1 /
-    1 30px 20px 10px round space;
+  border-image: url('./grid-nine.svg') 54 33.33% 33.33% 54 / 10px 20px 30px 1 / 1 30px 20px 10px round space;
 }
 ```
 
@@ -138,26 +137,12 @@ $$
 
 .border-stripe {
   border: 12px solid;
-  border-image: repeating-linear-gradient(
-      -45deg,
-      red,
-      red 5px,
-      transparent 5px,
-      transparent 10px
-    )
-    12;
+  border-image: repeating-linear-gradient(-45deg, red, red 5px, transparent 5px, transparent 10px) 12;
 }
 
 .border-dashed {
   border: 1px dashed deepskyblue;
-  border-image: repeating-linear-gradient(
-      135deg,
-      deepskyblue,
-      deepskyblue 5px,
-      transparent 5px,
-      transparent 10px
-    )
-    1;
+  border-image: repeating-linear-gradient(135deg, deepskyblue, deepskyblue 5px, transparent 5px, transparent 10px) 1;
 }
 ```
 
@@ -442,11 +427,7 @@ Two opposite sides box shadow:
   width: 128px;
   height: 96px;
   background: url('fallback.jpg');
-  background: image-set(
-    url('w128px.jpg') 1x,
-    url('w256px.jpg') 2x,
-    url('w512px.jpg') 3x
-  );
+  background: image-set(url('w128px.jpg') 1x, url('w256px.jpg') 2x, url('w512px.jpg') 3x);
   background-size: cover;
 }
 ```
@@ -657,8 +638,7 @@ p:hover {
  * 列表滚动时, 纯白渐变背景移出视口, 露出灰度渐变背景.
  */
 .scrollable-list {
-  background: linear-gradient(#fff 30%, transparent),
-    radial-gradient(at 50% 0, rgb(0 0 0 / 20%), transparent 70%);
+  background: linear-gradient(#fff 30%, transparent), radial-gradient(at 50% 0, rgb(0 0 0 / 20%), transparent 70%);
   background-repeat: no-repeat;
   background-attachment: local, scroll;
   background-size:
@@ -739,12 +719,7 @@ body {
 .linear-gradient {
   width: 300px;
   height: 150px;
-  background-image: linear-gradient(
-    45deg,
-    white 100px,
-    skyblue 100px 200px,
-    white 200px
-  );
+  background-image: linear-gradient(45deg, white 100px, skyblue 100px 200px, white 200px);
   border: solid deepskyblue;
 }
 ```
@@ -776,16 +751,8 @@ body {
   background-image: radial-gradient(50% 50%, white, deepskyblue);
   background-image: radial-gradient(100px at 0 0, white, deepskyblue);
   background-image: radial-gradient(100px at left top, white, deepskyblue);
-  background-image: radial-gradient(
-    100px at right 100px bottom 100px,
-    white,
-    deepskyblue
-  );
-  background-image: radial-gradient(
-    farthest-corner circle at right 100px bottom 100px,
-    white,
-    deepskyblue
-  );
+  background-image: radial-gradient(100px at right 100px bottom 100px, white, deepskyblue);
+  background-image: radial-gradient(farthest-corner circle at right 100px bottom 100px, white, deepskyblue);
 }
 ```
 
@@ -936,11 +903,7 @@ object {
 
 ```html
 <div class="embed-container">
-  <iframe
-    src="http://www.youtube.com/embed/B1_N28DA3gY"
-    frameborder="0"
-    allowfullscreen
-  ></iframe>
+  <iframe src="http://www.youtube.com/embed/B1_N28DA3gY" frameborder="0" allowfullscreen></iframe>
 </div>
 
 <style>
@@ -1431,13 +1394,7 @@ Shape will zoom to fill size of SVG `width` and `height`:
 ### SVG Fill
 
 ```html
-<svg
-  width="100px"
-  height="100px"
-  viewBox="0 0 100 100"
-  version="1.1"
-  xmlns="..."
->
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="...">
   <title>My Awesome SVG</title>
   <circle class="circle" cx="50" cy="50" r="50" fill="#FFFF00" />
 </svg>
@@ -1564,23 +1521,10 @@ This is also used to create **icon systems**.
 ```html
 <svg width="0" height="0" style="position: absolute">
   <defs>
-    <marker
-      id="marker-circle"
-      markerWidth="8"
-      markerHeight="8"
-      refX="4"
-      refY="4"
-    >
+    <marker id="marker-circle" markerWidth="8" markerHeight="8" refX="4" refY="4">
       <circle cx="4" cy="4" r="2.5" />
     </marker>
-    <marker
-      id="marker-arrow"
-      markerWidth="12"
-      markerHeight="12"
-      refX="2"
-      refY="6"
-      orient="auto"
-    >
+    <marker id="marker-arrow" markerWidth="12" markerHeight="12" refX="2" refY="6" orient="auto">
       <path d="M2,3 L2,10 L8,6 L2,3" />
     </marker>
   </defs>
@@ -1598,26 +1542,12 @@ This is also used to create **icon systems**.
 
 ```html
 <div class="circle-word">
-  <svg
-    width="400px"
-    height="300px"
-    viewBox="0 0 400 200"
-    version="1.1"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg width="400px" height="300px" viewBox="0 0 400 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <path
-        id="textCircle"
-        d="M 20 100 A 80 80 0 0 0 180 100 A 80 80 0 0 0 20 100"
-        fill="none"
-        stroke="#333"
-      ></path>
+      <path id="textCircle" d="M 20 100 A 80 80 0 0 0 180 100 A 80 80 0 0 0 20 100" fill="none" stroke="#333"></path>
     </defs>
     <text class="textCircle" fill="yellowgreen">
-      <textPath
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        xlink:href="#textCircle"
-      >
+      <textPath xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#textCircle">
         这是一段随着 path 路径绘制的文字
       </textPath>
     </text>
@@ -1658,21 +1588,8 @@ Avatar with circle status indicator:
     <circle fill="black" cx="86%" cy="86%" r="18"></circle>
   </mask>
   <g mask="url(#circle)">
-    <image
-      x="0"
-      y="0"
-      width="100%"
-      height="100%"
-      xlink:href="avatar.jpg"
-    ></image>
-    <circle
-      fill="none"
-      cx="100"
-      cy="100"
-      r="100"
-      stroke="rgb(0 0 0 / 10%)"
-      stroke-width="2"
-    ></circle>
+    <image x="0" y="0" width="100%" height="100%" xlink:href="avatar.jpg"></image>
+    <circle fill="none" cx="100" cy="100" r="100" stroke="rgb(0 0 0 / 10%)" stroke-width="2"></circle>
   </g>
 </svg>
 ```
@@ -1682,24 +1599,14 @@ Avatar with circle status indicator:
 内投影滤镜:
 
 ```html
-<svg
-  width="300"
-  height="300"
-  viewBox="0 0 20 20"
-  style="position: absolute; left: -999px"
->
+<svg width="300" height="300" viewBox="0 0 20 20" style="position: absolute; left: -999px">
   <filter id="inset-shadow">
     <!-- 投影偏移 -->
     <feOffset dx="0" dy="0" />
     <!-- 投影模糊 -->
     <feGaussianBlur stdDeviation="6" result="offset-blur" />
     <!-- 反转投影使其变成内投影 -->
-    <feComposite
-      operator="out"
-      in="SourceGraphic"
-      in2="offset-blur"
-      result="inverse"
-    />
+    <feComposite operator="out" in="SourceGraphic" in2="offset-blur" result="inverse" />
     <!-- 内投影附加黑色 -->
     <feFlood flood-color="black" flood-opacity=".95" result="color" />
     <feComposite operator="in" in="color" in2="inverse" result="shadow" />
@@ -1730,13 +1637,7 @@ SVG
 <svg>
   <defs>
     <filter id="fe1">
-      <feTurbulence
-        id="animation"
-        type="fractalNoise"
-        baseFrequency="0.00001 9.9999999"
-        numOctaves="1"
-        result="warp"
-      >
+      <feTurbulence id="animation" type="fractalNoise" baseFrequency="0.00001 9.9999999" numOctaves="1" result="warp">
         <animate
           attributeName="baseFrequency"
           from="0.00001 9.9999"
@@ -1755,13 +1656,7 @@ SVG
       ></feDisplacementMap>
     </filter>
     <filter id="fe2">
-      <feTurbulence
-        id="animation"
-        type="fractalNoise"
-        baseFrequency="9.9999999 0.00001"
-        numOctaves="1"
-        result="warp"
-      >
+      <feTurbulence id="animation" type="fractalNoise" baseFrequency="9.9999999 0.00001" numOctaves="1" result="warp">
         <animate
           attributeName="baseFrequency"
           from="9.9999999 0.00001"
@@ -1821,12 +1716,7 @@ SVG [SMIL animation](https://css-tricks.com/guide-svg-animations-smil):
       repeatCount="indefinite"
     />
   </text>
-  <path
-    d="M10,80 q100,120 120,20 q140,-50 160,0"
-    stroke="#cd0000"
-    stroke-width="2"
-    fill="none"
-  />
+  <path d="M10,80 q100,120 120,20 q140,-50 160,0" stroke="#cd0000" stroke-width="2" fill="none" />
 </svg>
 ```
 
@@ -1983,8 +1873,7 @@ const svgRectElement = document.createElementNS(
   /* Additional range input feature */
   const range = document.querySelector('.image-a11y-control')
   range.addEventListener('input', (event) => {
-    document.querySelector('.image-before').style.width =
-      `${event.target.value}%`
+    document.querySelector('.image-before').style.width = `${event.target.value}%`
   })
 </script>
 ```
@@ -2069,9 +1958,9 @@ body {
   .scroll-x {
     max-width: 414px;
     height: 420px;
-    scroll-snap-type: x mandatory;
     overflow: auto;
     white-space: nowrap;
+    scroll-snap-type: x mandatory;
   }
 
   .scroll-x img {
@@ -2275,9 +2164,9 @@ Scroll bars take up space within `padding box`.
 
 ```css
 .scroll-none {
+  overflow: hidden auto;
   scrollbar-width: none; /* FireFox */
   -ms-overflow-style: none; /* IE 10+ */
-  overflow: hidden auto;
 }
 
 .scroll-none::-webkit-scrollbar {
@@ -2690,10 +2579,7 @@ function main() {
 
 <script>
   document.querySelector('color-scheme').addEventListener('change', (e) => {
-    document.documentElement.setAttribute(
-      'data-force-color-mode',
-      e.target.value,
-    )
+    document.documentElement.setAttribute('data-force-color-mode', e.target.value)
     localStorage.setItem('preferredColorScheme', e.target.value)
   })
 
@@ -3005,8 +2891,8 @@ Use `@container` style query to
   font-size: 1rem;
 }
 
-@supports (transform-style: preserve) or (-moz-transform-style: preserve) or
-  (-o-transform-style: preserve) or (-webkit-transform-style: preserve) {
+@supports (transform-style: preserve) or (-moz-transform-style: preserve) or (-o-transform-style: preserve) or
+  (-webkit-transform-style: preserve) {
   font-size: 1rem;
 }
 ```
@@ -3153,11 +3039,9 @@ PC 屏幕 DPR 为 1,
 .background-gradient-1px {
   background:
     linear-gradient(#000, #000 100%, transparent 100%) left / 1px 100% no-repeat,
-    linear-gradient(#000, #000 100%, transparent 100%) right / 1px 100%
-      no-repeat,
+    linear-gradient(#000, #000 100%, transparent 100%) right / 1px 100% no-repeat,
     linear-gradient(#000, #000 100%, transparent 100%) top / 100% 1px no-repeat,
-    linear-gradient(#000, #000 100%, transparent 100%) bottom / 100% 1px
-      no-repeat;
+    linear-gradient(#000, #000 100%, transparent 100%) bottom / 100% 1px no-repeat;
 }
 
 .box-shadow-1px {
@@ -3375,12 +3259,7 @@ and call JavaScript API triggering layout stage (`reflow`):
 <link rel="preload" href="/path/to/split.css" as="style" />
 
 <!-- Loading media query -->
-<link
-  rel="stylesheet"
-  href="/path/to/split.css"
-  media="print"
-  onload="this.media='all'"
-/>
+<link rel="stylesheet" href="/path/to/split.css" media="print" onload="this.media='all'" />
 ```
 
 ### Animation Performance
@@ -3455,8 +3334,7 @@ window.requestAnimationFrame(step)
 ```css
 .loading {
   background: url('/images/loading.gif');
-  background: url('/images/loading.png'),
-    linear-gradient(transparent, transparent);
+  background: url('/images/loading.png'), linear-gradient(transparent, transparent);
 }
 
 .shadow {

@@ -281,13 +281,7 @@ use `inline-box` with `width`
 
 <img
   src="x-small.png"
-  srcset="
-    x-small.png  300w,
-    small.png    400w,
-    medium.png   600w,
-    large.png    800w,
-    x-large.png 1200w
-  "
+  srcset="x-small.png 300w, small.png 400w, medium.png 600w, large.png 800w, x-large.png 1200w"
   sizes="
     (min-width: 70em) 12.6875em,
     (min-width: 50em) calc(25vw * 0.95 - 2.75em),
@@ -401,9 +395,7 @@ Tiered structure: we define tokens at different levels of abstraction:
   :root {
     --color-brand-blue-800: #069; /* Tier 1 */
     --theme-color-content-default: var(--color-brand-blue-800); /* Tier 2 */
-    --theme-color-button-content: var(
-      --theme-color-content-default
-    ); /* Tier 3 */
+    --theme-color-button-content: var(--theme-color-content-default); /* Tier 3 */
   }
 </style>
 ```
@@ -503,9 +495,8 @@ Implementing design tokens in your workflow:
   --color-surface-bg-interact: var(--color-mid-shade);
   --color-surface-text: var(--color-dark);
   --color-surface-text-interact: var(--color-dark);
-  --font-base: -apple-system, 'BlinkMacSystemFont', avenir next, avenir,
-    segoe ui, helvetica neue, helvetica, cantarell, ubuntu, roboto, noto, arial,
-    sans-serif;
+  --font-base: -apple-system, 'BlinkMacSystemFont', avenir next, avenir, segoe ui, helvetica neue, helvetica, cantarell,
+    ubuntu, roboto, noto, arial, sans-serif;
   --font-display: var(--font-base);
   --font-weight-regular: 400;
   --font-weight-medium: 500;
@@ -525,10 +516,7 @@ body {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(
-    var(--grid-placement, auto-fill),
-    minmax(var(--grid-min-item-size, 16rem), 1fr)
-  );
+  grid-template-columns: repeat(var(--grid-placement, auto-fill), minmax(var(--grid-min-item-size, 16rem), 1fr));
   gap: var(--space-gutter, var(--space-s-l));
 }
 

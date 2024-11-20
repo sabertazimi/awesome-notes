@@ -222,16 +222,8 @@ Generating favicons in [all necessary sizes](https://github.com/pixel-point/favp
 - [HTML Specification](https://html.spec.whatwg.org/multipage/semantics.html#meta-theme-color)
 
 ```html
-<meta
-  name="theme-color"
-  content="#319197"
-  media="(prefers-color-scheme: light)"
-/>
-<meta
-  name="theme-color"
-  content="#872e4e"
-  media="(prefers-color-scheme: dark)"
-/>
+<meta name="theme-color" content="#319197" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#872e4e" media="(prefers-color-scheme: dark)" />
 ```
 
 ## Form
@@ -275,8 +267,8 @@ Generating favicons in [all necessary sizes](https://github.com/pixel-point/favp
       readonly只读
       hidden隐藏
     />
-    <input type="submit" 提交按钮 /> == <button type="submit">提交</button>
-    <input type="reset" 重置按钮 /> == <button type="reset">重置</button>
+    <input type="submit" 提交按钮 /> == <button type="submit">提交</button> <input type="reset" 重置按钮 /> ==
+    <button type="reset">重置</button>
 
     <div>
       <label for="delivery" 功能提示信息，通过for与标签对应>配送方式</label>
@@ -370,13 +362,7 @@ usernameInput.addEventListener('invalid', () => {
 ```html
 <div class="form-control">
   <label for="search">Search the site...</label>
-  <input
-    id="search"
-    name="search"
-    type="search"
-    placeholder="Search here ..."
-    autofocus
-  />
+  <input id="search" name="search" type="search" placeholder="Search here ..." autofocus />
 </div>
 ```
 
@@ -385,14 +371,7 @@ usernameInput.addEventListener('invalid', () => {
 ```html
 <div class="form-control">
   <label for="film">The film in question?</label>
-  <input
-    id="film"
-    name="film"
-    type="text"
-    placeholder="e.g. King Kong"
-    required
-    aria-required="true"
-  />
+  <input id="film" name="film" type="text" placeholder="e.g. King Kong" required aria-required="true" />
 </div>
 ```
 
@@ -431,12 +410,7 @@ usernameInput.addEventListener('invalid', () => {
   </div>
   <div>
     <label for="password">Password</label>
-    <input
-      autocomplete="new-password"
-      type="password"
-      id="password"
-      name="password"
-    />
+    <input autocomplete="new-password" type="password" id="password" name="password" />
   </div>
   <button>Sign up</button>
 </form>
@@ -448,12 +422,7 @@ usernameInput.addEventListener('invalid', () => {
   </div>
   <div>
     <label for="password">Password</label>
-    <input
-      autocomplete="current-password"
-      type="password"
-      id="password"
-      name="password"
-    />
+    <input autocomplete="current-password" type="password" id="password" name="password" />
   </div>
   <button>Sign in</button>
 </form>
@@ -520,12 +489,7 @@ textbox.value = '666666' //  等同于 input.value = '666666';
 ```html
 <div class="form-control">
   <label for="search">Search the site...</label>
-  <input
-    id="search"
-    name="search"
-    type="search"
-    placeholder="Search here ..."
-  />
+  <input id="search" name="search" type="search" placeholder="Search here ..." />
 </div>
 ```
 
@@ -536,14 +500,7 @@ textbox.value = '666666' //  等同于 input.value = '666666';
 ```html
 <div class="form-control">
   <label for="tel">Telephone (so we can berate you if you're wrong)</label>
-  <input
-    id="tel"
-    name="tel"
-    type="tel"
-    placeholder="1-234-546758"
-    autocomplete="off"
-    required
-  />
+  <input id="tel" name="tel" type="tel" placeholder="1-234-546758" autocomplete="off" required />
 </div>
 ```
 
@@ -561,13 +518,7 @@ textbox.value = '666666' //  等同于 input.value = '666666';
 ```html
 <div class="form-control">
   <label for="email">Your Email address</label>
-  <input
-    type="email"
-    id="email"
-    name="email"
-    placeholder="dwight.schultz@gmail.com"
-    required
-  />
+  <input type="email" id="email" name="email" placeholder="dwight.schultz@gmail.com" required />
 </div>
 ```
 
@@ -576,15 +527,7 @@ textbox.value = '666666' //  等同于 input.value = '666666';
 ```html
 <div class="form-control">
   <label for="yearOfCrime">Year Of Crime</label>
-  <input
-    id="yearOfCrime"
-    name="yearOfCrime"
-    type="number"
-    min="1929"
-    max="2015"
-    step="1"
-    required
-  />
+  <input id="yearOfCrime" name="yearOfCrime" type="number" min="1929" max="2015" step="1" required />
 </div>
 ```
 
@@ -815,10 +758,7 @@ closers?.forEach((closer) => {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up Form</title>
     <link rel="stylesheet" href="css/normalize.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Lato:300,400,700"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" />
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body>
@@ -835,15 +775,10 @@ closers?.forEach((closer) => {
       <input type="password" id="password" name="student_password" />
 
       <label>Age:</label>
-      <input
-        type="radio"
-        id="under_16"
-        value="under_16"
-        name="user_age"
-      /><label for="under_16" class="light">Under 16</label><br />
-      <input type="radio" id="over_16" value="over_16" name="user_age" /><label
-        for="over_16"
-        class="light"
+      <input type="radio" id="under_16" value="under_16" name="user_age" /><label for="under_16" class="light"
+        >Under 16</label
+      ><br />
+      <input type="radio" id="over_16" value="over_16" name="user_age" /><label for="over_16" class="light"
         >16 or Older</label
       >
 
@@ -855,9 +790,7 @@ closers?.forEach((closer) => {
       <label for="courses">Select Courses</label>
       <select id="courses" name="student_courses">
         <optgroup label="Engineering">
-          <option value="computer_engineering">
-            Computer Science Engineering
-          </option>
+          <option value="computer_engineering">Computer Science Engineering</option>
           <option value="electrical_engineering">Electrical Engineering</option>
           <option value="mechanical_engineering">Mechanical Engineering</option>
           <option value="civil_engineering">Civil Engineering</option>
@@ -867,31 +800,24 @@ closers?.forEach((closer) => {
           <option value="finance_management">Finance Management</option>
           <option value="technology_management">Technology Management</option>
           <option value="marketing_management">Marketing Management</option>
-          <option value="business_administration">
-            Business Administration
-          </option>
+          <option value="business_administration">Business Administration</option>
         </optgroup>
       </select>
 
       <label>Interests:</label>
-      <input
-        type="checkbox"
-        id="engineering"
-        value="interest_engineering"
-        name="user_interest"
-      /><label class="light" for="engineering">Engineering</label><br />
-      <input
-        type="checkbox"
-        id="business"
-        value="interest_business"
-        name="user_interest"
-      /><label class="light" for="business">Business</label><br />
-      <input
-        type="checkbox"
-        id="law"
-        value="interest_law"
-        name="user_interest"
-      /><label class="light" for="law">Law</label>
+      <input type="checkbox" id="engineering" value="interest_engineering" name="user_interest" /><label
+        class="light"
+        for="engineering"
+        >Engineering</label
+      ><br />
+      <input type="checkbox" id="business" value="interest_business" name="user_interest" /><label
+        class="light"
+        for="business"
+        >Business</label
+      ><br />
+      <input type="checkbox" id="law" value="interest_law" name="user_interest" /><label class="light" for="law"
+        >Law</label
+      >
 
       <button type="submit">Submit</button>
     </form>
@@ -913,9 +839,8 @@ Accordion list:
     <summary>Why is it called an accordion menu?</summary>
     <hr />
     <p>
-      Because each part of it can expand and contract, like in an accordion. If
-      you don't know what an accordion is, just imagine a cute fluffy cat. You
-      still won't know what it is, but at least you'll feel better about not
+      Because each part of it can expand and contract, like in an accordion. If you don't know what an accordion is,
+      just imagine a cute fluffy cat. You still won't know what it is, but at least you'll feel better about not
       knowing.
     </p>
   </details>
@@ -931,9 +856,8 @@ Accordion list:
     <hr />
     <p>
       No, not unless you're designing a MySpace profile. The
-      <code>{"details"}</code> element is cool though, and you can use that for
-      a lot of things. I'm using it on this page right below here, to show the
-      code for each example!
+      <code>{"details"}</code> element is cool though, and you can use that for a lot of things. I'm using it on this
+      page right below here, to show the code for each example!
     </p>
   </details>
 </div>
@@ -994,10 +918,7 @@ Accordion list:
 
 ```html
 <h1>Review your data</h1>
-<p>
-  Please review the data you entered in the previous step to ensure it is
-  correct:
-</p>
+<p>Please review the data you entered in the previous step to ensure it is correct:</p>
 <dl>
   <dt>First name</dt>
   <dd>Marc</dd>
@@ -1052,12 +973,9 @@ Accordion list:
 Insert text
 
 ```html
-<ins
-  cite="https://bugzilla.mozilla.org/show_bug.cgi?id=1620467"
-  datetime="2020-07-23"
->
-  The <code>appearance</code> property, previously only available prefixed in
-  Firefox, can now be used in all modern browsers un-prefixed.
+<ins cite="https://bugzilla.mozilla.org/show_bug.cgi?id=1620467" datetime="2020-07-23">
+  The <code>appearance</code> property, previously only available prefixed in Firefox, can now be used in all modern
+  browsers un-prefixed.
 </ins>
 ```
 
@@ -1066,12 +984,8 @@ Insert text
 Delete text
 
 ```html
-<del
-  cite="https://bugzilla.mozilla.org/show_bug.cgi?id=1620467"
-  datetime="2020-07-23"
->
-  Firefox doesn't support CSS's standard <code>appearance</code> property, so
-  you can only use it prefixed.
+<del cite="https://bugzilla.mozilla.org/show_bug.cgi?id=1620467" datetime="2020-07-23">
+  Firefox doesn't support CSS's standard <code>appearance</code> property, so you can only use it prefixed.
 </del>
 ```
 
@@ -1236,29 +1150,13 @@ Embed [best practice](https://web.dev/embed-best-practices):
 ### Video
 
 ```html
-<video
-  src="myVideo.mp4"
-  width="640"
-  height="480"
-  controls
-  autoplay
-  preload="auto"
-  loop
-  poster="myVideoPoster.png"
->
+<video src="myVideo.mp4" width="640" height="480" controls autoplay preload="auto" loop poster="myVideoPoster.png">
   If you're reading this either video didn't load or your browser is legacy!
 </video>
 ```
 
 ```html
-<video
-  width="640"
-  height="480"
-  controls
-  preload="auto"
-  loop
-  poster="myVideoPoster.png"
->
+<video width="640" height="480" controls preload="auto" loop poster="myVideoPoster.png">
   <source src="myVideo.sp8" type="video/super8" />
   <source src="myVideo.mp4" type="video/mp4" />
   <p><b>Download Video:</b> MP4 Format:<a href="myVideo.mp4">"MP4"</a></p>
@@ -1312,11 +1210,7 @@ Embed [best practice](https://web.dev/embed-best-practices):
 <div id="my-popover" popover="manual">
   <p>I am a popover with more information.</p>
   <p>
-    <button
-      popovertarget="my-popover"
-      popovertargetaction="hide"
-      class="close-btn"
-    >
+    <button popovertarget="my-popover" popovertargetaction="hide" class="close-btn">
       <span aria-hidden="true">❌</span>
       <span class="sr-only">Close</span>
     </button>
@@ -1644,17 +1538,10 @@ console.log(input.defaultValue) // 'another new default'
       <a href="https://example.com/products"> Products </a>
     </li>
     <li>
-      <a href="https://example.com/products/childrens-clothing">
-        Children's clothing
-      </a>
+      <a href="https://example.com/products/childrens-clothing"> Children's clothing </a>
     </li>
     <li>
-      <a
-        href="https://example.com/products/childrens-clothing/shoes"
-        aria-current="page"
-      >
-        Shoes
-      </a>
+      <a href="https://example.com/products/childrens-clothing/shoes" aria-current="page"> Shoes </a>
     </li>
   </ol>
 </nav>
@@ -1705,18 +1592,13 @@ The `<article>` element is used to represent a fully self-contained region of co
 ```html
 <p>
   Every time Kenny is killed, Stan will announce
-  <q cite="http://en.wikipedia.org/wiki/Kenny_McCormick#Cultural_impact">
-    Oh my God, you/they killed Kenny! </q
-  >.
+  <q cite="http://en.wikipedia.org/wiki/Kenny_McCormick#Cultural_impact"> Oh my God, you/they killed Kenny! </q>.
 </p>
 ```
 
 ```html
 <blockquote cite="https://www.huxley.net/bnw/four.html">
-  <p>
-    Words can be like X-rays, if you use them properly – they'll go through
-    anything. You read and you're pierced.
-  </p>
+  <p>Words can be like X-rays, if you use them properly – they'll go through anything. You read and you're pierced.</p>
 </blockquote>
 
 <cite>– Ados Huxley, Brave New World</cite>
@@ -1779,15 +1661,7 @@ Use `<button>` for clickable elements
 <svg width="100" height="75">
   <title>Dark rectangle</title>
   <desc>A grey rectangle with rounded corners and a dark green border</desc>
-  <rect
-    width="75"
-    height="50"
-    rx="20"
-    ry="20"
-    fill="#666"
-    stroke="#229b23"
-    stroke-fill="1"
-  />
+  <rect width="75" height="50" rx="20" ry="20" fill="#666" stroke="#229b23" stroke-fill="1" />
 </svg>
 ```
 
@@ -1855,16 +1729,8 @@ With `fieldset` and `legend`:
 ```html
 <form role="form">
   <label for="email-address"> Your Email Address </label>
-  <span id="email-error">
-    Error: Your email address must contain an @ symbol
-  </span>
-  <input
-    id="email-address"
-    name="email-address"
-    type="email"
-    aria-describedby="email-error"
-    aria-invalid="true"
-  />
+  <span id="email-error"> Error: Your email address must contain an @ symbol </span>
+  <input id="email-address" name="email-address" type="email" aria-describedby="email-error" aria-invalid="true" />
 </form>
 ```
 
@@ -1911,8 +1777,7 @@ export default function Field() {
     <address property="address" typeof="PostalAddress">
       <p property="streetAddress">123 Main St., Suite 404</p>
       <p>
-        <span property="addressLocality">Your Town</span>,
-        <span property="addressRegion">AK</span>,
+        <span property="addressLocality">Your Town</span>, <span property="addressRegion">AK</span>,
         <span property="postalCode">12345</span>
       </p>
       <p property="addressCountry">United States of America</p>
@@ -2083,13 +1948,7 @@ Further reading:
   - `role="application"`.
 
 ```html
-<button
-  class="list-expander"
-  aria-expanded="false"
-  aria-controls="expandable-list-1"
->
-  Expand List
-</button>
+<button class="list-expander" aria-expanded="false" aria-controls="expandable-list-1">Expand List</button>
 <ul id="expandable-list-1">
   <li><a href="http://example.com">Sample Link</a></li>
   <li><a href="http://example.com">Sample Link 2</a></li>
@@ -2123,15 +1982,12 @@ listExpander.addEventListener('click', (e) => {
   >
     <h2 id="dialog1_label" class="dialog_label">Address Added</h2>
     <p id="dialog1_desc" class="dialog_desc">
-      The address you provided has been added to your list of delivery
-      addresses. It is ready for immediate use. If you wish to remove it, you
-      can do so from
+      The address you provided has been added to your list of delivery addresses. It is ready for immediate use. If you
+      wish to remove it, you can do so from
       <a href="#" onclick="openDialog('dialog2', this)"> your profile. </a>
     </p>
     <div class="dialog_form_actions">
-      <button type="button" id="dialog1_close_btn" onclick="closeDialog(this)">
-        OK
-      </button>
+      <button type="button" id="dialog1_close_btn" onclick="closeDialog(this)">OK</button>
     </div>
   </div>
   <div
@@ -2144,13 +2000,11 @@ listExpander.addEventListener('click', (e) => {
   >
     <h2 id="dialog2_label" class="dialog_label">End of the Road!</h2>
     <p id="dialog2_desc" class="dialog_desc">
-      You activated a fake link or button that goes nowhere! The link or button
-      is present for demonstration purposes only.
+      You activated a fake link or button that goes nowhere! The link or button is present for demonstration purposes
+      only.
     </p>
     <div class="dialog_form_actions">
-      <button type="button" id="dialog2_close_btn" onclick="closeDialog(this)">
-        Close
-      </button>
+      <button type="button" id="dialog2_close_btn" onclick="closeDialog(this)">Close</button>
     </div>
   </div>
 </div>

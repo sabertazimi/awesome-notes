@@ -362,13 +362,13 @@ React server side rendering `start.server.js`
 (compile to `dist/server.js`):
 
 ```tsx
-import React from 'react'
-import { renderToString } from 'react-dom/server'
-import { StaticRouter } from 'react-router-dom'
-import { renderRoutes } from 'react-router-config'
 import Koa from 'koa'
 import koaStatic from 'koa-static'
+import React from 'react'
+import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
+import { renderRoutes } from 'react-router-config'
+import { StaticRouter } from 'react-router-dom'
 
 const routes = [
   { path: '/', component: Home, exact: true },
@@ -440,9 +440,9 @@ React client side hydration `start.client.js`
 ```tsx
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter } from 'react-router-dom'
-import { renderRoutes } from 'react-router-config'
 import { Provider } from 'react-redux'
+import { renderRoutes } from 'react-router-config'
+import { BrowserRouter } from 'react-router-dom'
 
 const Routes = [
   { path: '/', component: Home, exact: true },
@@ -806,12 +806,12 @@ Session authentication with Lucia in [Next.js](https://www.robinwieruch.de/next-
 // src/features/auth/actions/sign-up.ts
 'use server'
 
+import { lucia } from '@/lib/lucia'
+import { prisma } from '@/lib/prisma'
 import { generateId } from 'lucia'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { Argon2id } from 'oslo/password'
-import { lucia } from '@/lib/lucia'
-import { prisma } from '@/lib/prisma'
 
 async function signUp(formData: FormData) {
   const formDataRaw = {
@@ -871,11 +871,11 @@ export { signUp }
 // src/features/auth/actions/sign-in.ts
 'use server'
 
+import { lucia } from '@/lib/lucia'
+import { prisma } from '@/lib/prisma'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { Argon2id } from 'oslo/password'
-import { lucia } from '@/lib/lucia'
-import { prisma } from '@/lib/prisma'
 
 async function signIn(formData: FormData) {
   const formDataRaw = {
@@ -928,12 +928,12 @@ export { signIn }
 `getAuth` function:
 
 ```ts
+import type { Session, User } from 'lucia'
+import { lucia } from '@/lib/lucia'
+
 // src/features/auth/queries/get-auth.ts
 import { cookies } from 'next/headers'
 import { cache } from 'react'
-
-import type { Session, User } from 'lucia'
-import { lucia } from '@/lib/lucia'
 
 export const getAuth = cache(
   async (): Promise<
@@ -984,10 +984,10 @@ export const getAuth = cache(
 // src/features/auth/actions/sign-out.ts
 'use server'
 
+import { lucia } from '@/lib/lucia'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { getAuth } from '../queries/get-auth'
-import { lucia } from '@/lib/lucia'
 
 export async function signOut(_formData: FormData) {
   const { session } = await getAuth()
@@ -1012,12 +1012,12 @@ export async function signOut(_formData: FormData) {
 Protected routes:
 
 ```tsx
+import { getAuth } from '@/features/auth/queries/get-auth'
 // src/app/(authenticated)/layout.tsx
 // - src/app/(authenticated)/dashboard/page.tsx
 // - src/app/(authenticated)/account/page.tsx
 // - and more ...
 import { redirect } from 'next/navigation'
-import { getAuth } from '@/features/auth/queries/get-auth'
 
 export default async function AuthenticatedLayout({
   children,
@@ -1036,9 +1036,9 @@ export default async function AuthenticatedLayout({
 Authorization UI:
 
 ```tsx
+import { getAuth } from '@/features/auth/queries/get-auth'
 // src/app/layout.tsx
 import Link from 'next/link'
-import { getAuth } from '@/features/auth/queries/get-auth'
 
 export default function RootLayout() {
   const { user } = await getAuth()
@@ -1909,8 +1909,8 @@ const config = {
   `modules.mode` 设置为 [`pure`](https://github.com/vercel/next.js/blob/v12.1.6/packages/next/build/webpack/config/blocks/css/loaders/modules.ts#L42-L44).
 
 ```ts
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const devMode = process.env.NODE_ENV !== 'production'
 
@@ -2271,9 +2271,9 @@ const config = new webpack.optimize.CommonsChunkPlugin({
 #### Code Minimization
 
 ```ts
-const TerserPlugin = require('terser-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
 const isEnvProduction = process.env.NODE_ENV === 'production'
 const isEnvProductionProfile
@@ -2760,9 +2760,9 @@ Typed webpack plugin from `laravel-mix/`:
 
 ```ts
 const readline = require('node:readline')
-const _ = require('lodash')
 const chalk = require('chalk')
 const Table = require('cli-table3')
+const _ = require('lodash')
 const stripAnsi = require('strip-ansi')
 const { formatSize } = require('webpack/lib/SizeFormatHelpers')
 const { version } = require('../../package.json')

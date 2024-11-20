@@ -247,10 +247,7 @@ li {
   inset: 0;
   z-index: -1;
   background: #ccc;
-  background-image: linear-gradient(
-    hsl(0deg 0% 100% / 60%),
-    hsl(0deg 0% 100% / 0%)
-  );
+  background-image: linear-gradient(hsl(0deg 0% 100% / 60%), hsl(0deg 0% 100% / 0%));
   border: 1px solid rgb(0 0 0 / 40%);
   border-bottom: none;
   border-radius: 0.5em 0.5em 0 0;
@@ -535,23 +532,12 @@ a:focus::after {
 <!-- markdownlint-disable line-length -->
 
 ```html
-<a
-  href="https://github.com/Trevald/WhatTheTag.com"
-  class="github-corner"
-  aria-label="View source on GitHub"
->
+<a href="https://github.com/Trevald/WhatTheTag.com" class="github-corner" aria-label="View source on GitHub">
   <svg
     width="80"
     height="80"
     viewBox="0 0 250 250"
-    style="
-      position: absolute;
-      top: 0;
-      right: 0;
-      color: #2d3748;
-      border: 0;
-      fill: #718096;
-    "
+    style="position: absolute; top: 0; right: 0; color: #2d3748; border: 0; fill: #718096"
     aria-hidden="true"
   >
     <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z" />
@@ -641,48 +627,23 @@ a.btn-custom {
 
 ```css
 .btn-1 {
-  background-image: linear-gradient(
-    to right,
-    #f6d365 0%,
-    #fda085 51%,
-    #f6d365 100%
-  );
+  background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
 }
 
 .btn-2 {
-  background-image: linear-gradient(
-    to right,
-    #fbc2eb 0%,
-    #a6c1ee 51%,
-    #fbc2eb 100%
-  );
+  background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%);
 }
 
 .btn-3 {
-  background-image: linear-gradient(
-    to right,
-    #84fab0 0%,
-    #8fd3f4 51%,
-    #84fab0 100%
-  );
+  background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%);
 }
 
 .btn-4 {
-  background-image: linear-gradient(
-    to right,
-    #a1c4fd 0%,
-    #c2e9fb 51%,
-    #a1c4fd 100%
-  );
+  background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
 }
 
 .btn-5 {
-  background-image: linear-gradient(
-    to right,
-    #ffecd2 0%,
-    #fcb69f 51%,
-    #ffecd2 100%
-  );
+  background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 51%, #ffecd2 100%);
 }
 
 .btn:hover,
@@ -700,26 +661,14 @@ a.btn-custom {
 }
 
 .ripple-button:active {
-  background-image: radial-gradient(
-    160% 100% at 50% 0%,
-    hsl(0deg 0% 100% / 30%) 50%,
-    hsl(0deg 0% 100% / 0%) 52%
-  );
+  background-image: radial-gradient(160% 100% at 50% 0%, hsl(0deg 0% 100% / 30%) 50%, hsl(0deg 0% 100% / 0%) 52%);
 }
 
 .colorful-button {
   color: #fff;
   background-color: #2a80eb;
-  background-image: radial-gradient(
-      farthest-side at bottom left,
-      rgb(255 0 255/ 50%),
-      transparent
-    ),
-    radial-gradient(
-      farthest-corner at bottom right,
-      rgb(255 255 50/ 50%),
-      transparent
-    );
+  background-image: radial-gradient(farthest-side at bottom left, rgb(255 0 255/ 50%), transparent),
+    radial-gradient(farthest-corner at bottom right, rgb(255 255 50/ 50%), transparent);
 }
 ```
 
@@ -1759,13 +1708,7 @@ Mix `transparent` with non-`transparent` border to make shapes (e.g. triangle):
   width: 304px;
   height: 160px;
   background-color: #fff;
-  background-image: linear-gradient(
-      45deg,
-      #eee 25%,
-      transparent 25%,
-      transparent 75%,
-      #eee 75%
-    ),
+  background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%),
     linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%);
   background-position:
     0 0,
@@ -1996,10 +1939,7 @@ Rotate border [wave](https://codepen.io/Chokcoco/pen/EXJrdB):
  */
 .nest-grid-line {
   background: #58a;
-  background-image: linear-gradient(
-      var(--primary-line-color) 2px,
-      transparent 0
-    ),
+  background-image: linear-gradient(var(--primary-line-color) 2px, transparent 0),
     linear-gradient(90deg, var(--primary-line-color) 2px, transparent 0),
     linear-gradient(var(--secondary-line-color) 1px, transparent 0),
     linear-gradient(90deg, var(--secondary-line-color) 1px, transparent 0);
@@ -2131,8 +2071,7 @@ div {
   background:
     radial-gradient(circle at top left, transparent 15px, #58a 0) top left,
     radial-gradient(circle at top right, transparent 15px, #58a 0) top right,
-    radial-gradient(circle at bottom right, transparent 15px, #58a 0) bottom
-      right,
+    radial-gradient(circle at bottom right, transparent 15px, #58a 0) bottom right,
     radial-gradient(circle at bottom left, transparent 15px, #58a 0) bottom left;
   background-repeat: no-repeat;
   background-size: 50% 50%;
@@ -2203,10 +2142,8 @@ Background gradient triangle:
   color: white;
   text-align: center;
   background:
-    linear-gradient(-135deg, transparent 10%, #04e6fb 10%, #65ff9a 100%) top
-      right,
-    linear-gradient(-45deg, transparent 10%, #04e6fb 10%, #65ff9a 100%) bottom
-      right,
+    linear-gradient(-135deg, transparent 10%, #04e6fb 10%, #65ff9a 100%) top right,
+    linear-gradient(-45deg, transparent 10%, #04e6fb 10%, #65ff9a 100%) bottom right,
     linear-gradient(-135deg, #04e6fb 0, #65ff9a 90%, transparent 90%) top left,
     linear-gradient(-45deg, #04e6fb 0, #65ff9a 90%, transparent 90%) bottom left;
   background-repeat: no-repeat;
@@ -2230,13 +2167,7 @@ Background gradient triangle:
   width: 1.73em;
   height: 3em;
   content: '';
-  background: linear-gradient(
-      to left bottom,
-      transparent 50%,
-      rgb(0 0 0 / 20%) 0,
-      rgb(0 0 0 / 40%)
-    )
-    100% 0 no-repeat;
+  background: linear-gradient(to left bottom, transparent 50%, rgb(0 0 0 / 20%) 0, rgb(0 0 0 / 40%)) 100% 0 no-repeat;
   transform: translateY(-1.3em) rotate(-30deg);
   transform-origin: bottom right;
 }
@@ -2310,18 +2241,8 @@ Background gradient square shape:
 ```css
 .checkerboard-linear-gradient {
   background: #eee;
-  background-image: linear-gradient(
-      45deg,
-      rgb(0 0 0 / 25%) 25%,
-      transparent 0 75%,
-      rgb(0 0 0 / 25%) 0
-    ),
-    linear-gradient(
-      45deg,
-      rgb(0 0 0 / 25%) 25%,
-      transparent 0 75%,
-      rgb(0 0 0 / 25%) 0
-    );
+  background-image: linear-gradient(45deg, rgb(0 0 0 / 25%) 25%, transparent 0 75%, rgb(0 0 0 / 25%) 0),
+    linear-gradient(45deg, rgb(0 0 0 / 25%) 25%, transparent 0 75%, rgb(0 0 0 / 25%) 0);
   background-position:
     0 0,
     15px 15px;

@@ -768,8 +768,8 @@ const ButtonElement = React.forwardRef(Button)
 
 // Create ref to the DOM button:
 // get ref to `<button>`
-const ref = React.createRef()
 export default function App() {
+  const ref = useRef()
   return <ButtonElement ref={ref}>Forward Ref</ButtonElement>
 }
 ```
@@ -2146,10 +2146,10 @@ export default useEventListener
 ```
 
 ```ts
-import { useEffect, useReducer, useRef } from 'react'
-
 import type { AxiosRequestConfig } from 'axios'
+
 import axios from 'axios'
+import { useEffect, useReducer, useRef } from 'react'
 
 // State & hook output
 interface State<T> {
@@ -2265,8 +2265,8 @@ export default {
 
 ```ts
 import IntlMessageFormat from 'intl-messageformat'
-import zh from '../locale/zh'
 import en from '../locale/en'
+import zh from '../locale/zh'
 const MESSAGES = { en, zh }
 const LOCALE = 'en' // 这里写上决定语言的方法，例如可以从 cookie 判断语言
 
@@ -2643,8 +2643,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ### Concurrent Features
 
 ```tsx
-import * as ReactDOM from 'react-dom'
 import App from 'App'
+import * as ReactDOM from 'react-dom'
 
 // Create a root by using ReactDOM.createRoot():
 const root = ReactDOM.createRoot(document.getElementById('app'))
@@ -2843,7 +2843,7 @@ export function AppProvider({ children }: AppProviderProps) {
 Lazy loading and code splitting:
 
 ```tsx
-import React, { Suspense, lazy } from 'react'
+import React, { lazy, Suspense } from 'react'
 
 const Product = lazy(() => import('./ProductHandler'))
 
@@ -2935,9 +2935,9 @@ It hasn't been standardized.
 <TabItem value="next" label="Next">
 
 ```tsx
+import type { PageProps } from '@/types'
 // pages/index.js
 import ParentComponent from '../components/parent-component'
-import type { PageProps } from '@/types'
 
 export default function Page({ data }: PageProps) {
   return <ParentComponent data={data} />
@@ -2955,9 +2955,9 @@ export async function getServerSideProps() {
 <TabItem value="remix" label="Remix">
 
 ```tsx
+import { json } from '@remix-run/node'
 // app/routes/_index.jsx
 import { useLoaderData } from '@remix-run/react'
-import { json } from '@remix-run/node'
 import ParentComponent from '../components/parent-component'
 
 export default function Page() {
@@ -2980,9 +2980,9 @@ export async function loader() {
 <TabItem value="gatsby" label="Gatsby">
 
 ```tsx
+import type { PageProps } from '@/types'
 // src/pages/index.js
 import ParentComponent from '../components/parent-component'
-import type { PageProps } from '@/types'
 
 export default function Page({ data }: PageProps) {
   return <ParentComponent data={data} />
@@ -3619,8 +3619,8 @@ export default function App2(items) {
 ### Code Splitting
 
 ```tsx
-import React, { Component } from 'react'
 import { Formik } from 'formik'
+import React, { Component } from 'react'
 import * as Yup from 'yup'
 
 const formValidator = Yup.object().shape({
@@ -3762,9 +3762,9 @@ npm i -D enzyme enzyme-adapter-react-16 @types/enzyme
 ```
 
 ```tsx
-import React from 'react'
 import { configure, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
+import React from 'react'
 import { DataTable } from './components'
 
 configure({ adapter: new Adapter() })
@@ -3893,11 +3893,11 @@ describe('Welcome should', () => {
 ```
 
 ```tsx
-import React from 'react'
 import { fireEvent, render, wait } from '@testing-library/react'
+import React from 'react'
 
-import { App } from './App'
 import { api } from './api'
+import { App } from './App'
 
 // Normally you can mock entire module using jest.mock('./api);
 const mockCreateItem = (api.createItem = jest.fn())
@@ -3944,9 +3944,9 @@ npm i -D @testing-library/user-event @testing-library/dom
 ```
 
 ```tsx
-import React from 'react'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import React from 'react'
 
 test('click', () => {
   render(

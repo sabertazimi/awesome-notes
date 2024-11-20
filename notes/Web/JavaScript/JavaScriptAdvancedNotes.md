@@ -1873,7 +1873,7 @@ sequential()
 
 async function parallel() {
   const t0 = Date.now()
-  const promises = Array(5)
+  const promises = Array.from({ length: 5 })
     .fill(null)
     .map((_, i) => randomDelay(i))
 
@@ -2257,8 +2257,8 @@ Promise.all(partialSumPromises)
 #### Abort Fetching
 
 ```ts
-import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 interface Post {
   id: number
@@ -2624,7 +2624,7 @@ function require(moduleId) {
     const module = { exports: {} }
     require.cache[moduleId] = module
     // eslint-disable-next-line no-new-func
-    const wrapper = Function('require, exports, module', code)
+    const wrapper = new Function('require, exports, module', code)
     // Bind code to module.exports:
     wrapper(require, module.exports, module)
   }
@@ -2748,9 +2748,9 @@ Universal module definition:
 #### ES6 Module Syntax
 
 ```ts
-import { lastName as surname } from './profile.js'
-import module from './module.js'
 import * as Bar from './bar.js' // Object.freeze(Bar)
+import module from './module.js'
+import { lastName as surname } from './profile.js'
 import './foo.js' // Load effects
 ```
 
@@ -2773,9 +2773,9 @@ export { firstName, lastName, year }
 ```
 
 ```ts
+export { default as Article } from './Article'
 // 接口改名
 export { foo as myFoo } from 'node:module'
-export { default as Article } from './Article'
 
 // 整体输出
 export * from 'utils'
@@ -2945,7 +2945,7 @@ Modify default object behavior with `Proxy` and `Reflect`:
 - `Proxy.revocable(target, handler)`.
 
 ```ts
-Proxy(target, {
+const proxy = new Proxy(target, {
   set(target, name, value, receiver) {
     const success = Reflect.set(target, name, value, receiver)
     if (success)
