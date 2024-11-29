@@ -394,7 +394,7 @@ tags: [Web, Framework, Library]
 - [UIVerse](https://github.com/uiverse-io/galaxy):
   UI gallery made with CSS and Tailwind.
 
-### Utility UI Framework
+### Atomic Utility UI Framework
 
 - [Tailwind](https://github.com/tailwindlabs/tailwindcss).
 - [Material](https://github.com/creativetimofficial/material-tailwind):
@@ -403,8 +403,6 @@ tags: [Web, Framework, Library]
   Tailwind components collection.
 - [Daisy](https://github.com/saadeghi/daisyui):
   Tailwind components plugin.
-- [FranKen](https://github.com/sveltecult/franken-ui):
-  Tailwind components plugin based on ShadCN UI.
 - [Form](https://github.com/tailwindlabs/tailwindcss-forms):
   Basic reset for form styles.
 - [Typography](https://github.com/tailwindlabs/tailwindcss-typography):
@@ -418,12 +416,10 @@ tags: [Web, Framework, Library]
 
 ### Headless UI Framework
 
-- [Headless](https://github.com/tailwindlabs/headlessui):
-  Completely un-styled and fully accessible Tailwind React components.
 - [Radix](https://github.com/radix-ui/primitives):
   Build high-quality and accessible design systems.
-- [ShadCN](https://github.com/shadcn-ui/ui):
-  Accessible and customizable components can copy and paste.
+- [Headless](https://github.com/tailwindlabs/headlessui):
+  Completely un-styled and fully accessible Tailwind React components.
 - [Spectrum](https://github.com/adobe/react-spectrum):
   Build adaptive, accessible and robust user experiences.
 - [AriaKit](https://github.com/ariakit/ariakit):
@@ -435,13 +431,17 @@ tags: [Web, Framework, Library]
   Ant group design system.
 - [Material](https://github.com/mui-org/material-ui):
   Material UI for React.
+- [ShadCN](https://github.com/shadcn-ui/ui):
+  Accessible and customizable components can copy and paste.
+- [Magic](https://github.com/magicuidesign/magicui):
+  Animated effects based on ShadCN UI.
+- [Next](https://github.com/nextui-org/nextui):
+  Beautiful, fast and modern React UI library.
 - [Chakra](https://github.com/chakra-ui/chakra-ui).
 - [Mantine](https://github.com/mantinedev/mantine).
 - [BluePrint](https://github.com/palantir/blueprint).
 - [Tamagui](https://github.com/tamagui/tamagui):
   Style and UI for React meet optimizing compiler.
-- [Next](https://github.com/nextui-org/nextui):
-  Beautiful, fast and modern React UI library.
 - [Primer](https://github.com/primer/react):
   GitHub Primer design system.
 - [Luna](https://github.com/liriliri/luna):
