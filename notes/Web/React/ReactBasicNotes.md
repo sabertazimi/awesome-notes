@@ -261,8 +261,6 @@ const HTMLButtonElement = {
 - [New JSX transform](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html).
 
 ```ts
-import React from 'react'
-
 function App() {
   return React.createElement('h1', null, 'Hello world')
 }
@@ -749,7 +747,7 @@ class App extends React.Component<{ data: object }> {
 
 #### Forward Refs
 
-不能在函数式组件上使用`ref`属性,
+Before React 19, 不能在函数式组件上使用`ref`属性,
 因为它们没有实例, 但可以在函数式组件内部使用`ref`.
 Ref forwarding 是一个特性,
 它允许一些组件获取接收到 ref 对象并将它进一步传递给子组件.
@@ -764,6 +762,7 @@ function Button({ children }: { children: ReactElement }, ref) {
   )
 }
 
+// eslint-disable-next-line react/no-forward-ref -- In React 19, 'forwardRef' is no longer necessary.
 const ButtonElement = React.forwardRef(Button)
 
 // Create ref to the DOM button:
@@ -788,6 +787,7 @@ function Button({ children }: Props, ref: Ref) {
   )
 }
 
+// eslint-disable-next-line react/no-forward-ref -- In React 19, 'forwardRef' is no longer necessary.
 const FancyButton = React.forwardRef<Ref, Props>(Button)
 
 export default FancyButton
@@ -913,7 +913,6 @@ export default RadioImageForm
 
 ```tsx
 import type { CSSProperties, ReactNode } from 'react'
-import React from 'react'
 
 interface Props {
   children: ReactNode
@@ -1542,7 +1541,6 @@ class MyComponent extends React.Component<{
 ```
 
 ```tsx
-import React from 'react'
 import Button from './Button'
 
 type Props = typeof ButtonCounter.defaultProps & {
@@ -1555,6 +1553,7 @@ type State = Readonly<typeof initialState>
 class ButtonCounter extends React.Component<Props, State> {
   readonly state: State = initialState
 
+  // eslint-disable-next-line react/no-default-props
   static defaultProps = {
     name: 'count',
   }
@@ -2324,7 +2323,7 @@ Context 中只定义被大多数组件所共用的属性
 增加 `render` 次数, 从而导致性能问题.
 
 ```tsx
-import React, { createContext, useContext, useMemo, useState } from 'react'
+import { createContext, useContext, useMemo, useState } from 'react'
 import { fakeAuth } from './app/services/auth'
 
 const authContext = createContext()
@@ -2358,7 +2357,7 @@ export default function AuthProvider({ children }: { children: ReactElement }) {
     }
   }, [user, signIn, signOut])
 
-  return <authContext.Provider value={auth}>{children}</authContext.Provider>
+  return <authContext value={auth}>{children}</authContext>
 }
 ```
 
@@ -2366,7 +2365,7 @@ export default function AuthProvider({ children }: { children: ReactElement }) {
 
 ```tsx
 // Context.js
-import React, { Component, createContext } from 'react'
+import { Component, createContext } from 'react'
 
 // React team — thanks for Context API 👍
 const context = createContext()
@@ -2403,7 +2402,6 @@ class Provider extends Component<{ children: ReactElement }> {
 
 ```tsx
 // TextArea.jsx
-import React from 'react'
 import { Consumer } from './Context'
 
 export default function TextArea() {
@@ -2843,7 +2841,7 @@ export function AppProvider({ children }: AppProviderProps) {
 Lazy loading and code splitting:
 
 ```tsx
-import React, { lazy, Suspense } from 'react'
+import { lazy, Suspense } from 'react'
 
 const Product = lazy(() => import('./ProductHandler'))
 
@@ -3376,7 +3374,7 @@ the same result given the same props and state,
 use `React.PureComponent`/`React.memo` for a performance boost in some cases.
 
 ```tsx
-import React, { PureComponent } from 'react'
+import { PureComponent } from 'react'
 
 function Unstable({ value }: { value: string }) {
   console.log(' Rendered Unstable component ')
@@ -3414,7 +3412,7 @@ export default App
 ```
 
 ```tsx
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 function Unstable({ value }: { value: string }) {
   console.log(' Rendered this component ')
@@ -3620,7 +3618,7 @@ export default function App2(items) {
 
 ```tsx
 import { Formik } from 'formik'
-import React, { Component } from 'react'
+import { Component } from 'react'
 import * as Yup from 'yup'
 
 const formValidator = Yup.object().shape({
@@ -3635,7 +3633,7 @@ export default class Form extends Component {
 ```
 
 ```tsx
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 export default class App extends Component {
   constructor() {
@@ -3764,7 +3762,6 @@ npm i -D enzyme enzyme-adapter-react-16 @types/enzyme
 ```tsx
 import { configure, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import React from 'react'
 import { DataTable } from './components'
 
 configure({ adapter: new Adapter() })
@@ -3860,8 +3857,6 @@ npm i -D @testing-library/react @testing-library/dom @testing-library/jest-dom @
 ### React Testing Library Basis
 
 ```tsx
-import React from 'react'
-
 /**
  * render: render the component
  * screen: finding elements along with user
@@ -3894,8 +3889,6 @@ describe('Welcome should', () => {
 
 ```tsx
 import { fireEvent, render, wait } from '@testing-library/react'
-import React from 'react'
-
 import { api } from './api'
 import { App } from './App'
 
@@ -3946,7 +3939,6 @@ npm i -D @testing-library/user-event @testing-library/dom
 ```tsx
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import React from 'react'
 
 test('click', () => {
   render(
@@ -4001,7 +3993,7 @@ test('should reset counter to updated initial value', () => {
 #### Async Hook Testing
 
 ```ts
-import React, { useCallback, useContext, useState } from 'react'
+import { useCallback, useContext, useState } from 'react'
 
 export default function useCounter(initialValue = 0) {
   const [count, setCount] = useState(initialValue)
@@ -4031,7 +4023,7 @@ test('should increment counter after delay', async () => {
 #### Error Hook Testing
 
 ```ts
-import React, { useCallback, useContext, useState } from 'react'
+import { useCallback, useContext, useState } from 'react'
 
 export default function useCounter(initialValue = 0) {
   const [count, setCount] = useState(initialValue)
@@ -4325,8 +4317,7 @@ export default function App() {
 ### Shared CSS Styles
 
 ```tsx
-// Import React.js, styled-components and css
-import React from 'react'
+// Import styled-components and css
 import styled, { css } from 'styled-components'
 const container = document.querySelector('.container')
 
@@ -4395,8 +4386,7 @@ ReactDOM.createRoot(container).render(<WrapperContainer />)
 ### Styled Component Extension
 
 ```tsx
-// Import React.js and styled-components
-import React from 'react'
+// Import styled-components
 import styled from 'styled-components'
 
 const container = document.querySelector('.container')
@@ -4440,8 +4430,7 @@ ReactDOM.createRoot(container).render(<WrapperContainer />)
 ### Styled Component Props
 
 ```tsx
-// Import React.js, styled-components and css
-import React from 'react'
+// Import styled-components and css
 import styled, { css } from 'styled-components'
 
 const container = document.querySelector('.container')

@@ -1339,7 +1339,7 @@ import { forwardRef, useImperativeHandle, useRef } from 'react'
 
 interface Props {}
 
-const MyInput = forwardRef((props: Props, ref) => {
+function MyInput({ ref, ...props }: Props) {
   const realInputRef = useRef(null)
   useImperativeHandle(ref, () => ({
     // Only expose focus and nothing else
@@ -1348,7 +1348,7 @@ const MyInput = forwardRef((props: Props, ref) => {
     },
   }))
   return <input {...props} ref={realInputRef} />
-})
+}
 
 export default function Form() {
   const inputRef = useRef(null)
@@ -1572,7 +1572,7 @@ export default function CountProvider(props) {
     }
   }, [count, setCount])
 
-  return <CountContext.Provider value={value} {...props} />
+  return <CountContext value={value} {...props} />
 }
 
 function useCount() {
@@ -2560,7 +2560,7 @@ Migrate from `useState` + `useEffect` + `useRef` to `useSyncExternalStore`
 for 3rd external stores libraries (e.g `Redux`):
 
 ```tsx
-import React, { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useSyncExternalStore } from 'use-sync-external-store/shim'
 
 function createStore(initialState) {
@@ -4050,7 +4050,7 @@ export default function FriendListItem({ friend }: Props) {
 
 ```ts
 import axios from 'axios'
-import React, { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 
 function useDataApi(initialUrl, initialData) {
   const [data, setData] = useState(initialData)

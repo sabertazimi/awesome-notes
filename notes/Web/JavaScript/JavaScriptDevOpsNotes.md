@@ -364,7 +364,6 @@ React server side rendering `start.server.js`
 ```tsx
 import Koa from 'koa'
 import koaStatic from 'koa-static'
-import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { renderRoutes } from 'react-router-config'
@@ -438,7 +437,6 @@ React client side hydration `start.client.js`
 - 执行服务端未执行的 lifecycle hooks: `beforeMount()`/`onMounted()`.
 
 ```tsx
-import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { renderRoutes } from 'react-router-config'
@@ -2441,8 +2439,8 @@ module.exports = {
             const resource = module.nameForCondition?.()
             return resource
               ? topLevelFrameworkPaths.some(pkgPath =>
-                resource.startsWith(pkgPath)
-              )
+                  resource.startsWith(pkgPath)
+                )
               : false
           },
           priority: 40,

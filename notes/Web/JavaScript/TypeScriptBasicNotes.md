@@ -3484,8 +3484,6 @@ logger(user) // Oops! `user.isSuperAdmin` is undefined.
 - Type-safe React router advanced [types](https://speakerdeck.com/zoontek/advanced-typescript-how-we-made-our-router-typesafe).
 
 ```tsx
-import React from 'react'
-
 type PathSegments<Path extends string> =
   Path extends `${infer SegmentA}/${infer SegmentB}`
     ? ParamOnly<SegmentA> | PathSegments<SegmentB>

@@ -543,7 +543,7 @@ body {
 #### React Design Variants
 
 ```tsx
-import React, { ButtonHTMLAttributes } from 'react'
+import type { ButtonHTMLAttributes } from 'react'
 
 type ButtonVariant = 'filled' | 'outlined'
 
