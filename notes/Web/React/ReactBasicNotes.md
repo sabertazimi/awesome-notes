@@ -716,6 +716,7 @@ class CssThemeProvider extends React.PureComponent<Props> {
   `Flow` can't guess the magic that framework does to make string ref appear on `this.refs`,
   as well as its type (which could be different).
   `Callback Refs` are friendly to static analysis.
+- Starting in React 19, `String Refs` was [removed](https://react.dev/blog/2024/04/25/react-19-upgrade-guide#removed-string-refs).
 
 ```tsx
 class Foo extends Component {
