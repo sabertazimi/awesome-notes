@@ -794,6 +794,18 @@ const FancyButton = React.forwardRef<Ref, Props>(Button)
 export default FancyButton
 ```
 
+#### Prop Refs
+
+Starting in React 19, you can now access ref as a prop for function components:
+
+```tsx
+function MyInput({ placeholder, ref }) {
+  return <input placeholder={placeholder} ref={ref} />
+}
+
+<MyInput ref={ref} />
+```
+
 #### Callback Refs
 
 ```tsx
