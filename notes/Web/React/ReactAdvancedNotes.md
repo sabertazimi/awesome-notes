@@ -2621,9 +2621,9 @@ function commitLayoutEffectOnFiber(
                 = finishedWork.elementType === finishedWork.type
                   ? current.memoizedProps
                   : resolveDefaultProps(
-                    finishedWork.type,
-                    current.memoizedProps
-                  )
+                      finishedWork.type,
+                      current.memoizedProps
+                    )
               const prevState = current.memoizedState
 
               instance.componentDidUpdate(

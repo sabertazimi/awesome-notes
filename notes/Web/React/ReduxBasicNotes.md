@@ -1307,7 +1307,6 @@ export default configureStore({
 ```
 
 ```tsx
-import React from 'react'
 import { useGetPostsQuery } from '../api'
 import { PostExcerpt, Spinner } from '../components'
 
@@ -1346,7 +1345,7 @@ export function PostsList() {
 ```
 
 ```tsx
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useAddNewPostMutation } from '../api'
 
 export function AddPostForm() {
@@ -1601,7 +1600,6 @@ function myThunk() {
 `client.jsx`:
 
 ```tsx
-import React from 'react'
 import { hydrateRoot } from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
@@ -1628,7 +1626,6 @@ hydrateRoot(
 import path from 'node:path'
 import Express from 'express'
 import qs from 'qs'
-import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
@@ -1806,7 +1803,7 @@ export function Provider({
   const StoreContext = React.createContext(store)
 
   return (
-    <StoreContext.Provider value={store}>
+    <StoreContext value={store}>
       <StoreContext.Consumer>
         {(store) => {
           const childrenWithStore = React.Children.map(children, child =>
@@ -1815,7 +1812,7 @@ export function Provider({
           return <div>{childrenWithStore}</div>
         }}
       </StoreContext.Consumer>
-    </StoreContext.Provider>
+    </StoreContext>
   )
 }
 

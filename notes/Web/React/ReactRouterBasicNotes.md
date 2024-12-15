@@ -418,11 +418,6 @@ interface Props {
 }
 
 class Link extends Component<Props> {
-  static propTypes = {
-    to: PropTypes.string.isRequired,
-    replace: PropTypes.bool,
-  }
-
   handleClick = (event) => {
     const { replace, to } = this.props
     event.preventDefault()
@@ -446,13 +441,9 @@ class Link extends Component<Props> {
 
 ```tsx
 class Redirect extends Component {
+  // eslint-disable-next-line react/no-default-props
   static defaultProps = {
     push: false,
-  }
-
-  static propTypes = {
-    to: PropTypes.string.isRequired,
-    push: PropTypes.bool.isRequired,
   }
 
   componentDidMount() {

@@ -774,7 +774,6 @@ module.exports = reactDom
 
 ```ts
 // gatsby.js
-import React from 'react'
 const gatsby = jest.requireActual('gatsby')
 
 module.exports = {
