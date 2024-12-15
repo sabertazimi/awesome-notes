@@ -814,6 +814,10 @@ class UserInput extends Component {
     this.input = input
   }
 
+  componentDidMount() {
+    this.input.focus()
+  }
+
   render() {
     return (
       <>
