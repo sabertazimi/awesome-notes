@@ -54,14 +54,14 @@ tags: [Web, Framework, Library]
   React Electron boilerplate.
 - [StarterKit](https://github.com/kriasoft/react-starter-kit):
   React fullstack app boilerplate.
-- [Vitamin](https://github.com/wtchnm/Vitamin):
-  React Vite boilerplate.
 - [Plasmo](https://github.com/PlasmoHQ/plasmo):
   Browser extension framework.
-- [Extension.js](https://github.com/cezaraugusto/extension.js):
+- [WXT](https://github.com/wxt-dev/wxt):
+  Next-gen web extension framework.
+- [Extension.js](https://github.com/extension-js/extension.js):
   Plug-and-play, zero-config, cross-browser extension development tool.
-- [ViteSSE](https://github.com/antfu/vitesse-webext):
-  Browser Extension Vite starter.
+- [ViteSSE](https://github.com/antfu-collective/vitesse-webext):
+  Browser extension Vite starter.
 
 ## Framework and Solution
 
