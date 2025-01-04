@@ -413,6 +413,8 @@ tags: [Web, Framework, Library]
   Provides utilities for visually truncating text after a fixed number of lines.
 - [Fluid](https://github.com/barvian/fluid-tailwind):
   Fluid `clamp()` plugin for Tailwind that works with every utility.
+- [Motion](https://github.com/romboHQ/tailwindcss-motion):
+  Tailwind animations plugin.
 
 ### Headless UI Framework
 
