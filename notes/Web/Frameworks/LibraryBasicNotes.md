@@ -2232,6 +2232,8 @@ tags: [Web, Framework, Library]
 
 ### DevOps Platform
 
+- [SealOS](https://github.com/labring/sealos):
+  Cloud operating system designed for managing cloud-native applications.
 - [Lens](https://github.com/lensapp/lens):
   Kubernetes platform.
 - [KubeSphere](https://github.com/kubesphere/kubesphere).
