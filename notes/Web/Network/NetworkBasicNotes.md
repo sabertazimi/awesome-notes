@@ -568,7 +568,7 @@ User Datagram Protocol (RFC 768):
 - 应该足够稳定以支持 2 分钟以上的交付延迟.
 - 应该支持 IPv4 UDP 校验和, 必须支持 IPv6 校验和.
 - 可以在需要时使用 `Keep-Alive` (最小间隔 15 秒).
-- 基于 UDP 的 P2P 程序必须考虑 NAT (Network Address Translator) 穿透:
+- 基于 UDP 的 P2P 程序必须考虑 [NAT (Network Address Translator) 穿透](https://tailscale.com/blog/how-nat-traversal-works):
   - ICE: Interactive Connectivity Establishment.
   - STUN: Session Traversal Utilities for NAT.
   - TURN: Traversal Using Relays around NAT.
