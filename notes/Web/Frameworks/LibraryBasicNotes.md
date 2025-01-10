@@ -2043,6 +2043,8 @@ tags: [Web, Framework, Library]
 
 - [SourceGraph](https://github.com/sourcegraph/sourcegraph):
   Universal code search.
+- [SourceBot](https://github.com/sourcebot-dev/sourcebot):
+  Blazingly fast code search deployed as a single Docker image.
 - [SonarSource](https://github.com/SonarSource/SonarJS):
   Static source code analyzer.
 - [ASTExplorer](https://github.com/fkling/astexplorer).
@@ -2185,8 +2187,6 @@ tags: [Web, Framework, Library]
   Generate massive amounts of realistic fake data.
 - [Axios](https://github.com/ctimmerm/axios-mock-adapter):
   Axios mock adapter that allows to easily mock requests.
-- [MemFS](https://github.com/streamich/memfs):
-  In-memory file system for Node.js.
 - [MockRTC](https://github.com/httptoolkit/mockrtc):
   Powerful friendly WebRTC mock proxy.
 
