@@ -95,29 +95,18 @@ tags: [Web, Framework, Library]
   Enterprise-grade server-side applications on top of TypeScript.
 - [Fastify](https://github.com/fastify/fastify):
   Fast and low overhead web framework.
+- [HoNo](https://github.com/honojs/hono):
+  Web framework built on web standards.
 - [Feathers.js](https://github.com/feathersjs/feathers):
   Real-time applications framework based on Socket.io.
-- [Egg.js](https://github.com/eggjs/egg).
-- [Midway](https://github.com/midwayjs/midway):
-  Serverless framework for frontend developers.
-- [Koa](https://github.com/koajs/koa):
-  Expressive middleware using ES2017 async functions.
-- [Sails](https://github.com/balderdashy/sails):
-  Realtime MVC framework.
 - [RedWood](https://github.com/redwoodjs/redwood):
   App framework for startups.
 - [Amplication](https://github.com/amplication/amplication):
   Low-code but high quality applications.
 - [LoopBack](https://github.com/loopbackio/loopback-next):
   Build modern API applications.
-- [Aleph](https://github.com/alephjs/aleph.js):
-  Fullstack framework in Deno.
-- [Remult](https://github.com/remult/remult):
-  CRUD framework for fullstack TypeScript.
 - [Adonis](https://github.com/adonisjs/core):
   TypeScript-first web framework with support for testing and modern tooling.
-- [HoNo](https://github.com/honojs/hono):
-  Web framework built on web standards.
 - [ElySia](https://github.com/elysiajs/elysia):
   Ergonomic framework for humans supercharged by Bun.
 - [Oak](https://github.com/oakserver/oak):
@@ -128,11 +117,10 @@ tags: [Web, Framework, Library]
 ### Headless CMS
 
 - [StrAPI](https://github.com/strapi/strapi).
-- [Ghost](https://github.com/TryGhost/Ghost).
-- [Netlify](https://github.com/netlify/netlify-cms).
-- [KeyStone](https://github.com/keystonejs/keystone).
-- [TinaCMS](https://github.com/tinacms/tinacms).
 - [Payload](https://github.com/payloadcms/payload).
+- [Ghost](https://github.com/TryGhost/Ghost).
+- [TinaCMS](https://github.com/tinacms/tinacms).
+- [KeyStone](https://github.com/keystonejs/keystone).
 
 ### Desktop Solution
 
@@ -1982,6 +1970,8 @@ tags: [Web, Framework, Library]
   Princeton GitHub issues auto-fixer.
 - [PRAgent](https://github.com/Codium-ai/pr-agent):
   Codium AI-powered tool for automated pull request analysis, feedback and suggestions.
+- [N8N](https://github.com/n8n-io/n8n):
+  Fair-code workflow automation platform with native AI capabilities.
 
 ## Debugging and Testing
 
