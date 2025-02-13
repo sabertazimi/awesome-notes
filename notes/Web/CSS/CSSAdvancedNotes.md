@@ -776,8 +776,8 @@ body {
 .color-picker-wheel {
   width: 150px;
   height: 150px;
-  background: radial-gradient(closest-side circle, gray, transparent),
-    conic-gradient(red, magenta, blue, aqua, lime, yellow, red);
+  background:
+    radial-gradient(closest-side circle, gray, transparent), conic-gradient(red, magenta, blue, aqua, lime, yellow, red);
   border-radius: 50%;
 }
 ```
@@ -1173,8 +1173,8 @@ img.alpha-mask {
   width: 100px;
   height: 100px;
   background-color: #8cffa0;
-  mask-image: url('https://mdn.mozillademos.org/files/12668/MDN.svg'),
-    url('https://mdn.mozillademos.org/files/12676/star.svg');
+  mask-image:
+    url('https://mdn.mozillademos.org/files/12668/MDN.svg'), url('https://mdn.mozillademos.org/files/12676/star.svg');
   mask-size: 100% 100%;
   mask-composite: add;
 }
