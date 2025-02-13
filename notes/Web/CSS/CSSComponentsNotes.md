@@ -667,7 +667,8 @@ a.btn-custom {
 .colorful-button {
   color: #fff;
   background-color: #2a80eb;
-  background-image: radial-gradient(farthest-side at bottom left, rgb(255 0 255/ 50%), transparent),
+  background-image:
+    radial-gradient(farthest-side at bottom left, rgb(255 0 255/ 50%), transparent),
     radial-gradient(farthest-corner at bottom right, rgb(255 255 50/ 50%), transparent);
 }
 ```
@@ -1708,7 +1709,8 @@ Mix `transparent` with non-`transparent` border to make shapes (e.g. triangle):
   width: 304px;
   height: 160px;
   background-color: #fff;
-  background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%),
+  background-image:
+    linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%),
     linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%);
   background-position:
     0 0,
@@ -1924,8 +1926,8 @@ Rotate border [wave](https://codepen.io/Chokcoco/pen/EXJrdB):
 ```css
 .grid-line {
   background-color: #fff;
-  background-image: linear-gradient(var(--line-color) 1px, transparent 0),
-    linear-gradient(90deg, var(--line-color) 1px, transparent 0);
+  background-image:
+    linear-gradient(var(--line-color) 1px, transparent 0), linear-gradient(90deg, var(--line-color) 1px, transparent 0);
   background-size: 10px 10px;
   border-top: 1px solid #e5e8eb;
   border-bottom: 1px solid #e5e8eb;
@@ -1939,7 +1941,8 @@ Rotate border [wave](https://codepen.io/Chokcoco/pen/EXJrdB):
  */
 .nest-grid-line {
   background: #58a;
-  background-image: linear-gradient(var(--primary-line-color) 2px, transparent 0),
+  background-image:
+    linear-gradient(var(--primary-line-color) 2px, transparent 0),
     linear-gradient(90deg, var(--primary-line-color) 2px, transparent 0),
     linear-gradient(var(--secondary-line-color) 1px, transparent 0),
     linear-gradient(90deg, var(--secondary-line-color) 1px, transparent 0);
@@ -2241,7 +2244,8 @@ Background gradient square shape:
 ```css
 .checkerboard-linear-gradient {
   background: #eee;
-  background-image: linear-gradient(45deg, rgb(0 0 0 / 25%) 25%, transparent 0 75%, rgb(0 0 0 / 25%) 0),
+  background-image:
+    linear-gradient(45deg, rgb(0 0 0 / 25%) 25%, transparent 0 75%, rgb(0 0 0 / 25%) 0),
     linear-gradient(45deg, rgb(0 0 0 / 25%) 25%, transparent 0 75%, rgb(0 0 0 / 25%) 0);
   background-position:
     0 0,

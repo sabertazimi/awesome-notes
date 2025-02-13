@@ -495,8 +495,9 @@ Implementing design tokens in your workflow:
   --color-surface-bg-interact: var(--color-mid-shade);
   --color-surface-text: var(--color-dark);
   --color-surface-text-interact: var(--color-dark);
-  --font-base: -apple-system, 'BlinkMacSystemFont', avenir next, avenir, segoe ui, helvetica neue, helvetica, cantarell,
-    ubuntu, roboto, noto, arial, sans-serif;
+  --font-base:
+    -apple-system, 'BlinkMacSystemFont', avenir next, avenir, segoe ui, helvetica neue, helvetica, cantarell, ubuntu,
+    roboto, noto, arial, sans-serif;
   --font-display: var(--font-base);
   --font-weight-regular: 400;
   --font-weight-medium: 500;
