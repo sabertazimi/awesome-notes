@@ -1450,7 +1450,7 @@ person.on('ageChanged', (newAge) => {
     console.warn('warning! negative age')
 })
 
-// It's typo-resistent
+// It's typo-resistant
 person.on('firstName', () => {})
 // Argument of type '"firstName"' is not assignable to
 // parameter of type '"firstNameChanged" | "lastNameChanged" | "ageChanged"'.
