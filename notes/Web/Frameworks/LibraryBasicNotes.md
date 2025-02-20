@@ -1271,7 +1271,7 @@ tags: [Web, Framework, Library]
 ### Geolocation
 
 - [MapBox](https://github.com/visgl/react-map-gl):
-  React friendly API wrapper around MapboxGL.
+  React friendly API wrapper around MapBoxGL.
 - [Turf](https://github.com/Turfjs/turf):
   Modular geospatial engine.
 - [Leaflet](https://github.com/PaulLeCam/react-leaflet):
