@@ -887,6 +887,33 @@ section {
 }
 ```
 
+[`:has(:not)` vs `:not(:has)`](https://polypane.app/blog/decoding-css-selectors-has-not-vs-not-has):
+
+```html
+<!-- card 1 -->
+<div class="card">
+  <img />
+  <span />
+</div>
+
+<!-- card 2 -->
+<div class="card">
+  <span />
+</div>
+
+<style>
+  /* Match card 1 and card 2 */
+  .card:has(:not(img)) {
+    color: red;
+  }
+
+  /* Match card 2 */
+  .card:not(:has(img)) {
+    color: blue;
+  }
+</style>
+```
+
 ### Linguistic Pseudo Class
 
 - `:dir(ltr)`/`:dir(rtl)`.
