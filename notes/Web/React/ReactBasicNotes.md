@@ -3361,22 +3361,6 @@ export default function Hello() {
 - 计算: 精确判断更新时机和范围, 减少计算量, 优化 render 过程.
 - 渲染: 精细粒度, 降低组件复杂度, 减少 DOM 数量.
 
-### React Performance Best Practice
-
-- Use `key` correctly.
-- `React.useMemo` and `React.useCallback` (no anonymous functions).
-- `shouldComponentUpdate`/`React.memo`/`React.PureComponent`:
-  **shallow compare** on components
-  to prevent unnecessary re-rendering **caused by parent components**.
-- Lazy loading components (`React.lazy` and `React.Suspense`).
-- Virtualized Lists.
-- Stateless component: less props, less state, less nest (HOC or render props).
-- `Immutable.js`.
-- Isomorphic rendering.
-- Webpack bundle analyzer.
-- [Progressive React](https://houssein.me/progressive-react).
-- `useDeferredValue`/`useTransition` hook for debounce concurrent features.
-
 ### Re-rendering Problem
 
 React will [recursively render **all child components**](https://blog.isquaredsoftware.com/2020/05/blogged-answers-a-mostly-complete-guide-to-react-rendering-behavior)
@@ -3685,6 +3669,26 @@ export default class App extends Component {
   }
 }
 ```
+
+### React Performance Best Practice
+
+- Use `key` correctly.
+- `React.useMemo` and `React.useCallback` (no anonymous functions).
+- `shouldComponentUpdate`/`React.memo`/`React.PureComponent`:
+  **shallow compare** on components
+  to prevent unnecessary re-rendering **caused by parent components**.
+- Lazy loading components (`React.lazy` and `React.Suspense`).
+- Virtualized Lists.
+- Stateless component: less props, less state, less nest (HOC or render props).
+- `Immutable.js`.
+- Isomorphic rendering.
+- Webpack bundle analyzer.
+- `useDeferredValue`/`useTransition` hook for debounce concurrent features.
+
+### React Performance Reference
+
+- [Progressive React](https://houssein.me/progressive-react).
+- Sentry performance [guide](https://blog.sentry.io/react-js-performance-guide) for React.
 
 ## React Testing
 
