@@ -1692,13 +1692,15 @@ function dispatchAction<S, A>(
 - workLoopSync / workLoopConcurrent.
 - **performUnitOfWork(workInProgress)**.
 - **beginWork**:
-  - 若判断当前 Fiber 节点无需更新, 调用 `bailoutOnAlreadyFinishedWork` 循环检测子节点是否需要更新:
-    - `instance.shouldComponentUpdate() === false`.
-    - `workInProgress.pendingProps === current.memoizedProps`.
-    - `hasLegacyContextChange() === false`.
-    - `checkIfContextChanged(fiber.dependencies) === false`.
-    - `includesSomeLane(fiber.lanes, renderLanes) === false`.
-  - 若判断当前 Fiber 节点需要更新, 调用 `UpdateXXXComponent` 进行更新.
+  - 若判断当前 Fiber 节点无需更新 (`lanes: 0, childLanes: ?`), 调用 `bailoutOnAlreadyFinishedWork` 循环检测子节点是否需要更新:
+    - `instance.shouldComponentUpdate() === false`,
+      `workInProgress.pendingProps === current.memoizedProps`,
+      `hasLegacyContextChange() === false`,
+      `checkIfContextChanged(fiber.dependencies) === false`,
+      `includesSomeLane(fiber.lanes, renderLanes) === false`.
+    - When it comes to `lanes: 0, childLanes: 0`, skip it and its children (**bailout**).
+    - When it comes to `lanes: 0, childLanes: 1`, continue to check its children.
+  - 若判断当前 Fiber 节点需要更新 (`lanes: 1`), 调用 `updateXXXComponent` 进行更新.
 - **bailoutOnAlreadyFinishedWork**:
   - 若 `includesSomeLane(renderLanes, workInProgress.childLanes) === false`
     表明子节点无需更新, 可直接进入回溯阶段 (`completeUnitOfWork`).
