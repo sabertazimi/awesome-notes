@@ -62,6 +62,8 @@ Reconciler Work Loop (`Fiber` 构造循环) 负责实现 `Task`.
 
 ## React Core Workflow
 
+[![React Core Workflow](./figures/ReactCoreWorkflow.png)](https://jser.dev/2023-07-11-overall-of-react-internals)
+
 ### Create RootContainer
 
 #### Legacy Root
