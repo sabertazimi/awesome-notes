@@ -70,15 +70,15 @@ Reconciler Work Loop (`Fiber` 构造循环) 负责实现 `Task`.
   - **render**.
   - legacyRenderSubtreeIntoContainer.
   - legacyCreateRootFromDOMContainer.
-- [react-reconciler/src/ReactFiberReconciler](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberReconciler.new.js):
+- [react-reconciler/src/ReactFiberReconciler](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberReconciler.js):
   - **createContainer**.
 - [react-dom/src/client/ReactDOMComponentTree](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMComponentTree.js):
   - markContainerAsRoot.
-- [react-reconciler/src/ReactFiberRoot](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberRoot.new.js):
+- [react-reconciler/src/ReactFiberRoot](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberRoot.js):
   - **createFiberRoot**.
-- [react-reconciler/src/ReactFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiber.new.js):
+- [react-reconciler/src/ReactFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiber.js):
   - createHostRootFiber.
-- [react-reconciler/src/ReactUpdateQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
+- [react-reconciler/src/ReactUpdateQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.js):
   - **initializeUpdateQueue**.
 - [react-dom/src/events/DOMPluginEventSystem](https://github.com/facebook/react/blob/main/packages/react-dom/src/events/DOMPluginEventSystem.js):
   - listenToAllSupportedEvents:
@@ -88,15 +88,15 @@ Reconciler Work Loop (`Fiber` 构造循环) 负责实现 `Task`.
 
 - [react-dom/src/client/ReactDOMRoot](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMRoot.js):
   - **createRoot**.
-- [react-reconciler/src/ReactFiberReconciler](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberReconciler.new.js):
+- [react-reconciler/src/ReactFiberReconciler](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberReconciler.js):
   - **createContainer**.
 - [react-dom/src/client/ReactDOMComponentTree](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMComponentTree.js):
   - markContainerAsRoot.
-- [react-reconciler/src/ReactFiberRoot](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberRoot.new.js):
+- [react-reconciler/src/ReactFiberRoot](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberRoot.js):
   - **createFiberRoot**.
-- [react-reconciler/src/ReactFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiber.new.js):
+- [react-reconciler/src/ReactFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiber.js):
   - createHostRootFiber.
-- [react-reconciler/src/ReactUpdateQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
+- [react-reconciler/src/ReactUpdateQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.js):
   - **initializeUpdateQueue**.
 - [react-dom/src/events/DOMPluginEventSystem](https://github.com/facebook/react/blob/main/packages/react-dom/src/events/DOMPluginEventSystem.js):
   - listenToAllSupportedEvents:
@@ -110,33 +110,33 @@ Reconciler Work Loop (`Fiber` 构造循环) 负责实现 `Task`.
   - legacyRenderSubtreeIntoContainer.
 - [react-dom/src/client/ReactDOMRoot](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMRoot.js):
   - render.
-- [react-reconciler/src/ReactFiberReconciler](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberReconciler.new.js):
+- [react-reconciler/src/ReactFiberReconciler](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberReconciler.js):
   - **updateContainer**.
-- [react-reconciler/src/ReactUpdateQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
+- [react-reconciler/src/ReactUpdateQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.js):
   - createUpdate.
   - enqueueUpdate.
-- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
+- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.js):
   - **scheduleUpdateOnFiber**.
   - **ensureRootIsScheduled**.
-- [react-reconciler/src/ReactFiberSyncTaskQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberSyncTaskQueue.new.js):
+- [react-reconciler/src/ReactFiberSyncTaskQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberSyncTaskQueue.js):
   - flushSyncCallbacks.
-- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
+- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.js):
   - **performSyncWorkOnRoot**.
   - renderRootSync.
   - workLoopSync.
   - **performUnitOfWork**.
-- [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.new.js):
+- [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.js):
   - **beginWork**.
   - **updateHostRoot**/**updateXXXComponent**.
   - `ReactDOMComponent.createElement`.
   - reconcileChildren.
-- [react-reconciler/src/ReactChildFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactChildFiber.new.js):
+- [react-reconciler/src/ReactChildFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactChildFiber.js):
   - reconcileChildFibers.
-- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
+- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.js):
   - **completeUnitOfWork**.
-- [react-reconciler/src/ReactFiberCompleteWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCompleteWork.new.js)
+- [react-reconciler/src/ReactFiberCompleteWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCompleteWork.js)
   - **completeWork**.
-- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
+- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.js):
   - **commitRoot**.
 - [react-dom/src/client/ReactDOMHostConfig](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMHostConfig.js):
   - appendChildToContainer.
@@ -199,34 +199,34 @@ export default Renderer
   - dispatchDiscreteEvent.
 - [react/src/ReactBaseClasses](https://github.com/facebook/react/blob/main/packages/react/src/ReactBaseClasses.js):
   - **setState**.
-- [react-reconciler/src/ReactFiberClassComponent](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberClassComponent.new.js):
+- [react-reconciler/src/ReactFiberClassComponent](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberClassComponent.js):
   - enqueueSetState.
-- [react-reconciler/src/ReactUpdateQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
+- [react-reconciler/src/ReactUpdateQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.js):
   - createUpdate.
   - enqueueUpdate.
-- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
+- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.js):
   - **scheduleUpdateOnFiber**.
   - discreteUpdates.
-- [react-reconciler/src/ReactFiberSyncTaskQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberSyncTaskQueue.new.js):
+- [react-reconciler/src/ReactFiberSyncTaskQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberSyncTaskQueue.js):
   - flushSyncCallbacks.
-- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
+- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.js):
   - **performSyncWorkOnRoot**.
   - workLoopSync.
   - **performUnitOfWork**.
-- [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.new.js):
+- [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.js):
   - **beginWork**.
   - **updateXXXComponent**.
   - reconcileChildren.
-- [react-reconciler/src/ReactChildFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactChildFiber.new.js):
+- [react-reconciler/src/ReactChildFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactChildFiber.js):
   - reconcileChildFibers.
-- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
+- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.js):
   - **completeUnitOfWork**.
-- [react-reconciler/src/ReactFiberCompleteWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCompleteWork.new.js)
+- [react-reconciler/src/ReactFiberCompleteWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCompleteWork.js)
   - **completeWork**.
-- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
+- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.js):
   - **commitRoot**.
   - commitMutationEffects.
-- [react-reconciler/src/ReactFiberCommitWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.new.js):
+- [react-reconciler/src/ReactFiberCommitWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.js):
   - commitWork.
 - [react-dom/src/client/ReactDOMHostConfig](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMHostConfig.js):
   - commitUpdate.
@@ -238,38 +238,38 @@ export default Renderer
 
 ### ClassComponent Update
 
-- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
+- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.js):
   - performSyncWorkOnRoot.
   - workLoopSync.
   - performUnitOfWork.
-- [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.new.js):
+- [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.js):
   - beginWork
   - **updateClassComponent**.
-- [react-reconciler/src/ReactFiberClassComponent](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberClassComponent.new.js):
+- [react-reconciler/src/ReactFiberClassComponent](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberClassComponent.js):
   - updateClassInstance.
-- [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.new.js):
+- [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.js):
   - finishClassComponent.
   - **instance.render** (User defined Component).
   - **reconcileChildren**.
-- [react-reconciler/src/ReactChildFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactChildFiber.new.js):
+- [react-reconciler/src/ReactChildFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactChildFiber.js):
   - reconcileChildFibers.
 
 ### FunctionComponent Update
 
-- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
+- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.js):
   - performSyncWorkOnRoot.
   - workLoopSync.
   - performUnitOfWork.
-- [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.new.js):
+- [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.js):
   - beginWork.
   - **updateFunctionComponent**.
-- [react-reconciler/src/ReactFiberHooks](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.new.js):
+- [react-reconciler/src/ReactFiberHooks](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.js):
   - renderWithHooks.
   - **FunctionComponent()** (User defined Function).
   - **Hooks**: useXXX -> mountXXX -> updateXXX.
-- [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.new.js):
+- [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.js):
   - **reconcileChildren**.
-- [react-reconciler/src/ReactChildFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactChildFiber.new.js):
+- [react-reconciler/src/ReactChildFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactChildFiber.js):
   - reconcileChildFibers.
 
 ## React Scheduler
@@ -291,7 +291,7 @@ React 16, unstable concurrent mode with
 - IdlePriority: 可闲置优先级, `expirationTime = maxSigned31BitInt`.
 
 React 17, stable concurrent mode with
-[`Lanes`](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberLane.new.js):
+[`Lanes`](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberLane.js):
 
 ```ts
 export type Lanes = number
@@ -811,7 +811,7 @@ const MountPassiveDev = /*              */ 0b100000000000000000
 
 ### React Fiber Lanes
 
-[Assign `Lane` to `Update`](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
+[Assign `Lane` to `Update`](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.js):
 
 - Legacy 模式: 返回 SyncLane.
 - Blocking 模式: 返回 SyncLane.
@@ -872,7 +872,7 @@ export function requestUpdateLane(fiber: Fiber): Lane {
 }
 ```
 
-[Global `renderLanes`](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberLane.new.js):
+[Global `renderLanes`](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberLane.js):
 
 Fiber 树构造过程中 (`Render Phase`),
 若 Fiber 对象或 Update 对象优先级 (`fiber.lanes`/`update.lane`) 比全局渲染优先级低,
@@ -1582,7 +1582,7 @@ function updateHostComponent(
 
 ### Reconciler Update Workflow
 
-[Update and Update Queue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
+[Update and Update Queue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.js):
 
 - `UpdateQueue` 是一个**循环队列**.
 - 创建 `Update` 时机 (`createUpdate`/`enqueueUpdate`):
@@ -1616,7 +1616,7 @@ interface UpdateQueue<State> {
 }
 ```
 
-[ReactFiberClassComponent.setState](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberClassComponent.new.js):
+[ReactFiberClassComponent.setState](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberClassComponent.js):
 
 ```ts
 const classComponentUpdater = {
@@ -1641,7 +1641,7 @@ const classComponentUpdater = {
 }
 ```
 
-[ReactFiberHooks.dispatchAction](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.new.js):
+[ReactFiberHooks.dispatchAction](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.js):
 
 ```ts
 function dispatchAction<S, A>(
@@ -2028,7 +2028,7 @@ Reconciler:
   - `instance` callback for `setState`.
   - `useLayoutEffect` (**synchronous**).
 - `CommitEffects` functions located in
-  [ReactFiberCommitWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.new.js).
+  [ReactFiberCommitWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.js).
 
 ```ts
 function commitRoot(root: FiberRoot, recoverableErrors: null | Array<mixed>) {
