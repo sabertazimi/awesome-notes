@@ -2388,13 +2388,20 @@ function commitBeforeMutationEffectsDeletion(deletion: Fiber) {
     `markCommitTimeOfFallback`.
   - `OffscreenComponent` fiber:
     `hideOrUnhideAllChildren` -> `HostConfig.hideInstance/hideTextInstance/unhideInstance/unhideTextInstance`.
+- `Deletion` effects:
+  `commitDeletion` -> `HostConfig.removeChild/removeChildFromContainer/clearSuspenseBoundaryFromContainer`.
 - `Placement` effects:
-  `commitPlacement`
-  -> `insertOrAppendPlacementNode`/`insertOrAppendPlacementNodeIntoContainer`
+  `commitPlacement` -> `insertOrAppendPlacementNode`/`insertOrAppendPlacementNodeIntoContainer`
   -> `HostConfig.appendChild/insertBefore/appendChildToContainer/insertInContainerBefore`.
-- `Update` effects: `commitWork` -> `HostConfig.commitUpdate/commitTextUpdate/commitHydratedContainer/replaceContainerChildren`.
-- `Deletion` effects: `commitDeletion` -> `HostConfig.removeChild/removeChildFromContainer/clearSuspenseBoundaryFromContainer`.
+- `Update` effects:
+  `commitWork` -> `HostConfig.commitUpdate/commitTextUpdate/commitHydratedContainer/replaceContainerChildren`.
 - `Hydrating` effects.
+
+:::tip Effect Order
+
+Deletion -> Insertion -> Update.
+
+:::
 
 ```ts
 export function commitMutationEffects(
