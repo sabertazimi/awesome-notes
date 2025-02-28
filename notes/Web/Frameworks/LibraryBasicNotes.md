@@ -1973,6 +1973,11 @@ tags: [Web, Framework, Library]
 - [N8N](https://github.com/n8n-io/n8n):
   Fair-code workflow automation platform with native AI capabilities.
 
+### AI Platform
+
+- [ChatBox](https://github.com/Bin-Huang/chatbox):
+  User-friendly desktop client app for AI models.
+
 ## Debugging and Testing
 
 ### Unit Testing
