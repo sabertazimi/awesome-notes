@@ -27,16 +27,23 @@ git config --global color.ui true
 
 ```bash
 git config --global init.defaultBranch main
+git config --global merge.conflictstyle diff3
 git config --global push.default simple
 git config --global push.autoSetupRemote true
+git config --global pull.rebase true
 git config --global fetch.prune true
 git config --global fetch.pruneTags true
 git config --global fetch.all true
 git config --global rebase.autoSquash true
 git config --global rebase.autoStash true
 git config --global rebase.updateRefs true
-git config --global merge.conflictstyle diff3
-git config --global pull.rebase true
+```
+
+```bash
+git config --global diff.algorithm histogram
+git config --global diff.colorMoved plain
+git config --global diff.mnemonicPrefix true
+git config --global diff.renames true
 ```
 
 ```bash
@@ -46,7 +53,6 @@ git config --global alias.a "add"
 git config --global alias.rs "restore --staged"
 git config --global alias.st "stash"
 git config --global alias.pr "pull --rebase"
-git config --global alias.rpo "remote prune origin"
 ```
 
 ```bash
