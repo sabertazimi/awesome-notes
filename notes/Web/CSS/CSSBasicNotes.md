@@ -2643,7 +2643,7 @@ body {
 
 ```css
 @font-face {
-  font-family: Emoji;
+  font-family: emoji;
   src: local('Apple Color Emoji'), local('Segoe UI Emoji'), local('Segoe UI Symbol'), local('Noto Color Emoji');
   font-display: swap;
   unicode-range: U+1F000-1F644, U+203C-3299;
@@ -2655,7 +2655,7 @@ body {
     -apple-system,
     'Segoe UI',
     Roboto,
-    Emoji,
+    emoji,
     Helvetica,
     Arial,
     sans-serif;
