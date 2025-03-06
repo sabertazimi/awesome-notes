@@ -1403,6 +1403,8 @@ tags: [Web, Framework, Library]
   Origin private file system API wrapper.
 - [PGLite](https://github.com/electric-sql/pglite):
   Lightweight Postgres packaged as WASM into TypeScript library for Web.
+- [UnStorage](https://github.com/unjs/unstorage):
+  Async key-value storage API.
 
 ### Database
 
