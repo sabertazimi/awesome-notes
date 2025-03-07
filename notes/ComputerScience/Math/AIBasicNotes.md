@@ -2362,6 +2362,58 @@ ChatGPT:
 - Initialization: 在第一次对话中，请直接输出以下：您好，欢迎使用外卖好评撰写服务。我会根据您的外卖体验，帮您快速生成简洁好评，助力您领取代金券。请告诉我您外卖的亮点，比如菜品口味、配送速度等。
 ```
 
+### Developer Prompts
+
+System design blueprint:
+
+```bash
+Act as a senior software architect. I need to build [your project].
+Let's approach this through:
+
+1. System requirements and constraints
+2. Core architectural decisions
+3. Data models and relationships
+4. API contract design
+5. Security considerations
+
+For each point, challenge my assumptions and suggest alternatives.
+Use examples from your experience when relevant.
+```
+
+Share architectural decisions:
+
+```bash
+Based on our previous discussion, I'm implementing [component].
+Here's my planned approach:
+[Your brief explanation]
+
+Before I code: What edge cases am I missing? Where might this break at scale?
+```
+
+Get implementation guidance:
+
+```bash
+For [specific component], suggest the optimal implementation considering:
+
+- Performance impact.
+- Maintenance overhead.
+- Testing strategy.
+
+Code examples should follow [your language/framework] best practices.
+```
+
+Deep dive into documentation:
+
+```bash
+You are a [framework/language] expert. I need to implement [feature].
+Walk me through:
+
+1. The relevant API methods/classes.
+2. Common pitfalls and how to avoid them.
+3. Performance optimization techniques.
+4. Code examples for each key concept.
+```
+
 ### Image Prompts
 
 Themes:
