@@ -1964,6 +1964,8 @@ tags: [Web, Framework, Library]
 
 ### AI Agent
 
+- [BrowserUse](https://github.com/browser-use/browser-use):
+  Leading open-source web agent project.
 - [MetaGPT](https://github.com/geekan/MetaGPT):
   Multi-agent framework to form collaborative entity for complex tasks.
 - [ChatDev](https://github.com/OpenBMB/ChatDev):
