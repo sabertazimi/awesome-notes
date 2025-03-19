@@ -1976,6 +1976,8 @@ tags: [Web, Framework, Library]
   Codium AI-powered tool for automated pull request analysis, feedback and suggestions.
 - [N8N](https://github.com/n8n-io/n8n):
   Fair-code workflow automation platform with native AI capabilities.
+- [MCP](https://github.com/punkpeye/awesome-mcp-servers):
+  Collection of MCP (Model Context Protocol) servers.
 
 ### AI Platform
 
