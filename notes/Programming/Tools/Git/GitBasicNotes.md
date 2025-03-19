@@ -1002,10 +1002,10 @@ git config --global user.signingkey <pub-keyID>
 # WSL2 fix: Add to ~/.zshrc
 export GPG_TTY=$(tty)
 
-# Import GitHub signature
+# Import GitHugit log --show-signatureb signature
 curl https://github.com/web-flow.gpg | gpg --import
 # gpg --sign-key <GitHub-keyID>
-gpg --sign-key 4AEE18F83AFDEB23
+gpg --sign-key B5690EEEBB952194
 
 # Log git signature
 git log --show-signature
