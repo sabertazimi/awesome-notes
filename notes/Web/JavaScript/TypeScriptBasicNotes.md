@@ -28,7 +28,7 @@ npx tsc --init
 npm i -D @tsconfig/create-react-app
 ```
 
-Basic [`tsconfig`](https://www.typescriptlang.org/tsconfig):
+Basic [`tsconfig.json`](https://www.typescriptlang.org/tsconfig):
 
 - [`extends`](https://github.com/tsconfig/bases):
   - `@tsconfig/recommended/tsconfig.json`.
