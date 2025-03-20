@@ -23,6 +23,7 @@ git config --global core.autocrlf false
 git config --global core.editor vim
 git config --global credential.helper store
 git config --global color.ui true
+git config --global commit.template $HOME/.gitmsg.md
 ```
 
 ```bash
@@ -56,13 +57,6 @@ git config --global alias.pr "pull --rebase"
 ```
 
 ```bash
-git config --global commit.template $HOME/.gitmsg.md
-git config --global commit.gpgsign true
-git config --global gpg.program gpg
-git config --global user.signingkey <pub-keyID>
-```
-
-```bash
 # after 1s, git auto correct wrong command
 git config --global help.autocorrect 10
 ```
@@ -91,6 +85,14 @@ To fix `SSL_ERROR_SYSCALL in connection to github.com:443`:
 - Change DNS server configuration (`8.8.8.8`).
 
 :::
+
+### GPG Configuration
+
+```bash
+git config --global commit.gpgsign true
+git config --global gpg.program gpg
+git config --global user.signingkey <pub-keyID>
+```
 
 ### List and Help
 
