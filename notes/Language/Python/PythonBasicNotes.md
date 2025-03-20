@@ -32,36 +32,61 @@ print(message.lower())
 print(message.title())
 ```
 
-### Tuples
-
-Tuples in python are immutable.
-
-## Control Statement
-
-### For Loop
+### List
 
 ```python
-for i in range(3): # goes from i = 0 to i = 2
-  x += 1
+list.append(element)
+list.remove(element) # Remove the first occurrence of the element
 
-for i in [0, 1, 2]:
-  x += 1
+list.insert(index, element)
+del list[index]
+list.pop(index=-1)
+
+list.sort()
+list.sort(reverse=True)
+sorted_list = sorted(list)
+list.reverse()
+
+len(list)
+min(digits_list)
+max(digits_list)
+sum(digits_list)
+
+list[1:3] # [1, 3)
+list[:3] # [0, 3)
+list[3:] # [3, end)
+list[-3:] # last 3 elements
+list[:] # all elements
+
+original_list = list
+copy_list = list[:]
 ```
 
-### While Loop
+#### Range
 
 ```python
-while x > 0:
-  x -= 1
+for i in range(3): # 0, 1, 2
+  print(i)
+
+for i in range(1, 3): # 1, 2
+  print(i)
+
+even_numbers = list(range(2, 11, 2))
+print(even_numbers) # [2, 4, 6, 8, 10]
 ```
 
-## Functions
+#### List Comprehension
+
+列表解析:
 
 ```python
-def join_name(first_name, last_name):
-  joined_name = first_name + " " + last_name
-  return joined_name
+squares = [value**2 for value in range(1, 11)]
+print(squares) # [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
 ```
+
+### Tuple
+
+Tuple in python are immutable.
 
 ## Classes
 
