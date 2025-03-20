@@ -93,7 +93,7 @@ for key, value in my_dict.items(): # my_dict.keys() / my_dict.values()
   print(key, value)
 ```
 
-## If Statement
+## Control Flow Statement
 
 Special condition:
 
@@ -641,7 +641,11 @@ fig.savefig('plot.pdf')
 
 ## CLI Application
 
-### Basic CLI
+### Basic Input
+
+- `input(prompt)`: read a line from the user.
+
+### Click CLI
 
 ```python
 import click
