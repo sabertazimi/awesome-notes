@@ -10,9 +10,23 @@ tags: [Language, Python]
 
 ## Basic Types
 
+### String
+
+```python
+message = " Hello, python world! "
+
+print(message)
+print(message.strip())
+print(message.lstrip())
+print(message.rstrip())
+print(message.upper())
+print(message.lower())
+print(message.title())
+```
+
 ### Tuples
 
-tuples in python are immutable
+Tuples in python are immutable.
 
 ## Control Statement
 
@@ -64,98 +78,68 @@ print(my_dog.name)
 # Guises
 ```
 
-## CLI Application
-
-### Basic CLI
+## NumPy
 
 ```python
-import click
+import numpy as np
 
-from caesar_encryption import encrypt
-
-@click.command()
-@click.option(
-    '--input_file',
-    type=click.File('r'),
-    help='File in which there is the text you want to encrypt/decrypt.'
-         'If not provided, a prompt will allow you to type the input text.',
-)
-@click.option(
-    '--output_file',
-    type=click.File('w'),
-    help='File in which the encrypted / decrypted text will be written.'
-         'If not provided, the output text will just be printed.',
-)
-@click.option(
-    '--decrypt/--encrypt',
-    '-d/-e',
-    help='Whether you want to encrypt the input text or decrypt it.'
-)
-@click.option(
-    '--key',
-    '-k',
-    default=1,
-    help='The numeric key to use for the caesar encryption / decryption.'
-)
-def caesar(input_file, output_file, decrypt, key):
-    if input_file:
-        text = input_file.read()
-    else:
-        text = click.prompt('Enter a text', hide_input=not decrypt)
-    if decrypt:
-        key = -key
-    cypherText = encrypt(text, key)
-    if output_file:
-        output_file.write(cypherText)
-    else:
-        click.echo(cypherText)
-
-if __name__ == '__main__':
-    caesar()
+np.random.seed(seed=1234)
 ```
 
-### Progress Bar
+### NumPy Array Creation
 
 ```python
-import click
-import enchant
-
-from tqdm import tqdm
-
-from caesar_encryption import encrypt
-
-@click.command()
-@click.option(
-    '--input_file',
-    type=click.File('r'),
-    required=True,
-)
-@click.option(
-    '--output_file',
-    type=click.File('w'),
-    required=True,
-)
-def caesar_breaker(input_file, output_file):
-    cypherText = input_file.read()
-    english_dictionary = enchant.Dict("en_US")
-    best_number_of_english_words = 0
-    for key in tqdm(range(26)):
-        plaintext = encrypt(cypherText, -key)
-        number_of_english_words = 0
-        for word in plaintext.split(' '):
-            if word and english_dictionary.check(word):
-                number_of_english_words += 1
-        if number_of_english_words > best_number_of_english_words:
-            best_number_of_english_words = number_of_english_words
-            best_plaintext = plaintext
-            best_key = key
-    click.echo(f'The most likely encryption key is {best_key}. It gives the
-    following plaintext:\n\n{best_plaintext[:1000]}...')
-    output_file.write(best_plaintext)
-
-if __name__ == '__main__':
-    caesar_breaker()
+x = np.array(6)
+x.ndim
+x.shape
+x.size
+x.dtype
 ```
+
+```python
+np.zeros((2, 2))
+np.ones((2, 2))
+np.eye((2))
+np.random.random.((2, 2))
+```
+
+### NumPy Indexing
+
+```python
+x = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])
+x[:, 1]    # [2, 6, 10]
+x[0, :]    # [1, 2, 3, 4]
+x[:3, 1:3] # [[2, 3], [6, 7], [10, 11]]
+x[[0, 1, 2], [0, 2, 1]] # [1, 7, 10]
+```
+
+```python
+# Boolean array indexing
+x = np.array([[1,2], [3, 4], [5, 6]])
+print ("x:\n", x)
+print ("x > 2:\n", x > 2)
+print ("x[x > 2]:\n", x[x > 2])
+# x:
+#  [[1 2]
+#  [3 4]
+#  [5 6]]
+# x > 2:
+#  [[False False]
+#  [ True  True]
+#  [ True  True]]
+# x[x > 2]:
+#  [3 4 5 6]
+```
+
+### NumPy Matrix Operations
+
+- math: `x+y`/`x-y`/`x*y` `np.add/subtract/multiply`
+- dot product: `a.dot(b)`
+- sum: `np.sum(x)`
+- column sum: `np.sum(x, axis=0)`
+- row sum: `np.sum(x, axis=1)`
+- transposing: `x.T`
+- reshape: `np.reshape(x, (2, 3))`
 
 ## Data Files
 
@@ -324,69 +308,6 @@ with open('saved_data.csv', 'wb') as output_file:
     dict_writer.writeheader()
     dict_writer.writerows(data_listOfDict)
 ```
-
-## NumPy
-
-```python
-import numpy as np
-
-np.random.seed(seed=1234)
-```
-
-### NumPy Array Creation
-
-```python
-x = np.array(6)
-x.ndim
-x.shape
-x.size
-x.dtype
-```
-
-```python
-np.zeros((2, 2))
-np.ones((2, 2))
-np.eye((2))
-np.random.random.((2, 2))
-```
-
-### NumPy Indexing
-
-```python
-x = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])
-x[:, 1]    # [2, 6, 10]
-x[0, :]    # [1, 2, 3, 4]
-x[:3, 1:3] # [[2, 3], [6, 7], [10, 11]]
-x[[0, 1, 2], [0, 2, 1]] # [1, 7, 10]
-```
-
-```python
-# Boolean array indexing
-x = np.array([[1,2], [3, 4], [5, 6]])
-print ("x:\n", x)
-print ("x > 2:\n", x > 2)
-print ("x[x > 2]:\n", x[x > 2])
-# x:
-#  [[1 2]
-#  [3 4]
-#  [5 6]]
-# x > 2:
-#  [[False False]
-#  [ True  True]
-#  [ True  True]]
-# x[x > 2]:
-#  [3 4 5 6]
-```
-
-### NumPy Matrix Operations
-
-- math: `x+y`/`x-y`/`x*y` `np.add/subtract/multiply`
-- dot product: `a.dot(b)`
-- sum: `np.sum(x)`
-- column sum: `np.sum(x, axis=0)`
-- row sum: `np.sum(x, axis=1)`
-- transposing: `x.T`
-- reshape: `np.reshape(x, (2, 3))`
 
 ## Matplotlib
 
@@ -669,6 +590,99 @@ ax.set_xlim(0, 3*np.pi)
 
 fig.set_size_inches(width, height)
 fig.savefig('plot.pdf')
+```
+
+## CLI Application
+
+### Basic CLI
+
+```python
+import click
+
+from caesar_encryption import encrypt
+
+@click.command()
+@click.option(
+    '--input_file',
+    type=click.File('r'),
+    help='File in which there is the text you want to encrypt/decrypt.'
+         'If not provided, a prompt will allow you to type the input text.',
+)
+@click.option(
+    '--output_file',
+    type=click.File('w'),
+    help='File in which the encrypted / decrypted text will be written.'
+         'If not provided, the output text will just be printed.',
+)
+@click.option(
+    '--decrypt/--encrypt',
+    '-d/-e',
+    help='Whether you want to encrypt the input text or decrypt it.'
+)
+@click.option(
+    '--key',
+    '-k',
+    default=1,
+    help='The numeric key to use for the caesar encryption / decryption.'
+)
+def caesar(input_file, output_file, decrypt, key):
+    if input_file:
+        text = input_file.read()
+    else:
+        text = click.prompt('Enter a text', hide_input=not decrypt)
+    if decrypt:
+        key = -key
+    cypherText = encrypt(text, key)
+    if output_file:
+        output_file.write(cypherText)
+    else:
+        click.echo(cypherText)
+
+if __name__ == '__main__':
+    caesar()
+```
+
+### Progress Bar
+
+```python
+import click
+import enchant
+
+from tqdm import tqdm
+
+from caesar_encryption import encrypt
+
+@click.command()
+@click.option(
+    '--input_file',
+    type=click.File('r'),
+    required=True,
+)
+@click.option(
+    '--output_file',
+    type=click.File('w'),
+    required=True,
+)
+def caesar_breaker(input_file, output_file):
+    cypherText = input_file.read()
+    english_dictionary = enchant.Dict("en_US")
+    best_number_of_english_words = 0
+    for key in tqdm(range(26)):
+        plaintext = encrypt(cypherText, -key)
+        number_of_english_words = 0
+        for word in plaintext.split(' '):
+            if word and english_dictionary.check(word):
+                number_of_english_words += 1
+        if number_of_english_words > best_number_of_english_words:
+            best_number_of_english_words = number_of_english_words
+            best_plaintext = plaintext
+            best_key = key
+    click.echo(f'The most likely encryption key is {best_key}. It gives the
+    following plaintext:\n\n{best_plaintext[:1000]}...')
+    output_file.write(best_plaintext)
+
+if __name__ == '__main__':
+    caesar_breaker()
 ```
 
 ## Awesome Library
