@@ -155,10 +155,9 @@ user_profile = build_profile('albert', 'einstein', location='princeton', field='
 ## Class
 
 ```python
-class Pet(object):
+class Pet(Animal):
   def __init__(self, species, color, name):
-    self.species = species
-    self.color = color
+    super().__init__(species, color)
     self.name = name
 
   def __str__(self):
@@ -180,8 +179,8 @@ print(my_dog.name)
 ```python
 import module_name
 import module_name as mn
-from module_name import function_name
-from module_name import function_name as fn
+from module_name import function_name, ClassName
+from module_name import long_long_name as lln
 from module_name import *
 ```
 
