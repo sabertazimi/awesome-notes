@@ -28,6 +28,8 @@ print(message.rstrip())
 print(message.upper())
 print(message.lower())
 print(message.title())
+print(message.removeprefix(" Hello"))
+print(message.removesuffix(" world! "))
 ```
 
 ## List
@@ -38,7 +40,8 @@ my_list.remove(element) # Remove the first occurrence of the element
 
 my_list.insert(index, element)
 del my_list[index]
-my_list.pop(index=-1)
+my_list.pop()
+my_list.pop(index)
 
 my_list.sort()
 my_list.sort(reverse=True)
@@ -75,7 +78,7 @@ print(even_numbers) # [2, 4, 6, 8, 10]
 
 ### List Comprehension
 
-列表解析:
+列表解析/列表推导式:
 
 ```python
 squares = [value**2 for value in range(1, 11)]

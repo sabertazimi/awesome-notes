@@ -1449,6 +1449,8 @@
     "relativedelta",
     "Rellax",
     "relu",
+    "removeprefix",
+    "removesuffix",
     "remult",
     "renewcommand",
     "renice",
