@@ -16,9 +16,7 @@ tags: [Language, Python]
 echo ". /usr/local/anaconda3/etc/profile.d/conda.sh" >> ~/.bashrc
 ```
 
-## Basic Types
-
-### String
+## String
 
 ```python
 message = " Hello, python world! "
@@ -32,37 +30,37 @@ print(message.lower())
 print(message.title())
 ```
 
-### List
+## List
 
 ```python
-list.append(element)
-list.remove(element) # Remove the first occurrence of the element
+my_list.append(element)
+my_list.remove(element) # Remove the first occurrence of the element
 
-list.insert(index, element)
-del list[index]
-list.pop(index=-1)
+my_list.insert(index, element)
+del my_list[index]
+my_list.pop(index=-1)
 
-list.sort()
-list.sort(reverse=True)
-sorted_list = sorted(list)
-list.reverse()
+my_list.sort()
+my_list.sort(reverse=True)
+sorted_list = sorted(my_list)
+my_list.reverse()
 
-len(list)
+len(my_list)
 min(digits_list)
 max(digits_list)
 sum(digits_list)
 
-list[1:3] # [1, 3)
-list[:3] # [0, 3)
-list[3:] # [3, end)
-list[-3:] # last 3 elements
-list[:] # all elements
+my_list[1:3] # [1, 3)
+my_list[:3] # [0, 3)
+my_list[3:] # [3, end)
+my_list[-3:] # last 3 elements
+my_list[:] # all elements
 
-original_list = list
-copy_list = list[:]
+original_list = my_list
+copy_list = my_list[:]
 ```
 
-#### Range
+### Range
 
 ```python
 for i in range(3): # 0, 1, 2
@@ -75,7 +73,7 @@ even_numbers = list(range(2, 11, 2))
 print(even_numbers) # [2, 4, 6, 8, 10]
 ```
 
-#### List Comprehension
+### List Comprehension
 
 列表解析:
 
@@ -84,11 +82,27 @@ squares = [value**2 for value in range(1, 11)]
 print(squares) # [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
 ```
 
-### Tuple
+## Tuple
 
 Tuple in python are immutable.
 
-## Classes
+## Dictionary
+
+```python
+for key, value in my_dict.items(): # my_dict.keys() / my_dict.values()
+  print(key, value)
+```
+
+## If Statement
+
+Special condition:
+
+- `and`.
+- `or`.
+- `in`.
+- `not in`.
+
+## Class
 
 ```python
 class Pet(object):
