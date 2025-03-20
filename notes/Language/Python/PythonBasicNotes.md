@@ -8,6 +8,14 @@ tags: [Language, Python]
 
 # Python Basic Notes
 
+## Python Installation
+
+### Anaconda
+
+```bash
+echo ". /usr/local/anaconda3/etc/profile.d/conda.sh" >> ~/.bashrc
+```
+
 ## Basic Types
 
 ### String
