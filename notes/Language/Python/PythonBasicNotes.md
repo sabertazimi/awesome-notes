@@ -175,6 +175,16 @@ print(my_dog.name)
 # Guises
 ```
 
+## Module
+
+```python
+import module_name
+import module_name as mn
+from module_name import function_name
+from module_name import function_name as fn
+from module_name import *
+```
+
 ## NumPy
 
 ```python
