@@ -13,7 +13,12 @@ tags: [Language, Python]
 ### Anaconda
 
 ```bash
-echo ". /usr/local/anaconda3/etc/profile.d/conda.sh" >> ~/.bashrc
+echo ". ~/anaconda3/etc/profile.d/conda.sh" >> ~/.bashrc
+```
+
+```bash
+conda env list
+conda activate base
 ```
 
 ## String
