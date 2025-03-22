@@ -179,6 +179,17 @@ print(my_dog.name)
 # Guises
 ```
 
+## Exception
+
+```python
+try:
+  answer = int(first_number) / int(second_number)
+except ZeroDivisionError:
+  print("You can't divide by 0!")
+else:
+  print(answer)
+```
+
 ## Module
 
 ```python
@@ -205,6 +216,8 @@ lines = contents.splitlines()
 
 for line in lines:
     print(line)
+
+path.write_text(lines)
 ```
 
 Numpy:
