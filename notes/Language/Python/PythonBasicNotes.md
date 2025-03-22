@@ -209,15 +209,19 @@ Standard library:
 ```python
 from pathlib import Path
 
-filename = 'pi_digits.txt'
-path = Path(filename)
-contents = path.read_text().rstrip()
-lines = contents.splitlines()
+path = Path('alice.txt')
 
-for line in lines:
-    print(line)
+try:
+  contents = path.read_text(encoding='utf-8').rstrip()
+except FileNotFoundError:
+  print(f"Sorry, the file {path} does not exist.")
+else:
+  words = contents.split()
+  num_words = len(words)
+  print(f"The file {path} has about {num_words} words.")
 
-path.write_text(lines)
+  lines = contents.splitlines()
+  path.write_text(lines)
 ```
 
 Numpy:
@@ -225,6 +229,31 @@ Numpy:
 ```python
 import numpy as np
 x, y = np.loadtxt('input.dat', delimiter=',', unpack=True)
+```
+
+### JSON File
+
+```python
+ from pathlib import Path
+import json
+import pandas as pd
+
+path = Path('data.json')
+contents = path.read_text()
+data_listOfDict = json.loads(contents)
+
+# We can do the same thing with pandas
+data_df = pd.read_json('data.json', orient='records')
+
+# We can write a dictionary to JSON like so
+# Use 'indent' and 'sort_keys' to make the JSON
+# file look nice
+path = Path('new_data.json')
+contents = json.dump(data_listOfDict, indent=4, sort_keys=True)
+path.write_text(contents)
+
+# And again the same thing with pandas
+export = data_df.to_json('new_data.json', orient='records')
 ```
 
 ### CSV File
@@ -293,30 +322,6 @@ print(data.head(5))
 
 # Write the data to file
 data.to_csv("new_data.csv", sep=",", index=False)
-```
-
-### JSON File
-
-```python
-import json
-import pandas as pd
-
-# Read the data from file
-# We now have a Python dictionary
-with open('data.json') as f:
-    data_listOfDict = json.load(f)
-
-# We can do the same thing with pandas
-data_df = pd.read_json('data.json', orient='records')
-
-# We can write a dictionary to JSON like so
-# Use 'indent' and 'sort_keys' to make the JSON
-# file look nice
-with open('new_data.json', 'w+') as json_file:
-    json.dump(data_listOfDict, json_file, indent=4, sort_keys=True)
-
-# And again the same thing with pandas
-export = data_df.to_json('new_data.json', orient='records')
 ```
 
 ### XML File
