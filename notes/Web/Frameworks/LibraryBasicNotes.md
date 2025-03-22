@@ -447,8 +447,16 @@ tags: [Web, Framework, Library]
   Frontend framework for building B2B applications.
 - [Tremor](https://github.com/tremorlabs/tremor):
   React components to build charts and dashboards.
+- [VBen](https://github.com/vbenjs/vue-vben-admin):
+  Vue vBen admin system.
+- [Gin](https://github.com/flipped-aurora/gin-vue-admin):
+- Vue gin admin system.
+- [Pure](https://github.com/pure-admin/vue-pure-admin):
+  Vue pure admin system.
+- [Soybean](https://github.com/soybeanjs/soybean-admin):
+  Vue soybean admin system.
 - [Vuestic](https://github.com/epicmaxco/vuestic-admin):
-  Vue admin components.
+  Vue vuestic admin system.
 
 ## CSS Utils
 
