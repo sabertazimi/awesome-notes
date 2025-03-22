@@ -259,28 +259,21 @@ export = data_df.to_json('new_data.json', orient='records')
 ### CSV File
 
 ```python
+from pathlib import Path
 import csv
 
-filename = "my_data.csv"
+path = Path('weather_data/sitka_weather_07-2021_simple.csv')
+lines = path.read_text().splitlines()
+reader = csv.reader(lines)
+header_row = next(reader)
 
-fields = []
-rows = []
+for index, column_header in enumerate(header_row):
+  print(index, column_header)
 
-# Reading csv file
-with open(filename, 'r') as csvFile:
-    # Creating a csv reader object
-    csvReader = csv.reader(csvFile)
-
-    # Extracting field names in the first row
-    fields = csvReader.next()
-
-    # Extracting each data row one by one
-    for row in csvReader:
-        rows.append(row)
-
-# Printing out the first 5 rows
-for row in rows[:5]:
-    print(row)
+highs = []
+for row in reader:
+  high = int(row[4])
+  highs.append(high)
 ```
 
 ```python
