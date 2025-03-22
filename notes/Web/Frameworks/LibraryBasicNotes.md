@@ -1916,18 +1916,18 @@ tags: [Web, Framework, Library]
 - [LeptonAI](https://github.com/leptonai/leptonai):
   Simplify AI service building.
 
-### AI Search
+### AI Chatbot
 
 - [ChatGPT](https://chat.openai.com).
 - [BingAI](https://www.bing.com/chat).
 - [GeminiAI](https://gemini.google.com).
-- [PhindAI](https://www.phind.com).
 - [PerplexityAI](https://www.perplexity.ai).
+- [PhindAI](https://www.phind.com).
+- [DeepSeek](https://chat.deepseek.com).
+- [KimiAI](https://kimi.moonshot.cn).
+- [QianWen](https://tongyi.aliyun.com/qianwen).
 - [PoeAI](https://poe.com):
   Quora chatbot aggregator.
-- [KimiAI](https://kimi.moonshot.cn).
-- [ChatGLM](https://chatglm.cn).
-- [QianWen](https://tongyi.aliyun.com/qianwen).
 - [Local](https://github.com/nilsherzig/LLocalSearch):
   Completely locally running search aggregator using LLM Agents.
 
@@ -1939,8 +1939,6 @@ tags: [Web, Framework, Library]
   All-in-one chatbot client.
 - [WebChatGPT](https://github.com/interstellard/chatgpt-advanced):
   Augments ChatGPT prompts with web results.
-- [C4G](https://microsoftedge.microsoft.com/addons/detail/ilphilpfaejmgdkapaijljgcigibggam):
-  ChatGPT for Google.
 - [Sider](https://microsoftedge.microsoft.com/addons/detail/dhoenijjpgpeimemopealfcbiecgceod):
   ChatGPT4-driven browser copilot.
 - [Monica](https://microsoftedge.microsoft.com/addons/detail/fhimbbbmdjiifimnepkibjfjbppnjble):
@@ -1957,8 +1955,6 @@ tags: [Web, Framework, Library]
   Free writing and grammar checker copilot.
 - [DeepL](https://microsoftedge.microsoft.com/addons/detail/fancfknaplihpclbhbpclnmmjcjanbaf):
   Free translation copilot.
-- [ZipZap](https://microsoftedge.microsoft.com/addons/detail/efjbjbiikanoebecldljpjddfhjfmnob):
-  Multilingual translation copilot.
 - [CodeAI](https://github.com/sourcegraph/awesome-code-ai):
   Curated list of coding copilot.
 

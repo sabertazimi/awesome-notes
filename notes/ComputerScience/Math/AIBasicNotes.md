@@ -1959,7 +1959,7 @@ significantly improves ability of LLMs to perform complex reasoning.
 
 Few shot CoT:
 
-```bash
+```markdown
 Q: Roger has 5 tennis balls.
 He buys 2 more cans of tennis balls.
 Each can has 3 tennis balls.
@@ -1974,7 +1974,8 @@ If they used 20 to make lunch and bought 6 more,
 how many apples do they have?
 
 A:
-------
+
+---
 
 (Output) The cafeteria had 23 apples originally.
 They used 20 to make lunch. So they had 23 - 20 = 3.
@@ -1983,14 +1984,15 @@ They bought 6 more apples, so they have 3 + 6 = 9. The answer is 9.
 
 Zero shot CoT:
 
-```bash
+```markdown
 Q: A juggler can juggle 16 balls.
 Half of the balls are golf balls,
 and half of the golf balls are blue.
 How many blue golf balls are there?
 
 A: Let's think step by step.
-------
+
+---
 
 (Output) There are 16 balls in total.
 Half of the balls are golf balls.
@@ -2012,18 +2014,19 @@ That means that there are 4 blue golf balls.
 - [GoT](https://ojs.aaai.org/index.php/AAAI/article/view/29720):
   graph of thoughts.
 
-```bash
+```markdown
 How to make a simple but delicious dish called "Scrambled eggs with tomatoes".
 Let’s break down this problem.
 ```
 
-```bash
+```markdown
 Give me a solution to accelerate decoding speed of LLMs during inference?
 Let’s break down this problem and give me the solution with code format.
 ```
 
-```bash
-# ReAct
+```markdown
+<!-- ReAct -->
+
 问题 科罗拉多造山带东部区域延伸到的区域的海拔范围是多少?
 思考 1 我需要搜索科罗拉多造山带, 找到科罗拉多造山带东段延伸的区域, 然后找到该区域的海拔范围.
 操作 1 搜索 [科罗拉多造山带]
@@ -2042,8 +2045,9 @@ Let’s break down this problem and give me the solution with code format.
 ...
 ```
 
-```bash
-# Tree of thoughts
+```markdown
+<!-- Tree of thoughts -->
+
 假设三位不同的专家来回答这个问题.
 所有专家都写下他们思考这个问题的第一个步骤, 然后与大家分享.
 然后, 所有专家都写下他们思考的下一个步骤并分享.
@@ -2221,19 +2225,21 @@ print(response.content)
 
 ### Prompt Compression
 
-```bash
+```markdown
 Compress the given text to short expressions,
 and such that you (GPT-4) can reconstruct it as close as possible to the original.
 Unlike the usual text compression,
 I need you to comply with the 5 conditions below:
+
 1. You can ONLY remove unimportant words.
 2. Do not reorder the original words.
 3. Do not change the original words.
 4. Do not use abbreviations or emojis.
 5. Do not add new words or symbols.
+
 Compress the origin aggressively by removing words only.
 Compress the origin as short as you can,
-while retaining as much information as possible.
+while retaining as much information as possible.
 If you understand, please compress the following text: {text to compress}
 The compressed text is:
 ```
@@ -2264,7 +2270,7 @@ The compressed text is:
 - Personality (个性): 定义模型回答请求时的风格或方式.
 - Experiment (实验): 通过提供多个答案的请求来迭代, 以获得更好的答案.
 
-```bash
+```markdown
 I want you to act as a JavasScript console.
 I will type commands and you will reply with what JavasScript console should show.
 
@@ -2311,7 +2317,7 @@ My first command is console.log("Hello World").
 - 步骤3 (提供背景信息): 如果任务涉及特定的主题或需要特定知识, 提供相关的背景信息. 例如: "在一个干旱的城市里".
 - 步骤4 (指定输出格式): 明确你想要的输出类型. 例如: "三段话, 每段不超过五句话".
 
-```bash
+```markdown
 我要写一个英语学习计划, 请根据下列规则生成一个合适的 Prompt, 然后再输出内容:
 明确任务: 直接指出你需要模型做什么. 例如: "写一个故事", "回答一个问题", "解释一个概念".
 设定角色和风格: 简短描述模型应采用的角色和风格. 例如: "像专家一样", "幽默地", "正式地".
@@ -2343,7 +2349,7 @@ ChatGPT:
 - Examples: 提供示例, 以帮助模型更好地理解任务.
 - Initialization: 在第一次对话中, 提供初始信息, 以引导模型开始任务.
 
-```bash
+```markdown
 - Role: 外卖体验优化专家和文案撰写顾问
 - Background: 用户希望通过撰写外卖好评来领取代金券，需要一个简洁而有效的文案框架，以表达对外卖服务的满意。
 - Profile: 你是一位精通外卖行业服务标准和用户体验的专家，擅长用简洁明了的语言撰写具有说服力的文案，能够精准地捕捉用户需求并转化为积极的评价。
@@ -2352,13 +2358,13 @@ ChatGPT:
 - Constrains: 好评内容需真实、积极，避免过度夸张，确保符合平台要求。
 - OutputFormat: 简洁好评文案，2-3句话。
 - Workflow:
-    1. 确定外卖的主要亮点（如菜品口味、配送速度、包装等）。
-    2. 用简洁明了的语言撰写好评，突出亮点。
-    3. 确保好评语气真诚，符合平台要求。
+  1. 确定外卖的主要亮点（如菜品口味、配送速度、包装等）。
+  2. 用简洁明了的语言撰写好评，突出亮点。
+  3. 确保好评语气真诚，符合平台要求。
 - Examples:
-    - 例子1：菜品美味，配送速度超快，包装也很精致，赞一个！
-    - 例子2：食物很新鲜，味道很棒，服务也很贴心，下次还会点！
-    - 例子3：外卖送到时还是热乎的，味道超棒，包装很用心，好评！
+  - 例子1：菜品美味，配送速度超快，包装也很精致，赞一个！
+  - 例子2：食物很新鲜，味道很棒，服务也很贴心，下次还会点！
+  - 例子3：外卖送到时还是热乎的，味道超棒，包装很用心，好评！
 - Initialization: 在第一次对话中，请直接输出以下：您好，欢迎使用外卖好评撰写服务。我会根据您的外卖体验，帮您快速生成简洁好评，助力您领取代金券。请告诉我您外卖的亮点，比如菜品口味、配送速度等。
 ```
 
@@ -2366,7 +2372,7 @@ ChatGPT:
 
 System design blueprint:
 
-```bash
+```markdown
 Act as a senior software architect. I need to build [your project].
 Let's approach this through:
 
@@ -2382,7 +2388,7 @@ Use examples from your experience when relevant.
 
 Share architectural decisions:
 
-```bash
+```markdown
 Based on our previous discussion, I'm implementing [component].
 Here's my planned approach:
 [Your brief explanation]
@@ -2392,7 +2398,7 @@ Before I code: What edge cases am I missing? Where might this break at scale?
 
 Get implementation guidance:
 
-```bash
+```markdown
 For [specific component], suggest the optimal implementation considering:
 
 - Performance impact.
@@ -2404,7 +2410,7 @@ Code examples should follow [your language/framework] best practices.
 
 Deep dive into documentation:
 
-```bash
+```markdown
 You are a [framework/language] expert. I need to implement [feature].
 Walk me through:
 
@@ -2412,6 +2418,21 @@ Walk me through:
 2. Common pitfalls and how to avoid them.
 3. Performance optimization techniques.
 4. Code examples for each key concept.
+```
+
+### Cursor Rules
+
+Cursor [directory](https://cursor.directory):
+
+```markdown
+1. 总是用中文回答我的问题。
+2. 当你针对我的需求提出建议时，先向我展示你的解决思路，在与我确认清楚后，再采取行动。
+3. 当我向你反馈错误代码时，请总是按照思考链推理的方式严谨地分析出现问题的原因，不要基于猜想来修改代码。
+   如果有不确定的地方，要进一步深入严谨地分析，直到真正找到问题的根源。
+4. 在需要生成新文件时，你必须先检查项目结构中已存在的文件，只有当不存在相同文件名的文件时，才生成新文件。
+   否则，你需要与我确认，然后再采取行动。
+5. 在一个文件中，如果要创建新的方法或变量，你需要先梳理当前已经存在的方法和变量，确保当前需求没有被已存在的方法处理过，才生成新的方法。
+   否则，你需要与我确认，然后再采取行动。
 ```
 
 ### Image Prompts
