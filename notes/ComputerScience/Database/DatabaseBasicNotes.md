@@ -468,6 +468,52 @@ CREATE VIEW
 WITH CHECK OPTION;
 ```
 
+## MySQL Basic Notes
+
+### MySQL Set Up
+
+Setup in [Docker](https://github.com/dromara/RuoYi-Vue-Plus/blob/5.X/script/docker/docker-compose.yml):
+
+```yml
+services:
+  mysql:
+    image: mysql:8.0.33
+    container_name: mysql
+    environment:
+      # 时区上海
+      TZ: Asia/Shanghai
+      # root 密码
+      MYSQL_ROOT_PASSWORD: passwd
+      # 初始化数据库(后续的初始化sql会在这个库执行)
+      MYSQL_DATABASE: ry-vue
+    ports:
+      - '3306:3306'
+    volumes:
+      # 数据挂载
+      - /docker/mysql/data/:/var/lib/mysql/
+      # 配置挂载
+      - /docker/mysql/conf/:/etc/mysql/conf.d/
+    command:
+      # 将mysql8.0默认密码策略 修改为 原先 策略 (mysql8.0对其默认策略做了更改 会导致密码无法匹配)
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+      --explicit_defaults_for_timestamp=true
+      --lower_case_table_names=1
+    privileged: true
+    # network_mode: host
+```
+
+[允许外部连接](https://cloud.tencent.com/developer/article/2356690):
+
+```bash
+mysql -uroot -proot
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+chmod 644 /etc/mysql/conf.d/mysql.cnf
+mysql -h 127.0.0.1 -P 3306 -uroot -proot
+```
+
 ## MongoDB Basic Notes
 
 ### MongoDB Set Up
