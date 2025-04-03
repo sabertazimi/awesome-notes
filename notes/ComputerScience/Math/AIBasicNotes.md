@@ -2420,6 +2420,31 @@ Walk me through:
 4. Code examples for each key concept.
 ```
 
+分步式开发策略:
+
+```markdown
+采用 「原子化任务拆分」+「渐进式验证」 方法，将复杂需求拆解为独立可测试的小模块。
+帮我设计并且给出我每一步的提示词用来指导 Cursor 编程。
+```
+
+多方法开发策略:
+
+```markdown
+Please think through at least 3 possibilities of what could be causing this. write in detail about them.
+Choose which you believe could be the most likely cause (noting above you already tried 2 other things that didn't work,
+so don't try them again, because we're getting the same exact error after both)
+
+When you pick the most probably solution, write in detail how do implement the solution.
+Make it a thorough plan that even a junior engineer could solve successfully.
+```
+
+日志定位开发策略:
+
+```markdown
+Pleaes add logs to the code to get better visibility into what is going on so we can find the fix.
+I'll run the code and feed you the logs results.
+```
+
 ### Cursor Rules
 
 Cursor [directory](https://cursor.directory):
