@@ -2447,6 +2447,14 @@ I'll run the code and feed you the logs results.
 
 ### Cursor Rules
 
+- App flow.
+- Frontend guidelines.
+- Backend structure.
+- Project rules.
+- Implementation plan.
+- Project requirements.
+- Tech stack.
+
 Cursor [directory](https://cursor.directory):
 
 ```markdown
