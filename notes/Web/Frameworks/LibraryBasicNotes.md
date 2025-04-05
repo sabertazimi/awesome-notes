@@ -1983,10 +1983,12 @@ tags: [Web, Framework, Library]
 - [MCP](https://github.com/punkpeye/awesome-mcp-servers):
   Collection of MCP (Model Context Protocol) servers.
 
-### AI Platform
+### AI Client
 
 - [ChatBox](https://github.com/Bin-Huang/chatbox):
   User-friendly desktop client app for AI models.
+- [CherryStudio](https://github.com/CherryHQ/cherry-studio):
+  All-in-One desktop copilot.
 
 ## Debugging and Testing
 
