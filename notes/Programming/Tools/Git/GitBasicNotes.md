@@ -54,6 +54,7 @@ git config --global alias.a "add"
 git config --global alias.rs "restore --staged"
 git config --global alias.st "stash"
 git config --global alias.pr "pull --rebase"
+git config --global alias.d '!sh -c "git diff --cached | cat"'
 ```
 
 ```bash
