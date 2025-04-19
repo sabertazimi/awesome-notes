@@ -77,6 +77,11 @@ sudo systemctl reload sshd
 sudo service restart sshd
 ```
 
+```bash
+AllowUsers root
+AllowUsers sabertaz
+```
+
 ### SSH Config File
 
 `~/.ssh/config`:
@@ -113,15 +118,35 @@ git clone git@cs.github.com:user/repo
 ```
 
 ```bash
-ssh -qTfnN -D 7070 bwg
-google-chrome socks5 127.0.0.1 7070
+ssh -qTfnN -D 1080 bwg
+google-chrome socks5 127.0.0.1 1080
 ```
 
 ### 密钥文件
 
-- 登录远程主机：ssh -i sabertaz root@119.29.140.60
-- 文件传输：sftp -i sabertaz root@119.29.140.60
-- 登录数据库：mysql -h 10.66.135.125 -P 3306 -u root -p
+Setup [SSH key](https://github.com/appleboy/ssh-action):
+
+```bash
+# Generate SSH key
+ssh-keygen -t ed25519 -a 200 -C "your_email@example.com"
+
+# Add SSH public key to remote host
+cat ~/.ssh/id_ed25519.pub | ssh b@B 'cat >> ~/.ssh/authorized_keys'
+
+# Copy SSH private key to clipboard
+xclip < ~/.ssh/id_ed25519
+```
+
+```bash
+# Login to remote host
+ssh -i sabertaz root@119.29.140.60
+
+# File transfer
+sftp -i sabertaz root@119.29.140.60
+
+# Login to database
+mysql -h 10.66.135.125 -P 3306 -u root -p
+```
 
 ### 远程传输文件
 
