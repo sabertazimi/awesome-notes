@@ -2362,6 +2362,26 @@ plugins=(
 )
 ```
 
+Install zsh on [Windows](https://gist.github.com/fworks/af4c896c9de47d827d4caa6fd7154b6b):
+
+```bash
+# Download zsh and extract into "C:\Program Files\Git":
+curl -O https://mirror.msys2.org/msys/x86_64/zsh-5.9-3-x86_64.pkg.tar.zst
+
+# Open git bash and configure zsh:
+zsh
+
+# Install oh-my-zsh:
+git clone https://github.com/ohmyzsh/ohmyzsh
+bash ohmyzsh/tools/install.sh
+
+# Edit ~/.bashrc:
+# Launch Zsh
+if [ -t 1 ]; then
+exec zsh
+fi
+```
+
 ## Terminal
 
 ### Terminal Basis
