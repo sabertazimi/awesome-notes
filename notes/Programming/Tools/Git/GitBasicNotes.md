@@ -23,7 +23,7 @@ git config --global core.autocrlf false
 git config --global core.editor vim
 git config --global credential.helper store
 git config --global color.ui true
-git config --global commit.template $HOME/.gitmsg.md
+git config --global commit.template ~/.gitmsg.md
 ```
 
 ```bash
