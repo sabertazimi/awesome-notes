@@ -176,10 +176,23 @@ docker ps -a
 docker ps -q
 ```
 
+### Execute Command in Docker Container
+
+```bash
+docker exec -it <container> <command>
+docker exec -it <container> bash
+```
+
 ### Remove Docker Container
 
 ```bash
 docker rm <container>
+```
+
+### Log Docker Container
+
+```bash
+docker logs -f <container>
 ```
 
 ## Dockerfile
