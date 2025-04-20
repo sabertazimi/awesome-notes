@@ -1449,6 +1449,33 @@ sysctl vm [-options] CONFIG
 swapoff
 ```
 
+#### Custom Systemctl Service
+
+```bash
+sudo vim /etc/systemd/system/ruoyi-server.service
+sudo systemctl daemon-reload
+sudo systemctl start ruoyi-server
+sudo systemctl enable ruoyi-server
+sudo systemctl status ruoyi-server
+sudo journalctl -u ruoyi-server -e -f
+```
+
+```bash
+[Unit]
+Description=RuoYi Server Service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/java -jar /root/ruoyi-admin.jar
+WorkingDirectory=/root
+User=root
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
+```
+
 ### Crontab Commands
 
 - `/etc/crontab`
