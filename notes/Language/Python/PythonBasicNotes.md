@@ -856,6 +856,12 @@ def test_store_three_responses(language_survey):
     assert response in language_survey.responses
 ```
 
+## UV
+
+```bash
+set UV_DEFAULT_INDEX=http://mirrors.aliyun.com/pypi/simple/
+```
+
 ## Awesome Library
 
 ### Debugging and Testing
