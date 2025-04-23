@@ -2445,6 +2445,8 @@ Pleaes add logs to the code to get better visibility into what is going on so we
 I'll run the code and feed you the logs results.
 ```
 
+辅助学习开发策略: 利用 Cursor 的辅助学习新知识, 例如学习 [Next.js](https://github.com/zenyarn/nextjs-study).
+
 ### Cursor Rules
 
 - App flow.
