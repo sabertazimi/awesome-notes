@@ -2094,3 +2094,67 @@ web 层操作：一般定义在 net.vschool.xxx.action 中。
   比如系统的添加新用户，用户可以前台注册，也可以管理员后台添加，方法会被重用，所以最好不要用使用 register，采用 add 会更好写.
   避免使用与 web 层相关的方法.
 - Web 层方法最好是贴近 web 的语言，如 register，login，logout 等方法。
+
+## Maven
+
+### Maven Settings
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <!-- 本地仓库 -->
+    <localRepository>/Users/yiny/soft/apache-maven-3.8.1/repo</localRepository>
+
+    <!-- 镜像仓库 -->
+    <mirrors>
+        <mirror>
+            <id>aliyun-maven</id>
+            <mirrorOf>*</mirrorOf>
+            <name>Aliyun Maven</name>
+            <url>http://maven.aliyun.com/repository/public</url>
+        </mirror>
+    </mirrors>
+
+    <!-- 配置文件 -->
+    <profiles>
+        <profile>
+            <id>jdk-22</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <jdk>22</jdk>
+            </activation>
+            <properties>
+                <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+                <maven.compiler.source>22</maven.compiler.source>
+                <maven.compiler.target>22</maven.compiler.target>
+                <maven.compiler.compilerVersion>22</maven.compiler.compilerVersion>
+            </properties>
+        </profile>
+    </profiles>
+</settings>
+```
+
+### Maven Lifecycle
+
+Default lifecycle:
+validate -> compile -> test -> package -> verify -> install -> deploy.
+
+```bash
+# Generate a new Maven project
+mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=false
+
+# Validate maven settings
+mvn validate
+
+# Verify build results
+mvn verify
+
+# Install artifact into local repository
+mvn install
+
+# Deploy artifact to remote repository
+mvn deploy
+```
