@@ -2158,3 +2158,36 @@ mvn install
 # Deploy artifact to remote repository
 mvn deploy
 ```
+
+### Maven Dependency
+
+Scope:
+
+- compile: default scope, compile time and runtime dependencies.
+- test: test time dependencies, e.g. junit.
+- provided: compile time dependencies, but not included in the final package, e.g. servlet-api.
+- runtime: runtime dependencies, not compile time, e.g. jdbc driver.
+- system: system path dependencies.
+- import: import dependencies.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+        <version>2.7.15</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <version>2.7.15</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+```
