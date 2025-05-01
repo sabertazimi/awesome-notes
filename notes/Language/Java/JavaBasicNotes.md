@@ -2190,4 +2190,86 @@ Scope:
         <scope>test</scope>
     </dependency>
 </dependencies>
+
+</project>
+```
+
+排除依赖传递:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>2.7.15</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+</project>
+```
+
+:::tip Dependency Management
+
+聚合项目用 `dependencyManagement` 来管理依赖, 依赖不会传递给子项目, 子项目需要显式声明依赖 (此时不用指定版本号).
+
+:::
+
+### Maven Project
+
+`packaging` 为 `pom` 时, 表示该项目是一个聚合项目, 它将包含多个子项目:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.ruoyi</groupId>
+    <artifactId>ruoyi</artifactId>
+    <version>1.0.0</version>
+
+    <modules>
+        <module>ruoyi-admin</module>
+        <module>ruoyi-framework</module>
+        <module>ruoyi-system</module>
+        <module>ruoyi-quartz</module>
+        <module>ruoyi-generator</module>
+        <module>ruoyi-common</module>
+    </modules>
+    <packaging>pom</packaging>
+
+</project>
+```
+
+此时子项目可以独立运行, 也可以作为聚合项目的一部分运行:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>ruoyi-admin</artifactId>
+
+    <parent>
+        <groupId>com.ruoyi</groupId>
+        <artifactId>ruoyi</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <packaging>jar</packaging>
+
+</project>
 ```
