@@ -649,20 +649,29 @@ services:
   mysql:
     image: mysql:8.0.33
     container_name: mysql
+    restart: unless-stopped
     environment:
       # 时区上海
       TZ: Asia/Shanghai
       # root 密码
-      MYSQL_ROOT_PASSWORD: passwd
-      # 初始化数据库(后续的初始化sql会在这个库执行)
+      MYSQL_ROOT_PASSWORD: 123456
+      # 初始化数据库
       MYSQL_DATABASE: ry-vue
     ports:
       - '3306:3306'
     volumes:
-      # 数据挂载
-      - /docker/mysql/data/:/var/lib/mysql/
       # 配置挂载
-      - /docker/mysql/conf/:/etc/mysql/conf.d/
+      - ./docker/mysql/conf:/etc/mysql/conf.d/
+      - ./docker/mysql/conf/ry.cnf:/etc/mysql/conf.d/ry.cnf:ro
+      # 数据挂载
+      - ./docker/mysql/data:/var/lib/mysql/
+      # 日志挂载
+      - ./docker/mysql/logs:/var/log/mysql
+      # 数据库初始化
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+      # 数据库脚本
+      - ./docker/mysql/sql:/opt/mysql/sql
+    privileged: true
     command:
       # 将mysql8.0默认密码策略 修改为 原先 策略 (mysql8.0对其默认策略做了更改 会导致密码无法匹配)
       --default-authentication-plugin=mysql_native_password
@@ -670,8 +679,6 @@ services:
       --collation-server=utf8mb4_general_ci
       --explicit_defaults_for_timestamp=true
       --lower_case_table_names=1
-    privileged: true
-    # network_mode: host
 ```
 
 [允许外部连接](https://cloud.tencent.com/developer/article/2356690):
