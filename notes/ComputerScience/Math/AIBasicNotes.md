@@ -2037,8 +2037,8 @@ Let’s break down this problem and give me the solution with code format.
 思考 3 科罗拉多造山运动的东部区域延伸到高平原. 所以我需要搜索高平原, 找到它的海拔范围.
 操作 3 搜索 [高平原]
 观察 3 高平原指的是两个截然不同的陆地区域之一.
-思考 4 我需要搜索高平原（美国）
-操作 4 搜索 [高平原（美国）]
+思考 4 我需要搜索高平原 (美国)
+操作 4 搜索 [高平原 (美国)]
 观察 4 高平原是大平原的一个分区. 从东到西, 高平原的海拔从 1800 到 7000 英尺 (550 到 2130 米) 不等.
 思考 5 高平原海拔高度从 1800 到 7000 英尺, 所以答案是 1800 到 7000 英尺.
 操作 5 结束 [1800 到 7000 英尺]
@@ -2358,7 +2358,7 @@ ChatGPT:
 - Constrains: 好评内容需真实、积极，避免过度夸张，确保符合平台要求。
 - OutputFormat: 简洁好评文案，2-3句话。
 - Workflow:
-  1. 确定外卖的主要亮点（如菜品口味、配送速度、包装等）。
+  1. 确定外卖的主要亮点 (如菜品口味、配送速度、包装等)。
   2. 用简洁明了的语言撰写好评，突出亮点。
   3. 确保好评语气真诚，符合平台要求。
 - Examples:
@@ -2369,6 +2369,8 @@ ChatGPT:
 ```
 
 ### Developer Prompts
+
+#### System Design Prompts
 
 System design blueprint:
 
@@ -2396,6 +2398,21 @@ Here's my planned approach:
 Before I code: What edge cases am I missing? Where might this break at scale?
 ```
 
+#### Requirements Analysis Prompts
+
+| 目标       | 了解业务功能                                                                        | 了解代码实现                                                           | 了解字段依赖                                   |
+| ---------- | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------- |
+| 提示词参考 | 当前功能如何运作, 用户交互有哪些路径, 具体数据流向是怎样的, 请整理成 mermaid 时序图 | 当前代码如何组织, 核心模块有哪些, 组件间如何通信, 梳理组件关系图       | 梳理当前表单字段的显隐关系、联动逻辑以及数据源 |
+| 效果       | 输出所属功能中的角色和角色之间的交互方式, 能快速掌握业务模块的大体脉络              | 输出组件职责和组件间的关系, 以便在投入开发前以组件模块维度确定改动范围 | 能直观地呈现表单字段间的联动说明               |
+
+```markdown
+我们先探讨方案, 在我让你写代码之前不要生成代码.
+如果此处要加个 xxx 该怎么做,请先逐步分析需求,
+在想明白后向我说明为什么要这么设计.
+```
+
+#### Implementation Prompts
+
 Get implementation guidance:
 
 ```markdown
@@ -2420,14 +2437,28 @@ Walk me through:
 4. Code examples for each key concept.
 ```
 
-分步式开发策略:
+最小改动原则:
 
 ```markdown
-采用 「原子化任务拆分」+「渐进式验证」 方法，将复杂需求拆解为独立可测试的小模块。
-帮我设计并且给出我每一步的提示词用来指导 Cursor 编程。
+在写代码时遵循最小改动原则, 避免影响原先的功能.
+即使识别到历史问题也不要自行优化, 可以先告知我问题描述和对当前需求的影响, 不要直接改跟本次需求无关的代码.
 ```
 
-多方法开发策略:
+审查与验证:
+
+| 目标   | 代码审查                                                | 功能验证                                     |
+| ------ | ------------------------------------------------------- | -------------------------------------------- |
+| 提示词 | `@git` 逐个文件分析并总结改动点, 评估是否引入了新的问题 | `@git` 基于代码变更输出自测用例清单          |
+| 效果   | 在列举出每个文件的改动意图后, 会告知潜在问题和修改意见  | 围绕改动, 生成新旧功能在不同场景中的测试用例 |
+
+#### 分步式开发策略
+
+```markdown
+采用 「原子化任务拆分」+「渐进式验证」 方法, 将复杂需求拆解为独立可测试的小模块.
+帮我设计并且给出我每一步的提示词用来指导 Cursor 编程.
+```
+
+#### 多方法开发策略
 
 ```markdown
 Please think through at least 3 possibilities of what could be causing this. write in detail about them.
@@ -2438,14 +2469,16 @@ When you pick the most probably solution, write in detail how do implement the s
 Make it a thorough plan that even a junior engineer could solve successfully.
 ```
 
-日志定位开发策略:
+#### 日志定位开发策略
 
 ```markdown
 Pleaes add logs to the code to get better visibility into what is going on so we can find the fix.
 I'll run the code and feed you the logs results.
 ```
 
-辅助学习开发策略: 利用 Cursor 的辅助学习新知识, 例如学习 [Next.js](https://github.com/zenyarn/nextjs-study).
+#### 辅助学习开发策略
+
+利用 Cursor 的辅助学习新知识, 例如学习 [Next.js](https://github.com/zenyarn/nextjs-study).
 
 ### Cursor Rules
 
@@ -2607,9 +2640,7 @@ import { CommaSeparatedListOutputParser } from '@langchain/core/output_parsers'
 import { PromptTemplate } from '@langchain/core/prompts'
 import { OpenAI } from '@langchain/openai'
 
-const template = PromptTemplate.fromTemplate(
-  'List 10 {subject}.\n{format_instructions}',
-)
+const template = PromptTemplate.fromTemplate('List 10 {subject}.\n{format_instructions}')
 const model = new OpenAI({ temperature: 0 })
 const listParser = new CommaSeparatedListOutputParser()
 
@@ -2667,9 +2698,7 @@ import { PromptTemplate } from '@langchain/core/prompts'
 import { RunnableSequence } from '@langchain/core/runnables'
 import { OpenAI } from '@langchain/openai'
 
-const template = PromptTemplate.fromTemplate(
-  'List 10 {subject}.\n{format_instructions}',
-)
+const template = PromptTemplate.fromTemplate('List 10 {subject}.\n{format_instructions}')
 const model = new OpenAI({ temperature: 0 })
 const listParser = new CommaSeparatedListOutputParser()
 
@@ -2691,10 +2720,7 @@ agents choose their actions with the help of an LLM:
 ```ts
 import { createVectorStoreAgent, VectorStoreToolkit } from 'langchain/agents'
 
-const toolkit = new VectorStoreToolkit(
-  { name: 'Demo Data', vectorStore },
-  model,
-)
+const toolkit = new VectorStoreToolkit({ name: 'Demo Data', vectorStore }, model)
 const agent = createVectorStoreAgent(model, toolkit)
 
 const result = await agent.invoke({ input: '...' })
