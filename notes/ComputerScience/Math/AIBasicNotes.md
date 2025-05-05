@@ -2402,10 +2402,14 @@ Before I code: What edge cases am I missing? Where might this break at scale?
 
 [现状分析](https://zhuanlan.zhihu.com/p/1892580714635047120):
 
+<!-- markdownlint-disable MD013 -->
+
 | 目标       | 了解业务功能                                                                        | 了解代码实现                                                           | 了解字段依赖                                   |
 | ---------- | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------- |
 | 提示词参考 | 当前功能如何运作, 用户交互有哪些路径, 具体数据流向是怎样的, 请整理成 mermaid 时序图 | 当前代码如何组织, 核心模块有哪些, 组件间如何通信, 梳理组件关系图       | 梳理当前表单字段的显隐关系、联动逻辑以及数据源 |
 | 效果       | 输出所属功能中的角色和角色之间的交互方式, 能快速掌握业务模块的大体脉络              | 输出组件职责和组件间的关系, 以便在投入开发前以组件模块维度确定改动范围 | 能直观地呈现表单字段间的联动说明               |
+
+<!-- markdownlint-enable MD013 -->
 
 ```markdown
 我们先探讨方案, 在我让你写代码之前不要生成代码.
@@ -2448,10 +2452,14 @@ Walk me through:
 
 审查与验证:
 
+<!-- markdownlint-disable MD013 -->
+
 | 目标   | 代码审查                                                | 功能验证                                     |
 | ------ | ------------------------------------------------------- | -------------------------------------------- |
 | 提示词 | `@git` 逐个文件分析并总结改动点, 评估是否引入了新的问题 | `@git` 基于代码变更输出自测用例清单          |
 | 效果   | 在列举出每个文件的改动意图后, 会告知潜在问题和修改意见  | 围绕改动, 生成新旧功能在不同场景中的测试用例 |
+
+<!-- markdownlint-enable MD013 -->
 
 #### 分步式开发策略
 
@@ -2463,8 +2471,10 @@ Walk me through:
 #### 多方法开发策略
 
 ```markdown
-Please think through at least 3 possibilities of what could be causing this. write in detail about them.
-Choose which you believe could be the most likely cause (noting above you already tried 2 other things that didn't work,
+Please think through at least 3 possibilities of what could be causing this.
+write in detail about them.
+Choose which you believe could be the most likely cause
+(noting above you already tried 2 other things that didn't work,
 so don't try them again, because we're getting the same exact error after both)
 
 When you pick the most probably solution, write in detail how do implement the solution.
@@ -2474,7 +2484,8 @@ Make it a thorough plan that even a junior engineer could solve successfully.
 #### 日志定位开发策略
 
 ```markdown
-Pleaes add logs to the code to get better visibility into what is going on so we can find the fix.
+Please add logs to the code to get better visibility into what is going on
+so we can find the fix.
 I'll run the code and feed you the logs results.
 ```
 
