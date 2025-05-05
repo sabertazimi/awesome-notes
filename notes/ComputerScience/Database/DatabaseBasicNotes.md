@@ -201,10 +201,172 @@ children classes
 
 ## SQL
 
-- select ... from ... where
-- insert into ... ...
-- delete from ... where ...
-- update ... set ... = ... where ...
+### Basic SQL Statements
+
+增删查改:
+
+```sql
+-- 插入
+INSERT INTO table_name (column_name) VALUES (sql_value);
+
+-- 删除
+DELETE FROM table_name WHERE column_name = sql_value;
+
+-- 查询
+SELECT * FROM table_name WHERE column_name = sql_value;
+
+-- 更新
+UPDATE table_name SET column1 = value1 WHERE column2 = value2;
+```
+
+### Table Management
+
+```sql
+-- 添加列
+ALTER TABLE table_name ADD COLUMN column_name;
+
+-- 删除列
+ALTER TABLE table_name DROP COLUMN column_name;
+
+-- 修改列
+ALTER TABLE table_name MODIFY COLUMN column_name;
+
+-- 重命名列
+ALTER TABLE table_name RENAME COLUMN column_name TO new_column_name;
+
+-- 重命名表
+ALTER TABLE table_name RENAME TO new_table_name;
+```
+
+### WHERE Condition
+
+- `=`
+- `<>`
+- `>`
+- `>=`
+- `<`
+- `<=`
+- `NOT`
+- `AND`
+- `OR`
+- `IN (collection)`
+- `BETWEEN value1 AND value2`
+- `LIKE '%王_'`
+- `REGEXP 'regexp'`
+- `IS NULL`
+- `IS NOT NULL`
+
+### Order
+
+排序:
+
+```sql
+ORDER BY column_name [ASC|DESC]
+```
+
+### Group
+
+分组:
+
+```sql
+GROUP BY column_name [HAVING condition]
+```
+
+### Aggregation
+
+聚合函数:
+
+```sql
+AVG(column_name)
+
+COUNT(column_name)
+
+MAX(column_name)
+
+MIN(column_name)
+
+SUM(column_name)
+```
+
+### Limit
+
+限制数量:
+
+```sql
+LIMIT [offset,] length
+```
+
+### Distinct
+
+去重:
+
+```sql
+DISTINCT column_name
+```
+
+### Set Operations
+
+并集:
+
+```sql
+query UNION query
+```
+
+交集:
+
+```sql
+query INTERSECT query
+```
+
+差集:
+
+```sql
+query EXCEPT query
+```
+
+### Join
+
+表关联:
+
+```sql
+-- 内连接
+INNER JOIN table_name ON condition
+
+-- 左连接
+LEFT JOIN table_name ON condition
+
+-- 右连接
+RIGHT JOIN table_name ON condition
+
+-- 外连接
+OUTER JOIN table_name ON condition
+```
+
+### Index
+
+索引:
+
+```sql
+CREATE [UNIQUE|FULLTEXT|SPATIAL] INDEX index ON table_name (column1, column2, ...);
+
+DROP INDEX index ON table_name;
+
+SHOW INDEX FROM table_name;
+
+ALTER TABLE table_name ADD INDEX index (column1, column2, ...);
+```
+
+### View
+
+视图:
+
+```sql
+CREATE VIEW view AS query;
+
+DROP VIEW view;
+
+ALTER VIEW view AS query;
+```
 
 ```sql
 DROP VIEW IF EXISTS Standings;
@@ -250,6 +412,14 @@ CREATE VIEW Standings AS
   WHERE Players.id = Wins.id and Wins.id = Count.id;
 ```
 
+### Export and Import
+
+```bash
+mysqldump -u <user> -p<password> <database> > sync.sql
+
+mysql -u <user> -p<password> <database> < sync.sql
+```
+
 ## Relational Design
 
 ### Decomposition
@@ -257,7 +427,7 @@ CREATE VIEW Standings AS
 - start with mega-relations: including all attributes
 - decompose into smaller relations(BCNF/4NF)
 
-### functional dependencies
+### Functional Dependencies
 
 - A -> B => 1-1/n-1 mapping
 - key sets: closure of sets contains all attributes
@@ -468,9 +638,9 @@ CREATE VIEW
 WITH CHECK OPTION;
 ```
 
-## MySQL Basic Notes
+## MySQL
 
-### MySQL Set Up
+### MySQL Setup
 
 Setup in [Docker](https://github.com/dromara/RuoYi-Vue-Plus/blob/5.X/script/docker/docker-compose.yml):
 
