@@ -691,9 +691,15 @@ chmod 644 /etc/mysql/conf.d/mysql.cnf
 mysql -h 127.0.0.1 -P 3306 -uroot -proot
 ```
 
-## MongoDB Basic Notes
+### MySQL Infrastructure
 
-### MongoDB Set Up
+![MySQL Server Layer](./figures/MySQLServerLayer.png 'MySQL Server Layer')
+
+![MySQL Infrastructure](./figures/MySQLInfrastructure.jpg 'MySQL Infrastructure')
+
+## MongoDB
+
+### MongoDB Setup
 
 #### MongoDB Installation
 
