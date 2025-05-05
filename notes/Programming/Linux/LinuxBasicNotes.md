@@ -133,6 +133,9 @@ ssh-keygen -t ed25519 -a 200 -C "your_email@example.com"
 # Add SSH public key to remote host
 cat ~/.ssh/id_ed25519.pub | ssh b@B 'cat >> ~/.ssh/authorized_keys'
 
+# Add SSH public key to remote host
+ssh-copy-id -i ~/.ssh/id_ed25519.pub user@192.168.x.xxx
+
 # Copy SSH private key to clipboard
 xclip < ~/.ssh/id_ed25519
 ```
