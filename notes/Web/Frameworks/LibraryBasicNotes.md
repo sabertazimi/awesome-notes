@@ -1968,6 +1968,14 @@ tags: [Web, Framework, Library]
 
 ### AI Agent
 
+- [Dify](https://github.com/langgenius/dify):
+  LLM app development platform combines AI workflow, RAG pipeline, agent capabilities.
+- [N8N](https://github.com/n8n-io/n8n):
+  Fair-code workflow automation platform with native AI capabilities.
+- [LangGraph](https://github.com/langchain-ai/langgraph):
+  Build resilient language agents as graphs.
+- [MCP](https://github.com/punkpeye/awesome-mcp-servers):
+  Collection of MCP (Model Context Protocol) servers.
 - [BrowserUse](https://github.com/browser-use/browser-use):
   Leading open-source web agent project.
 - [MetaGPT](https://github.com/geekan/MetaGPT):
@@ -1978,10 +1986,6 @@ tags: [Web, Framework, Library]
   Princeton GitHub issues auto-fixer.
 - [PRAgent](https://github.com/Codium-ai/pr-agent):
   Codium AI-powered tool for automated pull request analysis, feedback and suggestions.
-- [N8N](https://github.com/n8n-io/n8n):
-  Fair-code workflow automation platform with native AI capabilities.
-- [MCP](https://github.com/punkpeye/awesome-mcp-servers):
-  Collection of MCP (Model Context Protocol) servers.
 
 ### AI Client
 
