@@ -594,6 +594,12 @@ Cursor [directory](https://cursor.directory):
    否则，你需要与我确认，然后再采取行动。
 ```
 
+:::tip Cursor Link
+
+Use `[file_name.file_extension](mdc:file_path/file_name.file_extension)` to link to a file.
+
+:::
+
 ### Cursor Custom Modes
 
 #### Research Mode
