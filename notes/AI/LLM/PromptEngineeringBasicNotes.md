@@ -622,11 +622,11 @@ Cursor [directory](https://cursor.directory):
 
 **计划文件存储**：
 
-- 所有计划文件必须存储在 .plans/ 目录下。
-- 文件命名格式为 PLAN-{id}-{summary}.md：
-  - {id} 为 .plans/ 目录及其子目录中的唯一编号。
-  - {summary} 为任务的简短描述。
-- 文件采用 Markdown 格式，包含任务完成状态（如 [ ] 未完成，[x] 已完成）等。
+- 所有计划文件必须存储在 `.plans/` 目录下。
+- 文件命名格式为 `PLAN-{id}-{summary}.md`：
+  - `{id}` 为 `.plans/` 目录及其子目录中的唯一编号。
+  - `{summary}` 为任务的简短描述。
+- 文件采用 Markdown 格式，包含任务完成状态（如 `[ ]` 未完成，`[x]` 已完成）等。
 
 ### System Design Prompts
 
