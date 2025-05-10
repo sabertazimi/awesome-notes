@@ -1297,6 +1297,13 @@ echo "nohup sslocal -c /etc/shadowsocks.json /dev/null 2>&1 &" /etc/rc.local
 nohup ssserver -c /etc/shadowsocks.json -d start /dev/null 2>&1 &
 ```
 
+```bash
+185.199.108.133 raw.githubusercontent.com
+185.199.109.133 raw.githubusercontent.com
+185.199.110.133 raw.githubusercontent.com
+185.199.111.133 raw.githubusercontent.com
+```
+
 ### NetWork Management Commands
 
 | 用途           | net-tool(被淘汰) | iproute2         |
