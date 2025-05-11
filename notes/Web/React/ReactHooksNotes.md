@@ -1178,6 +1178,12 @@ export default function Child({ fetchData }) {
 
 ## UseRef Hook
 
+[ref](https://jser.dev/react/2021/12/05/how-does-useRef-work):
+
+- During reconciliation, ref changes/creation will be marked on fiber in flags.
+- During committing, react will detach/attach the ref by checking flags.
+- `useRef()` is a simple hook which just holds the ref object.
+
 ### UseRef Hooks Dispatcher
 
 ```ts
