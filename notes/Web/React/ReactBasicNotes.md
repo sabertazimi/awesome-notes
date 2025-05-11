@@ -2805,6 +2805,8 @@ export default function App() {
 }
 ```
 
+[![Suspense Fiber Structure](https://jser.dev/static/suspense-fiber-structure-hidden.png)](https://jser.dev/react/2022/04/02/suspense-in-concurrent-mode-1-reconciling)
+
 :::tip React Bottlenecks
 
 1. CPU bottleneck: Concurrency Feature (Priority Interrupt Mechanism).
