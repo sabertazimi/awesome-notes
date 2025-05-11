@@ -2368,7 +2368,82 @@ export default function App() {
 如果出现更紧急的更新 (User Input), 则上面的更新都会被中断,
 直到没有其他紧急操作之后才会去继续执行更新.
 
-Opt-in concurrent features (implementing debounce-like function):
+[Opt-in concurrent features](https://jser.dev/2023-05-19-how-does-usetransition-work)
+(implementing debounce-like function):
+
+- Avoid blocking updates: events (e.g click) are triggering updates in synchronous mode.
+- Avoid unnecessary `Suspense` fallbacks.
+
+```tsx
+// Use this function to schedule a task for a root.
+function ensureRootIsScheduled(root: FiberRoot, currentTime: number) {
+  const existingCallbackNode = root.callbackNode
+  markStarvedLanesAsExpired(root, currentTime)
+
+  // `getNextLanes()` returns highest priority lane
+  // if there are SyncLane and Transition Lanes, SyncLane will be chosen
+  const nextLanes = getNextLanes(
+    root,
+    root === workInProgressRoot ? workInProgressRootRenderLanes : NoLanes,
+  )
+
+  if (nextLanes === NoLanes) {
+    // Special case: There's nothing to work on.
+    if (existingCallbackNode !== null) {
+      cancelCallback(existingCallbackNode)
+    }
+    root.callbackNode = null
+    root.callbackPriority = NoLane
+    return
+  }
+
+  if (existingCallbackNode != null) {
+    // This is important!
+    // If a re-render is not done, and we schedule a new one,
+    // the old one is going to be canceled.
+    // This is how interruption happens.
+    cancelCallback(existingCallbackNode)
+  }
+
+  // Schedule a new callback.
+  let newCallbackNode
+  if (newCallbackPriority === SyncLane) {
+    // For SyncLane, the reconciliation is sync work, not concurrent mode
+    // meaning there is no yielding to main thread, potentially becomes blocking
+    scheduleSyncCallback(performSyncWorkOnRoot.bind(null, root))
+  } else {
+    let schedulerPriorityLevel
+    switch (lanesToEventPriority(nextLanes)) {
+      case DiscreteEventPriority:
+        schedulerPriorityLevel = ImmediateSchedulerPriority
+        break
+      case ContinuousEventPriority:
+        schedulerPriorityLevel = UserBlockingSchedulerPriority
+        break
+      case DefaultEventPriority:
+        schedulerPriorityLevel = NormalSchedulerPriority
+        break
+      case IdleEventPriority:
+        schedulerPriorityLevel = IdleSchedulerPriority
+        break
+      default:
+        schedulerPriorityLevel = NormalSchedulerPriority
+        break
+    }
+
+    // If not SyncLane, concurrent mode is used,
+    // reconciliation yields to main thread time to time
+    // which makes UI interactive and thus possible to cancel previous re-render
+    newCallbackNode = scheduleCallback(
+      schedulerPriorityLevel,
+      performConcurrentWorkOnRoot.bind(null, root),
+    )
+  }
+
+  root.callbackPriority = newCallbackPriority
+  root.callbackNode = newCallbackNode
+}
+```
 
 ```tsx
 import { useRef, useState, useTransition } from 'react'
