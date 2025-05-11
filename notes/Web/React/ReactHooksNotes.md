@@ -2786,7 +2786,11 @@ React.createRoot(document.querySelector('#root')).render(<App />)
 
 Extracting non-reactive logic out of `useEffect`,
 [put them into `useEvent`](https://react.dev/learn/separating-events-from-effects),
-call `useEvent` from inside `useEffect`:
+call `useEvent` from inside `useEffect`.
+
+Event functions let you split an `Effect`
+into reactive parts (which should "react" to reactive values and their changes)
+and non-reactive parts (which only read their latest values):
 
 ```ts
 import { useCallback, useEffect, useInsertionEffect, useRef } from 'react'
@@ -2819,9 +2823,47 @@ function ChatRoom({ roomId, theme }) {
 }
 ```
 
-Event functions let you split an `Effect`
-into reactive parts (which should "react" to reactive values and their changes)
-and non-reactive parts (which only read their latest values).
+Reusable [behavior hooks](https://jser.dev/react/2022/02/18/reusable-behavior-hooks-through-ref)
+through ref:
+
+```tsx
+function useEvent(event, handler, option = {}) {
+  const refPrev = useRef()
+  const attach = useCallback(
+    (el) => {
+      el.addEventListener(event, handler, option)
+      refPrev.current = el
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- event and option are not deps
+    [handler]
+  )
+  const detach = useCallback(
+    (el) => {
+      refPrev.current.removeEventListener(event, handler)
+      refPrev.current = null
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- event and handler are not deps
+    [handler]
+  )
+  const ref = (el) => {
+    if (el === null) {
+      detach()
+    } else {
+      attach(el)
+    }
+  }
+  return ref
+}
+
+function App() {
+  const onScroll = () => {}
+  const onClick = () => {}
+  const refScroll = useEvent('scroll', onScroll, ({ onScroll }))
+  const refClick = useEvent('click', onClick)
+  const mergedRefs = mergeRefs(refScroll, refClick)
+  return (<div ref={mergedRefs}>some content</div>)
+}
+```
 
 ## UseOptimistic Hook
 
