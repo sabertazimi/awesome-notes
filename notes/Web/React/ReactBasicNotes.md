@@ -2719,7 +2719,7 @@ Reconciler 注册调度任务时, 会通过节流与防抖提升调度性能:
   `existingCallbackPriority !== newCallbackPriority`,
   新旧更新的优先级不同, 则取消旧 Task, 重新注册新 Task.
 
-[EnsureRootIsScheduled](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
+[EnsureRootIsScheduled](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.js):
 
 ```ts
 function ensureRootIsScheduled(root: FiberRoot, currentTime: number) {

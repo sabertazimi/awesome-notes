@@ -22,7 +22,7 @@ tags: [Web, React]
 ## Hooks Types
 
 Hooks
-[definition](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.new.js):
+[definition](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.js):
 
 - 从 React 内部 (Reconciler) 看, Hooks 可分为三类:
   - State Hooks (`useState/useReducer/useContext/useRef/useCallback/useMemo`):
@@ -127,7 +127,7 @@ type HookType =
 - **`mountXXX`**: `mountWorkInProgressHook` -> respective mount logic.
 - **`updateXXX`**: `updateWorkInProgressHook` -> respective update logic.
 
-[ReactReconciler/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.new.js):
+[ReactReconciler/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.js):
 
 ```ts
 function beginWork(
@@ -195,7 +195,7 @@ function updateFunctionComponent(
 }
 ```
 
-[ReactReconciler/ReactFiberHooks](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.new.js):
+[ReactReconciler/ReactFiberHooks](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.js):
 
 ```ts
 // 渲染优先级.
