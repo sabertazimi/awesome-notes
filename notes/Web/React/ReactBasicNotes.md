@@ -2936,6 +2936,148 @@ export default function LandingPage() {
 }
 ```
 
+[Hydration for Suspense](https://jser.dev/react/2023/03/27/hydration-with-suspense):
+
+- Suspense is serialized by comment node with `<!--$-->` meaning non-suspended,
+  and `<!--$!-->` as suspended.
+- Hydration for Suspense is 2-pass process in order to put it into lower priority.
+- During hydration:
+  - If pre-existing DOM is fallback, then it'll be discarded
+    and client-side rendering will generate the new DOM, either fallback or contents.
+  - If pre-existing DOM is contents, but client-side suspends.
+    We want to switch the contents directly without fallback in the middle, so fallback won't be displayed.
+  - If pre-existing DOM is contents and also is the client-side,
+    then hydration continues to the children of Suspense.
+
+```tsx
+import * as React from 'react'
+import './style.css'
+
+function createCounter(delay) {
+  return {
+    data: null,
+    promise: null,
+    fetch() {
+      if (this.data != null) {
+        return this.data
+      }
+
+      if (this.promise == null) {
+        this.promise = new Promise((resolve) => {
+          setTimeout(() => {
+            this.data = delay
+            resolve(this.data)
+          }, delay)
+        })
+      }
+      throw this.promise
+    },
+  }
+}
+
+const counter1000 = createCounter(1000)
+const counter2000 = createCounter(2000)
+
+function Component({ counter }) {
+  const count = counter.fetch()
+  return (<button type="button">{count}</button>)
+}
+
+function render(jsx, context) {
+  if (jsx == null) {
+    return ''
+  }
+
+  if (typeof jsx === 'string' || typeof jsx === 'number') {
+    return jsx
+  }
+
+  if (typeof jsx.type === 'string') {
+    return `<${jsx.type}>${render(jsx.props.children, context)}</${jsx.type}>`
+  }
+
+  if (Array.isArray(jsx)) {
+    return jsx.map(item => render(item, context)).join('')
+  }
+
+  if (typeof jsx.type === 'function') {
+    return render(jsx.type(jsx.props), context)
+  }
+
+  if (jsx.type === Symbol.for('react.suspense')) {
+    try {
+      return `<div hidden id="S:${context.id}">${render(
+        jsx.props.children,
+        context
+      )}</div><script>TODO: some script to kick off the re-render of target suspense boundary</script>`
+    } catch (e) {
+      if ('then' in e) {
+        const currentContext = { ...context }
+        e.then(() => {
+          context.pipe(render(jsx, currentContext))
+        })
+
+        return `<!--$?--><template id="B:${context.id++}"></template>${render(
+          jsx.props.fallback,
+          context
+        )}<!--/$-->`
+      } else {
+        throw new Error(`error in rendering:${e}`)
+      }
+    }
+  }
+  throw new Error(`unhandled type${jsx.type}`)
+}
+
+function renderToPipe(jsx, pipe) {
+  pipe(
+    render(jsx, {
+      pipe,
+      id: 0, // increment id to differentiate suspense boundaries.
+    })
+  )
+}
+
+export default function App() {
+  const [chunks, setChunks] = React.useState([])
+
+  const pipe = React.useCallback((chunk) => {
+    console.log('pipe', chunk)
+    setChunks(chunks => [...chunks, chunk])
+  }, [])
+
+  React.useEffect(() => {
+    const jsx = (
+      <div>
+        <React.Suspense fallback="loading">
+          <Component counter={counter1000} />
+        </React.Suspense>
+        <React.Suspense fallback="loading">
+          <Component counter={counter2000} />
+        </React.Suspense>
+        <p>another p</p>
+      </div>
+    )
+    renderToPipe(jsx, pipe)
+  }, [pipe])
+
+  return (
+    <div>
+      {chunks.map((chunk, i) => (
+        <div key={chunk.id}>
+          <p>
+            chunk
+            {i + 1}
+          </p>
+          <code>{chunk}</code>
+          <hr />
+        </div>
+      ))}
+    </div>
+  )
+}
+```
+
 ### React Server Components
 
 Give React a chunk of code that it runs exclusively on the server,
