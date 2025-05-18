@@ -2915,6 +2915,44 @@ export default function App() {
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
+```tsx
+function createModuleLoader(load) {
+  return {
+    module: null,
+    promise: null,
+    error: null,
+    load() {
+      if (this.module != null) {
+        return this.module
+      }
+
+      if (this.error != null) {
+        throw this.error
+      }
+
+      if (this.promise == null) {
+        this.promise = load().then((res) => {
+          // suppose we get an ES module
+          this.module = res.default
+        }, (error) => {
+          this.error = error
+        })
+      }
+
+      throw this.promise
+    }
+  }
+}
+
+function lazy(load) {
+  const moduleLoader = createModuleLoader(load)
+  return function (props) {
+    const Component = moduleLoader.load()
+    return <Component {...props} />
+  }
+}
+```
+
 #### SSR Suspense
 
 React v18+: enable `Suspense` on the server:
