@@ -1259,7 +1259,7 @@ root.do()
 
 :::tip Decorator Use Case
 
-- React HOC Components.
+- Graphics and UI Frameworks: e.g extended React HOC components.
 - ES2016 and TypeScript `@decorator`.
 - Guard: form validator.
 - Interceptor:
@@ -2608,6 +2608,10 @@ button.off()
 
 :::tip Strategy Use Case
 
+- 布局管理器:
+  - 环境对象：面板.
+  - 抽象策略：抽象布局管理接口.
+  - 具体策略：具体布局管理类.
 - 表单验证 (Validator).
 - 动画策略.
 - 存在大量 if-else 场景.
@@ -3264,6 +3268,12 @@ export default DatePicker
 - Angular: 脏检查, React: Virtual DOM, Vue: Watch.
 
 ### MVC Pattern
+
+组件三要素: 状态、外观、行为:
+
+- 模型类: 存储状态 (state getter/setter).
+- 视图类: 显示状态对应外观, 一个模型可以有多个视图 (模型的不同部分/形式).
+- 控制器类: 处理用户输入事件 (点击鼠标、敲击键盘), 改变模型类/视图类状态, 调用模型类/视图类中方法.
 
 在 MVC 中, 视图位于我们架构的顶部, 其背后是控制器.
 模型在控制器后面, 而因此我们的视图了解得到我们的控制器, 而控制器了解得到模型.
