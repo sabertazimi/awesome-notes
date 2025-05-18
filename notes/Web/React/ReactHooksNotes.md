@@ -2917,6 +2917,62 @@ function App() {
   it suspends by throwing the promise.
   The revert will be tried again after the async action is done.
 
+```tsx
+function useOptimistic(state, optimisticDispatcher) {
+  const [optimisticState, setState] = useState(state)
+
+  useLayoutEffect(() => {
+    setState(optimisticState)
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- state is not a dependency
+  }, [state])
+
+  const dispatch = (action) => {
+    setState(state => optimisticDispatcher(state, action))
+  }
+
+  return [
+    optimisticState,
+    dispatch
+  ]
+}
+
+function Thread({ messages, sendMessage }) {
+  const formRef = useRef()
+
+  async function formAction(formData) {
+    addOptimisticMessage(formData.get('message'))
+    formRef.current.reset()
+    await sendMessage(formData)
+  }
+
+  const [optimisticMessages, addOptimisticMessage] = useOptimistic(
+    messages,
+    (state, newMessage) => [
+      ...state,
+      {
+        text: newMessage,
+        sending: true
+      }
+    ]
+  )
+
+  return (
+    <>
+      {optimisticMessages.map((message, index) => (
+        <div key={message.id}>
+          {message.text}
+          {!!message.sending && <small> (Sending...)</small>}
+        </div>
+      ))}
+      <form action={formAction} ref={formRef}>
+        <input type="text" name="message" placeholder="Hello!" />
+        <button type="submit">Send</button>
+      </form>
+    </>
+  )
+}
+```
+
 ## Custom Hooks
 
 ### Custom LifeCycle Hooks
