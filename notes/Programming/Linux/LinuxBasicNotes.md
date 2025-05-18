@@ -2568,6 +2568,8 @@ set-window-option -g window-status-current-bg red
 
 ## Perf Tools
 
+![Linux Perf Tools](./figures/LinuxPerfTools.png 'Linux Perf Tools')
+
 ### Top Command
 
 ```bash
