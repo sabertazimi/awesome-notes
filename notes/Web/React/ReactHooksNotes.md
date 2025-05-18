@@ -2280,6 +2280,16 @@ export default function Component() {
 }
 ```
 
+In commit phase, the ordering of effects are:
+
+- Insertion Effects - `useInsertionEffect()`.
+- Mutation Effects - host DOM updates diffed from reconciliation.
+- Layout Effects - `useLayoutEffect()`.
+- Passive Effects - `useEffect()`.
+
+It is synchronous from 1 to 3, the last step of Passive Effects are run
+[in next tick](https://jser.dev/react/2022/01/19/lifecycle-of-effect-hook/#flushpassiveeffects).
+
 ## UseImperativeHandle Hook
 
 ```tsx
