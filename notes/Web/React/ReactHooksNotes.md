@@ -2559,6 +2559,27 @@ and during hydration of server-rendered content on client.
 The server snapshot must be the same between client and server,
 and is usually serialized and passed from server to client.
 
+Simple shim for [`useSyncExternalStore`](https://jser.dev/2023-08-02-usesyncexternalstore):
+
+```tsx
+function useSyncExternalStore(subscribe, getSnapshot) {
+  const [data, setData] = useState(getSnapshot())
+
+  const update = useCallback(() => {
+    setData(getSnapshot())
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- constant fn
+  }, [])
+
+  useEffect(() => {
+    update()
+    return subscribe(update)
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- update is not a dependency
+  }, [update])
+
+  return data
+}
+```
+
 ### Sync Browser API
 
 Sync navigator `online` API:
