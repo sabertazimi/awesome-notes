@@ -203,6 +203,18 @@ AI agents powered by tricky LLMs prompting:
 - Generative [agent](https://github.com/joonspk-research/generative_agents).
 - Minecraft [agent](https://github.com/MineDojo/Voyager).
 
+## MCP Server
+
+- [Sequential thinking](https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking).
+- [Playwright](https://github.com/microsoft/playwright-mcp).
+- [Puppeteer](https://github.com/modelcontextprotocol/servers/tree/main/src/puppeteer).
+- [Browser tools](https://github.com/AgentDeskAI/browser-tools-mcp).
+- [StageWise](https://github.com/stagewise-io/stagewise).
+- [Context7](https://github.com/upstash/context7).
+- [Git](https://github.com/modelcontextprotocol/servers/tree/main/src/git).
+- [GitHub](https://github.com/github/github-mcp-server).
+- [MySQL](https://github.com/benborla/mcp-server-mysql).
+
 ## LLM Reference
 
 - LLM survey: [大语言模型](https://github.com/LLMBook-zh/LLMBook-zh.github.io).
