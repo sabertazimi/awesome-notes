@@ -875,7 +875,17 @@ Student s = new Person();  //ERROR:e.g. s.getStuID();
 
 ### 对象包装器与自动装箱
 
-Void,Boolean,Byte,Character,Short,Integer, Long, Float, Double 类:包装器(Wrapper)类
+| 基本类型 | 对应的引用类型      |
+| -------- | ------------------- |
+| void     | java.lang.Void      |
+| boolean  | java.lang.Boolean   |
+| char     | java.lang.Character |
+| byte     | java.lang.Byte      |
+| short    | java.lang.Short     |
+| int      | java.lang.Integer   |
+| long     | java.lang.Long      |
+| float    | java.lang.Float     |
+| double   | java.lang.Double    |
 
 #### 父类
 
@@ -883,7 +893,11 @@ Void,Boolean,Byte,Character,Short,Integer, Long, Float, Double 类:包装器(Wra
 
 #### Final 类
 
-(强不可变类): 无子类, 不可改变数.
+所有的包装类型都是不变类 (强不可变类):
+
+- 无子类, 不可改变数.
+- 对于较小的数, `Integer.valueOf()` 静态工厂方法始终返回相同的实例.
+- `Byte.valueOf()` 静态工厂方法返回的实例全部是缓存实例.
 
 #### 编译器特性
 
@@ -911,9 +925,13 @@ myArrayList.add(Integer.valueOf(10));
 Int I =  I.intValue();
 ```
 
-#### API 说明
+#### 包装类实用方法
 
-### 可变参数方法
+- `Boolean.TRUE`/`Boolean.FALSE`.
+- `Long.SIZE`/`Long.BYTES`.
+- `Integer.MAX_VALUE`/`Integer.MIN_VALUE`.
+- `Integer.parseInt()`.
+- `Integer.toString()`/`Integer.toHexString()`/`Integer.toOctalString()`/`Integer.toBinaryString()`.
 
 ### 枚举类
 
