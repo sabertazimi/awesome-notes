@@ -400,27 +400,6 @@ StringBuilder 类:
 - StringBuilder 是可变对象, 用来高效拼接字符串.
 - StringBuilder 可以支持链式操作, 实现链式操作的关键是返回实例本身.
 
-## 输入输出
-
-### Scanner 类
-
-监视器, 功能最强大的输入类, new Scanner(System.in)
-
-### 格式化输出方法
-
-System.out.printf(): 静态创建格式化字符串
-
-### 文件的输入与输出
-
-#### 输入(至内存)
-
-用 File 对象构造一个 Scanner 对象: new Scanner(Paths.get(“FileName”))(反斜杠需双写)
-
-#### 输出(至文件)
-
-用文件名构造一个 PrintWriter 对象:
-`new PrintWriter(“FileName”)`, 之后调用`System.PrintWriter.print`方法.
-
 ## 表达式
 
 - 整数提升:算术运算前 byte,short,char 提升为 int
@@ -475,11 +454,6 @@ break label;
 continue label;
 } //跳至循环块首部
 ```
-
-## 大数值
-
-- java.math.BigInteger
-- java.math.BigDecimal
 
 ## 数组
 
@@ -558,7 +532,48 @@ Arrays.sort(ArrayName)快速排序方法
 - `static` 方法: 以声明类型 (标识符前的类型) 为准, 无关实例类型.
 - `final`/`private` 方法: 子类无法覆盖/继承父类同名方法, 不存在虚化问题.
 
-### 完整的 Java 源文件
+### JavaBean
+
+JavaBean 是一种符合命名规范的 `class`,
+它通过 `getter` 和 `setter` 来定义属性:
+
+```java
+import java.beans.*;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        BeanInfo info = Introspector.getBeanInfo(Person.class);
+        for (PropertyDescriptor pd : info.getPropertyDescriptors()) {
+            System.out.println(pd.getName());
+            System.out.println("  " + pd.getReadMethod());
+            System.out.println("  " + pd.getWriteMethod());
+        }
+    }
+}
+
+class Person {
+    private String name;
+    private int age;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+```
+
+### Java Code Structure
 
 ```java
 package packageName;              //指定文件中的类所在的包, 0个或1个
@@ -1452,6 +1467,48 @@ RandomAccess 接口: 标记接口, 无任何方法, 标记一个集合是否支�
 
 ### 早期集合
 
+## IO
+
+### Scanner 类
+
+监视器, 功能最强大的输入类, new Scanner(System.in)
+
+### 格式化输出方法
+
+System.out.printf(): 静态创建格式化字符串
+
+### 文件的输入与输出
+
+#### 输入(至内存)
+
+用 File 对象构造一个 Scanner 对象: new Scanner(Paths.get(“FileName”))(反斜杠需双写)
+
+#### 输出(至文件)
+
+用文件名构造一个 PrintWriter 对象:
+`new PrintWriter(“FileName”)`, 之后调用`System.PrintWriter.print`方法.
+
+### 输入
+
+- InputStream 类: read(字节)
+- Reader 类: read(char)
+
+### 输出
+
+- OutputStream 类: write、flush、close
+- Writer 类: write(char,String)、flush、close
+
+## 正则表达式
+
+### 基本写法
+
+`([字符]){数量}\位置`.
+
+### Group RegExp
+
+- matcher.group(int)
+- 0 表示整个正则表达式, i 表示第 i 个圆括号
+
 ## 线程
 
 ### 线程基础
@@ -1647,49 +1704,6 @@ public void run()
 String itemName = ((JRadioButton) e.getSource()).getText();
 // Source: 事件源(点击按钮事件)
 ```
-
-## Self-Defined Class
-
-@override:
-
-- equals
-- hashCode
-- toString
-- Comparable(compareTo)
-- Cloneable(clone)
-
-## 常用工具类
-
-- java.lang Java 语言的核心类库
-- java.util 实用工具
-- java.io 标准输入/输出类库
-- java.awt/javax.swing 图形用户界面(GUI)的类库
-- java.net 网络功能的类库
-- java.sql 数据库访问的类库
-- java.io 输入输出流
-
-## 输入与输出
-
-### 输入
-
-- InputStream 类: read(字节)
-- Reader 类: read(char)
-
-### 输出
-
-- OutputStream 类: write、flush、close
-- Writer 类: write(char,String)、flush、close
-
-## 正则表达式
-
-### 基本写法
-
-`([字符]){数量}\位置`.
-
-### Group RegExp
-
-- matcher.group(int)
-- 0 表示整个正则表达式, i 表示第 i 个圆括号
 
 ## Garbage Collection
 
