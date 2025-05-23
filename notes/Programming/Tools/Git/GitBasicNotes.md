@@ -16,6 +16,8 @@ tags: [Programming, Tools, Git]
 
 ### Basic Configuration
 
+[Configure git](https://blog.gitbutler.com/how-git-core-devs-configure-git):
+
 ```bash
 git config --global user.name "sabertazimi"
 git config --global user.email sabertazimi@gmail.com
@@ -95,7 +97,7 @@ git config --global gpg.program gpg
 git config --global user.signingkey <pub-keyID>
 ```
 
-### List and Help
+### List Configuration
 
 ```bash
 git config --list
