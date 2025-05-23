@@ -829,6 +829,32 @@ enum Weekday {
 }
 ```
 
+### 记录类
+
+`record` 类:
+
+- 使用 `record` 定义的是不变类.
+- 可以编写 `Compact Constructor` 对参数进行验证.
+- 可以定义静态方法.
+
+```java
+public record Point(int x, int y) {
+    public Point {
+        if (x < 0 || y < 0) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public static Point of() {
+        return new Point(0, 0);
+    }
+
+    public static Point of(int x, int y) {
+        return new Point(x, y);
+    }
+}
+```
+
 ## 继承
 
 ### 父类与子类
