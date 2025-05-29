@@ -113,12 +113,12 @@ That means that there are 4 blue golf balls.
 
 ```markdown
 How to make a simple but delicious dish called "Scrambled eggs with tomatoes".
-Let’s break down this problem.
+Let's break down this problem.
 ```
 
 ```markdown
 Give me a solution to accelerate decoding speed of LLMs during inference?
-Let’s break down this problem and give me the solution with code format.
+Let's break down this problem and give me the solution with code format.
 ```
 
 ```markdown
@@ -596,6 +596,8 @@ Cursor [directory](https://cursor.directory):
    否则，你需要与我确认，然后再采取行动。
 ```
 
+#### UI Design Rule
+
 ```markdown
 # UI 设计规范文档
 
@@ -730,6 +732,19 @@ Cursor [directory](https://cursor.directory):
 Use `[file_name.file_extension](mdc:file_path/file_name.file_extension)` to link to a file.
 
 :::
+
+#### RIPER-5 Rule
+
+[RIPER-5](https://github.com/johnpeterman72/cursor_memory_riper_framework) rule
+给 AI 规定了 5 种行为模式：
+
+```markdown
+- "ENTER RESEARCH MODE" // 进入研究模式
+- "ENTER INNOVATE MODE" // 进入创新模式
+- "ENTER PLAN MODE" // 进入规划模式
+- "ENTER EXECUTE MODE" // 进入执行模式
+- "ENTER REVIEW MODE" // 进入审查模式
+```
 
 ### Cursor Custom Modes
 
