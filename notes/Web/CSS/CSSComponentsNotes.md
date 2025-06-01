@@ -1596,7 +1596,7 @@ Separate set horizontal and vertical radius to make well-designed shapes:
 
 ```css
 .avatar-shape {
-  border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%;
+  border-radius: 70% 30% 30% 70% / 60% 40%;
 }
 
 .avatar {
