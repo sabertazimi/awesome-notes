@@ -571,9 +571,7 @@ ChatGPT:
 - Initialization: 在第一次对话中，请直接输出以下：您好，欢迎使用外卖好评撰写服务。我会根据您的外卖体验，帮您快速生成简洁好评，助力您领取代金券。请告诉我您外卖的亮点，比如菜品口味、配送速度等。
 ```
 
-## Developer Prompts
-
-### Cursor Rules
+## Cursor Rules
 
 - App flow.
 - Frontend guidelines.
@@ -596,7 +594,7 @@ Cursor [directory](https://cursor.directory):
    否则，你需要与我确认，然后再采取行动。
 ```
 
-#### UI Design Rule
+### UI Design Rule
 
 ```markdown
 # UI 设计规范文档
@@ -733,7 +731,7 @@ Use `[file_name.file_extension](mdc:file_path/file_name.file_extension)` to link
 
 :::
 
-#### RIPER-5 Rule
+### RIPER-5 Rule
 
 [RIPER-5](https://github.com/johnpeterman72/cursor_memory_riper_framework) rule
 给 AI 规定了 5 种行为模式：
@@ -746,9 +744,9 @@ Use `[file_name.file_extension](mdc:file_path/file_name.file_extension)` to link
 - "ENTER REVIEW MODE" // 进入审查模式
 ```
 
-### Cursor Custom Modes
+## Cursor Custom Modes
 
-#### Research Mode
+### Research Mode
 
 1. 在提出解决方案之前，从工作空间和代码库的多个来源中收集全面信息。
 2. 分析代码和近期变更，但不得自动修复问题。
@@ -757,7 +755,7 @@ Use `[file_name.file_extension](mdc:file_path/file_name.file_extension)` to link
 5. 避免基于不明确的假设进行分析或建议，必要时向用户请求澄清。
 6. 以一致的格式（如代码块、列表或标题）呈现分析结果和解决方案，便于用户快速阅读。
 
-#### Plan Mode
+### Plan Mode
 
 **充分研究和审查**：在开始制定计划前，需全面研究和审查所有相关细节，包括我们讨论过的内容、文档、代码库和外部资源。
 
@@ -779,6 +777,22 @@ Use `[file_name.file_extension](mdc:file_path/file_name.file_extension)` to link
   - `{id}` 为 `.plans/` 目录及其子目录中的唯一编号。
   - `{summary}` 为任务的简短描述。
 - 文件采用 Markdown 格式，包含任务完成状态（如 `[ ]` 未完成，`[x]` 已完成）等。
+
+### Prototype Mode
+
+```markdown
+进行原型实现或设计稿还原时，需要遵守以下准则：
+
+1. 当存在 Figma 链接时，使用 Figma MCP 工具获取设计信息。保证实现代码，尽可能符合设计稿。
+2. 所有样式使用 TailwindCSS，不可在 `<style>` 或 `<style scoped>` 里设置样式。
+3. 对于宽度或长度类样式，不需要完全符合设计稿，请在 tailwindcss 中选择相近的宽度或长度，使得宽度或长度使用 TailwindCSS 预设的 `rem` 值，保持一致性与响应性。
+4. 对于颜色、背景、边框、渐变、阴影、字体颜色等样式，请尽可能符合设计稿。
+5. 布局实现方式：请使用 `flex` 或 `grid`布局，实现响应式布局。除特殊情况外，一般不使用绝对布局去定位元素。
+6. 运用模块化的思维，凡是重复的地方，将抽象为单独的 Vue 组件。最后尽可能保证路由对应的页面组件中出现比较少的原生 HTML 元素，尽可能多的组件元素。
+7. 组件中的具体内容，如标题、背景图片、图标、摘要等信息，应作为 `props` 由使用者传入，保证组件的动态性。
+```
+
+## Developer Prompts
 
 ### System Design Prompts
 
