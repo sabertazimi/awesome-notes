@@ -2294,6 +2294,13 @@ tags: [Web, Framework, Library]
   Local GitHub action runner.
 - [TerraForm](https://github.com/hashicorp/terraform).
 
+### Developer Toolkit
+
+- [IT Tools](https://github.com/CorentinTh/it-tools):
+  Collection of handy online tools for developers.
+- [Omni Tools](https://github.com/iib0011/omni-tools):
+  Collection of powerful web-based tools for everyday tasks.
+
 ### GitHub Actions
 
 - [ActionToolkit](https://github.com/actions-cool).
