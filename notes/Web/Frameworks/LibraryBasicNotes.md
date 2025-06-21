@@ -425,6 +425,8 @@ tags: [Web, Framework, Library]
   Accessible and customizable components can copy and paste.
 - [Magic](https://github.com/magicuidesign/magicui):
   Animated effects based on ShadCN UI.
+- [Animate](https://github.com/animate-ui/animate-ui):
+  Fully animated, open-source component distribution.
 - [Next](https://github.com/nextui-org/nextui):
   Beautiful, fast and modern React UI library.
 - [Chakra](https://github.com/chakra-ui/chakra-ui).
