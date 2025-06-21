@@ -793,8 +793,11 @@ Use `[file_name.file_extension](mdc:file_path/file_name.file_extension)` to link
 6. 运用模块化的思维，凡是重复的地方，将其抽象为单独的 Vue 组件。确保路由对应的页面组件中出现较少的原生 HTML 元素，并尽可能多地使用组件元素。
 7. 尽可能优先使用 Shadcn Vue 组件库，而不是自己实现组件。当 Shadcn Vue 组件库中没有合适的组件时，再考虑自己实现组件。
 8. 组件中的具体内容，如标题、背景图片、图标、摘要等信息，应作为 `props` 由使用者传入，保证组件的动态性。
-9. 响应式设计：使用 Tailwind CSS 的响应式设计，确保在不同设备上都能正常显示。现有三种常见设备：平板电脑（768px-1024px），27 英寸显示器（1920px-2560px），超大屏幕（2560px及以上）。实现样例：`mt-2 desktop:mt-4 screen:mt-8`（Tailwind CSS 断点样式已经设置好，不需要再设置）。
-10. 国际化：字典位于 `dictionary.json`，更新字典后运行 `npm run i18n`，通过 `import I18N from '@/utils/i18n.base';` `{{ I18N.xxx }}` 使用字典。
+9. 图标：优先使用 'lucide-vue-next' 中的图标。
+10. 响应式设计：使用 Tailwind CSS 的响应式设计，确保在不同设备上都能正常显示。现有三种常见设备：平板电脑（768px-1024px），27 英寸显示器（1920px-2560px），超大屏幕（2560px及以上）。实现样例：`mt-2 desktop:mt-4 screen:mt-8`（Tailwind CSS 断点样式已经设置好，不需要再设置）。
+11. 国际化：字典位于 `dictionary.json`，更新字典后运行 `npm run i18n`，通过 `import I18N from '@/utils/i18n.base';` `{{ I18N.xxx }}` 使用字典。
+12. 可视化图表：可视化图表请使用 vue-echarts 库。除特殊情况外，不推荐直接使用原生 echarts 库。绘制可视化图表时，请抽象为单独组件（放入 `components/echarts` 文件夹），提供标题、tooltip、坐标轴名称、数据作为 props，并且提供三种尺寸大小，以适应项目中的三种断点设备（tablet、desktop、screen）。
+13. 本地开发服务器：本地开发服务器已经运行在地址 `http://localhost:5173/`，无需额外使用命令运行本地开发服务器。
 ```
 
 <!-- markdownlint-enable MD013 -->
