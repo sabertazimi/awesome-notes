@@ -798,6 +798,7 @@ Use `[file_name.file_extension](mdc:file_path/file_name.file_extension)` to link
 11. 国际化：字典位于 `dictionary.json`，更新字典后运行 `npm run i18n`，通过 `import I18N from '@/utils/i18n.base';` `{{ I18N.xxx }}` 使用字典。
 12. 可视化图表：可视化图表请使用 vue-echarts 库。除特殊情况外，不推荐直接使用原生 echarts 库。绘制可视化图表时，请抽象为单独组件（放入 `components/echarts` 文件夹），提供标题、tooltip、坐标轴名称、数据作为 props，并且提供三种尺寸大小，以适应项目中的三种断点设备（tablet、desktop、screen）。
 13. 本地开发服务器：本地开发服务器已经运行在地址 `http://localhost:5173/`，无需额外使用命令运行本地开发服务器。
+14. 注释：对于每个类、函数，请添加 JSDoc 格式的块级注释。除此之外，只在代码关键部分与逻辑复杂部分添加行级注释或内联注释。
 ```
 
 <!-- markdownlint-enable MD013 -->
