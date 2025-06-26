@@ -228,6 +228,10 @@ tags: [Web, Framework, Library]
 - [IdleTimer](https://github.com/SupremeTechnopriest/react-idle-timer):
   User activity timer component.
 
+### LLM Hooks
+
+- [UseMCP](https://github.com/modelcontextprotocol/use-mcp).
+
 ## JavaScript Utils
 
 - [Cash](https://github.com/fabiospampinato/cash):
