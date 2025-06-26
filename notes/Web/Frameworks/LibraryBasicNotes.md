@@ -228,7 +228,7 @@ tags: [Web, Framework, Library]
 - [IdleTimer](https://github.com/SupremeTechnopriest/react-idle-timer):
   User activity timer component.
 
-### LLM Hooks
+### AI Hooks
 
 - [UseMCP](https://github.com/modelcontextprotocol/use-mcp).
 
@@ -463,6 +463,13 @@ tags: [Web, Framework, Library]
   Vue soybean admin system.
 - [Vuestic](https://github.com/epicmaxco/vuestic-admin):
   Vue vuestic admin system.
+
+### AI UI Framework
+
+- [OpenWebUI](https://github.com/open-webui/open-webui):
+  User-friendly AI interface.
+- [AntDesignX](https://github.com/ant-design/x):
+  Craft AI-driven interface effortlessly.
 
 ## CSS Utils
 
@@ -1974,10 +1981,10 @@ tags: [Web, Framework, Library]
 
 ### AI Agent
 
-- [Dify](https://github.com/langgenius/dify):
-  LLM app development platform combines AI workflow, RAG pipeline, agent capabilities.
 - [N8N](https://github.com/n8n-io/n8n):
   Fair-code workflow automation platform with native AI capabilities.
+- [Dify](https://github.com/langgenius/dify):
+  LLM app development platform combines AI workflow, RAG pipeline, agent capabilities.
 - [LangGraph](https://github.com/langchain-ai/langgraph):
   Build resilient language agents as graphs.
 - [MCP](https://github.com/punkpeye/awesome-mcp-servers):
