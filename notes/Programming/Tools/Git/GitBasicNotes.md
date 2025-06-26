@@ -140,10 +140,17 @@ doc/**/*.pdf
 
 ## Add
 
-- 交互式的选择 add 特定部分
+交互式的选择 add 特定部分:
 
 ```bash
 git add -p
+```
+
+对于新文件, 使用 `git add -N` 来跟踪文件:
+
+```bash
+git add -N <filename>
+git add -p <filename>
 ```
 
 ## Remove
