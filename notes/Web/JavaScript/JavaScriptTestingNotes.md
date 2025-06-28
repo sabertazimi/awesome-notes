@@ -1911,6 +1911,7 @@ long click reload: multiple reload options e.g clean cache
 
 - Break on elements.
 - Inspect elements a11y.
+- Capture node screenshot.
 
 #### Style Tab
 
@@ -1972,8 +1973,8 @@ Same thing in `VSCode` debug panel (log points, break points etc).
 
 ### Network Panel
 
-- throttling: simulate different network environment.
-- initiator: go to files.
+- Network throttling: simulate different network environment.
+- Initiator: go to files.
 
 ### Performance Panel
 
@@ -2014,20 +2015,31 @@ Tool for composite stage analysis:
 
 ### Rendering Panel
 
+- Emulate a focused page.
 - FPS monitor.
+- Scrolling performance.
 - Scroll event.
 - Paint flashing area: re-paint area.
-- Compositor layers border.
 - Layout shift region.
+- Compositor layer borders.
 - CSS media query emulation:
   - `prefers-color-scheme`.
   - `prefers-reduced-motion`.
   - `prefers-contrast`.
   - A11y emulation.
 
-### Animation Panel
+### Animations Panel
 
-- Animations.
+Overview for animations: learn animations tricks.
+
+### CSS Overview Panel
+
+CSS overview:
+
+- Colors.
+- Fonts.
+- Unused declarations.
+- Media queries.
 
 ## Bug List
 
