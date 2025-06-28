@@ -803,6 +803,13 @@ Use `[file_name.file_extension](mdc:file_path/file_name.file_extension)` to link
 
 <!-- markdownlint-enable MD013 -->
 
+## System Prompts
+
+### AI Tools Prompts
+
+- [System prompts](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools)
+  for AI tools and agents.
+
 ## Developer Prompts
 
 ### System Design Prompts
