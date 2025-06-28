@@ -1857,7 +1857,6 @@ web 层操作: 一般定义在 net.vschool.xxx.action 中.
   - 接口类: 采用 Xxx+Interface+Service 的形式来定义,即, 模块+Interface+Service
   - 实现类: 采用 Xxx+Interface+Impl+Service 的形式来定义,即, 模块+Interface+Impl+Service
 - Web 层 (action 类)
-
   - 实现类: 采用县 Xxx+Operator+Action 的形式来定义,即, 模块+操作+Action
 
 ### 变量的命名
