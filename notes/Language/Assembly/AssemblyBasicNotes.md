@@ -153,7 +153,6 @@ R1 = MEM[SP + 8]
 ### 转移命令
 
 - Flags
-
   - CF：Carry Flag(unsigned) 进位标志——当有进位时设为 1
   - OF：OverFlow Flag(signed) 溢出标志——当补码溢出时设为 1
   - SF：Sign Flag(signed) 符号标志——当 `t < 0` 时设为 1
