@@ -789,7 +789,11 @@ Use `[file_name.file_extension](mdc:file_path/file_name.file_extension)` to link
 
 ## 设计稿处理
 
-1. **Figma 设计稿获取**：当存在 Figma 链接时，使用 Figma MCP 工具获取设计信息。保证实现代码尽可能符合设计稿。
+1. **Figma 设计稿获取**：当存在 Figma 链接时，使用 Figma MCP 工具获取设计信息。保证实现代码尽可能符合设计稿：
+   - Figma Dev Mode MCP 服务器提供一个可提供图像和 SVG 资产的资产端点。
+   - IMPORTANT：如果 Figma Dev Mode MCP 服务器为图像或 SVG 返回一个 localhost 源，请直接使用该图像或 SVG 源。
+   - IMPORTANT：不要导入或添加新的图标包，所有资产都应在 Figma 负载中，或者 Lucide 图标库（已安装）。
+   - IMPORTANT：如果提供了 localhost 源，则不要使用或创建占位符。
 2. **设计与开发平衡**：在保持设计一致性的前提下，优先考虑代码的可维护性和性能。
 
 ## 样式实现规范
@@ -906,30 +910,59 @@ Use `[file_name.file_extension](mdc:file_path/file_name.file_extension)` to link
 
 19. **本地开发**：本地开发服务器运行在 `http://localhost:5173/`，无需手动启动。
 
+## 文档获取与参考
+
+### 第三方依赖文档
+
+20. **Context7 MCP 工具使用**：
+    - 当需要查阅第三方依赖的官方文档时，使用 Context7 MCP 工具获取最新、准确的文档信息
+    - **优先获取文档的依赖**：
+      - **Shadcn Vue**：组件库使用方法、API 参考、最佳实践
+      - **Vue-ECharts**：图表配置、事件处理、响应式设计
+      - **Pinia**：状态管理模式、store 设计、数据持久化
+      - **Vue Router**：路由配置、导航守卫、动态路由
+      - **Tailwind CSS**：样式类参考、响应式设计、自定义配置
+      - **Lucide**：图标使用方法、图标列表、自定义图标
+
+### 文档查阅策略
+
+21. **文档优先级**：
+    - **第一优先级**：使用 Context7 MCP 工具获取官方文档
+    - **第二优先级**：参考项目内现有的实现示例
+    - **第三优先级**：基于经验进行合理推断
+
+### 文档应用原则
+
+22. **文档实践应用**：
+    - 在使用新的 API 或组件前，先通过 Context7 MCP 工具查阅相关文档
+    - 确保 API 使用方式与官方文档一致，避免过时或错误的用法
+    - 参考文档中的最佳实践和性能优化建议
+    - 遵循文档中的命名约定和代码风格
+
 ## 代码质量
 
 ### 注释规范
 
-20. **注释策略**：
+23. **注释策略**：
     - **必须**：为每个类、函数添加 JSDoc 格式的块级注释
     - **适度**：仅在代码关键部分与逻辑复杂部分添加行级注释
     - **避免**：过度注释显而易见的代码
 
 ### 代码结构
 
-21. **文件组织**：
+24. **文件组织**：
     - 组件文件使用 PascalCase 命名
     - 工具函数使用 camelCase 命名
     - 常量使用 UPPER_SNAKE_CASE 命名
 
 ## 错误处理与边界情况
 
-22. **错误处理**：
+25. **错误处理**：
     - API 调用必须包含错误处理
     - 组件 props 提供类型检查和默认值
     - 使用 `try-catch` 处理可能的运行时错误
 
-23. **边界情况**：
+26. **边界情况**：
     - 考虑空数据状态的 UI 展示
     - 处理加载状态和错误状态
     - 提供合理的 loading 和 error 组件
@@ -947,6 +980,9 @@ Use `[file_name.file_extension](mdc:file_path/file_name.file_extension)` to link
 - [ ] 考虑了响应式设计
 - [ ] 处理了错误和边界情况
 - [ ] 进行了基本的性能优化
+- [ ] 使用 Context7 MCP 工具查阅了相关第三方依赖文档
+- [ ] API 使用方式与官方文档一致
+- [ ] 遵循了文档中的最佳实践和命名约定
 ```
 
 <!-- markdownlint-enable MD013 -->
