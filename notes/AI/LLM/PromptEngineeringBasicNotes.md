@@ -874,13 +874,18 @@ Use `[file_name.file_extension](mdc:file_path/file_name.file_extension)` to link
     - 文本内容从 `dictionary.json` 字典获取
     - 更新字典后运行 `npm run i18n` 生成类型
     - 使用方式：`import I18N from '@/utils/i18n.base';` + `{{ I18N.xxx }}`
-    - 时间国际化使用 `@internationalized/date` 库
+
+15. **时间格式处理**：
+    - 时间国际化或格式化使用 `@internationalized/date` 库，**禁止随意使用**自定义的时间格式化函数
+    - 标准用法：`new DateFormatter(I18N.locale, options).format(date)`
+    - 支持的格式选项：`year`、`month`、`day`、`hour`、`minute`、`second` 等
+    - 示例：
 
 ## 数据可视化
 
 ### 图表组件规范
 
-15. **可视化图表**：
+16. **可视化图表**：
     - **优先使用** vue-echarts 库
     - **避免直接使用**原生 echarts（除特殊情况）
     - 图表组件放置在 `components/echarts` 目录
@@ -889,32 +894,32 @@ Use `[file_name.file_extension](mdc:file_path/file_name.file_extension)` to link
 
 ### 图表最佳实践
 
-16. **图表性能优化**：
+17. **图表性能优化**：
     - 大数据量时考虑数据采样
     - 使用 `vue-echarts` 的懒加载特性
     - 合理设置图表的 `resize` 行为
 
 ## 性能优化
 
-17. **组件性能**：
+18. **组件性能**：
     - 使用 `defineAsyncComponent` 进行组件懒加载
     - 大列表使用虚拟滚动
     - 图片使用懒加载和适当的格式（WebP）
 
-18. **渲染优化**：
+19. **渲染优化**：
     - 合理使用 `v-memo` 和 `v-once`
     - 避免在模板中进行复杂计算
     - 使用 `computed` 缓存计算结果
 
 ## 开发环境
 
-19. **本地开发**：本地开发服务器运行在 `http://localhost:5173/`，无需手动启动。
+20. **本地开发**：本地开发服务器运行在 `http://localhost:5173/`，无需手动启动。
 
 ## 文档获取与参考
 
 ### 第三方依赖文档
 
-20. **Context7 MCP 工具使用**：
+21. **Context7 MCP 工具使用**：
     - 当需要查阅第三方依赖的官方文档时，使用 Context7 MCP 工具获取最新、准确的文档信息
     - **优先获取文档的依赖**：
       - **Shadcn Vue**：组件库使用方法、API 参考、最佳实践
@@ -926,14 +931,14 @@ Use `[file_name.file_extension](mdc:file_path/file_name.file_extension)` to link
 
 ### 文档查阅策略
 
-21. **文档优先级**：
+22. **文档优先级**：
     - **第一优先级**：使用 Context7 MCP 工具获取官方文档
     - **第二优先级**：参考项目内现有的实现示例
     - **第三优先级**：基于经验进行合理推断
 
 ### 文档应用原则
 
-22. **文档实践应用**：
+23. **文档实践应用**：
     - 在使用新的 API 或组件前，先通过 Context7 MCP 工具查阅相关文档
     - 确保 API 使用方式与官方文档一致，避免过时或错误的用法
     - 参考文档中的最佳实践和性能优化建议
@@ -943,26 +948,26 @@ Use `[file_name.file_extension](mdc:file_path/file_name.file_extension)` to link
 
 ### 注释规范
 
-23. **注释策略**：
+24. **注释策略**：
     - **必须**：为每个类、函数添加 JSDoc 格式的块级注释
     - **适度**：仅在代码关键部分与逻辑复杂部分添加行级注释
     - **避免**：过度注释显而易见的代码
 
 ### 代码结构
 
-24. **文件组织**：
+25. **文件组织**：
     - 组件文件使用 PascalCase 命名
     - 工具函数使用 camelCase 命名
     - 常量使用 UPPER_SNAKE_CASE 命名
 
 ## 错误处理与边界情况
 
-25. **错误处理**：
+26. **错误处理**：
     - API 调用必须包含错误处理
     - 组件 props 提供类型检查和默认值
     - 使用 `try-catch` 处理可能的运行时错误
 
-26. **边界情况**：
+27. **边界情况**：
     - 考虑空数据状态的 UI 展示
     - 处理加载状态和错误状态
     - 提供合理的 loading 和 error 组件
