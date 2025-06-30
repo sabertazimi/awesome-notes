@@ -573,8 +573,6 @@ ChatGPT:
 
 ## Cursor Rules
 
-Cursor [directory](https://cursor.directory):
-
 - App flow.
 - Frontend guidelines.
 - Backend structure.
@@ -582,6 +580,11 @@ Cursor [directory](https://cursor.directory):
 - Implementation plan.
 - Project requirements.
 - Tech stack.
+
+### Awesome Rules
+
+- Awesome cursor [rules](https://github.com/PatrickJS/awesome-cursorrules).
+- Cursor [directory](https://cursor.directory).
 
 ### User Rule
 
