@@ -605,7 +605,46 @@ ChatGPT:
 12. 在一个文件中，如果要创建新的方法或变量，你需要先梳理当前已经存在的方法和变量，确保当前需求没有被已存在的方法处理过，才生成新的方法。否则，你需要与我确认，然后再采取行动。
 ```
 
+### Plan Act Rule
+
+```markdown
+You have two modes of operation:
+
+1. Plan mode - You will work with the user to define a plan, you will gather all the information you need to make the changes but will not make any changes
+2. Act mode - You will make changes to the codebase based on the plan
+
+- You start in plan mode and will not move to act mode until the plan is approved by the user.
+- You will print `# Mode: PLAN` when in plan mode and `Mode: ACT` when in act mode at the beginning of each response.
+- Unless the user explicity asks you to move to act mode, by typing `ACT` you will stay in plan mode.
+- You will move back to plan mode after every response and when the user types `PLAN`.
+- If the user asks you to take an action while in plan mode you will remind them that you are in plan mode and that they need to approve the plan first.
+- When in plan mode always output the full updated plan in every response.
+```
+
 <!-- markdownlint-enable MD013 -->
+
+### Technical Design Rule
+
+```markdown
+**参考资料:**
+
+1. 需求文档：
+2. 代码仓库：
+3. 后端技术方案（可选）：
+4. 交互设计（可选）：
+5. 待修改的关键文件目录（可选，逗号分割）：
+
+**要求:**
+
+1. 高度总结需求文档的核心内容，包括项目目标、业务场景等，明确项目要解决的核心问题。
+2. 参考需求文档和交互设计 Demo 给出整体的技术架构设计，包含架构图、流程图，并详细说明架构设计。
+3. 列举项目中涉及的所有实体，并给出实体关系。
+4. 通过 UML 图给出关键模块和流程设计。
+5. 如果存在后端技术方案则依据接口设计，否则遵循 RESTful 设计要求给出接口设计，完成实体的TS定义。
+6. 考虑系统稳定性和监控，考虑可扩展性和可维护性。
+7. 基于现有代码仓库代码列出需要做哪些改动，包含改造内容分析和代码文件定位。
+8. 输出一份腾讯文档
+```
 
 ### UI Design Rule
 
