@@ -8,6 +8,8 @@ tags: [AI, LLM, PromptEngineering]
 
 # Prompt Engineering Basic Notes
 
+<!-- markdownlint-disable MD013 -->
+
 ## Design Principles
 
 26 guiding principles designed to streamline process of querying and prompting LLMs:
@@ -581,14 +583,20 @@ ChatGPT:
 - Project requirements.
 - Tech stack.
 
+:::tip Cursor Link
+
+Use `[file_name.file_extension](mdc:file_path/file_name.file_extension)`
+to link to a file.
+
+:::
+
 ### Awesome Rules
 
-- Awesome cursor [rules](https://github.com/PatrickJS/awesome-cursorrules).
 - Cursor [directory](https://cursor.directory).
+- Awesome Cursor [rules](https://github.com/PatrickJS/awesome-cursorrules).
+- Awesome Cursor [rules](https://github.com/sanjeed5/awesome-cursor-rules-mdc).
 
 ### User Rule
-
-<!-- markdownlint-disable MD013 -->
 
 ```markdown
 1. Always respond in 中文。
@@ -621,7 +629,23 @@ You have two modes of operation:
 - When in plan mode always output the full updated plan in every response.
 ```
 
-<!-- markdownlint-enable MD013 -->
+Useful plan and task management system:
+
+- [Task Master](https://github.com/eyaltoledano/claude-task-master)。
+- [Shrimp Task Manager](https://github.com/cjo4m06/mcp-shrimp-task-manager)。
+
+### RIPER-5 Rule
+
+[RIPER-5](https://github.com/johnpeterman72/cursor_memory_riper_framework) rule
+给 AI 规定了 [5 种行为模式](./rules/RIPER-5.mdc)：
+
+```markdown
+- "ENTER RESEARCH MODE" // 进入研究模式
+- "ENTER INNOVATE MODE" // 进入创新模式
+- "ENTER PLAN MODE" // 进入规划模式
+- "ENTER EXECUTE MODE" // 进入执行模式
+- "ENTER REVIEW MODE" // 进入审查模式
+```
 
 ### Technical Design Rule
 
@@ -648,154 +672,34 @@ You have two modes of operation:
 
 ### UI Design Rule
 
-```markdown
-# UI 设计规范文档
+UI design [rule](./rules/UI-design.mdc):
 
-## 1. 设计原则
+- 设计原则.
+- 颜色规范.
+- 字体规范.
+- 布局规范.
+- 组件规范.
+- 交互规范.
+- 响应式设计.
 
-### 1.1 一致性
+### Prototype Implementation Rule
 
-- 保持界面元素的一致性
-- 使用统一的颜色方案
-- 保持字体和图标风格统一
-- 统一的交互模式
+Prototype implementation [rule](./rules/prototype-implementation.mdc):
 
-### 1.2 简洁性
-
-- 避免界面元素过度拥挤
-- 使用清晰的视觉层次
-- 突出重要信息
-- 减少不必要的装饰元素
-
-### 1.3 可用性
-
-- 确保所有功能易于访问
-- 提供清晰的反馈
-- 保持操作流程简单直观
-- 提供必要的帮助信息
-
-## 2. 颜色规范
-
-### 2.1 主色调
-
-- 主色：#1890FF（蓝色）
-- 辅助色：#52C41A（绿色）
-- 警告色：#FAAD14（橙色）
-- 错误色：#F5222D（红色）
-
-### 2.2 中性色
-
-- 标题文字：#262626
-- 正文文字：#595959
-- 次要文字：#8C8C8C
-- 禁用文字：#BFBFBF
-- 边框颜色：#D9D9D9
-- 背景色：#F0F2F5
-
-## 3. 字体规范
-
-### 3.1 字体家族
-
-- 中文：PingFang SC
-- 英文：Helvetica Neue
-
-### 3.2 字号规范
-
-- 主标题：24px
-- 次标题：20px
-- 小标题：16px
-- 正文：14px
-- 辅助文字：12px
-
-## 4. 布局规范
-
-### 4.1 间距
-
-- 页面边距：24px
-- 组件间距：16px
-- 内部间距：8px
-
-### 4.2 栅格系统
-
-- 使用24栅格系统
-- 响应式断点：
-  - xs: <576px
-  - sm: ≥576px
-  - md: ≥768px
-  - lg: ≥992px
-  - xl: ≥1200px
-
-## 5. 组件规范
-
-### 5.1 按钮
-
-- 主要按钮：实心背景
-- 次要按钮：描边样式
-- 文字按钮：纯文字样式
-- 按钮高度：32px/40px
-
-### 5.2 表单
-
-- 输入框高度：32px
-- 标签对齐：右对齐
-- 必填项标记：红色星号
-
-### 5.3 表格
-
-- 表头背景色：#FAFAFA
-- 行高：48px
-- 斑马纹：隔行变色
-
-## 6. 交互规范
-
-### 6.1 状态反馈
-
-- 加载状态：使用加载动画
-- 成功提示：绿色对勾图标
-- 错误提示：红色错误图标
-- 警告提示：黄色警告图标
-
-### 6.2 动画效果
-
-- 过渡时间：0.3s
-- 缓动函数：ease-in-out
-- 弹窗动画：fade + slide
-
-## 7. 响应式设计
-
-### 7.1 移动端适配
-
-- 优先考虑移动端体验
-- 使用弹性布局
-- 关键信息优先展示
-- 触控区域最小44x44px
-
-### 7.2 桌面端优化
-
-- 合理利用空间
-- 支持快捷键操作
-- 提供高级功能入口
-```
-
-:::tip Cursor Link
-
-Use `[file_name.file_extension](mdc:file_path/file_name.file_extension)`
-to link to a file.
-
-:::
-
-### RIPER-5 Rule
-
-[RIPER-5](https://github.com/johnpeterman72/cursor_memory_riper_framework) rule
-给 AI 规定了 5 种行为模式：
-
-```markdown
-- "ENTER RESEARCH MODE" // 进入研究模式
-- "ENTER INNOVATE MODE" // 进入创新模式
-- "ENTER PLAN MODE" // 进入规划模式
-- "ENTER EXECUTE MODE" // 进入执行模式
-- "ENTER REVIEW MODE" // 进入审查模式
-```
+- 设计稿处理.
+- 样式实现规范.
+- 布局实现规范.
+- 组件化开发.
+- 图标与资源.
+- 响应式设计.
+- 国际化处理.
+- 数据可视化.
+- 性能优化.
+- 开发环境.
+- 文档获取与参考.
+- 代码质量.
+- 错误处理与边界情况.
+- 代码检查清单.
 
 ## Cursor Custom Modes
 
@@ -831,220 +735,6 @@ to link to a file.
   - `{summary}` 为任务的简短描述。
 - 文件采用 Markdown 格式，包含任务完成状态（如 `[ ]` 未完成，`[x]` 已完成）等。
 
-### Prototype Mode
-
-<!-- markdownlint-disable MD013 -->
-
-```markdown
-# 原型实现与设计稿还原规范
-
-进行原型实现或设计稿还原时，需要遵守以下准则：
-
-## 设计稿处理
-
-1. **Figma 设计稿获取**：当存在 Figma 链接时，使用 Figma MCP 工具获取设计信息。保证实现代码尽可能符合设计稿：
-   - Figma Dev Mode MCP 服务器提供一个可提供图像和 SVG 资产的资产端点。
-   - IMPORTANT：如果 Figma Dev Mode MCP 服务器为图像或 SVG 返回一个 localhost 源，请直接使用该图像或 SVG 源。
-   - IMPORTANT：不要导入或添加新的图标包，所有资产都应在 Figma 负载中，或者 Lucide 图标库（已安装）。
-   - IMPORTANT：如果提供了 localhost 源，则不要使用或创建占位符。
-2. **设计与开发平衡**：在保持设计一致性的前提下，优先考虑代码的可维护性和性能。
-
-## 样式实现规范
-
-### 基础样式规则
-
-3. **样式系统**：所有样式必须使用 Tailwind CSS，**禁止**在 `<style>` 或 `<style scoped>` 中设置样式。
-4. **尺寸处理策略**：
-   - **禁止使用固定宽度或长度**，优先使用相对宽度或长度（如 `w-3/4`、`h-screen`）
-   - 当必须使用固定尺寸时，选择 Tailwind CSS 预设的 `rem` 值，保持一致性与响应性
-   - 避免使用 `w-[123px]` 等任意值，优先使用预设值如 `w-32`、`w-64`
-
-### 视觉样式规范
-
-5. **颜色与视觉效果**：颜色、背景、边框、渐变、阴影、字体颜色等样式应尽可能符合设计稿，使用项目中预定义的 CSS 变量。
-
-## 布局实现规范
-
-### 布局系统
-
-6. **布局实现方式**：
-   - **必须**使用 `flex` 或 `grid` 布局，实现响应式布局
-   - **严禁**使用绝对布局（`absolute`、`fixed`）定位元素，除非确实需要层叠效果
-
-### 间距处理
-
-7. **元素间距**：
-   - **优先使用**：`gap-`、`space-x-`、`space-y-` 类
-   - **尽量避免**：`mt-`、`mb-`、`ml-`、`mr-` 类
-   - **推荐模式**：父容器设置 `gap`，子元素不设置外边距
-
-## 组件化开发
-
-### 组件抽象原则
-
-8. **模块化思维**：
-   - 识别重复的 UI 模式，将其抽象为独立的 Vue 组件
-   - 页面组件应尽可能少包含原生 HTML 元素，多使用组件化元素
-   - 单个组件职责单一，功能内聚
-
-### 组件库优先级
-
-9. **组件选择策略**：
-   - **第一优先级**：使用 Shadcn Vue 组件库
-   - **第二优先级**：使用项目现有的自定义组件
-   - **最后选择**：实现新的自定义组件
-
-### 组件设计原则
-
-10. **组件动态性**：
-    - 组件的具体内容（标题、图片、图标、文本等）应作为 `props` 传入
-    - 避免在组件内硬编码具体内容
-    - 提供合理的默认值和类型定义
-
-## 图标与资源
-
-11. **图标使用**：优先使用 `lucide-vue-next` 图标库，保持图标风格统一性。
-
-## 响应式设计
-
-### 断点系统
-
-12. **响应式实现**：
-    - 使用 Tailwind CSS 响应式前缀：`tablet:`、`desktop:`、`screen:`
-    - 三种设备适配：
-      - **平板电脑**：768px-1536px (`tablet:`)
-      - **桌面显示器**：1536px-2304px (`desktop:`)
-      - **超大屏幕**：2304px及以上 (`screen:`)
-    - 实现样例：`mt-2 tablet:mt-4 desktop:mt-6 screen:mt-8`
-
-### 响应式最佳实践
-
-13. **移动优先**：从最小屏幕开始设计，逐步增强到大屏幕。
-
-## 国际化处理
-
-14. **多语言支持**：
-    - 文本内容从 `dictionary.json` 字典获取
-    - 更新字典后运行 `npm run i18n` 生成类型
-    - 使用方式：`import I18N from '@/utils/i18n.base';` + `{{ I18N.xxx }}`
-
-15. **时间格式处理**：
-    - 时间国际化或格式化使用 `@internationalized/date` 库，**禁止随意使用**自定义的时间格式化函数
-    - 标准用法：`new DateFormatter(I18N.locale, options).format(date)`
-    - 支持的格式选项：`year`、`month`、`day`、`hour`、`minute`、`second` 等
-    - 示例：
-
-## 数据可视化
-
-### 图表组件规范
-
-16. **可视化图表**：
-    - **优先使用** vue-echarts 库
-    - **避免直接使用**原生 echarts（除特殊情况）
-    - 图表组件放置在 `components/echarts` 目录
-    - 必须提供 `props`：标题、tooltip、坐标轴名称、数据
-    - 支持三种响应式尺寸：`tablet`、`desktop`、`screen`
-
-### 图表最佳实践
-
-17. **图表性能优化**：
-    - 大数据量时考虑数据采样
-    - 使用 `vue-echarts` 的懒加载特性
-    - 合理设置图表的 `resize` 行为
-
-## 性能优化
-
-18. **组件性能**：
-    - 使用 `defineAsyncComponent` 进行组件懒加载
-    - 大列表使用虚拟滚动
-    - 图片使用懒加载和适当的格式（WebP）
-
-19. **渲染优化**：
-    - 合理使用 `v-memo` 和 `v-once`
-    - 避免在模板中进行复杂计算
-    - 使用 `computed` 缓存计算结果
-
-## 开发环境
-
-20. **本地开发**：本地开发服务器运行在 `http://localhost:5173/`，无需手动启动。
-
-## 文档获取与参考
-
-### 第三方依赖文档
-
-21. **Context7 MCP 工具使用**：
-    - 当需要查阅第三方依赖的官方文档时，使用 Context7 MCP 工具获取最新、准确的文档信息
-    - **优先获取文档的依赖**：
-      - **Shadcn Vue**：组件库使用方法、API 参考、最佳实践
-      - **Vue-ECharts**：图表配置、事件处理、响应式设计
-      - **Pinia**：状态管理模式、store 设计、数据持久化
-      - **Vue Router**：路由配置、导航守卫、动态路由
-      - **Tailwind CSS**：样式类参考、响应式设计、自定义配置
-      - **Lucide**：图标使用方法、图标列表、自定义图标
-
-### 文档查阅策略
-
-22. **文档优先级**：
-    - **第一优先级**：使用 Context7 MCP 工具获取官方文档
-    - **第二优先级**：参考项目内现有的实现示例
-    - **第三优先级**：基于经验进行合理推断
-
-### 文档应用原则
-
-23. **文档实践应用**：
-    - 在使用新的 API 或组件前，先通过 Context7 MCP 工具查阅相关文档
-    - 确保 API 使用方式与官方文档一致，避免过时或错误的用法
-    - 参考文档中的最佳实践和性能优化建议
-    - 遵循文档中的命名约定和代码风格
-
-## 代码质量
-
-### 注释规范
-
-24. **注释策略**：
-    - **必须**：为每个类、函数添加 JSDoc 格式的块级注释
-    - **适度**：仅在代码关键部分与逻辑复杂部分添加行级注释
-    - **避免**：过度注释显而易见的代码
-
-### 代码结构
-
-25. **文件组织**：
-    - 组件文件使用 PascalCase 命名
-    - 工具函数使用 camelCase 命名
-    - 常量使用 UPPER_SNAKE_CASE 命名
-
-## 错误处理与边界情况
-
-26. **错误处理**：
-    - API 调用必须包含错误处理
-    - 组件 props 提供类型检查和默认值
-    - 使用 `try-catch` 处理可能的运行时错误
-
-27. **边界情况**：
-    - 考虑空数据状态的 UI 展示
-    - 处理加载状态和错误状态
-    - 提供合理的 loading 和 error 组件
-
-## 代码检查清单
-
-在提交代码前，请确认：
-
-- [ ] 所有样式都使用 Tailwind CSS
-- [ ] 没有使用固定宽高（除非必要）
-- [ ] 布局使用 flex/grid，避免绝对定位
-- [ ] 重复的 UI 已抽象为组件
-- [ ] 组件内容通过 props 传入
-- [ ] 添加了必要的 JSDoc 注释
-- [ ] 考虑了响应式设计
-- [ ] 处理了错误和边界情况
-- [ ] 进行了基本的性能优化
-- [ ] 使用 Context7 MCP 工具查阅了相关第三方依赖文档
-- [ ] API 使用方式与官方文档一致
-- [ ] 遵循了文档中的最佳实践和命名约定
-```
-
-<!-- markdownlint-enable MD013 -->
-
 ## System Prompts
 
 ### AI Tools Prompts
@@ -1052,9 +742,16 @@ to link to a file.
 - [System prompts](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools)
   for AI tools and agents.
 
-## Developer Prompts
+### Codex Agent System Prompt
 
-### System Design Prompts
+OpenAI [Codex](https://openai.com/index/introducing-codex) [prompts](./prompts/codex-agent.md):
+
+- Instructions.
+- Git instructions.
+- `AGENTS.md` spec.
+- Citations instructions.
+
+### System Design Prompt
 
 System design blueprint:
 
@@ -1082,18 +779,14 @@ Here's my planned approach:
 Before I code: What edge cases am I missing? Where might this break at scale?
 ```
 
-### System Analysis Prompts
+### System Analysis Prompt
 
 [现状分析](https://zhuanlan.zhihu.com/p/1892580714635047120):
-
-<!-- markdownlint-disable MD013 -->
 
 | 目标       | 了解业务功能                                                                        | 了解代码实现                                                           | 了解字段依赖                                   |
 | ---------- | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------- |
 | 提示词参考 | 当前功能如何运作, 用户交互有哪些路径, 具体数据流向是怎样的, 请整理成 mermaid 时序图 | 当前代码如何组织, 核心模块有哪些, 组件间如何通信, 梳理组件关系图       | 梳理当前表单字段的显隐关系、联动逻辑以及数据源 |
 | 效果       | 输出所属功能中的角色和角色之间的交互方式, 能快速掌握业务模块的大体脉络              | 输出组件职责和组件间的关系, 以便在投入开发前以组件模块维度确定改动范围 | 能直观地呈现表单字段间的联动说明               |
-
-<!-- markdownlint-enable MD013 -->
 
 ```markdown
 我们先探讨方案, 在我让你写代码之前不要生成代码.
@@ -1101,7 +794,7 @@ Before I code: What edge cases am I missing? Where might this break at scale?
 在想明白后向我说明为什么要这么设计.
 ```
 
-### System Implementation Prompts
+### System Implementation Prompt
 
 Get implementation guidance:
 
@@ -1136,111 +829,34 @@ Walk me through:
 
 审查与验证:
 
-<!-- markdownlint-disable MD013 -->
-
 | 目标   | 代码审查                                                | 功能验证                                     |
 | ------ | ------------------------------------------------------- | -------------------------------------------- |
 | 提示词 | `@git` 逐个文件分析并总结改动点, 评估是否引入了新的问题 | `@git` 基于代码变更输出自测用例清单          |
 | 效果   | 在列举出每个文件的改动意图后, 会告知潜在问题和修改意见  | 围绕改动, 生成新旧功能在不同场景中的测试用例 |
 
-<!-- markdownlint-enable MD013 -->
+## UI Prompts
 
-### Codex Agent System Message
-
-OpenAI [Codex](https://openai.com/index/introducing-codex):
+### Prototype Design Prompt
 
 ```markdown
-# Instructions
+你是一个专业的 UI 设计师，你需要根据我提供的需求文档来完成页面的设计。
 
-- The user will provide a task.
-- The task involves working with Git repositories in your current working directory.
-- Wait for all terminal commands to be completed (or terminate them) before finishing.
+请仔细阅读需求文档 @prd.md，现在需要输出高保真的原型图，请通过以下方式帮我完成所有界面的原型设计，并确保这些原型界面可以直接用于开发：
 
-# Git instructions
+1. 用户体验分析：先分析这个 App 的主要功能和用户需求，确定核心交互逻辑。
+2. 产品界面规划：作为产品经理，定义关键界面，确保信息架构合理。
+3. 高保真 UI 设计：作为 UI 设计师，设计贴近真实 iOS/Android 设计规范的界面，使用现代化的 UI 元素，使其具有良好的视觉体验。
+4. HTML 原型实现：使用 HTML + Tailwind CSS（或 Bootstrap）生成所有原型界面，并使用 FontAwesome（或其他开源 UI 组件）让界面更加精美、接近真实的 App 设计。拆分代码文件，保持结构清晰。
+5. 每个界面应作为独立的 HTML 文件存放，例如 home.html、profile.html、settings.html 等：
+   - index.html 作为主入口，不直接写入所有界面的 HTML 代码，而是使用 iframe 的方式嵌入这些 HTML 片段，并将所有页面直接平铺展示在 index 页面中，而不是跳转链接。
+   - 真实感增强：界面尺寸应模拟 iPhone 15 Pro，并让界面圆角化，使其更像真实的手机界面。
+   - 使用真实的 UI 图片，而非占位符图片（可从 Unsplash、Pexels、Apple 官方 UI 资源中选择）。
+   - 添加顶部状态栏（模拟 iOS 状态栏），并包含 App 导航栏（类似 iOS 底部 Tab Bar）。
 
-If completing the user's task requires writing or modifying files:
-
-- Do not create new branches.
-- Use git to commit your changes.
-- If pre-commit fails, fix issues and retry.
-- Check git status to confirm your commit.
-  You must leave your worktree in a clean state.
-- Only committed code will be evaluated.
-- Do not modify or amend existing commits.
-
-# AGENTS.md spec
-
-- Containers often contain AGENTS.md files.
-  These files can appear anywhere in the container's filesystem.
-  Typical locations include `/`, `~`, and in various places inside of Git repos.
-- These files are a way for humans to
-  give you (the agent) instructions or tips for working within the container.
-- Some examples might be: coding conventions, info about how code is organized,
-  or instructions for how to run or test code.
-- AGENTS.md files may provide instructions about PR messages
-  (messages attached to a GitHub Pull Request produced by the agent).
-  These instructions should be respected.
-- Instructions in AGENTS.md files:
-  - The scope of an AGENTS.md file is
-    the entire directory tree rooted at the folder that contains it.
-  - For every file you touch in the final patch,
-    you must obey instructions in any AGENTS.md file whose scope includes that file.
-  - Instructions about code style, structure, naming, etc.
-    apply only to code within the AGENTS.md file's scope,
-    unless the file states otherwise.
-  - More-deeply-nested AGENTS.md files
-    take precedence in the case of conflicting instructions.
-  - Direct system/developer/user instructions (as part of a prompt)
-    take precedence over AGENTS.md instructions.
-- AGENTS.md files need not live only in Git repos.
-  For example, you may find one in your home directory.
-- If the AGENTS.md includes programmatic checks to verify your work,
-  you MUST run all of them and make a best effort to
-  validate that the checks pass AFTER all code changes have been made.
-  - This applies even for changes that appear simple, i.e. documentation.
-    You still must run all of the programmatic checks.
-
-# Citations instructions
-
-- If you browsed files or used terminal commands,
-  you must add citations to the final response (not body of PR message) where relevant.
-  Citations reference file paths and terminal outputs with the following formats:
-  1. `【F:<file_path>†L<line_start>(-L<line_end>)?】`
-  - File path citations must start with `F:`.
-    `file_path` is the exact file path of the file
-    relative to the root of the repository that contains the relevant text.
-  - `line_start` is the 1-indexed start line number of
-    the relevant output within that file.
-  2. `【<chunk_id>†L<line_start>(-L<line_end>)?】`
-  - Where `chunk_id` is the chunk_id of the terminal output,
-    `line_start` and `line_end` are the 1-indexed start and end line numbers of
-    the relevant output within that chunk.
-- Line ends are optional, and if not provided,
-  line end is the same as line start, so only 1 line is cited.
-- Ensure that the line numbers are correct,
-  and that the cited file paths or terminal outputs
-  are directly relevant to the word or clause before the citation.
-- Do not cite completely empty lines inside the chunk,
-  only cite lines that have content.
-- Only cite from file paths and terminal outputs,
-  DO NOT cite from previous pr diffs and comments,
-  nor cite git hashes as chunk ids.
-- Use file path citations that reference any code changes, documentation or files,
-  and use terminal citations only for relevant terminal output.
-- Prefer file citations over terminal citations
-  unless the terminal output is directly relevant to the clauses before the citation,
-  i.e. clauses on test results.
-  - For PR creation tasks,
-    use file citations when referring to code changes
-    in the summary section of your final response,
-    and terminal citations in the testing section.
-  - For question-answering tasks,
-    you should only use terminal citations
-    if you need to programmatically verify an answer (i.e. counting lines of code).
-    Otherwise, use file citations.
+请按照以上要求生成完整的 HTML 代码，并确保其可用于实际开发。
 ```
 
-### UI Implementation Prompts
+### UI Implementation Prompt
 
 ```markdown
 你是一位资深全栈工程师，参考 ui-design-rules.mdc 设计一个 @README.md 中描述的应用，
@@ -1251,6 +867,35 @@ If completing the user's task requires writing or modifying files:
 3、每个页面写一个独立的 HTML 文件，并可以通过点击跳转。
 4、由于页面较多，你每完成一部分就让我来确认，一直持续到结束。
 ```
+
+## Backend Prompts
+
+### API Mock Prompt
+
+```markdown
+所有的 API 请求需要支持 Mock 接口，请设置一个全局变量来控制是否开启 Mock 数据，
+在 request 中统一进行 Mock 数据的切换，每个 Mock 数据按模块划分与 API 请求一一对应。
+
+命名规范：`<模块名>-mock.ts`。
+```
+
+### Mapper Generation Prompt
+
+```markdown
+请读取 `tables.md` SQL 语句，为每个表生成独立 Entity，Mapper 接口以及对应的 XML文件，
+要求包含通用的增加、删除、修改、查询方法，详细如下：
+
+- 单个增加。
+- 批量增加。
+- 根据 id 更新。
+- 通用查询，以 Entity 为 condition。
+- 根据 id 查询。
+- 根据 ids 查询。
+- 根据 id 删除（软删除）。
+- 根据 ids 删除（软删除）。
+```
+
+## Developer Prompts
 
 ### 分步式开发策略
 
