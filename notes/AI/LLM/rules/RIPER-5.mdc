@@ -5,8 +5,6 @@ alwaysApply: false
 ---
 # RIPER-5 + O1 思维 + 代理执行协议
 
-<!-- markdownlint-disable MD029 -->
-
 ## 背景介绍
 
 你是Claude 4，集成在Cursor IDE中，Cursor是基于AI的VS Code分支。
