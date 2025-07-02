@@ -870,6 +870,8 @@ tags: [Web, Framework, Library]
   Virtual whiteboard for sketching hand-drawn.
 - [iDraw](https://github.com/idrawjs/idraw):
   Simple JavaScript framework for drawing on web.
+- [ISOFlow](https://github.com/markmanx/isoflow):
+  React components for drawing network diagrams
 
 ### Math
 
