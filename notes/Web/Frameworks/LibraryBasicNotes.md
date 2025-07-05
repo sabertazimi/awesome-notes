@@ -1209,6 +1209,8 @@ tags: [Web, Framework, Library]
   Image comparison slider.
 - [Cropper.js](https://github.com/fengyuanchen/cropperjs):
   JavaScript image cropper.
+- [SnapDOM](https://github.com/zumerlab/snapdom):
+  Captures HTML elements to images with exceptional speed and accuracy.
 
 ## Canvas
 
