@@ -470,6 +470,8 @@ tags: [Web, Framework, Library]
   User-friendly AI interface.
 - [AntDesignX](https://github.com/ant-design/x):
   Craft AI-driven interface effortlessly.
+- [RuoyiElementAI](https://github.com/element-plus-x/ruoyi-element-ai):
+  Enterprise AI PC application template.
 
 ## CSS Utils
 
