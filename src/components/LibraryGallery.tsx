@@ -73,9 +73,16 @@ export default function LibraryGallery({ content }: Props): React.JSX.Element {
     setIsDropdownOpen(false)
   }
 
-  const renderItemCard = (item: Item, index: number) => (
+  const renderEmptyState = () => (
+    <div className={styles.emptyState}>
+      <h3>暂无内容</h3>
+      <p>该分类下暂时没有可显示的内容。</p>
+    </div>
+  )
+
+  const renderItemCard = (item: Item) => (
     <a
-      key={index}
+      key={item.name}
       className={styles.itemCard}
       href={item.url}
       target="_blank"
@@ -92,17 +99,12 @@ export default function LibraryGallery({ content }: Props): React.JSX.Element {
       return null
     }
 
-    return <div className={styles.itemsGrid}>{items.map((item, index) => renderItemCard(item, index))}</div>
+    return <div className={styles.itemsGrid}>{items.map(item => renderItemCard(item))}</div>
   }
 
   const renderSection = (section: Section | null) => {
     if (!section) {
-      return (
-        <div className={styles.emptyState}>
-          <h3>暂无内容</h3>
-          <p>该分类下暂时没有可显示的内容。</p>
-        </div>
-      )
+      return renderEmptyState()
     }
 
     const hasItems = section.items.length > 0
@@ -113,7 +115,7 @@ export default function LibraryGallery({ content }: Props): React.JSX.Element {
         <h2 className={styles.sectionTitle}>{section.name}</h2>
 
         {/* 渲染 section 级别的 items */}
-        {hasItems ? renderItemsGrid(section.items) : null}
+        {hasItems && renderItemsGrid(section.items)}
 
         {/* 渲染 subSections */}
         {hasSubSections && (
@@ -140,12 +142,7 @@ export default function LibraryGallery({ content }: Props): React.JSX.Element {
         )}
 
         {/* 如果既没有 items 也没有 subSections，显示空状态 */}
-        {!hasItems && !hasSubSections && (
-          <div className={styles.emptyState}>
-            <h3>暂无内容</h3>
-            <p>该分类下暂时没有可显示的内容。</p>
-          </div>
-        )}
+        {!hasItems && !hasSubSections && renderEmptyState()}
       </div>
     )
   }

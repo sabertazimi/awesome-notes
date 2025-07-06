@@ -21,8 +21,8 @@ export interface Section {
   subSections: SubSection[]
 }
 
-function parseItems(items: string[]) {
-  if (items == null) {
+function parseItems(items?: string[]) {
+  if (items == null || items.length === 0) {
     return []
   }
 
