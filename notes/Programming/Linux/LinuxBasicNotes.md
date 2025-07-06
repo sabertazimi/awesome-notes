@@ -1417,7 +1417,7 @@ Check key TCP metrics:
 ### Dmesg Command
 
 ```bash
-dmesg | tail
+dmesg -T | tail
 ```
 
 ### Journalctl Command
@@ -2667,24 +2667,43 @@ set-window-option -g window-status-current-bg red
 - [Mpstat](#mpstat-command).
 - [Pidstat](#pidstat-command).
 - [Iostat](#iostat-command).
-- [Iotop](#iotop-command).
 - [Free](#free-command).
 - [Sar](#sar-command).
 - [Top](#top-command).
+- [Iotop](#iotop-command).
 
 [Linux performance analysis in 60,000 milliseconds](https://netflixtechblog.com/linux-performance-analysis-in-60-000-milliseconds-accc10403c55)
 (Netflix):
 
 ```bash
+# Load average
 uptime
-dmesg | tail
+
+# Kernel errors
+dmesg -T | tail
+
+# Overall stats by time
 vmstat 1
+
+# CPU balance
 mpstat -P ALL 1
+
+# Process usage
 pidstat 1
+
+# Disk I/O
 iostat -xz 1
+
+# Memory usage
 free -m
+
+# Network I/O
 sar -n DEV 1
+
+# TCP stats
 sar -n TCP,ETCP 1
+
+# Check overview
 top
 ```
 
@@ -2698,6 +2717,13 @@ perf stat <command>
 perf stat -e <events> <command>
 perf record -e <events> -a <command>
 perf report
+```
+
+```bash
+perf record -F 99 -a -g -- sleep 10
+
+perf report -n --stdio
+perf report -n -g 'flamegraph'
 ```
 
 ## Linux Tools
