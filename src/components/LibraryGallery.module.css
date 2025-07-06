@@ -1,9 +1,9 @@
-/* stylelint-disable docusaurus/copyright-header */
+/* stylelint-disable selector-class-pattern -- disable for CSS modules */
 
 .container {
-  margin: 0 auto;
   max-width: 1200px;
   padding: 0 var(--ifm-spacing-horizontal);
+  margin: 0 auto;
 }
 
 .sectionSelector {
@@ -12,8 +12,8 @@
 
 .sectionSelector label {
   display: block;
-  font-weight: var(--ifm-font-weight-semibold);
   margin-bottom: 0.5rem;
+  font-weight: var(--ifm-font-weight-semibold);
   color: var(--ifm-color-content);
 }
 
@@ -32,14 +32,14 @@
   justify-content: space-between;
   width: 100%;
   padding: 0.5rem 1rem;
+  font-size: var(--ifm-font-size-base);
+  color: var(--ifm-color-content);
+  cursor: pointer;
+  user-select: none;
+  background-color: var(--ifm-background-color);
   border: 1px solid var(--ifm-color-emphasis-300);
   border-radius: var(--ifm-button-border-radius);
-  background-color: var(--ifm-background-color);
-  color: var(--ifm-color-content);
-  font-size: var(--ifm-font-size-base);
-  cursor: pointer;
   transition: all 0.2s ease;
-  user-select: none;
 }
 
 .dropdownButton:hover {
@@ -47,8 +47,8 @@
 }
 
 .dropdownButton:focus {
-  outline: none;
   border-color: var(--ifm-color-primary);
+  outline: none;
   box-shadow: 0 0 0 2px var(--ifm-color-primary-lightest);
 }
 
@@ -56,10 +56,10 @@
 .dropdownArrow {
   width: 0;
   height: 0;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 4px solid var(--ifm-color-content-secondary);
   margin-left: 0.5rem;
+  border-top: 4px solid var(--ifm-color-content-secondary);
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
   transition: transform 0.2s ease;
 }
 
@@ -71,28 +71,28 @@
 .dropdownMenu {
   position: absolute;
   top: 100%;
-  left: 0;
   right: 0;
+  left: 0;
   z-index: 1000;
-  margin: 0;
+  max-height: 300px;
   padding: 0;
+  margin: 0;
+  overflow-y: auto;
   list-style: none;
-  background-color: rgba(255, 255, 255, 0.9);
+  visibility: hidden;
+  background-color: rgb(255 255 255 / 90%);
+  backdrop-filter: blur(4px);
   border: 1px solid var(--ifm-color-emphasis-300);
   border-radius: var(--ifm-button-border-radius);
   box-shadow: var(--ifm-global-shadow-md);
-  max-height: 300px;
-  overflow-y: auto;
   opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
   transition: all 0.2s ease;
-  backdrop-filter: blur(4px);
+  transform: translateY(-10px);
 }
 
 .dropdownOpen .dropdownMenu {
-  opacity: 1;
   visibility: visible;
+  opacity: 1;
   transform: translateY(0);
 }
 
@@ -109,9 +109,9 @@
 }
 
 .dropdownItem.active {
-  background-color: var(--ifm-menu-color-background-active);
-  color: var(--ifm-menu-color-active);
   font-weight: var(--ifm-font-weight-semibold);
+  color: var(--ifm-menu-color-active);
+  background-color: var(--ifm-menu-color-background-active);
 }
 
 .sectionContent {
@@ -119,9 +119,9 @@
 }
 
 .sectionTitle {
+  margin-bottom: 1.5rem;
   font-size: 2rem;
   font-weight: var(--ifm-font-weight-bold);
-  margin-bottom: 1.5rem;
   color: var(--ifm-color-content);
 }
 
@@ -133,35 +133,35 @@
 }
 
 .itemCard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.5rem;
+  text-decoration: none;
   background: var(--ifm-card-background-color);
   border: 1px solid var(--ifm-color-emphasis-200);
   border-radius: var(--ifm-card-border-radius);
-  padding: 1.5rem;
   transition: all 0.2s ease;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
 }
 
 .itemCard:hover {
+  text-decoration: none;
   border-color: var(--ifm-color-primary);
   transform: translateY(-2px);
-  text-decoration: none;
 }
 
 .itemTitle {
+  display: block;
+  margin-bottom: 0.5rem;
   font-size: 1.25rem;
   font-weight: var(--ifm-font-weight-semibold);
-  margin-bottom: 0.5rem;
   color: var(--ifm-color-primary);
-  display: block;
 }
 
 .itemDescription {
-  color: var(--ifm-color-content-secondary);
-  line-height: 1.6;
   flex-grow: 1;
+  line-height: 1.6;
+  color: var(--ifm-color-content-secondary);
 }
 
 .subSection {
@@ -169,12 +169,12 @@
 }
 
 .subSectionTitle {
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
   font-size: 1.5rem;
   font-weight: var(--ifm-font-weight-semibold);
-  margin-bottom: 1rem;
   color: var(--ifm-color-content);
   border-bottom: 2px solid var(--ifm-color-emphasis-200);
-  padding-bottom: 0.5rem;
 }
 
 .subSubSection {
@@ -183,33 +183,33 @@
 }
 
 .subSubSectionTitle {
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.75rem;
   font-size: 1.25rem;
   font-weight: var(--ifm-font-weight-semibold);
-  margin-bottom: 0.75rem;
   color: var(--ifm-color-content);
   border-bottom: 1px solid var(--ifm-color-emphasis-200);
-  padding-bottom: 0.25rem;
 }
 
 .emptyState {
-  text-align: center;
   padding: 3rem 1rem;
   color: var(--ifm-color-content-secondary);
+  text-align: center;
 }
 
 .emptyState h3 {
-  font-size: 1.5rem;
   margin-bottom: 1rem;
+  font-size: 1.5rem;
   color: var(--ifm-color-content);
 }
 
 .emptyState p {
-  font-size: 1rem;
   margin: 0;
+  font-size: 1rem;
 }
 
 /* 响应式设计 */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .itemsGrid {
     grid-template-columns: 1fr;
   }
