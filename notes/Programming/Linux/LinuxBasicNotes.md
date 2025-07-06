@@ -375,7 +375,7 @@ to auto-start in services.
 
 ## Basic Commands
 
-### ls
+### Ls Command
 
 - `-lh`: long human.
 - `-ld`: long directory.
@@ -383,22 +383,22 @@ to auto-start in services.
 
 权限 (user/group/other) 引用计数 user group 文件大小 文件修改时间 文件名.
 
-### cd
+### Cd Command
 
 - `-`: 上次目录.
 - `..`: 上级目录.
 
-### pwd
+### Pwd Command
 
 print working directory
 
-### rm
+### Rm Command
 
 - –r delete directory
 - –f delete forcedly
 - -i 显示确认信息
 
-### cp
+### Cp Command
 
 - -r copy directory
 - -p copy property
@@ -406,13 +406,13 @@ print working directory
 - -a --all(-pdr)
 - -i 显示确认信息
 
-### mv
+### Mv Command
 
 无需参数(改名+移动)
 
 - -i 显示确认信息
 
-### ln
+### Ln Command
 
 link: create `.bak/.hard` (硬链接) and `.soft` (软链接：创建链接时填写绝对路径).
 
@@ -425,7 +425,7 @@ ln [源文件] [New Hard Link File]
 ln -s [源文件] [New Soft Link File]
 ```
 
-### history
+### History Command
 
 - -c 清除历史命令
 - -w (~/.bash_history) 保存历史命令
@@ -457,7 +457,7 @@ Press `ctrl-r` 提示符改变, 显示我们正在执行反向增量搜索.
 | `Alt-n`  | 向前搜索，非增量                     |
 | `Ctrl-o` | 执行历史列表中的当前项，并移到下一个 |
 
-### Time
+### Time Commands
 
 ```bash
 date
@@ -479,25 +479,32 @@ Use local time (not UTC time):
 sudo timedatectl set-local-rtc 1
 ```
 
+NTP servers:
+
+```bash
+ntpd
+ntpq -p
+```
+
 ## Find and Search Commands
 
-### Locate
+### Locate Command
 
 结合 `updatedb` 命令 (该命令一般自动 1 天/次).
 
-### Type
+### Type Command
 
 Indicate how a command name is interpreted.
 
-### Apropos
+### Apropos Command
 
 Display a list of appropriate commands.
 
-### Whereis and Whatis
+### Whereis Command
 
-### Which
+### Whatis Command
 
-### Find
+### Find Command
 
 `find [搜索路径] [可选参数] [文件名](可加"")`:
 
@@ -518,7 +525,7 @@ find . -name "*.bak" -type f
 find . -name "*.bak" -type f -delete
 ```
 
-### Grep
+### Grep Command
 
 `grep` `[可选参数] '字符串' 文件名`:
 
@@ -536,34 +543,27 @@ grep -lr FunctionalComponent src --exclude=*.md | xargs code
 
 ## CPU and Process Commands
 
-### uptime
+### Uptime Command
 
-Average load information
+Average load information:
 
-### ps
+```bash
+uptime
+```
+
+### Ps Command
 
 Report a snapshot of current processes
 
 ```bash
 ps aux
+ps aux --sort=-%mem
+
+ps -u <username> | grep -v PID | sort -k4 -n -r | head -n 10
+ps -u <username> | grep -v PID | awk '{print $1}' | xargs kill -9
 ```
 
-### top
-
-top/htop:
-
-- Display tasks
-- Average load
-- Process status
-- CPU usage
-
-atop:
-
-- Memory usage
-- Disk I/O usage
-- Network usage
-
-### vmstat
+### Vmstat Command
 
 Outputs a snapshot of system resource usage:
 
@@ -575,7 +575,20 @@ Outputs a snapshot of system resource usage:
 - Swap space
 - Disk I/O usage
 
-### pidstat
+```bash
+vmstat 1
+```
+
+### Mpstat Command
+
+- CPU usage
+- Software interrupt times (/proc/interrupts)
+
+```bash
+mpstat -P ALL 1
+```
+
+### Pidstat Command
 
 Process and Thread:
 
@@ -587,52 +600,58 @@ Process and Thread:
 pidstat 1
 ```
 
-### mpstat
+### Top Command
 
+`top`/`htop`:
+
+- Display tasks
+- Average load
+- Process status
 - CPU usage
-- Software interrupt times (/proc/interrupts)
 
-```bash
-mpstat -P ALL 1
-```
+`atop`:
 
-### lscpu
+- Memory usage
+- Disk I/O usage
+- Network usage
+
+### Lscpu Command
 
 Show `/proc/cpuinfo`.
 
-### jobs
+### Jobs Command
 
 list active jobs
 
-### bg
+### Bg Command
 
 place a job in the background
 
-### fg
+### Fg Command
 
 place a job in the foreground
 
-### kill
+### Kill Command
 
 send a signal to a process
 
-### killall
+### Killall Command
 
 kill processes by name
 
-### shutdown
+### Shutdown Command
 
 shutdown or reboot the system
 
-### pstree
+### Pstree Command
 
 outputs a process list arranged in a tree-like pattern
 
-### xload and tload
+### Xload and Tload Command
 
 draws a graph showing system load over time
 
-### screen
+### Screen Command
 
 ```bash
 screen -S screenName
@@ -643,197 +662,25 @@ screen -r
 - Ctrl+d // detach window
 - Ctrl+k // kill window
 
-## CLI Input Output Commands
+## Memory Commands
 
-### cat
-
-concatenate files
-
-### sort
-
-sort lines of text
-
-### uniq
-
-report or omit repeated lines
-
-### wc
-
-print newline, word, and byte counts for each file
-
-### Head and Tail
-
-output the first/last part of a file
+### Iostat Command
 
 ```bash
-head -n 5 filename
-tail -f filename
+iostat -xz 1
+iostat -xmhy 1 4
 ```
 
-### Tee
-
-read from standard input and write to standard output and files
+### Iotop Command
 
 ```bash
-[me@linuxBox ~]$ ls /usr/bin | tee ls.txt | grep zip
-bunzip2
-bzip2
-....
+iotop -o
 ```
 
-### nl
-
-number lines
-
-### fold
-
-wrap each line to a specified length
-
-### fmt
-
-a simple text formatter
-
-### pr
-
-prepare text for printing
-
-### printf
-
-format and print data
-
-## Helper and Documentation Commands
-
-### Man
-
-- -f 显示操作等级
-- -k 包含匹配
-- -1/2/.../9 显示命令不同操作等级的帮助
-
-1. Commands (Programs)
-   Those commands that can be executed by the user from within a shell.
-2. System calls
-   Those functions which must be performed by the kernel.
-3. Library calls
-   Most of the libc functions.
-4. Special files (devices)
-   Files found in /dev.
-5. File formats and conventions
-   The format for /etc/passwd and other human-readable files.
-6. Games
-7. Conventions and miscellaneous
-   Overviews of various topics, conventions and protocols,
-   character set standards, and miscellaneous other things.
-8. System management commands
-   Commands like mount(8), many of which only root can execute.
-
-### Help Shell
-
-显示 shell 内部命令帮助，如 cd 命令(shell 内部命令)
-
-### Info
-
-显示大型帮助文档 - enter 进入 u 返回 p 上一节 n 下一节 q 退出
-
-### System Info
+### Free Command
 
 ```bash
-sudo add-apt-repository ppa:dawidd0811/neofetch
-sudo apt-get update
-sudo apt-get install neofetch
-```
-
-```bash
-sudo apt-get install screenfetch
-```
-
-### Linux Documentation Reference
-
-- [DashDash: Beautiful Linux Manual Pages](https://dashdash.io)
-- [TLDR](https://github.com/tldr-pages/tldr)
-- [ArchWiki](https://wiki.archlinux.org)
-
-## Compress and Extract Commands
-
-### Zip
-
-- `zip -r(目录) 压缩文件 源文件/源目录`.
-- `unzip 源文件 -d 指定路径`.
-
-```bash
-zip -r archive_name.zip folder_to_compress
-unzip archive_name.zip
-
-zipinfo archive_name.zip
-unzip -l archive_name.zip
-```
-
-### Gz
-
-- `gzip 源文件`.
-- `gzip –c 源文件 > 压缩文件`.
-- `gzip -r 源目录 将源目录下所有子文件分别单独压缩`.
-- `gzip –d(解压缩) 文件`.
-- `gunzip 压缩文件`.
-
-### Bz2
-
-不可压缩目录:
-
-- `bzip2 –k(保留源文件) 源文件`.
-- `bzip2 –d(解压缩) –k(保留压缩文件) 压缩文件`.
-- `bunzip2 –k(保留压缩文件) 压缩文件`.
-
-### Tar
-
-`.tar.gz`/`.tar.bz2`:
-
-`tar [可选参数] 压缩文件(可指定压缩路径) [-c 解压缩路径]源文件/源目录`:
-
-- `-z`: 将 `.tar` 压缩为 `.tar.gz`.
-- `-j`: 将 `.tar` 压缩为 `.tar.bz2`.
-- `-c`: 打包 `-x` 解打包.
-- `-t`: 查看压缩文件.
-- `-v`: 显示过程.
-- `-f`: 指定压缩文件名.
-- `-C`: 指定解压缩路径.
-- `-zcvf`/`-zxvf`/`-ztcf`.
-- `-jcvf`/`-jxvf`/`-jtvf`.
-
-### 7z
-
-- `a`: add.
-- `x`: extract.
-- `-r`: recursive.
-- `-o`: specific path.
-- `-t`: type.
-
-```bash
-7z x manager.7z -r -o /home/xx
-7z a -t7z -r manager.7z /home/manager/*
-```
-
-### UnAr
-
-Decompress files of any format:
-
-```bash
-unar archive_name.zip
-unar archive_name.7z
-unar archive_name.rar
-unar archive_name.ISO
-unar archive_name.tar.gz
-```
-
-### LsAr
-
-Peek files in a compress file of any format:
-
-```bash
-lsar -l archive_name.zip
-lsar -l archive_name.7z
-lsar -l archive_name.ISO
-lsar -l archive_name.rar
-lsar -l archive_name.tar.gz
+free -m
 ```
 
 ## User and Group Commands
@@ -904,6 +751,8 @@ Options:
 ```bash
 useradd -s bash -m testUser
 passwd testUser # modify `/etc/passwd`, then add to `/etc/sudoers`
+
+useradd -s /sbin/nologin username
 ```
 
 `adduser` is a perl script which uses `useradd` binary in back-end,
@@ -942,8 +791,6 @@ finger apacheUser 查看单个用户信息
 - passwd -u 用户名 解锁用户
 - passwd -d 用户名 清除用户密码
 
-## Privilege Management Commands
-
 ### Common Privilege Management
 
 - chown 用户名：组名 文件名
@@ -975,11 +822,155 @@ finger apacheUser 查看单个用户信息
 - chmod 4xxx 设置 SetUID 权限
 - chmod 6xxx 设置双权限
 
-## Disk IO Commands
+## File Commands
+
+### Cat Command
+
+concatenate files
+
+### Sort Command
+
+sort lines of text
+
+### Uniq Command
+
+report or omit repeated lines
+
+### Wc Command
+
+print newline, word, and byte counts for each file
+
+### Head and Tail Command
+
+output the first/last part of a file
+
+```bash
+head -n 5 filename
+tail -f filename
+```
+
+### Tee Command
+
+read from standard input and write to standard output and files
+
+```bash
+[me@linuxBox ~]$ ls /usr/bin | tee ls.txt | grep zip
+bunzip2
+bzip2
+....
+```
+
+### Nl Command
+
+number lines
+
+### Fold Command
+
+wrap each line to a specified length
+
+### Fmt Command
+
+a simple text formatter
+
+### Pr Command
+
+prepare text for printing
+
+### Printf Command
+
+format and print data
+
+### Zip Command
+
+- `zip -r(目录) 压缩文件 源文件/源目录`.
+- `unzip 源文件 -d 指定路径`.
+
+```bash
+zip -r archive_name.zip folder_to_compress
+unzip archive_name.zip
+
+zipinfo archive_name.zip
+unzip -l archive_name.zip
+```
+
+### Gz Command
+
+- `gzip 源文件`.
+- `gzip –c 源文件 > 压缩文件`.
+- `gzip -r 源目录 将源目录下所有子文件分别单独压缩`.
+- `gzip –d(解压缩) 文件`.
+- `gunzip 压缩文件`.
+
+### Bz2 Command
+
+不可压缩目录:
+
+- `bzip2 –k(保留源文件) 源文件`.
+- `bzip2 –d(解压缩) –k(保留压缩文件) 压缩文件`.
+- `bunzip2 –k(保留压缩文件) 压缩文件`.
+
+### Tar Command
+
+`.tar.gz`/`.tar.bz2`:
+
+`tar [可选参数] 压缩文件(可指定压缩路径) [-c 解压缩路径]源文件/源目录`:
+
+- `-z`: 将 `.tar` 压缩为 `.tar.gz`.
+- `-j`: 将 `.tar` 压缩为 `.tar.bz2`.
+- `-c`: 打包 `-x` 解打包.
+- `-t`: 查看压缩文件.
+- `-v`: 显示过程.
+- `-f`: 指定压缩文件名.
+- `-C`: 指定解压缩路径.
+- `-zcvf`/`-zxvf`/`-ztcf`.
+- `-jcvf`/`-jxvf`/`-jtvf`.
+
+```bash
+tar -xzf archive.tar.gz
+```
+
+### 7z Command
+
+- `a`: add.
+- `x`: extract.
+- `-r`: recursive.
+- `-o`: specific path.
+- `-t`: type.
+
+```bash
+7z x manager.7z -r -o /home/xx
+7z a -t7z -r manager.7z /home/manager/*
+```
+
+### UnAr Command
+
+Decompress files of any format:
+
+```bash
+unar archive_name.zip
+unar archive_name.7z
+unar archive_name.rar
+unar archive_name.ISO
+unar archive_name.tar.gz
+```
+
+### LsAr Command
+
+Peek files in a compress file of any format:
+
+```bash
+lsar -l archive_name.zip
+lsar -l archive_name.7z
+lsar -l archive_name.ISO
+lsar -l archive_name.rar
+lsar -l archive_name.tar.gz
+```
+
+## IO Commands
 
 主分区 (primary) 与延伸分区 (extended) 延伸分区可以继续划分成逻辑分区 (logical).
 
-### 挂载命令
+### Mount Command
 
 ```bash
 mount [-t 文件系统][-o 特殊选项] 设备文件名 挂载点(挂载目录/media /misc /mnt)
@@ -996,22 +987,22 @@ umount 设备文件名/挂载点
 fdisk –l
 ```
 
-### 修复命令
+### Repair Command
 
 ```bash
 sudo debugfs /dev/sda9
 > debugfs: lsdel
 ```
 
-### 分区命令
+### Partition Command
 
-#### fdisk
+#### Fdisk Command
 
 分区表类型 MBR
 
 n p e l 新 主 逻辑 扩展 分区 w 激活
 
-#### parted
+#### Parted Command
 
 分区表类型 MBR/GPT
 
@@ -1039,9 +1030,23 @@ location /video/ {
 }
 ```
 
-## Device Management Commands
+### Du Command
 
-### Host System Info Commands
+```bash
+du -sh /home/user
+```
+
+### Swap File
+
+```bash
+dd if=/dev/zero of=/swapfile bs=1G count=4
+mkswap /swapfile
+swapon /swapfile
+```
+
+## Device Commands
+
+### Host System Information Commands
 
 ```bash
 #!/bin/bash
@@ -1151,28 +1156,280 @@ echo '===== END ====='
 
 ### Screen Monitor Commands
 
-#### xrandr
+#### Xrandr Command
 
 ```bash
 xrandr -s 1920x1800 # set resolution
 ```
 
-#### Monitor Info
+#### Monitor Info Command
 
 ```bash
 sudo apt-get install read-edid
 sudo get-edid | parse-edid
 ```
 
-### Touch Pad Synoptics
+### Touch Pad Synoptics Command
 
 ```bash
 synclient TouchpadOff=0
 ```
 
+## Documentation Commands
+
+### Man Command
+
+- -f 显示操作等级
+- -k 包含匹配
+- -1/2/.../9 显示命令不同操作等级的帮助
+
+1. Commands (Programs)
+   Those commands that can be executed by the user from within a shell.
+2. System calls
+   Those functions which must be performed by the kernel.
+3. Library calls
+   Most of the libc functions.
+4. Special files (devices)
+   Files found in /dev.
+5. File formats and conventions
+   The format for /etc/passwd and other human-readable files.
+6. Games
+7. Conventions and miscellaneous
+   Overviews of various topics, conventions and protocols,
+   character set standards, and miscellaneous other things.
+8. System management commands
+   Commands like mount(8), many of which only root can execute.
+
+### Help Shell Command
+
+显示 shell 内部命令帮助，如 cd 命令(shell 内部命令)
+
+### Info Command
+
+显示大型帮助文档 - enter 进入 u 返回 p 上一节 n 下一节 q 退出
+
+### Neofetch Command
+
+Get system information:
+
+```bash
+sudo add-apt-repository ppa:dawidd0811/neofetch
+sudo apt-get update
+sudo apt-get install neofetch
+```
+
+```bash
+sudo apt-get install screenfetch
+```
+
+### Linux Documentation Reference
+
+- [DashDash: Beautiful Linux Manual Pages](https://dashdash.io)
+- [TLDR](https://github.com/tldr-pages/tldr)
+- [ArchWiki](https://wiki.archlinux.org)
+
+## Network Commands
+
+### Wget Command
+
+- 下载全站资料
+- -P 表示下载到哪个目录
+- -r 表示递归下载
+- -np 表示不下载旁站连接.
+- -k 表示将下载的网页里的链接修改为本地链接.
+- -p 获得所有显示网页所需的元素
+
+```bash
+wget -r -p -np -k -P ~/tmp/ http://java-er.com
+```
+
+### Certificate Bot
+
+[CertBot](https://github.com/certbot/certbot)
+for SSL certificates.
+
+### GFW Commands
+
+- [Hosts](https://github.com/racaljk/hosts)
+- [RSS](https://github.com/breakwa11/shadowsocks-rss)
+- [ChinaDNS](https://github.com/shadowsocks/ChinaDNS-Python)
+- [ProxyChains](https://github.com/rofl0r/proxychains-ng)
+- [OpenVPN](https://github.com/OpenVPN/openvpn)
+- [VPNGate](https://github.com/waylau/vpngate-mirrors)
+- [DockerVPN](https://github.com/hwdsl2/docker-ipsec-vpn-server)
+
+```bash
+yum install python-setuptools && easy_install pip
+pip install shadowsocks
+echo "nohup sslocal -c /etc/shadowsocks.json /dev/null 2>&1 &" /etc/rc.local
+nohup ssserver -c /etc/shadowsocks.json -d start /dev/null 2>&1 &
+```
+
+```bash
+185.199.108.133 raw.githubusercontent.com
+185.199.109.133 raw.githubusercontent.com
+185.199.110.133 raw.githubusercontent.com
+185.199.111.133 raw.githubusercontent.com
+```
+
+### Network Management Commands
+
+| 用途           | net-tool(被淘汰) | iproute2         |
+| :------------- | :--------------- | :--------------- |
+| 地址和链路配置 | ifconfig         | ip addr, ip link |
+| 路由表         | route            | ip route         |
+| 邻居           | arp              | ip neigh         |
+| VLAN           | vconfig          | ip link          |
+| 隧道           | iptunnel         | ip tunnel        |
+| 组播           | ipmaddr          | ip maddr         |
+| 统计           | netstat          | ss               |
+
+```bash
+ip link show
+ip address show
+ip route show
+
+# add commands to /etc/init.d/local.sh
+
+rm -fr /etc/udev/rules.d/70-persistent-net.rules
+
+# start up network adapter
+ip link set eth0 up
+
+# add/delete static ip
+ip address add 192.168.1.1/24 dev eth0
+ip address del 192.168.1.1/24 dev eth0
+
+# add/delete static route
+ip route add 192.168.1.0/24 dev eth0
+ip route del 192.168.1.0/24 dev eth0
+ip route add default via 192.168.0.196
+
+# watch packets
+watch -n 1 "ifconfig eth0"
+watch -n 1 "ifconfig eth1"
+watch -n 1 "ifconfig eth2"
+```
+
+### Ufw Command
+
+```bash
+ufw status
+ufw enable
+ufw allow ssh
+ufw allow http
+ufw allow https
+```
+
+### Iptables Command
+
+### Fail2ban Command
+
+### Arp Command
+
+`arp -a`显示地址解析协议 (IP 地址—网卡地址):
+
+- 网际互联层：IP 协议(网际)、IGMP 协议(互联网组管理)、ICMP 协议(互联网控制报文)
+- 传输层：TCP 协议(传输控制)、UDP 协议(用户数据报)
+
+### Netstat Command
+
+`netstat -an`查看本机启用的端口:
+
+- (-a 查看所有连接和监听端口 -n 显示 IP 地址和端口号)
+- -t tcp 协议端口
+- -u udp 协议端口
+- -l 监听状态服务
+
+### Nslookup Command
+
+`nslookup domain_name` 查看 DNS 解析器: `/etc/network/interfaces`.
+
+主机名:
+
+- `/etc/hostname`.
+- `/etc/sysconfig/network`.
+- `/etc/resolv.conf`.
+
+### Ping Command
+
+`ping -c ip/domain`探测网络状况
+
+### Telnet Command
+
+`telnet [ip/domain] [端口]`远程管理与端口探测命令
+
+### Traceroute Command
+
+- `traceroute [-n IP] domain`路由跟踪命令
+- `traceroute -n -I -T -p`路由扫描
+
+### Nftables Command
+
+nftables 命令行工具 (network filter): nft.
+
+### Fping Command
+
+`fping -a -u -g -f [target]`批量扫描主机地址
+
+### Hping Command
+
+`hping -p -S -a`可伪造 IP 地址
+
+### Mtr Command
+
+路由扫描
+
+### Nmap Command
+
+批量主机服务扫描:
+
+- -P ICMP
+- -sS TCP SYN
+- -sT TCP connect()
+- -sU UDP
+
+### Ncat Command
+
+批量主机服务扫描:
+
+- -w 设置超时时间
+- -v 显示命令执行过程
+- -z 一个输入输出模式
+- -u UDP 协议
+
+### Sar Command
+
+Check network interface throughput:
+
+```bash
+`sar -n DEV 1`
+```
+
+Check key TCP metrics:
+
+```bash
+`sar -n TCP,ETCP 1`
+```
+
+## Logs Commands
+
+### Dmesg Command
+
+```bash
+dmesg | tail
+```
+
+### Journalctl Command
+
+```bash
+journalctl -r
+journalctl -u <service_name>
+```
+
 ## Package Manager Commands
 
-### RPM Commands
+### Rpm Commands
 
 安装和卸载时同时存在依赖性(包依赖、库依赖)
 
@@ -1190,7 +1447,7 @@ rpm 校验(查看 Cracker 信息):
 
 - -V 校验已安装包 相应信息不是.号便是被修改项 可用于找回丢失的系统命令
 
-### YUM Commands
+### Yum Commands
 
 源配置文件:/etc/yum.repos.d
 
@@ -1260,178 +1517,12 @@ sudo apt-key del 73C62A18
 sudo apt update
 ```
 
-## Network Commands
-
-### wget
-
-- 下载全站资料
-- -P 表示下载到哪个目录
-- -r 表示递归下载
-- -np 表示不下载旁站连接.
-- -k 表示将下载的网页里的链接修改为本地链接.
-- -p 获得所有显示网页所需的元素
-
-```bash
-wget -r -p -np -k -P ~/tmp/ http://java-er.com
-```
-
-### Certificate Bot
-
-[CertBot](https://github.com/certbot/certbot)
-for SSL certificates.
-
-### GFW
-
-- [Hosts](https://github.com/racaljk/hosts)
-- [RSS](https://github.com/breakwa11/shadowsocks-rss)
-- [ChinaDNS](https://github.com/shadowsocks/ChinaDNS-Python)
-- [ProxyChains](https://github.com/rofl0r/proxychains-ng)
-- [OpenVPN](https://github.com/OpenVPN/openvpn)
-- [VPNGate](https://github.com/waylau/vpngate-mirrors)
-- [DockerVPN](https://github.com/hwdsl2/docker-ipsec-vpn-server)
-
-```bash
-yum install python-setuptools && easy_install pip
-pip install shadowsocks
-echo "nohup sslocal -c /etc/shadowsocks.json /dev/null 2>&1 &" /etc/rc.local
-nohup ssserver -c /etc/shadowsocks.json -d start /dev/null 2>&1 &
-```
-
-```bash
-185.199.108.133 raw.githubusercontent.com
-185.199.109.133 raw.githubusercontent.com
-185.199.110.133 raw.githubusercontent.com
-185.199.111.133 raw.githubusercontent.com
-```
-
-### NetWork Management Commands
-
-| 用途           | net-tool(被淘汰) | iproute2         |
-| :------------- | :--------------- | :--------------- |
-| 地址和链路配置 | ifconfig         | ip addr, ip link |
-| 路由表         | route            | ip route         |
-| 邻居           | arp              | ip neigh         |
-| VLAN           | vconfig          | ip link          |
-| 隧道           | iptunnel         | ip tunnel        |
-| 组播           | ipmaddr          | ip maddr         |
-| 统计           | netstat          | ss               |
-
-```bash
-ip link show
-ip address show
-ip route show
-
-# add commands to /etc/init.d/local.sh
-
-rm -fr /etc/udev/rules.d/70-persistent-net.rules
-
-# start up network adapter
-ip link set eth0 up
-
-# add/delete static ip
-ip address add 192.168.1.1/24 dev eth0
-ip address del 192.168.1.1/24 dev eth0
-
-# add/delete static route
-ip route add 192.168.1.0/24 dev eth0
-ip route del 192.168.1.0/24 dev eth0
-ip route add default via 192.168.0.196
-
-# watch packets
-watch -n 1 "ifconfig eth0"
-watch -n 1 "ifconfig eth1"
-watch -n 1 "ifconfig eth2"
-```
-
-### ufw
-
-```bash
-ufw status
-ufw enable
-ufw allow ssh
-ufw allow http
-ufw allow https
-```
-
-### arp
-
-`arp -a`显示地址解析协议 (IP 地址—网卡地址):
-
-- 网际互联层：IP 协议(网际)、IGMP 协议(互联网组管理)、ICMP 协议(互联网控制报文)
-- 传输层：TCP 协议(传输控制)、UDP 协议(用户数据报)
-
-### netstat
-
-`netstat -an`查看本机启用的端口:
-
-- (-a 查看所有连接和监听端口 -n 显示 IP 地址和端口号)
-- -t tcp 协议端口
-- -u udp 协议端口
-- -l 监听状态服务
-
-### nslookup
-
-`nslookup domain_name` 查看 DNS 解析器: `/etc/network/interfaces`.
-
-主机名:
-
-- `/etc/hostname`.
-- `/etc/sysconfig/network`.
-- `/etc/resolv.conf`.
-
-### ping
-
-`ping -c ip/domain`探测网络状况
-
-### telnet
-
-`telnet [ip/domain] [端口]`远程管理与端口探测命令
-
-### Trace Route
-
-- `traceroute [-n IP] domain`路由跟踪命令
-- `traceroute -n -I -T -p`路由扫描
-
-### Net Filter Framework
-
-nftables 命令行工具：nft
-
-### fping
-
-`fping -a -u -g -f [target]`批量扫描主机地址
-
-### hping
-
-`hping -p -S -a`可伪造 IP 地址
-
-### mtr
-
-路由扫描
-
-### nmap
-
-批量主机服务扫描:
-
-- -P ICMP
-- -sS TCP SYN
-- -sT TCP connect()
-- -sU UDP
-
-### ncat
-
-批量主机服务扫描:
-
-- -w 设置超时时间
-- -v 显示命令执行过程
-- -z 一个输入输出模式
-- -u UDP 协议
-
 ## Shell Execution Commands
 
 exec 1>>output.log
 exec 2>>error.log
 
-### Systemctl
+### Systemctl Command
 
 ```bash
 systemctl enable local
@@ -1541,13 +1632,13 @@ crontab -e(establish)
 
 ## C++ Binary Commands
 
-### ldd
+### Ldd Command
 
 ```bash
 ldd ./lib.sio
 ```
 
-### nm
+### Nm Command
 
 ```bash
 nm -Ca ./lib.so
@@ -2566,47 +2657,40 @@ setw -g mode-keys vi      # Vi
 set-window-option -g window-status-current-bg red
 ```
 
-## Perf Tools
+## Performance Tools
 
 ![Linux Perf Tools](./figures/LinuxPerfTools.png 'Linux Perf Tools')
 
-### Top Command
+- [Uptime](#uptime-command).
+- [Dmesg](#dmesg-command).
+- [Vmstat](#vmstat-command).
+- [Mpstat](#mpstat-command).
+- [Pidstat](#pidstat-command).
+- [Iostat](#iostat-command).
+- [Iotop](#iotop-command).
+- [Free](#free-command).
+- [Sar](#sar-command).
+- [Top](#top-command).
+
+[Linux performance analysis in 60,000 milliseconds](https://netflixtechblog.com/linux-performance-analysis-in-60-000-milliseconds-accc10403c55)
+(Netflix):
 
 ```bash
+uptime
+dmesg | tail
+vmstat 1
+mpstat -P ALL 1
+pidstat 1
+iostat -xz 1
+free -m
+sar -n DEV 1
+sar -n TCP,ETCP 1
 top
 ```
 
-### dmesg
+### Perf Command
 
-```bash
-dmesg | tail
-```
-
-### iostat
-
-```bash
-iostat -xz 1
-```
-
-### free
-
-```bash
-free -m
-```
-
-### sar
-
-```bash
-`sar -n DEV 1`
-```
-
-```bash
-`sar -n TCP,ETCP 1`
-```
-
-### perf
-
-[Perf Examples](http://www.brendangregg.com/perf.html)
+Perf [cookbook](http://www.brendangregg.com/perf.html)
 
 ```bash
 perf list # events
