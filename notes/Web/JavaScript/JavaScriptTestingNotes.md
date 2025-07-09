@@ -1821,7 +1821,8 @@ ndb index.js
 
 ### DevTools Detection
 
-- [DevTools detection guide](https://github.com/546669204/fuck-debugger-extensions)
+- DevTools disable [library](https://github.com/theajack/disable-devtool).
+- DevTools disable detection [guide](https://github.com/546669204/fuck-debugger-extensions).
 
 #### Console DevTools Detection
 
