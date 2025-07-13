@@ -1674,6 +1674,20 @@ Children property:
 
 [![Grid Auto Repeat Size](./figures/GridAutoRepeatSize.png)](https://css-tricks.com/auto-sizing-columns-css-grid-auto-fill-vs-auto-fit)
 
+:::tip Flexible Grids
+
+One of the [all-time great CSS tricks](https://css-tricks.com/books/greatest-css-tricks/flexible-grids):
+
+```css
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+```
+
+:::
+
 #### Grid Line Types
 
 `<grid-line>`:
