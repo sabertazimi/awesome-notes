@@ -1681,8 +1681,8 @@ One of the [all-time great CSS tricks](https://css-tricks.com/books/greatest-css
 ```css
 .grid {
   display: grid;
-  gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
 }
 ```
 
