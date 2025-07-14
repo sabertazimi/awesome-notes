@@ -216,11 +216,204 @@ AI agents powered by tricky LLMs prompting:
   并包含关于如何通过条件步骤或分支来处理它们的指令, e.g 在缺少所需信息时提供替代步骤.
 
 ```markdown
-您是 LLM 智能体指令编写专家。
-请将以下帮助中心文档转换为一组清晰的指令，以编号列表形式编写。
-该文档将成为 LLM 遵循的政策。确保没有歧义，并且指令是以智能体的指示形式编写的。
+您是 LLM 智能体指令编写专家.
+请将以下帮助中心文档转换为一组清晰的指令, 以编号列表形式编写.
+该文档将成为 LLM 遵循的政策. 确保没有歧义, 并且指令是以智能体的指示形式编写的.
 要转换的帮助中心文档如下 {{help_center_doc}}
 ```
+
+### Agent Orchestration
+
+单智能体系统 (Single-agent systems):
+
+```mermaid
+graph TD
+    A[Input] --> B[Agent]
+    B --> C[Output]
+    D[Instructions] --> B
+    E[Tools] --> B
+    F[Guardrails] --> B
+    G[Hooks] --> B
+```
+
+多智能体系统中心模式 (Multi-agent systems in manager pattern):
+其余智能体作为工具, 由中心智能体调用:
+
+```mermaid
+graph LR
+    A[Translate 'hello' to Spanish, French and Italian for me!] --> B[Manager]
+    C[...] --> B
+    B --> D[Task]
+    B --> E[Task]
+    B --> F[Task]
+    D --> G[Spanish agent]
+    E --> H[French agent]
+    F --> I[Italian agent]
+```
+
+```python
+from agents import Agent, Runner
+
+manager_agent = Agent(
+  name="manager_agent",
+  instructions=(
+    "您是一名翻译代理. 您使用给定的工具进行翻译."
+    "如果要求进行多次翻译, 您将调用相关工具."
+  ),
+  tools=[
+    spanish_agent.as_tool(
+      tool_name="translate_to_spanish",
+      tool_description="将用户的消息翻译成西班牙语",
+    ),
+    french_agent.as_tool(
+      tool_name="translate_to_french",
+      tool_description="将用户的消息翻译成法语",
+    ),
+    italian_agent.as_tool(
+      tool_name="translate_to_italian",
+      tool_description="将用户的消息翻译成意大利语",
+    ),
+  ],
+)
+
+async def main():
+  msg = input("Translate 'hello' to Spanish, French and Italian for me!")
+
+  orchestrator_output = await Runner.run(manager_agent, msg)
+
+  for message in orchestrator_output.new_messages:
+    print(f"翻译步骤: {message.content}")
+```
+
+多智能体系统去中心模式 (Multi-agent systems in decentralized pattern),
+多个代理作为对等体运行:
+
+```mermaid
+graph LR
+    A[Where is my order?] --> B[Triage]
+    B -->|Issues and Repairs| C[Issues and Repairs]
+    B -->|Sales| D[Sales]
+    B -->|Orders| E[Orders]
+    E --> F[On its way!]
+```
+
+```python
+from agents import Agent, Runner
+
+technical_support_agent = Agent(
+  name="Technical Support Agent",
+  instructions=(
+    "您提供解决技术问题、系统中断或产品故障排除的专家协助."
+  ),
+  tools=[search_knowledge_base]
+)
+
+sales_assistant_agent = Agent(
+  name="Sales Assistant Agent",
+  instructions=(
+    "您帮助企业客户浏览产品目录、推荐合适的解决方案并促成购买交易."
+  ),
+  tools=[initiate_purchase_order]
+)
+
+order_management_agent = Agent(
+  name="Order Management Agent",
+  instructions=(
+    "您协助客户查询订单跟踪、交付时间表以及处理退货或退款."
+  )
+)
+
+tools=[track_order_status, initiate_refund_process]
+
+triage_agent = Agent(
+  name="Triage Agent",
+  instructions="您作为第一个接触点, 评估客户查询并迅速将其引导至正确的专业代理.",
+  handoffs=[technical_support_agent, sales_assistant_agent, order_management_agent],
+)
+
+await Runner.run(triage_agent, input("您能提供我最近购买商品的配送时间表更新吗?"))
+```
+
+### Agent Guardrails
+
+构建防护措施:
+
+- 相关性分类器:
+  确保智能体响应保持在预期范围内, 通过标记偏离主题的查询.
+- 安全分类器:
+  检测试图利用系统漏洞的不安全输入 (越狱或提示注入).
+- PII 过滤器:
+  通过审查模型输出中任何潜在的个人身份信息 (PII), 防止不必要的个人身份信息泄露.
+- 内容审核:
+  标记有害或不当的输入 (仇恨言论、骚扰、暴力), 以保持安全、尊重的互动.
+- 工具安全措施:
+  通过评估您代理可用的每个工具的风险,
+  并根据只读与写入访问、可逆性、所需的账户权限和财务影响等因素分配低、中或高评级.
+  使用这些风险评级来触发自动化操作,
+  例如在高风险功能执行前暂停进行防护措施检查, 或在需要时升级到人工干预.
+- 基于规则的保护:
+  简单的确定性措施 (黑名单、输入长度限制、正则表达式过滤器) 以防止已知的威胁,
+  如禁止的术语或 SQL 注入.
+- 输出验证:
+  通过提示工程和内容检查确保响应与品牌价值一致, 防止可能损害品牌完整性的输出.
+
+```python
+from agents import (
+  Agent,
+  GuardrailFunctionOutput,
+  InputGuardrailTripwireTriggered,
+  RunContextWrapper,
+  Runner,
+  TResponseInputItem,
+  input_guardrail,
+  Guardrail,
+  GuardrailTripwireTriggered
+)
+from pydantic import BaseModel
+
+class ChurnDetectionOutput(BaseModel):
+  is_churn_risk: bool
+  reasoning: str
+
+churn_detection_agent = Agent(
+  name="Churn Detection Agent",
+  instructions="识别用户消息是否表示潜在的客户流失风险.",
+  output_type=ChurnDetectionOutput,
+)
+
+@input_guardrail
+async def churn_detection_tripwire(
+   ctx: RunContextWrapper[None],
+   agent: Agent,
+   input: str | list[TResponseInputItem]
+) -> GuardrailFunctionOutput:
+  result = await Runner.run(churn_detection_agent, input, context=ctx.context)
+
+  return GuardrailFunctionOutput(
+    output_info=result.final_output,
+    tripwire_triggered=result.final_output.is_churn_risk,
+  )
+
+customer_support_agent = Agent(
+  name="Customer support agent",
+  instructions="您是客户支持代理. 您帮助客户解决他们的问题.",
+  input_guardrails=[Guardrail(guardrail_function=churn_detection_tripwire)]
+)
+
+async def main():
+  # 这应该没问题
+  await Runner.run(customer_support_agent, "你好！")
+  print("你好消息已通过")
+
+  # 这应该触发防护措施
+  try:
+    await Runner.run(agent, "我想取消订阅")
+    print("防护措施未触发 - 这是意料之外的")
+  except GuardrailTripwireTriggered:
+    print("流失检测防护措施已触发")
+```
+
+当超出失败阈值或高风险操作时, 触发人工干预计划, 是一项关键的安全保障措施:
 
 ## MCP Server
 
