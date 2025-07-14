@@ -203,6 +203,25 @@ AI agents powered by tricky LLMs prompting:
 - Generative [agent](https://github.com/joonspk-research/generative_agents).
 - Minecraft [agent](https://github.com/MineDojo/Voyager).
 
+### Agent Instruction
+
+- Use existing documents:
+  使用现有的操作程序、支持脚本或政策文档来创建 LLM 友好的 routines.
+- Prompt agents to break down tasks:
+  提供更小、更清晰的步骤有助于最大限度地减少歧义, 并帮助模型更好地遵循指令.
+- Define clear actions:
+  确保 routine 中的每一步都对应一个特定的行动或输出.
+- Capture edge cases:
+  实际交互通常会产生决策点, 一个健壮的 routine 会预测常见的变化,
+  并包含关于如何通过条件步骤或分支来处理它们的指令, e.g 在缺少所需信息时提供替代步骤.
+
+```markdown
+您是 LLM 智能体指令编写专家。
+请将以下帮助中心文档转换为一组清晰的指令，以编号列表形式编写。
+该文档将成为 LLM 遵循的政策。确保没有歧义，并且指令是以智能体的指示形式编写的。
+要转换的帮助中心文档如下 {{help_center_doc}}
+```
+
 ## MCP Server
 
 - [Sequential thinking](https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking).
