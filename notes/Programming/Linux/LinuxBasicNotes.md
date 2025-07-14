@@ -353,6 +353,17 @@ VLAN (或其他网络) 设备访问本地代理连接.
 
 :::
 
+当本地配置系统代理后，需要更改 WSL2 网络配置:
+
+```ini
+# ~/.wslconfig
+[wsl2]
+networkingMode=mirrored
+dnsTunneling=true
+firewall=true
+autoProxy=true
+```
+
 ### WSL Remote Connection
 
 [Gzip for WSL2](https://github.com/microsoft/WSL/issues/4461#issuecomment-1174011640):
