@@ -733,3 +733,24 @@ NNGroup article [homepage design principles](https://www.nngroup.com/articles/ho
 - Place extra buttons based on what they do.
 - In some single field forms put the button next to the input (e.g `search` button).
 - Put buttons on multi select forms above the form.
+
+## AI Interfaces
+
+### AI Interfaces Design Patterns
+
+[Design patterns](https://www.smashingmagazine.com/2025/07/design-patterns-ai-interfaces 'Design Patterns for AI Interfaces')
+for AI Interfaces:
+
+- Input UX, expressing intent:
+  - Conversational AI is a very slow way of helping users express their intent.
+  - Instead of writing prompts manually,
+    it’s a good idea to ask AI to write a prompt to feed itself.
+- Output UX, displaying outcomes:
+  AI output doesn’t have to be merely plain text or list.
+  It must be helpful to drive people to insights, faster.
+- Refinement UX, tweaking output:
+  Allow users to refine the output of AI.
+- AI Actions, tasks to complete:
+  Allow users to initiate tasks that AI can perform on their behalf.
+- AI Integration, where work happens:
+  Integrate AI into the user’s workflow and daily used tools.
