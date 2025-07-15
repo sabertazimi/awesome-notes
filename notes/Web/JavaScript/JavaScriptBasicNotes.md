@@ -4738,6 +4738,30 @@ obj.foo() // `this` in `inner` function refer to `obj`
 func() // `this` in `inner` function refer to `window`
 ```
 
+[Difference](https://jrsinclair.com/articles/2025/whats-the-difference-between-named-functions-and-arrow-functions 'What’s the difference between named functions and arrow functions?')
+between named functions and arrow functions:
+
+```mermaid
+graph TD
+    A((Start)) --> B{Need yield?};
+    B -- Y --> C[Function* generators];
+    B -- N --> D{Need this?};
+    D -- Y --> E[Method or named function];
+    D -- N --> F{Rearrange function order?};
+    F -- Y --> G[Named function declarations hoisting];
+    F -- N --> H[Arrow function];
+
+    %% Styling
+    style A fill:#009688,stroke:#009688,stroke-width:2px,color:#fff
+    style B fill:#f9c74f,stroke:#f9c74f,stroke-width:2px,color:#000
+    style C fill:#009688,stroke:#009688,stroke-width:2px,color:#fff
+    style D fill:#f9c74f,stroke:#f9c74f,stroke-width:2px,color:#000
+    style E fill:#009688,stroke:#009688,stroke-width:2px,color:#fff
+    style F fill:#f9c74f,stroke:#f9c74f,stroke-width:2px,color:#000
+    style G fill:#009688,stroke:#009688,stroke-width:2px,color:#fff
+    style H fill:#009688,stroke:#009688,stroke-width:2px,color:#fff
+```
+
 ### This Binding Invocation
 
 |                                 | `function` Call | Method Call | `new` Call  |
