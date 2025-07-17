@@ -806,13 +806,23 @@ li:first-child:nth-last-child(n + 2):nth-last-child(-n + 6) ~ li {
   - A target element has child elements: `:has(> selector)`.
   - A target element has sibling elements: `:has(+ selector)`.
 
+#### IS Pseudo Class
+
 ```css
 :is(ol, ul) :is(ol, ul) li {
   margin-left: 2rem;
 }
 ```
 
-Use `:has()` selector for [conditional styling](https://www.smashingmagazine.com/2024/05/combining-css-has-html-select-conditional-styling):
+#### Has Pseudo Class
+
+[`:has()`](https://www.joshwcomeau.com/css/has):
+
+- 父元素选择器: 选择父元素本身, 选择特定父元素的子元素/兄弟元素.
+- 兄弟元素选择器: `selector + target` 与 `target:has(+ selector)` 选中不同兄弟元素.
+- Combined with dataset: `:has([data-theme='dark'])`, `:has([data-disable-scroll='true'])`.
+- State based styling: `:active`, `:checked`, `:focus`, `:focus-visible`, `:hover`.
+- 可用于实现 [conditional styling](https://www.smashingmagazine.com/2024/05/combining-css-has-html-select-conditional-styling).
 
 ```css
 :root {
