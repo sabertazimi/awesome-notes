@@ -821,6 +821,9 @@ li:first-child:nth-last-child(n + 2):nth-last-child(-n + 6) ~ li {
 - 父元素选择器: 选择父元素本身, 选择特定父元素的子元素/兄弟元素.
 - 兄弟元素选择器: `selector + target` 与 `target:has(+ selector)` 选中不同兄弟元素.
 - Combined with dataset: `:has([data-theme='dark'])`, `:has([data-disable-scroll='true'])`.
+- Combined with structural pseudo class:
+  - `:has(:nth-child(4))`/`:has(:nth-last-child(n + 4))`: 包含至少 4 个子元素.
+  - `:has(:nth-child(5):last-child)`: 当且仅当包含 5 个子元素.
 - State based styling: `:active`, `:checked`, `:focus`, `:focus-visible`, `:hover`.
 - 可用于实现 [conditional styling](https://www.smashingmagazine.com/2024/05/combining-css-has-html-select-conditional-styling).
 
