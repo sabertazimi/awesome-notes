@@ -1544,7 +1544,7 @@ Transparent border with background image, origin and clip:
   border-radius: 1rem;
 
   /** transparent border */
-  border: transparent 1px solid;
+  border: 1px solid transparent;
 
   /**
    * background-origin: padding-box, border-box;
@@ -1553,6 +1553,34 @@ Transparent border with background image, origin and clip:
   background:
     radial-gradient(circle at 50% 250%, var(--bg-primary), var(--bg-background)) padding-box,
     linear-gradient(red, blue) border-box;
+}
+```
+
+Transparent border with mask composite:
+
+```css
+.card {
+  background-color: transparent;
+  border-radius: 1rem;
+  position: relative;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 1rem;
+
+  /** transparent border */
+  border: 1px solid transparent;
+
+  /** mask */
+  background: linear-gradient(red, blue) border-box;
+  mask:
+    linear-gradient(black, black) border-box,
+    linear-gradient(black, black) padding-box;
+  mask-composite: subtract;
 }
 ```
 
