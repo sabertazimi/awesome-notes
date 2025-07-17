@@ -2485,6 +2485,57 @@ body {
 }
 ```
 
+Tweaked frosted glass header menu:
+
+```html
+<style>
+  .backdrop {
+    position: absolute;
+    inset: 0;
+    height: 200%;
+    pointer-events: none;
+    background: hsl(0deg 0% 100% / 10%);
+    backdrop-filter: blur(16px);
+    border-radius: 4px;
+    mask-image: linear-gradient(to bottom, black 0, black 50%, transparent 50%);
+  }
+
+  .backdrop-edge {
+    /* Set this to whatever you want for the edge thickness: */
+    --thickness: 6px;
+
+    position: absolute;
+    inset: 0;
+
+    /*
+      Only a few pixels will be visible, but we’ll
+      set the height by 100% to include nearby elements.
+    */
+    height: 100%;
+    pointer-events: none;
+    background: hsl(0deg 0% 100% / 10%);
+    backdrop-filter: blur(8px) brightness(120%);
+
+    /*
+      We mask out everything aside from the first few
+      pixels, specified by the --thickness variable:
+    */
+    mask-image: linear-gradient(to bottom, black 0, black var(--thickness), transparent var(--thickness));
+
+    /*
+      Shift down by 100% of its own height, so that the
+      edge stacks underneath the main <header>:
+    */
+    transform: translateY(100%);
+  }
+</style>
+
+<header>
+  <div class="backdrop"></div>
+  <div class="backdrop-edge"></div>
+</header>
+```
+
 ### Liquid Glass Effect
 
 [Liquid glass](https://designfast.io/liquid-glass 'Liquid Glass') effect:
