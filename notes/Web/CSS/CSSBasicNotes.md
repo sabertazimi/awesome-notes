@@ -924,6 +924,12 @@ section {
 </style>
 ```
 
+:::warning
+
+`:has()` 内部无法嵌套 `:has()`.
+
+:::
+
 ### Linguistic Pseudo Class
 
 - `:dir(ltr)`/`:dir(rtl)`.
