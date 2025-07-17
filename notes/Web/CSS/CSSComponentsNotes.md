@@ -2437,6 +2437,105 @@ body {
 }
 ```
 
+### Liquid Glass Effect
+
+[Liquid glass](https://designfast.io/liquid-glass 'Liquid Glass') effect:
+
+```html
+<!-- @see {@link https://www.liquid-glass.pro} -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Liquid Glass Button Demo</title>
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+        background-image: url('https://static.liquid-glass.pro/img/background-5.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+
+      .liquid-glass {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 180px;
+        height: 60px;
+        padding: 0;
+        margin: 0;
+        text-decoration: none;
+        cursor: pointer;
+        background: none;
+        isolation: isolate;
+        border: none;
+        border-radius: 16.8px;
+        box-shadow: 0 6px 24px rgb(0 0 0 / 20%);
+      }
+
+      .liquid-glass:focus {
+        outline: none;
+      }
+
+      .liquid-glass::before {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        content: '';
+        background-color: rgb(255 255 255 / 0%);
+        border-radius: 16.8px;
+        box-shadow: inset 0 0 15px -5px #000;
+      }
+
+      .liquid-glass::after {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        content: '';
+        filter: url('#glass-distortion');
+        backdrop-filter: blur(0);
+        border-radius: 16.8px;
+      }
+
+      .glass-text {
+        position: relative;
+        font-family: Georgia, 'Microsoft YaHei', '微软雅黑', serif;
+        font-size: 24px;
+        font-weight: 400;
+        color: #fff;
+        text-shadow: 0 2px 4px rgb(0 0 0 / 20%);
+        opacity: 1;
+        transform: translate(0, 0);
+      }
+    </style>
+  </head>
+  <body>
+    <button class="liquid-glass">
+      <div class="glass-text">Login</div>
+    </button>
+
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+      <defs>
+        <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.008 0.008" numOctaves="2" seed="92" result="noise" />
+          <feGaussianBlur in="noise" stdDeviation="2" result="blurred" />
+          <feDisplacementMap in="SourceGraphic" in2="blurred" scale="77" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </defs>
+    </svg>
+  </body>
+</html>
+```
+
 ### Gradient Text Effect
 
 [Gradient text](https://codepen.io/Chokcoco/pen/Rwoybzr):
