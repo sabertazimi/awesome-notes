@@ -1511,7 +1511,7 @@ Use pseudo elements to construct circle and line:
 
 ### Gradient Border
 
-[Gradient border](https://codepen.io/Chokcoco/pen/povBORP):
+[Gradient border image](https://codepen.io/Chokcoco/pen/povBORP):
 
 ```css
 .gradient-border {
@@ -1533,6 +1533,26 @@ Use pseudo elements to construct circle and line:
   100% {
     filter: hue-rotate(360deg);
   }
+}
+```
+
+Transparent border with background image, origin and clip:
+
+```css
+.card {
+  background-color: var(--bg-background);
+  border-radius: 1rem;
+
+  /** transparent border */
+  border: transparent 1px solid;
+
+  /**
+   * background-origin: padding-box, border-box;
+   * background-clip: padding-box, border-box;
+   */
+  background:
+    radial-gradient(circle at 50% 250%, var(--bg-primary), var(--bg-background)) padding-box,
+    linear-gradient(red, blue) border-box;
 }
 ```
 
