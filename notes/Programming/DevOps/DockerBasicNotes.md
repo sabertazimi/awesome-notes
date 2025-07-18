@@ -225,7 +225,10 @@ CMD ["nginx", "-g", "daemon off;"]
 
 ## Docker Hub
 
-- [Docker mirrors](https://github.com/dongyubin/DockerHub) for mainland China.
+### Docker Hub Mirror and Proxy
+
+- Docker [mirrors](https://github.com/dongyubin/DockerHub).
+- [HubProxy](https://github.com/sky22333/hubproxy).
 
 ## Kubernetes
 
