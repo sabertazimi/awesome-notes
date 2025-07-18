@@ -2390,6 +2390,42 @@ type SyncInterface = Sync<AsyncInterface>
 // }
 ```
 
+Better types for [`Promise.all()`](https://spin.atomicobject.com/better-promise-all):
+
+```ts
+type ShallowPromisify<T> =
+  T extends Array<infer V>
+    ? Array<Promise<V>>
+    : T extends object
+      ? { [K in keyof T]: Promise<T[K]> }
+      : Promise<T>
+
+type ShallowSettled<T> =
+  T extends Array<infer V>
+    ? Array<PromiseSettledResult<V>>
+    : T extends object
+      ? { [K in keyof T]: PromiseSettledResult<T[K]> }
+      : PromiseSettledResult<T>
+
+type DeepAwaited<T> =
+  T extends Promise<infer U>
+    ? DeepAwaited<U>
+    : T extends Array<infer V>
+      ? Array<DeepAwaited<V>>
+      : T extends object
+        ? { [K in keyof T]: DeepAwaited<T[K]> }
+        : T
+
+type DeepSettled<T> =
+  T extends Promise<infer U>
+    ? PromiseSettledResult<DeepSettled<U>>
+    : T extends Array<infer V>
+      ? Array<DeepSettled<V>>
+      : T extends object
+        ? { [K in keyof T]: DeepSettled<T[K]> }
+        : T
+```
+
 ### Proxy Types
 
 ```ts
