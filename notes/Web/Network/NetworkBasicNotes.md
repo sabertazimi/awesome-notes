@@ -111,7 +111,9 @@ entity body
 
 ### HTTP Response Status Codes
 
-[RFC 2616](https://developer.mozilla.org/docs/Web/HTTP/Status):
+[RFC 2616](https://developer.mozilla.org/docs/Web/HTTP/Status)
+defines the following
+[status codes](https://evertpot.com/http):
 
 - Informational responses: 100–199.
 - Successful responses: 200–299.
