@@ -1253,6 +1253,23 @@ Multiple `column` layout:
 }
 ```
 
+:::tip `min-w-0` 与 `min-h-0`
+
+根据 Flexbox 的规范,
+flex item 的 `min-width` 和 `min-height` 的默认值是 `auto`,
+导致 flex item 宽度大于其内容宽度时，无法收缩至内容宽度以下.
+
+`min-w-0`/`min-h-0` 可以解决这个问题:
+告诉浏览器请忽略这个元素的固有最小宽度, 将它无限收缩, 最小可以到 `0`.
+
+想象在压缩一个弹簧 (`flex-shrink: 1`),
+但弹簧中间有一个硬块 (`min-width: auto` 计算出的内容尺寸),
+导致最多只能把弹簧压缩到硬块那么大.
+而 `min-width: 0` 就相当于把这个硬块给拿掉了,
+现在可以把弹簧压到任意小了.
+
+:::
+
 ### Flex Shorthand Property
 
 [`flex`](https://developer.mozilla.org/docs/Web/CSS/flex)
