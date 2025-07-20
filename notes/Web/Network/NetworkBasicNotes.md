@@ -507,6 +507,15 @@ WindowSize = BandWidth `*` RTT (带宽延迟积)
 
 :::
 
+:::tip 14kB Rule
+
+[14kB rule](https://endtimes.dev/why-your-website-should-be-under-14kb-in-size),
+most web servers TCP slow start algorithm starts by sending 10 TCP packets:
+
+`10 x 1460 = 14600 bytes`.
+
+:::
+
 ### TCP Performance
 
 - Upgrade kernel version.
