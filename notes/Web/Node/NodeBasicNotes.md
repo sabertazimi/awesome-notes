@@ -1920,6 +1920,7 @@ const iPhone11 = devices['iPhone 11'];
 
 ## Node Reference
 
-- [Node.js Dev](https://nodejs.dev/learn)
-- [Tao of Node](https://alexkondov.com/tao-of-node)
-- [Node Best Practice](https://github.com/goldbergyoni/nodebestpractices)
+- Node.js [modern patterns](https://kashw1n.com/blog/nodejs-2025).
+- Node.js official [tutorial](https://nodejs.org/en/learn/getting-started/introduction-to-nodejs).
+- Node.js [tao](https://alexkondov.com/tao-of-node).
+- Node.js [best practice](https://github.com/goldbergyoni/nodebestpractices).
