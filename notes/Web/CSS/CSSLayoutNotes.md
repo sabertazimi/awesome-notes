@@ -872,7 +872,9 @@ If `containing block` `height` is `auto`, it calculated to `0`.
 .profile-menu {
   position-anchor: --profile-button;
   position: absolute;
+  /* stylelint-disable-next-line declaration-property-value-no-unknown */
   inset-block-start: anchor(end); /* top: anchor(--profile-button bottom) */
+  /* stylelint-disable-next-line declaration-property-value-no-unknown */
   inset-inline-start: anchor(start); /* left: anchor(--profile-button left) */
 }
 ```
