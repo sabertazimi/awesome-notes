@@ -55,12 +55,6 @@ tags: [Web, CSS]
 [`@layer`](https://developer.mozilla.org/docs/Web/CSS/@layer) formal syntax:
 
 ```css
-@layer [<layer-name># | <layer-name>?  {
-  <stylesheet>
-}];
-```
-
-```css
 @layer base;
 @layer theme, layout, components, utilities;
 
@@ -626,11 +620,11 @@ button:active,
 [type='button']:active,
 [type='reset']:active,
 [type='submit']:active {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  background: linear-gradient(rgb(0 0 0 / 5%), rgb(0 0 0 / 5%));
   outline: 999px solid rgb(0 0 0 / 5%);
   outline-offset: -999px;
+  background: linear-gradient(rgb(0 0 0 / 5%), rgb(0 0 0 / 5%));
   box-shadow: inset 0 0 0 999px rgb(0 0 0 / 5%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 ```
 
@@ -1470,12 +1464,6 @@ html {
   }
 }
 
-@media speech {
-  html {
-    --media-speech: ;
-  }
-}
-
 /* 把当前变量变为空值 */
 @media (width <= 37.499em) {
   html {
@@ -2171,6 +2159,7 @@ Create fluid typography with [`clamp()`](https://www.sitepoint.com/fluid-typogra
 .wrap {
   text-align: justify;
   text-align-last: justify; /* 一个块或行的最后一行对齐方式 */
+  /* stylelint-disable-next-line declaration-property-value-no-unknown */
   text-justify: distribute-all-lines; /* ie6-8 */
 }
 ```
@@ -2198,7 +2187,7 @@ Create fluid typography with [`clamp()`](https://www.sitepoint.com/fluid-typogra
 
 ```css
 .hidden-text {
-  font: 0/0;
+  font: 0/0 sans-serif;
   color: transparent;
   text-indent: -9999px;
 }
@@ -2240,8 +2229,8 @@ pre {
 .paragraph {
   line-height: 1.5em; /* 行间距  */
   text-indent: 2em; /* 段落缩进 */
-  letter-spacing: 50px; /* 字间距  */
   word-spacing: 50px; /* 词间距  */
+  letter-spacing: 50px; /* 字间距  */
 }
 ```
 
@@ -2258,12 +2247,9 @@ p {
 
 ### Text Decoration
 
-```css
-.formal-syntax {
-  text-decoration: < 'text-decoration-line' > || < 'text-decoration-style' > || < 'text-decoration-color' > || <
-    'text-decoration-thickness' >;
-}
-```
+[`text-decoration`](https://developer.mozilla.org/docs/Web/CSS/text-decoration):
+
+`<'text-decoration-line'> || <'text-decoration-style'> || <'text-decoration-color'> || <'text-decoration-thickness'>`.
 
 ```css
 .line {
@@ -2385,7 +2371,7 @@ body {
 
 ```css
 .article-container {
-  display: box;
+  display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 4; /* 需要显示的行数 */
@@ -2440,8 +2426,7 @@ dd + dd::before {
     Non-CJK text behavior is same as for `normal`.
   - `break-all`:
     word breaks should be inserted between any two characters (excluding CJK text).
-- [`overflow-wrap`](https://developer.mozilla.org/docs/Web/CSS/overflow-wrap)
-  (`word-wrap`):
+- [`overflow-wrap`](https://developer.mozilla.org/docs/Web/CSS/overflow-wrap):
   - `normal`.
   - `anywhere`.
   - `break-word`.
@@ -2469,13 +2454,14 @@ dd + dd::before {
 .auto-wrap {
   hyphens: auto;
   word-break: normal;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
   line-break: anywhere;
 }
 
 /* 自动换行 */
 pre {
   hyphens: auto;
+  /* stylelint-disable-next-line property-no-deprecated */
   word-wrap: break-word; /* IE 5.5-7 */
   white-space: pre-wrap; /* Modern Browsers */
   line-break: anywhere;
@@ -2506,7 +2492,7 @@ wbr::after {
   max-width: 250px;
   overflow: hidden;
   text-overflow: ellipsis;
-  word-wrap: normal;
+  overflow-wrap: normal;
   white-space: nowrap;
 }
 ```
@@ -2567,9 +2553,9 @@ Set whether lines of text are laid out horizontally or **vertically**:
   height: auto;
   padding: 8px 5px;
   font-size: 12px;
-  hyphens: auto;
   line-height: 18px;
-  word-wrap: break-word; /* 英文自动换行 */
+  hyphens: auto;
+  overflow-wrap: break-word; /* 英文自动换行 */
 }
 
 /* 多列展示 */
@@ -2581,6 +2567,7 @@ Set whether lines of text are laid out horizontally or **vertically**:
   writing-mode: vertical-lr; /* 竖直从左向右 */
   writing-mode: vertical-rl; /* 竖直从右向左 */
   writing-mode: lr-tb; /* IE: 水平排列 */
+  /* stylelint-disable-next-line declaration-property-value-no-unknown */
   writing-mode: tb-lr; /* IE: 竖直从左向右 */
   writing-mode: tb-rl; /* IE: 竖直从右向左 */
 }
@@ -2801,18 +2788,8 @@ math {
 
 .font-sans-serif {
   font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    'Avenir Next,' Avenir,
-    'Segoe UI',
-    'Helvetica Neue',
-    Helvetica,
-    Cantarell,
-    Ubuntu,
-    Roboto,
-    Noto,
-    Arial,
-    sans-serif;
+    -apple-system, BlinkMacSystemFont, 'Avenir Next', Avenir, 'Segoe UI', 'Helvetica Neue', Helvetica, Cantarell,
+    Ubuntu, Roboto, Noto, Arial, sans-serif;
 }
 
 .font-serif {
@@ -3011,9 +2988,8 @@ whether and when it is [downloaded and ready to use](https://github.com/bramstei
 ```css
 @font-face {
   font-family: mySpecialFont;
-  font-style: inherit;
-  font-weight: inherit;
-  font-variant: inherit;
+  font-style: normal;
+  font-weight: 400;
   src: url('./Colleen.ttf');
   font-display: swap;
 }

@@ -50,8 +50,8 @@ new_y = element_original_y + (mouseY - original_mouseY)
 
 .hidden-opacity {
   position: absolute;
-  filter: opacity(0%);
   opacity: 0;
+  filter: opacity(0%);
 }
 
 .hidden-stacking {
@@ -61,7 +61,7 @@ new_y = element_original_y + (mouseY - original_mouseY)
 
 .hidden-clip {
   position: absolute;
-  clip: rect(0 0 0 0);
+  clip-path: rect(0 0 0 0);
 }
 
 .hidden-visibility {
@@ -104,9 +104,9 @@ h1::after {
   font-weight: 400;
   line-height: 100px;
   color: black;
-  text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 1.3px;
+  text-decoration: none;
   font-display: swap;
 }
 ```
@@ -513,7 +513,7 @@ a::after {
   height: 3px;
   content: '';
   background-color: #22313f;
-  transform-origin: bottom-center;
+  transform-origin: bottom center;
 }
 
 a:hover,
@@ -811,8 +811,8 @@ thead th:nth-child(4) {
 }
 
 :focus:not(:focus-visible) ~ .radio-label {
-  border-color: var(--color-primary);
   outline: none;
+  border-color: var(--color-primary);
 }
 
 :active:not(:disabled) ~ .radio-label {
@@ -870,12 +870,12 @@ input[type='url']:focus,
 input[type='password']:focus,
 textarea:focus,
 select:focus {
-  /* Custom border color */
-  border: 1px solid #33c3f0;
-
   /* Key point: remove default outline */
   outline: 2px solid transparent;
   outline-offset: 2px;
+
+  /* Custom border color */
+  border: 1px solid #33c3f0;
 }
 
 label,
@@ -916,7 +916,7 @@ label > .label-body {
 <style>
   [type='submit'] {
     position: absolute;
-    clip: rect(0 0 0 0);
+    clip-path: rect(0 0 0 0);
   }
 
   .btn {
@@ -1022,6 +1022,7 @@ from circle to circle:
   width: 15%;
   height: 35px;
   margin-right: 20px;
+  text-overflow: '';
 
   /* 文本属性 */
   text-align: center;
@@ -1029,7 +1030,6 @@ from circle to circle:
 
   /* 消除默认箭头 */
   text-indent: 0.01px;
-  text-overflow: '';
 
   /* 消除默认样式 */
   appearance: none;
@@ -1108,6 +1108,7 @@ from circle to circle:
   background: url('data:image/png;base64,iVB...g==');
 
   /* for IE9+ */
+  /* stylelint-disable-next-line declaration-property-value-no-unknown */
   background: rgb(0 0 0 / 50%), none;
 }
 
@@ -1120,9 +1121,9 @@ from circle to circle:
 
 .dialog {
   display: inline-block;
+  vertical-align: middle;
   text-align: left;
   white-space: normal;
-  vertical-align: middle;
   background-color: #fff;
   border-radius: 6px;
 }
@@ -1415,11 +1416,11 @@ body {
 
 .slide {
   z-index: 0;
+  transform: rotate(90deg);
+  transform-origin: 0 0;
   transition:
     transform 1s,
     opacity 0.8s;
-  transform: rotate(90deg);
-  transform-origin: 0 0;
 }
 
 .slide:target {
@@ -1454,7 +1455,7 @@ function resetScrollX() {
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-auto-rows: 1fr;
   grid-auto-flow: dense;
-  grid-gap: 1em;
+  gap: 1em;
 }
 
 .gallery .featured {
@@ -1519,10 +1520,10 @@ Use pseudo elements to construct circle and line:
   width: 200px;
   height: 100px;
   margin: auto;
-  clip-path: inset(0 round 10px);
-  filter: hue-rotate(360deg);
   border: 10px solid;
   border-image: linear-gradient(45deg, gold, deeppink) 1;
+  filter: hue-rotate(360deg);
+  clip-path: inset(0 round 10px);
   animation: hue 6s infinite linear;
 }
 
@@ -1596,11 +1597,11 @@ Transparent border with mask composite:
   z-index: -1;
   content: '';
   background: linear-gradient(-45deg, #ff3d00 0%, #0400ff 100%);
-  filter: blur(20px);
   border-radius: inherit;
-  opacity: var(0.7);
-  transition: opacity 0.3s;
+  opacity: 0.7;
+  filter: blur(20px);
   transform: translate3d(0, 20px, 0) scale(0.95);
+  transition: opacity 0.3s;
 }
 
 /**
@@ -2245,8 +2246,8 @@ Clip path triangle:
 .arrow-right {
   width: 20px;
   height: 32px;
-  clip-path: polygon(0 0, 0 100%, 100% 50%);
   background-color: #e888a3;
+  clip-path: polygon(0 0, 0 100%, 100% 50%);
 }
 ```
 
@@ -2303,6 +2304,7 @@ Background gradient square shape:
 }
 
 .checkerboard-conic-gradient {
+  /* stylelint-disable-next-line declaration-property-value-no-unknown */
   background: repeating-conic-gradient(#bbb 0, #bbb 25%, #eee 0, #eee 50%);
   background-size: 30px 30px;
 }
@@ -2463,9 +2465,9 @@ body {
 
 .card {
   background-color: rgb(17 25 40 / 54%);
-  backdrop-filter: blur(12px) saturate(200%);
   border: 1px solid rgb(255 255 255 / 12.5%);
   border-radius: 12px;
+  backdrop-filter: blur(12px) saturate(200%);
 }
 
 .hero {
@@ -2496,8 +2498,8 @@ Tweaked frosted glass header menu:
     height: 200%;
     pointer-events: none;
     background: hsl(0deg 0% 100% / 10%);
-    backdrop-filter: blur(16px);
     border-radius: 4px;
+    backdrop-filter: blur(16px);
     mask-image: linear-gradient(to bottom, black 0, black 50%, transparent 50%);
   }
 
@@ -2576,10 +2578,10 @@ Tweaked frosted glass header menu:
         text-decoration: none;
         cursor: pointer;
         background: none;
-        isolation: isolate;
         border: none;
         border-radius: 16.8px;
         box-shadow: 0 6px 24px rgb(0 0 0 / 20%);
+        isolation: isolate;
       }
 
       .liquid-glass:focus {
@@ -2601,9 +2603,9 @@ Tweaked frosted glass header menu:
         inset: 0;
         z-index: -1;
         content: '';
+        border-radius: 16.8px;
         filter: url('#glass-distortion');
         backdrop-filter: blur(0);
-        border-radius: 16.8px;
       }
 
       .glass-text {
@@ -2731,10 +2733,11 @@ Tweaked frosted glass header menu:
 
 ```css
 .night {
-  background: rgb(0 40 140 / 60%), url('./house-bed.jpg');
-  filter: brightness(80%) grayscale(20%) contrast(1.2);
+  background-color: rgb(0 40 140 / 60%);
+  background-image: url('./house-bed.jpg');
   background-size: 100%;
   background-blend-mode: darken;
+  filter: brightness(80%) grayscale(20%) contrast(1.2);
 }
 ```
 
@@ -2742,8 +2745,8 @@ Tweaked frosted glass header menu:
 
 ```css
 .movie {
-  filter: contrast(1.1);
   background-blend-mode: soft-light;
+  filter: contrast(1.1);
 }
 ```
 
@@ -2777,9 +2780,9 @@ Tweaked frosted glass header menu:
   background:
     url('10.jpg') -2px -2px,
     url('10.jpg');
-  filter: brightness(3) invert(1) grayscale(1);
   background-size: 258px 173px;
   background-blend-mode: difference;
+  filter: brightness(3) invert(1) grayscale(1);
 }
 ```
 
@@ -2793,8 +2796,8 @@ Tweaked frosted glass header menu:
   height: 1em;
   overflow: hidden;
   line-height: 1;
-  text-align: left;
   vertical-align: -0.25ex;
+  text-align: left;
 }
 
 @media only screen and (prefers-reduced-motion: no-preference) {
@@ -3122,8 +3125,8 @@ p {
 }
 
 .div {
-  transition: transform 0.5s ease;
   transform: scaleX(0);
+  transition: transform 0.5s ease;
 }
 
 .div:hover,
@@ -3137,9 +3140,9 @@ p {
 ```css
 .cube {
   transform: translate3d(0, 0, 0);
-  perspective: 1000;
-  backface-visibility: hidden;
   transform-style: preserve-3d;
+  perspective: 1000px;
+  backface-visibility: hidden;
 }
 ```
 

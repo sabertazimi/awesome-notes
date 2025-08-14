@@ -299,8 +299,8 @@ export = React
 export as namespace React
 
 declare namespace React {
-  type ElementType<P = any> =
-    | {
+  type ElementType<P = any>
+    = | {
       [K in keyof JSX.IntrinsicElements]: P extends JSX.IntrinsicElements[K]
         ? K
         : never
@@ -1582,9 +1582,9 @@ interface IteratorReturnResult<TReturn> {
   value: TReturn
 }
 
-type IteratorResult<T, TReturn = any> =
-  | IteratorYieldResult<T>
-  | IteratorReturnResult<TReturn>
+type IteratorResult<T, TReturn = any>
+  = | IteratorYieldResult<T>
+    | IteratorReturnResult<TReturn>
 ```
 
 Rust-style discriminated union:
@@ -1684,8 +1684,8 @@ function reverse<T>(items: T[]): T[] {
 ### Generic Parameters
 
 ```ts
-type Event =
-  | {
+type Event
+  = | {
     type: 'LogIn'
     payload: {
       userId: string
@@ -2044,8 +2044,8 @@ interface QueryOptions {
   throwIfNotFound: boolean
 }
 
-type QueryResult<Options extends QueryOptions> =
-  Options['throwIfNotFound'] extends true ? string : string | undefined
+type QueryResult<Options extends QueryOptions>
+  = Options['throwIfNotFound'] extends true ? string : string | undefined
 
 declare function retrieve<Options extends QueryOptions>(
   key: string,
@@ -2199,8 +2199,8 @@ type Parameters<T extends (...args: any) => any> = T extends (
   ? P
   : never
 
-type ConstructorParameters<T extends new (...args: any) => any> =
-  T extends new (...args: infer P) => any ? P : never
+type ConstructorParameters<T extends new (...args: any) => any>
+  = T extends new (...args: infer P) => any ? P : never
 
 type ReturnType<T extends (...args: any) => any> = T extends (
   ...args: any[]
@@ -2393,22 +2393,22 @@ type SyncInterface = Sync<AsyncInterface>
 Better types for [`Promise.all()`](https://spin.atomicobject.com/better-promise-all):
 
 ```ts
-type ShallowPromisify<T> =
-  T extends Array<infer V>
+type ShallowPromisify<T>
+  = T extends Array<infer V>
     ? Array<Promise<V>>
     : T extends object
       ? { [K in keyof T]: Promise<T[K]> }
       : Promise<T>
 
-type ShallowSettled<T> =
-  T extends Array<infer V>
+type ShallowSettled<T>
+  = T extends Array<infer V>
     ? Array<PromiseSettledResult<V>>
     : T extends object
       ? { [K in keyof T]: PromiseSettledResult<T[K]> }
       : PromiseSettledResult<T>
 
-type DeepAwaited<T> =
-  T extends Promise<infer U>
+type DeepAwaited<T>
+  = T extends Promise<infer U>
     ? DeepAwaited<U>
     : T extends Array<infer V>
       ? Array<DeepAwaited<V>>
@@ -2416,8 +2416,8 @@ type DeepAwaited<T> =
         ? { [K in keyof T]: DeepAwaited<T[K]> }
         : T
 
-type DeepSettled<T> =
-  T extends Promise<infer U>
+type DeepSettled<T>
+  = T extends Promise<infer U>
     ? PromiseSettledResult<DeepSettled<U>>
     : T extends Array<infer V>
       ? Array<DeepSettled<V>>
@@ -2485,11 +2485,11 @@ const typeSym = Symbol('type')
 const valueSym = Symbol('value')
 
 type Brand<B extends string, T> = T extends
-| undefined
-| null
-| number
-| boolean
-| bigint
+  | undefined
+  | null
+  | number
+  | boolean
+  | bigint
   ? { [typeSym]: B, [valueSym]: T }
   : T & { [typeSym]: B }
 
@@ -2517,8 +2517,8 @@ type Parameters<T extends (...args: any) => any> = T extends (
   ? P
   : never
 
-type ConstructorParameters<T extends new (...args: any) => any> =
-  T extends new (...args: infer P) => any ? P : never
+type ConstructorParameters<T extends new (...args: any) => any>
+  = T extends new (...args: infer P) => any ? P : never
 
 type ReturnType<T extends (...args: any) => any> = T extends (
   ...args: any[]
@@ -3521,8 +3521,8 @@ logger(user) // Oops! `user.isSuperAdmin` is undefined.
 - Type-safe React router advanced [types](https://speakerdeck.com/zoontek/advanced-typescript-how-we-made-our-router-typesafe).
 
 ```tsx
-type PathSegments<Path extends string> =
-  Path extends `${infer SegmentA}/${infer SegmentB}`
+type PathSegments<Path extends string>
+  = Path extends `${infer SegmentA}/${infer SegmentB}`
     ? ParamOnly<SegmentA> | PathSegments<SegmentB>
     : ParamOnly<Path>
 type ParamOnly<Segment extends string> = Segment extends `:${infer Param}`

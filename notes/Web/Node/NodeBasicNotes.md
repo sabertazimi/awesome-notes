@@ -589,6 +589,7 @@ API_URL=**************************
 ```ts
 // config.js
 const dotenv = require('dotenv')
+
 dotenv.config()
 
 module.exports = {
@@ -601,6 +602,7 @@ module.exports = {
 ```ts
 // server.js
 const { port } = require('./config')
+
 console.log(`Your port is ${port}`) // 8626
 ```
 
@@ -1241,7 +1243,7 @@ async function* walk(dir: string): AsyncGenerator<string> {
     const entry = join(dir, d.name)
 
     if (d.isDirectory())
-      yield * walk(entry)
+      yield* walk(entry)
     else if (d.isFile())
       yield entry
   }
@@ -1415,6 +1417,7 @@ server.listen(8000)
 
 ```ts
 const net = require('node:net')
+
 const chatServer = net.createServer()
 // 用于检测僵尸客户端,用于及时清楚僵尸客户端
 const clientList = []
@@ -1474,6 +1477,7 @@ socket.end()
 const fs = require('node:fs')
 const http = require('node:http')
 const io = require('socket.io')
+
 const sockFile = fs.readFileSync('socket.html')
 
 server = http.createServer()
@@ -1580,6 +1584,7 @@ dns.resolve('github.com', 'MX', (err, res) => {
 
 ```ts
 const crypto = require('node:crypto')
+
 const md5 = crypto.createHash('md5')
 
 md5.update('foo')
@@ -1595,6 +1600,7 @@ openssl genrsa -out key.pem 1024
 ```ts
 const crypto = require('node:crypto')
 const fs = require('node:fs')
+
 const pem = fs.readFileSync('key.pem')
 const key = pem.toString('ascii')
 const hmac = crypto.createHmac('sha1', key)
@@ -1654,6 +1660,7 @@ const id = newId('keyY')
 const cluster = require('node:cluster')
 const http = require('node:http')
 const numCPUs = require('node:os').cpus().length
+
 const rssWarn = 50 * 1024 * 1024
 const heapWarn = 50 * 1024 * 1024
 const workers = {}
@@ -1893,6 +1900,7 @@ puppeteer.use(StealthPlugin());
 })()
 
 const { chromium, devices } = require('playwright')
+
 const iPhone11 = devices['iPhone 11'];
 
 (async () => {

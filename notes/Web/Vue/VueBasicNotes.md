@@ -1061,6 +1061,7 @@ watchPostEffect(() => {
 ```ts
 import { isRef, ref, unref, watchEffect } from 'vue'
 
+// eslint-disable-next-line react-hooks-extra/no-unnecessary-use-prefix
 export function useFetch(url) {
   const data = ref(null)
   const error = ref(null)
@@ -1098,6 +1099,7 @@ export function App() {
 import { produce } from 'immer'
 import { shallowRef } from 'vue'
 
+// eslint-disable-next-line react-hooks-extra/no-unnecessary-use-prefix
 export function useImmer(baseState) {
   const state = shallowRef(baseState)
   const update = (updater) => {

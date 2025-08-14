@@ -804,12 +804,12 @@ Session authentication with Lucia in [Next.js](https://www.robinwieruch.de/next-
 // src/features/auth/actions/sign-up.ts
 'use server'
 
-import { lucia } from '@/lib/lucia'
-import { prisma } from '@/lib/prisma'
 import { generateId } from 'lucia'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { Argon2id } from 'oslo/password'
+import { lucia } from '@/lib/lucia'
+import { prisma } from '@/lib/prisma'
 
 async function signUp(formData: FormData) {
   const formDataRaw = {
@@ -869,11 +869,11 @@ export { signUp }
 // src/features/auth/actions/sign-in.ts
 'use server'
 
-import { lucia } from '@/lib/lucia'
-import { prisma } from '@/lib/prisma'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { Argon2id } from 'oslo/password'
+import { lucia } from '@/lib/lucia'
+import { prisma } from '@/lib/prisma'
 
 async function signIn(formData: FormData) {
   const formDataRaw = {
@@ -926,12 +926,11 @@ export { signIn }
 `getAuth` function:
 
 ```ts
-import type { Session, User } from 'lucia'
-import { lucia } from '@/lib/lucia'
-
 // src/features/auth/queries/get-auth.ts
+import type { Session, User } from 'lucia'
 import { cookies } from 'next/headers'
 import { cache } from 'react'
+import { lucia } from '@/lib/lucia'
 
 export const getAuth = cache(
   async (): Promise<
@@ -982,9 +981,9 @@ export const getAuth = cache(
 // src/features/auth/actions/sign-out.ts
 'use server'
 
-import { lucia } from '@/lib/lucia'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
+import { lucia } from '@/lib/lucia'
 import { getAuth } from '../queries/get-auth'
 
 export async function signOut(_formData: FormData) {
@@ -1010,12 +1009,12 @@ export async function signOut(_formData: FormData) {
 Protected routes:
 
 ```tsx
-import { getAuth } from '@/features/auth/queries/get-auth'
 // src/app/(authenticated)/layout.tsx
 // - src/app/(authenticated)/dashboard/page.tsx
 // - src/app/(authenticated)/account/page.tsx
 // - and more ...
 import { redirect } from 'next/navigation'
+import { getAuth } from '@/features/auth/queries/get-auth'
 
 export default async function AuthenticatedLayout({
   children,
@@ -1034,9 +1033,9 @@ export default async function AuthenticatedLayout({
 Authorization UI:
 
 ```tsx
-import { getAuth } from '@/features/auth/queries/get-auth'
 // src/app/layout.tsx
 import Link from 'next/link'
+import { getAuth } from '@/features/auth/queries/get-auth'
 
 export default function RootLayout() {
   const { user } = await getAuth()
@@ -1337,12 +1336,14 @@ export default function ABTestComponent() {
 
   useEffect(() => {
     // Simulate reading from localStorage with a delay
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       const randomVariant = Math.random() < 0.5 ? 'A' : 'B'
       const storedVariant = localStorage.getItem('userVariant') ?? randomVariant
       localStorage.setItem('userVariant', storedVariant)
       setVariant(storedVariant)
     }, 500) // 500ms second delay to simulate a flicker effect
+
+    return () => clearTimeout(timeout)
   }, [])
 
   return (
@@ -2717,6 +2718,7 @@ module.exports = {
 ```ts
 const childProcess = require('node:child_process')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+
 const branch = childProcess
   .execSync('git rev-parse --abbrev-ref HEAD')
   .toString()

@@ -441,7 +441,6 @@ class Link extends Component<Props> {
 
 ```tsx
 class Redirect extends Component {
-  // eslint-disable-next-line react/no-default-props
   static defaultProps = {
     push: false,
   }

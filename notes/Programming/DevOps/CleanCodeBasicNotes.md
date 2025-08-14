@@ -1776,6 +1776,7 @@ class Koa extends EventEmitter {
     this.middlewares = []
   }
 
+  // eslint-disable-next-line react-hooks-extra/no-unnecessary-use-prefix
   use(fn) {
     this.middlewares.push(fn)
   }

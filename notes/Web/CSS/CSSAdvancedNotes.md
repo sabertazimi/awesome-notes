@@ -124,15 +124,15 @@ $$
 
 ```css
 .border-linear-gradient {
-  clip-path: inset(0 round 10px);
   border-style: solid;
   border-image: linear-gradient(deepskyblue, deeppink) 20 / 10px;
+  clip-path: inset(0 round 10px);
 }
 
 .border-radial-gradient {
-  clip-path: inset(0 round 10px);
   border-style: solid;
   border-image: radial-gradient(deepskyblue, deeppink) 20 / 10px;
+  clip-path: inset(0 round 10px);
 }
 
 .border-stripe {
@@ -820,7 +820,7 @@ body {
 ```css
 .image-container {
   position: relative;
-  padding-bottom: calc(2 / 3) * 100%; /* (height / width) ratio */
+  padding-bottom: calc(2 / 3 * 100%); /* (height / width) ratio */
   overflow: hidden;
 }
 
@@ -962,8 +962,8 @@ making it possible to wrap text around complex objects rather than simple boxes:
 .shape {
   float: left;
   shape-outside: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
-  shape-margin: 20px;
   shape-image-threshold: 20%;
+  shape-margin: 20px;
 }
 ```
 
@@ -983,7 +983,7 @@ making it possible to wrap text around complex objects rather than simple boxes:
 ```css
 .fixed-clip {
   position: fixed;
-  clip: rect(30px 200px 200px 20px);
+  clip-path: rect(30px 200px 200px 20px);
 }
 ```
 
@@ -1402,8 +1402,8 @@ Shape will zoom to fill size of SVG `width` and `height`:
 <style>
   .circle {
     fill: currentcolor;
-    fill-opacity: 0.5;
     fill-rule: nonzero;
+    fill-opacity: 0.5;
   }
 </style>
 ```
@@ -1413,12 +1413,12 @@ Shape will zoom to fill size of SVG `width` and `height`:
 ```css
 circle {
   stroke: blue;
-  stroke-dasharray: 14px 4px 4px 4px; /* 实色长度 透明长度 实色长度 透明长度 ... */
-  stroke-dashoffset: 0;
-  stroke-linecap: round;
-  stroke-linejoin: round;
   stroke-opacity: 0.5;
   stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 14px 4px 4px 4px; /* 实色长度 透明长度 实色长度 透明长度 ... */
+  stroke-dashoffset: 0;
   paint-order: stroke;
   vector-effect: non-scaling-stroke;
 }
@@ -1485,8 +1485,6 @@ text {
   dominant-baseline: auto;
   dominant-baseline: middle;
   dominant-baseline: central;
-  dominant-baseline: text-top;
-  dominant-baseline: text-bottom;
   dominant-baseline: alphabetic;
   dominant-baseline: hanging;
   dominant-baseline: ideographic;
@@ -1797,7 +1795,7 @@ const svgRectElement = document.createElementNS(
   touch-action: pan-up;
   touch-action: pan-down;
   touch-action: pinch-zoom;
-  touch-action: pan-left pan-up pan-zoom;
+  touch-action: pan-left pan-up;
 }
 ```
 
@@ -2745,8 +2743,8 @@ e.g `.main > .button` vs `.sidebar > .button`,
 
 ```css
 .sidebar {
-  container-type: inline-size;
   container-name: sidebar;
+  container-type: inline-size;
 }
 
 @container sidebar (min-width: 400px) {
@@ -2923,10 +2921,9 @@ const result = CSS.supports(`
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0 0 0 0);
-  clip-path: polygon(0 0, 0 0, 0 0);
   white-space: nowrap;
   border-width: 0;
+  clip-path: polygon(0 0, 0 0, 0 0);
 }
 
 .not-sr-only {
@@ -2936,9 +2933,8 @@ const result = CSS.supports(`
   padding: 0;
   margin: 0;
   overflow: visible;
-  clip: auto;
-  clip-path: none;
   white-space: normal;
+  clip-path: none;
 }
 ```
 
@@ -3145,22 +3141,19 @@ docEl.style.fontSize = fontsize
 
 ```css
 .content {
-  /* Keyword values */
-  content-visibility: visible;
-  content-visibility: hidden;
-  content-visibility: auto;
-
   /* <length> values */
   contain-intrinsic-size: 1000px;
   contain-intrinsic-size: 10rem;
 
-  /* <percentage> value */
-  contain-intrinsic-size: 10%;
+  /* Keyword values */
+  content-visibility: visible;
+  content-visibility: hidden;
+  content-visibility: auto;
 }
 
 .p {
-  content-visibility: auto;
   contain-intrinsic-size: 320px; /* 预设高度, 防止滚动条频繁抖动 */
+  content-visibility: auto;
 }
 ```
 
@@ -3755,38 +3748,6 @@ will lead to class purged.
 @layer components {
   .primary-btn {
     @apply bg-yellow-600 hover:bg-yellow-800 text-black font-bold py-4 px-6 shadow-md;
-  }
-}
-
-@layer utilities {
-  @variants hover {
-    .padding-large {
-      padding: 30px;
-    }
-  }
-
-  @variants focus hover {
-    .border-small {
-      border: 1px solid #30485e;
-    }
-
-    .border-medium-dashed {
-      border: 7px dashed #30485e;
-    }
-  }
-
-  @responsive {
-    /* generate for all breakpoints */
-    .border-solid {
-      border: 10px solid #30485e;
-    }
-  }
-
-  @screen sm {
-    /* generate for small screen breakpoint */
-    .border-solid {
-      border: 10px solid #30485e;
-    }
   }
 }
 ```

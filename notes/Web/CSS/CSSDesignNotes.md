@@ -91,8 +91,8 @@ The optimal line length for body text is `50`–`75` characters:
 .line-length {
   margin-top: 2em;
   line-height: 1.5em;
-  letter-spacing: 0.12em;
   word-spacing: 0.16em;
+  letter-spacing: 0.12em;
 }
 ```
 
@@ -201,7 +201,7 @@ use `inline-box` with `width`
 
 ```css
 .element {
-  display: inline-box;
+  display: inline-block;
   width: 80%;
 }
 ```
@@ -528,9 +528,9 @@ body {
   font-weight: var(--button-font-weight, var(--font-weight-medium));
   line-height: var(--button-leading, var(--leading-fine));
   color: var(--button-text, var(--color-surface-text));
-  text-decoration: none;
   text-transform: var(--button-text-transform, uppercase);
   letter-spacing: var(--button-kerning, var(--kerning-loose));
+  text-decoration: none;
   background: var(--button-bg, var(--color-surface-bg));
   border-radius: var(--button-radius, 0);
 }

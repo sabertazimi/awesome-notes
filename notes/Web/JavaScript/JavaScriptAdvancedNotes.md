@@ -30,7 +30,7 @@ Iteration [protocol](https://developer.mozilla.org/docs/Web/JavaScript/Reference
   - `new Set()`.
   - `Promise.all()`.
   - `Promise.race()`.
-  - `yield *` 操作符.
+  - `yield*` 操作符.
 - `for...in`/`for...of` 隐形调用迭代器的方式, 称为内部迭代器, 使用方便, 不可自定义迭代过程.
 - `{ next, done, value }` 显式调用迭代器的方式, 称为外部迭代器, 使用复杂, 可以自定义迭代过程.
 - All built-in ES6 iterators are `Self Iterable Iterator`.
@@ -579,7 +579,7 @@ const users = {
   luke: false,
   clare: true,
 
-  *[Symbol.iterator]() {
+  * [Symbol.iterator]() {
     // this === 'users'
     for (const key in this) {
       if (this[key])
@@ -599,8 +599,8 @@ class Foo {
     this.values = [1, 2, 3]
   }
 
-  *[Symbol.iterator]() {
-    yield * this.values
+  * [Symbol.iterator]() {
+    yield* this.values
   }
 }
 
@@ -720,7 +720,7 @@ Default asynchronous iterator:
 
 ```ts
 const asyncSource = {
-  async *[Symbol.asyncIterator]() {
+  async* [Symbol.asyncIterator]() {
     yield await new Promise(resolve => setTimeout(resolve, 1000, 1))
   },
 }
@@ -778,7 +778,7 @@ class Observable {
     return this.promiseQueue.shift()
   }
 
-  async *fromEvent(element, eventType) {
+  async* fromEvent(element, eventType) {
     // 在有事件生成时, 用事件对象来 resolve 队列头部的 promise
     // 同时把另一个 promise 加入队列
     element.addEventListener(eventType, (event) => {
@@ -891,15 +891,15 @@ readFile().then(res => console.log(res))
 
 #### Delegating Generator
 
-`yield *` 能够迭代一个可迭代对象 (`yield* iterable`):
+`yield*` 能够迭代一个可迭代对象 (`yield* iterable`):
 
 - 可以迭代标准库提供的 `Iterable` 集合.
 - 生成器函数产生的生成器对象是一个**自引用可迭代对象**,
-  可以使用 `yield *` 聚合生成器 (`Delegating Generator`).
+  可以使用 `yield*` 聚合生成器 (`Delegating Generator`).
 
 ```ts
 function* generatorFn() {
-  console.log('iter value:', yield * [1, 2, 3])
+  console.log('iter value:', yield* [1, 2, 3])
 }
 
 for (const x of generatorFn())
@@ -918,7 +918,7 @@ function* innerGeneratorFn() {
 }
 
 function* outerGeneratorFn(genObj) {
-  console.log('iter value:', yield * innerGeneratorFn())
+  console.log('iter value:', yield* innerGeneratorFn())
 }
 
 for (const x of outerGeneratorFn())
@@ -931,7 +931,7 @@ for (const x of outerGeneratorFn())
 ```ts
 function* chunkify(array, n) {
   yield array.slice(0, n)
-  array.length > n && (yield * chunkify(array.slice(n), n))
+  array.length > n && (yield* chunkify(array.slice(n), n))
 }
 
 async function* getRemoteData() {
@@ -944,7 +944,7 @@ async function* getRemoteData() {
     )
 
     // Return 5 elements with each iteration.
-    yield * chunkify(results, 5)
+    yield* chunkify(results, 5)
 
     hasMore = next_page !== null
     page = next_page
@@ -958,7 +958,7 @@ for await (const chunk of getRemoteData())
 #### Recursive Generator
 
 在生成器函数内部,
-用 `yield *` 去迭代自身产生的生成器对象,
+用 `yield*` 去迭代自身产生的生成器对象,
 实现递归算法.
 
 Tree traversal:
@@ -972,17 +972,17 @@ class BinaryTree {
     this.right = right
   }
 
-  *[Symbol.iterator]() {
+  * [Symbol.iterator]() {
     yield this.value
 
     if (this.left) {
       // Short for: yield* this.left[Symbol.iterator]()
-      yield * this.left
+      yield* this.left
     }
 
     if (this.right) {
       // Short for: yield* this.right[Symbol.iterator]()
-      yield * this.right
+      yield* this.right
     }
   }
 }
@@ -1012,7 +1012,7 @@ function* graphTraversal(nodes) {
   for (const node of nodes) {
     if (!visitedNodes.has(node)) {
       yield node
-      yield * graphTraversal(node.neighbors)
+      yield* graphTraversal(node.neighbors)
     }
   }
 }
@@ -1026,7 +1026,7 @@ function* domTraversal(element) {
   element = element.firstElementChild
 
   while (element) {
-    yield * domTraversal(element)
+    yield* domTraversal(element)
     element = element.nextElementSibling
   }
 }
@@ -1046,7 +1046,7 @@ async function* walk(dir: string): AsyncGenerator<string> {
     const entry = join(dir, d.name)
 
     if (d.isDirectory())
-      yield * walk(entry)
+      yield* walk(entry)
     else if (d.isFile())
       yield entry
   }
@@ -1173,7 +1173,7 @@ setTimeout(console.log, 0, p11) // Promise <resolved>: Error: bar
 ```ts
 // eslint-disable-next-line prefer-promise-reject-errors
 const p = Promise.reject()
-const onRejected = function (e) {
+function onRejected(e) {
   setTimeout(console.log, 0, 'rejected')
 }
 // 语法糖:
@@ -2274,28 +2274,34 @@ function usePostLoading() {
   useEffect(() => {
     const abortController = new AbortController()
 
-    setIsLoading(true)
-    fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`, {
-      signal: abortController.signal,
-    })
-      .then((response) => {
-        if (response.ok)
-          return response.json()
+    const fetchPost = async () => {
+      setIsLoading(true)
+      fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`, {
+        signal: abortController.signal,
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json()
+          }
 
-        return Promise.reject(new Error('The request failed.'))
-      })
-      .then((fetchedPost: Post) => {
-        setPost(fetchedPost)
-      })
-      .catch((err) => {
-        if (abortController.signal.aborted)
-          console.log('The user aborted the request')
-        else
-          console.error(err.message)
-      })
-      .finally(() => {
-        setIsLoading(false)
-      })
+          return Promise.reject(new Error('The request failed.'))
+        })
+        .then((fetchedPost: Post) => {
+          setPost(fetchedPost)
+        })
+        .catch((err) => {
+          if (abortController.signal.aborted) {
+            console.log('The user aborted the request')
+          } else {
+            console.error(err.message)
+          }
+        })
+        .finally(() => {
+          setIsLoading(false)
+        })
+    }
+
+    fetchPost()
 
     return () => {
       abortController.abort()
