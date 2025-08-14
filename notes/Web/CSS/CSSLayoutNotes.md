@@ -847,6 +847,36 @@ calculate by containing block `height`:
 
 If `containing block` `height` is `auto`, it calculated to `0`.
 
+### Anchor Position
+
+[Anchor positioning](https://webkit.org/blog/17240/a-gentle-introduction-to-anchor-positioning):
+
+```css
+.profile-button {
+  anchor-name: --profile-button;
+}
+
+.profile-menu {
+  position-anchor: --profile-button;
+  position: absolute;
+  position-area: block-end span-inline-end;
+  position-try: block-end span-inline-start;
+}
+```
+
+```css
+.profile-button {
+  anchor-name: --profile-button;
+}
+
+.profile-menu {
+  position-anchor: --profile-button;
+  position: absolute;
+  inset-block-start: anchor(end); /* top: anchor(--profile-button bottom) */
+  inset-inline-start: anchor(start); /* left: anchor(--profile-button left) */
+}
+```
+
 ### Position Reference
 
 - `position` property impact on [`display` items](https://dev.to/melnik909/css-isnt-magic-all-tips-about-the-position-property-to-avoid-common-mistakes-398m).
