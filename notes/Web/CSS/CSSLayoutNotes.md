@@ -1829,6 +1829,27 @@ One of the [all-time great CSS tricks](https://css-tricks.com/books/greatest-css
 }
 ```
 
+#### Count `auto-fit` Columns
+
+Count `auto-fit` columns [guide](https://frontendmasters.com/blog/count-auto-fill-columns):
+
+```css
+.grid {
+  --u: 7em;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, var(--u));
+  container-type: inline-size;
+}
+
+.grid::before {
+  --n: round(down, 100cqw / var(--u));
+
+  content: counter(n);
+  counter-reset: n var(--n);
+}
+```
+
 ### Named Grid Layout
 
 #### Grid Lines
