@@ -271,8 +271,8 @@ Individual transform [property](https://drafts.csswg.org/css-transforms-2/#indiv
 
 ```css
 .transform-container {
-  perspective: 1024px;
   transform-style: preserve-3d;
+  perspective: 1024px;
 }
 
 .front .back {
@@ -310,12 +310,11 @@ Individual transform [property](https://drafts.csswg.org/css-transforms-2/#indiv
 
 - `transition-property`: `all` (initial value).
 - `transition-duration`.
-- `transition-delay`: 支持负值.
 - `transition-timing-function`: `<easing-function>`.
+- `transition-delay`: 支持负值.
 
 ```css
 .element {
-  transition: property duration timing-function delay;
   transition: all 0s ease 0s;
   transition: transform 0.5s ease-in-out 0.2s;
 }
@@ -391,8 +390,8 @@ Change `transition` when `:hover` etc state bring magic effect:
 ```css
 .menu-nav {
   visibility: hidden;
-  transition: all 0.4s ease-in-out; /* Exit transition */
   transform: translateX(-100%);
+  transition: all 0.4s ease-in-out; /* Exit transition */
 }
 
 .menu-link {
@@ -530,10 +529,10 @@ function updateView(event) {
 
 - `animation-name`.
 - `animation-duration`.
-- `animation-delay`:
-  支持负值.
 - `animation-timing-function`:
   [`<easing-function>`](#transition-timing-function).
+- `animation-delay`:
+  支持负值.
 - `animation-iteration-count`:
   - `infinite | <number>` 执行次数.
   - 支持 `0` 与小数.
@@ -552,10 +551,6 @@ function updateView(event) {
   .element {
     animation: none;
   }
-}
-
-.element {
-  animation: name duration timing-function delay iteration-count direction;
 }
 ```
 
@@ -607,12 +602,12 @@ div {
 
 .to-animate {
   animation: animationName 1.5s linear;
-  animation-play-state: paused;
   animation-iteration-count: infinite;
+  animation-play-state: paused;
 }
 
 .animate {
-  animation-iteration-count: running;
+  animation-play-state: running;
 }
 ```
 
@@ -675,8 +670,8 @@ animating an element along a defined path:
 
 /* first: scale(1), last: scale(1.2) */
 .scale-up {
-  transition: transform 0.2s linear;
   transform: scale(0.8);
+  transition: transform 0.2s linear;
 }
 
 .scale-up:hover,

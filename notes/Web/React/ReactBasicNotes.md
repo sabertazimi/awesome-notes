@@ -47,13 +47,17 @@ class Example extends React.Component {
     this.setState({ val: this.state.val + 1 })
     console.log(this.state.val) // 第 2 次 log
 
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       this.setState({ val: this.state.val + 1 })
       console.log(this.state.val) // 第 3 次 log
 
       this.setState({ val: this.state.val + 1 })
       console.log(this.state.val) // 第 4 次 log
     }, 0)
+  }
+
+  componentWillUnmount() {
+    clearTimeout(timeout)
   }
 
   render() {
@@ -158,27 +162,27 @@ React Element 实际上是纯对象,
 并被 React 在必要时渲染成真实的 DOM Nodes.
 
 ```ts
-type ReactInternalType =
-  | 'react.element'
-  | 'react.portal'
-  | 'react.fragment'
-  | 'react.strict_mode'
-  | 'react.profiler'
-  | 'react.provider'
-  | 'react.context'
-  | 'react.forward_ref'
-  | 'react.suspense'
-  | 'react.suspense_list'
-  | 'react.memo'
-  | 'react.lazy'
-  | 'react.block'
-  | 'react.server.block'
-  | 'react.fundamental'
-  | 'react.scope'
-  | 'react.opaque.id'
-  | 'react.debug_trace_mode'
-  | 'react.offscreen'
-  | 'react.legacy_hidden'
+type ReactInternalType
+  = | 'react.element'
+    | 'react.portal'
+    | 'react.fragment'
+    | 'react.strict_mode'
+    | 'react.profiler'
+    | 'react.provider'
+    | 'react.context'
+    | 'react.forward_ref'
+    | 'react.suspense'
+    | 'react.suspense_list'
+    | 'react.memo'
+    | 'react.lazy'
+    | 'react.block'
+    | 'react.server.block'
+    | 'react.fundamental'
+    | 'react.scope'
+    | 'react.opaque.id'
+    | 'react.debug_trace_mode'
+    | 'react.offscreen'
+    | 'react.legacy_hidden'
 
 export interface ReactElement<Props> {
   $$typeof: any
@@ -203,16 +207,15 @@ export interface ReactElement<Props> {
 ```
 
 ```ts
-ReactDOM.render(
-  {
-    type: Form,
-    props: {
-      isSubmitted: false,
-      buttonText: 'OK!',
-    },
+import { createRoot } from 'react-dom/client'
+
+createRoot(document.getElementById('root')).render({
+  type: Form,
+  props: {
+    isSubmitted: false,
+    buttonText: 'OK!',
   },
-  document.getElementById('root'),
-)
+})
 
 // React: You told me this...
 const FormElement = {
@@ -1570,7 +1573,6 @@ type State = Readonly<typeof initialState>
 class ButtonCounter extends React.Component<Props, State> {
   readonly state: State = initialState
 
-  // eslint-disable-next-line react/no-default-props
   static defaultProps = {
     name: 'count',
   }
@@ -1819,10 +1821,10 @@ interface CheckboxInputDefinition extends BaseInputDefinition {
   onChange: BooleanChangeHandler
 }
 
-type Input =
-  | TextInputDefinition
-  | NumberInputDefinition
-  | CheckboxInputDefinition
+type Input
+  = | TextInputDefinition
+    | NumberInputDefinition
+    | CheckboxInputDefinition
 ```
 
 ### React Portal Types
@@ -1994,9 +1996,9 @@ export default function App() {
 const initialState = { count: 0 }
 type State = typeof initialState
 
-type Action =
-  | { type: 'increment', payload: number }
-  | { type: 'decrement', payload: string }
+type Action
+  = | { type: 'increment', payload: number }
+    | { type: 'decrement', payload: string }
 
 function reducer(state: State, action: Action) {
   switch (action.type) {
@@ -2177,10 +2179,10 @@ interface State<T> {
 type Cache<T> = Record<string, T>
 
 // discriminated union type
-type Action<T> =
-  | { type: 'request' }
-  | { type: 'success', payload: T }
-  | { type: 'failure', payload: string }
+type Action<T>
+  = | { type: 'request' }
+    | { type: 'success', payload: T }
+    | { type: 'failure', payload: string }
 
 function useFetch<T = unknown>(
   url?: string,
@@ -2283,6 +2285,7 @@ export default {
 import IntlMessageFormat from 'intl-messageformat'
 import en from '../locale/en'
 import zh from '../locale/zh'
+
 const MESSAGES = { en, zh }
 const LOCALE = 'en' // 这里写上决定语言的方法，例如可以从 cookie 判断语言
 
@@ -2340,13 +2343,13 @@ Context 中只定义被大多数组件所共用的属性
 增加 `render` 次数, 从而导致性能问题.
 
 ```tsx
-import { createContext, useContext, useMemo, useState } from 'react'
+import { createContext, use, useMemo, useState } from 'react'
 import { fakeAuth } from './app/services/auth'
 
 const authContext = createContext()
 
 function useAuth() {
-  return useContext(authContext)
+  return use(authContext)
 }
 
 export default function AuthProvider({ children }: { children: ReactElement }) {
@@ -3575,11 +3578,15 @@ class App extends PureComponent {
   }
 
   componentDidMount() {
-    setInterval(() => {
+    const interval = setInterval(() => {
       this.setState(() => {
         return { value: 1 }
       })
     }, 2000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(interval)
   }
 
   render() {
@@ -3615,11 +3622,15 @@ class App extends Component {
   }
 
   componentDidMount() {
-    setInterval(() => {
+    const interval = setInterval(() => {
       this.setState(() => {
         return { value: 1 }
       })
     }, 2000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(interval)
   }
 
   render() {
@@ -4196,11 +4207,11 @@ test('should reset counter to updated initial value', () => {
 #### Async Hook Testing
 
 ```ts
-import { useCallback, useContext, useState } from 'react'
+import { use, useCallback, useState } from 'react'
 
 export default function useCounter(initialValue = 0) {
   const [count, setCount] = useState(initialValue)
-  const step = useContext(CounterStepContext)
+  const step = use(CounterStepContext)
   const increment = useCallback(() => setCount(x => x + step), [step])
   const incrementAsync = useCallback(
     () => setTimeout(increment, 100),
@@ -4226,11 +4237,11 @@ test('should increment counter after delay', async () => {
 #### Error Hook Testing
 
 ```ts
-import { useCallback, useContext, useState } from 'react'
+import { use, useCallback, useState } from 'react'
 
 export default function useCounter(initialValue = 0) {
   const [count, setCount] = useState(initialValue)
-  const step = useContext(CounterStepContext)
+  const step = use(CounterStepContext)
   const increment = useCallback(() => setCount(x => x + step), [step])
   const incrementAsync = useCallback(
     () => setTimeout(increment, 100),
@@ -4522,6 +4533,7 @@ export default function App() {
 ```tsx
 // Import styled-components and css
 import styled, { css } from 'styled-components'
+
 const container = document.querySelector('.container')
 
 // Define new const with bold style
@@ -5010,7 +5022,7 @@ with `import('dep').then();`:
 import type { ReportHandler } from 'web-vitals'
 
 function reportWebVitals(onPerfEntry?: ReportHandler) {
-  if (onPerfEntry && onPerfEntry instanceof Function) {
+  if (onPerfEntry && typeof onPerfEntry === 'function') {
     // Code splitting into separate chunk
     import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
       getCLS(onPerfEntry)

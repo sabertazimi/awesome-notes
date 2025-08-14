@@ -1503,6 +1503,7 @@ git checkout <commit-hash-id>
 ```ts
 // Get file commit history
 const Git = require('nodegit')
+
 let repo
 
 Git.Repository.open(path.resolve('./.git'))

@@ -1072,7 +1072,7 @@ for (const element of elements)
 
 ```ts
 const div = document.getElementById('div1')
-const filter = function (node) {
+function filter(node) {
   return node.tagName.toLowerCase() === 'li'
     ? NodeFilter.FILTER_ACCEPT
     : NodeFilter.FILTER_SKIP
@@ -2396,12 +2396,12 @@ class EventUtil {
 // const isCSS1Compat = (document.compatMode || '') === 'CSS1Compat';
 const width
   = window.innerWidth
-  || document.documentElement.clientWidth
-  || document.body.clientWidth
+    || document.documentElement.clientWidth
+    || document.body.clientWidth
 const height
   = window.innerHeight
-  || document.documentElement.clientHeight
-  || document.body.clientHeight
+    || document.documentElement.clientHeight
+    || document.body.clientHeight
 ```
 
 ```ts
@@ -2430,12 +2430,12 @@ function isElementInViewport(el) {
   const { top, height, left, width } = el.getBoundingClientRect()
   const w
     = window.innerWidth
-    || document.documentElement.clientWidth
-    || document.body.clientWidth
+      || document.documentElement.clientWidth
+      || document.body.clientWidth
   const h
     = window.innerHeight
-    || document.documentElement.clientHeight
-    || document.body.clientHeight
+      || document.documentElement.clientHeight
+      || document.body.clientHeight
 
   return top <= h && top + height >= 0 && left <= w && left + width >= 0
 }
@@ -2502,12 +2502,12 @@ window.moveBy(-50, 0)
 // const isCSS1Compat = (document.compatMode || '') === 'CSS1Compat';
 const x
   = window.pageXOffset
-  || document.documentElement.scrollLeft
-  || document.body.scrollLeft
+    || document.documentElement.scrollLeft
+    || document.body.scrollLeft
 const y
   = window.pageYOffset
-  || document.documentElement.scrollTop
-  || document.body.scrollTop
+    || document.documentElement.scrollTop
+    || document.body.scrollTop
 ```
 
 ```ts
@@ -4236,21 +4236,21 @@ export class State {
   async dbConnect() {
     State.DB
       = State.DB
-      || (await new IndexedDB(
-        State.dbName,
-        State.dbVersion,
-        (db, oldVersion, newVersion) => {
+        || (await new IndexedDB(
+          State.dbName,
+          State.dbVersion,
+          (db, oldVersion, newVersion) => {
           // upgrade database
-          switch (oldVersion) {
-            case 0: {
-              db.createObjectStore(State.storeName)
-              break
+            switch (oldVersion) {
+              case 0: {
+                db.createObjectStore(State.storeName)
+                break
+              }
+              default:
+                throw new Error('Unsupported version!')
             }
-            default:
-              throw new Error('Unsupported version!')
           }
-        }
-      ))
+        ))
 
     return State.DB
   }

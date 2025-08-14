@@ -312,12 +312,14 @@ const a = (1 + 2) / 10 // a = 0.1 + 0.2;
 ```ts
 const goodString = 'I\'ve been a good string'
 console.log(typeof goodString) // string
+// eslint-disable-next-line unicorn/no-instanceof-builtins
 console.log(goodString instanceof String) // false
 console.log(Object.prototype.toString.call(goodString)) // [object String]
 
 // eslint-disable-next-line no-new-wrappers, unicorn/new-for-builtins
 const badString = new String('I\'ve been a naughty string')
 console.log(typeof badString) // object
+// eslint-disable-next-line unicorn/no-instanceof-builtins
 console.log(badString instanceof String) // true
 console.log(Object.prototype.toString.call(badString)) // [object String]
 
@@ -325,10 +327,12 @@ const isPrimitiveString = value => typeof value === 'string'
 console.log(isPrimitiveString(goodString)) // true
 console.log(isPrimitiveString(badString)) // false
 
+// eslint-disable-next-line unicorn/no-instanceof-builtins
 const isObjectWrappedString = value => value instanceof String
 console.log(isObjectWrappedString(goodString)) // false
 console.log(isObjectWrappedString(badString)) // true
 
+// eslint-disable-next-line unicorn/no-instanceof-builtins
 const isString = value => typeof value === 'string' || value instanceof String
 console.log(isString(goodString)) // true
 console.log(isString(badString)) // true
@@ -1089,15 +1093,18 @@ const falseObject = new Boolean(false)
 const result = falseObject && true
 console.log(result) // true
 console.log(typeof falseObject) // object
+// eslint-disable-next-line unicorn/no-instanceof-builtins
 console.log(falseObject instanceof Boolean) // true
 
 const prim = true
 assert.equal(typeof prim, 'boolean')
+// eslint-disable-next-line unicorn/no-instanceof-builtins
 assert.equal(prim instanceof Boolean, false)
 
 // eslint-disable-next-line unicorn/new-for-builtins
 const wrapped = Object(prim)
 assert.equal(typeof wrapped, 'object')
+// eslint-disable-next-line unicorn/no-instanceof-builtins
 assert.equal(wrapped instanceof Boolean, true)
 assert.equal(wrapped.valueOf(), prim) // unwrap
 ```
@@ -1564,7 +1571,7 @@ console.log(concatArray instanceof Int32Array) // true
 ```ts
 const view = new Int16Array([25, 50])
 console.log(view instanceof Int16Array) // true
-// eslint-disable-next-line unicorn/no-instanceof-array
+// eslint-disable-next-line unicorn/no-instanceof-builtins
 console.log(view instanceof Array) // false
 console.log(Array.isArray(view)) // false
 ```
@@ -1943,8 +1950,7 @@ const isAfter = Temporal.PlainDate.compare('2010-10-20', '2010-10-19') === 1
 const isEqual = Temporal.PlainDate.from('2010-10-20').equals('2010-10-21')
 const isEqual = Temporal.PlainDate.from('2010-10-20').equals('2010-10-20')
 const isEqual
-  = Temporal.PlainDate.from('2010-10-20').month
-  === Temporal.PlainDate.from('2010-10-21').month
+  = Temporal.PlainDate.from('2010-10-20').month === Temporal.PlainDate.from('2010-10-21').month
 
 const isPlainTime = Temporal.Now.plainTimeISO() instanceof Temporal.PlainTime
 const isPlainDate = Temporal.Now.plainDateISO() instanceof Temporal.PlainDate
@@ -2899,6 +2905,7 @@ const truthy = Function[[proto]] === Function.prototype
 const truthy = Function[[proto]][[proto]] === Object.prototype
 
 // True:
+// eslint-disable-next-line unicorn/no-instanceof-builtins
 const truthy = Object instanceof Function
 const truthy = Function instanceof Object
 ```
@@ -2973,7 +2980,7 @@ console.log(
   Array.prototype.isPrototypeOf(p), // true
   // eslint-disable-next-line no-proto, no-restricted-properties
   p.__proto__ === Array.prototype, // true
-  // eslint-disable-next-line unicorn/no-instanceof-array
+  // eslint-disable-next-line unicorn/no-instanceof-builtins
   p instanceof Array // true
 )
 ```
@@ -3288,7 +3295,7 @@ Object.create = function (o) {
 - 当返回值为**基本类型**时, 仍然可得到 `this` 指针指向的原有对象.
 
 ```ts
-const ObjectMaker = function () {
+function ObjectMaker() {
   this.name = 'This is it'
   // user-defined literal object
   // 直接忽略 this.name.
@@ -3299,7 +3306,7 @@ const ObjectMaker = function () {
 ```
 
 ```ts
-const MyClass = function () {
+function MyClass() {
   this.name = 'sven'
   return 'anne' // 返回 string.
 }
@@ -3933,7 +3940,7 @@ Child.prototype.add = function () {
 复制式地继承, 将会消耗大量内存单元:
 
 ```ts
-const classSim = function (Parent, props) {
+function classSim(Parent, props) {
   // 新的构造函数
   const Child = function (...args) {
     if (
@@ -4841,6 +4848,7 @@ const result = compare({ name: 'Nicholas' }, { name: 'Matt' })
 
 ```ts
 function foo() {}
+// eslint-disable-next-line antfu/top-level-function
 const bar = function () {}
 function baz() {}
 
@@ -4983,9 +4991,11 @@ const b = 10
 
 ```ts
 // 函数表达式:
+// eslint-disable-next-line antfu/top-level-function
 const foo = function foo() {}
 
 // `function f() {}` 是命名函数表达式:
+// eslint-disable-next-line antfu/top-level-function
 const factorial = function f(num) {
   if (num <= 1)
     return 1
@@ -4997,6 +5007,7 @@ const factorial = function f(num) {
 The name `funcExpr` only exists inside the function body:
 
 ```ts
+// eslint-disable-next-line antfu/top-level-function
 const func = function funcExpr() {
   return funcExpr
 }
@@ -5264,7 +5275,7 @@ if (callback)
 ```
 
 ```ts
-const findNodes = function (callback) {
+function findNodes(callback) {
   let i = 100000
   const nodes = []
   let found
@@ -5292,12 +5303,12 @@ const findNodes = function (callback) {
 并利用 `apply/call` 改变执行环境.
 
 ```ts
-const findNodes = function (callbackObj, callback) {
+function findNodes(callbackObj, callback) {
   if (typeof callback === 'function')
     callback.call(callbackObj, found)
 }
 
-const findNodes = function (callbackObj, callback) {
+function findNodes(callbackObj, callback) {
   if (typeof callback === 'string')
     callback = callbackObj[callback]
 
@@ -5352,7 +5363,7 @@ let addEvent = function (el, type, handle) {
 ### Polymorphism Function
 
 ```ts
-const greet = function greet(options, ...rest) {
+function greet(options, ...rest) {
   // 运用 if/switch 方法分情况调用函数, 实现多态方法.
   if (typeof options === 'string' && typeof methods[options] === 'function') {
     // 方法集中含有此方法:

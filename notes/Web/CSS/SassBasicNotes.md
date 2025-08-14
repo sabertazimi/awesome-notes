@@ -354,7 +354,7 @@ $x: 1;
 - `max`.
 - `min`.
 
-```scss
+```sass
 $value: 13.37;
 $length: $value * 1em;
 

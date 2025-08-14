@@ -40,7 +40,7 @@ Some useful best practices:
 - `@import '~bootstrap/scss/functions';`
 - `@import '~bootstrap/scss/mixins';`
 
-```scss
+```sass
 @function color($key: 'blue') {
   @return map-get($colors, $key);
 }
@@ -122,7 +122,7 @@ key variable - `$spacer`:
 - 5 - (by default) for classes that set the margin or padding to `$spacer * 3`.
 - auto - for classes that set the margin to auto
 
-```css
+```sass
 .mt-0 {
   margin-top: 0 !important;
 }

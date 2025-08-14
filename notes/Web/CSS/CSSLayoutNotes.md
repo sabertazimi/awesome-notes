@@ -1098,7 +1098,7 @@ add `margin-left` and `margin-right` to `.middle`:
 }
 
 .middle {
-  margin: 0 right-width 0 left-width;
+  margin: 0 var(--right-width) 0 var(--left-width);
 }
 ```
 
@@ -1176,7 +1176,7 @@ Three column layout allows [full-width content](https://www.joshwcomeau.com/css/
 .container {
   display: grid;
   grid-template-columns: 1fr min(60ch, calc(100% - 64px)) 1fr;
-  grid-column-gap: 32px;
+  column-gap: 32px;
 }
 
 .container > * {
@@ -1575,7 +1575,7 @@ grid item [can't be smaller than its children](https://css-tricks.com/another-co
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
+    gap: 20px;
   }
 
   /**
@@ -1825,7 +1825,7 @@ One of the [all-time great CSS tricks](https://css-tricks.com/books/greatest-css
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-auto-rows: 1fr;
   grid-auto-flow: dense;
-  grid-gap: 1em;
+  gap: 1em;
 }
 ```
 
@@ -2262,8 +2262,8 @@ selected elements in grid container:
 
 /* 清除浮动影响 */
 .box::after {
-  display: block;
   clear: both;
+  display: block;
   content: '';
 }
 
@@ -2372,7 +2372,7 @@ selected elements in grid container:
 ```css
 .row {
   width: 100%;
-  max-width: --var(row-max-width);
+  max-width: var(--row-max-width);
   margin: 0 auto;
 }
 
@@ -2454,8 +2454,8 @@ a.button::before {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  backface-visibility: hidden; /* Remove blurry in WebKit browsers */
   transform-style: preserve-3d; /* Remove blurry in WebKit browsers */
+  backface-visibility: hidden; /* Remove blurry in WebKit browsers */
 }
 
 .dialog {

@@ -72,24 +72,24 @@ interface Effect {
   next: Effect
 }
 
-type HookType =
-  | 'useState'
-  | 'useReducer'
-  | 'useContext'
-  | 'useRef'
-  | 'useEffect'
-  | 'useInsertionEffect'
-  | 'useLayoutEffect'
-  | 'useCallback'
-  | 'useMemo'
-  | 'useImperativeHandle'
-  | 'useDebugValue'
-  | 'useDeferredValue'
-  | 'useTransition'
-  | 'useMutableSource'
-  | 'useSyncExternalStore'
-  | 'useId'
-  | 'useCacheRefresh'
+type HookType
+  = | 'useState'
+    | 'useReducer'
+    | 'useContext'
+    | 'useRef'
+    | 'useEffect'
+    | 'useInsertionEffect'
+    | 'useLayoutEffect'
+    | 'useCallback'
+    | 'useMemo'
+    | 'useImperativeHandle'
+    | 'useDebugValue'
+    | 'useDeferredValue'
+    | 'useTransition'
+    | 'useMutableSource'
+    | 'useSyncExternalStore'
+    | 'useId'
+    | 'useCacheRefresh'
 ```
 
 ## Hooks Memoized State
@@ -481,6 +481,7 @@ const MyReact = (function () {
       currentHook = 0 // reset for next render
       return Comp
     },
+    // eslint-disable-next-line react-hooks-extra/no-unnecessary-use-prefix
     useEffect(callback, depArray) {
       const hasNoDeps = !depArray
       const deps = hooks[currentHook] // type: array | undefined
@@ -493,6 +494,7 @@ const MyReact = (function () {
       }
       currentHook++ // done with this hook
     },
+    // eslint-disable-next-line react-hooks-extra/no-unnecessary-use-prefix
     useState(initialValue) {
       hooks[currentHook] = hooks[currentHook] || initialValue // type: any
       const setStateHookIndex = currentHook // for setState's closure!
@@ -1227,10 +1229,12 @@ export default function Example() {
   useEffect(() => {
     // Set the mutable latest value
     latestCount.current = count
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       // Read the mutable latest value
       console.log(`You clicked ${latestCount.current} times`)
     }, 3000)
+
+    return () => clearTimeout(timeout)
   })
 
   return <div>Example</div>
@@ -1265,12 +1269,14 @@ export default function User() {
   })
 
   useEffect(() => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       user.current = {
         name: 'NewUserName',
         avatarURL: 'https://avatar.com/newavatar',
       }
     }, 5000)
+
+    return () => clearTimeout(timeout)
   })
 
   // Only output once
@@ -1559,8 +1565,8 @@ function readContext<T>(
 ```tsx
 import {
   createContext,
+  use,
   useCallback,
-  useContext,
   useMemo,
   useState,
 } from 'react'
@@ -1582,7 +1588,7 @@ export default function CountProvider(props) {
 }
 
 function useCount() {
-  const context = useContext(CountContext)
+  const context = use(CountContext)
 
   // Check whether component under `XXXContextProvider`.
   if (!context)
@@ -1719,6 +1725,7 @@ function App() {
 
   useEffect(() => {
     console.log(4)
+    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
     setCount(count => count + 1)
   }, [])
   return <Child count={count} />
@@ -1976,9 +1983,11 @@ export default function Counter() {
   const [count, setCount] = useState(0)
 
   useEffect(() => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       console.log(`You clicked ${count} times`)
     }, 3000)
+
+    return () => clearTimeout(timeout)
   })
 
   return (
@@ -2563,10 +2572,11 @@ Simple shim for [`useSyncExternalStore`](https://jser.dev/2023-08-02-usesyncexte
 
 ```tsx
 function useSyncExternalStore(subscribe, getSnapshot) {
-  const [data, setData] = useState(getSnapshot())
+  const [data, setData] = useState(() => getSnapshot())
 
   const update = useCallback(() => {
-    setData(getSnapshot())
+    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
+    setData(() => getSnapshot())
   // eslint-disable-next-line react-hooks/exhaustive-deps -- constant fn
   }, [])
 
@@ -2749,9 +2759,10 @@ function createStore(initialState) {
 // with `useState` and `store.subscribe`:
 // store.setState -> updater -> setState.
 function useStoreLegacy(store, selector) {
-  const [state, setState] = useState(selector(store.getState()))
+  const [state, setState] = useState(() => selector(store.getState()))
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
     const updater = () => setState(selector(store.getState()))
     const unsubscribe = store.subscribe(updater)
     updater()
@@ -3068,8 +3079,10 @@ function useIsMounted() {
   const [isMount, setIsMount] = useState(false)
 
   useEffect(() => {
-    if (!isMount)
+    if (!isMount) {
+      // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
       setIsMount(true)
+    }
 
     return () => setIsMount(false)
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -3369,8 +3382,10 @@ function useLockedBody(initialLocked = false): ReturnType {
 
   // Update state if initialValue changes
   useEffect(() => {
-    if (locked !== initialLocked)
+    if (locked !== initialLocked) {
+      // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
       setLocked(initialLocked)
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialLocked])
 
@@ -3629,7 +3644,7 @@ export default function Field({
       />
       <FormHelperText component="div">
         {showErrors
-        && errors.map(errorMsg => <div key={errorMsg}>{errorMsg}</div>)}
+          && errors.map(errorMsg => <div key={errorMsg}>{errorMsg}</div>)}
       </FormHelperText>
     </FormControl>
   )
@@ -3860,16 +3875,18 @@ export default function useStateParams<T>(
 ): [T, (state: T) => void] {
   const history = useHistory()
   const search = new URLSearchParams(history.location.search)
-
   const existingValue = search.get(paramsName)
+
   const [state, setState] = useState<T>(
-    existingValue ? deserialize(existingValue) : initialState
+    () => existingValue ? deserialize(existingValue) : initialState
   )
 
   useEffect(() => {
     // Updates state when user navigates backwards or forwards in browser history
-    if (existingValue && deserialize(existingValue) !== state)
-      setState(deserialize(existingValue))
+    if (existingValue && deserialize(existingValue) !== state) {
+      // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
+      setState(() => deserialize(existingValue))
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [existingValue])
 
@@ -3888,13 +3905,13 @@ export default function useStateParams<T>(
 ### Custom Router Hook
 
 ```ts
-import { useContext, useEffect } from 'react'
+import { use, useEffect } from 'react'
 import { __RouterContext } from 'react-router'
 import useForceUpdate from 'use-force-update'
 
 function useReactRouter() {
   const forceUpdate = useForceUpdate()
-  const routerContext = useContext(__RouterContext)
+  const routerContext = use(__RouterContext)
 
   useEffect(
     () => routerContext.history.listen(forceUpdate),
@@ -4022,6 +4039,7 @@ function useScript(src: string): Status {
   useEffect(
     () => {
       if (!src) {
+        // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
         setStatus('idle')
         return
       }
@@ -4049,10 +4067,13 @@ function useScript(src: string): Status {
           )
         }
 
+        // eslint-disable-next-line react-web-api/no-leaked-event-listener
         script.addEventListener('load', setAttributeFromEvent)
+        // eslint-disable-next-line react-web-api/no-leaked-event-listener
         script.addEventListener('error', setAttributeFromEvent)
       } else {
         // Grab existing script status from attribute and set to state.
+        // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
         setStatus(script.getAttribute('data-status') as Status)
       }
 
@@ -4100,6 +4121,7 @@ function useScript(src) {
       // that means another instance ...
       // ... of this hook already loaded this script, so no need to load again.
       if (cachedScripts.includes(src)) {
+        // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
         setState({
           loaded: true,
           error: false,
@@ -4406,10 +4428,10 @@ interface State<T> {
 type Cache<T> = Record<string, T>
 
 // discriminated union type
-type Action<T> =
-  | { type: 'request' }
-  | { type: 'success', payload: T }
-  | { type: 'failure', payload: string }
+type Action<T>
+  = | { type: 'request' }
+    | { type: 'success', payload: T }
+    | { type: 'failure', payload: string }
 
 function useFetch<T = unknown>(
   url?: string,

@@ -274,6 +274,7 @@ O.makeBread({ type: wheat, size: 99, name: 'foo' })
 
 ```ts
 const mockery = require('mockery')
+
 mockery.enable()
 
 describe('Sum suite File', () => {
@@ -311,13 +312,11 @@ describe('Sum suite File', () => {
 ```ts
 const puppeteer = require('puppeteer')
 
-;(async () => {
-  const browser = await puppeteer.launch()
-  const page = await browser.newPage()
-  await page.goto('https://example.com')
-  await page.screenshot({ path: 'example.png' })
-  await browser.close()
-})()
+const browser = await puppeteer.launch()
+const page = await browser.newPage()
+await page.goto('https://example.com')
+await page.screenshot({ path: 'example.png' })
+await browser.close()
 ```
 
 ### Browser Context
@@ -479,6 +478,7 @@ npm i -D jest ts-jest @types/jest react-test-renderer
 ```ts
 const { pathsToModuleNameMapper } = require('ts-jest/utils')
 const { compilerOptions } = require('./tsconfig.json')
+
 const paths = pathsToModuleNameMapper(compilerOptions.paths, {
   prefix: '<rootDir>/',
 })
@@ -544,13 +544,13 @@ import '@testing-library/jest-dom'
 // Global/Window object Stubs for Jest
 window.matchMedia
   = window.matchMedia
-  || function () {
-    return {
-      matches: false,
-      addListener() {},
-      removeListener() {},
+    || function () {
+      return {
+        matches: false,
+        addListener() {},
+        removeListener() {},
+      }
     }
-  }
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
@@ -951,7 +951,7 @@ async function* walk(dir: string): AsyncGenerator<string> {
     const entry = join(dir, d.name)
 
     if (d.isDirectory())
-      yield * walk(entry)
+      yield* walk(entry)
     else if (d.isFile())
       yield entry
   }
@@ -1546,7 +1546,7 @@ Inject trace function (log, monitor, report service)
 to window `pushState` and `replaceState`.
 
 ```ts
-const _wr = function (type) {
+function _wr(type) {
   const orig = window.history[type]
 
   return function (...args) {

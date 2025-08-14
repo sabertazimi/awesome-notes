@@ -715,32 +715,32 @@ export interface Fiber {
 - FunctionComponent.
 
 ```ts
-type WorkTag =
-  | 'FunctionComponent'
-  | 'ClassComponent'
-  | 'IndeterminateComponent'
-  | 'HostRoot'
-  | 'HostPortal'
-  | 'HostComponent'
-  | 'HostText'
-  | 'Fragment'
-  | 'Mode'
-  | 'ContextConsumer'
-  | 'ContextProvider'
-  | 'ForwardRef'
-  | 'Profiler'
-  | 'SuspenseComponent'
-  | 'MemoComponent'
-  | 'SimpleMemoComponent'
-  | 'LazyComponent'
-  | 'IncompleteClassComponent'
-  | 'DehydratedFragment'
-  | 'SuspenseListComponent'
-  | 'FundamentalComponent'
-  | 'ScopeComponent'
-  | 'Block'
-  | 'OffscreenComponent'
-  | 'LegacyHiddenComponent'
+type WorkTag
+  = | 'FunctionComponent'
+    | 'ClassComponent'
+    | 'IndeterminateComponent'
+    | 'HostRoot'
+    | 'HostPortal'
+    | 'HostComponent'
+    | 'HostText'
+    | 'Fragment'
+    | 'Mode'
+    | 'ContextConsumer'
+    | 'ContextProvider'
+    | 'ForwardRef'
+    | 'Profiler'
+    | 'SuspenseComponent'
+    | 'MemoComponent'
+    | 'SimpleMemoComponent'
+    | 'LazyComponent'
+    | 'IncompleteClassComponent'
+    | 'DehydratedFragment'
+    | 'SuspenseListComponent'
+    | 'FundamentalComponent'
+    | 'ScopeComponent'
+    | 'Block'
+    | 'OffscreenComponent'
+    | 'LegacyHiddenComponent'
 ```
 
 ### React Fiber Mode
@@ -973,7 +973,7 @@ const isTaskIncludedInBatch = (task & batchOfTasks) !== 0
 // 1. expirationTime:
 const isTaskIncludedInBatch
   = taskPriority <= highestPriorityInRange
-  && taskPriority >= lowestPriorityInRange
+    && taskPriority >= lowestPriorityInRange
 // 2. Lanes:
 const isTaskIncludedInBatch = (task & batchOfTasks) !== 0
 
@@ -990,7 +990,7 @@ current.next = task
 
 const isTaskIncludedInBatch
   = taskPriority <= highestPriorityInRange
-  && taskPriority >= lowestPriorityInRange
+    && taskPriority >= lowestPriorityInRange
 
 // 2. Lanes:
 batchOfTasks &= ~task // Delete task.
@@ -2197,12 +2197,12 @@ const BeforeMutationMask = Update | Snapshot | ChildDeletion | Visibility
 
 const MutationMask
   = Placement
-  | Update
-  | ChildDeletion
-  | ContentReset
-  | Ref
-  | Hydrating
-  | Visibility
+    | Update
+    | ChildDeletion
+    | ContentReset
+    | Ref
+    | Hydrating
+    | Visibility
 
 const LayoutMask = Update | Callback | Ref | Visibility
 ```
