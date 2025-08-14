@@ -2295,7 +2295,7 @@ p {
 }
 ```
 
-下划线样式:
+更多下划线样式:
 
 - [`text-underline-position`](https://developer.mozilla.org/docs/Web/CSS/text-underline-position).
 - [`text-underline-offset`](https://developer.mozilla.org/docs/Web/CSS/text-underline-offset).
