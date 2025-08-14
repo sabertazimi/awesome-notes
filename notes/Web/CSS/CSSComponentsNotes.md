@@ -982,7 +982,8 @@ input[type='checkbox']:disabled + label::before {
 
 ### Custom Form Switch
 
-Pseudo element switch from circle to circle:
+[Pseudo element switch](https://web.dev/articles/building/a-switch-component)
+from circle to circle:
 
 - thumb-size: 2rem.
 - track-width: `2 * thumb-size`.
