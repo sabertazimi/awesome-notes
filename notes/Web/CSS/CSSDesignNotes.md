@@ -754,3 +754,7 @@ for AI Interfaces:
   Allow users to initiate tasks that AI can perform on their behalf.
 - AI Integration, where work happens:
   Integrate AI into the user’s workflow and daily used tools.
+
+## Design Reference
+
+- [Pricing page](https://pricingpages.design).
