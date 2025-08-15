@@ -701,3 +701,9 @@ MaxFlow-MinCut Theorem:
 ### Definition
 
 Tree Edit Distance: 给定 Cost(edit operation) 时的最小编辑费用
+
+## Asymmetry of Verification and Verifiers Law
+
+[Asymmetry of verification and verifiers law](https://www.jasonwei.net/blog/asymmetry-of-verification-and-verifiers-law):
+
+所有可解决且易于验证的问题, 都将被 AI 解决.
