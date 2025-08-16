@@ -1301,6 +1301,10 @@ Distributed denial of service attack:
 - 配置即代码 (Configuration as Code)
 - 标准化开发和部署 (Standard Development and Deployment)
 
+## Prompt Injection
+
+- Prompt injection [series](https://simonwillison.net/series/prompt-injection).
+
 ## Security Checklist
 
 ### Access Control System Checklist
