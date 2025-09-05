@@ -1,0 +1,58 @@
+description = "Transform URL to markdown file."
+prompt = """
+输入：
+文章URL：{{args}}
+
+输出：
+1. 格式化后的原文article.md
+2. 中英文双语版article-en-cn.md
+3. 中文版article-cn.md
+4. 文章中所有的图片资源
+
+每完成一步，都必须更新progress.md
+
+步骤0: 生成笔记
+- 仿照例子和当前任务生成笔记 progress.md
+
+步骤1: 访问网站
+- 访问上文输入中网址
+- 必须使用 "lynx -dump -image_links URL"命令访问网站
+- 网站内容保存在raw.txt中
+
+步骤2：下载图片
+- 从raw.txt中提取文章相关图片链接
+- 把图片链接写入 progress.md
+- 逐一下载到 resources/ 文件夹
+- 每下载完成一个图片，必须更新图片下载进度
+- 你必须使用curl命令进行下载
+
+步骤3：改写成markdown
+- 把raw.txt改写成markdown格式
+- 保存在article.md中
+- 将article.md中的图片链接指向 resources/ 文件夹
+
+步骤4：翻译成中英文
+- 把article.md翻译成中英文对照
+- 保存在article-en-cn.md中
+
+步骤5：翻译成中文
+- 提取article-en-cn.md中的中文
+- 保存在article-cn.md中
+
+----
+progress.md 笔记格式
+
+## 任务
+[x] xxxxx
+[ ] yyyyy
+[ ] zzzzz
+...
+
+## 图片下载进度
+[x] https://xxxx/yyy.png
+[ ] https://foo/bar.png
+...
+
+## 当前任务
+正在下载https://foo/bar.png
+"""
