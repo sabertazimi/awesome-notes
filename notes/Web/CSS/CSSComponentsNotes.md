@@ -2638,6 +2638,8 @@ Tweaked frosted glass header menu:
 </html>
 ```
 
+[Liquid glass](https://kube.io/blog/liquid-glass-css-svg) CSS SVG.
+
 ### Gradient Text Effect
 
 [Gradient text](https://codepen.io/Chokcoco/pen/Rwoybzr):
