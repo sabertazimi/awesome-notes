@@ -1426,3 +1426,4 @@ Distributed denial of service attack:
 - Security search [engines](https://github.com/edoardottt/awesome-hacker-search-engines).
 - ESLint node security [plugin](https://github.com/nodesecurity/eslint-plugin-security).
 - MetaSploit: penetration testing [framework](https://github.com/rapid7/metasploit-framework).
+- Linux server security [guide](https://github.com/imthenachoman/How-To-Secure-A-Linux-Server).
