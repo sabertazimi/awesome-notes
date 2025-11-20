@@ -1915,3 +1915,4 @@ Speed tools [list](https://web.dev/speed-tools):
 - `web.dev` performance optimization [guide](https://web.dev/explore/fast).
 - `web.dev` performance newbie [course](https://web.dev/learn/performance).
 - Performance [budgets](https://www.speedcurve.com/blog/performance-budgets).
+- Next.js SEO [course](https://nextjs.org/learn/seo).
