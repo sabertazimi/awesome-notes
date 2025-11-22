@@ -481,7 +481,7 @@ const MyReact = (function () {
       currentHook = 0 // reset for next render
       return Comp
     },
-    // eslint-disable-next-line react-hooks-extra/no-unnecessary-use-prefix
+    // eslint-disable-next-line react/no-unnecessary-use-prefix
     useEffect(callback, depArray) {
       const hasNoDeps = !depArray
       const deps = hooks[currentHook] // type: array | undefined
@@ -494,7 +494,7 @@ const MyReact = (function () {
       }
       currentHook++ // done with this hook
     },
-    // eslint-disable-next-line react-hooks-extra/no-unnecessary-use-prefix
+    // eslint-disable-next-line react/no-unnecessary-use-prefix
     useState(initialValue) {
       hooks[currentHook] = hooks[currentHook] || initialValue // type: any
       const setStateHookIndex = currentHook // for setState's closure!
@@ -1725,7 +1725,6 @@ function App() {
 
   useEffect(() => {
     console.log(4)
-    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
     setCount(count => count + 1)
   }, [])
   return <Child count={count} />
@@ -2575,7 +2574,6 @@ function useSyncExternalStore(subscribe, getSnapshot) {
   const [data, setData] = useState(() => getSnapshot())
 
   const update = useCallback(() => {
-    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
     setData(() => getSnapshot())
   // eslint-disable-next-line react-hooks/exhaustive-deps -- constant fn
   }, [])
@@ -2762,7 +2760,6 @@ function useStoreLegacy(store, selector) {
   const [state, setState] = useState(() => selector(store.getState()))
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
     const updater = () => setState(selector(store.getState()))
     const unsubscribe = store.subscribe(updater)
     updater()
@@ -3080,7 +3077,6 @@ function useIsMounted() {
 
   useEffect(() => {
     if (!isMount) {
-      // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
       setIsMount(true)
     }
 
@@ -3383,7 +3379,6 @@ function useLockedBody(initialLocked = false): ReturnType {
   // Update state if initialValue changes
   useEffect(() => {
     if (locked !== initialLocked) {
-      // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
       setLocked(initialLocked)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -3884,7 +3879,6 @@ export default function useStateParams<T>(
   useEffect(() => {
     // Updates state when user navigates backwards or forwards in browser history
     if (existingValue && deserialize(existingValue) !== state) {
-      // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
       setState(() => deserialize(existingValue))
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -4039,7 +4033,6 @@ function useScript(src: string): Status {
   useEffect(
     () => {
       if (!src) {
-        // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
         setStatus('idle')
         return
       }
@@ -4073,7 +4066,7 @@ function useScript(src: string): Status {
         script.addEventListener('error', setAttributeFromEvent)
       } else {
         // Grab existing script status from attribute and set to state.
-        // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
+
         setStatus(script.getAttribute('data-status') as Status)
       }
 
@@ -4121,7 +4114,6 @@ function useScript(src) {
       // that means another instance ...
       // ... of this hook already loaded this script, so no need to load again.
       if (cachedScripts.includes(src)) {
-        // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
         setState({
           loaded: true,
           error: false,

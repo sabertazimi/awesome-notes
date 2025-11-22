@@ -1302,8 +1302,8 @@ function prepareFreshStack(root: FiberRoot, lanes: Lanes) {
   workInProgress = createWorkInProgress(root.current, null) // currentHostRootFiber.alternate.
   workInProgressRootRenderLanes
     = subtreeRenderLanes
-    = workInProgressRootIncludedLanes
-      = lanes
+      = workInProgressRootIncludedLanes
+        = lanes
   workInProgressRootExitStatus = RootIncomplete
   workInProgressRootFatalError = null
   workInProgressRootSkippedLanes = NoLanes

@@ -2453,24 +2453,24 @@ dd + dd::before {
 /* 自动换行 */
 .auto-wrap {
   hyphens: auto;
+  line-break: anywhere;
   word-break: normal;
   overflow-wrap: break-word;
-  line-break: anywhere;
 }
 
 /* 自动换行 */
 pre {
   hyphens: auto;
+  line-break: anywhere;
   /* stylelint-disable-next-line property-no-deprecated */
   word-wrap: break-word; /* IE 5.5-7 */
   white-space: pre-wrap; /* Modern Browsers */
-  line-break: anywhere;
 }
 
 /* 强制换行 */
 .force-wrap {
-  word-break: break-all;
   line-break: anywhere;
+  word-break: break-all;
 }
 
 /* IE not support <wbr> */
