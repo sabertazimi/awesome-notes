@@ -344,8 +344,8 @@ Vue.extend = function (extendOptions: object): Function {}
 // initAssetRegisters: global-api/assets.js
 Vue.component
   = Vue.directive
-  = Vue.filter
-    = function (
+    = Vue.filter
+      = function (
         id: string,
         definition: Function | object
       ): Function | object | void {}

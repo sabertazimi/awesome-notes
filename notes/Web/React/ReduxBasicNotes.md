@@ -1793,6 +1793,8 @@ interface Store {
   dispatch: Function
 }
 
+const StoreContext = React.createContext(store)
+
 export function Provider({
   store,
   children,
@@ -1800,8 +1802,6 @@ export function Provider({
   store: Store
   children: ReactElement
 }) {
-  const StoreContext = React.createContext(store)
-
   return (
     <StoreContext value={store}>
       <StoreContext.Consumer>
