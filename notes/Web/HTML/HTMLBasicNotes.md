@@ -1140,8 +1140,7 @@ Embed [best practice](https://web.dev/embed-best-practices):
   class="lazyload"
   title="YouTube video player"
   frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write;
-        encrypted-media; gyroscope; picture-in-picture"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
   allowfullscreen
 >
 </iframe>

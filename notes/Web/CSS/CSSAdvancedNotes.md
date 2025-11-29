@@ -234,7 +234,7 @@ table {
 :root {
   --colo: #c0c0c0;
   --br-shadow: -6px 6px 15px rgb(0 0 0 / 50%);
-  --tl-shadow: 6px -6px 15px rgb(255 255 255/ 80%);
+  --tl-shadow: 6px -6px 15px rgb(255 255 255/80%);
 }
 
 body {
@@ -747,7 +747,9 @@ body {
 ```css
 .radial-gradient {
   background-image: radial-gradient(50px, white, deepskyblue);
+  /* stylelint-disable-next-line declaration-property-value-no-unknown */
   background-image: radial-gradient(50px 50%, white, deepskyblue);
+  /* stylelint-disable-next-line declaration-property-value-no-unknown */
   background-image: radial-gradient(50% 50%, white, deepskyblue);
   background-image: radial-gradient(100px at 0 0, white, deepskyblue);
   background-image: radial-gradient(100px at left top, white, deepskyblue);
@@ -3252,7 +3254,7 @@ and call JavaScript API triggering layout stage (`reflow`):
 <link rel="preload" href="/path/to/split.css" as="style" />
 
 <!-- Loading media query -->
-<link rel="stylesheet" href="/path/to/split.css" media="print" onload="this.media='all'" />
+<link rel="stylesheet" href="/path/to/split.css" media="print" onload="this.media = 'all'" />
 ```
 
 ### Animation Performance
