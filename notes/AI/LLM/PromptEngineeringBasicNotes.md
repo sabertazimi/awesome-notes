@@ -1025,6 +1025,23 @@ LLM 并未统一利用其上下文,
 信息的呈现方式对性能有显著影响.
 这凸显了 `上下文工程` 的必要性,
 优化相关信息的数量并最小化不相关上下文以实现可靠的性能.
+e.g custom gemini CLI [command](./prompts/url2md.toml).
+
+### Coding Agent Prompt
+
+Writing a good [`AGENTS.md`](https://www.humanlayer.dev/blog/writing-a-good-claude-md):
+
+- `AGENTS.md` should define your project's **WHY**, **WHAT**, and **HOW**.
+- **Less is more**.
+  Include as few instructions as reasonably possible in the file.
+- Keep the contents of your `AGENTS.md` **concise and universally applicable**.
+- Use **Progressive Disclosure**.
+  Don't tell Agent all the information to know, tell Agent when to needs, how to find and use it.
+- Agent is not a linter.
+  Use linters and code formatters,
+  and use other features like [Hooks](https://code.claude.com/docs/en/hooks) and [Slash Commands](https://code.claude.com/docs/en/slash-commands).
+- `AGENTS.md` is the highest leverage point of the harness, so avoid auto-generating it.
+  You should carefully craft its contents for best results.
 
 ## Prompt Engineering Reference
 
