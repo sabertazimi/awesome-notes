@@ -2546,20 +2546,20 @@ with a bunch of `data-v` weirdness in front of it.
 
 ```css
 /* bulma-custom.scss */
-@import url('./variables.scss');
+@import './variables.scss';
 
 /* UTILITIES */
-@import url('bulma/sass/utilities/animations.sass');
-@import url('bulma/sass/utilities/controls.sass');
-@import url('bulma/sass/utilities/mixins.sass');
+@import 'bulma/sass/utilities/animations.sass';
+@import 'bulma/sass/utilities/controls.sass';
+@import 'bulma/sass/utilities/mixins.sass';
 
 /* etc... */
 ```
 
 ```css
 /* site.scss */
-@import url('https://use.fontawesome.com/releases/v5.6.3/css/all.css');
-@import url('./bulma-custom.scss');
+@import 'https://use.fontawesome.com/releases/v5.6.3/css/all.css';
+@import './bulma-custom.scss';
 
 html,
 body {

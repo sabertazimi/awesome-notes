@@ -211,13 +211,13 @@ $x: 1;
 
 ```scss
 // import _variables.scss in main.scss
-@import url('variables');
+@import 'variables';
 ```
 
 `~` to import scss from `node_modules`
 
 ```scss
-@import url('~bootstrap/scss/bootstrap');
+@import '~bootstrap/scss/bootstrap';
 ```
 
 #### extend
