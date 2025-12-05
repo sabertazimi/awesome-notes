@@ -74,9 +74,9 @@ tags: [Web, CSS]
 ```css
 @layer reset, externals, base, components, utilities;
 
-@import url('reset.css') layer(reset);
-@import url('carousel.css') layer(externals);
-@import url('map.css') layer(externals);
+@import 'reset.css' layer(reset);
+@import 'carousel.css' layer(externals);
+@import 'map.css' layer(externals);
 ```
 
 ```html
