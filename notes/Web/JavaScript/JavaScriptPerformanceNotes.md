@@ -1916,3 +1916,4 @@ Speed tools [list](https://web.dev/speed-tools):
 - `web.dev` performance newbie [course](https://web.dev/learn/performance).
 - Performance [budgets](https://www.speedcurve.com/blog/performance-budgets).
 - Next.js SEO [course](https://nextjs.org/learn/seo).
+- The [anatomy](https://calendar.perfplanet.com/2025/the-anatomy-of-a-web-performance-report) of a web performance report.
