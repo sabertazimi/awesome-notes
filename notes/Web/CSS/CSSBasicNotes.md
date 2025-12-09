@@ -1851,6 +1851,76 @@ Change `lightness` to get gradient color:
 - `B`: blackness (`<percentage>`).
 - `A`: alpha (`<percentage>`).
 
+### LCH Color
+
+[`oklch()`](https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl):
+
+- Better readability.
+- Simple color modifications.
+- Relative colors.
+- P3 colors.
+- Better communication with design teams.
+
+```css
+/* Simple color modifications */
+.text {
+  /* ERROR: a 20% lightness difference is not sufficient for good contrast and a11y */
+  color: oklch(100% 0 0deg);
+  background: oklch(80% 0.02 300deg);
+}
+
+.error {
+  /* ERROR: colors have a slightly different hue */
+  color: oklch(50% 0.19 27deg);
+  background: oklch(90% 0.04 30deg);
+}
+
+.button {
+  background: oklch(50% 0.2 260deg);
+}
+
+.button:hover {
+  background: oklch(60% 0.2 260deg);
+}
+```
+
+```css
+/* Relative colors */
+.button {
+  background: var(--button-color);
+}
+
+.button:hover {
+  /* One :hover for normal, secondary, and error states */
+  background: oklch(from var(--button-color) calc(l + 0.1) c h);
+}
+
+.button.is-accent {
+  --button-color: var(--accent);
+}
+
+.button.is-secondary {
+  --button-color: var(--dimmed);
+}
+
+.button.is-error {
+  --button-color: var(--error);
+}
+```
+
+```css
+/* P3 colors */
+.buy-button {
+  background: oklch(62% 0.19 145deg);
+}
+
+@media (color-gamut: p3) {
+  .buy-button {
+    background: oklch(62% 0.26 145deg);
+  }
+}
+```
+
 ### Color Scheme
 
 [`color-scheme`](https://developer.mozilla.org/docs/Web/CSS/color-scheme):
