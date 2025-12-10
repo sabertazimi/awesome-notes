@@ -1302,6 +1302,11 @@ flex item 的 `min-width` 和 `min-height` 的默认值是 `auto`,
 
 :::
 
+| 属性      | 值   | 作用                                           | 目的                           |
+| --------- | ---- | ---------------------------------------------- | ------------------------------ |
+| min-width | 0    | 允许对象收缩到比其内容的固有尺寸更小，防止溢出 | 解决 Flexbox 溢出问题          |
+| max-width | none | 允许对象伸展到任意尺寸，填满可用空间           | 移除最大尺寸限制，确保完全伸展 |
+
 ### Flex Shorthand Property
 
 [`flex`](https://developer.mozilla.org/docs/Web/CSS/flex)
