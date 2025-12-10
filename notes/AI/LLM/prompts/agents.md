@@ -1,6 +1,6 @@
 ---
 name: your-agent-name
-description: [One-sentence description of what this agent does]
+description: One-sentence description of what this agent does
 ---
 
 # [AGENTS.md](https://github.blog/ai-and-ml/github-copilot/how-to-write-a-great-agents-md-lessons-from-over-2500-repositories)

@@ -146,6 +146,13 @@ window.addEventListener('resize', () => {
 })
 ```
 
+:::tip[`dvh`]
+
+`dvh` 在移动端上会产生抖动问题, 当用户从首屏开始滚动时, 导航栏的消失会导致 `100dvh` 的值发生突变。
+因此, 只有在不需要上下滚动的页面才用 `dvh`。
+
+:::
+
 ### Box Aspect Ratio
 
 Things can break [`aspect-ratio`](https://frontendmasters.com/blog/things-that-can-break-aspect-ratio-in-css):
