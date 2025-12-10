@@ -33,7 +33,7 @@ ng e2e
 production build: suffix `/` is required
 
 ```bash
-ng build --prod true --outputPath ./build --baseHref https://sabertazimi.github.io/hust-web/angular/learn/
+ng build --prod true --outputPath ./build --baseHref https://tazimi.dev/hust-web/angular/learn/
 ```
 
 ```bash
