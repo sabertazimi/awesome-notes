@@ -1086,9 +1086,10 @@ export default function RootLayout() {
 
 #### Token Authentication Pros
 
-- Token 认证不局限于浏览器 (Cookie).
-- 不使用 Cookie 可以规避 CSRF 攻击.
-- Token 中包含了用户信息, 不需要 Key-Value Store 持久化, 分布式友好.
+- 多端兼容性: Token 认证不局限于浏览器 (Cookie).
+- 安全性: 不使用 Cookie 可以规避 CSRF 攻击.
+- 灵活性:
+  Token 中包含了用户信息, 不需要 Key-Value Store 持久化, 分布式友好.
   服务器端变成无状态, 服务器端只需要根据定义的规则校验 Token 合法性.
   上述两点使得 Token Authentication 具有更好的扩展性.
 
