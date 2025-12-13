@@ -735,6 +735,10 @@ Prototype implementation [rule](./rules/prototype-implementation.mdc):
   - `{summary}` 为任务的简短描述。
 - 文件采用 Markdown 格式，包含任务完成状态（如 `[ ]` 未完成，`[x]` 已完成）等。
 
+## Claude Code Prompts
+
+- Claude code [best practices](https://www.anthropic.com/engineering/claude-code-best-practices).
+
 ## System Prompts
 
 ### AI Tools Prompts
