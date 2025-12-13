@@ -737,6 +737,13 @@ Prototype implementation [rule](./rules/prototype-implementation.mdc):
 
 ## Claude Code Prompts
 
+### Claude Code Tools
+
+Claude code has [built-in tools](https://code.claude.com/docs/en/settings#tools-available-to-claude),
+follow [certain paradigm](https://www.vtrivedy.com/posts/claudecode-tools-reference) to use them.
+
+### Claude Code Best Practices
+
 - Claude code [best practices](https://www.anthropic.com/engineering/claude-code-best-practices).
 
 ## System Prompts
