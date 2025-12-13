@@ -616,6 +616,15 @@ Don't trust user:
 - Content security policy: `script-src 'self' https://apis.google.com`.
 - Use mature template engine: built-in XSS protection feature.
 
+#### mXSS
+
+[Mutation XSS](https://www.sonarsource.com/blog/mxss-the-vulnerability-hiding-in-your-code)
+utilize mutation in HTML is any kind of change made to the markup:
+
+- When a parser fixes a broken markup: `<p>test` → `<p>test</p>`.
+- Normalizing attribute quotes: `<a alt=test>` → `<a alt=”test”>`.
+- Rearranging elements: `<table><a>` → `<a></a><table></table>`.
+
 ### CSRF
 
 #### CSRF Attack
