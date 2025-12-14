@@ -61,7 +61,7 @@ awesome-notes/
 ### Content Structure
 
 - All notes are Markdown files in the `notes/` directory
-- Notes follow the naming pattern `*BasicNotes.md`
+- Notes follow the naming pattern `*Notes.md`
 - Each note requires frontmatter with author metadata:
 
   ```yaml
@@ -115,7 +115,7 @@ awesome-notes/
 ### Creating New Notes
 
 1. Create Markdown file in appropriate category under `notes/`
-2. Follow the `*BasicNotes.md` naming convention
+2. Follow the `*Notes.md` naming convention
 3. Include required frontmatter with author metadata
 4. Use appropriate tags for categorization
 5. Leverage Docusaurus components (Tabs, Admonitions, etc.)
@@ -124,7 +124,7 @@ awesome-notes/
 
 - JSX/React components via MDX
 - LaTeX math equations: `$inline$` and `$$block$$`
-- Mermaid diagrams with ```mermaid code blocks
+- Mermaid diagrams using mermaid code blocks
 - Code syntax highlighting with language hints
 - Import Docusaurus components: `import Tabs from '@theme/Tabs'`
 
