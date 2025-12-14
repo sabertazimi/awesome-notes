@@ -954,22 +954,6 @@ mv ~/.config/nvim{,.bak}
 git clone https://github.com/LazyVim/starter ~/.config/nvim && nvim
 ```
 
-[NvChad](https://github.com/NvChad/NvChad):
-
-```bash
-mv ~/.config/nvim{,.bak}
-git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
-# Run :MasonInstallAll command after lazy.nvim finishes downloading plugins.
-```
-
-[LunarVim](https://github.com/LunarVim/LunarVim):
-
-```bash
-mv ~/.config/nvim{,.bak}
-git clone https://github.com/LunarVim/LunarVim
-bash LunarVim/utils/installer/install.sh
-```
-
 [AstroNvim](https://github.com/AstroNvim/AstroNvim):
 
 ```bash
@@ -979,6 +963,14 @@ mv ~/.local/state/nvim ~/.local/state/nvim.bak
 mv ~/.cache/nvim ~/.cache/nvim.bak
 git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim
 nvim
+```
+
+[NvChad](https://github.com/NvChad/NvChad):
+
+```bash
+mv ~/.config/nvim{,.bak}
+git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
+# Run :MasonInstallAll command after lazy.nvim finishes downloading plugins.
 ```
 
 ### NeoVim Language server
