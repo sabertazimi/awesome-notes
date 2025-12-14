@@ -682,6 +682,25 @@ contains production-ready slash commands for Claude Code.
   Convert documentation websites, GitHub repositories, and PDFs
   into Claude AI skills with automatic conflict detection.
 
+### Claude Code Plugins
+
+Install [plugins](https://github.com/anthropics/claude-code/tree/main/plugins)
+from [marketplace](https://code.claude.com/docs/en/plugin-marketplaces),
+it will extend Claude Code through the plugin system with:
+
+- Custom commands.
+- Agents.
+- Hooks.
+- Skills.
+- MCP servers.
+
+Install [edmuds plugin](https://github.com/edmund-io/edmunds-claude-code):
+
+```bash
+/plugin marketplace add edmund-io/edmunds-claude-code
+/plugin install edmunds-claude-code
+```
+
 ### Claude Code Best Practices
 
 - Claude code [best practices](https://www.anthropic.com/engineering/claude-code-best-practices).
