@@ -174,7 +174,7 @@ e.g `$`/`2l`/`aw`/`ap` 或 `/patterns`.
 | `o`      | `A<CR>`      |
 | `O`      | `ko`         |
 
-#### register
+#### Register
 
 `{register}{operator}{motion}` / `<C-r>{register}`:
 
@@ -225,6 +225,13 @@ e.g >G: 缩进全文
 `={motion}`
 
 `gg=G` 自动缩进全文
+
+:::tip[格式化（Formatting）]
+
+`={motion}` 在 VSCode 中会调用 [formatting](https://code.visualstudio.com/docs/editing/codebasics#_formatting) 命令，
+可以快速格式化代码。
+
+:::
 
 #### 注释
 
