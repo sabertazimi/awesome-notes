@@ -1051,6 +1051,8 @@ Create a test agent for this repository. It should:
 ## Prompt Engineering Reference
 
 - Prompt engineering [guide](https://github.com/dair-ai/Prompt-Engineering-Guide).
-- [Awesome](https://github.com/f/awesome-chatgpt-prompts) ChatGPT prompts.
+- Vibe coding [guide](https://github.com/tukuaiai/vibe-coding-cn).
+- Vibe coding [prompts](https://docs.google.com/spreadsheets/d/1ngoQOhJqdguwNAilCl1joNwTje7FWWN9WiI2bo5VhpU).
+- Awesome ChatGPT [prompts](https://github.com/f/awesome-chatgpt-prompts).
 - Midjourney [cookbook](https://fka.gumroad.com/l/the-art-of-midjourney-ai-guide-to-creating-images-from-text).
 - Gemini prompts [cookbook](https://services.google.com/fh/files/misc/gemini-for-google-workspace-prompting-guide-101.pdf).
