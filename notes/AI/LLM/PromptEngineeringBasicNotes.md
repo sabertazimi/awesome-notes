@@ -960,7 +960,8 @@ e.g custom gemini CLI [command](./prompts/url2md.toml).
 
 ### Coding Agent Prompt
 
-Writing a good [`AGENTS.md`](https://www.humanlayer.dev/blog/writing-a-good-claude-md):
+[Writing](https://github.com/agentsmd/agents.md)
+good [`AGENTS.md`](https://github.com/agentsmd/agents.md):
 
 - `AGENTS.md` should define your project's **WHY**, **WHAT**, and **HOW**.
 - **Less is more**.
