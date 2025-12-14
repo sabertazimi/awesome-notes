@@ -947,13 +947,6 @@ set termencoding=utf-8
 sudo snap install nvim --classic
 ```
 
-[LazyVim](https://github.com/LazyVim/LazyVim):
-
-```bash
-mv ~/.config/nvim{,.bak}
-git clone https://github.com/LazyVim/starter ~/.config/nvim && nvim
-```
-
 [AstroNvim](https://github.com/AstroNvim/AstroNvim):
 
 ```bash
@@ -963,6 +956,13 @@ mv ~/.local/state/nvim ~/.local/state/nvim.bak
 mv ~/.cache/nvim ~/.cache/nvim.bak
 git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim
 nvim
+```
+
+[LazyVim](https://github.com/LazyVim/LazyVim):
+
+```bash
+mv ~/.config/nvim{,.bak}
+git clone https://github.com/LazyVim/starter ~/.config/nvim && nvim
 ```
 
 [NvChad](https://github.com/NvChad/NvChad):
