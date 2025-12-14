@@ -656,6 +656,26 @@ Prototype implementation [rule](./rules/prototype-implementation.mdc):
 Claude code has [built-in tools](https://code.claude.com/docs/en/settings#tools-available-to-claude),
 follow [certain paradigm](https://www.vtrivedy.com/posts/claudecode-tools-reference) to use them.
 
+### Claude Code Commands
+
+`.claude/commands/api/api-new.md`:
+
+```markdown
+Create a new POST $ARGUMENTS endpoint with:
+
+- Auth middleware.
+- Rate limiting middleware.
+- Error handling wrapper.
+- TypeScript interfaces for request and response.
+```
+
+```bash
+/api-new /api/users
+```
+
+[Commands](http://github.com/wshobson/commands)
+contains production-ready slash commands for Claude Code.
+
 ### Claude Code Skills
 
 - [Skill Seekers](https://github.com/yusufkaraaslan/Skill_Seekers):
