@@ -434,6 +434,8 @@ async def main():
 ### Documentation
 
 - [DeepWiki](https://github.com/AsyncFuncAI/deepwiki-open).
+- [ZRead](https://zread.ai):
+  AI-powered github repository reader.
 
 ## LLM Reference
 
