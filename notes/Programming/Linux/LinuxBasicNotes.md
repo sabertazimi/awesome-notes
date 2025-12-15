@@ -552,6 +552,28 @@ Find `FunctionalComponent` in files and open them all:
 grep -lr FunctionalComponent src --exclude=*.md | xargs code
 ```
 
+### Fuzzy Find Tool
+
+[fzf](https://github.com/junegunn/fzf) is a command-line fuzzy finder:
+
+```bash
+brew install fzf
+scoop install fzf
+winget install fzf
+
+# ~/.bashrc
+eval "$(fzf --bash)"
+# ~/.zshrc
+source <(fzf --zsh)
+```
+
+- `ctrl-r`: find commands.
+- `ctrl-t`: find files and directories.
+- `alt-c`: `cd` into directory.
+- `code **<TAB>`/`code $(fzf -m)`: fuzzy completion for files and directories.
+- `ctrl-k` / `ctrl-j`: move cursor up and down.
+- Multi-select(`-m`): `tab` and `shift-tab` to mark multiple items.
+
 ## CPU and Process Commands
 
 ### Uptime Command
