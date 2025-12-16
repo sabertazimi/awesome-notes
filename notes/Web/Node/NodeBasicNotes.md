@@ -2117,4 +2117,5 @@ const iPhone11 = devices['iPhone 11'];
 - Node.js [modern patterns](https://kashw1n.com/blog/nodejs-2025).
 - Node.js official [tutorial](https://nodejs.org/en/learn/getting-started/introduction-to-nodejs).
 - Node.js [tao](https://alexkondov.com/tao-of-node).
-- Node.js [best practice](https://github.com/goldbergyoni/nodebestpractices).
+- Node.js [best practices](https://github.com/goldbergyoni/nodebestpractices).
+- Node.js testing [best practices](https://github.com/goldbergyoni/nodejs-testing-best-practices).
