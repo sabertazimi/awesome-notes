@@ -1335,6 +1335,97 @@ const delimiter = path.delimiter
 
 - Files read and write complete modern [guide](https://nodejsdesignpatterns.com/blog/reading-writing-files-nodejs).
 
+## Stream Module
+
+```ts
+import { createReadStream, createWriteStream } from 'node:fs'
+import { Readable, Transform } from 'node:stream'
+import { pipeline } from 'node:stream/promises'
+
+// Create transform streams with clean, focused logic
+const upperCaseTransform = new Transform({
+  objectMode: true,
+  transform(chunk, encoding, callback) {
+    this.push(chunk.toString().toUpperCase())
+    callback()
+  }
+})
+
+// Process files with robust error handling
+async function processFile(inputFile, outputFile) {
+  try {
+    await pipeline(
+      createReadStream(inputFile),
+      upperCaseTransform,
+      createWriteStream(outputFile)
+    )
+    console.log('File processed successfully')
+  } catch (error) {
+    console.error('Pipeline failed:', error)
+    throw error
+  }
+}
+```
+
+```ts
+// Create a Web Stream (compatible with browsers)
+const webReadable = new ReadableStream({
+  start(controller) {
+    controller.enqueue('Hello ')
+    controller.enqueue('World!')
+    controller.close()
+  }
+})
+
+// Convert between Web Streams and Node.js streams
+const nodeStream = Readable.fromWeb(webReadable)
+const backToWeb = Readable.toWeb(nodeStream)
+```
+
+## Fetch Module
+
+```ts
+async function fetchData(url) {
+  try {
+    const response = await fetch(url, {
+      signal: AbortSignal.timeout(5000) // Built-in timeout support
+    })
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+    }
+
+    return await response.json()
+  } catch (error) {
+    if (error.name === 'TimeoutError') {
+      throw new Error('Request timed out')
+    }
+    throw error
+  }
+}
+```
+
+```ts
+// Cancel long-running operations cleanly
+const controller = new AbortController()
+
+// Set up automatic cancellation
+setTimeout(() => controller.abort(), 10000)
+
+try {
+  const data = await fetch('https://slow-api.com/data', {
+    signal: controller.signal
+  })
+  console.log('Data received:', data)
+} catch (error) {
+  if (error.name === 'AbortError') {
+    console.log('Request was cancelled - this is expected behavior')
+  } else {
+    console.error('Unexpected error:', error)
+  }
+}
+```
+
 ## Http Module
 
 ### Request Object
