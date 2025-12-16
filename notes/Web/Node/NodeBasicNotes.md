@@ -1331,6 +1331,10 @@ const separator = path.sep
 const delimiter = path.delimiter
 ```
 
+### File Reference
+
+- Files read and write complete modern [guide](https://nodejsdesignpatterns.com/blog/reading-writing-files-nodejs).
+
 ## Http Module
 
 ### Request Object
