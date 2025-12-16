@@ -1783,6 +1783,50 @@ WeakMap/WeakSet 则更加**内存安全**:
 - Managing listeners.
 - Keeping private data.
 
+弱引用可以缓存计算结果 (无需修改网络层):
+
+```ts
+const CACHE = new WeakMap()
+
+async function describe(transaction) {
+  const cached = CACHE.get(transaction)
+
+  if (cached) {
+    return cached
+  }
+
+  // Not cached, do all the work...
+
+  CACHE.set(transaction, description)
+  return description
+}
+```
+
+弱引用可以[实现控制反转](https://jlongster.com/subverting-control-weak-refs):
+
+```ts
+const CONVERTERS = new WeakMap()
+
+function getConverter(transaction) {
+  const converter
+    = CONVERTERS.get(transaction) || new CurrencyConversion(transaction, { options })
+  CONVERTERS.set(transaction, converter)
+  return converter
+}
+
+function describe(transaction) {
+  if (!getConverter(transaction).isReady()) {
+    // do something..
+  }
+
+  // Here converter only exists for the lifetime to the describe function call.
+  // When we store it in a weak map, it exists for the entire lifetime of the transaction class.
+  // That allows us to write code the assumes the same lifetime
+  // e.g caching things, using instance equality.
+  const amount = getConverter(transaction).convert()
+}
+```
+
 ### Date
 
 - [Date and Temporal API CheatSheet](https://github.com/you-dont-need/You-Dont-Need-Momentjs)
