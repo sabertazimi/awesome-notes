@@ -2542,7 +2542,7 @@ Tweaked frosted glass header menu:
 
 ### Liquid Glass Effect
 
-[Liquid glass](https://designfast.io/liquid-glass 'Liquid Glass') effect:
+Simple [liquid glass](https://designfast.io/liquid-glass 'Liquid Glass') effect:
 
 ```html
 <!-- @see {@link https://www.liquid-glass.pro} -->
@@ -2639,7 +2639,64 @@ Tweaked frosted glass header menu:
 </html>
 ```
 
-[Liquid glass](https://kube.io/blog/liquid-glass-css-svg) CSS SVG.
+Advanced [liquid glass](https://kube.io/blog/liquid-glass-css-svg) effect with CSS and SVG refraction:
+
+```html
+<!-- Red Channel for displacement in X axis -->
+<!-- Green Channel for displacement in Y axis -->
+<svg colorInterpolationFilters="sRGB">
+  <filter id="{id}">
+    <feImage
+      href="{displacementMapDataUrl}"
+      x="{0}"
+      y="{0}"
+      width="{width}"
+      height="{height}"
+      result="displacement_map"
+    />
+    <feDisplacementMap
+      in="SourceGraphic"
+      in2="displacement_map"
+      scale="{scale}"
+      xChannelSelector="R"
+      yChannelSelector="G"
+    />
+  </filter>
+</svg>
+
+<style>
+  .glass-panel {
+    backdrop-filter: url(#liquidGlassFilterId);
+  }
+</style>
+
+<script>
+  // Surface function
+  const height = f(distanceFromSide)
+  const delta = 0.001 // Small value to approximate derivative
+  const y1 = f(distanceFromSide - delta)
+  const y2 = f(distanceFromSide + delta)
+  const derivative = (y2 - y1) / (2 * delta)
+  const normal = { x: -derivative, y: 1 } // Derivative, rotated by -90 degrees
+
+  // Normalize vector
+  const maximumDisplacement = Math.max(...displacementMagnitudes)
+  const displacementVector_normalized = {
+    angle: normalAtBorder,
+    magnitude: magnitude / maximumDisplacement,
+  }
+
+  // Vector to Read-Green values
+  const x = Math.cos(angle) * magnitude
+  const y = Math.sin(angle) * magnitude
+  const result = {
+    r: 128 + x * 127, // Red channel is the X component, remapped to 0-255
+    g: 128 + y * 127, // Green channel is the Y component, remapped to 0-255
+    b: 128, // Blue channel is ignored
+    a: 255, // Alpha channel is fully opaque
+  }
+</script>
+```
 
 ### Gradient Text Effect
 
