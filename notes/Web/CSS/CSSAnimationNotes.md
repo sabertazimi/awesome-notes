@@ -616,6 +616,62 @@ element.classList.add('animate')
 setTimeout(() => element.classList.remove('animate'), duration)
 ```
 
+### Animation Timeline
+
+Implement [scroll-driven animation](https://webkit.org/blog/17101/a-guide-to-scroll-driven-animations-with-just-css)
+with CSS `animation-timeline`:
+
+- `scroll()` timeline.
+- `view()` timeline.
+
+```css
+@media not (prefers-reduced-motion) {
+  footer::after {
+    position: fixed;
+    inset-inline-start: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1em;
+    content: '';
+    transform-origin: top left;
+    animation: grow-progress linear;
+    animation-timeline: scroll();
+  }
+
+  @keyframes grow-progress {
+    from {
+      transform: scaleX(0);
+    }
+
+    to {
+      transform: scaleX(1);
+    }
+  }
+}
+```
+
+```css
+@media not (prefers-reduced-motion) {
+  img {
+    animation: slide-in;
+    animation-timeline: view();
+    animation-range: 0% 50%;
+  }
+
+  @keyframes slide-in {
+    0% {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateX(0%);
+    }
+  }
+}
+```
+
 ### Offset Animation
 
 [`offset`](https://developer.mozilla.org/docs/Web/CSS/offset),
@@ -653,6 +709,8 @@ animating an element along a defined path:
   offset: url('arc.svg') 30deg / 50px 100px;
 }
 ```
+
+## Animation Patterns
 
 ### Animation FLIP Pattern
 
@@ -740,7 +798,7 @@ animating an element along a defined path:
 }
 ```
 
-### Animation API
+## Animation API
 
 DOM events:
 
@@ -748,15 +806,15 @@ DOM events:
 - `animationend`: triggered after an animation completes.
 - `animationstart`: triggered at the start of an animation.
 
-### GreenSock Library
+## GreenSock Library
 
-#### TweenMax
+### TweenMax
 
 ```ts
 TweenMax.fromTo(element, 1, { x: 0 }, { x: 100 })
 ```
 
-#### TimelineMax
+### TimelineMax
 
 ```ts
 const tl = new TimelineMax()
@@ -778,7 +836,7 @@ tl.staggerFrom(
 )
 ```
 
-### Animation Reference
+## Animation Reference
 
 - Animatable CSS [properties](https://developer.mozilla.org/docs/Web/CSS/CSS_animated_properties).
 - Animation 101 [guide](https://github.com/cssanimation/css-animation-101).
