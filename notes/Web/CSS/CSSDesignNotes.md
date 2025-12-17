@@ -664,7 +664,7 @@ export function Button({
 - [Frozen Filter](https://www.smashingmagazine.com/2021/07/frustrating-design-patterns-broken-frozen-filters)
 - [Disabled Button](https://www.smashingmagazine.com/2021/08/frustrating-design-patterns-disabled-buttons)
 - [Infinite Scroll](https://www.smashingmagazine.com/2022/03/designing-better-infinite-scroll)
-- [Breadcrumbs](https://www.smashingmagazine.com/2022/04/designing-better-breadcrumbs)
+- [Breadcrumbs](https://webdesignerdepot.com/breadcrumbs-are-dead-in-web-design)
 - [Push Notification](https://www.smashingmagazine.com/2022/04/guide-push-notifications-developers)
 - [Carousel](https://www.smashingmagazine.com/2022/04/designing-better-carousel-ux)
 - [Navigation](https://www.smashingmagazine.com/2022/04/designing-better-navigation-ux-queries)
