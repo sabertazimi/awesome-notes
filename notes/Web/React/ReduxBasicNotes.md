@@ -1995,22 +1995,26 @@ const fluxStandardAction = {
 
 ### State Management
 
-- Redux for global state:
-  作为全局状态管理.
-- RxJS for redux middleware:
-  RxJS 管理所有输入的 input -> redux action 的调度过程.
-- Mobx and `useState` for component state:
+- Remote state:
+  Anything coming from backend, API, database, etc.,
+  could be handled by data-fetching library
+  like [TanStack Query](https://github.com/tanstack/query) or [SWR](https://github.com/vercel/swr).
+- Query params in URL state:
+  If your router doesn't support syncing those with local state,
+  use [nuqs](https://github.com/47ng/nuqs) and save yourself massive pain implementing that sync manually.
+- Local state:
   作为组件局部状态管理器来用.
   对于只影响单个组件实例的状态,
-  应作为 Local State 交由 `useState` 管理,
+  应作为 Local State 交由 `useState`/`useReducer` 管理,
   而不是将其并入 Global Store.
-- Complex UI Change: 用 component 归一化处理
-- Complex Data Input: 用 RxJS/observable 归一化处理
-- Complex State Change: 用 action/state 归一化处理
-- `Jotai`/`Recoil`:
-  Split state into different atoms.
-  Atoms can be imported for any specific component **without single-entry point**.
-  Each atom handling different app domain/context (reducer).
+- Complex shared state:
+  Split state into different atoms
+  with [Zustand](https://github.com/pmndrs/zustand) or [JoTai](https://github.com/pmndrs/jotai),
+  atoms can be imported for any specific component **without single-entry point**,
+  each atom handling different app domain/context (reducer).
+- Complex UI change: 用 component 归一化处理.
+- Complex data input: 用 RxJS/observable 归一化处理.
+- Complex state change: 用 action/state 归一化处理.
 
 ## Redux Tools
 
