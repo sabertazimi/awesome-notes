@@ -3259,18 +3259,19 @@ and call JavaScript API triggering layout stage (`reflow`):
 
 ### Animation Performance
 
-[High performance animations](https://www.html5rocks.com/en/tutorials/speed/high-performance-animations):
+[High performance animations](http://web.dev/articles/animations-guide):
 
 - CSS 高性能动画三要素:
   - `absolute` position: 脱离文档流, 不会导致其他元素重排或重绘.
   - `opacity`: high performance trigger.
   - `transform`: high performance trigger.
-- All animation: `keyframe` animation or `transitions` is best.
-- JS-based animation: `requestAnimationFrame` is better than `setTimeout`/`setInterval`.
-- Position animation: `transform: translate(npx, npx)` is better than `top`/`right`/`bottom`/`left`.
-- Scale animation: `transform: scale(n)` better than `width`/`height`.
-- Rotation animation: `transform: rotate(deg)` is better.
-- Opacity/visibility animation: `opacity: 0...1` is better.
+- Animation performance [tier list](http://motion.dev/blog/web-animation-performance-tier-list):
+  - All animation: `keyframe` animation or `transitions` is best.
+  - JS-based animation: `requestAnimationFrame` is better than `setTimeout`/`setInterval`.
+  - Position animation: `transform: translate(npx, npx)` is better than `top`/`right`/`bottom`/`left`.
+  - Scale animation: `transform: scale(n)` better than `width`/`height`.
+  - Rotation animation: `transform: rotate(deg)` is better.
+  - Opacity/visibility animation: `opacity: 0...1` is better.
 
 #### Animation Frame
 
@@ -3305,7 +3306,9 @@ window.requestAnimationFrame(step)
 
 #### Animation DevTools
 
-- [DevTools for Animation Performance](https://calibreapp.com/blog/investigate-animation-performance-with-devtools).
+[DevTools](https://calibreapp.com/blog/investigate-animation-performance-with-devtools)
+for animation performance:
+
 - Slower CPU simulation in `performance` panel.
 - Enable paint instrumentation in `performance` panel.
 - FPS meter in `rendering` panel.

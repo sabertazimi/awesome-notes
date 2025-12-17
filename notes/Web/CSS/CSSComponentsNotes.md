@@ -2666,7 +2666,7 @@ Advanced [liquid glass](https://kube.io/blog/liquid-glass-css-svg) effect with C
 
 <style>
   .glass-panel {
-    backdrop-filter: url(#liquidGlassFilterId);
+    backdrop-filter: url('#liquidGlassFilterId');
   }
 </style>
 
