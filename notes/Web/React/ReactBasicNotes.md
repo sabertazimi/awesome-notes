@@ -3882,6 +3882,40 @@ export default class App extends Component {
 - Webpack bundle analyzer.
 - `useDeferredValue`/`useTransition` hook for debounce concurrent features.
 
+Production [case studies](https://largeapps.dev/case-studies/advanced):
+
+1. Performance optimization is paramount:
+   - Optimizing Core Web Vitals: LCP and INP are key focus.
+   - Reducing JavaScript payload.
+   - Main thread workload.
+2. SSR vs CSR: Striking the right balance:
+   - SSR for initial load and SEO.
+   - CSR for Interactivity and Rich UI.
+   - Progressive Hydration and islands architecture.
+   - Watch out for SSR Pitfalls.
+3. Smart caching strategies for speed and freshness:
+   - Edge and CDN caching.
+   - Next.js App Router cache.
+   - Client-Side state caching.
+4. Evolving State Management: simplify and leverage specialized Hooks:
+   - Don’t over-engineer global state.
+   - Rethinking Redux.
+   - Rise of specialized state libraries.
+5. Improved developer experience (DX) and maintainability:
+   - Next.js App structure and convention.
+   - Tooling for fast iteration.
+   - CI/CD and deployment improvements.
+   - Embracing React primitives (Suspense, Error Boundaries).
+6. Accessibility by design:
+   - Semantic HTML and proper ARIA usage.
+   - Keyboard navigation and focus management.
+   - Testing with assistive tech.
+7. User Experience enhancements and impact:
+   - Faster loads and interactions.
+   - Seamless navigation and transitions.
+   - Consistent UX across devices.
+   - Feedback and user-centric metrics.
+
 ### React Performance Reference
 
 - [Progressive React](https://houssein.me/progressive-react).
