@@ -50,6 +50,20 @@ git config --global diff.renames true
 ```
 
 ```bash
+brew install git-delta
+winget install dandavison.delta
+scoop install delta
+
+git config --global core.pager delta
+git config --global interactive.diffFilter 'delta --color-only'
+git config --global delta.navigate true
+git config --global delta.dark true
+git config --global delta.line-numbers true
+git config --global delta.side-by-side true
+git config --global merge.conflictStyle zdiff3
+```
+
+```bash
 git config --global alias.s "status"
 git config --global alias.c "commit --verbose"
 git config --global alias.a "add"
