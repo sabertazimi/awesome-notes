@@ -558,8 +558,8 @@ grep -lr FunctionalComponent src --exclude=*.md | xargs code
 
 ```bash
 brew install fzf
-scoop install fzf
 winget install fzf
+scoop install fzf
 
 # ~/.bashrc
 eval "$(fzf --bash)"
@@ -573,6 +573,16 @@ source <(fzf --zsh)
 - `code **<TAB>`/`code $(fzf -m)`: fuzzy completion for files and directories.
 - `ctrl-k` / `ctrl-j`: move cursor up and down.
 - Multi-select(`-m`): `tab` and `shift-tab` to mark multiple items.
+
+### RipGrep
+
+[rg](https://github.com/BurntSushi/ripgrep):
+
+```bash
+brew install ripgrep
+winget install BurntSushi.ripgrep.MSVC
+scoop install ripgrep
+```
 
 ## CPU and Process Commands
 
