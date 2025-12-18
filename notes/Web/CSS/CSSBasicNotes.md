@@ -1886,24 +1886,24 @@ Change `lightness` to get gradient color:
 
 ```css
 /* Relative colors */
-.button {
+button {
   background: var(--button-color);
 }
 
-.button:hover {
+button:hover {
   /* One :hover for normal, secondary, and error states */
   background: oklch(from var(--button-color) calc(l + 0.1) c h);
 }
 
-.button.is-accent {
+button[variant='accent'] {
   --button-color: var(--accent);
 }
 
-.button.is-secondary {
+button[variant='sceondary'] {
   --button-color: var(--dimmed);
 }
 
-.button.is-error {
+button[variant='error'] {
   --button-color: var(--error);
 }
 ```
