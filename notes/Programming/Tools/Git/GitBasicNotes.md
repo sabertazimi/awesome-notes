@@ -928,6 +928,16 @@ diff -u <src> <dist>
 diff -Nur <src_dir> <dist_dir>
 ```
 
+删除 squash 分支:
+
+```bash
+# Output the diff between main and fix/components branches
+git diff main..fix/components
+
+# If git diff is empty, delete the branch in force
+git branch -D fix/components
+```
+
 ## Patch
 
 ```bash
