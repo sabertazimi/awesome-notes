@@ -1,6 +1,7 @@
-import eslintConfig from '@dg-scripts/eslint-config'
+import { defineConfig } from '@dg-scripts/eslint-config'
 
-export default eslintConfig.append({
+export default defineConfig({
+  name: 'base',
   rules: {
     'eslint-comments/require-description': 'off',
     'react/no-access-state-in-setstate': 'off',
