@@ -487,6 +487,286 @@ ChatGPT:
 - Initialization: 在第一次对话中，请直接输出以下：您好，欢迎使用外卖好评撰写服务。我会根据您的外卖体验，帮您快速生成简洁好评，助力您领取代金券。请告诉我您外卖的亮点，比如菜品口味、配送速度等。
 ```
 
+## UI Prompts
+
+### Prototype Design Prompt
+
+```markdown
+你是一个专业的 UI 设计师，你需要根据我提供的需求文档来完成页面的设计。
+
+请仔细阅读需求文档 @prd.md，现在需要输出高保真的原型图，请通过以下方式帮我完成所有界面的原型设计，并确保这些原型界面可以直接用于开发：
+
+1. 用户体验分析：先分析这个 App 的主要功能和用户需求，确定核心交互逻辑。
+2. 产品界面规划：作为产品经理，定义关键界面，确保信息架构合理。
+3. 高保真 UI 设计：作为 UI 设计师，设计贴近真实 iOS/Android 设计规范的界面，使用现代化的 UI 元素，使其具有良好的视觉体验。
+4. HTML 原型实现：使用 HTML + Tailwind CSS（或 Bootstrap）生成所有原型界面，并使用 FontAwesome（或其他开源 UI 组件）让界面更加精美、接近真实的 App 设计。拆分代码文件，保持结构清晰。
+5. 每个界面应作为独立的 HTML 文件存放，例如 home.html、profile.html、settings.html 等：
+   - index.html 作为主入口，不直接写入所有界面的 HTML 代码，而是使用 iframe 的方式嵌入这些 HTML 片段，并将所有页面直接平铺展示在 index 页面中，而不是跳转链接。
+   - 真实感增强：界面尺寸应模拟 iPhone 15 Pro，并让界面圆角化，使其更像真实的手机界面。
+   - 使用真实的 UI 图片，而非占位符图片（可从 Unsplash、Pexels、Apple 官方 UI 资源中选择）。
+   - 添加顶部状态栏（模拟 iOS 状态栏），并包含 App 导航栏（类似 iOS 底部 Tab Bar）。
+
+请按照以上要求生成完整的 HTML 代码，并确保其可用于实际开发。
+```
+
+### UI Implementation Prompt
+
+```markdown
+你是一位资深全栈工程师，参考 ui-design-rules.mdc 设计一个 @README.md 中描述的应用，
+模拟产品经理提出需求和信息架构，请自己构思好功能需求和界面，然后设计 UI/UX：
+
+1、要高级有质感，遵守设计规范，注重 UI 细节。
+2、请引入 Tailwind CSS CDN 来完成，而不是编写 CSS Style 样式，图片使用 unslash。
+3、每个页面写一个独立的 HTML 文件，并可以通过点击跳转。
+4、由于页面较多，你每完成一部分就让我来确认，一直持续到结束。
+```
+
+## Frontend Prompts
+
+### Project Porting Prompt
+
+```markdown
+Your job is to port assistant-ui-react monorepo (for react)
+to assistant-ui-vue (for vue) and maintain the repository.
+
+You have access to the current assistant-ui-react repository
+as well as the assistant-ui-vue repository.
+
+Make a commit and push your changes after every single file edit.
+
+Use the assistant-ui-vue/.agent/ directory as a scratchpad for your work.
+Store long term plans and todo lists there.
+
+The original project was mostly tested by manually running the code.
+When porting, you will need to write end to end and unit tests for the project.
+But make sure to spend most of your time on the actual porting, not on the testing.
+A good heuristic is to spend 80% of your time on the actual porting, and 20% on the testing.
+```
+
+```markdown
+Your job is to port browser-use monorepo (Python)
+to better-use (Typescript) and maintain the repository.
+
+Make a commit and push your changes after every single file edit.
+
+Keep track of your current status in browser-use-ts/agent/TODO.md
+```
+
+## Backend Prompts
+
+### API Integration Prompt
+
+```markdown
+<核心任务>
+分析指定的前端页面代码和后端 API 文档，制定一份详细的接口对接实施计划，并为后续的编码工作做好准备。
+</核心任务>
+
+<工作流程>
+
+1. 信息收集 (Information Gathering)：
+   - 分析前端：深入分析当前上下文中的前端页面代码，完全理解其业务逻辑、功能和当前使用的数据结构。
+   - 获取后端 API：
+     1. 使用 API Documentation MCP 工具，务必先刷新缓存，以获取最新的 API 文档。
+     2. 重点研究XXX接口 (XXX APIs) 与XXX接口 (XXX APIs) 的接口定义及其关联的数据模型 (Model Definitions)。
+2. 规划与文档 (Planning & Documentation)：
+   - 定义数据模型：基于后端 API 的数据结构，在 `src/models/` 目录下规划所需的 TypeScript 类型/接口。请遵循下文的 【复用原则】。
+   - 定义 API 调用：在 `src/apis/` 目录下规划与后端接口对应的 API 调用函数。同样遵循 【复用原则】。
+3. 创建实施计划：将上述分析结果整理成一份详细的实施计划。该计划应：
+   - 保存为 Markdown 格式。
+   - 使用 英文 命名文件。
+   - 存放于项目的 `docs/` 目录下。
+
+</工作流程>
+
+<必须遵守的关键原则>
+
+1. 【复用优于创建】：在创建任何新的模型或 API 定义之前，必须首先检查 `src/models/` 和 `src/apis/` 目录。如果已存在功能相同或相似的定义，必须复用，严禁重复创建。
+2. 【计划是唯一真相来源】：
+   - 实施计划一经创建，即成为后续所有讨论和编码工作的基准。
+   - 任何对计划的修改（无论是由于编码中的新发现，还是需求讨论），都必须立即同步更新到该 Markdown 文档中。
+   - 如果在编码过程中对某个 API 不确定，应立即使用 API Documentation MCP 工具查询确认，并将结果更新至计划文档。
+3. 【清理临时代码】：
+   - 严格遵守**以后端接口为准**的原则。在实施对接时，必须删除前端组件、`utils.ts` 或 `mocks.ts` 文件中的所有临时类型定义 (type, interface)。
+   - 与这些临时类型相关的适配函数（如 `transform`、`map` 等）也必须一并删除。
+   - 所有类型定义都必须从 `src/models/` 中导入。
+
+</必须遵守的关键原则>
+```
+
+### API Mock Prompt
+
+```markdown
+所有的 API 请求需要支持 Mock 接口，请设置一个全局变量来控制是否开启 Mock 数据，
+在 request 中统一进行 Mock 数据的切换，每个 Mock 数据按模块划分与 API 请求一一对应。
+
+命名规范：`<模块名>-mock.ts`。
+```
+
+### Mapper Generation Prompt
+
+```markdown
+请读取 `tables.md` SQL 语句，为每个表生成独立 Entity，Mapper 接口以及对应的 XML文件，
+要求包含通用的增加、删除、修改、查询方法，详细如下：
+
+- 单个增加。
+- 批量增加。
+- 根据 id 更新。
+- 通用查询，以 Entity 为 condition。
+- 根据 id 查询。
+- 根据 ids 查询。
+- 根据 id 删除（软删除）。
+- 根据 ids 删除（软删除）。
+```
+
+## Developer Prompts
+
+### 分步式开发策略
+
+```markdown
+采用 「原子化任务拆分」+「渐进式验证」 方法, 将复杂需求拆解为独立可测试的小模块.
+帮我设计并且给出我每一步的提示词用来指导 Cursor 编程.
+```
+
+### 多方法开发策略
+
+```markdown
+Please think through at least 3 possibilities of what could be causing this.
+write in detail about them.
+Choose which you believe could be the most likely cause
+(noting above you already tried 2 other things that didn't work,
+so don't try them again, because we're getting the same exact error after both)
+
+When you pick the most probably solution, write in detail how do implement the solution.
+Make it a thorough plan that even a junior engineer could solve successfully.
+```
+
+### 日志定位开发策略
+
+```markdown
+Please add logs to the code to get better visibility into what is going on
+so we can find the fix.
+I'll run the code and feed you the logs results.
+```
+
+### 辅助学习开发策略
+
+利用 Cursor 的辅助学习新知识, 例如学习 [Next.js](https://github.com/zenyarn/nextjs-study):
+
+```markdown
+我是一个需要快速接手这段代码的开发者。这个文件的代码是由 Cursor 生成的。
+我希望快速掌握其核心要点。请重点分析以下几个方面：
+
+1. **整体功能和作用：** 这段代码（或组件/模块）是用来做什么的？在整个应用中扮演什么角色？
+2. **UI 组件结构：** 如果是组件，它内部包含哪些子组件或主要DOM结构？层级关系是怎样的？
+3. **状态管理和数据流：** 关键的状态 (state) 或属性 (props) 是什么？数据是如何在组件间流动或更新的？
+   是否有用到特定的状态管理方案（如 Redux, Vuex, Context API, Hooks 的 state/reducer 等）？
+4. **用户交互和事件处理：** 代码如何响应用户的操作（点击、输入等）？主要的事件监听和处理逻辑在哪里？
+5. **API 交互：** 如果代码涉及与后端通信，它是如何发起请求、处理响应和管理数据的？使用了什么库（如 fetch, axios）或模式？
+6. **关键依赖或技术栈：** 这段代码主要依赖于哪个前端框架/库（如 React, Vue, Angular）？使用了哪些重要的第三方库或技术？
+
+请以清晰、结构化的方式呈现，模拟我理解自己代码时的那种感觉（即对整体架构和关键部分的把握）。
+**避免详细的代码实现细节或逐行解释。**
+```
+
+## System Prompts
+
+### AI Tools Prompts
+
+- [System prompts](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools)
+  for AI tools and agents.
+
+### Codex Agent System Prompt
+
+OpenAI [Codex](https://openai.com/index/introducing-codex) [prompts](./prompts/codex-agent.md):
+
+- Instructions.
+- Git instructions.
+- `AGENTS.md` spec.
+- Citations instructions.
+
+### System Design Prompt
+
+System design blueprint:
+
+```markdown
+Act as a senior software architect. I need to build [your project].
+Let's approach this through:
+
+1. System requirements and constraints
+2. Core architectural decisions
+3. Data models and relationships
+4. API contract design
+5. Security considerations
+
+For each point, challenge my assumptions and suggest alternatives.
+Use examples from your experience when relevant.
+```
+
+Share architectural decisions:
+
+```markdown
+Based on our previous discussion, I'm implementing [component].
+Here's my planned approach:
+[Your brief explanation]
+
+Before I code: What edge cases am I missing? Where might this break at scale?
+```
+
+### System Analysis Prompt
+
+[现状分析](https://zhuanlan.zhihu.com/p/1892580714635047120):
+
+| 目标       | 了解业务功能                                                                        | 了解代码实现                                                           | 了解字段依赖                                   |
+| ---------- | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------- |
+| 提示词参考 | 当前功能如何运作, 用户交互有哪些路径, 具体数据流向是怎样的, 请整理成 mermaid 时序图 | 当前代码如何组织, 核心模块有哪些, 组件间如何通信, 梳理组件关系图       | 梳理当前表单字段的显隐关系、联动逻辑以及数据源 |
+| 效果       | 输出所属功能中的角色和角色之间的交互方式, 能快速掌握业务模块的大体脉络              | 输出组件职责和组件间的关系, 以便在投入开发前以组件模块维度确定改动范围 | 能直观地呈现表单字段间的联动说明               |
+
+```markdown
+我们先探讨方案, 在我让你写代码之前不要生成代码.
+如果此处要加个 xxx 该怎么做,请先逐步分析需求,
+在想明白后向我说明为什么要这么设计.
+```
+
+### System Implementation Prompt
+
+Get implementation guidance:
+
+```markdown
+For [specific component], suggest the optimal implementation considering:
+
+- Performance impact.
+- Maintenance overhead.
+- Testing strategy.
+
+Code examples should follow [your language/framework] best practices.
+```
+
+Deep dive into documentation:
+
+```markdown
+You are a [framework/language] expert. I need to implement [feature].
+Walk me through:
+
+1. The relevant API methods/classes.
+2. Common pitfalls and how to avoid them.
+3. Performance optimization techniques.
+4. Code examples for each key concept.
+```
+
+最小改动原则:
+
+```markdown
+在写代码时遵循最小改动原则, 避免影响原先的功能.
+即使识别到历史问题也不要自行优化, 可以先告知我问题描述和对当前需求的影响, 不要直接改跟本次需求无关的代码.
+```
+
+审查与验证:
+
+| 目标   | 代码审查                                                | 功能验证                                     |
+| ------ | ------------------------------------------------------- | -------------------------------------------- |
+| 提示词 | `@git` 逐个文件分析并总结改动点, 评估是否引入了新的问题 | `@git` 基于代码变更输出自测用例清单          |
+| 效果   | 在列举出每个文件的改动意图后, 会告知潜在问题和修改意见  | 围绕改动, 生成新旧功能在不同场景中的测试用例 |
+
 ## Cursor Rules
 
 - App flow.
@@ -705,286 +985,6 @@ Install [edmuds plugin](https://github.com/edmund-io/edmunds-claude-code):
 
 - Claude code [best practices](https://www.anthropic.com/engineering/claude-code-best-practices).
 
-## System Prompts
-
-### AI Tools Prompts
-
-- [System prompts](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools)
-  for AI tools and agents.
-
-### Codex Agent System Prompt
-
-OpenAI [Codex](https://openai.com/index/introducing-codex) [prompts](./prompts/codex-agent.md):
-
-- Instructions.
-- Git instructions.
-- `AGENTS.md` spec.
-- Citations instructions.
-
-### System Design Prompt
-
-System design blueprint:
-
-```markdown
-Act as a senior software architect. I need to build [your project].
-Let's approach this through:
-
-1. System requirements and constraints
-2. Core architectural decisions
-3. Data models and relationships
-4. API contract design
-5. Security considerations
-
-For each point, challenge my assumptions and suggest alternatives.
-Use examples from your experience when relevant.
-```
-
-Share architectural decisions:
-
-```markdown
-Based on our previous discussion, I'm implementing [component].
-Here's my planned approach:
-[Your brief explanation]
-
-Before I code: What edge cases am I missing? Where might this break at scale?
-```
-
-### System Analysis Prompt
-
-[现状分析](https://zhuanlan.zhihu.com/p/1892580714635047120):
-
-| 目标       | 了解业务功能                                                                        | 了解代码实现                                                           | 了解字段依赖                                   |
-| ---------- | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------- |
-| 提示词参考 | 当前功能如何运作, 用户交互有哪些路径, 具体数据流向是怎样的, 请整理成 mermaid 时序图 | 当前代码如何组织, 核心模块有哪些, 组件间如何通信, 梳理组件关系图       | 梳理当前表单字段的显隐关系、联动逻辑以及数据源 |
-| 效果       | 输出所属功能中的角色和角色之间的交互方式, 能快速掌握业务模块的大体脉络              | 输出组件职责和组件间的关系, 以便在投入开发前以组件模块维度确定改动范围 | 能直观地呈现表单字段间的联动说明               |
-
-```markdown
-我们先探讨方案, 在我让你写代码之前不要生成代码.
-如果此处要加个 xxx 该怎么做,请先逐步分析需求,
-在想明白后向我说明为什么要这么设计.
-```
-
-### System Implementation Prompt
-
-Get implementation guidance:
-
-```markdown
-For [specific component], suggest the optimal implementation considering:
-
-- Performance impact.
-- Maintenance overhead.
-- Testing strategy.
-
-Code examples should follow [your language/framework] best practices.
-```
-
-Deep dive into documentation:
-
-```markdown
-You are a [framework/language] expert. I need to implement [feature].
-Walk me through:
-
-1. The relevant API methods/classes.
-2. Common pitfalls and how to avoid them.
-3. Performance optimization techniques.
-4. Code examples for each key concept.
-```
-
-最小改动原则:
-
-```markdown
-在写代码时遵循最小改动原则, 避免影响原先的功能.
-即使识别到历史问题也不要自行优化, 可以先告知我问题描述和对当前需求的影响, 不要直接改跟本次需求无关的代码.
-```
-
-审查与验证:
-
-| 目标   | 代码审查                                                | 功能验证                                     |
-| ------ | ------------------------------------------------------- | -------------------------------------------- |
-| 提示词 | `@git` 逐个文件分析并总结改动点, 评估是否引入了新的问题 | `@git` 基于代码变更输出自测用例清单          |
-| 效果   | 在列举出每个文件的改动意图后, 会告知潜在问题和修改意见  | 围绕改动, 生成新旧功能在不同场景中的测试用例 |
-
-## UI Prompts
-
-### Prototype Design Prompt
-
-```markdown
-你是一个专业的 UI 设计师，你需要根据我提供的需求文档来完成页面的设计。
-
-请仔细阅读需求文档 @prd.md，现在需要输出高保真的原型图，请通过以下方式帮我完成所有界面的原型设计，并确保这些原型界面可以直接用于开发：
-
-1. 用户体验分析：先分析这个 App 的主要功能和用户需求，确定核心交互逻辑。
-2. 产品界面规划：作为产品经理，定义关键界面，确保信息架构合理。
-3. 高保真 UI 设计：作为 UI 设计师，设计贴近真实 iOS/Android 设计规范的界面，使用现代化的 UI 元素，使其具有良好的视觉体验。
-4. HTML 原型实现：使用 HTML + Tailwind CSS（或 Bootstrap）生成所有原型界面，并使用 FontAwesome（或其他开源 UI 组件）让界面更加精美、接近真实的 App 设计。拆分代码文件，保持结构清晰。
-5. 每个界面应作为独立的 HTML 文件存放，例如 home.html、profile.html、settings.html 等：
-   - index.html 作为主入口，不直接写入所有界面的 HTML 代码，而是使用 iframe 的方式嵌入这些 HTML 片段，并将所有页面直接平铺展示在 index 页面中，而不是跳转链接。
-   - 真实感增强：界面尺寸应模拟 iPhone 15 Pro，并让界面圆角化，使其更像真实的手机界面。
-   - 使用真实的 UI 图片，而非占位符图片（可从 Unsplash、Pexels、Apple 官方 UI 资源中选择）。
-   - 添加顶部状态栏（模拟 iOS 状态栏），并包含 App 导航栏（类似 iOS 底部 Tab Bar）。
-
-请按照以上要求生成完整的 HTML 代码，并确保其可用于实际开发。
-```
-
-### UI Implementation Prompt
-
-```markdown
-你是一位资深全栈工程师，参考 ui-design-rules.mdc 设计一个 @README.md 中描述的应用，
-模拟产品经理提出需求和信息架构，请自己构思好功能需求和界面，然后设计 UI/UX：
-
-1、要高级有质感，遵守设计规范，注重 UI 细节。
-2、请引入 Tailwind CSS CDN 来完成，而不是编写 CSS Style 样式，图片使用 unslash。
-3、每个页面写一个独立的 HTML 文件，并可以通过点击跳转。
-4、由于页面较多，你每完成一部分就让我来确认，一直持续到结束。
-```
-
-## Frontend Prompts
-
-### Project Porting Prompt
-
-```markdown
-Your job is to port assistant-ui-react monorepo (for react)
-to assistant-ui-vue (for vue) and maintain the repository.
-
-You have access to the current assistant-ui-react repository
-as well as the assistant-ui-vue repository.
-
-Make a commit and push your changes after every single file edit.
-
-Use the assistant-ui-vue/.agent/ directory as a scratchpad for your work.
-Store long term plans and todo lists there.
-
-The original project was mostly tested by manually running the code.
-When porting, you will need to write end to end and unit tests for the project.
-But make sure to spend most of your time on the actual porting, not on the testing.
-A good heuristic is to spend 80% of your time on the actual porting, and 20% on the testing.
-```
-
-```markdown
-Your job is to port browser-use monorepo (Python)
-to better-use (Typescript) and maintain the repository.
-
-Make a commit and push your changes after every single file edit.
-
-Keep track of your current status in browser-use-ts/agent/TODO.md
-```
-
-## Backend Prompts
-
-### API Integration Prompt
-
-```markdown
-<核心任务>
-分析指定的前端页面代码和后端 API 文档，制定一份详细的接口对接实施计划，并为后续的编码工作做好准备。
-</核心任务>
-
-<工作流程>
-
-1. 信息收集 (Information Gathering)：
-   - 分析前端：深入分析当前上下文中的前端页面代码，完全理解其业务逻辑、功能和当前使用的数据结构。
-   - 获取后端 API：
-     1. 使用 API Documentation MCP 工具，务必先刷新缓存，以获取最新的 API 文档。
-     2. 重点研究XXX接口 (XXX APIs) 与XXX接口 (XXX APIs) 的接口定义及其关联的数据模型 (Model Definitions)。
-2. 规划与文档 (Planning & Documentation)：
-   - 定义数据模型：基于后端 API 的数据结构，在 `src/models/` 目录下规划所需的 TypeScript 类型/接口。请遵循下文的 【复用原则】。
-   - 定义 API 调用：在 `src/apis/` 目录下规划与后端接口对应的 API 调用函数。同样遵循 【复用原则】。
-3. 创建实施计划：将上述分析结果整理成一份详细的实施计划。该计划应：
-   - 保存为 Markdown 格式。
-   - 使用 英文 命名文件。
-   - 存放于项目的 `docs/` 目录下。
-
-</工作流程>
-
-<必须遵守的关键原则>
-
-1. 【复用优于创建】：在创建任何新的模型或 API 定义之前，必须首先检查 `src/models/` 和 `src/apis/` 目录。如果已存在功能相同或相似的定义，必须复用，严禁重复创建。
-2. 【计划是唯一真相来源】：
-   - 实施计划一经创建，即成为后续所有讨论和编码工作的基准。
-   - 任何对计划的修改（无论是由于编码中的新发现，还是需求讨论），都必须立即同步更新到该 Markdown 文档中。
-   - 如果在编码过程中对某个 API 不确定，应立即使用 API Documentation MCP 工具查询确认，并将结果更新至计划文档。
-3. 【清理临时代码】：
-   - 严格遵守**以后端接口为准**的原则。在实施对接时，必须删除前端组件、`utils.ts` 或 `mocks.ts` 文件中的所有临时类型定义 (type, interface)。
-   - 与这些临时类型相关的适配函数（如 `transform`、`map` 等）也必须一并删除。
-   - 所有类型定义都必须从 `src/models/` 中导入。
-
-</必须遵守的关键原则>
-```
-
-### API Mock Prompt
-
-```markdown
-所有的 API 请求需要支持 Mock 接口，请设置一个全局变量来控制是否开启 Mock 数据，
-在 request 中统一进行 Mock 数据的切换，每个 Mock 数据按模块划分与 API 请求一一对应。
-
-命名规范：`<模块名>-mock.ts`。
-```
-
-### Mapper Generation Prompt
-
-```markdown
-请读取 `tables.md` SQL 语句，为每个表生成独立 Entity，Mapper 接口以及对应的 XML文件，
-要求包含通用的增加、删除、修改、查询方法，详细如下：
-
-- 单个增加。
-- 批量增加。
-- 根据 id 更新。
-- 通用查询，以 Entity 为 condition。
-- 根据 id 查询。
-- 根据 ids 查询。
-- 根据 id 删除（软删除）。
-- 根据 ids 删除（软删除）。
-```
-
-## Developer Prompts
-
-### 分步式开发策略
-
-```markdown
-采用 「原子化任务拆分」+「渐进式验证」 方法, 将复杂需求拆解为独立可测试的小模块.
-帮我设计并且给出我每一步的提示词用来指导 Cursor 编程.
-```
-
-### 多方法开发策略
-
-```markdown
-Please think through at least 3 possibilities of what could be causing this.
-write in detail about them.
-Choose which you believe could be the most likely cause
-(noting above you already tried 2 other things that didn't work,
-so don't try them again, because we're getting the same exact error after both)
-
-When you pick the most probably solution, write in detail how do implement the solution.
-Make it a thorough plan that even a junior engineer could solve successfully.
-```
-
-### 日志定位开发策略
-
-```markdown
-Please add logs to the code to get better visibility into what is going on
-so we can find the fix.
-I'll run the code and feed you the logs results.
-```
-
-### 辅助学习开发策略
-
-利用 Cursor 的辅助学习新知识, 例如学习 [Next.js](https://github.com/zenyarn/nextjs-study):
-
-```markdown
-我是一个需要快速接手这段代码的开发者。这个文件的代码是由 Cursor 生成的。
-我希望快速掌握其核心要点。请重点分析以下几个方面：
-
-1. **整体功能和作用：** 这段代码（或组件/模块）是用来做什么的？在整个应用中扮演什么角色？
-2. **UI 组件结构：** 如果是组件，它内部包含哪些子组件或主要DOM结构？层级关系是怎样的？
-3. **状态管理和数据流：** 关键的状态 (state) 或属性 (props) 是什么？数据是如何在组件间流动或更新的？
-   是否有用到特定的状态管理方案（如 Redux, Vuex, Context API, Hooks 的 state/reducer 等）？
-4. **用户交互和事件处理：** 代码如何响应用户的操作（点击、输入等）？主要的事件监听和处理逻辑在哪里？
-5. **API 交互：** 如果代码涉及与后端通信，它是如何发起请求、处理响应和管理数据的？使用了什么库（如 fetch, axios）或模式？
-6. **关键依赖或技术栈：** 这段代码主要依赖于哪个前端框架/库（如 React, Vue, Angular）？使用了哪些重要的第三方库或技术？
-
-请以清晰、结构化的方式呈现，模拟我理解自己代码时的那种感觉（即对整体架构和关键部分的把握）。
-**避免详细的代码实现细节或逐行解释。**
-```
-
 ## Context Engineering
 
 LLM 并未统一利用其上下文,
@@ -1087,6 +1087,37 @@ Create a test agent for this repository. It should:
 - Never modify source code or remove failing tests
 - Include specific examples of good test structure
 ```
+
+## Vibe Engineering
+
+### Vibe Coding Development Loop
+
+`Spec` → `Onboard` → `Direct` → `Verify` → `Integrate`.
+
+1. Spec the work:
+   - 目标: picking next highest-leverage goal
+   - 分解: breaking the work into small and verifiable slice (pull request)
+   - 标准: writing acceptance criteria, e.g inputs, outputs, edge cases, UX constraints
+   - 风险: calling out risks up front, e.g performance hotspots, security boundaries, migration concerns
+2. Give agents context:
+   - 仓库: Repository conventions
+   - 组件: Component system, design tokens and patterns
+   - 约束: Defining constraints: what not to touch, what must stay backward compatible
+3. Direct agents `what`, not `how`:
+   - 工具: Assigning right tools
+   - 文件: Pointing relevant files and components
+   - 约束: Stating explicit guardrails, e.g `don't change API shape`, `keep this behavior`, `no new deps`
+4. Verification and code review:
+   - 正确性 (correctness): edge cases, race conditions, error handling
+   - 性能 (performance): `N+1` queries, unnecessary re-renders, overfetching
+   - 安全性 (security): auth boundaries, injection, secrets, SSRF
+   - 测试 (tests): coverage for changed behaviors
+5. Integrate and ship:
+   - Break big work into tasks agents can complete reliably
+   - Merge conflicts
+   - Verify CI
+   - Stage roll-outs
+   - Monitor regressions
 
 ## Prompt Engineering Reference
 
