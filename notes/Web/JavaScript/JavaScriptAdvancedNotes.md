@@ -546,6 +546,87 @@ Generators can play 3 roles:
   generators are pauseable and can be both data producers and data consumers,
   generators can be coroutines (cooperatively multi-tasked tasks).
 
+Generators can help
+[reduce tight coupling](https://macarthur.me/posts/generators):
+
+```ts
+let windowStart = 0
+
+function calculateMovingAverage(values, windowSize) {
+  const section = values.slice(windowStart, windowStart + windowSize)
+
+  if (section.length < windowSize)
+    return null
+
+  return section.reduce((sum, val) => sum + val, 0) / windowSize
+}
+
+loadButton.addEventListener('click', () => {
+  const avg = calculateMovingAverage(prices, 5)
+  average.innerHTML = `Average: $${avg}`
+  windowStart++
+})
+```
+
+`windowStart` is only exposed where needed,
+state and logic are self-contained with generators:
+
+```ts
+function* calculateMovingAverage(values, windowSize) {
+  let windowStart = 0
+
+  while (windowStart <= values.length - 1) {
+    const section = values.slice(windowStart, windowStart + windowSize)
+
+    yield section.reduce((sum, val) => sum + val, 0) / windowSize
+
+    windowStart++
+  }
+}
+
+const generator = calculateMovingAverage(prices, 5)
+
+loadButton.addEventListener('click', () => {
+  const { value } = generator.next()
+  average.innerHTML = `Average: $${value}`
+})
+```
+
+Ugly callback-based code:
+
+```ts
+async function monitorVitals(cb) {
+  while (true) {
+    await new Promise(r => setTimeout(r, 1000))
+
+    const vitals = await requestVitals()
+    cb(vitals)
+  }
+}
+
+monitorVitals((vitals) => {
+  console.log('Update the UI...', vitals)
+})
+```
+
+No callbacks and timing risks with generators:
+
+```ts
+async function* generateVitals() {
+  while (true) {
+    const result = await requestVitals()
+
+    await new Promise(r => setTimeout(r, 1000))
+
+    yield result
+  }
+}
+
+for await (const vitals of generateVitals()) {
+  console.log('Update the UI...', vitals)
+}
+```
+
 ### Generator Basic Usage
 
 ```ts
