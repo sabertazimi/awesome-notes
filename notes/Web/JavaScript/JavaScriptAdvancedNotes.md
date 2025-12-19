@@ -401,14 +401,15 @@ function* elements() {
 }
 
 function twoLoops(iterator) {
-  // eslint-disable-next-line no-unreachable-loop
+  // eslint-disable-next-line no-unreachable-loop -- break loop
   for (const x of iterator) {
     console.log(x)
     break
   }
 
-  for (const x of iterator)
+  for (const x of iterator) {
     console.log(x)
+  }
 }
 
 class PreventReturn {
@@ -1133,7 +1134,6 @@ let p1 = Promise.resolve('foo')
 let p2 = p1.then()
 stetTimeout(console.log, 0, p2) // Promise <resolved>: foo
 
-// eslint-disable-next-line prefer-promise-reject-errors
 p1 = Promise.reject('foo')
 p2 = p1.then()
 // Uncaught (in promise) foo
@@ -1152,7 +1152,6 @@ setTimeout(console.log, 0, p6) // Promise <resolved>: bar
 setTimeout(console.log, 0, p7) // Promise <resolved>: bar
 
 const p8 = p1.then(null, () => new Promise(() => {}))
-// eslint-disable-next-line prefer-promise-reject-errors
 const p9 = p1.then(null, () => Promise.reject())
 // Uncaught (in promise): undefined
 setTimeout(console.log, 0, p8) // Promise <pending>
@@ -1171,7 +1170,6 @@ setTimeout(console.log, 0, p11) // Promise <resolved>: Error: bar
 ### Promise Catch
 
 ```ts
-// eslint-disable-next-line prefer-promise-reject-errors
 const p = Promise.reject()
 function onRejected(e) {
   setTimeout(console.log, 0, 'rejected')
@@ -1221,7 +1219,6 @@ setTimeout(console.log, 0, p8) // Promise <resolved>: foo
 // 特殊处理:
 const p9 = p1.finally(() => new Promise(() => {}))
 setTimeout(console.log, 0, p9) // Promise <pending>
-// eslint-disable-next-line prefer-promise-reject-errors
 const p10 = p1.finally(() => Promise.reject())
 // Uncaught (in promise): undefined
 setTimeout(console.log, 0, p10) // Promise <rejected>: undefined
@@ -1267,7 +1264,6 @@ const promise = Promise.resolve(42)
 
 promise
   .finally(() => {
-    // eslint-disable-next-line prefer-promise-reject-errors
     return Promise.reject(43)
   })
   .catch((reason) => {
@@ -1276,12 +1272,10 @@ promise
 ```
 
 ```ts
-// eslint-disable-next-line prefer-promise-reject-errors
 const promise = Promise.reject(43)
 
 promise
   .finally(() => {
-    // eslint-disable-next-line prefer-promise-reject-errors
     return Promise.reject(45)
   })
   .catch((reason) => {
@@ -1989,21 +1983,18 @@ export default {
 
 ```ts
 // worker.js
-// eslint-disable-next-line no-restricted-globals
-self.addEventListener(
+globalThis.addEventListener(
   'message',
   (e) => {
     const data = e.data
     switch (data.cmd) {
       case 'average': {
         const result = calculateAverage(data)
-        // eslint-disable-next-line no-restricted-globals
-        self.postMessage(result)
+        globalThis.postMessage(result)
         break
       }
       default:
-        // eslint-disable-next-line no-restricted-globals
-        self.postMessage('Unknown command')
+        globalThis.postMessage('Unknown command')
     }
   },
   false
@@ -2044,13 +2035,10 @@ self.addEventListener(
 /*
  * JSONParser.js
  */
-// eslint-disable-next-line no-restricted-globals
-self.onmessage = function (event) {
+globalThis.onmessage = function (event) {
   const jsonText = event.data
   const jsonData = JSON.parse(jsonText)
-
-  // eslint-disable-next-line no-restricted-globals
-  self.postMessage(jsonData)
+  globalThis.postMessage(jsonData)
 }
 ```
 
@@ -2629,9 +2617,9 @@ function require(moduleId) {
     const code = readFile(moduleId)
     const module = { exports: {} }
     require.cache[moduleId] = module
-    // eslint-disable-next-line no-new-func
-    const wrapper = new Function('require, exports, module', code)
+
     // Bind code to module.exports:
+    const wrapper = new Function('require, exports, module', code)
     wrapper(require, module.exports, module)
   }
   return require.cache[moduleId].exports
@@ -3938,7 +3926,6 @@ console.log(
 
 ```ts
 if (!String.prototype.trim) {
-  // eslint-disable-next-line no-extend-native
   String.prototype.trim = function () {
     return this.replace(/^\s+/, '').replace(/\s+$/, '')
   }
@@ -3947,7 +3934,6 @@ if (!String.prototype.trim) {
 
 ```ts
 if (!String.prototype.trim) {
-  // eslint-disable-next-line no-extend-native
   String.prototype.trim = function () {
     const str = this.replace(/^\s+/, '')
     let end = str.length - 1
@@ -4877,9 +4863,8 @@ interface Subscription {
   unsubscribe: () => void
 }
 
-interface Observable<T> {
-  // eslint-disable-next-line ts/no-misused-new
-  new (subscriber: (observer: Observer<T>) => Subscription): Observable<T>
+class Observable<T> {
+  constructor(subscriber: (observer: Observer<T>) => Subscription): Observable<T>
   observable: () => this
   readonly species: this
 
@@ -4891,6 +4876,7 @@ interface Observable<T> {
     acc: (accumulator: Z, value: T, index?: number, array?: Array<T>) => Z,
     startsWith?: T
   ) => Observable<T>
+
   filter: (predicate: (value: T) => boolean) => Observable<T>
   skip: (count: number) => Observable<T>
 

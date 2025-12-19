@@ -1840,7 +1840,7 @@ console.log(x)
 ```
 
 ```ts
-// eslint-disable-next-line prefer-regex-literals
+// eslint-disable-next-line prefer-regex-literals -- use RegExp to detect devtools panel opened
 const c = new RegExp('1')
 
 c.toString = function () {

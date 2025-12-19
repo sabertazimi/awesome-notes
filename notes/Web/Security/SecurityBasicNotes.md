@@ -414,7 +414,6 @@ class SnapshotSandbox {
 ```ts
 function ProxySandbox(code) {
   code = `with (sandbox) {${code}}`
-  // eslint-disable-next-line no-new-func
   const fn = new Function('sandbox', code)
 
   return function (sandbox) {

@@ -2768,8 +2768,8 @@ alias ping='gping'
 alias ps='procs'
 alias curl='curlie'
 
-eval "$(zoxide init bash)"
 eval "$(fzf --bash)"
+eval "$(zoxide init bash)"
 
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 ```

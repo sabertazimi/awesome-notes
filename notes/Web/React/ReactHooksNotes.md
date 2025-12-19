@@ -481,7 +481,6 @@ const MyReact = (function () {
       currentHook = 0 // reset for next render
       return Comp
     },
-    // eslint-disable-next-line react/no-unnecessary-use-prefix
     useEffect(callback, depArray) {
       const hasNoDeps = !depArray
       const deps = hooks[currentHook] // type: array | undefined
@@ -494,7 +493,6 @@ const MyReact = (function () {
       }
       currentHook++ // done with this hook
     },
-    // eslint-disable-next-line react/no-unnecessary-use-prefix
     useState(initialValue) {
       hooks[currentHook] = hooks[currentHook] || initialValue // type: any
       const setStateHookIndex = currentHook // for setState's closure!
@@ -1887,10 +1885,10 @@ export default function useCustomCompareEffect<TDeps extends DependencyList>(
 ) {
   const ref = useRef<TDeps | undefined>(undefined)
 
-  if (!ref.current || !depsEqual(deps, ref.current))
+  if (!ref.current || !depsEqual(deps, ref.current)) {
     ref.current = deps
+  }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(effect, ref.current)
 }
 ```
@@ -1933,7 +1931,6 @@ export default function Counter() {
       setCount(count + 1) // always 1 regardless `count` value change
     }, 1000)
     return () => clearInterval(id)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return <h1>{count}</h1>
@@ -2575,13 +2572,11 @@ function useSyncExternalStore(subscribe, getSnapshot) {
 
   const update = useCallback(() => {
     setData(() => getSnapshot())
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- constant fn
   }, [])
 
   useEffect(() => {
     update()
     return subscribe(update)
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- update is not a dependency
   }, [update])
 
   return data
@@ -2879,7 +2874,6 @@ function useEvent(event, handler, option = {}) {
       el.addEventListener(event, handler, option)
       refPrev.current = el
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- event and option are not deps
     [handler]
   )
   const detach = useCallback(
@@ -2887,7 +2881,6 @@ function useEvent(event, handler, option = {}) {
       refPrev.current.removeEventListener(event, handler)
       refPrev.current = null
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- event and handler are not deps
     [handler]
   )
   const ref = (el) => {
@@ -2931,7 +2924,6 @@ function useOptimistic(state, optimisticDispatcher) {
 
   useLayoutEffect(() => {
     setState(optimisticState)
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- state is not a dependency
   }, [state])
 
   const dispatch = (action) => {
@@ -2989,7 +2981,6 @@ function Thread({ messages, sendMessage }) {
 
 ```ts
 function useMount(fn) {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => fn(), [])
 }
 ```
@@ -2998,7 +2989,6 @@ componentWillUnmount:
 
 ```ts
 function useUnmount(fn) {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => fn, [])
 }
 ```
@@ -3034,7 +3024,6 @@ function useUpdateDeps(effectCallback, deps) {
       mounting.current = false
     else
       return effectCallback()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps)
 }
 ```
@@ -3081,7 +3070,6 @@ function useIsMounted() {
     }
 
     return () => setIsMount(false)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return isMount
@@ -3381,7 +3369,6 @@ function useLockedBody(initialLocked = false): ReturnType {
     if (locked !== initialLocked) {
       setLocked(initialLocked)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialLocked])
 
   return [locked, setLocked]
@@ -3523,7 +3510,6 @@ export function useField(
     if (pristine)
       return // Avoid validate on mount
     form.validateFields(fieldsToValidateOnChange)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value])
 
   const field = {
@@ -3881,7 +3867,6 @@ export default function useStateParams<T>(
     if (existingValue && deserialize(existingValue) !== state) {
       setState(() => deserialize(existingValue))
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [existingValue])
 
   const onChange = (s: T) => {
@@ -4060,13 +4045,12 @@ function useScript(src: string): Status {
           )
         }
 
-        // eslint-disable-next-line react-web-api/no-leaked-event-listener
+        // eslint-disable-next-line react-web-api/no-leaked-event-listener -- Remove event listener on cleanup.
         script.addEventListener('load', setAttributeFromEvent)
-        // eslint-disable-next-line react-web-api/no-leaked-event-listener
+        // eslint-disable-next-line react-web-api/no-leaked-event-listener -- Remove event listener on cleanup.
         script.addEventListener('error', setAttributeFromEvent)
       } else {
         // Grab existing script status from attribute and set to state.
-
         setStatus(script.getAttribute('data-status') as Status)
       }
 
@@ -4486,7 +4470,6 @@ function useFetch<T = unknown>(
     return () => {
       cancelRequest.current = true
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url])
 
   return state

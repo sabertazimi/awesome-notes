@@ -413,7 +413,6 @@ function debounce(func, wait = 50, immediate = true) {
       if (immediate) {
         func.apply(this, params)
       } else {
-        // eslint-disable-next-line ts/no-this-alias
         context = this
         args = params
       }
@@ -474,7 +473,6 @@ _.throttle = function (func, wait, options) {
 
     // 计算剩余时间
     const remaining = wait - (now - previous)
-    // eslint-disable-next-line ts/no-this-alias
     context = this
     args = original_args
 
@@ -707,8 +705,7 @@ read css -> write css (only re-layout/paint/composite once).
 [![Browser Cache](./figures/BrowserCache.webp)](https://web.dev/service-worker-caching-and-http-caching)
 
 ```ts
-// eslint-disable-next-line no-restricted-globals
-self.addEventListener('install', (event) => {
+globalThis.addEventListener('install', (event) => {
   async function buildCache() {
     const cache = await caches.open(cacheName)
     return cache.addAll(['/main.css', '/main.mjs', '/offline.html'])
@@ -716,8 +713,7 @@ self.addEventListener('install', (event) => {
   event.waitUntil(buildCache())
 })
 
-// eslint-disable-next-line no-restricted-globals
-self.addEventListener('fetch', (event) => {
+globalThis.addEventListener('fetch', (event) => {
   async function cachedFetch(event) {
     const cache = await caches.open(cacheName)
     let response = await cache.match(event.request)

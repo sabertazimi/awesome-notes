@@ -531,7 +531,6 @@ function RadioGroup({
 
   return (
     <div>
-      {/* eslint-disable-next-line react-hooks/static-components */}
       <RenderChildren />
     </div>
   )
@@ -2246,7 +2245,6 @@ function useFetch<T = unknown>(
     return () => {
       cancelRequest.current = true
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url])
 
   return state
@@ -3528,7 +3526,6 @@ export default function Hello() {
       __jsx('p', null, 'Hi:', 'Jack'),
       __jsx('strong', null, 'Static Content')
     )
-    // eslint-disable-next-line react-hooks/immutability
     $[0] = t0
   } else {
     t0 = $[0]
@@ -3690,10 +3687,8 @@ export default function App() {
 }
 
 function ExpensiveTree() {
-  // eslint-disable-next-line react-hooks/purity
   const now = performance.now()
 
-  // eslint-disable-next-line react-hooks/purity
   while (performance.now() - now < 100) {
     // Artificial delay -- do nothing for 100ms
   }

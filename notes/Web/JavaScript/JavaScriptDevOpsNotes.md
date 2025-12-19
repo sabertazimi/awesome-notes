@@ -78,8 +78,7 @@ async function handleRequest(event) {
 Stale-While-Revalidate:
 
 ```ts
-// eslint-disable-next-line no-restricted-globals
-self.addEventListener('fetch', (event) => {
+globalThis.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.open(cacheName).then((cache) => {
       cache.match(event.request).then((cacheResponse) => {
@@ -97,8 +96,7 @@ self.addEventListener('fetch', (event) => {
 Cache first, then Network:
 
 ```ts
-// eslint-disable-next-line no-restricted-globals
-self.addEventListener('fetch', (event) => {
+globalThis.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.open(cacheName).then((cache) => {
       cache.match(event.request).then((cacheResponse) => {
@@ -118,8 +116,7 @@ self.addEventListener('fetch', (event) => {
 Network first, then Cache:
 
 ```ts
-// eslint-disable-next-line no-restricted-globals
-self.addEventListener('fetch', (event) => {
+globalThis.addEventListener('fetch', (event) => {
   event.respondWith(
     fetch(event.request).catch(() => {
       return caches.match(event.request)
@@ -131,8 +128,7 @@ self.addEventListener('fetch', (event) => {
 Cache only:
 
 ```ts
-// eslint-disable-next-line no-restricted-globals
-self.addEventListener('fetch', (event) => {
+globalThis.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.open(cacheName).then((cache) => {
       cache.match(event.request).then((cacheResponse) => {
@@ -146,8 +142,7 @@ self.addEventListener('fetch', (event) => {
 Network only:
 
 ```ts
-// eslint-disable-next-line no-restricted-globals
-self.addEventListener('fetch', (event) => {
+globalThis.addEventListener('fetch', (event) => {
   event.respondWith(
     fetch(event.request).then((networkResponse) => {
       return networkResponse
@@ -177,8 +172,7 @@ function isImage(fetchRequest) {
   return fetchRequest.method === 'GET' && fetchRequest.destination === 'image'
 }
 
-// eslint-disable-next-line no-restricted-globals
-self.addEventListener('fetch', (e) => {
+globalThis.addEventListener('fetch', (e) => {
   e.respondWith(
     fetch(e.request)
       .then((response) => {
@@ -202,10 +196,8 @@ self.addEventListener('fetch', (e) => {
   )
 })
 
-// eslint-disable-next-line no-restricted-globals
-self.addEventListener('install', (e) => {
-  // eslint-disable-next-line no-restricted-globals
-  self.skipWaiting()
+globalThis.addEventListener('install', (e) => {
+  globalThis.skipWaiting()
   e.waitUntil(
     caches.open('precache').then((cache) => {
       // Add /broken.png to "precache"
@@ -218,8 +210,7 @@ self.addEventListener('install', (e) => {
 #### Caches Version Service Worker
 
 ```ts
-// eslint-disable-next-line no-restricted-globals
-self.addEventListener('activate', (event) => {
+globalThis.addEventListener('activate', (event) => {
   const cacheWhitelist = ['v2']
 
   event.waitUntil(
@@ -228,8 +219,7 @@ self.addEventListener('activate', (event) => {
         keyList.map((key) => {
           return cacheWhitelist.includes(key) ? caches.delete(key) : null
         }),
-        // eslint-disable-next-line no-restricted-globals
-        self.clients.claim(),
+        globalThis.clients.claim(),
       ])
     })
   )

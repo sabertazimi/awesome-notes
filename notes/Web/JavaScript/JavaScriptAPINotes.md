@@ -765,7 +765,7 @@ alert(element.childNodes.length) // 2
 ```ts
 const textContent = element.textContent
 const innerHTML = element.innerHTML
-// eslint-disable-next-line unicorn/prefer-dom-node-text-content
+// eslint-disable-next-line unicorn/prefer-dom-node-text-content -- API example
 const innerText = element.innerText
 ```
 

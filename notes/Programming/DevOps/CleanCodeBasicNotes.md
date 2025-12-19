@@ -1776,7 +1776,6 @@ class Koa extends EventEmitter {
     this.middlewares = []
   }
 
-  // eslint-disable-next-line react/no-unnecessary-use-prefix -- for koa use
   use(fn) {
     this.middlewares.push(fn)
   }
@@ -2090,7 +2089,6 @@ class Stuff {
   }
 
   [Symbol.iterator]() {
-    // eslint-disable-next-line ts/no-this-alias
     const self = this
     let i = 0
 
@@ -2105,7 +2103,6 @@ class Stuff {
   }
 
   get backwards() {
-    // eslint-disable-next-line ts/no-this-alias
     const self = this
     let i = 0
 
@@ -2996,17 +2993,16 @@ import * as React from 'react'
 class Injector {
   private static container = new Map<string, any>()
 
-  static resolve<T>(target: Type<T>): T {
-    if (Injector.container.has(target.name))
-      return Injector.container.get(target.name)
+  static resolve<T>(Target: Type<T>): T {
+    if (Injector.container.has(Target.name))
+      return Injector.container.get(Target.name)
 
-    const tokens = Reflect.getMetadata('design:types', target) || []
+    const tokens = Reflect.getMetadata('design:types', Target) || []
     const injections = tokens.map((token: Type<any>): any =>
       Injector.resolve(token)
     )
-    // eslint-disable-next-line new-cap
-    const instance = new target(...injections)
-    Injector.container.set(target.name, instance)
+    const instance = new Target(...injections)
+    Injector.container.set(Target.name, instance)
     return instance
   }
 }

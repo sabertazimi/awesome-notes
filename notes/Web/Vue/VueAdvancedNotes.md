@@ -373,7 +373,6 @@ Vue.compile = compileToFunctions
  */
 Vue.extend = function (extendOptions: object): Function {
   extendOptions = extendOptions || {}
-  // eslint-disable-next-line ts/no-this-alias
   const Super = this
   const SuperId = Super.cid
   const cachedCtors = extendOptions._Ctor || (extendOptions._Ctor = {})
@@ -856,7 +855,6 @@ mountComponent(vm, el)
 ```ts
 // initMixin(Vue)
 Vue.prototype._init = function (options?: object) {
-  // eslint-disable-next-line ts/no-this-alias
   const vm: Component = this
 
   // uid
@@ -913,7 +911,6 @@ export function mountComponent(
     vm._update(vm._render(), hydrating)
   }
 
-  // eslint-disable-next-line no-new
   new Watcher(
     vm,
     updateComponent,
@@ -946,7 +943,6 @@ export function mountComponent(
 
 ```ts
 Vue.prototype._render = function (): VNode {
-  // eslint-disable-next-line ts/no-this-alias
   const vm: Component = this
   const { render, _parentVnode } = vm.$options
 
@@ -1057,13 +1053,18 @@ export function _createElement(
         undefined,
         context
       )
-    } else if (
-      (!data || !data.pre)
-      // eslint-disable-next-line no-cond-assign
-      && isDef((Ctor = resolveAsset(context.$options, 'components', tag)))
-    ) {
-      // component
-      vnode = createComponent(Ctor, data, context, children, tag)
+    } else if (!data || !data.pre) {
+      Ctor = resolveAsset(context.$options, 'components', tag)
+
+      if (isDef(Ctor)) {
+        // component
+        vnode = createComponent(Ctor, data, context, children, tag)
+      } else {
+        // unknown or unlisted namespaced elements
+        // check at runtime because it may get assigned a namespace when its
+        // parent normalizes children
+        vnode = new VNode(tag, data, children, undefined, undefined, context)
+      }
     } else {
       // unknown or unlisted namespaced elements
       // check at runtime because it may get assigned a namespace when its
@@ -1093,7 +1094,6 @@ export function _createElement(
 
 ```ts
 Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
-  // eslint-disable-next-line ts/no-this-alias
   const vm: Component = this
   const prevEl = vm.$el
   const prevVnode = vm._vnode
@@ -1195,7 +1195,6 @@ export function mountComponent(
     vm._update(vm._render(), hydrating)
   }
 
-  // eslint-disable-next-line no-new
   new Watcher(
     vm,
     updateComponent,
@@ -1289,7 +1288,6 @@ function callUpdatedHooks(queue) {
 
 ```ts
 Vue.prototype.$destroy = function () {
-  // eslint-disable-next-line ts/no-this-alias
   const vm: Component = this
 
   if (vm._isBeingDestroyed)
@@ -1385,7 +1383,7 @@ function onMounted(fn) {
 
 ```ts
 // Vue.prototype._init: core/instance/init.js
-// eslint-disable-next-line ts/no-this-alias
+
 const vm: Component = this
 ```
 
@@ -2118,13 +2116,16 @@ export function defineReactive(
     set: function reactiveSetter(newVal) {
       const value = getter ? getter.call(obj) : val
 
-      /* eslint-disable no-self-compare */
-      if (newVal === value || (newVal !== newVal && value !== value))
+      // newVal and value are equal or both are NaN
+      if (newVal === value || (newVal !== newVal && value !== value)) {
         return
+      }
 
-      if (setter)
+      if (setter) {
         setter.call(obj, newVal)
-      else val = newVal
+      } else {
+        val = newVal
+      }
 
       childOb = !shallow && observe(newVal)
       dep.notify()
