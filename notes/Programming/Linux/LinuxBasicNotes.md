@@ -552,38 +552,6 @@ Find `FunctionalComponent` in files and open them all:
 grep -lr FunctionalComponent src --exclude=*.md | xargs code
 ```
 
-### Fuzzy Find Tool
-
-[fzf](https://github.com/junegunn/fzf) is a command-line fuzzy finder:
-
-```bash
-brew install fzf
-winget install fzf
-scoop install fzf
-
-# ~/.bashrc
-eval "$(fzf --bash)"
-# ~/.zshrc
-source <(fzf --zsh)
-```
-
-- `ctrl-r`: find commands.
-- `ctrl-t`: find files and directories.
-- `alt-c`: `cd` into directory.
-- `code **<TAB>`/`code $(fzf -m)`: fuzzy completion for files and directories.
-- `ctrl-k` / `ctrl-j`: move cursor up and down.
-- Multi-select(`-m`): `tab` and `shift-tab` to mark multiple items.
-
-### RipGrep
-
-[rg](https://github.com/BurntSushi/ripgrep):
-
-```bash
-brew install ripgrep
-winget install BurntSushi.ripgrep.MSVC
-scoop install ripgrep
-```
-
 ## CPU and Process Commands
 
 ### Uptime Command
@@ -2771,8 +2739,299 @@ perf report -n -g 'flamegraph'
 
 ## Linux Tools
 
+### Modern Unix Tools
+
 - Cross-platform Rust rewrite of the [GNU core utils](https://github.com/uutils/coreutils).
 - Modern alternatives to [common unix commands](https://github.com/ibraheemdev/modern-unix).
+
+```bash
+scoop install volta zoxide bat eza delta dust duf fd ripgrep fzf jq tlrc bottom gping procs curlie
+```
+
+```bash
+alias app='scoop'
+alias cc="claude"
+alias code="cursor"
+alias np='pnpm'
+alias vim="nvim"
+
+alias z='zoxide'
+alias zd='zoxide'
+alias cat='bat'
+alias ls='eza'
+alias du='dust'
+alias df='duf'
+alias find='fd'
+alias grep='rg'
+alias man='tldr'
+alias top='btm'
+alias ping='gping'
+alias ps='procs'
+alias curl='curlie'
+
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+
+eval "$(zoxide init bash)"
+eval "$(fzf --bash)"
+```
+
+#### Scoop
+
+[Scoop](https://github.com/ScoopInstaller/Scoop):
+
+```powershell
+# Command-line installer for Windows
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+```
+
+```bash
+scoop search bat
+scoop install eza
+scoop info fzf
+scoop bucket add extras
+```
+
+#### WinGet
+
+[WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget):
+
+```bash
+winget search steam
+winget install Microsoft.VisualStudioCode
+winget show vscode
+winget list
+```
+
+:::tip[Scoop vs WinGet]
+
+[Scoop vs WinGet](https://daftdev.blog/2024/04/01/chocolatey-vs-scoop-vs-winget---which-windows-package-manager-to-use):
+
+Scoop is command line installer,
+while WinGet is app installer.
+
+:::
+
+#### Volta
+
+[volta](https://github.com/volta-cli/volta):
+
+```bash
+curl https://get.volta.sh | bash
+scoop install volta
+winget install Volta.Volta
+```
+
+```bash
+volta setup
+volta install node
+volta list
+```
+
+#### Zoxide
+
+[zoxide](https://github.com/ajeetdsouza/zoxide):
+
+```bash
+brew install zoxide
+scoop install zoxide
+winget install ajeetdsouza.zoxide
+```
+
+```bash
+eval "$(zoxide init bash)"
+```
+
+#### Bat
+
+[bat](https://github.com/sharkdp/bat):
+
+```bash
+brew install bat
+scoop install bat
+winget install sharkdp.bat
+```
+
+#### Eza
+
+[eza](https://github.com/eza-community/eza):
+
+```bash
+brew install eza
+scoop install eza
+winget install eza-community.eza
+```
+
+#### Delta
+
+[delta](https://github.com/dandavison/delta):
+
+```bash
+brew install git-delta
+scoop install delta
+winget install dandavison.delta
+```
+
+```bash
+git config --global core.pager delta
+git config --global interactive.diffFilter 'delta --color-only'
+git config --global delta.navigate true
+git config --global delta.dark true
+git config --global delta.line-numbers true
+git config --global delta.side-by-side true
+git config --global merge.conflictStyle zdiff3
+```
+
+```bash
+git diff
+git show
+git add -p
+git log -p
+git stash show -p
+git reflog -p
+```
+
+#### Dust
+
+[dust](https://github.com/bootandy/dust):
+
+```bash
+brew install dust
+scoop install dust
+winget install bootandy.dust
+```
+
+#### Duf
+
+[duf](https://github.com/muesli/duf):
+
+```bash
+brew install duf
+scoop install duf
+winget install muesli.duf
+```
+
+#### Fd
+
+[fd](https://github.com/sharkdp/fd):
+
+```bash
+brew install fd
+scoop install fd
+winget install sharkdp.fd
+```
+
+#### RipGrep
+
+[rg](https://github.com/BurntSushi/ripgrep):
+
+```bash
+brew install ripgrep
+winget install BurntSushi.ripgrep.MSVC
+scoop install ripgrep
+```
+
+`$HOME/.ripgreprc`:
+
+```bash
+# Add 'web' type.
+--type-add
+web:*.{html,css,js,jsx,ts,tsx,vue,svelte,astro}*
+
+# Search hidden files / directories (e.g. dotfiles) by default
+--hidden
+
+# Using glob patterns to include/exclude files or folders
+--glob
+!.git/*
+```
+
+#### Fzf
+
+[fzf](https://github.com/junegunn/fzf):
+
+```bash
+brew install fzf
+winget install fzf
+scoop install fzf
+
+# ~/.bashrc
+eval "$(fzf --bash)"
+# ~/.zshrc
+source <(fzf --zsh)
+```
+
+Command line fuzzy finder:
+
+- `ctrl-r`: find commands.
+- `ctrl-t`: find files and directories.
+- `alt-c`: `cd` into directory.
+- `code **<TAB>`/`code $(fzf -m)`: fuzzy completion for files and directories.
+- `ctrl-k` / `ctrl-j`: move cursor up and down.
+- Multi-select(`-m`): `tab` and `shift-tab` to mark multiple items.
+
+#### Jq
+
+[jq](https://github.com/jqlang/jq):
+
+```bash
+brew install jq
+scoop install jq
+winget install jqlang.jq
+```
+
+```bash
+echo "version=$(jq -r '.devDependencies["@playwright/test"]' package.json | sed 's/^[^0-9]*//')"
+```
+
+#### TLDR
+
+[TLDR](https://github.com/tldr-pages/tldr):
+
+```bash
+brew install tlrc
+scoop install tlrc
+winget install tldr-pages.tlrc
+```
+
+#### Bottom
+
+[bottom](https://github.com/ClementTsang/bottom):
+
+```bash
+brew install bottom
+scoop install bottom
+winget install Clement.bottom
+```
+
+#### Gping
+
+[gping](https://github.com/orf/gping):
+
+```bash
+brew install gping
+scoop install gping
+winget install orf.gping
+```
+
+#### Procs
+
+[procs](https://github.com/dalance/procs):
+
+```bash
+brew install procs
+scoop install procs
+winget install dalance.procs
+```
+
+#### Curlie
+
+[Curlie](https://github.com/rs/curlie):
+
+```bash
+brew install curlie
+scoop install curlie
+```
 
 ### FFmpeg
 

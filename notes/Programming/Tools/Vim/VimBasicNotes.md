@@ -944,7 +944,9 @@ set termencoding=utf-8
 ## NeoVim
 
 ```bash
-sudo snap install nvim --classic
+brew install neovim
+winget install Neovim.Neovim
+sudo apt install neovim
 ```
 
 [AstroNvim](https://github.com/AstroNvim/AstroNvim):
