@@ -2755,8 +2755,7 @@ alias code="cursor"
 alias np='pnpm'
 alias vim="nvim"
 
-alias z='zoxide'
-alias zd='zoxide'
+alias cd='z'
 alias cat='bat'
 alias ls='eza'
 alias du='dust'
@@ -2769,10 +2768,10 @@ alias ping='gping'
 alias ps='procs'
 alias curl='curlie'
 
-export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
-
 eval "$(zoxide init bash)"
 eval "$(fzf --bash)"
+
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 ```
 
 #### Scoop
@@ -2839,6 +2838,8 @@ winget install ajeetdsouza.zoxide
 ```
 
 ```bash
+alias cd='z'
+
 eval "$(zoxide init bash)"
 ```
 
@@ -2852,6 +2853,10 @@ scoop install bat
 winget install sharkdp.bat
 ```
 
+```bash
+alias cat='bat'
+```
+
 #### Eza
 
 [eza](https://github.com/eza-community/eza):
@@ -2860,6 +2865,10 @@ winget install sharkdp.bat
 brew install eza
 scoop install eza
 winget install eza-community.eza
+```
+
+```bash
+alias ls='eza'
 ```
 
 #### Delta
@@ -2901,6 +2910,10 @@ scoop install dust
 winget install bootandy.dust
 ```
 
+```bash
+alias du='dust'
+```
+
 #### Duf
 
 [duf](https://github.com/muesli/duf):
@@ -2909,6 +2922,10 @@ winget install bootandy.dust
 brew install duf
 scoop install duf
 winget install muesli.duf
+```
+
+```bash
+alias df='duf'
 ```
 
 #### Fd
@@ -2921,6 +2938,10 @@ scoop install fd
 winget install sharkdp.fd
 ```
 
+```bash
+alias find='fd'
+```
+
 #### RipGrep
 
 [rg](https://github.com/BurntSushi/ripgrep):
@@ -2929,6 +2950,12 @@ winget install sharkdp.fd
 brew install ripgrep
 winget install BurntSushi.ripgrep.MSVC
 scoop install ripgrep
+```
+
+```bash
+alias grep='rg'
+
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 ```
 
 `$HOME/.ripgreprc`:
@@ -2994,6 +3021,10 @@ scoop install tlrc
 winget install tldr-pages.tlrc
 ```
 
+```bash
+alias man='tldr'
+```
+
 #### Bottom
 
 [bottom](https://github.com/ClementTsang/bottom):
@@ -3002,6 +3033,10 @@ winget install tldr-pages.tlrc
 brew install bottom
 scoop install bottom
 winget install Clement.bottom
+```
+
+```bash
+alias top='btm'
 ```
 
 #### Gping
@@ -3014,6 +3049,10 @@ scoop install gping
 winget install orf.gping
 ```
 
+```bash
+alias ping='gping'
+```
+
 #### Procs
 
 [procs](https://github.com/dalance/procs):
@@ -3024,6 +3063,10 @@ scoop install procs
 winget install dalance.procs
 ```
 
+```bash
+alias ps='procs'
+```
+
 #### Curlie
 
 [Curlie](https://github.com/rs/curlie):
@@ -3031,6 +3074,10 @@ winget install dalance.procs
 ```bash
 brew install curlie
 scoop install curlie
+```
+
+```bash
+alias curl='curlie'
 ```
 
 ### FFmpeg
