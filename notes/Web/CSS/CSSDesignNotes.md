@@ -21,7 +21,7 @@ tags: [Web, CSS, Design]
 - Font family.
 - Images and links.
 
-## Typography Principles
+## Typography Design
 
 - The typeface (font-family).
 - Type (modular) scale.
@@ -650,7 +650,7 @@ export function Button({
 - 智能手机: 按键的复杂度转为手机操作系统的复杂度.
 - 智能推荐: 用户自己选择筛选条件的复杂度转为人工智能算法的复杂度.
 
-## Components Design Principles
+## Components Design
 
 - [UX Checklist](https://www.smashingmagazine.com/2022/09/ux-checklists-for-interface-designers)
 - [Components Checklist](https://www.smashingmagazine.com/ebooks/checklist-cards-digital)
@@ -718,12 +718,12 @@ NNGroup article [homepage design principles](https://www.nngroup.com/articles/ho
   - Provide immediate access to content.
   - Avoid popup windows and splash screens unless legally required.
 
-### Form Design Principles
+### Form Design
 
 - Form design [blog](https://adamsilver.io/articles/form-design-from-zero-to-hero-all-in-one-blog-post).
 - Form design [book](https://www.smashingmagazine.com/printed-books/form-design-patterns).
 
-#### Buttons Placement Principles
+#### Buttons Placement
 
 [Principles](https://adamsilver.io/articles/where-to-put-buttons-in-forms):
 
@@ -733,6 +733,17 @@ NNGroup article [homepage design principles](https://www.nngroup.com/articles/ho
 - Place extra buttons based on what they do.
 - In some single field forms put the button next to the input (e.g `search` button).
 - Put buttons on multi select forms above the form.
+
+## User Experience
+
+High conversion rate can happen [despite poor UX](https://www.linkedin.com/posts/fabian-lenz-digital-experience-leadership_conversion-rate-is-not-a-ux-metric-yes-activity-7394261839506739200-78G9):
+
+- Strong brand power.
+- Aggressive urgency tactics.
+- Attractive prices.
+- Brilliant marketing.
+- Historical customer loyalty.
+- No alternative.
 
 ## AI Interfaces
 
