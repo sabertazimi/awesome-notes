@@ -3,10 +3,10 @@ author: Sabertazimi
 authorTitle: Web Developer
 authorURL: https://github.com/sabertazimi
 authorImageURL: https://github.com/sabertazimi.png
-tags: [AI, LLM, PromptEngineering]
+tags: [AI, LLM, PromptEngineering, Agent]
 ---
 
-# Prompt Engineering Basic Notes
+# Prompt and Agent Engineering Notes
 
 <!-- markdownlint-disable MD013 -->
 
