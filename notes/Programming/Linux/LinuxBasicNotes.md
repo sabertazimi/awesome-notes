@@ -2971,6 +2971,9 @@ web:*.{html,css,js,jsx,ts,tsx,vue,svelte,astro}*
 # Using glob patterns to include/exclude files or folders
 --glob
 !.git/*
+
+# Ignore case unless all caps
+--smart-case
 ```
 
 #### Fzf
