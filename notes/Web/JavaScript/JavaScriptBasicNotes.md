@@ -312,14 +312,11 @@ const a = (1 + 2) / 10 // a = 0.1 + 0.2;
 ```ts
 const goodString = 'I\'ve been a good string'
 console.log(typeof goodString) // string
-// eslint-disable-next-line unicorn/no-instanceof-builtins
 console.log(goodString instanceof String) // false
 console.log(Object.prototype.toString.call(goodString)) // [object String]
 
-// eslint-disable-next-line no-new-wrappers, unicorn/new-for-builtins
 const badString = new String('I\'ve been a naughty string')
 console.log(typeof badString) // object
-// eslint-disable-next-line unicorn/no-instanceof-builtins
 console.log(badString instanceof String) // true
 console.log(Object.prototype.toString.call(badString)) // [object String]
 
@@ -327,12 +324,10 @@ const isPrimitiveString = value => typeof value === 'string'
 console.log(isPrimitiveString(goodString)) // true
 console.log(isPrimitiveString(badString)) // false
 
-// eslint-disable-next-line unicorn/no-instanceof-builtins
 const isObjectWrappedString = value => value instanceof String
 console.log(isObjectWrappedString(goodString)) // false
 console.log(isObjectWrappedString(badString)) // true
 
-// eslint-disable-next-line unicorn/no-instanceof-builtins
 const isString = value => typeof value === 'string' || value instanceof String
 console.log(isString(goodString)) // true
 console.log(isString(badString)) // true
@@ -360,8 +355,6 @@ console.log(isStringAlternative(badString)) // true
 #### String Unicode
 
 ```ts
-// eslint-disable-next-line no-self-compare
-const truthy = 'z' === 'z' // true
 const truthy = '\x7A' === 'z' // true
 const truthy = '\u007A' === 'z' // true
 const truthy = '\u{7A}' === 'z' // true
@@ -465,8 +458,7 @@ interface RegExpMatchArray extends Array<string> {
 - `string.replaceAll(string | RegExp, replaceValue | replacerFunction)`.
 
 ```ts
-// eslint-disable-next-line prefer-regex-literals
-const regexp = new RegExp('foo[a-z]*', 'g')
+const regexp = /foo[a-z]*/g
 const str = 'table football, foosball'
 const matches = str.matchAll(regexp)
 
@@ -778,9 +770,9 @@ function objectToQueryString(obj) {
 - `Symbol.for(key)` create global Symbol registry.
 
 ```ts
-// eslint-disable-next-line symbol-description
+// eslint-disable-next-line symbol-description -- empty symbol description
 const genericSymbol = Symbol()
-// eslint-disable-next-line symbol-description
+// eslint-disable-next-line symbol-description -- empty symbol description
 const otherGenericSymbol = Symbol()
 console.log(genericSymbol === otherGenericSymbol) // false
 
@@ -1070,41 +1062,30 @@ is a useful way of coercing a value into a primitive type.
 
 ```ts
 // Not recommended (primitive object wrapper):
-// eslint-disable-next-line no-new-wrappers, unicorn/new-for-builtins
 const objectType = typeof new String(37) // object
 
 // Safe (type coercion with wrapper function):
 const stringType = typeof String(37) // string
 
-// Primitive strings:
-// eslint-disable-next-line no-self-compare
-const truthy = '37' === '37' // true
-
 // Object-wrapped string:
-// eslint-disable-next-line no-new-wrappers, unicorn/new-for-builtins
 const falsy = new String(37) === '37' // false
 
 // Type-coerced string:
 const truthy = String(37) === '37' // true
 
 // BAD!
-// eslint-disable-next-line no-new-wrappers, unicorn/new-for-builtins
 const falseObject = new Boolean(false)
 const result = falseObject && true
 console.log(result) // true
 console.log(typeof falseObject) // object
-// eslint-disable-next-line unicorn/no-instanceof-builtins
 console.log(falseObject instanceof Boolean) // true
 
 const prim = true
 assert.equal(typeof prim, 'boolean')
-// eslint-disable-next-line unicorn/no-instanceof-builtins
 assert.equal(prim instanceof Boolean, false)
 
-// eslint-disable-next-line unicorn/new-for-builtins
 const wrapped = Object(prim)
 assert.equal(typeof wrapped, 'object')
-// eslint-disable-next-line unicorn/no-instanceof-builtins
 assert.equal(wrapped instanceof Boolean, true)
 assert.equal(wrapped.valueOf(), prim) // unwrap
 ```
@@ -1145,7 +1126,6 @@ const undef = typeof greet.smile // "undefined"
 ```ts
 const numberType = typeof Number(1) // "number"
 const numberType = typeof Number('1') // "number"
-// eslint-disable-next-line no-new-wrappers, unicorn/new-for-builtins
 const numberType = typeof Number(new Number()) // "number"
 const stringType = typeof String(1) // "string"
 const booleanType = typeof Boolean(1) // "boolean"
@@ -1241,7 +1221,7 @@ Array.from(ps).forEach((p) => {
 
 // arguments 对象
 function foo() {
-  // eslint-disable-next-line prefer-rest-params
+  // eslint-disable-next-line prefer-rest-params -- arguments is not an array
   const args = Array.from(arguments)
   // ...
 }
@@ -1571,7 +1551,6 @@ console.log(concatArray instanceof Int32Array) // true
 ```ts
 const view = new Int16Array([25, 50])
 console.log(view instanceof Int16Array) // true
-// eslint-disable-next-line unicorn/no-instanceof-builtins
 console.log(view instanceof Array) // false
 console.log(Array.isArray(view)) // false
 ```
@@ -1604,10 +1583,7 @@ map.get('name') // 'Jean-Luc Picard'
 
 ```ts
 const map = new Map([])
-
-// eslint-disable-next-line no-new-wrappers, unicorn/new-for-builtins
 const n1 = new Number(5)
-// eslint-disable-next-line no-new-wrappers, unicorn/new-for-builtins
 const n2 = new Number(5)
 
 map.set(n1, 'One')
@@ -2483,13 +2459,9 @@ const true3 = undefined == null // true
 const false3 = undefined === null // false
 const true4 = '0' == false // true
 const false4 = '0' === false // false
-// eslint-disable-next-line no-self-compare
 const false5 = [] == [] // false, refer different objects in memory
-// eslint-disable-next-line no-self-compare
 const false6 = [] === [] // false, refer different objects in memory
-// eslint-disable-next-line no-self-compare
 const false7 = {} == {} // false, refer different objects in memory
-// eslint-disable-next-line no-self-compare
 const false8 = {} === {} // false, refer different objects in memory
 ```
 
@@ -2537,7 +2509,6 @@ if (!Object.is) {
         // The only possibility for a variable to not be strictly equal to itself
         // is when that variable evaluates to NaN (example: Number.NaN, 0/0, NaN).
         // This checks for case 3.
-        // eslint-disable-next-line no-self-compare
         return x !== x && y !== y
       }
     },
@@ -2612,9 +2583,9 @@ console.log(old.data) // 5
 const name = 'Lydia'
 age = 21
 
-// eslint-disable-next-line no-delete-var
+// eslint-disable-next-line no-delete-var -- false for failed deletion
 console.log(delete name) // false
-// eslint-disable-next-line no-delete-var
+// eslint-disable-next-line no-delete-var -- true for successful deletion
 console.log(delete age) // true
 ```
 
@@ -2949,7 +2920,6 @@ const truthy = Function[[proto]] === Function.prototype
 const truthy = Function[[proto]][[proto]] === Object.prototype
 
 // True:
-// eslint-disable-next-line unicorn/no-instanceof-builtins
 const truthy = Object instanceof Function
 const truthy = Function instanceof Object
 ```
@@ -2988,16 +2958,11 @@ console.log(person1 !== Person) // true
 console.log(person1 !== Person.prototype) // true
 console.log(Person.prototype !== Person) // true
 
-// eslint-disable-next-line no-proto, no-restricted-properties
 console.log(person1.__proto__ === Person.prototype) // true
-// eslint-disable-next-line no-proto, no-restricted-properties
 console.log(person1.__proto__.constructor === Person) // true
-// eslint-disable-next-line no-proto, no-restricted-properties
 console.log(person1.__proto__ === person2.__proto__) // true
 
-// eslint-disable-next-line no-prototype-builtins
 console.log(Person.prototype.isPrototypeOf(person1)) // true
-// eslint-disable-next-line no-prototype-builtins
 console.log(Person.prototype.isPrototypeOf(person2)) // true
 console.log(Object.getPrototypeOf(person1) === Person.prototype) // true
 
@@ -3020,11 +2985,8 @@ const p = new Proxy(obj, {
 console.log(
   Object.getPrototypeOf(p) === Array.prototype, // true
   Reflect.getPrototypeOf(p) === Array.prototype, // true
-  // eslint-disable-next-line no-prototype-builtins
   Array.prototype.isPrototypeOf(p), // true
-  // eslint-disable-next-line no-proto, no-restricted-properties
   p.__proto__ === Array.prototype, // true
-  // eslint-disable-next-line unicorn/no-instanceof-builtins
   p instanceof Array // true
 )
 ```
@@ -3096,26 +3058,27 @@ const valueOf = Object.prototype.valueOf
 const toString = Object.prototype.toString
 
 // 添加valueOf日志
-// eslint-disable-next-line no-extend-native
 Object.prototype.valueOf = function () {
   console.log('valueOf')
   return valueOf.call(this)
 }
+
 // 添加toString日志
-// eslint-disable-next-line no-extend-native
 Object.prototype.toString = function () {
   console.log('toString')
   return toString.call(this)
 }
+
 const a = {}
-// eslint-disable-next-line no-new-wrappers, unicorn/new-for-builtins
 const b = new Boolean(false)
 
-if (a)
+if (a) {
   console.log(1)
+}
 
-if (b)
+if (b) {
   console.log(2)
+}
 
 // output:
 // 1
@@ -3129,13 +3092,12 @@ const valueOf = Object.prototype.valueOf
 const toString = Object.prototype.toString
 
 // 添加valueOf日志
-// eslint-disable-next-line no-extend-native
 Object.prototype.valueOf = function () {
   console.log('valueOf')
   return valueOf.call(this)
 }
+
 // 添加toString日志
-// eslint-disable-next-line no-extend-native
 Object.prototype.toString = function () {
   console.log('toString')
   return toString.call(this)
@@ -3158,13 +3120,12 @@ const valueOf = Object.prototype.valueOf
 const toString = Object.prototype.toString
 
 // 添加valueOf日志
-// eslint-disable-next-line no-extend-native
 Object.prototype.valueOf = function () {
   console.log('valueOf')
   return '1' // 强制返回原始值
 }
+
 // 添加toString日志
-// eslint-disable-next-line no-extend-native
 Object.prototype.toString = function () {
   console.log('toString')
   return toString.call(this)
@@ -3185,13 +3146,12 @@ const valueOf = Object.prototype.valueOf
 const toString = Object.prototype.toString
 
 // 添加valueOf日志
-// eslint-disable-next-line no-extend-native
 Object.prototype.valueOf = function () {
   console.log('valueOf')
   return valueOf.call(this)
 }
+
 // 添加toString日志
-// eslint-disable-next-line no-extend-native
 Object.prototype.toString = function () {
   console.log('toString')
   return toString.call(this)
@@ -3212,13 +3172,12 @@ const valueOf = Object.prototype.valueOf
 const toString = Object.prototype.toString
 
 // 添加valueOf日志
-// eslint-disable-next-line no-extend-native
 Object.prototype.valueOf = function () {
   console.log('valueOf')
   return valueOf.call(this)
 }
+
 // 添加toString日志
-// eslint-disable-next-line no-extend-native
 Object.prototype.toString = function () {
   console.log('toString')
   return this
@@ -3798,7 +3757,6 @@ Object.isArray = function () {}
 
 ```ts
 if (typeof Function.prototype.method !== 'function') {
-  // eslint-disable-next-line no-extend-native
   Function.prototype.method = function (name, implementation) {
     this.prototype[name] = implementation
     return this
@@ -4630,7 +4588,6 @@ const obj = {
   foo() {
     // 若不将 `this` 赋值给 `that`, 而在内部函数中直接使用 `this.value`,
     // 则会发生错误: 内部函数的 `this` 指向全局对象而不是 `obj`.
-    // eslint-disable-next-line ts/no-this-alias
     const that = this
 
     function inner() {
@@ -4892,7 +4849,6 @@ const result = compare({ name: 'Nicholas' }, { name: 'Matt' })
 
 ```ts
 function foo() {}
-// eslint-disable-next-line antfu/top-level-function
 const bar = function () {}
 function baz() {}
 
@@ -4900,7 +4856,6 @@ console.log(foo.name) // foo
 console.log(bar.name) // bar
 console.log(baz.name) // baz
 console.log((() => {}).name) // (空字符串)
-// eslint-disable-next-line no-new-func
 console.log(new Function().name) // anonymous
 console.log(foo.bind(null).name) // bound foo
 
@@ -4942,7 +4897,7 @@ console.log(propertyDescriptor.set.name) // set age
 
 ```ts
 try {
-  // eslint-disable-next-line no-caller
+  // eslint-disable-next-line no-caller -- arguments.callee is deprecated
   if (arguments.length !== arguments.callee.length)
     throw new Error('传递的参数个数不匹配')
 } catch (err) {
@@ -5035,11 +4990,9 @@ const b = 10
 
 ```ts
 // 函数表达式:
-// eslint-disable-next-line antfu/top-level-function
 const foo = function foo() {}
 
 // `function f() {}` 是命名函数表达式:
-// eslint-disable-next-line antfu/top-level-function
 const factorial = function f(num) {
   if (num <= 1)
     return 1
@@ -5051,7 +5004,6 @@ const factorial = function f(num) {
 The name `funcExpr` only exists inside the function body:
 
 ```ts
-// eslint-disable-next-line antfu/top-level-function
 const func = function funcExpr() {
   return funcExpr
 }
@@ -5437,16 +5389,16 @@ function greet(options, ...rest) {
 ```ts
 // Anti-pattern:
 const property = 'name'
-// eslint-disable-next-line no-eval
+// eslint-disable-next-line no-eval -- eval is dangerous
 alert(eval(`obj.${property}`))
 // Preferred:
 const property = 'name'
 alert(obj[property])
 
 // Anti-pattern:
-// eslint-disable-next-line no-implied-eval
+// eslint-disable-next-line no-implied-eval -- eval is dangerous
 setTimeout('myFunc()', 1000)
-// eslint-disable-next-line no-implied-eval
+// eslint-disable-next-line no-implied-eval -- eval is dangerous
 setTimeout('myFunc(1, 2, 3)', 1000)
 
 // Preferred:
