@@ -2976,6 +2976,11 @@ web:*.{html,css,js,jsx,ts,tsx,vue,svelte,astro}*
 --smart-case
 ```
 
+```bash
+# Show file list with `-l`
+rg -l text
+```
+
 #### Fzf
 
 [fzf](https://github.com/junegunn/fzf):
