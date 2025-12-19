@@ -1011,6 +1011,19 @@ git filter-branch -f --prune-empty --index-filter
 
 获得在单个提交中引入的变更, 然后尝试将作为一个新的提交引入到你当前分支上.
 
+## Git GUI
+
+### LazyGit
+
+[lazygit](https://github.com/jesseduffield/lazygit):
+
+```bash
+brew install lazygit
+scoop bucket add extras
+scoop install lazygit
+winget install JesseDuffield.lazygit
+```
+
 ## GitHub
 
 ### GPG Usage
