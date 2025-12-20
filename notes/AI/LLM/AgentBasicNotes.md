@@ -25,12 +25,11 @@ AI agents powered by tricky LLMs prompting:
   实际交互通常会产生决策点, 一个健壮的 routine 会预测常见的变化,
   并包含关于如何通过条件步骤或分支来处理它们的指令, e.g 在缺少所需信息时提供替代步骤.
 
-```md
+```markdown
 您是 LLM 智能体指令编写专家.
 请将以下帮助中心文档转换为一组清晰的指令, 以编号列表形式编写.
 该文档将成为 LLM 遵循的政策. 确保没有歧义, 并且指令是以智能体的指示形式编写的.
 要转换的帮助中心文档如下 {{help_center_doc}}
-
 ```
 
 ### Vibe Coding Development
@@ -106,7 +105,6 @@ Before writing code, produce a 3–5 step plan that includes:
 
 Cite the exact files that justify your recommendations.
 After I approve a plan, use the Copilot coding agent to propose a PR.
-
 ```
 
 ### Docs Agent Prompt
@@ -151,7 +149,6 @@ don’t assume your audience are experts in the topic/area you are writing about
 - ✅ **Always do:** Write new files to `docs/`, follow the style examples, run markdownlint
 - ⚠️ **Ask first:** Before modifying existing documents in a major way
 - 🚫 **Never do:** Modify code in `src/`, edit config files, commit secrets
-
 ```
 
 ### Test Agent Prompt
@@ -165,7 +162,6 @@ Create a test agent for this repository. It should:
 - Write to “/tests/” directory only
 - Never modify source code or remove failing tests
 - Include specific examples of good test structure
-
 ```
 
 ## Agent Orchestration
@@ -399,7 +395,6 @@ to link to a file.
 10. 代码实现请先思考哪些业务可以参考或复用，尽可能参考现有业务的实现风格，如果你不明确可让我为你提供，避免从零造轮子。
 11. 在需要生成新文件时，你必须先检查项目结构中已存在的文件，只有当不存在相同文件名的文件时，才生成新文件。否则，你需要与我确认，然后再采取行动。
 12. 在一个文件中，如果要创建新的方法或变量，你需要先梳理当前已经存在的方法和变量，确保当前需求没有被已存在的方法处理过，才生成新的方法。否则，你需要与我确认，然后再采取行动。
-
 ```
 
 ### Plan Act Rule
@@ -418,7 +413,6 @@ You have two modes of operation:
 - If the user asks you to take an action while in plan mode
   you will remind them that you are in plan mode and that they need to approve the plan first.
 - When in plan mode always output the full updated plan in every response.
-
 ```
 
 Useful plan and task management system:
@@ -437,7 +431,6 @@ Useful plan and task management system:
 - "ENTER PLAN MODE" // 进入规划模式
 - "ENTER EXECUTE MODE" // 进入执行模式
 - "ENTER REVIEW MODE" // 进入审查模式
-
 ```
 
 ### Technical Design Rule
@@ -461,7 +454,6 @@ Useful plan and task management system:
 6. 考虑系统稳定性和监控，考虑可扩展性和可维护性。
 7. 基于现有代码仓库代码列出需要做哪些改动，包含改造内容分析和代码文件定位。
 8. 输出一份腾讯文档
-
 ```
 
 ### UI Design Rule
@@ -545,7 +537,6 @@ Create a new POST $ARGUMENTS endpoint with:
 - Rate limiting middleware.
 - Error handling wrapper.
 - TypeScript interfaces for request and response.
-
 ```
 
 ```bash
