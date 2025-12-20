@@ -82,7 +82,7 @@ git config --global help.autocorrect 10
 
 ```bash
 # GitHub proxy.
-git config --global url."https:/hub.fastgit.org/".insteadOf "https://github.com/"
+git config --global url."https://ghfast.top/https://github.com/".insteadOf "https://github.com/"
 
 # Socks5 proxy.
 git config --global http.proxy 'socks5://127.0.0.1:1080'
