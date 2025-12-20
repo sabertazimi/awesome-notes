@@ -2760,7 +2760,7 @@ alias cat='bat'
 alias ls='eza'
 alias du='dust'
 alias df='duf'
-alias find='fd'
+alias find='fd --hidden --follow --exclude .git'
 alias grep='rg'
 alias man='tldr'
 alias top='btm'
@@ -2771,7 +2771,18 @@ alias curl='curlie'
 eval "$(fzf --bash)"
 eval "$(zoxide init bash)"
 
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+
+# Use fd for listing path candidates
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+
+# Use fd for list directory candidates
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
 ```
 
 #### Scoop
@@ -2939,7 +2950,7 @@ winget install sharkdp.fd
 ```
 
 ```bash
-alias find='fd'
+alias find='fd --hidden --follow --exclude .git'
 ```
 
 #### RipGrep
@@ -2989,11 +3000,26 @@ rg -l text
 brew install fzf
 winget install fzf
 scoop install fzf
+```
 
+```bash
 # ~/.bashrc
 eval "$(fzf --bash)"
 # ~/.zshrc
 source <(fzf --zsh)
+
+# Respecting `.gitignore`
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+
+# Use fd for listing path candidates
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+
+# Use fd for list directory candidates
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
 ```
 
 Command line fuzzy finder:
