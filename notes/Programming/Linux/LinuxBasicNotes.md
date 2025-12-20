@@ -2754,7 +2754,7 @@ perf report -n -g 'flamegraph'
 - Modern alternatives to [common unix commands](https://github.com/ibraheemdev/modern-unix).
 
 ```bash
-scoop install volta zoxide bat eza delta dust duf fd ripgrep fzf jq tlrc bottom gping procs curlie
+scoop install volta zoxide bat eza delta dust duf fd ripgrep fzf jq fx tlrc bottom gping procs curlie
 ```
 
 ```bash
@@ -2777,8 +2777,9 @@ alias ping="gping"
 alias ps="procs"
 alias curl="curlie"
 
-eval "$(fzf --bash)"
 eval "$(zoxide init bash)"
+eval "$(fzf --bash)"
+source <(fx --comp bash)
 
 bind 'set bell-style none'
 
@@ -3054,6 +3055,35 @@ winget install jqlang.jq
 
 ```bash
 echo "version=$(jq -r '.devDependencies["@playwright/test"]' package.json | sed 's/^[^0-9]*//')"
+```
+
+#### Fx
+
+[fx](https://github.com/antonmedv/fx):
+
+```bash
+brew install fx
+scoop install fx
+```
+
+```bash
+# ~/.bashrc
+source <(fx --comp bash)
+# ~/.zshrc
+source <(fx --comp zsh)
+```
+
+Terminal JSON [viewer and processor](https://fx.wtf/getting-started):
+
+```bash
+# Hello world
+echo '{"name": "world"}' | fx 'x => x.name' 'x => `Hello, ${x}!`'
+
+# Bump version
+fx package.json 'x.version = x.version.replace(/\d+$/, n => +n + 1), x'
+
+# Interactive JSON viewer
+curl -i https://fx.wtf/example.json | fx
 ```
 
 #### TLDR
