@@ -2749,29 +2749,29 @@ scoop install volta zoxide bat eza delta dust duf fd ripgrep fzf jq tlrc bottom 
 ```
 
 ```bash
-alias app='scoop'
+alias app="scoop"
 alias cc="claude"
 alias code="cursor"
-alias np='pnpm'
+alias np="pnpm"
 alias vim="nvim"
 
-alias cd='z'
-alias cat='bat'
-alias ls='eza'
-alias du='dust'
-alias df='duf'
-alias find='fd --hidden --follow --exclude .git'
-alias grep='rg'
-alias man='tldr'
-alias top='btm'
-alias ping='gping'
-alias ps='procs'
-alias curl='curlie'
+alias cd="z"
+alias cat="bat"
+alias ls="eza"
+alias du="dust"
+alias df="duf"
+alias find="fd --hidden --follow --exclude .git"
+alias grep="rg"
+alias man="tldr"
+alias top="btm"
+alias ping="gping"
+alias ps="procs"
+alias curl="curlie"
 
 eval "$(fzf --bash)"
 eval "$(zoxide init bash)"
 
-export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 # Use fd for listing path candidates
@@ -2849,7 +2849,7 @@ winget install ajeetdsouza.zoxide
 ```
 
 ```bash
-alias cd='z'
+alias cd="z"
 
 eval "$(zoxide init bash)"
 ```
@@ -2865,7 +2865,7 @@ winget install sharkdp.bat
 ```
 
 ```bash
-alias cat='bat'
+alias cat="bat"
 ```
 
 #### Eza
@@ -2879,7 +2879,7 @@ winget install eza-community.eza
 ```
 
 ```bash
-alias ls='eza'
+alias ls="eza"
 ```
 
 #### Delta
@@ -2922,7 +2922,7 @@ winget install bootandy.dust
 ```
 
 ```bash
-alias du='dust'
+alias du="dust"
 ```
 
 #### Duf
@@ -2936,7 +2936,7 @@ winget install muesli.duf
 ```
 
 ```bash
-alias df='duf'
+alias df="duf"
 ```
 
 #### Fd
@@ -2950,7 +2950,7 @@ winget install sharkdp.fd
 ```
 
 ```bash
-alias find='fd --hidden --follow --exclude .git'
+alias find="fd --hidden --follow --exclude .git"
 ```
 
 #### RipGrep
@@ -2964,7 +2964,7 @@ scoop install ripgrep
 ```
 
 ```bash
-alias grep='rg'
+alias grep="rg"
 
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 ```
@@ -3009,7 +3009,7 @@ eval "$(fzf --bash)"
 source <(fzf --zsh)
 
 # Respecting `.gitignore`
-export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
 
 # Use fd for listing path candidates
 _fzf_compgen_path() {
@@ -3056,7 +3056,7 @@ winget install tldr-pages.tlrc
 ```
 
 ```bash
-alias man='tldr'
+alias man="tldr"
 ```
 
 #### Bottom
@@ -3070,7 +3070,7 @@ winget install Clement.bottom
 ```
 
 ```bash
-alias top='btm'
+alias top="btm"
 ```
 
 #### Gping
@@ -3084,7 +3084,7 @@ winget install orf.gping
 ```
 
 ```bash
-alias ping='gping'
+alias ping="gping"
 ```
 
 #### Procs
@@ -3098,7 +3098,7 @@ winget install dalance.procs
 ```
 
 ```bash
-alias ps='procs'
+alias ps="procs"
 ```
 
 #### Curlie
@@ -3111,7 +3111,7 @@ scoop install curlie
 ```
 
 ```bash
-alias curl='curlie'
+alias curl="curlie"
 ```
 
 ### FFmpeg
