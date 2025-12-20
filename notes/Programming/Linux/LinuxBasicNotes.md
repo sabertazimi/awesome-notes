@@ -2668,6 +2668,15 @@ setw -g mode-keys vi      # Vi
 set-window-option -g window-status-current-bg red
 ```
 
+### Windows Terminal
+
+```bash
+# ~/.bashrc
+
+# Fix git bash flicker
+bind 'set bell-style none'
+```
+
 ## Performance Tools
 
 ![Linux Perf Tools](./figures/LinuxPerfTools.png 'Linux Perf Tools')
