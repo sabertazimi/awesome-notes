@@ -423,7 +423,7 @@ Useful plan and task management system:
 ### RIPER-5 Rule
 
 [RIPER-5](https://github.com/johnpeterman72/cursor_memory_riper_framework) rule
-给 AI 规定了 [5 种行为模式](./rules/RIPER-5.mdc)：
+给 AI 规定了 [5 种行为模式](./rules/riper-5.mdc)：
 
 ```md
 - "ENTER RESEARCH MODE" // 进入研究模式
@@ -458,7 +458,7 @@ Useful plan and task management system:
 
 ### UI Design Rule
 
-UI design [rule](./rules/UI-design.mdc):
+UI design [rule](./rules/ui-design.mdc):
 
 - 设计原则.
 - 颜色规范.
