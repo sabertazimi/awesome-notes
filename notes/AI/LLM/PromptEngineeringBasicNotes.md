@@ -56,7 +56,7 @@ significantly improves ability of LLMs to perform complex reasoning.
 
 Few shot CoT:
 
-```markdown
+```md
 Q: Roger has 5 tennis balls.
 He buys 2 more cans of tennis balls.
 Each can has 3 tennis balls.
@@ -81,7 +81,7 @@ They bought 6 more apples, so they have 3 + 6 = 9. The answer is 9.
 
 Zero shot CoT:
 
-```markdown
+```md
 Q: A juggler can juggle 16 balls.
 Half of the balls are golf balls,
 and half of the golf balls are blue.
@@ -111,17 +111,17 @@ That means that there are 4 blue golf balls.
 - [GoT](https://ojs.aaai.org/index.php/AAAI/article/view/29720):
   graph of thoughts.
 
-```markdown
+```md
 How to make a simple but delicious dish called "Scrambled eggs with tomatoes".
 Let's break down this problem.
 ```
 
-```markdown
+```md
 Give me a solution to accelerate decoding speed of LLMs during inference?
 Let's break down this problem and give me the solution with code format.
 ```
 
-```markdown
+```md
 <!-- ReAct -->
 
 问题 科罗拉多造山带东部区域延伸到的区域的海拔范围是多少?
@@ -142,7 +142,7 @@ Let's break down this problem and give me the solution with code format.
 ...
 ```
 
-```markdown
+```md
 <!-- Tree of thoughts -->
 
 假设三位不同的专家来回答这个问题.
@@ -236,7 +236,7 @@ print(born)
 
 ## Prompt Compression
 
-```markdown
+```md
 Compress the given text to short expressions,
 and such that you (GPT-4) can reconstruct it as close as possible to the original.
 Unlike the usual text compression,
@@ -387,7 +387,7 @@ Film types:
 - Personality (个性): 定义模型回答请求时的风格或方式.
 - Experiment (实验): 通过提供多个答案的请求来迭代, 以获得更好的答案.
 
-```markdown
+```md
 I want you to act as a JavasScript console.
 I will type commands and you will reply with what JavasScript console should show.
 
@@ -434,7 +434,7 @@ My first command is console.log("Hello World").
 - 步骤3 (提供背景信息): 如果任务涉及特定的主题或需要特定知识, 提供相关的背景信息. 例如: "在一个干旱的城市里".
 - 步骤4 (指定输出格式): 明确你想要的输出类型. 例如: "三段话, 每段不超过五句话".
 
-```markdown
+```md
 我要写一个英语学习计划, 请根据下列规则生成一个合适的 Prompt, 然后再输出内容:
 明确任务: 直接指出你需要模型做什么. 例如: "写一个故事", "回答一个问题", "解释一个概念".
 设定角色和风格: 简短描述模型应采用的角色和风格. 例如: "像专家一样", "幽默地", "正式地".
@@ -466,7 +466,7 @@ ChatGPT:
 - Examples: 提供示例, 以帮助模型更好地理解任务.
 - Initialization: 在第一次对话中, 提供初始信息, 以引导模型开始任务.
 
-```markdown
+```md
 - Role: 外卖体验优化专家和文案撰写顾问
 - Background: 用户希望通过撰写外卖好评来领取代金券，需要一个简洁而有效的文案框架，以表达对外卖服务的满意。
 - Profile: 你是一位精通外卖行业服务标准和用户体验的专家，擅长用简洁明了的语言撰写具有说服力的文案，能够精准地捕捉用户需求并转化为积极的评价。
@@ -489,7 +489,7 @@ ChatGPT:
 
 ### Prototype Design Prompt
 
-```markdown
+```md
 你是一个专业的 UI 设计师，你需要根据我提供的需求文档来完成页面的设计。
 
 请仔细阅读需求文档 @prd.md，现在需要输出高保真的原型图，请通过以下方式帮我完成所有界面的原型设计，并确保这些原型界面可以直接用于开发：
@@ -507,9 +507,76 @@ ChatGPT:
 请按照以上要求生成完整的 HTML 代码，并确保其可用于实际开发。
 ```
 
+### Slide Design Prompt
+
+```md
+目标受众：{受众，例如：公司高管 / 技术团队 / 产品经理 / 普通用户}
+演示目的：{目的，例如：技术分享 / 项目汇报 / 产品介绍 / 教学使用}
+整体篇幅：{页数，例如：10 页以内 / 15～20 页}
+风格要求：{风格}
+视觉效果：{视觉效果}
+```
+
+风格:
+
+1. 专业，内容呈现以准确、逻辑、严谨为主，强调框架化表达（适合企业汇报、战略沟通、技术述职）
+2. 简洁，尽量减少装饰性内容，保留一级标题/二级标题，无其他内容，结构干净利落（适合快速阅读、高管场景）
+3. 具象比喻，通过贴近生活的例子、比喻、类比，让复杂内容变得容易理解（适合面向小朋友、非专业受众群体）
+4. 故事化，内容以叙事链条组织，用“背景—冲突—解决—结果”模型推动 （适合产品发布、经验分享）
+5. 数据驱动，强调数据、指标、趋势、对比分析，以数据结论作为核心逻辑（适合商业分析、调研报告）
+6. 教学，结构更加循序渐进，以解释概念、举例说明、对比差异、步骤演示为主（适合教学、培训类）
+7. 激励，采用鼓舞语气和积极愿景，强调“为什么重要”“我们要做什么” （适合团队动员、年度启动会、愿景介绍）
+8. 产品展示，突出场景镜头、用户价值、功能亮点、体验流程，强调“好处和使用方式”（适用于新品发布、方案宣讲）
+9. 思维导图，以概念之间的关联为主线，用层次化结构展开知识网络（适合复杂主题）
+
+视觉效果:
+
+1. 极简留白，以大量留白、弱化装饰、突出内容主体为核心，整体视觉干净现代（适合专业场景、高管简报）
+2. 强调色块，通过大色块和模块化布局强化层级关系，使重点更醒目（适合方案展示、运营复盘）
+3. 卡片式布局，以卡片、分区、分栏组织内容，让阅读更轻松清晰（适合内容较多、结构化信息）
+4. 图标驱动，以统一风格的图标、符号表达概念，降低文字密度、增强可读性（适合流程讲解、结构说明）
+5. 插画或手绘感，采用柔和插画或轻松手绘笔触，增强亲和力与友好度（适合科普、教学、文化主题）
+6. 科技质感，以线条、渐变、光效构建轻科技氛围，视觉更现代（适合 AI、数据、互联网主题）
+7. 深色主题，以暗色背景配亮色文字形成强对比，强调稳重与冲击力（适合正式场景、数据展示）
+8. 信息可视化，以图表、趋势图、结构图作为主视觉，减少大段文字（适合分析汇报、研究报告）
+9. 分镜叙事，以类似电影分镜的结构呈现画面连续性，使内容更具故事流动感（适合产品发布、战略叙述）
+10. 品牌一致，严格遵循品牌色、字体体系与风格规范，整体一致性强（适合外部宣讲、品牌官方材料）
+
+```md
+目标受众：小朋友
+演示目的：概念普及
+整体篇幅：10页
+风格要求：具象比喻，通过贴近生活的例子、比喻、类比，让复杂内容变得容易理解
+视觉效果：分镜叙事，以类似电影分镜的结构呈现画面连续性，使内容更具故事流动感
+```
+
+```md
+目标受众：产品经理
+演示目的：技术分享
+整体篇幅：10页
+风格要求：产品展示，突出场景镜头、用户价值、功能亮点、体验流程，强调“好处和使用方式”
+视觉风格：卡片式布局，以卡片、分区、分栏组织内容，让阅读更轻松清晰
+```
+
+```md
+目标受众：大众用户
+演示目的：行业分享
+整体篇幅：10页
+风格要求：产品展示，突出场景镜头、用户价值、功能亮点、体验流程，强调“好处和使用方式”
+视觉风格：插画或手绘感，采用柔和插画或轻松手绘笔触，增强亲和力与友好度
+```
+
+```md
+目标受众：高管
+演示目的：汇报
+整体篇幅：10页
+风格要求：简洁，尽量减少装饰性内容，保留一级标题/二级标题，无其他内容，结构干净利落
+视觉效果：极简留白，以大量留白、弱化装饰、突出内容主体为核心，整体视觉干净现代
+```
+
 ### UI Implementation Prompt
 
-```markdown
+```md
 你是一位资深全栈工程师，参考 ui-design-rules.mdc 设计一个 @README.md 中描述的应用，
 模拟产品经理提出需求和信息架构，请自己构思好功能需求和界面，然后设计 UI/UX：
 
@@ -523,7 +590,7 @@ ChatGPT:
 
 ### Project Porting Prompt
 
-```markdown
+```md
 Your job is to port assistant-ui-react monorepo (for react)
 to assistant-ui-vue (for vue) and maintain the repository.
 
@@ -541,7 +608,7 @@ But make sure to spend most of your time on the actual porting, not on the testi
 A good heuristic is to spend 80% of your time on the actual porting, and 20% on the testing.
 ```
 
-```markdown
+```md
 Your job is to port browser-use monorepo (Python)
 to better-use (Typescript) and maintain the repository.
 
@@ -554,7 +621,7 @@ Keep track of your current status in browser-use-ts/agent/TODO.md
 
 ### API Integration Prompt
 
-```markdown
+```md
 <核心任务>
 分析指定的前端页面代码和后端 API 文档，制定一份详细的接口对接实施计划，并为后续的编码工作做好准备。
 </核心任务>
@@ -593,7 +660,7 @@ Keep track of your current status in browser-use-ts/agent/TODO.md
 
 ### API Mock Prompt
 
-```markdown
+```md
 所有的 API 请求需要支持 Mock 接口，请设置一个全局变量来控制是否开启 Mock 数据，
 在 request 中统一进行 Mock 数据的切换，每个 Mock 数据按模块划分与 API 请求一一对应。
 
@@ -602,7 +669,7 @@ Keep track of your current status in browser-use-ts/agent/TODO.md
 
 ### Mapper Generation Prompt
 
-```markdown
+```md
 请读取 `tables.md` SQL 语句，为每个表生成独立 Entity，Mapper 接口以及对应的 XML文件，
 要求包含通用的增加、删除、修改、查询方法，详细如下：
 
@@ -620,14 +687,14 @@ Keep track of your current status in browser-use-ts/agent/TODO.md
 
 ### 分步式开发策略
 
-```markdown
+```md
 采用 「原子化任务拆分」+「渐进式验证」 方法, 将复杂需求拆解为独立可测试的小模块.
 帮我设计并且给出我每一步的提示词用来指导 Cursor 编程.
 ```
 
 ### 多方法开发策略
 
-```markdown
+```md
 Please think through at least 3 possibilities of what could be causing this.
 write in detail about them.
 Choose which you believe could be the most likely cause
@@ -640,7 +707,7 @@ Make it a thorough plan that even a junior engineer could solve successfully.
 
 ### 日志定位开发策略
 
-```markdown
+```md
 Please add logs to the code to get better visibility into what is going on
 so we can find the fix.
 I'll run the code and feed you the logs results.
@@ -650,7 +717,7 @@ I'll run the code and feed you the logs results.
 
 利用 Cursor 的辅助学习新知识, 例如学习 [Next.js](https://github.com/zenyarn/nextjs-study):
 
-```markdown
+```md
 我是一个需要快速接手这段代码的开发者。这个文件的代码是由 Cursor 生成的。
 我希望快速掌握其核心要点。请重点分析以下几个方面：
 
@@ -672,7 +739,7 @@ I'll run the code and feed you the logs results.
 
 System design blueprint:
 
-```markdown
+```md
 Act as a senior software architect. I need to build [your project].
 Let's approach this through:
 
@@ -688,7 +755,7 @@ Use examples from your experience when relevant.
 
 Share architectural decisions:
 
-```markdown
+```md
 Based on our previous discussion, I'm implementing [component].
 Here's my planned approach:
 [Your brief explanation]
@@ -710,7 +777,7 @@ Before I code: What edge cases am I missing? Where might this break at scale?
   - 梳理当前表单字段的显隐关系、联动逻辑以及数据源
   - 能直观地呈现表单字段间的联动说明
 
-```markdown
+```md
 我们先探讨方案, 在我让你写代码之前不要生成代码.
 如果此处要加个 xxx 该怎么做,请先逐步分析需求,
 在想明白后向我说明为什么要这么设计.
@@ -720,7 +787,7 @@ Before I code: What edge cases am I missing? Where might this break at scale?
 
 Get implementation guidance:
 
-```markdown
+```md
 For [specific component], suggest the optimal implementation considering:
 
 - Performance impact.
@@ -732,7 +799,7 @@ Code examples should follow [your language/framework] best practices.
 
 Deep dive into documentation:
 
-```markdown
+```md
 You are a [framework/language] expert. I need to implement [feature].
 Walk me through:
 
@@ -744,7 +811,7 @@ Walk me through:
 
 最小改动原则:
 
-```markdown
+```md
 在写代码时遵循最小改动原则, 避免影响原先的功能.
 即使识别到历史问题也不要自行优化, 可以先告知我问题描述和对当前需求的影响, 不要直接改跟本次需求无关的代码.
 ```

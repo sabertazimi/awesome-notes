@@ -127,7 +127,7 @@ OK
 - `BITFIELD key GET type offset`: get value.
 - `BITFIELD key INCRBY type offset increment`: increment value.
 
-```markdown
+```md
 BITFIELD mystring SET i8 #0 100 SET i8 #1 200
 BITFIELD mystring INCRBY i8 #0 10
 ```

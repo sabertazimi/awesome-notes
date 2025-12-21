@@ -25,7 +25,7 @@ AI agents powered by tricky LLMs prompting:
   实际交互通常会产生决策点, 一个健壮的 routine 会预测常见的变化,
   并包含关于如何通过条件步骤或分支来处理它们的指令, e.g 在缺少所需信息时提供替代步骤.
 
-```markdown
+```md
 您是 LLM 智能体指令编写专家.
 请将以下帮助中心文档转换为一组清晰的指令, 以编号列表形式编写.
 该文档将成为 LLM 遵循的政策. 确保没有歧义, 并且指令是以智能体的指示形式编写的.
@@ -94,7 +94,7 @@ good [`AGENTS.md`](https://github.com/agentsmd/agents.md):
 GitHub [copilot](https://github.blog/ai-and-ml/github-copilot/how-to-use-github-copilot-spaces-to-debug-issues-faster):
 to debug issues faster:
 
-```markdown
+```md
 You are an experienced engineer working on this codebase.
 Always ground your answers in the linked docs and sources in this space.
 Before writing code, produce a 3–5 step plan that includes:
@@ -111,7 +111,7 @@ After I approve a plan, use the Copilot coding agent to propose a PR.
 
 How to write a great `AGENTS.md` [lessons from over 2500 repositories](https://github.blog/ai-and-ml/github-copilot/how-to-write-a-great-agents-md-lessons-from-over-2500-repositories):
 
-```markdown
+```md
 ---
 name: docs_agent
 description: Expert technical writer for this project
@@ -153,7 +153,7 @@ don’t assume your audience are experts in the topic/area you are writing about
 
 ### Test Agent Prompt
 
-```markdown
+```md
 Create a test agent for this repository. It should:
 
 - Have the persona of a QA software engineer.
@@ -382,7 +382,7 @@ to link to a file.
 
 ### User Rule
 
-```markdown
+```md
 1. Always respond in 中文。
 2. 如果我要求先讨论方案请不要修改任何代码，直到方案确定才可以修改代码。
 3. 方案讨论或代码实现时，如果遇到了争议或不确定性请主动告知我，请牢记让我决策而不是默认采用一种方案实现，重点强调。
@@ -399,7 +399,7 @@ to link to a file.
 
 ### Plan Act Rule
 
-```markdown
+```md
 You have two modes of operation:
 
 1. Plan mode - You will work with the user to define a plan,
@@ -425,7 +425,7 @@ Useful plan and task management system:
 [RIPER-5](https://github.com/johnpeterman72/cursor_memory_riper_framework) rule
 给 AI 规定了 [5 种行为模式](./rules/RIPER-5.mdc)：
 
-```markdown
+```md
 - "ENTER RESEARCH MODE" // 进入研究模式
 - "ENTER INNOVATE MODE" // 进入创新模式
 - "ENTER PLAN MODE" // 进入规划模式
@@ -435,7 +435,7 @@ Useful plan and task management system:
 
 ### Technical Design Rule
 
-```markdown
+```md
 **参考资料:**
 
 1. 需求文档：
@@ -530,7 +530,7 @@ follow [certain paradigm](https://www.vtrivedy.com/posts/claudecode-tools-refere
 
 `.claude/commands/api/api-new.md`:
 
-```markdown
+```md
 Create a new POST $ARGUMENTS endpoint with:
 
 - Auth middleware.

@@ -97,7 +97,7 @@ mkdir -p .tasks && touch ".tasks/${TASK_FILE_NAME}_[TASK_IDENTIFIER].md"
 
 思考过程：
 
-```markdown
+```md
 嗯... [具有系统思维方法的推理过程]
 ```
 
@@ -152,7 +152,7 @@ mkdir -p .tasks && touch ".tasks/${TASK_FILE_NAME}_[TASK_IDENTIFIER].md"
 
 思考过程：
 
-```markdown
+```md
 嗯... [具有创造性、辩证方法的推理过程]
 ```
 
@@ -198,7 +198,7 @@ mkdir -p .tasks && touch ".tasks/${TASK_FILE_NAME}_[TASK_IDENTIFIER].md"
 2. 详细规划下一步更改
 3. 提交批准，附带明确理由：
 
-```markdown
+```md
 [更改计划]
 
 - 文件：[已更改文件]
@@ -220,7 +220,7 @@ mkdir -p .tasks && touch ".tasks/${TASK_FILE_NAME}_[TASK_IDENTIFIER].md"
 
 清单格式：
 
-```markdown
+```md
 实施清单：
 
 1. [具体行动1]
@@ -271,7 +271,7 @@ n. [最终行动]
 1. 完全按照计划实施更改
 2. 每次实施后追加到"任务进度"（作为计划执行的标准步骤）：
 
-```markdown
+```md
 [日期时间]
 
 - 已修改：[文件和代码更改列表]
@@ -463,7 +463,7 @@ HTML/XML：
 
 ## 任务文件模板
 
-```markdown
+```md
 # 背景
 
 文件名：[TASK_FILE_NAME]
