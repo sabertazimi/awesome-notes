@@ -88,17 +88,19 @@ memoizedGetDistance('Murcia', 'Madrid') // => cached, fast!
 倒序循环可提升性能:
 
 ```ts
-for (let i = item.length; i--;)
+for (let i = item.length; i--;) {
   process(items[i])
+}
 
 let j = items.length
-while (j--)
+while (j--) {
   process(items[i])
+}
 
 let k = items.length
-do
+do {
   process(items[k])
-while (k--)
+} while (k--)
 ```
 
 Duff's Device:
@@ -106,8 +108,9 @@ Duff's Device:
 ```ts
 let i = items.length % 8
 
-while (i)
+while (i) {
   process(items[i--])
+}
 
 i = Math.floor(items.length / 8)
 
@@ -182,8 +185,9 @@ const Timer = {
   stop(key) {
     const time = Timer._data[key]
 
-    if (time)
+    if (time) {
       Timer._data[key] = new Date() - time
+    }
   },
   getTime(key) {
     return Timer._data[key]
@@ -193,8 +197,9 @@ const Timer = {
 
 ```ts
 function pollTimerTask(time) {
-  if (timerQueue.length === 0)
+  if (timerQueue.length === 0) {
     return
+  }
 
   while (timerQueue[0] && time >= timerQueue[0].time) {
     const timer = timerQueue.shift()
@@ -261,10 +266,11 @@ function processArray(items, process, callback) {
   setTimeout(function sliceTask() {
     process(todo.shift())
 
-    if (todo.length > 0)
+    if (todo.length > 0) {
       setTimeout(sliceTask, 25)
-    else
+    } else {
       callback(items)
+    }
   }, 25)
 }
 ```
@@ -275,21 +281,11 @@ function processArray(items, process, callback) {
 
 ```ts
 async function saveSettings() {
-  const tasks = [
-    validateForm,
-    showSpinner,
-    saveToDatabase,
-    updateUI,
-    sendAnalytics,
-  ]
-
+  const tasks = [validateForm, showSpinner, saveToDatabase, updateUI, sendAnalytics]
   let deadline = performance.now() + 50
 
   while (tasks.length > 0) {
-    if (
-      navigator.scheduling?.isInputPending()
-      || performance.now() >= deadline
-    ) {
+    if (navigator.scheduling?.isInputPending() || performance.now() >= deadline) {
       // 1. Pending user input.
       // 2. deadline has been reached.
       // Yield here:
@@ -329,8 +325,10 @@ function debounce(action, delay) {
   let timer = null
 
   return function () {
-    if (timer)
+    if (timer) {
       clearTimeout(timer)
+    }
+
     timer = setTimeout(() => {
       action()
     }, delay)
@@ -345,8 +343,9 @@ function throttle(action) {
   let isRunning = false
 
   return function () {
-    if (isRunning)
+    if (isRunning) {
       return
+    }
 
     isRunning = true
 
@@ -395,6 +394,7 @@ function debounce(func, wait = 50, immediate = true) {
     setTimeout(() => {
       // 延迟函数执行完毕, 清空缓存的定时器序号
       timer = null
+
       // 延迟执行的情况下, 函数会在延迟函数中执行
       // 使用到之前缓存的参数和上下文
       if (!immediate) {
@@ -444,9 +444,11 @@ _.throttle = function (func, wait, options) {
   let timeout = null
   // 之前的时间戳
   let previous = 0
+
   // 如果 options 没传则设为空对象
-  if (!options)
+  if (!options) {
     options = {}
+  }
 
   // 定时器回调函数
   const later = function () {
@@ -456,8 +458,10 @@ _.throttle = function (func, wait, options) {
     // 置空一是为了防止内存泄漏, 二是为了下面的定时器判断
     timeout = null
     result = func.apply(context, args)
-    if (!timeout)
+
+    if (!timeout) {
       context = args = null
+    }
   }
 
   return function (...original_args) {
@@ -468,8 +472,9 @@ _.throttle = function (func, wait, options) {
     // 如果需要第一次不执行函数
     // 就将上次时间戳设为当前的
     // 这样在接下来计算 remaining 的值时会大于0
-    if (!previous && options.leading === false)
+    if (!previous && options.leading === false) {
       previous = now
+    }
 
     // 计算剩余时间
     const remaining = wait - (now - previous)
@@ -493,8 +498,9 @@ _.throttle = function (func, wait, options) {
 
       previous = now
       result = func.apply(context, args)
-      if (!timeout)
+      if (!timeout) {
         context = args = null
+      }
     } else if (!timeout && options.trailing !== false) {
       // 判断是否设置了定时器和 trailing
       // 没有的话就开启一个定时器
@@ -515,8 +521,9 @@ function useAnimation() {
   const ticking = useRef(false)
 
   const handleResize = (event) => {
-    if (ticking.current)
+    if (ticking.current) {
       return
+    }
     ticking.current = true
     frameId.current = requestAnimationFrame(() => handleUpdate(event))
   }
@@ -560,8 +567,9 @@ window.onload = function () {
 
     // alert(target.innerHTML);
 
-    if (target.nodeName.toLowerCase() === 'li')
+    if (target.nodeName.toLowerCase() === 'li') {
       target.style.background = 'red'
+    }
 
     // 阻止默认行为并取消冒泡
     if (typeof e.preventDefault === 'function') {
@@ -579,8 +587,9 @@ window.onload = function () {
 
     // alert(target.innerHTML);
 
-    if (target.nodeName.toLowerCase() === 'li')
+    if (target.nodeName.toLowerCase() === 'li') {
       target.style.background = ''
+    }
 
     // 阻止默认行为并取消冒泡
     if (typeof e.preventDefault === 'function') {
@@ -607,8 +616,9 @@ const btn = document.getElementById('btn')
 
 ```ts
 function toArray(coll) {
-  for (let i = 0, a = [], len = coll.length; i < len; i++)
+  for (let i = 0, a = [], len = coll.length; i < len; i++) {
     a[i] = coll[i]
+  }
 
   return a
 }
@@ -717,8 +727,11 @@ globalThis.addEventListener('fetch', (event) => {
   async function cachedFetch(event) {
     const cache = await caches.open(cacheName)
     let response = await cache.match(event.request)
-    if (response)
+
+    if (response) {
       return response
+    }
+
     response = await fetch(event.request)
     cache.put(event.request, response.clone())
     return response
@@ -784,7 +797,7 @@ export default async () => {
     ids.slice(0, 100).map(async (id) => {
       const story = await fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
       return story.json()
-    })
+    }),
   )
 
   return new Response(JSON.stringify(stories), {
@@ -807,10 +820,7 @@ Astro.response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate'
 
 // Tell the CDN to treat it as fresh for 5 minutes,
 // then return a stale version while it revalidate.
-Astro.response.headers.set(
-  'Netlify-CDN-Cache-Control',
-  'public, s-maxage=604800, stale-while-revalidate=604800'
-)
+Astro.response.headers.set('Netlify-CDN-Cache-Control', 'public, s-maxage=604800, stale-while-revalidate=604800')
 ```
 
 #### Server Cache
@@ -1149,8 +1159,9 @@ Lazy Loading Polyfill:
 ```ts
 window.addEventListener('scroll', (event) => {
   Array.from(document.querySelectorAll('.lazyload')).forEach((image) => {
-    if (image.slideIntoView(event.getBoundingClientRect()))
+    if (image.slideIntoView(event.getBoundingClientRect())) {
       image.setAttribute('src', image.dataset.src)
+    }
   })
 })
 ```
@@ -1462,9 +1473,7 @@ document.addEventListener('visibilitychange', () => {
 const thisPage = window.location.href
 const referringPage = document.referrer ? document.referrer : 'none'
 const beacon = new Image()
-beacon.src = `http://www.example.com/logger/beacon.gif?page=${encodeURI(
-  thisPage,
-)}&ref=${encodeURI(referringPage)}`
+beacon.src = `http://www.example.com/logger/beacon.gif?page=${encodeURI(thisPage)}&ref=${encodeURI(referringPage)}`
 ```
 
 ### Performance Monitoring Reference
@@ -1563,8 +1572,9 @@ const fetchTime = pageNav.responseEnd - pageNav.fetchStart
 // Service worker time plus response time.
 let workerTime = 0
 
-if (pageNav.workerStart > 0)
+if (pageNav.workerStart > 0) {
   workerTime = pageNav.responseEnd - pageNav.workerStart
+}
 
 // Request time only (excluding redirects, DNS, and connection/TLS time).
 const requestTime = pageNav.responseStart - pageNav.requestStart
@@ -1583,8 +1593,9 @@ First paint time:
 ```ts
 function entryHandler(list) {
   for (const entry of list.getEntries()) {
-    if (entry.name === 'first-paint')
+    if (entry.name === 'first-paint') {
       observer.disconnect()
+    }
 
     console.log(entry)
   }
@@ -1616,8 +1627,9 @@ First Contentful Paint:
 ```ts
 function entryHandler(list) {
   for (const entry of list.getEntries()) {
-    if (entry.name === 'first-contentful-paint')
+    if (entry.name === 'first-contentful-paint') {
       observer.disconnect()
+    }
 
     console.log(entry)
   }
@@ -1650,11 +1662,13 @@ Largest Contentful Paint:
 
 ```ts
 function entryHandler(list) {
-  if (observer)
+  if (observer) {
     observer.disconnect()
+  }
 
-  for (const entry of list.getEntries())
+  for (const entry of list.getEntries()) {
     console.log(entry)
+  }
 }
 
 const observer = new PerformanceObserver(entryHandler)
@@ -1717,6 +1731,22 @@ test('works with slows resources', async ({ page }) => {
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Frontend downtime/)
 })
+```
+
+对于 `<video>` 元素,
+[预加载海报](https://calendar.perfplanet.com/2025/insights-from-100-site-speed-reviews-in-2025)
+可以大幅改善 LCP:
+
+- `fetchpriority="high"` to preload.
+- `aspect-ratio` to match video.
+- `object-fit: cover` to prevents re-renders.
+
+```html
+<link rel="preload" as="image" href="posterimage.svg" fetchpriority="high" />
+
+<video poster="/assets/posterimage.svg" autoplay="" muted="">
+  <source src="/assets/video.mp4" type="video/mp4" />
+</video>
 ```
 
 ### INP
