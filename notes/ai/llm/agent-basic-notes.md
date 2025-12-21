@@ -552,6 +552,11 @@ contains production-ready slash commands for Claude Code.
   Convert documentation websites, GitHub repositories, and PDFs
   into Claude AI skills with automatic conflict detection.
 
+### Claude Code Memory
+
+Captures everything Claude does during your coding sessions, compresses it with Claude `agent-sdk`,
+and [injects relevant context](http://github.com/thedotmack/claude-mem) back into future sessions.
+
 ### Claude Code Plugins
 
 Install [plugins](https://github.com/anthropics/claude-code/tree/main/plugins)
