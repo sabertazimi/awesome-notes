@@ -65,7 +65,7 @@ module testBench();
   // at start of test, load vectors and pulse reset
   initial   // Only executes once
   begin
-    $readmemb("example.tv", testVectors); // Read vectors: e.g 000_0 001_1 ... xxx_x
+    $readmemb("example.tv", testVectors); // Read vectors: e.g. 000_0 001_1 ... xxx_x
     vectorNum = 0; errors = 0;            // Initialize
     reset = 1; #27; reset = 0;            // Apply reset wait
   end

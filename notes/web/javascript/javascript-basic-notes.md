@@ -1133,7 +1133,7 @@ const booleanType = typeof Boolean(1) // "boolean"
 
 ## Reference Values
 
-- Object e.g Date, RegExp.
+- Object e.g. Date, RegExp.
 - Function.
 - Array.
 - Map.
@@ -1798,7 +1798,7 @@ function describe(transaction) {
   // Here converter only exists for the lifetime to the describe function call.
   // When we store it in a weak map, it exists for the entire lifetime of the transaction class.
   // That allows us to write code the assumes the same lifetime
-  // e.g caching things, using instance equality.
+  // e.g. caching things, using instance equality.
   const amount = getConverter(transaction).convert()
 }
 ```

@@ -904,7 +904,7 @@ interface WithNumericName extends WithNullableName {
 
 Interface merging isn’t used often in day-to-day `TypeScript` development,
 but useful for augmenting interfaces from
-external 3rd-party packages (e.g `Cypress`) or built-in global interfaces (e.g `Window`):
+external 3rd-party packages (e.g. `Cypress`) or built-in global interfaces (e.g. `Window`):
 
 ```ts
 // Lib a.d.ts

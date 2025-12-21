@@ -2392,7 +2392,7 @@ export default function App() {
 [Opt-in concurrent features](https://jser.dev/2023-05-19-how-does-usetransition-work)
 (implementing debounce-like function):
 
-- Avoid blocking updates: events (e.g click) are triggering updates in synchronous mode.
+- Avoid blocking updates: events (e.g. click) are triggering updates in synchronous mode.
 - Avoid unnecessary `Suspense` fallbacks.
 
 ```tsx
@@ -2720,7 +2720,7 @@ export default function App() {
 ```
 
 Migrate from `useState` + `useEffect` + `useRef` to `useSyncExternalStore`
-for 3rd external stores libraries (e.g `Redux`):
+for 3rd external stores libraries (e.g. `Redux`):
 
 ```tsx
 import { useCallback, useEffect, useState } from 'react'
@@ -4931,7 +4931,7 @@ Simple global store based on:
 
 - Subscribe pattern.
 - UseState hook.
-- Atomic state library: e.g [Jotai](https://blog.axlight.com/posts/jotai-tips).
+- Atomic state library: e.g. [Jotai](https://blog.axlight.com/posts/jotai-tips).
 
 ```ts
 import type { Dispatch, MutableRefObject, SetStateAction } from 'react'

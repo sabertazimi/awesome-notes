@@ -298,7 +298,7 @@ Copyable type (implement `Copy` trait):
 - Bool type.
 - Float type.
 - Char type.
-- Copyable Tuple type, e.g `(i32, i32)`.
+- Copyable Tuple type, e.g. `(i32, i32)`.
 - Reference type (**borrowing** ownership).
 
 Most these types store on stack
@@ -3971,7 +3971,7 @@ fn main() {
 Tasks suite for native `Node.js` add-ons:
 
 - Computing intensive tasks with simple I/O:
-  e.g `@node-rs/crc32` (CPU SIMD instruction), `@node-rs/bcrypt`, `@node-rs/jieba`.
+  e.g. `@node-rs/crc32` (CPU SIMD instruction), `@node-rs/bcrypt`, `@node-rs/jieba`.
 - System call tasks:
   SIMD instruction, GPU instruction.
 

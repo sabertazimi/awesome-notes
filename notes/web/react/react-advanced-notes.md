@@ -19,7 +19,7 @@ tags: [Web, React]
     - `ReactFiberHooks.dispatchAction`.
   - 找出变化组件, 构建 Fiber Tree.
 - `Renderer` 渲染器:
-  - 引导 `React` 应用启动 (e.g `ReactDOM.createRoot(rootNode).render(<App />)`).
+  - 引导 `React` 应用启动 (e.g. `ReactDOM.createRoot(rootNode).render(<App />)`).
   - 实现 `HostConfig` 协议, 将变化的组件渲染到页面上.
 
 其中 `Reconciler` 构建 Fiber Tree 的过程被包装成一个回调函数, 传入 `Scheduler` 模块等待调度.
@@ -556,7 +556,7 @@ function handleTimeout(currentTime) {
 
 ### Scheduler Work Loop
 
-当 `callback()` 返回函数时, 表明产生连续回调 (e.g 出现更高优先任务/时间分片用完, 渲染中断),
+当 `callback()` 返回函数时, 表明产生连续回调 (e.g. 出现更高优先任务/时间分片用完, 渲染中断),
 需将返回的函数再次放入任务队列, 继续进行调度直至清空任务队列 (渲染恢复).
 
 ```ts

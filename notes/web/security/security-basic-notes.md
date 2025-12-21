@@ -482,8 +482,8 @@ const newSandboxWindow = new SandboxWindow(context, sandboxGlobal)
 
 Web crypto [API](https://developer.mozilla.org/docs/Web/API/SubtleCrypto):
 
-- 公钥加密私钥解密: 只有私钥拥有者可以获取信息, e.g HTTPS 会话密钥传输.
-- 公钥解密私钥加密: 只有私钥拥有者可以发布签名, e.g 数字签名.
+- 公钥加密私钥解密: 只有私钥拥有者可以获取信息, e.g. HTTPS 会话密钥传输.
+- 公钥解密私钥加密: 只有私钥拥有者可以发布签名, e.g. 数字签名.
 
 ### User Privacy
 
@@ -608,8 +608,8 @@ Don't trust user:
   - `input.trim()`.
   - React DOM escapes any values embedded in JSX before rendering them.
 - Secure encode output result (输出编码):
-  保证**编码方式一致**, e.g 混用单字节编码与多字节编码, 导致攻击者绕过 `\` 系统转义符.
-- 任何用户提供的 URL 在进一步处理前 (e.g 保存到数据库),
+  保证**编码方式一致**, e.g. 混用单字节编码与多字节编码, 导致攻击者绕过 `\` 系统转义符.
+- 任何用户提供的 URL 在进一步处理前 (e.g. 保存到数据库),
   应先做无害化处理 (`SanitizeUrl`).
 - Check HTTP `Content-Type` header.
 - Content security policy: `script-src 'self' https://apis.google.com`.
@@ -871,7 +871,7 @@ function isRelative(url) {
 #### HTTP Header Injection Protection
 
 - 不将外部输入作为 HTTP 响应头.
-- 检验 HTTP 响应头特殊字符: e.g 换行符.
+- 检验 HTTP 响应头特殊字符: e.g. 换行符.
 - 使用成熟的库生成 HTTP 响应头, 禁止简单字符拼接.
 
 ### Object Injection
@@ -962,7 +962,7 @@ Password [mis-management](https://www.hacksplaining.com/prevention/password-mism
 通过暴力工具得到被攻击网站的用户名单, 并利用社工得到密码:
 
 REST API 无法抵抗此种攻击,
-e.g GitHub [user profile](https://github.com).
+e.g. GitHub [user profile](https://github.com).
 
 #### User Enumeration Protection
 
@@ -1135,7 +1135,7 @@ GET /../../../passwd.key HTTP/1.1
 
 #### Malicious Package Attack
 
-名字与流行包相近, 通过 `postinstall` 脚本执行病毒脚本, 获取系统环境变量信息 e.g `crossenv`.
+名字与流行包相近, 通过 `postinstall` 脚本执行病毒脚本, 获取系统环境变量信息 e.g. `crossenv`.
 
 #### Malicious Package Protection
 
@@ -1214,12 +1214,12 @@ Distributed denial of service attack:
   - 客户端:
     CAPTCHA (Completely Automated Pub-lic Turing Test to Tell Computers and HumansApart).
   - 服务端:
-    建立应用防火墙与服务器安全模块, e.g 过滤网关防护.
+    建立应用防火墙与服务器安全模块, e.g. 过滤网关防护.
 - 提升带宽最大负荷.
   - 缩短超时 (SYN Timeout) 时间.
   - 增加最大半连接数.
 - 提升服务器性能:
-  - Use mature memory cache library, e.g `Redis`.
+  - Use mature memory cache library, e.g. `Redis`.
   - 负载均衡.
   - CDN.
 

@@ -36,7 +36,7 @@ tags: [AI, LLM, Agent]
 ### Scaling Law
 
 现有的预训练语言模型对于数据的需求量远高于扩展法则
-(e.g [Chinchilla](https://nips.cc/virtual/2022/53031)) 中所给出的估计规模.
+(e.g. [Chinchilla](https://nips.cc/virtual/2022/53031)) 中所给出的估计规模.
 很多更小的模型也能够通过使用超大规模的预训练数据获得较大的模型性能提升.
 这种现象的一个重要原因是由于 Transformer 架构具有较好的数据扩展性.
 目前为止, 还没有实验能够有效验证特定参数规模语言模型的饱和数据规模

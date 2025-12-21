@@ -255,7 +255,7 @@ const HTMLButtonElement = {
 在 JSX 中, 小写标签被认为是 HTML 标签.
 但是, 含有 `.` 的大写和小写标签名却不是.
 
-- `<component />`: 转换为 `React.createElement('component')` (e.g HTML native tag).
+- `<component />`: 转换为 `React.createElement('component')` (e.g. HTML native tag).
 - `<obj.component />`: 转换为 `React.createElement(obj.component)`.
 - `<Component />`: 转换为 `React.createElement(Component)`.
 
@@ -422,7 +422,7 @@ class Component {
 
 因为协调阶段可能被中断与恢复, 甚至重做,
 React 协调阶段的生命周期钩子可能会被调用多次,
-**协调阶段的生命周期钩子不要包含副作用**: e.g `fetch` promises, `async` functions.
+**协调阶段的生命周期钩子不要包含副作用**: e.g. `fetch` promises, `async` functions.
 通过 [`React.StrictMode`](https://reactjs.org/docs/strict-mode.html#detecting-unexpected-side-effects)
 可以自动检测应用中隐藏的问题.
 
@@ -1390,7 +1390,7 @@ Solve:
 - Lowest level of indirection.
 - No naming collision.
 
-e.g `Context` or `ThemesProvider` is designed base on Render Props.
+e.g. `Context` or `ThemesProvider` is designed base on Render Props.
 
 Upside:
 
@@ -1687,7 +1687,7 @@ type FooReturn = ReturnType<typeof foo> // { baz: number }
 - `React.KeyboardEvent`:
   keyboard interaction events.
 - `React.MouseEvent`:
-  pointing device interaction events (e.g mouse).
+  pointing device interaction events (e.g. mouse).
 - `React.TouchEvent`:
   touch device interaction events.
   Extends UIEvent.
@@ -5285,8 +5285,8 @@ if (!fs.existsSync(paths.appTypeDeclarations)) {
   通过 `fiberNode` 上的 `stateNode` 获取 DOM 实例,
   调用 `getBoundingClientRect` 得到具体位置信息,
   实现拖拽定位功能.
-- 节点在画布上的辅助功能: e.g `hover`/`select`/`resize`/`drag`/`drop`.
-- 设计态和渲染态的坐标系转换: e.g 滚动监听.
+- 节点在画布上的辅助功能: e.g. `hover`/`select`/`resize`/`drag`/`drop`.
+- 设计态和渲染态的坐标系转换: e.g. 滚动监听.
 - 快捷键功能.
 - 历史功能: 撤销和重做.
 - 结构化的插件扩展功能.

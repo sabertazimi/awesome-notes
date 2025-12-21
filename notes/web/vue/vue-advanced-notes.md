@@ -970,7 +970,7 @@ Vue.prototype._render = function (): VNode {
 
 - Normalize children: transform children to `Array<VNode>`.
 - Create VNode:
-  - `new VNode(tag, data, children, vm)` for native host elements (e.g `<div>`).
+  - `new VNode(tag, data, children, vm)` for native host elements (e.g. `<div>`).
   - `createComponent(tag, data, children, vm)` for custom components:
     - `resolveConstructorOptions`: merge and resolve options API.
     - `installComponentHooks`:

@@ -1056,7 +1056,7 @@ module Shapes
 
 - 后构造器 > 前构造器
 
-> e.g True > False
+> e.g. True > False
 
 ```haskell
 data Bool = False | True deriving (Ord)
@@ -1066,7 +1066,7 @@ data Bool = False | True deriving (Ord)
 
 data type 也是函数,若省略参数亦会造成 Curry 化.
 
-> e.g map fx list
+> e.g. map fx list
 
 ```haskell
 ghci> map (Circle 10 20) [4,5,6,6]
@@ -2543,7 +2543,7 @@ main = do
   - if condition then I/O action else I/O action
   - 改变`do block形成的I/O action`的结果值: otherIOAction -> return pureValue
 
-> e.g return "haha" - String -> IO String
+> e.g. return "haha" - String -> IO String
 
 ```haskell
 main = do

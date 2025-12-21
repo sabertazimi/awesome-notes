@@ -36,7 +36,7 @@ tags: [CS, Database]
 > (name, os, lang) is not normalized, because os isn't relevant to lang
 > (name, os) + (name, lang) is normalized
 > Data-intensive applications may not use DBMS/Query Language at all
-> e.g Hadoop, all operations on data stores in files
+> e.g. Hadoop, all operations on data stores in files
 
 ## Data Format
 

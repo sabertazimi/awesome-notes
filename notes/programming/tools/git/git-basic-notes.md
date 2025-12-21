@@ -257,7 +257,7 @@ no more than 50 characters
 - test: 添加确实测试或更正现有的测试.
 - build: 影响构建系统或外部依赖关系的更改 (示例范围: gulp, broccoli, NPM).
 - ci: 更改持续集成文件和脚本 (示例范围: Travis, Circle, BrowserStack, SauceLabs).
-- chore: 其他不修改 src 或 test 文件 e.g `chore(release)`.
+- chore: 其他不修改 src 或 test 文件 e.g. `chore(release)`.
 - revert: commit 回退.
 
 #### Scope Values
@@ -749,7 +749,7 @@ _多长期分支模式_:
 master 分支与 develop 分支都是长期分支,
 区别在于分支的**稳定性等级**, master > develop.
 
-e.g master/develop/next
+e.g. master/develop/next
 
 - 每一次的提交都必须有意义
 

@@ -379,7 +379,7 @@ interface ClosableIterator {
 }
 ```
 
-- Not all iterators are closable: e.g `Array Iterator`.
+- Not all iterators are closable: e.g. `Array Iterator`.
 
 ```ts
 const iterable = ['a', 'b', 'c']
@@ -4033,11 +4033,11 @@ if (!String.prototype.trim) {
 - 不使用 new RegExp(),使用正则表达式字面量
 - 将正则表达式赋值给变量, 防止正则表达式重复创建
 - 以简单(唯一性)字元开始, 如 `^/$ x \u363A [a-z] \b`, 避免以分组表达式开始:
-  e.g `\s\s*` 优于 `\s{1,}`.
+  e.g. `\s\s*` 优于 `\s{1,}`.
 - 减少表达式的重叠匹配.
 - 减少分支表达式,并将最常用的分支放在最前面.
 - 无需反向引用时, 使用非捕获组:
-  e.g `(?:...)` 优于 `(...)`.
+  e.g. `(?:...)` 优于 `(...)`.
 
 ### RegExp Use Case
 
@@ -6059,7 +6059,7 @@ Orinoco 优化 (优化全停顿现象):
 
 - 浏览器进程:
   - Singleton.
-  - 浏览器界面显示, 提供用户交互, e.g 前进/后退.
+  - 浏览器界面显示, 提供用户交互, e.g. 前进/后退.
   - 子进程管理.
   - 网络资源管理.
   - 存储管理.

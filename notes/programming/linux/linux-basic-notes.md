@@ -1491,7 +1491,7 @@ yum makecache
 make install
 ```
 
-e.g apache /var/www/html/index.html /usr/local/apache/htdocs/index.html
+e.g. apache /var/www/html/index.html /usr/local/apache/htdocs/index.html
 
 ### Applications Management Commands
 
@@ -1639,7 +1639,7 @@ crontab -e(establish)
 - command1 || command2 只执行一个命令(正确命令)
 - command1 | command2 前一正确命令的输出结果作为后一命令的输入结果
 
-> e.g ls && echo yes >> .log || echo no >> .log
+> e.g. ls && echo yes >> .log || echo no >> .log
 
 ## C++ Binary Commands
 

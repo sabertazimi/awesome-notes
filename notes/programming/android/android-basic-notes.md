@@ -119,7 +119,7 @@ user showing application icon defining the intent
 
 当有多个活动可相应某个特定意图时，系统将会弹出对话框提示用户选择一个应用的活动或者设定默认值(default)
 
-e.g web browsers
+e.g. web browsers
 
 ```html
 <intent-filter>
@@ -151,7 +151,7 @@ View view = LayoutInflater.from(context).inflate(R.layout.title, this/null);
 
 ### Component
 
-View(ViewGroup): e.g button、textbox(文本框)、checkbox(复选框)
+View(ViewGroup): e.g. button、textbox(文本框)、checkbox(复选框)
 
 #### Custom Component
 

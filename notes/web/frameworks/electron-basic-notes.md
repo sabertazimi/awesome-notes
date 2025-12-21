@@ -78,7 +78,7 @@ win.loadURL('https://github.com')
 
 - Web Storage API
 - IndexedDB
-- Electron IPC e.g remote.getGlobal
+- Electron IPC e.g. remote.getGlobal
 
 ## Native UI
 

@@ -769,7 +769,7 @@ animating an element along a defined path:
 - Pseudo class (`:hover`/`:focus`/`:target`).
 - Changing `top`/`right`/`bottom`/`left` of pseudo element
   can change animation start point:
-  e.g `bottom: 0, right: 0` change `width`/`height` from `0` to `100%`,
+  e.g. `bottom: 0, right: 0` change `width`/`height` from `0` to `100%`,
   size animation will start from `bottom-right` corner.
 
 ```css

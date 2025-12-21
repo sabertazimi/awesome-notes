@@ -574,14 +574,14 @@ $$
 - Binary classification:
   $y=\delta(Wx+b)$,
   $L=\sum\limits_{i=1}^n\delta(y_i\ne\hat{y}_i)$,
-  e.g spam filtering.
+  e.g. spam filtering.
 - Multi-class classification:
   $y=\text{softmax}(Wx+b)$,
   $L=-\sum\limits_{i=1}^n{y_i\log(\hat{y}_i)}$,
-  e.g document classification.
+  e.g. document classification.
 - Non-linear model:
   - Deep learning: $y=\text{softmax}(\text{ReLU}(Wx+b))$,
-    e.g image recognition, game playing.
+    e.g. image recognition, game playing.
   - Support vector machine (SVM): $y=\text{sign}(Wx+b)$.
   - Decision tree: $y=\text{vote}(\text{leaves}(x))$.
   - K-nearest neighbors (KNN): $y=\text{vote}(\text{neighbors}(x))$.
@@ -851,7 +851,7 @@ $$
 - ReLU (Rectified Linear Unit, 线性整流单元): $\sigma(H)=\max(0,H)$,
   可以解决梯度消失问题 (越靠近输入层的神经元梯度越接近 0), 加速收敛.
 - Sigmoid: $\sigma(H)=\frac{1}{1+e^{-H}}$.
-- e.g 归一化函数, 使得输出值在 0 到 1 之间, 可以使得整个网络成为概率模型.
+- e.g. 归一化函数, 使得输出值在 0 到 1 之间, 可以使得整个网络成为概率模型.
 
 ![Activation Function](./figures/activation-function.png 'Activation Function')
 
@@ -1196,7 +1196,7 @@ $$
 
 Given $\boldsymbol{a}$ and $\boldsymbol{b}$, then:
 $(\boldsymbol{a}*\boldsymbol{b})_n=\sum\limits_{\substack{i,j\\i+j=n}}a_i\cdot{b_j}$,
-e.g $(1,2,3)*(4,5,6)=(4,13,28,27,18)_{0\dots{4}}$.
+e.g. $(1,2,3)*(4,5,6)=(4,13,28,27,18)_{0\dots{4}}$.
 上述计算可以转换为多项式相乘的形式:
 
 $$

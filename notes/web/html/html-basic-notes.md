@@ -1402,7 +1402,7 @@ interface OListElement extends HTMLElement {
 };
 ```
 
-If attribute (e.g `foo=bar`) isn't a spec-defined attribute,
+If attribute (e.g. `foo=bar`) isn't a spec-defined attribute,
 then there isn't a spec-defined `foo` property that reflects it:
 
 ```ts

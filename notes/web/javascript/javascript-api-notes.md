@@ -1781,7 +1781,7 @@ function handleVisibilityChange() {
 document.addEventListener('visibilitychange', handleVisibilityChange, false)
 ```
 
-`pageshow` event (e.g [BFCache compatible](https://www.sabatino.dev/bfcache-explained)):
+`pageshow` event (e.g. [BFCache compatible](https://www.sabatino.dev/bfcache-explained)):
 
 ```ts
 window.addEventListener('pageshow', (event) => {

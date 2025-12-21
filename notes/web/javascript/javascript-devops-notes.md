@@ -520,7 +520,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 编写 SSR 组件时:
 
 - 需要使用前后端同构的 API:
-  对于前端或后端独有的 API (e.g BOM, DOM, Node API),
+  对于前端或后端独有的 API (e.g. BOM, DOM, Node API),
   需要进行封装与填充 (adapter/mock/polyfill).
 - 注意并发与时序:
   浏览器环境一般只有一个用户, 单例模式容易实现;
@@ -667,10 +667,10 @@ export default function App() {
 ### SEO Best Practice
 
 - [Server side rendering](https://css-tricks.com/server-side-react-rendering)
-  (e.g Next.js).
+  (e.g. Next.js).
 - [Pre-Rendering](https://github.com/chrisvfritz/prerender-spa-plugin)
 - Mobile performance optimization
-  (e.g minify resources, code splitting, CDN, lazy loading, minimize reflows).
+  (e.g. minify resources, code splitting, CDN, lazy loading, minimize reflows).
 - SEO-friendly [routing](https://reacttraining.com/react-router) and URL management.
 - [Google webmaster tools](https://www.google.com/webmasters)
 - `<title>` and `<meta>` in `<head>` (with tool like `react-helmet`).
@@ -774,7 +774,7 @@ Set-Cookie: weight=100; domain=me.github.com
 
 - 认证方式局限于在浏览器 (Cookie).
 - 非 HTTPS 协议下使用 Cookie, 容易受到 CSRF 跨站点请求伪造攻击.
-- Session ID 不包含具体用户信息, 需要 Key-Value Store (e.g **Redis**) 持久化,
+- Session ID 不包含具体用户信息, 需要 Key-Value Store (e.g. **Redis**) 持久化,
   在分布式环境下需要在每个服务器上都备份, 占用了大量的存储空间.
 
 #### Session Cookie Usage
@@ -2111,7 +2111,7 @@ const config = {
         name: 'my-pool',
       },
     },
-    // your expensive loader (e.g babel-loader)
+    // your expensive loader (e.g. babel-loader)
   ],
 }
 ```

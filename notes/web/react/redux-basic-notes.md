@@ -1085,7 +1085,7 @@ Redux middleware were designed to enable writing side effects logic:
 - Modifying state outside of `reducer` function.
 - Mutating arguments to `dispatch` function.
 - Generating random numbers or unique random IDs
-  (e.g `uuid()`/`Math.random()`/`Date.now()`).
+  (e.g. `uuid()`/`Math.random()`/`Date.now()`).
 
 ### Middleware Basic Concepts
 

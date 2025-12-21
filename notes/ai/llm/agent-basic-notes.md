@@ -23,7 +23,7 @@ AI agents powered by tricky LLMs prompting:
   确保 routine 中的每一步都对应一个特定的行动或输出.
 - Capture edge cases:
   实际交互通常会产生决策点, 一个健壮的 routine 会预测常见的变化,
-  并包含关于如何通过条件步骤或分支来处理它们的指令, e.g 在缺少所需信息时提供替代步骤.
+  并包含关于如何通过条件步骤或分支来处理它们的指令, e.g. 在缺少所需信息时提供替代步骤.
 
 ```md
 您是 LLM 智能体指令编写专家.
@@ -39,8 +39,8 @@ AI agents powered by tricky LLMs prompting:
 1. Spec the work:
    - 目标: picking next highest-leverage goal
    - 分解: breaking the work into small and verifiable slice (pull request)
-   - 标准: writing acceptance criteria, e.g inputs, outputs, edge cases, UX constraints
-   - 风险: calling out risks up front, e.g performance hotspots, security boundaries, migration concerns
+   - 标准: writing acceptance criteria, e.g. inputs, outputs, edge cases, UX constraints
+   - 风险: calling out risks up front, e.g. performance hotspots, security boundaries, migration concerns
 2. Give agents context:
    - 仓库: Repository conventions
    - 组件: Component system, design tokens and patterns
@@ -48,7 +48,7 @@ AI agents powered by tricky LLMs prompting:
 3. Direct agents `what`, not `how`:
    - 工具: Assigning right tools
    - 文件: Pointing relevant files and components
-   - 约束: Stating explicit guardrails, e.g `don't change API shape`, `keep this behavior`, `no new deps`
+   - 约束: Stating explicit guardrails, e.g. `don't change API shape`, `keep this behavior`, `no new deps`
 4. Verification and code review:
    - 正确性 (correctness): edge cases, race conditions, error handling
    - 性能 (performance): `N+1` queries, unnecessary re-renders, overfetching

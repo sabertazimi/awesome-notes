@@ -578,15 +578,15 @@ p:hover {
 [`background-size`](https://developer.mozilla.org/docs/Web/CSS/background-size):
 
 - `auto{1,2}`:
-  - 具有 intrinsic size 的背景 (e.g 位图),
+  - 具有 intrinsic size 的背景 (e.g. 位图),
     computed to `[intrinsic size, intrinsic size]`.
-  - 具有一个方向 intrinsic size, 具有 intrinsic ratio 的背景 (e.g 矢量图),
+  - 具有一个方向 intrinsic size, 具有 intrinsic ratio 的背景 (e.g. 矢量图),
     computed to `[intrinsic size, intrinsic size * intrinsic ratio]`.
-  - 具有一个方向 intrinsic size, 不具有 intrinsic ratio 的背景 (e.g 矢量图),
+  - 具有一个方向 intrinsic size, 不具有 intrinsic ratio 的背景 (e.g. 矢量图),
     computed to `[intrinsic size, extrinsic size]`.
-  - 不具有 intrinsic size, 具有 intrinsic ratio 的背景 (e.g 矢量图),
+  - 不具有 intrinsic size, 具有 intrinsic ratio 的背景 (e.g. 矢量图),
     computed to `contain` (等比例缩放).
-  - 不具有 intrinsic size, 不具有 intrinsic ratio 的背景 (e.g CSS gradient),
+  - 不具有 intrinsic size, 不具有 intrinsic ratio 的背景 (e.g. CSS gradient),
     computed to `[extrinsic size, extrinsic size]`.
 - `cover`: 等比例裁剪, 部分图像会裁剪.
 - `contain`: 等比例缩放, 部分区域会留白.
@@ -1329,7 +1329,7 @@ main::before {
 
 [`mix-blend-mode`](https://developer.mozilla.org/docs/Web/CSS/mix-blend-mode):
 
-- Used for multiple elements, e.g text styles.
+- Used for multiple elements, e.g. text styles.
 - 通常把混合模式设置在顶层元素上:
   当元素应用了混合模式时,
   该元素会混合 `z` 轴上所有层叠顺序比其低的层叠元素.
@@ -2315,9 +2315,9 @@ Scroll bars take up space within `padding box`.
 
 `pointer`/`any-pointer`:
 
-- `none`: no pointer device (e.g phones).
-- `coarse`: limited accuracy pointer device (e.g smart TV, video game consoles).
-- `fine`: accurate pointer device (e.g mouse, touch pads, stylus).
+- `none`: no pointer device (e.g. phones).
+- `coarse`: limited accuracy pointer device (e.g. smart TV, video game consoles).
+- `fine`: accurate pointer device (e.g. mouse, touch pads, stylus).
 
 ```html
 <input id="test" type="checkbox" /> <label for="test">Look at me!</label>
@@ -2739,7 +2739,7 @@ match.addEventListener('change', (e) => {
 ### Container Size Query
 
 当组件出现在同一视口大小 (viewport) 页面下的不同地方时,
-e.g `.main > .button` vs `.sidebar > .button`,
+e.g. `.main > .button` vs `.sidebar > .button`,
 此时 `@media` 无法有效实现响应式组件,
 使用 `@container` 可以有效实现响应式组件:
 
@@ -2946,7 +2946,7 @@ Focusable areas:
 
 - Elements whose `tabindex` value is not null.
 - The shapes of area elements in an image map.
-- The sub-widgets of elements: e.g video controls.
+- The sub-widgets of elements: e.g. video controls.
 - The scrollable regions of elements.
 - The viewport of a `Document`.
 - User agent focusable area.

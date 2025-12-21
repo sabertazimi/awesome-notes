@@ -475,7 +475,7 @@ WindowSize = BandWidth `*` RTT (带宽延迟积)
 - 拥塞预防:
   拥塞预防算法把丢包作为网络拥塞的标志, 重置拥塞窗口,
   之后拥塞预防机制按照自己的算法来增大窗口以尽量避免丢包.
-  e.g TCP Tahoe, TCP Reno, TCP Vegas, TCP New Reno, TCP BIC, TCP CUBIC.
+  e.g. TCP Tahoe, TCP Reno, TCP Vegas, TCP New Reno, TCP BIC, TCP CUBIC.
   AIMD (Multiplicative Decrease and Additive Increase, 倍减加增),
   PRR (Proportional Rate Reduction, 比例降速).
 - 快速重传:
@@ -625,7 +625,7 @@ WebRTC 是符合上述要求的框架.
 - 检查和监控 SSL/TLS 会话缓存的使用情况, 以之作为性能调优的依据.
 - 小记录会造成浪费, 大记录会导致延迟:
   一方面不要让 TLS 记录分成多个 TCP 分组, 另一方面又要尽量在一条记录中多发送数据
-  (e.g 1400 bytes).
+  (e.g. 1400 bytes).
 - 尽量减少中间证书颁发机构的数量 (确保证书链不会超过拥塞窗口的大小):
   理想情况下, 发送的证书链应该只包含两个证书,
   即站点证书和中间证书颁发机构的书 (根证书颁发机构的证书由浏览器内置提供).
@@ -688,7 +688,7 @@ Address structure:
   `171.64.0.0/16` means `171.64.0.0` to `171.64.255.255`,
   `A/24` describes `256` addresses, `A/20` describes `4096` addresses.
 - Longest prefix matching and netmask (`A/16`):
-  e.g `0.0.0.0/0` => matching all addresses.
+  e.g. `0.0.0.0/0` => matching all addresses.
 
 ### Packet Format
 
@@ -849,7 +849,7 @@ Address resolution protocol:
 
 Battery power save optimization:
 
-- 轮询在移动网络中代价极高 (Energy Tail), 少用: e.g heart beat, round beacon.
+- 轮询在移动网络中代价极高 (Energy Tail), 少用: e.g. heart beat, round beacon.
 - 尽可能使用推送和通知.
 - 消除不必要的长连接.
 - 出站和入站请求应该合并和汇总.

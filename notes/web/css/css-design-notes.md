@@ -41,7 +41,7 @@ tags: [Web, CSS, Design]
 - Multiples of base-size.
 - Use `rem` for most font-size, use `em` for some spacing (needing responsive design).
 - `rem` is better.
-- `em` for responsive layout: e.g layer2 font based-on layer1 font in dropdown menu.
+- `em` for responsive layout: e.g. layer2 font based-on layer1 font in dropdown menu.
 - Make text legible: at least `16px`.
 
 ```scss
@@ -144,7 +144,7 @@ Disable mobile browser auto scale:
 [Responsive font size](https://zellwk.com/blog/rem-vs-em);
 
 - Size in `em` if the property scales according to it's `font-size`:
-  e.g button `padding`.
+  e.g. button `padding`.
 - **Modular font size**:
   Size in `em` if the `font-size` should be modular
   (relative to it's context/parent).
@@ -419,7 +419,7 @@ Implementing design tokens in your workflow:
   - Implement tokens in your components.
   - Component library integration:
     include the generated styles in your component library environment setup
-    (e.g Storybook).
+    (e.g. Storybook).
 - Maintenance Phase: Updating Tokens:
   - Regenerate tokens and update your CSS file:
     design systems aren’t static.
@@ -624,7 +624,7 @@ export function Button({
 
 人的短时记忆能力广度为 7±2 个信息块:
 
-- 手机号/银行卡号/超大数字分段放置, 信息分层 e.g `134 9999 9999`, `999, 999, 999`.
+- 手机号/银行卡号/超大数字分段放置, 信息分层 e.g. `134 9999 9999`, `999, 999, 999`.
 - 文章布局时增大段落间 margin, 改变部分文字的粗细/字体/颜色.
 - 导航/选项卡不超过 9 个 (超过 9 个可使用 dropdown/subMenu).
 
@@ -731,7 +731,7 @@ NNGroup article [homepage design principles](https://www.nngroup.com/articles/ho
 - Put the back button above the form.
 - Put tangentially related actions above the form.
 - Place extra buttons based on what they do.
-- In some single field forms put the button next to the input (e.g `search` button).
+- In some single field forms put the button next to the input (e.g. `search` button).
 - Put buttons on multi select forms above the form.
 
 ## User Experience

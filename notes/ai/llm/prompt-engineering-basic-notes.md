@@ -16,7 +16,7 @@ tags: [AI, LLM, PromptEngineering]
 - 目标受众: 在提示中集成预期受众, 例如领域专家.
 - 任务分解: 将复杂任务分解为一系列简单提示.
 - 肯定指令: 使用肯定指令, 避免使用否定语言.
-- 概念解释: 使用简单术语解释特定主题, e.g 对11岁孩子或领域初学者解释.
+- 概念解释: 使用简单术语解释特定主题, e.g. 对11岁孩子或领域初学者解释.
 - 激励提示: 添加激励性语句, 如 `I'm going to tip $xxx for a better solution!`.
 - 少样本提示 (示例驱动提示).
 - 格式化: 使用特定的格式, 如以 `###Instruction###`/`###Question###`/`###Example###` 开始.
@@ -272,7 +272,7 @@ Design styles:
 - Patterns, Polka dot, Halftone, 20s, 30s, 1940s, 1950s.
 - Decor, 60s, 1800s, 2020s, 4000s, Pop-art, Hi-fi, Gothic.
 - Painting/Graffiti By artists,
-  e.g `By Van Gogh`, `By Pablo Picasso`, `By Leonardo Da Vinci`, `Graffiti By Banksy`.
+  e.g. `By Van Gogh`, `By Pablo Picasso`, `By Leonardo Da Vinci`, `Graffiti By Banksy`.
 
 Engines:
 
@@ -833,7 +833,7 @@ LLM 并未统一利用其上下文,
 信息的呈现方式对性能有显著影响.
 这凸显了 `上下文工程` 的必要性,
 优化相关信息的数量并最小化不相关上下文以实现可靠的性能.
-e.g custom gemini CLI [command](./prompts/url2md.toml).
+e.g. custom gemini CLI [command](./prompts/url2md.toml).
 
 ## Prompt Engineering Reference
 

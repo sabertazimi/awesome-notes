@@ -747,8 +747,8 @@ whereas private properties model build requirements of targets.
 
 ### Anti Patterns
 
-- Do not use global functions: e.g `link_directories`, `include_libraries`
-- Don't add unneeded PUBLIC requirements e.g `-Wall`
+- Do not use global functions: e.g. `link_directories`, `include_libraries`
+- Don't add unneeded PUBLIC requirements e.g. `-Wall`
 - Don't GLOB files
 - Link to built files directly: Always link to targets if available
 - Never skip PUBLIC/PRIVATE when linking

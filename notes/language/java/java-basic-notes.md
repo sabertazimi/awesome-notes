@@ -299,7 +299,7 @@ float f = 1.2F;   //OK
 
 Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.isNaN(检数)
 
-千分位下划线分隔法 e.g 123_456.789_000
+千分位下划线分隔法 e.g. 123_456.789_000
 
 ### 字符型
 
@@ -307,7 +307,7 @@ Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.isNaN(检数)
 - ’ ’(定界符)内可用八/十六进制转义字符表示字符
 
 - 八:\xxx
-- 十六:\uxxxx(\u 转义序列可出现在任何地方) e.g ‘\u0061’
+- 十六:\uxxxx(\u 转义序列可出现在任何地方) e.g. ‘\u0061’
 
 改进的 Unicode 字符集:
 
@@ -342,7 +342,7 @@ Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.isNaN(检数)
 
 有符号右移>>:最高位补符号位 左操作数 int/long, 右操作数 mod32/mod64
 
-> e.g int a >> 33 即 int a >> 1
+> e.g. int a >> 33 即 int a >> 1
 
 无符号右移>>>:最高位补 0
 
@@ -622,7 +622,7 @@ returnType get() {
 
 #### 更改器方法
 
-修改实例域的方法 (mutator method): e.g add、set.
+修改实例域的方法 (mutator method): e.g. add、set.
 
 ### 对象方法
 
@@ -1458,7 +1458,7 @@ HashSet implements Set: 无序无重复元素集, 基于 HashTable
 
 - 散列表: 列表/链表数组(多个列表/链表), 每个列表/链表成为桶(bucket)
   - 元素的桶的整数索引: 元素散列码 mod 桶的总数(余数)
-  - 桶数: 预计元素个数的 75%~150% e.g 标准类库桶数为 2 的 n 次方, 默认值 16
+  - 桶数: 预计元素个数的 75%~150% e.g. 标准类库桶数为 2 的 n 次方, 默认值 16
   - 散列冲突(hash collision): 目标桶已满
   - 再散列(rehashed): 创建大通数(如双倍桶数)的新散列表, 丢弃原散列表
   - 装填因子(load factor): 再散列时机决定因素, 一般为 0.75(75%桶中含有至少一个元素)

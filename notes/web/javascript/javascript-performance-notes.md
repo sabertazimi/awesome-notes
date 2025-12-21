@@ -159,7 +159,7 @@ JavaScript 代码与 UI 共享线程.
 - 模拟有间隙的循环, 使得 UI 更新得以进入浏览器线程的执行队列中.
 - 通过 MicroTask/MicroTask 实现时间分片调度器,
   使得长任务不阻塞页面操作 (60 FPS):
-  e.g React Scheduler and Reconciler, Vue `nextTick` API.
+  e.g. React Scheduler and Reconciler, Vue `nextTick` API.
 
 ```ts
 const button = document.getElementById('myButton')
@@ -1276,7 +1276,7 @@ requireScript('the_rest.js', () => {
 
 #### Babel Configuration
 
-- `modules`: always `false`, keep `esm` for bundler (e.g webpack) tree shaking.
+- `modules`: always `false`, keep `esm` for bundler (e.g. webpack) tree shaking.
 - `useBuiltIns`:
   - `entry`: 将 `core-js import` 替换为特性列表.
   - `usage`: 按使用引入用到的特性列表.
@@ -1429,7 +1429,7 @@ Load 也不一定代表用户看到主要内容.
 - 使用 `post` 上报.
 - Prefer `visibilitychange`/`pagehide` event.
   `unload`/`beforeunload` event not precise for mobile users:
-  e.g switch to another app not trigger `unload` event.
+  e.g. switch to another app not trigger `unload` event.
 
 ```ts
 document.addEventListener('DOMContentLoaded', () => {
@@ -1516,7 +1516,7 @@ function getPerformanceTiming() {
   times.domReady = t.domComplete - t.responseEnd
 
   // 【重要】重定向的时间.
-  // 【原因】拒绝重定向. e.g http://example.com/ 不应写成 http://example.com.
+  // 【原因】拒绝重定向. e.g. http://example.com/ 不应写成 http://example.com.
   times.redirect = t.redirectEnd - t.redirectStart
 
   // 【重要】DNS 查询时间.
@@ -1618,10 +1618,10 @@ First Contentful Paint:
 
 - Add the `defer` or `async` attributes to `<script>` tags.
 - Minify the JavaScript and CSS files.
-- Remove unused CSS (e.g Tailwind.css JIT mode).
+- Remove unused CSS (e.g. Tailwind.css JIT mode).
 - Lazy importing components not for first page.
 - Server side rendering.
-- Reduce server response time (e.g CDN).
+- Reduce server response time (e.g. CDN).
 - TBT (Total Blocking Time) = TTI (Time to Interactive) - FCP (First Contentful Paint).
 
 ```ts
@@ -1765,14 +1765,14 @@ Improve INP for Vanilla.js:
 
 - Reduce:
   减少不必要的代码,
-  e.g Useless polyfills, redundant animation and transition effects.
+  e.g. Useless polyfills, redundant animation and transition effects.
 - Defer:
   推迟不需要在下一个绘制之前运行的代码,
-  e.g Lazy loading, code splitting,
+  e.g. Lazy loading, code splitting,
   defer irrelevant expensive calculations (`requestIdleCallback()`).
 - Optimize:
   优化必须在下一个绘制之前运行的代码,
-  e.g Debounce, throttle, virtualized Window, time slicing (`yieldToMain()`).
+  e.g. Debounce, throttle, virtualized Window, time slicing (`yieldToMain()`).
 
 Improve INP in [Next.js](https://www.thisdot.co/blog/improving-inp-in-react-and-next-js):
 

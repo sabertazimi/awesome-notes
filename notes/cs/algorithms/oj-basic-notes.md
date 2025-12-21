@@ -324,7 +324,7 @@ ll mod_pow(ll x, ll n, ll mod) {
 
 - 对于实际操作, 直接覆写至状态数组即可, 无需关心边界条件(效果会立即生效)
 
-> e.g 交接处方块 , 2 次写 1, `maps[i][j] = 1`, 不用担心重复计数.
+> e.g. 交接处方块 , 2 次写 1, `maps[i][j] = 1`, 不用担心重复计数.
 
 ### Reverting Simulation
 
@@ -388,7 +388,7 @@ dp 数组可以滚动使用, 从而节省空间:
 - 所有背包问题
 - 二分问题:最优二分搜索树/文件合并
 - 非连续特征序列: 最长子序列/最长上升序列
-- 多重部分和问题 e.g 数组中是否存在一对数的和为 xx
+- 多重部分和问题 e.g. 数组中是否存在一对数的和为 xx
 - 计数问题/分组问题/分划问题
 
 ### Digital Bits Dynamic Programming Problem
@@ -581,7 +581,7 @@ for (const num of nums) {
 
 ### Set
 
-- 用于去重与查重 (`Duplicate Problem`, e.g LeetCode 217/219/220).
+- 用于去重与查重 (`Duplicate Problem`, e.g. LeetCode 217/219/220).
 - 用于集合运算题（交、并、差等）
 
 ### BitMap

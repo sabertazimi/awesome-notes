@@ -72,7 +72,7 @@ link /DEBUG src
 #### 数据区
 
 - `<C-C>` Change: 临时修改数据
-- `<C-D>` Display: 选择显示格式 e.g Byte/Word/Long/Comp/Float/Real/Double/Extended
+- `<C-D>` Display: 选择显示格式 e.g. Byte/Word/Long/Comp/Float/Real/Double/Extended
 - `<C-G>` Goto: 跳转至指定地址区
 
 ### NMAKE
@@ -115,7 +115,7 @@ test:
 - `^`：无进位
 - `p && *p++` : NULL 检查
 
-编码：2^n e.g 一副牌的编码 2 位牌色位+4 位数字位
+编码：2^n e.g. 一副牌的编码 2 位牌色位+4 位数字位
 
 ## Address
 
@@ -166,7 +166,7 @@ R1 = MEM[SP + 8]
   `testl Src2, Src1`
   根据 Src1 & Src2(andl Src2, Src1)的结果设置标志寄存器的值
 
-  e.g testl %eax, %eax 实现符号函数
+  e.g. testl %eax, %eax 实现符号函数
 
 - setX 命令 根据标志寄存器运算值，将值存入 dest
   `setX dest`

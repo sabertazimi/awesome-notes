@@ -34,10 +34,10 @@ Box sizing:
 
 - `Intrinsic Sizing` (内在尺寸):
   表示元素最终的尺寸表现是由内容决定的,
-  e.g `fit-content`/`min-content`/`max-content`.
+  e.g. `fit-content`/`min-content`/`max-content`.
 - `Extrinsic Sizing` (外在尺寸):
   表示元素最终的尺寸表现是由上下文决定的,
-  e.g `stretch`/`-moz-available`/`-webkit-fill-available`.
+  e.g. `stretch`/`-moz-available`/`-webkit-fill-available`.
 
 ### Box Width
 
@@ -263,7 +263,7 @@ Margin collapsing only happen to **normal** block box **vertical** direction:
 #### Invalid Margin
 
 - `display: inline` 非替换元素 vertical `margin` 无效.
-- `display: table-cell`/`display: table-row` 元素 `margin` 无效: e.g `<tr>`, `<td>`.
+- `display: table-cell`/`display: table-row` 元素 `margin` 无效: e.g. `<tr>`, `<td>`.
 - `position: absolute` 绝对定位元素未定位方向 (`auto`) `margin`:
   `.absolute { top: 10%; left: 30%; }` `margin-right` 与 `margin-bottom` 改变了外部尺寸,
   但无法影响兄弟元素布局.
@@ -323,7 +323,7 @@ include `padding-top` and `padding-bottom`:
 - Block level element:
   由于行框盒子幽灵空白节点的存在,
   `line-height * font-size` 会决定 block level element 内部元素的最小高度,
-  e.g `<div><span></span></div>` 高度不为 `0`.
+  e.g. `<div><span></span></div>` 高度不为 `0`.
 
 ### Box Vertical Align
 
@@ -480,8 +480,8 @@ BFC 是页面上的一个隔离的独立容器 (隔离性):
 #### Block Formatting Context Creation
 
 - 根元素或其它包含它的元素.
-- `overflow`: not `visible` (e.g `hidden`).
-- `position`: not `static`/`relative` (e.g `absolute`/`fixed`).
+- `overflow`: not `visible` (e.g. `hidden`).
+- `position`: not `static`/`relative` (e.g. `absolute`/`fixed`).
 - `float` elements.
 - `display`: `inline-block`.
 - `display`: `table-cell`/`table-caption`/`table-*h`.
@@ -1342,7 +1342,7 @@ flex item 的 `min-width` 和 `min-height` 的默认值是 `auto`,
 
 :::tip Flex Shorthand Property Usage
 
-- `flex: none`: 适合设置在内容不能换行显示的小控件元素上, e.g `<button>`.
+- `flex: none`: 适合设置在内容不能换行显示的小控件元素上, e.g. `<button>`.
 - `flex: auto`: 适合基于内容动态适配的布局.
 - `flex: 0`: 适用场景较少, 适合设置在替换元素的父元素上.
 - `flex: 1`: 适合等分布局.

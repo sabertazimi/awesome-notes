@@ -61,7 +61,7 @@ tags: [Language, C]
 #### 边界检查
 
 - 空/满栈检查
-- 参数合法性检查 e.g elemSize > 0 检查
+- 参数合法性检查 e.g. elemSize > 0 检查
 
 #### 指针检查
 
@@ -92,11 +92,11 @@ short s = *(short *)&f;
 - 未初始化
 - 改写未知区域
   - 下标越界
-  - 内存上溢 e.g `gets(string);`
+  - 内存上溢 e.g. `gets(string);`
 - 指针相关运算符优先级与结合性
 - 返回局部变量的地址
 - 重复释放内存空间
-- 内存泄漏 e.g 未释放空间/未释放部分深度空间(多维数组)
+- 内存泄漏 e.g. 未释放空间/未释放部分深度空间(多维数组)
 - 不能引用 void 指针指向的内存单元
 
 ### Debugging Malloc
@@ -422,7 +422,7 @@ void SellTickets(int agent, int *ticketsNum, Semaphore lock) {
 
 ## 联合体
 
-- 机器码 e.g 理解 IEEE 754 标准
+- 机器码 e.g. 理解 IEEE 754 标准
 - 区分大/小端模式
 
 ## Naming Conventions
@@ -779,7 +779,7 @@ void printargs(int arg1, ...) /* 输出所有int类型的参数，直到-1结束
   - b filename:line_num
 - display/format address
 
-e.g `display $pc`/`i $pc`.
+e.g. `display $pc`/`i $pc`.
 
 - t 按二进制格式显示变量.
 - d 按十进制格式显示变量.
@@ -793,7 +793,7 @@ e.g `display $pc`/`i $pc`.
 - disas 显示汇编代码.
 - x /num-size-format `$pc`/rsp/rbp.
 
-e.g size:w(2 字节) format:x/d/s(十六进制/十进制/字符串)
+e.g. size:w(2 字节) format:x/d/s(十六进制/十进制/字符串)
 2wx
 
 - examine - 查看内存

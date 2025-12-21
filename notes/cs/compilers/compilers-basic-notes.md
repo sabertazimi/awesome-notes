@@ -15,7 +15,7 @@ tags: [CS, Compiler]
 - `program_code` ---compiler---> executable
 - data ---executable---> output
 
-> e.g Fortran(formula translation) 1 project
+> e.g. Fortran(formula translation) 1 project
 
 ### Structure of compilers
 
@@ -455,7 +455,7 @@ bool top_down_parsing(tokens[]) {
       t == tokens[i] ? pop(i++) : backtrack();
     } else if (stack[top] is a non_terminal T) {
       pop();
-      push(T next expansion); // 自右向左压栈, e.g pop(S), push(N_right), push(V), push(N_left)
+      push(T next expansion); // 自右向左压栈, e.g. pop(S), push(N_right), push(V), push(N_left)
     } else {
       throw new SyntaxError();
     }
@@ -611,7 +611,7 @@ bool ll1_parsing(tokens[]) {
     } else if (stack[top] is a non_terminal T) {
       pop();
       // push(T correct expansion);
-      // 自右向左压栈, e.g pop(S), push(N_right), push(V), push(N_left)
+      // 自右向左压栈, e.g. pop(S), push(N_right), push(V), push(N_left)
       push(select_table[T][tokens[i]] 对应项(规则编号)所对应规则的右边式子);
     } else {
       throw new SyntaxError();
@@ -660,7 +660,7 @@ while (some sets is changing) {
   foreach (production p: N->beta1...beta_n) {
     foreach (beta_i from beta1 up to beta_n) {
       if (beta_i == a) {
-      // e.g N->abX: first(N) += {a}
+      // e.g. N->abX: first(N) += {a}
         first(N) += {a};
         break;
       } else if (beta_i == M) {
@@ -823,7 +823,7 @@ S'-> alpha1S'
 
 ###### 消除间接左递归
 
-- 把文法 G 的所有非终结符按任一顺序排列, e.g A1, A2, …, An
+- 把文法 G 的所有非终结符按任一顺序排列, e.g. A1, A2, …, An
 - 消除 Ai 规则中的直接左递归: 把形如 Ai→Ajγ 的产生式
   改写成 Ai→δ1γ /δ2γ /…/δkγ(其中 Aj→δ1 /δ2 /…/δk 是关于的 Aj 全部规则)
 - 去掉多余的规则(不可达规则)
@@ -1393,7 +1393,7 @@ E: E + E { $$ = new_exp_add($1, $3); }
 
 AST + semantic of programming language --semantic analysis--> intermediate
 
-e.g 变量/函数必须先声明再使用; 每个表达式必须有合适类型(左值/右值); 函数调用与函数定义保持一致(函数签名)
+e.g. 变量/函数必须先声明再使用; 每个表达式必须有合适类型(左值/右值); 函数调用与函数定义保持一致(函数签名)
 
 ```cpp
 P: D S

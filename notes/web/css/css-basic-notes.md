@@ -676,9 +676,9 @@ Separate focus styles:
 
 - `:autofill`.
 - `:enabled`:
-  匹配启用的界面元素, e.g `input`.
+  匹配启用的界面元素, e.g. `input`.
 - `:disabled`:
-  匹配禁用的界面元素 (`[disabled]`), e.g `input`.
+  匹配禁用的界面元素 (`[disabled]`), e.g. `input`.
 - `:read-only`:
   匹配其内容无法供用户修改的元素 (`<div>`/`[readonly]`).
 - `:read-write`:
@@ -687,7 +687,7 @@ Separate focus styles:
   匹配处于默认状态的表单元素, 可用于默认选项/推荐选项样式.
 - `:checked`:
   匹配处于选中状态的表单元素, 可用于开关选框/多选框样式,
-  e.g [tab](https://codepen.io/llgruff/pen/ZGBxOa),
+  e.g. [tab](https://codepen.io/llgruff/pen/ZGBxOa),
   [dropdown](https://codepen.io/eduardoboucas/pen/BNyKwO),
   [modal](https://codepen.io/chrisburnell/pen/abqKZG),
   [carousel](https://codepen.io/SitePoint/pen/MyPVdK),
@@ -705,7 +705,7 @@ Separate focus styles:
   匹配用户交互后仍然验证无效的表单元素.
 - `:in-range`:
   匹配具有范围限制的元素, 其中该值位于限制范围内,
-  e.g 具有 `min` 和 `max` 属性的 `number` 和 `range` 输入框.
+  e.g. 具有 `min` 和 `max` 属性的 `number` 和 `range` 输入框.
 - `:out-of-range`:
   与 `:in-range` 选择相反, 其中该值位于限制范围外.
 - `:required`:
@@ -1515,7 +1515,7 @@ for progressive enhancement
 
 ### Limit Variables
 
-For some CSS values and units have limits (e.g `<color>`),
+For some CSS values and units have limits (e.g. `<color>`),
 use variables to implement `if else` statement.
 
 ```css
@@ -2551,8 +2551,8 @@ wbr::after {
 
 :::tip Punctuation Types
 
-- 避头标点: 不在行首显示的标点, e.g 逗号, 顿号, 句号, 问号, 叹号.
-- 避尾标点: 不在行尾显示的标点, e.g 前引号, 前括号.
+- 避头标点: 不在行首显示的标点, e.g. 逗号, 顿号, 句号, 问号, 叹号.
+- 避尾标点: 不在行尾显示的标点, e.g. 前引号, 前括号.
 
 :::
 
@@ -3007,7 +3007,7 @@ selects a normal, condensed, or expanded face from a font:
   - `historical-ligatures`: 使用古代连字效果.
   - `contextual-ligatures`: 使用上下文连字效果, 前后字母影响具体效果表现.
 - [`font-variant-numeric`](https://developer.mozilla.org/docs/Web/CSS/font-variant-numeric):
-  - `ordinal`: 强制使用序数标记特殊的标志符号, e.g `1st`, `2nd`, `3rd`, `4th`.
+  - `ordinal`: 强制使用序数标记特殊的标志符号, e.g. `1st`, `2nd`, `3rd`, `4th`.
   - `slashed-zero`: 强制使用带斜线的 `0`.
   - `lining-nums`: 沿基线对齐.
   - `oldstyle-nums`: 传统对齐方式.
@@ -3143,7 +3143,7 @@ whether and when it is [downloaded and ready to use](https://github.com/bramstei
 
 [Reduce web font size](https://web.dev/reduce-webfont-size):
 
-- Compress fonts: better formats (e.g `woff2`/`woff`).
+- Compress fonts: better formats (e.g. `woff2`/`woff`).
 - Subset fonts: `unicode-range`.
 - Local fonts: `local()`.
 

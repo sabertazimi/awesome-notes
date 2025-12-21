@@ -115,7 +115,7 @@ Structure every test to 3 part code:
   valid inputs,
   verify functions.
 - Negative tests:
-  invalid inputs (e.g `null`/`undefined`/`''`/mismatch type/mismatch structure)
+  invalid inputs (e.g. `null`/`undefined`/`''`/mismatch type/mismatch structure)
   verify robustness.
 - Exception tests:
   `expect(api()).toThrow(error)`.
@@ -270,7 +270,7 @@ O.makeBread({ type: wheat, size: 99, name: 'foo' })
 
 - mock: 模拟对象中的方法/接口
 - stub: 模拟对象中的返回值
-- spy: 在原有对象的基础上, 增加监视用变量/方法 e.g assert/调用次数/参数限制
+- spy: 在原有对象的基础上, 增加监视用变量/方法 e.g. assert/调用次数/参数限制
 
 ```ts
 const mockery = require('mockery')
@@ -1062,7 +1062,7 @@ reactTest('test component', () => {
 ## Cypress Testing
 
 When it comes to test heavy visual features,
-(e.g fixed navigation based on window scroll event),
+(e.g. fixed navigation based on window scroll event),
 E2E testing helps a lot.
 
 ### Cypress Installation
@@ -1906,7 +1906,7 @@ while (true) {
 - cs-p: go to anywhere
 - cs-o: go to functions
 
-long click reload: multiple reload options e.g clean cache
+long click reload: multiple reload options e.g. clean cache
 
 ### Elements Panel
 

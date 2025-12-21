@@ -1114,7 +1114,7 @@ Split large class or set of closely related classes into two separate hierarchie
 
 :::tip Bridge Use Case
 
-- Platform independence: e.g separate GUI frameworks from operating systems.
+- Platform independence: e.g. separate GUI frameworks from operating systems.
 - Database drivers.
 - Device drivers.
 
@@ -1175,8 +1175,8 @@ circle.draw()
 
 :::tip Composite Use Case
 
-- Graphics and UI Frameworks: e.g DOM.
-- File Systems: e.g directory tree.
+- Graphics and UI Frameworks: e.g. DOM.
+- File Systems: e.g. directory tree.
 - Organization Structures.
 - AST.
 
@@ -1250,7 +1250,7 @@ root.do()
 ### Decorator Pattern
 
 - 重写/重载/扩展对象原有的行为 (Methods), 但不改变对象原有属性.
-- 可以添加新属性, 并围绕新属性扩展对象的原行为 e.g 原对象只会说中文, 装饰后同时说中文与英文.
+- 可以添加新属性, 并围绕新属性扩展对象的原行为 e.g. 原对象只会说中文, 装饰后同时说中文与英文.
 - 避免了通过继承来为类型添加新职责, 通过继承的方式容易造成子类的膨胀.
 - 保持接口的一致性, **动态**改变对象的外观/职责.
 - ConcreteDecorator 类: `private ClassName component` 拥有一个对象引用.
@@ -1259,7 +1259,7 @@ root.do()
 
 :::tip Decorator Use Case
 
-- Graphics and UI Frameworks: e.g extended React HOC components.
+- Graphics and UI Frameworks: e.g. extended React HOC components.
 - ES2016 and TypeScript `@decorator`.
 - Guard: form validator.
 - Interceptor:
@@ -1424,8 +1424,8 @@ sabertazimi.addMyEvent = function (el, ev, fn) {
 
 :::tip Flyweight Use Case
 
-- Objects pool: e.g text processing.
-- DOM nodes pool: e.g user interface.
+- Objects pool: e.g. text processing.
+- DOM nodes pool: e.g. user interface.
 - Event delegation.
 - Reduce similar object instances.
 - Caching.
@@ -1902,7 +1902,7 @@ Bind `Command` to UI components:
 - `Executor`: UI components.
 - `Client` and `Receiver`: background tasks or other UI components.
 - `Executor` -> `Client` `Command.execute()` -> `Receiver.action()`:
-  e.g click `button` -> refresh `menu`.
+  e.g. click `button` -> refresh `menu`.
 
 ```ts
 // Executor
@@ -2849,9 +2849,9 @@ Separating an algorithm from an object structure on which it operates.
 
 :::tip Visitor Use Case
 
-- Data structures: e.g Tree, Graph.
-- Document processing: e.g DOM tree, reporting and analysis.
-- Compiler: e.g abstract syntax tree.
+- Data structures: e.g. Tree, Graph.
+- Document processing: e.g. DOM tree, reporting and analysis.
+- Compiler: e.g. abstract syntax tree.
 
 :::
 
@@ -3190,7 +3190,7 @@ that start at the **same internal configuration**.
 
 - concurrency or race condition (timing effects)
 - shared-state concurrency or message-passing concurrency
-- concurrent programming language e.g Java
+- concurrent programming language e.g. Java
 
 #### Named State
 
@@ -3438,7 +3438,7 @@ Bad code smell:
 - Use guard clause and assertion: 消除复杂嵌套条件语句.
 - 消除不必要条件语句:
   - Introduce special case.
-  - Polymorphism: e.g strategy pattern.
+  - Polymorphism: e.g. strategy pattern.
 
 ### API Refactoring
 
