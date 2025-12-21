@@ -1133,6 +1133,20 @@ GET /../../../passwd.key HTTP/1.1
 - 使用时长.
 - 后续依赖版本更新策略.
 
+`pnpm` workspace config to prevent [supply chain attacks](https://pnpm.io/blog/2025/12/05/newsroom-npm-supply-chain-security):
+
+```yaml
+minimumReleaseAge: <duration-in-minutes>
+
+minimumReleaseAgeExclude:
+  - package-with-critical-hotfix@1.2.3
+
+trustPolicy: no-downgrade
+
+trustPolicyExclude:
+  - package-that-migrated-cicd@1.2.3
+```
+
 #### Malicious Package Attack
 
 名字与流行包相近, 通过 `postinstall` 脚本执行病毒脚本, 获取系统环境变量信息 e.g. `crossenv`.
@@ -1154,6 +1168,16 @@ GET /../../../passwd.key HTTP/1.1
 
 ```bash
 cat FILENAME.js | openssl dgst -sha384 -binary | openssl base64 -A
+```
+
+```yaml
+strictDepBuilds: true
+
+onlyBuiltDependencies:
+  - package-with-necessary-build-scripts
+
+ignoredBuiltDependencies:
+  - package-with-unnecessary-build-scripts
 ```
 
 ### XML Vulnerability
