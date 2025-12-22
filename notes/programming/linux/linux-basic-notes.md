@@ -2677,75 +2677,6 @@ set-window-option -g window-status-current-bg red
 bind 'set bell-style none'
 ```
 
-## Performance Tools
-
-![Linux Perf Tools](./figures/linux-perf-tools.png 'Linux Perf Tools')
-
-- [Uptime](#uptime-command).
-- [Dmesg](#dmesg-command).
-- [Vmstat](#vmstat-command).
-- [Mpstat](#mpstat-command).
-- [Pidstat](#pidstat-command).
-- [Iostat](#iostat-command).
-- [Free](#free-command).
-- [Sar](#sar-command).
-- [Top](#top-command).
-- [Iotop](#iotop-command).
-
-[Linux performance analysis in 60,000 milliseconds](https://netflixtechblog.com/linux-performance-analysis-in-60-000-milliseconds-accc10403c55)
-(Netflix):
-
-```bash
-# Load average
-uptime
-
-# Kernel errors
-dmesg -T | tail
-
-# Overall stats by time
-vmstat 1
-
-# CPU balance
-mpstat -P ALL 1
-
-# Process usage
-pidstat 1
-
-# Disk I/O
-iostat -xz 1
-
-# Memory usage
-free -m
-
-# Network I/O
-sar -n DEV 1
-
-# TCP stats
-sar -n TCP,ETCP 1
-
-# Check overview
-top
-```
-
-### Perf Command
-
-Perf [cookbook](http://www.brendangregg.com/perf.html)
-
-```bash
-perf list # events
-perf stat <command>
-perf stat -e <events> <command>
-perf record -e <events> -a <command>
-perf report
-```
-
-```bash
-perf record -F 99 -a -g -- sleep 10
-
-perf report -n --stdio
-perf report -n -g 'flamegraph'
-```
-
 ## Linux Tools
 
 ### Modern Unix Tools
@@ -3155,6 +3086,75 @@ scoop install curlie
 alias curl="curlie"
 ```
 
+### Performance Tools
+
+![Linux Perf Tools](./figures/linux-perf-tools.png 'Linux Perf Tools')
+
+- [Uptime](#uptime-command).
+- [Dmesg](#dmesg-command).
+- [Vmstat](#vmstat-command).
+- [Mpstat](#mpstat-command).
+- [Pidstat](#pidstat-command).
+- [Iostat](#iostat-command).
+- [Free](#free-command).
+- [Sar](#sar-command).
+- [Top](#top-command).
+- [Iotop](#iotop-command).
+
+[Linux performance analysis in 60,000 milliseconds](https://netflixtechblog.com/linux-performance-analysis-in-60-000-milliseconds-accc10403c55)
+(Netflix):
+
+```bash
+# Load average
+uptime
+
+# Kernel errors
+dmesg -T | tail
+
+# Overall stats by time
+vmstat 1
+
+# CPU balance
+mpstat -P ALL 1
+
+# Process usage
+pidstat 1
+
+# Disk I/O
+iostat -xz 1
+
+# Memory usage
+free -m
+
+# Network I/O
+sar -n DEV 1
+
+# TCP stats
+sar -n TCP,ETCP 1
+
+# Check overview
+top
+```
+
+#### Perf Command
+
+Perf [cookbook](http://www.brendangregg.com/perf.html)
+
+```bash
+perf list # events
+perf stat <command>
+perf stat -e <events> <command>
+perf record -e <events> -a <command>
+perf report
+```
+
+```bash
+perf record -F 99 -a -g -- sleep 10
+
+perf report -n --stdio
+perf report -n -g 'flamegraph'
+```
+
 ### FFmpeg
 
 [Media conversion](https://web.dev/media-conversion):
@@ -3408,3 +3408,7 @@ server {
   }
 }
 ```
+
+### Linux Tools Reference
+
+- Linux [cheatsheets](https://github.com/trimstray/the-book-of-secret-knowledge).
