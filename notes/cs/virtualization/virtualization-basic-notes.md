@@ -849,3 +849,73 @@ rather than at `first-access time` as with demand paging.
   which modern large memories make less common.
 - RMM trades increased memory for better performance,
   a common tradeoff when memory is cheap and plentiful.
+
+## Namespaces and Cgroup
+
+### Namespaces
+
+```bash
+# PID Namespace
+unshare --fork --pid --mount-proc /bin/bash
+ps -aux
+
+# Mount Namespace
+unshare --fork --mount /bin/bash
+mkdir /tmp/mnt
+mount -t tmpfs -o size=1m tmpfs /tmp/mnt
+df -h |grep mnt
+
+# User Namespace
+PS1='\u@container#' unshare --user -r /bin/bash
+
+# UTS Namespace (isolated hostname)
+unshare --fork --uts /bin/bash
+hostname -b container
+
+# IPC Namespace
+unshare --fork --ipc /bin/bash
+ipcmk -Q
+ipcs -q
+
+# Net Namespace
+unshare --fork --net /bin/bash
+ip addr
+netstat -ntlp
+```
+
+### Cgroup
+
+Cgroup (Linux Control Group):
+limit process group resources usage,
+including CPU, Memory, Disk I/O, Network Bandwidth etc.
+
+- Resource usage limit.
+- Priority.
+- Resource record.
+- Process Control.
+
+List cgroup
+
+```bash
+mount -t cgroup
+ls -l /sys/fs/cgroup/
+```
+
+Create cgroup
+
+```bash
+mkdir /sys/fs/cgroup/cpu/loop
+ls -l /sys/fs/cgroup/cpu/loop
+cat /sys/fs/cgroup/cpu/loop/cpu.cfs_period_us # 100000us
+cat /sys/fs/cgroup/cpu/loop/cpu.cfs_quota_us  # -1 (no limit)
+```
+
+Resource control via cgroup
+
+```bash
+# limit cpu usage to 50%
+echo 50000 >/sys/fs/cgroup/cpu/loop/cpu.cfs_quota_us
+
+# add pid to `loop` cgroup
+echo 21497 >/sys/fs/cgroup/cpu/loop/tasks
+```
