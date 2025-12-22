@@ -1452,10 +1452,11 @@ Distributed denial of service attack:
 
 ## Security Reference
 
+- List of useful [payloads and bypass](https://github.com/swisskyrepo/PayloadsAllTheThings)
+  for web application security and pentest.
 - Open web application security project [cheat sheet](https://github.com/OWASP/CheatSheetSeries).
-- Open source security state of [2022](https://snyk.io/reports/open-source-security).
-- Web security [checklist](https://eggjs.org/zh-cn/core/security.html).
-- Security search [engines](https://github.com/edoardottt/awesome-hacker-search-engines).
-- ESLint node security [plugin](https://github.com/nodesecurity/eslint-plugin-security).
-- MetaSploit: penetration testing [framework](https://github.com/rapid7/metasploit-framework).
+- Web security [checklist](https://eggjs.org/zh-CN/core/security).
 - Linux server security [guide](https://github.com/imthenachoman/How-To-Secure-A-Linux-Server).
+- Security search [engines](https://github.com/edoardottt/awesome-hacker-search-engines).
+- MetaSploit: penetration testing [framework](https://github.com/rapid7/metasploit-framework).
+- ESLint node security [plugin](https://github.com/nodesecurity/eslint-plugin-security).
