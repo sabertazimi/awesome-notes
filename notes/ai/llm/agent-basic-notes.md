@@ -551,6 +551,9 @@ export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 }
 ```
 
+Quick configuration with All-in-One assistant tool
+[Claude Code Switch](https://github.com/farion1231/cc-switch).
+
 ### Claude Code Tools
 
 Claude code has [built-in tools](https://code.claude.com/docs/en/settings#tools-available-to-claude),
