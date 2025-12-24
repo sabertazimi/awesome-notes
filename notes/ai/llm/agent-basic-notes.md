@@ -528,9 +528,11 @@ Prototype implementation [rule](./rules/prototype-implementation.mdc):
 ```bash
 export ANTHROPIC_AUTH_TOKEN="<YOUR_API_KEY>"
 export ANTHROPIC_BASE_URL="https://open.bigmodel.cn/api/anthropic"
+export ANTHROPIC_MODEL="glm-4.7"
+export ANTHROPIC_SMALL_FAST_MODEL="glm-4.7"
 export ANTHROPIC_DEFAULT_OPUS_MODEL="glm-4.7"
 export ANTHROPIC_DEFAULT_SONNET_MODEL="glm-4.7"
-export ANTHROPIC_DEFAULT_HAIKU_MODEL="glm-4.5-air"
+export ANTHROPIC_DEFAULT_HAIKU_MODEL="glm-4.7"
 export API_TIMEOUT_MS="3000000"
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 ```
@@ -540,11 +542,13 @@ export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 ```json
 {
   "env": {
-    "ANTHROPIC_AUTH_TOKEN": "<YOUR_API_KEY",
+    "ANTHROPIC_AUTH_TOKEN": "<YOUR_API_KEY>",
     "ANTHROPIC_BASE_URL": "https://open.bigmodel.cn/api/anthropic",
+    "ANTHROPIC_MODEL": "glm-4.7",
+    "ANTHROPIC_SMALL_FAST_MODEL": "glm-4.7",
     "ANTHROPIC_DEFAULT_OPUS_MODEL": "glm-4.7",
     "ANTHROPIC_DEFAULT_SONNET_MODEL": "glm-4.7",
-    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "glm-4.5-air",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "glm-4.7",
     "API_TIMEOUT_MS": "3000000",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": 1
   }
