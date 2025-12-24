@@ -581,6 +581,12 @@ contains production-ready slash commands for Claude Code.
 
 ### Claude Code Skills
 
+- [Anthropic](https://github.com/anthropics/skills):
+  Anthropic repository for agent skills.
+- [Awesome](https://github.com/travisvn/awesome-claude-skills):
+  Curated list of Claude Code skills.
+- [Marketplace](https://skillsmp.com):
+  Agent skills marketplace.
 - [Skill Seekers](https://github.com/yusufkaraaslan/Skill_Seekers):
   Convert documentation websites, GitHub repositories, and PDFs
   into Claude AI skills with automatic conflict detection.
