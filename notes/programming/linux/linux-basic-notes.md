@@ -1261,27 +1261,18 @@ for SSL certificates.
 
 ### GFW Commands
 
-- [Hosts](https://github.com/racaljk/hosts)
-- [RSS](https://github.com/breakwa11/shadowsocks-rss)
-- [ChinaDNS](https://github.com/shadowsocks/ChinaDNS-Python)
-- [ProxyChains](https://github.com/rofl0r/proxychains-ng)
-- [OpenVPN](https://github.com/OpenVPN/openvpn)
-- [VPNGate](https://github.com/waylau/vpngate-mirrors)
-- [DockerVPN](https://github.com/hwdsl2/docker-ipsec-vpn-server)
-
-```bash
-yum install python-setuptools && easy_install pip
-pip install shadowsocks
-echo "nohup sslocal -c /etc/shadowsocks.json /dev/null 2>&1 &" /etc/rc.local
-nohup ssserver -c /etc/shadowsocks.json -d start /dev/null 2>&1 &
-```
-
-```bash
-185.199.108.133 raw.githubusercontent.com
-185.199.109.133 raw.githubusercontent.com
-185.199.110.133 raw.githubusercontent.com
-185.199.111.133 raw.githubusercontent.com
-```
+- [GFWList](https://github.com/gfwlist/gfwlist):
+  GFW list.
+- [ClashVerge](https://github.com/clash-verge-rev/clash-verge-rev):
+  Clash Meta (Mihomo) GUI based on Tauri.
+- [SingBox](https://github.com/233boy/sing-box)
+  Sing-box server scripts.
+- [ProxyChains](https://github.com/rofl0r/proxychains-ng):
+  Proxy any TCP connection.
+- [OpenVPN](https://github.com/OpenVPN/openvpn):
+  Open source VPN daemon.
+- [DockerVPN](https://github.com/hwdsl2/docker-ipsec-vpn-server):
+  Docker image to run an IPsec VPN server.
 
 ### Network Management Commands
 
