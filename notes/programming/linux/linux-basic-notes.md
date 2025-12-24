@@ -1261,14 +1261,30 @@ for SSL certificates.
 
 ### GFW Commands
 
-- [GFWList](https://github.com/gfwlist/gfwlist):
-  GFW list.
+#### Client
+
 - [ClashVerge](https://github.com/clash-verge-rev/clash-verge-rev):
   Clash Meta (Mihomo) GUI based on Tauri.
 - [SingBox](https://github.com/233boy/sing-box)
   Sing-box server scripts.
 - [ProxyChains](https://github.com/rofl0r/proxychains-ng):
   Proxy any TCP connection.
+
+#### Server
+
+- [DuYao](https://duyaoss.com):
+  机场测速.
+- [Nexitally](https://github.com/winston779/nexitally):
+  奶昔机场.
+- [Tag](https://github.com/winston779/tagInternet):
+  Tag 机场.
+- [Flower](https://github.com/winston779/flowercloud):
+  花云机场.
+
+#### VPN
+
+- [GFWList](https://github.com/gfwlist/gfwlist):
+  GFW list.
 - [OpenVPN](https://github.com/OpenVPN/openvpn):
   Open source VPN daemon.
 - [DockerVPN](https://github.com/hwdsl2/docker-ipsec-vpn-server):
