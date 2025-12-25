@@ -498,7 +498,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 }
 ```
 
-:::caution SSR Hydration Warning
+:::caution[SSR Hydration Warning]
 
 服务端返回的 HTML 与客户端渲染结果不一致时会产生
 `SSR Hydration Warning`,
@@ -515,7 +515,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 :::
 
-:::caution SSR Components
+:::caution[SSR Components]
 
 编写 SSR 组件时:
 
@@ -693,7 +693,7 @@ export default function App() {
   (extract identification number for specific site from cookies files).
 - Function: create **User Session Layer** on top of stateless HTTP.
 
-:::caution Cookie Security
+:::caution[Cookie Security]
 
 用户能够更改自己的 Cookie 值 (client side),
 因此不可将超过权限的数据保存在 Cookie 中 (如权限信息),

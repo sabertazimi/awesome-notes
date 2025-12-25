@@ -2397,7 +2397,7 @@ function commitBeforeMutationEffectsDeletion(deletion: Fiber) {
   `commitWork` -> `HostConfig.commitUpdate/commitTextUpdate/commitHydratedContainer/replaceContainerChildren`.
 - `Hydrating` effects.
 
-:::tip Effect Order
+:::tip[Effect Order]
 
 Deletion -> Insertion -> Update.
 

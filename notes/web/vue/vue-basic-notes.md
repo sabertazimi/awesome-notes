@@ -41,14 +41,14 @@ tags: [Web, Vue]
 </template>
 ```
 
-:::tip Show and If Directive
+:::tip[Show and If Directive]
 
 Prefer `v-show` if you need to toggle something very often (`display: none`),
 and prefer `v-if` if the condition is unlikely to change at runtime (lifecycle called).
 
 :::
 
-:::tip For and If Directive
+:::tip[For and If Directive]
 
 - 不要把 `v-if` 和 `v-for` 同时用在同一个元素上,
   会带来性能方面的浪费,
@@ -2600,7 +2600,7 @@ Evan You [recommended](https://github.com/vuejs/rfcs/discussions/378):
 - Use VSCode + [Volar](https://github.com/johnsoncodehk/volar).
 - Not strictly required for TS, but if applicable, use Vite for build tooling.
 
-:::tip Composition API vs Options API
+:::tip[Composition API vs Options API]
 
 Original intention for supporting both APIs:
 existing Options-API-based codebases can benefit from Composition API-based libraries,

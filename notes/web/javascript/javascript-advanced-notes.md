@@ -2899,7 +2899,7 @@ Import map `importmap`:
 </script>
 ```
 
-:::tip Imports Order
+:::tip[Imports Order]
 
 - Polyfills: `import 'reflect-metadata';`.
 - Node builtin modules: `import fs from 'node:fs';`.
@@ -3870,7 +3870,7 @@ const result = text.match(regExp)
 console.log(result) // [111, 222, 333]
 ```
 
-:::danger RegExp Static Property
+:::danger[RegExp Static Property]
 
 Most `RegExp.XXX`/`RegExp.$X` static property aren't standard.
 Avoid use them in production:
@@ -4127,7 +4127,7 @@ function processArray(items, process, done) {
 }
 ```
 
-:::tips `this` Binding in Timer Function
+:::tips[`this` Binding in Timer Function]
 
 所有超时执行的代码 (函数) 都会在全局作用域中的一个匿名函数中运行,
 因此函数中的 `this` 值在非严格模式下始终指向 `window`, 在严格模式下是 `undefined`.
@@ -4598,7 +4598,7 @@ dtfEnglish.formatRange(start, end) // => 'May 7 - 9, 2019'
 - Transparent: pure and immutable.
 - Modular: composite with currying and monads.
 
-:::tip Functional JavaScript
+:::tip[Functional JavaScript]
 
 Functional programming is the art of composing higher-order functions
 to advance the state of a program in a pure manner:
@@ -5544,7 +5544,7 @@ if there’s any pending call back waiting to be executed:
   后面就是再从任务队列中取出下一个宏任务来继续执行, 以此类推.
 - `Event Loop` 与 `Call Stack` 有且仅有一个, `Task/Job/Message Queue` 可以有多个.
 
-:::tip Event Loop
+:::tip[Event Loop]
 
 宏任务队列取宏任务 -> 执行 1 个宏任务 -> 检查微任务队列并执行所有微任务
 -> requestAnimationFrame -> 浏览器重排/重绘 -> requestIdleCallback
@@ -6184,13 +6184,13 @@ Render process:
   - 当检测到 HTTP 请求状态变更时, 此线程产生状态变更事件,
     并将 HTTP 响应处理函数 (用户回调函数) 添加到任务队列, 等待 JS 引擎线程执行.
 
-:::danger GUI and JS Thread
+:::danger[GUI and JS Thread]
 
 GUI 渲染线程与 JS 引擎线程互斥.
 
 :::
 
-:::tip Multi-threads Architecture
+:::tip[Multi-threads Architecture]
 
 Threads help achieve:
 
@@ -6212,7 +6212,7 @@ Threads help achieve:
 DTD is context-sensitive grammar.
 Use State Machine pattern to implement a tokenizer:
 
-:::tip Tokenizer
+:::tip[Tokenizer]
 
 Data -> Tag Open -> Tag Name -> Tag Close -> Data.
 
@@ -6220,7 +6220,7 @@ Data -> Tag Open -> Tag Name -> Tag Close -> Data.
 
 tokenizer send tokens to constructor, constructing DOM tree:
 
-:::tip DOM Tree Constructor
+:::tip[DOM Tree Constructor]
 
 initial -> before HTML -> before head -> in head -> after head
 -> in body -> after body -> after after body -> EOF token.

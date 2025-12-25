@@ -68,7 +68,7 @@ class Example extends React.Component {
 // => 0 0 2 3
 ```
 
-:::tip State Structure Principles
+:::tip[State Structure Principles]
 
 [Principles for structuring state](https://react.dev/learn/choosing-the-state-structure):
 
@@ -2809,7 +2809,7 @@ export default function App() {
 
 [![Suspense Fiber Structure](https://jser.dev/static/suspense-fiber-structure-hidden.png)](https://jser.dev/react/2022/04/02/suspense-in-concurrent-mode-1-reconciling)
 
-:::tip React Bottlenecks
+:::tip[React Bottlenecks]
 
 1. CPU bottleneck: Concurrency Feature (Priority Interrupt Mechanism).
 2. I/O bottleneck: Suspense.
@@ -5213,7 +5213,7 @@ if (!fs.existsSync(paths.appTypeDeclarations)) {
 子应用就像不同的电器,
 只要遵循某种协议就可以轻松实现可插拔操作.
 
-:::tip Single SPA Lifecycle
+:::tip[Single SPA Lifecycle]
 
 - Register.
 - Load.

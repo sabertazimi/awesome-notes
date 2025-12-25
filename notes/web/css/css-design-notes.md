@@ -189,7 +189,7 @@ img {
 }
 ```
 
-:::caution Image Display
+:::caution[Image Display]
 
 Image `display` set to `inline` default.
 

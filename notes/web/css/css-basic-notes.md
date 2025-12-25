@@ -39,7 +39,7 @@ tags: [Web, CSS]
 
 > Transition > Animation > Normal > `@layer` > User > User Agent > Inherit
 
-:::tip Important Styles Reversion
+:::tip[Important Styles Reversion]
 
 - 级联水平高的 styles 应用 !important 后, 其优先级变低.
 - 级联水平低的 styles 应用 !important 后, 其优先级变高.
@@ -179,7 +179,7 @@ thousands, hundreds, tens, ones `0000`:
 - Tens: class selector, attribute selector, pseudo class(`:`).
 - Ones: type selector, pseudo element(`::`).
 
-:::tip Zero Specificity
+:::tip[Zero Specificity]
 
 - Universal selector (`*`),
   combinators (`+`, `>`, `~`, `a b`)
@@ -751,7 +751,7 @@ Separate focus styles:
 - `E F:last-of-type`: **相同类型** 的最后一个元素.
 - `E F:only-of-type`: 孩子中只有一种该元素.
 
-:::tip N Calculation
+:::tip[N Calculation]
 
 `n` start from `0`,
 calculation result limit to `> 0`:
@@ -1242,7 +1242,7 @@ The user agent performs four steps to calculate a property's actual (final) valu
    the limitations of the local environment,
    resulting in the actual value
 
-:::tip CSS Value Transform
+:::tip[CSS Value Transform]
 
 1. initial.
 2. specified.
@@ -2029,7 +2029,7 @@ html {
 }
 ```
 
-:::caution Broken Calculation
+:::caution[Broken Calculation]
 
 If `calc()` result breaks,
 check cache plugin or build tool.
@@ -2549,7 +2549,7 @@ wbr::after {
 }
 ```
 
-:::tip Punctuation Types
+:::tip[Punctuation Types]
 
 - 避头标点: 不在行首显示的标点, e.g. 逗号, 顿号, 句号, 问号, 叹号.
 - 避尾标点: 不在行尾显示的标点, e.g. 前引号, 前括号.

@@ -207,7 +207,7 @@ Scope:
 </project>
 ```
 
-:::tip Dependency Management
+:::tip[Dependency Management]
 
 聚合项目用 `dependencyManagement` 来管理依赖, 依赖不会传递给子项目, 子项目需要显式声明依赖 (此时不用指定版本号).
 
@@ -387,7 +387,7 @@ a (包括)、b (不包括) 为起止位置.
 - `s.formatted()`/`String.format()`.
 - `String.valueOf()`/`Integer.parseInt()`/`Boolean.parseBoolean()`.
 
-:::tip Unicode
+:::tip[Unicode]
 
 Java 的 `String` 和 `char` 在内存中总是以 Unicode 编码表示.
 
@@ -1064,7 +1064,7 @@ public>protected(包作用域+)>默认(包作用域)>private(类作用域)
 - 只能处理该类中的 static 实例域/调用该类中的 static 方法.
 - 既可通过类名调用该方法(推荐), 又可通过对象实例名调用 static 方法.
 
-:::tip 工厂模式
+:::tip[工厂模式]
 
 利用 static 方法可模拟构造器方法, 可自定义构造器名和返回对象类型.
 

@@ -689,7 +689,7 @@ body {
 - `<angular-color-hint>`: `<angle-percentage>`, 改变颜色的转换点位置.
 - `<angle-percentage>`: `<angle> | <percentage>`.
 
-:::tip Color Stop Position
+:::tip[Color Stop Position]
 
 若后一个色标的位置值为 `0`,
 则它的位置总是会被浏览器调整为前一个色标的位置值:
@@ -1207,7 +1207,7 @@ img.alpha-mask {
 }
 ```
 
-:::tip Drop Shadow
+:::tip[Drop Shadow]
 
 `filter: drop-shadow()`:
 
@@ -2959,7 +2959,7 @@ Focusable areas:
 - `:focus-visible`.
 - `:focus`.
 
-:::tip HTML Order vs CSS Order
+:::tip[HTML Order vs CSS Order]
 
 [HTML source order vs CSS display order](https://adrianroselli.com/2015/10/html-source-order-vs-css-display-order):
 
@@ -3734,7 +3734,7 @@ module.exports = {
 
 #### Tailwind Configuration
 
-:::danger JIT Mode
+:::danger[JIT Mode]
 
 Missing `.html`/`.tsx`/`.vue` directory
 will lead to class purged.

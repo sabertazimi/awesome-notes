@@ -400,7 +400,7 @@ I will do so by putting text inside curly brackets {like this}.
 My first command is console.log("Hello World").
 ```
 
-:::tip Prompt Engineering Frameworks
+:::tip[Prompt Engineering Frameworks]
 
 上述两个框架的共性在于:
 

@@ -457,7 +457,7 @@ TCP 连接的每一方都要通告自己的接收窗口 (`rwnd` 字段),
 客户端与服务器最大可传输数据量为 min(`rwnd`, `cwnd`),
 即接口窗口与拥塞窗口的最小值.
 
-:::tip 理想窗口大小
+:::tip[理想窗口大小]
 
 WindowSize = BandWidth `*` RTT (带宽延迟积)
 
@@ -500,14 +500,14 @@ WindowSize = BandWidth `*` RTT (带宽延迟积)
 
 ![TCP Fast Retransmission](./figures/tcp-fast-retransmission.png 'TCP Fast Retransmission')
 
-:::tip Flow Control vs Congestion Control
+:::tip[Flow Control vs Congestion Control]
 
 - 流量控制是为了让双方适应容量与处理能力.
 - 拥塞控制是为了降低整个网络的拥塞程度.
 
 :::
 
-:::tip 14kB Rule
+:::tip[14kB Rule]
 
 [14kB rule](https://endtimes.dev/why-your-website-should-be-under-14kb-in-size),
 most web servers TCP slow start algorithm starts by sending 10 TCP packets:
@@ -584,7 +584,7 @@ User Datagram Protocol (RFC 768):
   - STUN: Session Traversal Utilities for NAT.
   - TURN: Traversal Using Relays around NAT.
 
-:::tip WebRTC
+:::tip[WebRTC]
 
 WebRTC 是符合上述要求的框架.
 
@@ -659,7 +659,7 @@ openssl s_client -state -CAfile start-ssl.ca.crt -connect server.com:443
   - 判断网络包是否经过分片.
   - 将包转交给 TCP 模块或 UDP 模块.
 
-:::tip IP Layer
+:::tip[IP Layer]
 
 IP 本身不负责包的传输,
 而是委托各种通信技术将包传输到下一个路由器 (纯粹路由器).

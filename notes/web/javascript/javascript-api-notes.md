@@ -750,7 +750,7 @@ alert(newNode.nodeValue) // " world!"
 alert(element.childNodes.length) // 2
 ```
 
-:::tip TextContent vs InnerText vs InnerHTML
+:::tip[TextContent vs InnerText vs InnerHTML]
 
 - `textContent`:
   - **Security**: Doesn’t parse HTML.
@@ -1114,7 +1114,7 @@ for (
   console.log(node.tagName) // 遍历 <li>
 ```
 
-:::tip NodeIterator vs TreeWalker
+:::tip[NodeIterator vs TreeWalker]
 
 - `NodeFilter.acceptNode()` `FILTER_REJECT`:
   - For `NodeIterator`, this flag is synonymous with `FILTER_SKIP`.
@@ -1258,7 +1258,7 @@ function loadScriptString(code) {
 }
 ```
 
-:::caution InnerHTML Script
+:::caution[InnerHTML Script]
 
 所有现代浏览器中, 通过 `innerHTML` 属性创建的 `<script>` 元素永远不会执行.
 
@@ -1297,7 +1297,7 @@ function loadStyleString(css) {
 }
 ```
 
-:::danger StyleSheet CSSText
+:::danger[StyleSheet CSSText]
 
 - 若重用同一个 `<style>` 元素并设置该属性超过一次, 则可能导致浏览器崩溃.
 - 将 `cssText` 设置为空字符串也可能导致浏览器崩溃.
@@ -1917,7 +1917,7 @@ console.log(document.activeElement === button) // true
 console.log(document.hasFocus()) // true
 ```
 
-:::tip Focus Events
+:::tip[Focus Events]
 
 当焦点从页面中的一个元素移到另一个元素上时, 会依次发生如下事件:
 
@@ -2413,7 +2413,7 @@ window.resizeBy(100, 50)
 window.resizeTo(300, 300)
 ```
 
-:::tip DOM Rect API
+:::tip[DOM Rect API]
 
 In case of transforms,
 the offsetWidth and offsetHeight returns the layout width and height (all the same),

@@ -409,7 +409,7 @@ console.log(addTodo('Write more docs'))
  */
 ```
 
-:::tip RTK Pitfall
+:::tip[RTK Pitfall]
 
 Strongly recommend to only use string action types.
 
@@ -605,7 +605,7 @@ to let you write reducers as if they were mutating the state directly.
 In reality, the reducer receives a proxy state
 that translates all mutations into equivalent copy operations.
 
-:::danger Mutating State Case
+:::danger[Mutating State Case]
 
 Only write **mutating** logic in RTK `createSlice` and `createReducer` API.
 
@@ -640,7 +640,7 @@ const todosReducer = createReducer([] as Todo[], (builder) => {
 })
 ```
 
-:::tip Reducer Pitfall
+:::tip[Reducer Pitfall]
 
 Ensure that either mutate state argument or return a new state, but **not both**.
 

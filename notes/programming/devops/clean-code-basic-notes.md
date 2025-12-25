@@ -10,7 +10,7 @@ tags: [Programming, DevOps, Design Pattern, Clean Code]
 
 ## Basic Code Patterns
 
-:::tip Design Patterns
+:::tip[Design Patterns]
 
 Software design is the art of managing dependencies and abstractions.
 
@@ -27,7 +27,7 @@ Software design is the art of managing dependencies and abstractions.
 - Interface Segregation Principle: 接口隔离原则.
 - Dependency Inversion Principle: 依赖反转原则.
 
-:::tip SOLID Principles
+:::tip[SOLID Principles]
 
 - 单一职责是所有设计原则的基础.
 - 开闭原则是设计的终极目标.
@@ -79,7 +79,7 @@ class AnimalDB {
 }
 ```
 
-:::tip Exception Handle
+:::tip[Exception Handle]
 
 异常处理视作单独职责,
 抽离 `try catch` 代码块,
@@ -930,7 +930,7 @@ car2.SetName('BMW')
 
 ### Singleton Pattern
 
-:::tip Singleton Use Case
+:::tip[Singleton Use Case]
 
 - Redux/VueX global store.
 - Window 对象.
@@ -998,7 +998,7 @@ const createLoginLayer = (function (creator) {
   实现此 method 时, 使用了新接口规定的属性/方法.
 - 符合开放封闭原则.
 
-:::tip Adapter Use Case
+:::tip[Adapter Use Case]
 
 - API adapter.
 - 3rd-party code adapter.
@@ -1112,7 +1112,7 @@ Split large class or set of closely related classes into two separate hierarchie
 - 分离抽象和实现 (Separate abstracts and implements).
 - 分离对象的两种不同属性. `e.g` 从 2 个不同维度上扩展对象.
 
-:::tip Bridge Use Case
+:::tip[Bridge Use Case]
 
 - Platform independence: e.g. separate GUI frameworks from operating systems.
 - Database drivers.
@@ -1173,7 +1173,7 @@ circle.draw()
   组合对象把请求委托给它所包含的所有叶对象,
   它们能够合作的关键是拥有**相同的接口**.
 
-:::tip Composite Use Case
+:::tip[Composite Use Case]
 
 - Graphics and UI Frameworks: e.g. DOM.
 - File Systems: e.g. directory tree.
@@ -1257,7 +1257,7 @@ root.do()
 - 在 JS 中, 可以利用 `Closure` (闭包) + `Higher Order Function` (高阶函数) 快速实现装饰器模式.
 - 符合开放封闭原则和单一职责模式.
 
-:::tip Decorator Use Case
+:::tip[Decorator Use Case]
 
 - Graphics and UI Frameworks: e.g. extended React HOC components.
 - ES2016 and TypeScript `@decorator`.
@@ -1422,7 +1422,7 @@ sabertazimi.addMyEvent = function (el, ev, fn) {
   - 当所需享元已存在时, 返回已存在享元.
   - 当所需享元不存在时, 创建新享元.
 
-:::tip Flyweight Use Case
+:::tip[Flyweight Use Case]
 
 - Objects pool: e.g. text processing.
 - DOM nodes pool: e.g. user interface.
@@ -1556,7 +1556,7 @@ setTimeout(() => {
 - 代理类型: 远程/保护/虚拟/缓存代理.
 - 符合开放封闭原则.
 
-:::tip Proxy Use Case
+:::tip[Proxy Use Case]
 
 - 远程代理:
   - 代理软件.
@@ -1666,7 +1666,7 @@ reactive.name = 'bob' // 'updating UI...'
 - 职责链中的节点数量和顺序可以自由变化.
 - 符合开放封闭原则.
 
-:::tip CoR Use Case
+:::tip[CoR Use Case]
 
 - AOP: Aspect Oriented Programming.
 - Middlewares:
@@ -1876,7 +1876,7 @@ app.listen(2323, () => {
   - 调用者接过命令并将其保存下来, 它会在某个时候调用该命令对象的 `Command.execute()` 方法.
   - 调用者调用 `Command.execute()` 后, 最终将调用接收者方法 `Receiver.action()`.
 
-:::tip Command Use Case
+:::tip[Command Use Case]
 
 - Decouple `Executor` and `Receiver`.
 - GUI applications: bind `Command` to UI components.
@@ -2070,7 +2070,7 @@ class Cursor {
 - 无需暴露聚集对象的内部表示, 符合开放封闭原则.
 - 实现统一遍历接口, 抽离遍历逻辑与业务逻辑, 符合单一职责原则.
 
-:::tip Iterator Use Case
+:::tip[Iterator Use Case]
 
 - Collection data structure.
 - 遍历对象:
@@ -2175,7 +2175,7 @@ const result = upload([flashUploader, formUploader])
 - 网状的多对多关系 => 相对简单的一对多关系.
 - 存在单点故障 (`Single Point of Failure`) 可能, 需要容灾备份.
 
-:::tip Mediator Use Case
+:::tip[Mediator Use Case]
 
 - 聊天室.
 - 交通系统.
@@ -2258,7 +2258,7 @@ doe.say('Hello everyone!')
   each depends on `Abstraction` not `Implementation`.
 - 摆脱持续轮询模式, 在合适时机发布消息.
 
-:::tip Observer Use Case
+:::tip[Observer Use Case]
 
 - Decouple.
 - 跨层级通信.
@@ -2338,7 +2338,7 @@ class Observer {
 - 符合开放封闭原则.
 - 存在依赖追踪困难可能, 导致调试困难.
 
-:::tip Pub-Sub Use Case
+:::tip[Pub-Sub Use Case]
 
 - Event listener and handler.
 - Event Bus in Vue.
@@ -2526,7 +2526,7 @@ class MicroEvent {
   - 状态切换规则分布在状态类中, 有效地消除了大量条件分支语句.
 - 符合开放封闭原则.
 
-:::tip State Use Case
+:::tip[State Use Case]
 
 - Networking protocol stack.
 - Game player logic.
@@ -2604,7 +2604,7 @@ button.off()
 - JS 中, 函数作为参数与返回值时, 可以实现隐式的策略模式:
   函数作为第一公民, 无需将 Strategy 封装成策略对象, 可以直接传递或返回策略函数.
 
-:::tip Strategy Use Case
+:::tip[Strategy Use Case]
 
 - 布局管理器:
   - 环境对象：面板.
@@ -2772,7 +2772,7 @@ const errorMsg = rules[rule](element, limits)
 - 符合开放封闭原则.
 - 在 JS 中, 高阶函数可以隐式地实现模板方法模式.
 
-:::tip Template Method Use Case
+:::tip[Template Method Use Case]
 
 - APIs and SDKs.
 - Plugins and Extensions: VSCode extension, Vue plugin.
@@ -2847,7 +2847,7 @@ chess.run()
 
 Separating an algorithm from an object structure on which it operates.
 
-:::tip Visitor Use Case
+:::tip[Visitor Use Case]
 
 - Data structures: e.g. Tree, Graph.
 - Document processing: e.g. DOM tree, reporting and analysis.

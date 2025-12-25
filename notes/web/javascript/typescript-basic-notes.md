@@ -327,7 +327,7 @@ namespace Utility {
 })(Utility || (Utility = {}))
 ```
 
-:::caution No Namespace
+:::caution[No Namespace]
 
 Unless authoring DefinitelyTyped type definitions for existing package,
 **do not use namespaces**.
@@ -754,7 +754,7 @@ padding(1, 1, 1, 1) // Okay: top, right, bottom, left
 padding(1, 1, 1) // Error: Not a part of the available overloads
 ```
 
-:::tip Function Overload
+:::tip[Function Overload]
 
 `TypeScript` 中的函数重载没有任何运行时开销.
 它只允许你记录希望调用函数的方式,
@@ -1979,7 +1979,7 @@ function pick<T extends object, U extends keyof T>(obj: T, keys: U[]): T[U][] {
 }
 ```
 
-:::tip Generic Golden Rule
+:::tip[Generic Golden Rule]
 
 [Type `T` parameters should appear twice](https://effectivetypescript.com/2020/08/12/generics-golden-rule):
 
@@ -2693,7 +2693,7 @@ function getArea(shape: Shape) {
 }
 ```
 
-:::tip Never and Void
+:::tip[Never and Void]
 
 - 当一个函数返回空值时, 它的返回值为 `void` 类型.
 - 当一个函数**永不返回**时 (或者总是抛出错误), 它的返回值为 `never` 类型.
@@ -3461,7 +3461,7 @@ logger = logAdmin
 logger(user) // Oops! `user.isSuperAdmin` is undefined.
 ```
 
-:::tip Function Types
+:::tip[Function Types]
 
 函数类型中:
 
@@ -3470,7 +3470,7 @@ logger(user) // Oops! `user.isSuperAdmin` is undefined.
 
 :::
 
-:::tip Array Types
+:::tip[Array Types]
 
 - 允许不变的列表 (`Immutable`) 在它的参数类型上是协变的:
   `ConstList<Dog>` 为 `ConstList<Animal>` 的子类型.

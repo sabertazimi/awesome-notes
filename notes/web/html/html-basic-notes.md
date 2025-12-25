@@ -1417,7 +1417,7 @@ console.log(div.getAttribute('foo')) // 'bar'
 console.log(div.foo) // 'hello world'
 ```
 
-:::caution `input.defaultValue` and `input.value` property
+:::caution[`input.defaultValue` and `input.value` property]
 
 [`input.defaultValue` property](https://html.spec.whatwg.org/multipage/input.html#dom-input-defaultvalue)
 reflects HTML `value` attribute,

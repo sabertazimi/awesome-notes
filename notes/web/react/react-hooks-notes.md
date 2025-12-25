@@ -2117,7 +2117,7 @@ function App() {
 }
 ```
 
-:::caution React 18 Development Strict Mode
+:::caution[React 18 Development Strict Mode]
 
 With `Strict Mode` in React 18,
 React will simulate unmounting and remounting component in development mode:

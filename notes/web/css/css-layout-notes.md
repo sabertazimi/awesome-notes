@@ -248,7 +248,7 @@ include `margin-top` and `margin-bottom`.
 - Add `padding`.
 - Add `border`.
 
-:::tip Never Collapse
+:::tip[Never Collapse]
 
 Margin collapsing only happen to **normal** block box **vertical** direction:
 
@@ -378,7 +378,7 @@ include `padding-top` and `padding-bottom`:
 
 [![Inline Box Model](./figures/inline-box-model.png)](https://developer.mozilla.org/docs/Web/CSS/CSS_Flow_Layout/Intro_to_formatting_contexts#inline_formatting_contexts)
 
-:::caution Inline Block Element
+:::caution[Inline Block Element]
 
 [`display: inline-block`](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/The_box_model#using_display_inline-block):
 
@@ -424,7 +424,7 @@ Character box/em-box/selection box:
 
 `<p>` tag 会形成一个包含盒子, 此盒子由一行一行的行框盒子组成.
 
-:::tip Box Height
+:::tip[Box Height]
 
 在很多情况下, 容器高度**莫名奇妙**变大,
 都是行框盒子幽灵空白节点 (`Strut`), `line-height`, `vertical-align` 共同作用的结果:
@@ -1111,7 +1111,7 @@ add `margin-left` and `margin-right` to `.middle`:
 }
 ```
 
-:::tip Negative Margin
+:::tip[Negative Margin]
 
 For `float` element:
 
@@ -1292,7 +1292,7 @@ Multiple `column` layout:
 }
 ```
 
-:::tip `min-w-0` 与 `min-h-0`
+:::tip[`min-w-0` 与 `min-h-0`]
 
 根据 Flexbox 的规范,
 flex item 的 `min-width` 和 `min-height` 的默认值是 `auto`,
@@ -1340,7 +1340,7 @@ flex item 的 `min-width` 和 `min-height` 的默认值是 `auto`,
   元素会被赋予一个容器中自由空间的指定占比,
   equal to `flex: <number> 1 0%`.
 
-:::tip Flex Shorthand Property Usage
+:::tip[Flex Shorthand Property Usage]
 
 - `flex: none`: 适合设置在内容不能换行显示的小控件元素上, e.g. `<button>`.
 - `flex: auto`: 适合基于内容动态适配的布局.
@@ -1735,7 +1735,7 @@ Children property:
 
 [![Grid Auto Repeat Size](./figures/grid-auto-repeat-size.png)](https://css-tricks.com/auto-sizing-columns-css-grid-auto-fill-vs-auto-fit)
 
-:::tip Flexible Grids
+:::tip[Flexible Grids]
 
 One of the [all-time great CSS tricks](https://css-tricks.com/books/greatest-css-tricks/flexible-grids):
 
@@ -2056,7 +2056,7 @@ will refactor grid item's size and location:
 - `place-items`: `<'align-items'> <'justify-items'>?`.
 - `place-self`: `<'align-self'> <'justify-self'>?`.
 
-:::tip Grid-Only Alignment Properties
+:::tip[Grid-Only Alignment Properties]
 
 - [`justify-items`](https://developer.mozilla.org/docs/Web/CSS/justify-items),
   defines the default `justify-self` for all items:

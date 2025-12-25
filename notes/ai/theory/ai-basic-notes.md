@@ -55,7 +55,7 @@ $$
 \end{split}
 $$
 
-:::tip Matrix Multiplication
+:::tip[Matrix Multiplication]
 
 左乘矩阵相当于对列向量进行线性变换,
 右乘矩阵相当于对行向量进行线性变换.
@@ -70,7 +70,7 @@ $A_{m\times n}$ 表示 n 维空间到 m 维空间的线性变换:
   向量点乘 (Dot Product) $\vec{v} \cdot \vec{w}$ 可以理解为
   $\vec{w}$ 通过 $V_{1\times n}$ 变换到一维空间后的投影.
 
-:::tip Dot Product and Cross Product
+:::tip[Dot Product and Cross Product]
 
 - Dot Product: $\vec{v} \cdot \vec{w}=\|\vec{v}\|\|\vec{w}\|\cos{\theta}$.
 - Cross Product: $\|\vec{v} \times \vec{w}\|=\|\vec{v}\|\|\vec{w}\|\sin{\theta}$.
@@ -608,7 +608,7 @@ $$
 
 ![Structured Learning](./figures/structured-learning.png 'Structured Learning')
 
-:::tip Three Problems
+:::tip[Three Problems]
 
 - Evaluation: what does $F(X, y)$ look like.
 - Inference: how to solve $\arg\max$ problem.
@@ -658,7 +658,7 @@ $$
 - 将特征向量按对应特征值大小从上到下按行排列成矩阵, 取前 $k$ 行组成矩阵 $P$.
 - $Y=PX$ 即为降维到 $k$ 维后的数据.
 
-:::tip Normalization
+:::tip[Normalization]
 
 $$
 x'_i=\frac{x_i-\mu}{\sigma}
@@ -868,7 +868,7 @@ $$
   - Selective synaptic plasticity:
     $L'(\theta)=L(\theta)+\lambda\sum\limits_ib_i(\theta_i'-\theta_i)^2$.
 
-:::tip Deep
+:::tip[Deep]
 
 $|\mathcal{H}|$ is the size of hypothesis space,
 larger $|\mathcal{H}|$ means deeper model:
@@ -881,7 +881,7 @@ flat/shallow model has larger $|\mathcal{H}|$.
 
 :::
 
-:::tip Learning
+:::tip[Learning]
 
 Learning is the process of minimizing loss function,
 finally find out the right weights and biases:
@@ -1017,7 +1017,7 @@ $$
 - 当 $\nabla^2{L(\theta_0)}$ 为负定矩阵时, $\theta_0$ 为局部最大值.
 - 当 $\nabla^2{L(\theta_0)}$ 为不定矩阵时, $\theta_0$ 为鞍点.
 
-:::tip Saddle Point
+:::tip[Saddle Point]
 
 在高维空间中, 鞍点的数量远远多于局部最小值.
 深度神经网络拥有大量的参数, 使得其损失函数的鞍点数量远远多于局部最小值.
@@ -1078,7 +1078,7 @@ $$
 \end{equation}
 $$
 
-:::tip Mini-Batch
+:::tip[Mini-Batch]
 
 Utilize parallel computing (GPU) to speed up training process:
 
@@ -1512,7 +1512,7 @@ QK^T
 =\begin{bmatrix}2&4&4\\4&16&12\\4&12&10\end{bmatrix}
 $$
 
-:::tip $XX^T$
+:::tip[$XX^T$]
 
 $XX^T$ 为行向量分别与自己和其他两个行向量做内积 (点乘),
 向量的内积表征两个向量的夹角 ($\cos\theta=\frac{a\cdot{b}}{|a||b|}$),
@@ -1540,7 +1540,7 @@ $$
 =\begin{bmatrix}0.0&0.5&0.5\\0.0&1.0&0.0\\0.0&0.9&0.1\end{bmatrix}
 $$
 
-:::tip Softmax
+:::tip[Softmax]
 
 [`softmax`](https://en.wikipedia.org/wiki/Softmax_function) function:
 
@@ -1561,7 +1561,7 @@ $$
 
 :::
 
-:::tip $\sqrt{d_k}$
+:::tip[$\sqrt{d_k}$]
 
 矩阵 $A$ 中每一个元素除以 $\sqrt{d_k}$ 后, 方差变为 1.
 这使得 $\text{softmax}(A)$ 的分布"陡峭"程度与 $d_k$ 解耦,
@@ -1598,7 +1598,7 @@ $$
 =\begin{bmatrix}2.0&7.0&1.5\\2.0&8.0&0.0\\2.0&7.8&0.3\end{bmatrix}
 $$
 
-:::tip $QK^TV$
+:::tip[$QK^TV$]
 
 Self-attention 中的 $QKV$ 思想,
 另一个层面是想要构建一个具有全局语义 (Context) 整合功能的数据库,

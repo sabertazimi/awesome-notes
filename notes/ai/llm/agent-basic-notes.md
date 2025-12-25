@@ -367,7 +367,7 @@ async def main():
 - Project requirements.
 - Tech stack.
 
-:::tip Cursor Link
+:::tip[Cursor Link]
 
 Use `[file_name.file_extension](mdc:file_path/file_name.file_extension)`
 to link to a file.

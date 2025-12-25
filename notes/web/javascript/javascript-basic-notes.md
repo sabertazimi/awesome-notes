@@ -46,7 +46,7 @@ Primitive data types:
 当引用为空或引用对象不存在时, 值为 `null`.
 `null` 值表示一个空对象指针.
 
-:::danger Null
+:::danger[Null]
 
 `typeof null` -> `object`.
 
@@ -202,7 +202,7 @@ function isNumber(value) {
 }
 ```
 
-:::danger NaN
+:::danger[NaN]
 
 `NaN === NaN` -> `false`.
 
@@ -2924,7 +2924,7 @@ const truthy = Object instanceof Function
 const truthy = Function instanceof Object
 ```
 
-:::tip Prototype Chain
+:::tip[Prototype Chain]
 
 - `Object.__proto__` -> `Function.prototype`.
 - `Function.prototype.__proto__` -> `Object.prototype`.
@@ -4117,7 +4117,7 @@ Person.locate() // class, class Person {}
 | `C extends Object` | `Object`             | `Object.prototype`          |
 | `C extends B`      | `B`                  | `B.prototype`               |
 
-:::tip ES5 vs ES6 Inheritance
+:::tip[ES5 vs ES6 Inheritance]
 
 - ES5 继承先创造子类实例对象 `this`,
   然后再将父类的属性与方法添加到 `this` 上 (`Parent.apply(this)`),
@@ -4706,7 +4706,7 @@ function newConstructor(Func, ...args) {
 }
 ```
 
-:::tip Function Invocation Priority
+:::tip[Function Invocation Priority]
 
 `new` constructor invocation >
 explicit invocation >
@@ -5368,7 +5368,7 @@ function greet(options, ...rest) {
 }
 ```
 
-:::tip 多态与面向对象
+:::tip[多态与面向对象]
 
 多态最根本的作用:
 通过把过程化的条件分支语句转化为对象的多态性,

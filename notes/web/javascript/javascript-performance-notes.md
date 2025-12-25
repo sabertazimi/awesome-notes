@@ -677,7 +677,7 @@ element.classList.add('className')
 element.className += ' className'
 ```
 
-:::tip Pipeline
+:::tip[Pipeline]
 
 Script -> Style -> Layout -> Paint -> Composite.
 
@@ -687,7 +687,7 @@ Make `script` stage become: read then write.
 Interleaved read and write will trigger multiple times
 of re-layout/repaint/re-composite.
 
-:::danger Forced Synchronous Layout
+:::danger[Forced Synchronous Layout]
 
 read css -> write css (re-layout/paint/composite)
 -> read css -> write css (re-layout/paint/composite)
@@ -695,7 +695,7 @@ read css -> write css (re-layout/paint/composite)
 
 :::
 
-:::tip High Performance
+:::tip[High Performance]
 
 read css -> write css (only re-layout/paint/composite once).
 
@@ -1057,7 +1057,7 @@ provide 3 ~ 5 different sizes reduce image transfer sizes by average of **~20%**
 - Images optimization [blog](https://stackoverflow.blog/2022/03/28/picture-perfect-images-with-the-modern-element).
 - Images optimization [book](https://www.smashingmagazine.com/printed-books/image-optimization).
 
-:::danger CSS/Image Sprites
+:::danger[CSS/Image Sprites]
 
 - Use image sprites **only on HTTP/1** to improve page-load times.
 - Avoid using image sprites on HTTP/2.

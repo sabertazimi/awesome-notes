@@ -367,7 +367,7 @@ npx user/repo#branch
 npx gistUrl
 ```
 
-:::tip NPX Cache
+:::tip[NPX Cache]
 
 NPX cache packages in `~/.npm/_npx`.
 

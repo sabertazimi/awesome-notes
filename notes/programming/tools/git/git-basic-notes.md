@@ -93,7 +93,7 @@ git config --global http.postbuffer 524288000
 git config --global https.postbuffer 1048576000
 ```
 
-:::caution DNS Pollution
+:::caution[DNS Pollution]
 
 To fix `SSL_ERROR_SYSCALL in connection to github.com:443`:
 

@@ -650,7 +650,7 @@ Cross-site request forgery (跨站请求伪造)
 - `@import ""`.
 - `background: url("")`.
 
-:::tip XSS vs CSRF
+:::tip[XSS vs CSRF]
 
 - XSS 利用的是网站对用户 (输入) 的信任.
 - CSRF 利用的是网站对用户网页浏览器的信任.
@@ -777,7 +777,7 @@ Prevent load self in frame (`Frame Busting`):
 </script>
 ```
 
-:::caution Frame Busting Attack
+:::caution[Frame Busting Attack]
 
 `<iframe>` `sandbox` 属性与 `security`,
 可以限制 `<iframe>` 页面中的 JavaScript 脚本执行,

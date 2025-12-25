@@ -346,7 +346,7 @@ export HTTP_PROXY="${PROXY_SOCKS}"
 export HTTPS_PROXY="${PROXY_SOCKS}"
 ```
 
-:::caution Socks Client
+:::caution[Socks Client]
 
 主机代理客户端需要[允许](https://github.com/microsoft/WSL/issues/4402#issuecomment-570474468)
 VLAN (或其他网络) 设备访问本地代理连接.
