@@ -885,6 +885,15 @@ HTTP 1.1 304 Not Modified
 - positive case: IIFE function heuristics
 - passive case: too small (`< 1KB`) and inline scripts
 
+### BFCache
+
+[What](https://calendar.perfplanet.com/2025/chasing-bfcache-navigations) prevents [BFCache](https://www.sabatino.dev/bfcache-explained/):
+
+- `Cache-Control: no-store`.
+- `unload` event on page and iframes: reaplce it with `pagehide` event.
+- Unclosed modern APIs: `IndexedDB`, `WebSocket`, `WebRTC`, etc.
+- SPA soft navigation.
+
 ## Render Blocking Resources
 
 ### Render Blocking Resources Type
