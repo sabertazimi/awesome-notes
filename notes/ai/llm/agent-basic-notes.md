@@ -621,7 +621,9 @@ Install [edmuds plugin](https://github.com/edmund-io/edmunds-claude-code):
 
 ### Claude Code Best Practices
 
-- Claude code [best practices](https://www.anthropic.com/engineering/claude-code-best-practices).
+Claude code [best practices](https://www.anthropic.com/engineering/claude-code-best-practices):
+
+- Extended thinking mode: "think" -> "think hard" -> "think harder" -> "ultrathink".
 
 ## MCP Servers
 
