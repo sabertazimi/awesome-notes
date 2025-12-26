@@ -281,6 +281,13 @@ const result = await agent.invoke({ input: '...' })
 - OpenAI GPT [API](https://platform.openai.com).
 - Google Gemini [API](https://ai.google.dev).
 
+## LLM Collection
+
+### Text-to-Speech
+
+- [ChatterBox](https://github.com/resemble-ai/chatterbox):
+  SoTA open-source TTS model.
+
 ## LLM Reference
 
 - LLM survey: [大语言模型](https://github.com/LLMBook-zh/LLMBook-zh.github.io).
