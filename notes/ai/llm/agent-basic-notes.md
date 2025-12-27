@@ -680,6 +680,11 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 - [ZRead](https://zread.ai):
   AI-powered github repository reader.
 
+### RAG
+
+- [RAGFlow](https://github.com/infiniflow/ragflow):
+  Superior context layer for AI agents.
+
 ## Agent Benchmarks
 
 [Benckmarks](https://blog.sshh.io/p/understanding-ai-benchmarks):
