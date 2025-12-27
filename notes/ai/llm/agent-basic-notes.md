@@ -583,18 +583,6 @@ Create a new POST $ARGUMENTS endpoint with:
 [Commands](http://github.com/wshobson/commands)
 contains production-ready slash commands for Claude Code.
 
-### Claude Code Skills
-
-- [Anthropic](https://github.com/anthropics/skills):
-  Anthropic repository for agent skills.
-- [Awesome](https://github.com/travisvn/awesome-claude-skills):
-  Curated list of Claude Code skills.
-- [Marketplace](https://skillsmp.com):
-  Agent skills marketplace.
-- [Skill Seekers](https://github.com/yusufkaraaslan/Skill_Seekers):
-  Convert documentation websites, GitHub repositories, and PDFs
-  into Claude AI skills with automatic conflict detection.
-
 ### Claude Code Memory
 
 Captures everything Claude does during your coding sessions, compresses it with Claude `agent-sdk`,
@@ -624,6 +612,27 @@ Install [edmuds plugin](https://github.com/edmund-io/edmunds-claude-code):
 Claude code [best practices](https://www.anthropic.com/engineering/claude-code-best-practices):
 
 - Extended thinking mode: "think" -> "think hard" -> "think harder" -> "ultrathink".
+
+## Skills
+
+### Featured Skills
+
+- [Superpowers](https://github.com/obra/superpowers):
+  Complete software development workflow for coding agents.
+- [NotebookLM](https://github.com/PleasePrompto/notebooklm-skill):
+  Communicate directly with Google NotebookLM notebooks.
+
+### Skills List
+
+- [Anthropic](https://github.com/anthropics/skills):
+  Anthropic repository for agent skills.
+- [Awesome](https://github.com/travisvn/awesome-claude-skills):
+  Curated list of Claude Code skills.
+- [Marketplace](https://skillsmp.com):
+  Agent skills marketplace.
+- [Skill Seekers](https://github.com/yusufkaraaslan/Skill_Seekers):
+  Convert documentation websites, GitHub repositories, and PDFs
+  into Claude AI skills with automatic conflict detection.
 
 ## MCP Servers
 
