@@ -627,6 +627,8 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 
 ## MCP Servers
 
+### Featured MCP Servers
+
 - [Sequential thinking](https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking).
 - [Context7](https://github.com/upstash/context7).
 - [Playwright](https://github.com/microsoft/playwright-mcp).
@@ -639,6 +641,13 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 - [Figma](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server).
 - [Notion](https://github.com/makenotion/notion-mcp-server).
 - [APIFox](https://github.com/apifox/apifox-mcp-server).
+
+### MCP Servers List
+
+- [MCP](https://mcpservers.org):
+  Collection of MCP servers and Claude Code skills.
+- [Awesome](https://github.com/punkpeye/awesome-mcp-servers):
+  Collection of MCP (Model Context Protocol) servers.
 
 ## Agent Tools
 
