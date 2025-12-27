@@ -588,6 +588,27 @@ contains production-ready slash commands for Claude Code.
 Captures everything Claude does during your coding sessions, compresses it with Claude `agent-sdk`,
 and [injects relevant context](http://github.com/thedotmack/claude-mem) back into future sessions.
 
+### Claude Code Skills
+
+#### Featured Skills
+
+- [Superpowers](https://github.com/obra/superpowers):
+  Complete software development workflow for coding agents.
+- [NotebookLM](https://github.com/PleasePrompto/notebooklm-skill):
+  Communicate directly with Google NotebookLM notebooks.
+
+#### Skills List
+
+- [Anthropic](https://github.com/anthropics/skills):
+  Anthropic repository for agent skills.
+- [Awesome](https://github.com/travisvn/awesome-claude-skills):
+  Curated list of Claude Code skills.
+- [Marketplace](https://skillsmp.com):
+  Agent skills marketplace.
+- [Seekers](https://github.com/yusufkaraaslan/Skill_Seekers):
+  Convert documentation websites, GitHub repositories, and PDFs
+  into Claude AI skills with automatic conflict detection.
+
 ### Claude Code Plugins
 
 Install [plugins](https://github.com/anthropics/claude-code/tree/main/plugins)
@@ -600,39 +621,25 @@ it will extend Claude Code through the plugin system with:
 - Skills.
 - MCP servers.
 
-Install [edmuds plugin](https://github.com/edmund-io/edmunds-claude-code):
+#### Featured Plugins
 
-```bash
-/plugin marketplace add edmund-io/edmunds-claude-code
-/plugin install edmunds-claude-code
-```
+- [Agents](https://github.com/wshobson/agents):
+  Intelligent automation and multi-agent orchestration for Claude Code.
+- [Edmuds](https://github.com/edmund-io/edmunds-claude-code):
+  Personal Claude Code configuration for productive web development.
+
+#### Plugins List
+
+- [Anthropic](https://github.com/anthropics/claude-plugins-official):
+  Anthropic-managed directory of high quality Claude Code plugins.
+- [Plugins](https://github.com/Kamalnrf/claude-plugins):
+  Lightweight registry to discover and manage Claude plugins and agent skills.
 
 ### Claude Code Best Practices
 
 Claude code [best practices](https://www.anthropic.com/engineering/claude-code-best-practices):
 
 - Extended thinking mode: "think" -> "think hard" -> "think harder" -> "ultrathink".
-
-## Skills
-
-### Featured Skills
-
-- [Superpowers](https://github.com/obra/superpowers):
-  Complete software development workflow for coding agents.
-- [NotebookLM](https://github.com/PleasePrompto/notebooklm-skill):
-  Communicate directly with Google NotebookLM notebooks.
-
-### Skills List
-
-- [Anthropic](https://github.com/anthropics/skills):
-  Anthropic repository for agent skills.
-- [Awesome](https://github.com/travisvn/awesome-claude-skills):
-  Curated list of Claude Code skills.
-- [Marketplace](https://skillsmp.com):
-  Agent skills marketplace.
-- [Skill Seekers](https://github.com/yusufkaraaslan/Skill_Seekers):
-  Convert documentation websites, GitHub repositories, and PDFs
-  into Claude AI skills with automatic conflict detection.
 
 ## MCP Servers
 
