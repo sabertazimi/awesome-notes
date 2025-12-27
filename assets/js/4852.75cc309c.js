@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkawesome_notes=self.webpackChunkawesome_notes||[]).push([[4852],{64852:(e,s,a)=>{a.d(s,{createGitGraphServices:()=>t.b});var t=a(50249);a(60349)}}]);
