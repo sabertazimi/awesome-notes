@@ -685,18 +685,17 @@ Keep track of your current status in browser-use-ts/agent/TODO.md
 
 ## Developer Prompts
 
-### 分步式开发策略
+### 分步式提示词
 
 ```md
 采用 「原子化任务拆分」+「渐进式验证」 方法, 将复杂需求拆解为独立可测试的小模块.
 帮我设计并且给出我每一步的提示词用来指导 Cursor 编程.
 ```
 
-### 多方法开发策略
+### 多重选择提示词
 
 ```md
-Please think through at least 3 possibilities of what could be causing this.
-write in detail about them.
+Please think through at least 3 possibilities of what could be causing this, write in detail about them.
 Choose which you believe could be the most likely cause
 (noting above you already tried 2 other things that didn't work,
 so don't try them again, because we're getting the same exact error after both)
@@ -705,15 +704,14 @@ When you pick the most probably solution, write in detail how do implement the s
 Make it a thorough plan that even a junior engineer could solve successfully.
 ```
 
-### 日志定位开发策略
+### 日志定位提示词
 
 ```md
-Please add logs to the code to get better visibility into what is going on
-so we can find the fix.
+Please add logs to the code to get better visibility into what is going on so we can find the fix.
 I'll run the code and feed you the logs results.
 ```
 
-### 辅助学习开发策略
+### 辅助学习提示词
 
 利用 Cursor 的辅助学习新知识, 例如学习 [Next.js](https://github.com/zenyarn/nextjs-study):
 
@@ -731,6 +729,51 @@ I'll run the code and feed you the logs results.
 
 请以清晰、结构化的方式呈现，模拟我理解自己代码时的那种感觉（即对整体架构和关键部分的把握）。
 **避免详细的代码实现细节或逐行解释。**
+```
+
+### 阅读理解提示词
+
+```markdown
+你是一位专业的内容分析师。请对以下文章进行深度分析，按照下面的框架逐层回答问题。
+
+## 分析框架
+
+### 一、核心内容（搞清楚"是什么"）
+
+1. 文章的核心论点是什么？用一句话概括
+2. 作者用了哪些关键概念？这些概念是怎么定义的？
+3. 文章的结构是什么？论证是怎么展开的？
+4. 有哪些具体案例或证据支撑观点？
+
+### 二、背景语境（理解"为什么"）
+
+1. 作者是谁？他的背景、身份、立场是什么？
+2. 这篇文章是在什么背景下写的？在回应什么现象或争论？
+3. 作者想解决什么问题？想影响谁？
+4. 作者的底层假设是什么？有哪些没说出来的前提？
+
+### 三、批判性审视
+
+1. 有人会怎么反驳这个观点？主要的反对意见可能是什么？
+2. 作者的论证有没有漏洞、跳跃或偏颇之处？
+3. 这个观点在什么情况下成立？什么情况下不成立？边界在哪里？
+4. 作者有没有刻意回避或淡化什么问题？
+
+### 四、价值提取
+
+1. 作者提出了什么可复用的思考框架或方法论？
+2. 对于[目标读者角色1]，能从中学到什么？
+3. 对于[目标读者角色2]，能从中学到什么？
+4. 这篇文章可能改变读者的什么认知？
+
+### 五、写作技巧分析（可选）
+
+1. 文章的标题、开头、结尾是怎么设计的？
+2. 作者用了什么技巧让文章有说服力？
+3. 这篇文章的写法有什么值得学习的地方？
+
+请按照上述框架，逐一回答每个问题。回答要具体、有洞察，避免泛泛而谈。
+如果某个问题信息不足无法回答，请说明原因。
 ```
 
 ## System Prompts
