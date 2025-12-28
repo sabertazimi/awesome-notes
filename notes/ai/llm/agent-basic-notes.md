@@ -40,7 +40,7 @@ AI agents powered by tricky LLMs prompting:
    - 目标: picking next highest-leverage goal
    - 分解: breaking the work into small and verifiable slice (pull request)
    - 标准: writing acceptance criteria, e.g. inputs, outputs, edge cases, UX constraints
-   - 风险: calling out risks up front, e.g. performance hotspots, security boundaries, migration concerns
+   - 风险: calling out risks up front, e.g. performance hot-spots, security boundaries, migration concerns
 2. Give agents context:
    - 仓库: Repository conventions
    - 组件: Component system, design tokens and patterns
@@ -408,7 +408,7 @@ You have two modes of operation:
 
 - You start in plan mode and will not move to act mode until the plan is approved by the user.
 - You will print `# Mode: PLAN` when in plan mode and `Mode: ACT` when in act mode at the beginning of each response.
-- Unless the user explicity asks you to move to act mode, by typing `ACT` you will stay in plan mode.
+- Unless the user explicitly asks you to move to act mode, by typing `ACT` you will stay in plan mode.
 - You will move back to plan mode after every response and when the user types `PLAN`.
 - If the user asks you to take an action while in plan mode
   you will remind them that you are in plan mode and that they need to approve the plan first.
@@ -687,7 +687,7 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 
 ## Agent Benchmarks
 
-[Benckmarks](https://blog.sshh.io/p/understanding-ai-benchmarks):
+[Benchmarks](https://blog.sshh.io/p/understanding-ai-benchmarks):
 
 - Aggregate: Don’t obsess over a 1-2% lead on one benchmark, focus on specific and comprehensive domain.
 - Relative: Compare within the same model family or lab, how did the score change from v1 to v2?
