@@ -1479,9 +1479,15 @@ like Gaussian, Xavier and Kaiming distributions):
 
 $$
 W_Q=\begin{bmatrix}q_1&q_2&q_3\end{bmatrix}
-   =\begin{bmatrix}1&0&1\\1&0&0\\0&0&1\\0&1&1\end{bmatrix}\\[1em]
+   =\begin{bmatrix}1&0&1\\1&0&0\\0&0&1\\0&1&1\end{bmatrix}
+$$
+
+$$
 W_K=\begin{bmatrix}k_1&k_2&k_3\end{bmatrix}
-   =\begin{bmatrix}0&0&1\\1&1&0\\0&1&0\\1&1&0\end{bmatrix}\\[1em]
+   =\begin{bmatrix}0&0&1\\1&1&0\\0&1&0\\1&1&0\end{bmatrix}
+$$
+
+$$
 W_V=\begin{bmatrix}v_1&v_2&v_3\end{bmatrix}
    =\begin{bmatrix}0&2&0\\0&3&0\\1&0&3\\1&1&0\end{bmatrix}
 $$
@@ -1492,15 +1498,21 @@ $$
 Q=XW_Q
  =\begin{bmatrix}1&0&1&0\\0&2&0&2\\1&1&1&1\end{bmatrix}
   \begin{bmatrix}1&0&1\\1&0&0\\0&0&1\\0&1&1\end{bmatrix}
- =\begin{bmatrix}1&0&2\\2&2&2\\2&1&3\end{bmatrix}\\[1em]
+ =\begin{bmatrix}1&0&2\\2&2&2\\2&1&3\end{bmatrix}
+$$
+
+$$
 K=XW_K
  =\begin{bmatrix}1&0&1&0\\0&2&0&2\\1&1&1&1\end{bmatrix}
   \begin{bmatrix}0&0&1\\1&1&0\\0&1&0\\1&1&0\end{bmatrix}
- =\begin{bmatrix}0&1&1\\4&4&0\\2&3&1\end{bmatrix}\\[1em]
+ =\begin{bmatrix}0&1&1\\4&4&0\\2&3&1\end{bmatrix}
+$$
+
+$$
 V=XW_V
  =\begin{bmatrix}1&0&1&0\\0&2&0&2\\1&1&1&1\end{bmatrix}
   \begin{bmatrix}0&2&0\\0&3&0\\1&0&3\\1&1&0\end{bmatrix}
- =\begin{bmatrix}1&2&3\\2&8&0\\2&6&3\end{bmatrix}\\[1em]
+ =\begin{bmatrix}1&2&3\\2&8&0\\2&6&3\end{bmatrix}
 $$
 
 Calculate attention scores $QK^T$ for input:
