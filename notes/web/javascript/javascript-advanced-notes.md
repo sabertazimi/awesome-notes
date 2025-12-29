@@ -4127,7 +4127,7 @@ function processArray(items, process, done) {
 }
 ```
 
-:::tips[`this` Binding in Timer Function]
+:::tip[`this` Binding in Timer Function]
 
 所有超时执行的代码 (函数) 都会在全局作用域中的一个匿名函数中运行,
 因此函数中的 `this` 值在非严格模式下始终指向 `window`, 在严格模式下是 `undefined`.

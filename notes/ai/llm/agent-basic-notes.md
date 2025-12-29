@@ -590,6 +590,39 @@ and [injects relevant context](http://github.com/thedotmack/claude-mem) back int
 
 ### Claude Code Skills
 
+```mermaid
+---
+config:
+  flowchart:
+    subGraphTitleMargin:
+      bottom: 30
+---
+graph TD
+  subgraph Application["应用层<br />(Application Layer)"]
+    SKILLS["Agent Skills"]
+    KNOWLEDGE["领域知识、工作流、最佳实践"]
+  end
+
+  subgraph Transport["传输层<br />(Transport Layer)"]
+    MCP["MCP"]
+    STD["标准化接口、工具调用、资源访问"]
+  end
+
+  subgraph Infrastructure["基础设施层<br />(Infrastructure Layer)"]
+    DB[("数据库")]
+    API[("API")]
+    FS[("文件系统")]
+    EXT[("外部服务")]
+  end
+
+  SKILLS --> KNOWLEDGE --> MCP --> STD
+  STD --> DB & API & FS & EXT
+
+  style Transport fill:#fceacf
+  style Application fill:#e1eff8
+  style Infrastructure fill:#d9f0e1
+```
+
 #### Featured Skills
 
 - [Superpowers](https://github.com/obra/superpowers):
