@@ -588,6 +588,19 @@ contains production-ready slash commands for Claude Code.
 Captures everything Claude does during your coding sessions, compresses it with Claude `agent-sdk`,
 and [injects relevant context](http://github.com/thedotmack/claude-mem) back into future sessions.
 
+### Claude Code Session
+
+Resume from [session](https://stevekinney.com/courses/ai-development/claude-code-session-management):
+
+```bash
+# Most recent session
+claude -c
+
+# Specific session
+claude -r
+claude -r [session_id]
+```
+
 ### Claude Code Skills
 
 ```mermaid
