@@ -2963,135 +2963,7 @@ class MyComponent extends React.Component<Props, State> {
 - 装饰器模式是 Class 继承的一个替代模式.
   (类似于组合模式)
 
-### Legacy Stage 2 Decorators
-
-#### Class Decorators
-
-```ts
-function classDecorator(options: any[]) {
-  return (target) => {
-    // ...
-  }
-}
-
-@classDecorator
-class Component {}
-```
-
-```ts
-function inject(options: { api_version: string }) {
-  // returns the class decorator implementation
-  return (target) => {
-    // `target` will give us access to the entire class prototype
-    target.apiVersion = options.api_version
-  }
-}
-
-function deprecated(target) {
-  console.log(`
-    this class is deprecated and will be removed
-    in a future version of the app
-  `)
-  console.log(`@: ${target}`)
-}
-
-@inject({
-  api_version: '0.3.4',
-})
-@deprecated
-class MyComponent extends React.Component<Props> {
-  static apiVersion: string
-}
-```
-
-#### Class Properties Decorators
-
-first parameter `target` will be
-`class prototype` for normal properties
-and `class constructor` for static properties.
-
-```ts
-function prop(target, name) {
-  // ...
-}
-
-function staticProp(constructor, name) {
-  // ...
-}
-
-class MyComponent extends React.Component<Props> {
-  @prop
-  public member: string
-
-  @staticProp
-  public static apiVersion: string
-}
-```
-
-#### Method Parameters Decorators
-
-`@uppercase`/`@lowercase` for string parameters,
-`@rounded` for number parameters.
-
-```ts
-function decorator<T>(classPrototype: T, name: string, index: int) {
-  // ...
-}
-
-class MyComponent extends React.Component<Props> {
-  private handleMethod(@decorator param1: string) {
-    // ...
-  }
-}
-```
-
-#### Methods Decorators
-
-- `target` parameter will class prototype
-- `propertyKey` will be a string containing the name of the method.
-- `propertyDescriptor` will provide with standard metadata associated with the object:
-  configurable, enumerable, value and writable,
-  as well as get and set.
-
-```ts
-function methodDecorator(options: any[]) {
-  return (
-    target: MyComponent,
-    propertyKey: string,
-    propertyDescriptor: PropertyDescriptor
-  ) => {
-    // ...
-  }
-}
-
-class MyComponent extends React.Component {
-  @methodDecorator
-  handleSomething() {
-    // ...
-  }
-}
-```
-
-```ts
-function enumerable(enumerable: boolean) {
-  return (
-    target: MyComponent,
-    propertyKey: string,
-    propertyDescriptor: PropertyDescriptor
-  ) => {
-    propertyDescriptor.enumerable = enumerable
-  }
-}
-
-class MyComponent extends React.Component {
-  @enumerable(false)
-  handleSomething() {
-    // ...
-  }
-}
-```
-
-### Modern Stage 3 Decorators
+### Decorators Types
 
 ```ts
 type Decorator = (value: Input, context: {
@@ -3168,70 +3040,138 @@ type ClassAutoAccessorDecorator = (
 } | void
 ```
 
-### Decorators Execution Order
-
-- 不同级装饰器:
-  1. 实例成员: (参数 > 方法) -> 访问器 -> 属性 装饰器 (按顺序).
-  2. 静态成员: (参数 > 方法) -> 访问器 -> 属性 装饰器 (按顺序).
-  3. 构造器: 参数装饰器.
-  4. 类装饰器.
-- 同级装饰器: 先从外到内进入，然后由内向外执行.
+### Class Decorators
 
 ```ts
-function f(key: string): any {
-  return function () {
-    console.log('执行: ', key)
+type Constructor<T = object> = new (...args: any[]) => T
+
+function toString<Class extends Constructor>(
+  Value: Class,
+  context: ClassDecoratorContext<Class>
+) {
+  return class extends Value {
+    constructor(...args: any[]) {
+      super(...args)
+      console.log(JSON.stringify(this))
+      console.log(JSON.stringify(context))
+    }
   }
 }
 
-@f('8. 类')
-class C {
-  @f('4. 静态属性')
-  static prop?: number
+@toString
+class Person {
+  name: string
 
-  @f('5. 静态方法')
-  static method(@f('6. 静态方法参数') foo) {}
-
-  constructor(@f('7. 构造器参数') foo) {
-    super(foo)
+  constructor(name: string) {
+    this.name = name
   }
 
-  @f('2. 实例方法')
-  method(@f('1. 实例方法参数') foo) {}
-
-  @f('3. 实例属性')
-  prop?: number
+  greet() {
+    return `Hello, ${this.name}`
+  }
 }
-
-// "执行: ",  "1. 实例方法参数"
-// "执行: ",  "2. 实例方法"
-// "执行: ",  "3. 实例属性"
-// "执行: ",  "4. 静态属性"
-// "执行: ",  "6. 静态方法参数"
-// "执行: ",  "5. 静态方法"
-// "执行: ",  "7. 构造器参数"
-// "执行: ",  "8. 类"
+const person = new Person('Simon')
+/**
+ * Logs:
+ * {"name":"Simon"}
+ * {"kind":"class","name":"Person"}
+ */
 ```
 
-```ts
-function dec(id) {
-  console.log('装饰器初始化', id)
+### Property Decorators
 
-  return function (target, property, descriptor) {
-    console.log('装饰器执行', id)
+```ts
+function upperCase<T>(
+  target: undefined,
+  context: ClassFieldDecoratorContext<T, string>
+) {
+  return function (this: T, value: string) {
+    return value.toUpperCase()
   }
 }
 
-class Example {
-  @dec(1)
-  @dec(2)
-  method() {}
+class MyClass {
+  @upperCase
+  prop1 = 'hello!'
 }
 
-// 装饰器初始化 1
-// 装饰器初始化 2
-// 装饰器执行 2
-// 装饰器执行 1
+console.log(new MyClass().prop1) // Logs: HELLO!
+```
+
+### Method Decorators
+
+```ts
+function log<This, Args extends any[], Return>(
+  target: (this: This, ...args: Args) => Return,
+  context: ClassMethodDecoratorContext<
+    This,
+    (this: This, ...args: Args) => Return
+  >
+) {
+  const methodName = String(context.name)
+
+  function replacementMethod(this: This, ...args: Args): Return {
+    console.log(`LOG: Entering method '${methodName}'.`)
+    const result = target.call(this, ...args)
+    console.log(`LOG: Exiting method '${methodName}'.`)
+    return result
+  }
+
+  return replacementMethod
+}
+
+class MyClass {
+  @log
+  sayHello() {
+    console.log('Hello!')
+  }
+}
+
+new MyClass().sayHello()
+```
+
+### Getter and Setter Decorators
+
+```ts
+function range<This, Return extends number>(min: number, max: number) {
+  return function (
+    target: (this: This) => Return,
+    context: ClassGetterDecoratorContext<This, Return>
+  ) {
+    return function (this: This): Return {
+      const value = target.call(this)
+
+      if (value < min || value > max) {
+        throw new Error('Invalid')
+      }
+
+      Object.defineProperty(this, context.name, {
+        value,
+        enumerable: true,
+      })
+      return value
+    }
+  }
+}
+
+class MyClass {
+  private _value = 0
+
+  constructor(value: number) {
+    this._value = value
+  }
+
+  @range(1, 100)
+  get getValue(): number {
+    return this._value
+  }
+}
+
+const obj = new MyClass(10)
+console.log(obj.getValue) // Valid: 10
+
+const obj2 = new MyClass(999)
+console.log(obj2.getValue) // Throw: Invalid!
 ```
 
 ### Reflect Metadata
