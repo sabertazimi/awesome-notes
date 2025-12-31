@@ -658,8 +658,12 @@ it will extend Claude Code through the plugin system with:
 
 - [Agents](https://github.com/wshobson/agents):
   Intelligent automation and multi-agent orchestration for Claude Code.
+- [SafetyNet](https://github.com/kenryu42/claude-code-safety-net):
+  Catching destructive git and filesystem commands before they execute.
 - [Edmuds](https://github.com/edmund-io/edmunds-claude-code):
   Personal Claude Code configuration for productive web development.
+- [LifeAssistant](https://github.com/lout33/claude_life_assistant):
+  Personal coach that remembers, notices patterns, and holds accountable.
 
 #### Plugins List
 
