@@ -724,16 +724,21 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 - [llms.txt](https://github.com/AnswerDotAI/llms-txt):
   Helping language models use website.
 
+### RAG
+
+- [RAGFlow](https://github.com/infiniflow/ragflow):
+  Superior context layer for AI agents.
+
+### Project
+
+- [VibeKanban](http://github.com/BloopAI/vibe-kanban):
+  Run coding agents in parallel without conflicts, and perform code review.
+
 ### Documentation
 
 - [DeepWiki](https://github.com/AsyncFuncAI/deepwiki-open).
 - [ZRead](https://zread.ai):
   AI-powered github repository reader.
-
-### RAG
-
-- [RAGFlow](https://github.com/infiniflow/ragflow):
-  Superior context layer for AI agents.
 
 ## Agent Benchmarks
 
