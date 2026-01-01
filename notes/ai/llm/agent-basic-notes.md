@@ -636,9 +636,9 @@ graph TD
 #### Featured Skills
 
 - [Superpowers](https://github.com/obra/superpowers):
-  Complete software development workflow for coding agents.
+  Complete software development workflow.
 - [DevBrowser](http://github.com/SawyerHood/dev-browser):
-  Browser automation skill.
+  Browser automation.
 - [NotebookLM](https://github.com/PleasePrompto/notebooklm-skill):
   Communicate directly with Google NotebookLM notebooks.
 
@@ -670,10 +670,12 @@ it will extend Claude Code through the plugin system with:
 
 - [Agents](https://github.com/wshobson/agents):
   Comprehensive production-ready system combining agents, multi-agent workflow orchestrators, skills, and slash commands.
+- [Continuous](https://github.com/parcadei/Continuous-Claude-v2):
+  Context management.
 - [SafetyNet](https://github.com/kenryu42/claude-code-safety-net):
   Catching destructive git and filesystem commands before they execute.
 - [Edmuds](https://github.com/edmund-io/edmunds-claude-code):
-  Personal Claude Code configuration for productive web development.
+  Personal configuration for productive web development.
 - [LifeAssistant](https://github.com/lout33/claude_life_assistant):
   Personal coach that remembers, notices patterns, and holds accountable.
 
