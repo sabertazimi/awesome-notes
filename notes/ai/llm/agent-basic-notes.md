@@ -637,6 +637,8 @@ graph TD
 
 - [Superpowers](https://github.com/obra/superpowers):
   Complete software development workflow for coding agents.
+- [DevBrowser](http://github.com/SawyerHood/dev-browser):
+  Browser automation skill.
 - [NotebookLM](https://github.com/PleasePrompto/notebooklm-skill):
   Communicate directly with Google NotebookLM notebooks.
 
