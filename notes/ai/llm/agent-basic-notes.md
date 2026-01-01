@@ -580,9 +580,6 @@ Create a new POST $ARGUMENTS endpoint with:
 /api-new /api/users
 ```
 
-[Commands](http://github.com/wshobson/commands)
-contains production-ready slash commands for Claude Code.
-
 ### Claude Code Memory
 
 Captures everything Claude does during your coding sessions, compresses it with Claude `agent-sdk`,
@@ -670,7 +667,7 @@ it will extend Claude Code through the plugin system with:
 #### Featured Plugins
 
 - [Agents](https://github.com/wshobson/agents):
-  Intelligent automation and multi-agent orchestration for Claude Code.
+  Comprehensive production-ready system combining agents, multi-agent workflow orchestrators, skills, and slash commands.
 - [SafetyNet](https://github.com/kenryu42/claude-code-safety-net):
   Catching destructive git and filesystem commands before they execute.
 - [Edmuds](https://github.com/edmund-io/edmunds-claude-code):
