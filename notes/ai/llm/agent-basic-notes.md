@@ -633,6 +633,15 @@ graph TD
   style Infrastructure fill:#d9f0e1
 ```
 
+:::tip[工具选择]
+
+- 临时任务 -> prompts
+- 重复性工作流 -> skills
+- 连接外部系统 -> MCP
+- 复杂独立任务 -> sub-agents
+
+:::
+
 #### Featured Skills
 
 - [Superpowers](https://github.com/obra/superpowers):
