@@ -651,7 +651,7 @@ graph TD
 :::tip[工具选择]
 
 - 临时任务 -> prompts
-- 重复性工作流 -> skills
+- 标准作业程序 -> skills
 - 连接外部系统 -> MCP
 - 复杂独立任务 -> sub-agents
 
@@ -665,6 +665,37 @@ graph TD
 description: Extract text and tables from PDF files, fill forms, merge documents.
   Use when working with PDF files or when the user mentions PDFs,
   forms, or document extraction.
+```
+
+#### Skills Checklist
+
+1. Code Review:
+   - [ ] 所有脚本已审查
+   - [ ] 无硬编码密钥或密码
+   - [ ] 无危险的系统命令（rm -rf, eval, exec）
+   - [ ] 文件路径经过验证（防止路径遍历）
+2. Network Access:
+   - [ ] 检查所有外部 URL
+   - [ ] 验证 API 端点可信
+   - [ ] 处理网络失败情况
+3. Data Handling:
+   - [ ] 无敏感数据泄露
+   - [ ] 日志不包含 PII
+   - [ ] 临时文件正确清理
+4. Permissions:
+   - [ ] 最小权限原则
+   - [ ] 不请求不必要的文件访问
+   - [ ] 明确说明需要的权限
+5. Documentation:
+   - [ ] 安全注意事项已文档化
+   - [ ] 数据处理流程透明
+   - [ ] 用户知情同意
+
+```bash
+grep -r "requests\." .
+grep -r "os.system" .
+grep -r "subprocess" .
+grep -r "eval" .
 ```
 
 #### Featured Skills
