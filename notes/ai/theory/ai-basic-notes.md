@@ -10,9 +10,12 @@ tags: [AI, Math, Theory]
 
 ## Quantum Mechanics
 
-薛定谔方程：$i\hbar \frac{\partial \psi}{\partial t} = -\frac{\hbar^2}{2m}\nabla^2 \psi + V\psi$
+薛定谔方程:
+$i\hbar\frac{\partial\psi}{\partial t} = -\frac{\hbar^2}{2m}\nabla^2\psi + V\psi$
 
-狄拉克方程：$(i\gamma^\mu \partial_\mu - m) \psi = 0$
+狄拉克方程:
+$i\hbar\frac{\partial\psi}{\partial t} = -i\hbar{c}\boldsymbol{\alpha}\cdot\nabla\psi + \beta{mc^2}\psi$,
+$(i\gamma^\mu\partial_\mu - m)\psi = 0$
 
 | 特征维度      | Schrödinger Equation                      | Dirac Equation                                          |
 | ------------- | ----------------------------------------- | ------------------------------------------------------- |
