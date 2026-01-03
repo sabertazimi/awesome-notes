@@ -725,6 +725,11 @@ grep -r "eval" .
   Convert documentation websites, GitHub repositories, and PDFs
   into Claude AI skills with automatic conflict detection.
 
+#### Skills Guide
+
+- Agent skills [best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices).
+- Claude skills [cookbook](https://github.com/anthropics/claude-cookbooks/tree/main/skills).
+
 ### Claude Code Plugins
 
 Install [plugins](https://github.com/anthropics/claude-code/tree/main/plugins)
