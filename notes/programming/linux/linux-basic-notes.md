@@ -2698,6 +2698,7 @@ scoop install volta zoxide bat eza delta dust duf fd ripgrep fzf jq fx tlrc bott
 ```bash
 alias app="scoop"
 alias cc="claude"
+alias ccc="claude -c"
 alias code="cursor"
 alias np="pnpm"
 alias vim="nvim"
