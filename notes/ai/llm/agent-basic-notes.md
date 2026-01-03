@@ -748,6 +748,10 @@ it will extend Claude Code through the plugin system with:
   Comprehensive production-ready system combining agents, multi-agent workflow orchestrators, skills, and slash commands.
 - [Continuous](https://github.com/parcadei/Continuous-Claude-v2):
   Context management.
+- [Figma](https://github.com/figma/mcp-server-guide):
+  Figma official skills and MCP server.
+- [Notion](https://github.com/makenotion/claude-code-notion-plugin):
+  Notion official skills, commands and MCP server.
 - [SafetyNet](https://github.com/kenryu42/claude-code-safety-net):
   Catching destructive git and filesystem commands before they execute.
 - [Edmuds](https://github.com/edmund-io/edmunds-claude-code):
