@@ -657,6 +657,16 @@ graph TD
 
 :::
 
+#### Skills Description
+
+**核心原则**: 既要说明`做什么`，也要说明`什么时候用`:
+
+```yaml
+description: Extract text and tables from PDF files, fill forms, merge documents.
+  Use when working with PDF files or when the user mentions PDFs,
+  forms, or document extraction.
+```
+
 #### Featured Skills
 
 - [Superpowers](https://github.com/obra/superpowers):
