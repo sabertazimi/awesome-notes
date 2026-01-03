@@ -650,9 +650,10 @@ graph TD
 
 **渐进式披露**:
 
-- 核心功能简洁.
+- 核心功能简洁: 500 行以内.
 - 高级功能分离.
-- 按需加载.
+- [按需加载](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview#how-skills-work):
+  metadata -> instructions -> resources and code.
 
 :::tip[工具选择]
 
