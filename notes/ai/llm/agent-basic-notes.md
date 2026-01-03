@@ -8,6 +8,17 @@ tags: [AI, LLM, Agent]
 
 # Agent Basic Notes
 
+## Agent Principles
+
+### First-Principles Agents
+
+从李世石与 AlphaGo 的围棋对战中的第 37 手,
+我们可以总结出[第一性原理](https://www.chasewhughes.com/writing/beyond-the-replica-the-case-for-first-principles-agents)
+智能体的基本原则:
+
+- Replica agents: 当流程需要人工审核、代理作为用户的副驾驶员或与仅限 UI 的旧版工具集成时，使用仿生学。
+- Alien agents: 当目标是纯粹的结果效率时，使用第一性原理。
+
 ## Agent Instruction
 
 - Use existing documents:
