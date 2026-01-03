@@ -181,7 +181,7 @@ Personal learning [Notes](https://notes.tazimi.dev): **awesome notes** for mysel
 
 ## License
 
-MIT License Copyright (c) [sabertazimi](https://github.com/sabertazimi)
+MIT License Copyright (c) [Sabertaz](https://github.com/sabertazimi)
 
 ## Contact
 
