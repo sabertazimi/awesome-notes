@@ -8,11 +8,6 @@ tags: [AI, LLM, Agent]
 
 # Agent Basic Notes
 
-AI agents powered by tricky LLMs prompting:
-
-- Generative [agent](https://github.com/joonspk-research/generative_agents).
-- Minecraft [agent](https://github.com/MineDojo/Voyager).
-
 ## Agent Instruction
 
 - Use existing documents:
@@ -72,7 +67,7 @@ OpenAI [Codex](https://openai.com/index/introducing-codex) [prompts](./prompts/c
 - `AGENTS.md` spec.
 - Citations instructions.
 
-### Coding Agent Prompt
+### Coding Agent Prompts
 
 [Writing](https://github.com/agentsmd/agents.md)
 good [`AGENTS.md`](https://github.com/agentsmd/agents.md):
@@ -89,7 +84,7 @@ good [`AGENTS.md`](https://github.com/agentsmd/agents.md):
 - `AGENTS.md` is the highest leverage point of the harness, so avoid auto-generating it.
   You should carefully craft its contents for best results.
 
-### Pull Request Agent Prompt
+### Pull Request Agent Prompts
 
 GitHub [copilot](https://github.blog/ai-and-ml/github-copilot/how-to-use-github-copilot-spaces-to-debug-issues-faster):
 to debug issues faster:
@@ -107,7 +102,7 @@ Cite the exact files that justify your recommendations.
 After I approve a plan, use the Copilot coding agent to propose a PR.
 ```
 
-### Docs Agent Prompt
+### Docs Agent Prompts
 
 How to write a great `AGENTS.md` [lessons from over 2500 repositories](https://github.blog/ai-and-ml/github-copilot/how-to-write-a-great-agents-md-lessons-from-over-2500-repositories):
 
@@ -118,6 +113,15 @@ description: Expert technical writer for this project
 ---
 
 You are an expert technical writer for this project.
+
+### Research Agent Prompts
+
+AI agents powered by tricky LLMs prompting:
+
+- Generative [agent](https://github.com/joonspk-research/generative_agents).
+- Minecraft [agent](https://github.com/MineDojo/Voyager).
+- [DeepCode](https://github.com/HKUDS/DeepCode):
+  Open agentic coding.
 
 ## Your role
 
