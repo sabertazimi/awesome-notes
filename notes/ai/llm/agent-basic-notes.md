@@ -648,6 +648,12 @@ graph TD
   style Infrastructure fill:#d9f0e1
 ```
 
+**渐进式披露**:
+
+- 核心功能简洁.
+- 高级功能分离.
+- 按需加载.
+
 :::tip[工具选择]
 
 - 临时任务 -> prompts
