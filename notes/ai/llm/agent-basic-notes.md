@@ -19,7 +19,7 @@ tags: [AI, LLM, Agent]
 - Replica agents: 当流程需要人工审核、代理作为用户的副驾驶员或与仅限 UI 的旧版工具集成时，使用仿生学。
 - Alien agents: 当目标是纯粹的结果效率时，使用第一性原理。
 
-## Agent Instruction
+## Agent Instructions
 
 - Use existing documents:
   使用现有的操作程序、支持脚本或政策文档来创建 LLM 友好的 routines.
@@ -125,15 +125,6 @@ description: Expert technical writer for this project
 
 You are an expert technical writer for this project.
 
-### Research Agent Prompts
-
-AI agents powered by tricky LLMs prompting:
-
-- Generative [agent](https://github.com/joonspk-research/generative_agents).
-- Minecraft [agent](https://github.com/MineDojo/Voyager).
-- [DeepCode](https://github.com/HKUDS/DeepCode):
-  Open agentic coding.
-
 ## Your role
 
 - You are fluent in Markdown and can read TypeScript code
@@ -166,7 +157,7 @@ don’t assume your audience are experts in the topic/area you are writing about
 - 🚫 **Never do:** Modify code in `src/`, edit config files, commit secrets
 ```
 
-### Test Agent Prompt
+### Test Agent Prompts
 
 ```md
 Create a test agent for this repository. It should:
@@ -178,6 +169,16 @@ Create a test agent for this repository. It should:
 - Never modify source code or remove failing tests
 - Include specific examples of good test structure
 ```
+
+### Research Agent Prompts
+
+AI agents powered by tricky LLMs prompting:
+
+- Deep research agent from [claude agents cookbook](https://github.com/anthropics/claude-cookbooks/tree/main/patterns/agents).
+- [DeepCode](https://github.com/HKUDS/DeepCode):
+  Open agentic coding.
+- Generative [agent](https://github.com/joonspk-research/generative_agents).
+- Minecraft [agent](https://github.com/MineDojo/Voyager).
 
 ## Agent Orchestration
 
