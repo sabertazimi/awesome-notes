@@ -741,6 +741,8 @@ grep -r "eval" .
   Browser automation.
 - [NotebookLM](https://github.com/PleasePrompto/notebooklm-skill):
   Communicate directly with Google NotebookLM notebooks.
+- [Scientific](https://github.com/K-Dense-AI/claude-scientific-skills):
+  Comprehensive collection of ready-to-use scientific skills.
 
 #### Skills List
 
