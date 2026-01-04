@@ -791,6 +791,30 @@ it will extend Claude Code through the plugin system with:
 - [LifeAssistant](https://github.com/lout33/claude_life_assistant):
   Personal coach that remembers, notices patterns, and holds accountable.
 
+```bash
+/plugin marketplace add anthropics/claude-plugins-official
+```
+
+```bash
+/plugin marketplace add obra/superpowers-marketplace
+```
+
+```bash
+/plugin marketplace add sabertazimi/claude-code
+```
+
+```bash
+/plugin install frontend-design
+```
+
+```bash
+/plugin install superpowers@superpowers-marketplace
+```
+
+```bash
+/plugin install sabertaz-claude-code
+```
+
 #### Plugins List
 
 - [Anthropic](https://github.com/anthropics/claude-plugins-official):
