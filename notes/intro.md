@@ -125,14 +125,14 @@ Personal learning [Notes](https://notes.tazimi.dev): **awesome notes** for mysel
 
 #### CSS
 
-- [CSS Basic Notes](./web/css/css-basic-notes/)
-- [CSS Advanced Notes](./web/css/css-advanced-notes/)
-- [CSS Layout Notes](./web/css/css-layout-notes/)
-- [CSS Animation Notes](./web/css/css-animation-notes/)
-- [CSS Components Notes](./web/css/css-components-notes/)
-- [CSS Design Notes](./web/css/css-design-notes/)
-- [Bootstrap Basic Notes](./web/css/bootstrap-basic-notes/)
-- [Sass Basic Notes](./web/css/sass-basic-notes/)
+- [CSS Notes](./web/css/)
+- [CSS Components Notes](./web/css/components/)
+- [Bootstrap Notes](./web/css/bootstrap/)
+- [Sass Notes](./web/css/sass/)
+
+### Design
+
+- [Design Notes](./web/design/)
 
 #### HTML
 

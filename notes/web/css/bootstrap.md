@@ -6,7 +6,7 @@ authorImageURL: https://github.com/sabertazimi.png
 tags: [Web, CSS, Bootstrap]
 ---
 
-# Bootstrap Basic Notes
+# Bootstrap
 
 ## Custom Bootstrap Theme
 
