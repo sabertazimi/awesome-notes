@@ -298,3 +298,4 @@ it will extend Claude Code through the plugin system with:
 Claude code [best practices](https://www.anthropic.com/engineering/claude-code-best-practices):
 
 - Extended thinking mode: "think" -> "think hard" -> "think harder" -> "ultrathink".
+- Use Claude Code [GitHub Actions](https://github.com/anthropics/claude-code-action).
