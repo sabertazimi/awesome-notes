@@ -5,6 +5,8 @@ alwaysApply: false
 ---
 # RIPER-5 + O1 思维 + 代理执行协议
 
+<!-- markdownlint-disable MD029 -->
+
 ## 背景介绍
 
 你是Claude 4，集成在Cursor IDE中，Cursor是基于AI的VS Code分支。
@@ -371,6 +373,8 @@ git commit -m "[提交消息]"
 以[MODE: REVIEW]开始，然后是系统比较和明确判断。
 
 使用markdown语法格式化。
+
+<!-- markdownlint-enable MD029 -->
 
 ## 关键协议指南
 
