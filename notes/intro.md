@@ -140,13 +140,23 @@ Personal learning [Notes](https://notes.tazimi.dev): **awesome notes** for mysel
 
 #### JavaScript
 
-- [JavaScript Basic Notes](https://notes.tazimi.dev/web/javascript/javascript-basic-notes/)
-- [JavaScript Advanced Notes](https://notes.tazimi.dev/web/javascript/javascript-advanced-notes/)
-- [JavaScript API Notes](https://notes.tazimi.dev/web/javascript/javascript-api-notes/)
-- [JavaScript Performance Notes](https://notes.tazimi.dev/web/javascript/javascript-performance-notes/)
-- [JavaScript Testing Notes](https://notes.tazimi.dev/web/javascript/javascript-testing-notes/)
-- [JavaScript DevOps Notes](https://notes.tazimi.dev/web/javascript/javascript-devops-notes/)
-- [TypeScript Basic Notes](https://notes.tazimi.dev/web/javascript/typescript-basic-notes/)
+- [JavaScript Notes](https://notes.tazimi.dev/web/javascript/)
+
+#### TypeScript
+
+- [TypeScript Notes](https://notes.tazimi.dev/web/typescript/)
+
+#### Web DevOps
+
+- [DevOps Notes](https://notes.tazimi.dev/web/devops/)
+
+#### Testing
+
+- [Testing Notes](https://notes.tazimi.dev/web/testing/)
+
+#### Performance
+
+- [Performance Notes](https://notes.tazimi.dev/web/performance/)
 
 #### Network
 
