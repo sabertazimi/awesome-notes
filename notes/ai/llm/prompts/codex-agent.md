@@ -1,4 +1,4 @@
-# Codex Agent System Prompt
+# Codex Agent
 
 <!-- markdownlint-disable MD029 -->
 
