@@ -6,7 +6,7 @@ authorImageURL: https://github.com/sabertazimi.png
 tags: [Web, CSS, Design]
 ---
 
-# CSS Design Notes
+# Design
 
 ## CSS Framework Key Points
 

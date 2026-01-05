@@ -6,13 +6,11 @@ authorImageURL: https://github.com/sabertazimi.png
 tags: [Web, CSS, Sass]
 ---
 
-# Sass Basic Notes
+# Sass
 
-## Sass Basis
+## Variable
 
-### Variable
-
-#### Normal Variable
+### Normal Variable
 
 - start with `$`
 
@@ -24,11 +22,11 @@ h1 {
 }
 ```
 
-#### String Variable
+### String Variable
 
 - `#{$var}`: combine with string
 
-#### Nesting Variable
+### Nesting Variable
 
 refer to parent-selector, only use it on:
 
@@ -57,7 +55,7 @@ refer to parent-selector, only use it on:
 }
 ```
 
-#### List
+### List
 
 - `length($list)`.
 - `nth($list, $n)`.
@@ -66,7 +64,7 @@ refer to parent-selector, only use it on:
 - `list-separator($list)`
 - `append($list, $value, [$separator])`.
 
-#### Map
+### Map
 
 - `map-get($map, $key)`.
 - `map-merge($map, $map)`.
@@ -89,7 +87,7 @@ $colors: (
 }
 ```
 
-#### arguments list
+### arguments list
 
 ```scss
 @mixin dummy($a, $b, $c) {
@@ -119,13 +117,13 @@ $params: (
 @include dummy($params...);
 ```
 
-#### `!default` flag
+### `!default` flag
 
 only assign when variables hadn't been assigned
 
-### Directive
+## Directive
 
-#### Mixin and Include Directive
+### Mixin and Include Directive
 
 ```scss
 @mixin box-shadow($x, $y, $blur, $c) {
@@ -144,7 +142,7 @@ div {
 }
 ```
 
-#### If Else Directive
+### If Else Directive
 
 ```scss
 @mixin border-stroke($val) {
@@ -174,7 +172,7 @@ div {
 }
 ```
 
-#### for loop
+### for loop
 
 ```scss
 @for $i from 1 through 12 {
@@ -184,7 +182,7 @@ div {
 }
 ```
 
-#### while loop
+### while loop
 
 ```scss
 $x: 1;
@@ -197,7 +195,7 @@ $x: 1;
 }
 ```
 
-#### each
+### each
 
 ```scss
 @each $color in blue, red, green {
@@ -207,7 +205,7 @@ $x: 1;
 }
 ```
 
-#### import
+### import
 
 ```scss
 // import _variables.scss in main.scss
@@ -220,7 +218,7 @@ $x: 1;
 @import '~bootstrap/scss/bootstrap';
 ```
 
-#### extend
+### extend
 
 `@extend` is basically about moving selectors around:
 
@@ -281,7 +279,7 @@ $x: 1;
 }
 ```
 
-##### Media Queries with extend
+#### Media Queries with extend
 
 ```scss
 %foo {
@@ -327,11 +325,11 @@ $x: 1;
 }
 ```
 
-### Built-in Functions
+## Built-in Functions
 
 [Official Documentation](https://sass-lang.com/documentation/Sass/Script/Functions.html)
 
-#### Color
+### Color
 
 - `mix` is better than `lighten`/`darken`
 
@@ -345,7 +343,7 @@ $x: 1;
 }
 ```
 
-#### Math
+### Math
 
 - `round($number)`.
 - `ceil($number)`.
@@ -363,7 +361,7 @@ $length: $value * 1em;
 }
 ```
 
-#### type and unit
+### type and unit
 
 - `unit($length)`.
 - `unitless($length)`.

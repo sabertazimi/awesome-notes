@@ -10,8 +10,9 @@ tags: [Web, Performance]
 
 ## Code Performance
 
-- [JavaScript](./javascript.md) - Effective JavaScript, Memory Leak, Function/Loop/Math Performance
 - [DOM](./dom.md) - DOM Performance, Event Delegation, Layout/Paint
+- [JavaScript](./javascript.md) - Effective JavaScript, Memory Leak, Function/Loop/Math Performance
+- [CSS](./css.md) - CSS Performance, Layout/Paint
 
 ## Loading Performance
 

@@ -6,7 +6,7 @@ authorImageURL: https://github.com/sabertazimi.png
 tags: [Web, Performance, JavaScript]
 ---
 
-# JavaScript Performance
+# Effective JavaScript
 
 ## Memory Leak
 
