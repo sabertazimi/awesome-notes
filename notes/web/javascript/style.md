@@ -6,7 +6,7 @@ authorImageURL: https://github.com/sabertazimi.png
 tags: [Web, JavaScript, ECMAScript]
 ---
 
-# JavaScript Style Guide
+# Style Guide
 
 ## ESLint
 

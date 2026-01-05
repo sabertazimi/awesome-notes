@@ -6,7 +6,7 @@ authorImageURL: https://github.com/sabertazimi.png
 tags: [Web, TypeScript, Interface]
 ---
 
-# TypeScript Interface
+# Interface
 
 ```ts
 interface Name {

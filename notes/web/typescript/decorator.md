@@ -6,7 +6,7 @@ authorImageURL: https://github.com/sabertazimi.png
 tags: [Web, TypeScript, Decorator]
 ---
 
-# TypeScript Decorators
+# Decorators
 
 - Attaching to a class:
   access to the class prototype and its member properties.

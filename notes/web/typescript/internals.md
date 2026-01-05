@@ -6,7 +6,7 @@ authorImageURL: https://github.com/sabertazimi.png
 tags: [Web, TypeScript, Internals]
 ---
 
-# TypeScript Internals
+# Internals
 
 ## Type System
 

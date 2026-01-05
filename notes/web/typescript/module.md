@@ -6,7 +6,7 @@ authorImageURL: https://github.com/sabertazimi.png
 tags: [Web, TypeScript, Module]
 ---
 
-# TypeScript Modules
+# Modules
 
 [Module types search](https://microsoft.github.io/TypeSearch):
 

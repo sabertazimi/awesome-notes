@@ -6,7 +6,7 @@ authorImageURL: https://github.com/sabertazimi.png
 tags: [Web, JavaScript, ECMAScript, Primitive]
 ---
 
-# Primitive Types
+# Primitives
 
 ## TC39
 
