@@ -27,16 +27,11 @@ Personal learning [Notes](https://notes.tazimi.dev): **awesome notes** for mysel
 
 - [LLM](./ai/llm/large-language-model/)
 - [Prompt Engineering](./ai/llm/prompt-engineering/)
-- [RAG](./ai/llm/rag/)
 - [Agent](./ai/llm/agent/)
-- [Claude Code](./ai/llm/claude-code/)
-- [Cursor](./ai/llm/cursor/)
-- [MCP](./ai/llm/mcp/)
-- [Prompts](./ai/llm/prompts/)
 
 #### Theory
 
-- [AI](./ai/theory/ai-basic-notes/)
+- [Theory](./ai/theory/)
 
 ### ComputerScience
 
@@ -130,14 +125,14 @@ Personal learning [Notes](https://notes.tazimi.dev): **awesome notes** for mysel
 
 #### CSS
 
-- [CSS Notes](./web/css/)
-- [CSS Components Notes](./web/css/components/)
-- [Bootstrap Notes](./web/css/bootstrap/)
-- [Sass Notes](./web/css/sass/)
+- [CSS](./web/css/)
+- [CSS Components](./web/css/components/)
+- [Bootstrap](./web/css/bootstrap/)
+- [Sass](./web/css/sass/)
 
 ### Design
 
-- [Design Notes](./web/design/)
+- [Design](./web/design/)
 
 #### HTML
 
@@ -145,23 +140,23 @@ Personal learning [Notes](https://notes.tazimi.dev): **awesome notes** for mysel
 
 #### JavaScript
 
-- [JavaScript Notes](./web/javascript/)
+- [JavaScript](./web/javascript/)
 
 #### TypeScript
 
-- [TypeScript Notes](./web/typescript/)
+- [TypeScript](./web/typescript/)
 
 #### Web DevOps
 
-- [DevOps Notes](./web/devops/)
+- [DevOps](./web/devops/)
 
 #### Testing
 
-- [Testing Notes](./web/testing/)
+- [Testing](./web/testing/)
 
 #### Performance
 
-- [Performance Notes](./web/performance/)
+- [Performance](./web/performance/)
 
 #### Network
 
