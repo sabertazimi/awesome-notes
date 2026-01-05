@@ -118,9 +118,9 @@ After I approve a plan, use the Copilot coding agent to propose a PR.
 How to write a great `AGENTS.md` [lessons from over 2500 repositories](https://github.blog/ai-and-ml/github-copilot/how-to-write-a-great-agents-md-lessons-from-over-2500-repositories):
 
 1. States a clear **role**:
-  Defines who the agent is (expert technical writer),
-  what skills it has (Markdown, TypeScript),
-  and what it does (read code, write docs).
+   Defines who the agent is (expert technical writer),
+   what skills it has (Markdown, TypeScript),
+   and what it does (read code, write docs).
 2. Executable **commands**: Gives AI tools it can run (npm run docs:build and npx markdownlint docs/). Commands come first.
 3. **Project** knowledge: Specifies tech stack with versions (React 18, TypeScript, Vite, Tailwind CSS) and exact file locations.
 4. Real **examples**: Shows what good output looks like with actual code. No abstract descriptions.

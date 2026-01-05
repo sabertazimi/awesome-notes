@@ -12,7 +12,7 @@ Notes on Large Language Models, AI Agents, Prompt Engineering, and related tools
 
 ## Fundamentals
 
-- [LLM](./large-language-model) - Large Language Model fundamentals and concepts
+- [LLM](./large-language-model/) - Large Language Model fundamentals and concepts
 - [Prompt Engineering](./prompt-engineering/) - Prompt design and optimization techniques
 - [RAG](./rag/) - Retrieval Augmented Generation
 - [Agent](./agent/) - AI Agent architecture and patterns
