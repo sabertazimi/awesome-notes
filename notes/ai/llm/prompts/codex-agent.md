@@ -1,7 +1,5 @@
 # Codex Agent
 
-<!-- markdownlint-disable MD029 -->
-
 ## Instructions
 
 - The user will provide a task.
