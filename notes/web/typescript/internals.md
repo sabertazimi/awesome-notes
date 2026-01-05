@@ -139,15 +139,15 @@ logger(user) // Oops! `user.isSuperAdmin` is undefined.
 
 - [Template literal types](./literal.md#template-literal-types).
 - [Index signature](./signature.md#index-signature).
-- [Mapped types](./mapped.md#mapped-types).
-- [Conditional types](./conditional.md#conditional-types):
+- [Mapped types](./mapped.md).
+- [Conditional types](./conditional.md):
   - [Nested conditional types](./conditional.md#nested-conditional-types).
   - [Index conditional types](./conditional.md#index-conditional-types).
   - [Mapped conditional types](./conditional.md#mapped-conditional-types).
   - [Distributive conditional types](./conditional.md#distributive-conditional-types).
 - `infer` [inference types](./narrowing.md#type-inference).
 - `...` [rest types](./function.md#rest-parameters): `Items extends [infer Head, ...infer Tail]`.
-- [Recursive types](./generic.md#recursive-types).
+- [Recursive types](./utility.md#recursive-types).
 
 ### Type Gymnastics Examples
 
