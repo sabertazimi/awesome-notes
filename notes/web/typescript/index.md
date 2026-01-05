@@ -6,7 +6,7 @@ authorImageURL: https://github.com/sabertazimi.png
 tags: [Web, TypeScript]
 ---
 
-# TypeScript Notes
+# TypeScript
 
 ## Getting Started
 

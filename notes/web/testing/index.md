@@ -6,7 +6,7 @@ authorImageURL: https://github.com/sabertazimi.png
 tags: [Web, Testing]
 ---
 
-# Testing Notes
+# Testing
 
 ## Methodology
 

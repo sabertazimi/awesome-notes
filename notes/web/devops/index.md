@@ -6,7 +6,7 @@ authorImageURL: https://github.com/sabertazimi.png
 tags: [Web, DevOps]
 ---
 
-# DevOps Notes
+# DevOps
 
 ## Web Deployment
 
