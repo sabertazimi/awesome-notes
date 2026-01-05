@@ -25,175 +25,175 @@ Personal learning [Notes](https://notes.tazimi.dev): **awesome notes** for mysel
 
 #### LLM
 
-- [LLM Basic Notes](https://notes.tazimi.dev/ai/llm/llm-basic-notes/)
-- [Prompt Engineering Basic Notes](https://notes.tazimi.dev/ai/llm/prompt-engineering-basic-notes/)
-- [Agent Basic Notes](https://notes.tazimi.dev/ai/llm/agent-basic-notes/)
+- [LLM Basic Notes](./ai/llm/llm-basic-notes/)
+- [Prompt Engineering Basic Notes](./ai/llm/prompt-engineering-basic-notes/)
+- [Agent Basic Notes](./ai/llm/agent-basic-notes/)
 
 #### Theory
 
-- [AI Basic Notes](https://notes.tazimi.dev/ai/theory/ai-basic-notes/)
+- [AI Basic Notes](./ai/theory/ai-basic-notes/)
 
 ### ComputerScience
 
 #### Algorithms
 
-- [Algorithm Basic Notes](https://notes.tazimi.dev/cs/algorithms/algorithms-basic-notes/)
-- [OJ Basic Notes](https://notes.tazimi.dev/cs/algorithms/oj-basic-notes/)
+- [Algorithm Basic Notes](./cs/algorithms/algorithms-basic-notes/)
+- [OJ Basic Notes](./cs/algorithms/oj-basic-notes/)
 
 #### Architecture
 
-- [Architecture Basic Notes](https://notes.tazimi.dev/cs/architecture/architecture-basic-notes/)
-- [Graph Processing Basic Notes](https://notes.tazimi.dev/cs/architecture/graph-processing-basic-notes/)
+- [Architecture Basic Notes](./cs/architecture/architecture-basic-notes/)
+- [Graph Processing Basic Notes](./cs/architecture/graph-processing-basic-notes/)
 
 #### Compilers
 
-- [Compiler Basic Notes](https://notes.tazimi.dev/cs/compilers/compilers-basic-notes/)
+- [Compiler Basic Notes](./cs/compilers/compilers-basic-notes/)
 
 #### Database
 
-- [Database Basic Notes](https://notes.tazimi.dev/cs/database/database-basic-notes/)
+- [Database Basic Notes](./cs/database/database-basic-notes/)
 
 #### LaTeX
 
-- [LaTeX Basic Notes](https://notes.tazimi.dev/cs/latex/latex-basic-notes/)
+- [LaTeX Basic Notes](./cs/latex/latex-basic-notes/)
 
 #### Math
 
-- [Economics Basic Notes](https://notes.tazimi.dev/cs/math/economics-basic-notes/)
-- [Mahjong Basic Notes](https://notes.tazimi.dev/cs/math/mahjong-basic-notes/)
+- [Economics Basic Notes](./cs/math/economics-basic-notes/)
+- [Mahjong Basic Notes](./cs/math/mahjong-basic-notes/)
 
 #### Operating Systems
 
-- [Computer Systems: A Programmer's Perspective Basic Notes](https://notes.tazimi.dev/cs/operating-systems/csapp/)
-- [Operating System Basic Notes](https://notes.tazimi.dev/cs/operating-systems/operating-systems-basic-notes/)
+- [Computer Systems: A Programmer's Perspective Basic Notes](./cs/operating-systems/csapp/)
+- [Operating System Basic Notes](./cs/operating-systems/operating-systems-basic-notes/)
 
 #### Virtualization
 
-- [Virtualization Basic Notes](https://notes.tazimi.dev/cs/virtualization/virtualization-basic-notes/)
+- [Virtualization Basic Notes](./cs/virtualization/virtualization-basic-notes/)
 
 ### Programming
 
 #### Android
 
-- [Android Basic Notes](https://notes.tazimi.dev/programming/android/android-basic-notes/)
+- [Android Basic Notes](./programming/android/android-basic-notes/)
 
 #### DevOps
 
-- [Clean Code Basic Notes](https://notes.tazimi.dev/programming/devops/clean-code-basic-notes/)
-- [Clean Architecture Basic Notes](https://notes.tazimi.dev/programming/devops/clean-architecture-basic-notes/)
-- [Docker Basic Notes](https://notes.tazimi.dev/programming/devops/docker-basic-notes/)
+- [Clean Code Basic Notes](./programming/devops/clean-code-basic-notes/)
+- [Clean Architecture Basic Notes](./programming/devops/clean-architecture-basic-notes/)
+- [Docker Basic Notes](./programming/devops/docker-basic-notes/)
 
 #### Functional Programming
 
-- [Functional Programming Basic Notes](https://notes.tazimi.dev/programming/functional-programming/functional-programming-basic-notes/)
+- [Functional Programming Basic Notes](./programming/functional-programming/functional-programming-basic-notes/)
 
 #### Gaming
 
-- [Game Design Basic Notes](https://notes.tazimi.dev/programming/gaming/game-design-basic-notes/)
+- [Game Design Basic Notes](./programming/gaming/game-design-basic-notes/)
 
 #### Linux
 
-- [Linux Basic Notes](https://notes.tazimi.dev/programming/linux/linux-basic-notes/)
+- [Linux Basic Notes](./programming/linux/linux-basic-notes/)
 
 #### Tools
 
-- [CMake Basic Notes](https://notes.tazimi.dev/programming/tools/build-tools/cmake-basic-notes/)
-- [Git Basic Notes](https://notes.tazimi.dev/programming/tools/git/git-basic-notes/)
-- [Vim Basic Notes](https://notes.tazimi.dev/programming/tools/vim/vim-basic-notes/)
+- [CMake Basic Notes](./programming/tools/build-tools/cmake-basic-notes/)
+- [Git Basic Notes](./programming/tools/git/git-basic-notes/)
+- [Vim Basic Notes](./programming/tools/vim/vim-basic-notes/)
 
 ### Language
 
-- [Assembly Basic Notes](https://notes.tazimi.dev/language/assembly/assembly-basic-notes/)
-- [C Basic Notes](https://notes.tazimi.dev/language/c/c-basic-notes/)
-- [C++ Basic Notes](https://notes.tazimi.dev/language/cpp/cpp-basic-notes/)
-- [Go Basic Notes](https://notes.tazimi.dev/language/go/go-basic-notes/)
-- [Haskell Basic Notes](https://notes.tazimi.dev/language/haskell/haskell-basic-notes/)
-- [Java Basic Notes](https://notes.tazimi.dev/language/java/java-basic-notes/)
-- [Python Basic Notes](https://notes.tazimi.dev/language/python/python-basic-notes/)
-- [Rust Basic Notes](https://notes.tazimi.dev/language/rust/rust-basic-notes/)
-- [Verilog Basic Notes](https://notes.tazimi.dev/language/verilog/verilog-basic-notes/)
+- [Assembly Basic Notes](./language/assembly/assembly-basic-notes/)
+- [C Basic Notes](./language/c/c-basic-notes/)
+- [C++ Basic Notes](./language/cpp/cpp-basic-notes/)
+- [Go Basic Notes](./language/go/go-basic-notes/)
+- [Haskell Basic Notes](./language/haskell/haskell-basic-notes/)
+- [Java Basic Notes](./language/java/java-basic-notes/)
+- [Python Basic Notes](./language/python/python-basic-notes/)
+- [Rust Basic Notes](./language/rust/rust-basic-notes/)
+- [Verilog Basic Notes](./language/verilog/verilog-basic-notes/)
 
 ### Web
 
 #### Library
 
-- [Library List](https://notes.tazimi.dev/web/library/library-basic-notes/)
+- [Library List](./web/library/library-basic-notes/)
 
 #### Angular
 
-- [Angular Basic Notes](https://notes.tazimi.dev/web/angular/angular-basic-notes/)
+- [Angular Basic Notes](./web/angular/angular-basic-notes/)
 
 #### CSS
 
-- [CSS Basic Notes](https://notes.tazimi.dev/web/css/css-basic-notes/)
-- [CSS Advanced Notes](https://notes.tazimi.dev/web/css/css-advanced-notes/)
-- [CSS Layout Notes](https://notes.tazimi.dev/web/css/css-layout-notes/)
-- [CSS Animation Notes](https://notes.tazimi.dev/web/css/css-animation-notes/)
-- [CSS Components Notes](https://notes.tazimi.dev/web/css/css-components-notes/)
-- [CSS Design Notes](https://notes.tazimi.dev/web/css/css-design-notes/)
-- [Bootstrap Basic Notes](https://notes.tazimi.dev/web/css/bootstrap-basic-notes/)
-- [Sass Basic Notes](https://notes.tazimi.dev/web/css/sass-basic-notes/)
+- [CSS Basic Notes](./web/css/css-basic-notes/)
+- [CSS Advanced Notes](./web/css/css-advanced-notes/)
+- [CSS Layout Notes](./web/css/css-layout-notes/)
+- [CSS Animation Notes](./web/css/css-animation-notes/)
+- [CSS Components Notes](./web/css/css-components-notes/)
+- [CSS Design Notes](./web/css/css-design-notes/)
+- [Bootstrap Basic Notes](./web/css/bootstrap-basic-notes/)
+- [Sass Basic Notes](./web/css/sass-basic-notes/)
 
 #### HTML
 
-- [HTML Basic Notes](https://notes.tazimi.dev/web/html/html-basic-notes/)
+- [HTML Basic Notes](./web/html/html-basic-notes/)
 
 #### JavaScript
 
-- [JavaScript Notes](https://notes.tazimi.dev/web/javascript/)
+- [JavaScript Notes](./web/javascript/)
 
 #### TypeScript
 
-- [TypeScript Notes](https://notes.tazimi.dev/web/typescript/)
+- [TypeScript Notes](./web/typescript/)
 
 #### Web DevOps
 
-- [DevOps Notes](https://notes.tazimi.dev/web/devops/)
+- [DevOps Notes](./web/devops/)
 
 #### Testing
 
-- [Testing Notes](https://notes.tazimi.dev/web/testing/)
+- [Testing Notes](./web/testing/)
 
 #### Performance
 
-- [Performance Notes](https://notes.tazimi.dev/web/performance/)
+- [Performance Notes](./web/performance/)
 
 #### Network
 
-- [Network Basic Notes](https://notes.tazimi.dev/web/network/network-basic-notes/)
+- [Network Basic Notes](./web/network/network-basic-notes/)
 
 #### Node
 
-- [Express Basic Notes](https://notes.tazimi.dev/web/node/express-basic-notes/)
-- [GraphQL Basic Notes](https://notes.tazimi.dev/web/node/graphql-basic-notes/)
-- [Message Queue Basic Notes](https://notes.tazimi.dev/web/node/message-queue-basic-notes/)
-- [Node Basic Notes](https://notes.tazimi.dev/web/node/node-basic-notes/)
-- [Redis Basic Notes](https://notes.tazimi.dev/web/node/redis-basic-notes/)
+- [Express Basic Notes](./web/node/express-basic-notes/)
+- [GraphQL Basic Notes](./web/node/graphql-basic-notes/)
+- [Message Queue Basic Notes](./web/node/message-queue-basic-notes/)
+- [Node Basic Notes](./web/node/node-basic-notes/)
+- [Redis Basic Notes](./web/node/redis-basic-notes/)
 
 #### React
 
-- [React Basic Notes](https://notes.tazimi.dev/web/react/react-basic-notes/)
-- [React Advanced Notes](https://notes.tazimi.dev/web/react/react-advanced-notes/)
-- [React Hooks Notes](https://notes.tazimi.dev/web/react/react-hooks-notes/)
-- [React Router Basic Notes](https://notes.tazimi.dev/web/react/react-router-basic-notes/)
-- [Redux Basic Notes](https://notes.tazimi.dev/web/react/redux-basic-notes/)
+- [React Basic Notes](./web/react/react-basic-notes/)
+- [React Advanced Notes](./web/react/react-advanced-notes/)
+- [React Hooks Notes](./web/react/react-hooks-notes/)
+- [React Router Basic Notes](./web/react/react-router-basic-notes/)
+- [Redux Basic Notes](./web/react/redux-basic-notes/)
 
 #### Vue
 
-- [Vue Basic Notes](https://notes.tazimi.dev/web/vue/vue-basic-notes/)
-- [Vue Advanced Notes](https://notes.tazimi.dev/web/vue/vue-advanced-notes/)
+- [Vue Basic Notes](./web/vue/vue-basic-notes/)
+- [Vue Advanced Notes](./web/vue/vue-advanced-notes/)
 
 #### Electron
 
-- [Electron Basic Notes](https://notes.tazimi.dev/web/electron/electron-basic-notes/)
+- [Electron Basic Notes](./web/electron/electron-basic-notes/)
 
 #### jQuery
 
-- [jQuery Basic Notes](https://notes.tazimi.dev/web/jquery/jquery-basic-notes/)
+- [jQuery Basic Notes](./web/jquery/jquery-basic-notes/)
 
 #### Security
 
-- [Security Basic Notes](https://notes.tazimi.dev/web/security/security-basic-notes/)
+- [Security Basic Notes](./web/security/security-basic-notes/)
 
 ## License
 
