@@ -10,30 +10,30 @@ tags: [Web, CSS, Components]
 
 ## Layout Components
 
-- [Layout Utilities](layout.md)
+- [Layout Utilities](./layout.md)
 
 ## Navigation Components
 
-- [Navigation](navigation.md)
+- [Navigation](./navigation.md)
 
 ## Form Components
 
-- [Form](form.md)
+- [Form](./form.md)
 
 ## Interactive Components
 
-- [Interaction](interaction.md)
+- [Interaction](./interaction.md)
 
 ## Display Components
 
-- [Display](display.md)
+- [Display](./display.md)
 
 ## Visual Effects
 
-- [Background](background.md)
-- [Filter](filter.md)
-- [Shape](shape.md)
+- [Background](./background.md)
+- [Filter](./filter.md)
+- [Shape](./shape.md)
 
 ## Animation Components
 
-- [Animation](animation.md)
+- [Animation](./animation.md)

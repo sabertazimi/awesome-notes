@@ -3,7 +3,10 @@ description: 原型实现与设计稿还原规范
 globs:
 alwaysApply: false
 ---
+
 # 原型实现与设计稿还原规范
+
+<!-- markdownlint-disable MD029 -->
 
 进行原型实现或设计稿还原时，需要遵守以下准则：
 
@@ -191,6 +194,8 @@ alwaysApply: false
     - 考虑空数据状态的 UI 展示
     - 处理加载状态和错误状态
     - 提供合理的 loading 和 error 组件
+
+<!-- markdownlint-enable MD029 -->
 
 ## 代码检查清单
 

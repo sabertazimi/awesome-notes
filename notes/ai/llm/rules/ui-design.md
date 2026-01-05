@@ -3,6 +3,7 @@ description: UI 设计规范文档
 globs:
 alwaysApply: false
 ---
+
 # UI 设计规范文档
 
 ## 1. 设计原则
@@ -71,13 +72,13 @@ alwaysApply: false
 
 ### 4.2 栅格系统
 
-- 使用24栅格系统
+- 使用 24 栅格系统
 - 响应式断点：
-  - xs: <576px
-  - sm: ≥576px
-  - md: ≥768px
-  - lg: ≥992px
-  - xl: ≥1200px
+  - xs: `< 576px`
+  - sm: `≥ 576px`
+  - md: `≥ 768px`
+  - lg: `≥ 992px`
+  - xl: `≥ 1200px`
 
 ## 5. 组件规范
 
