@@ -1,0 +1,384 @@
+---
+author: Sabertazimi
+authorTitle: Web Developer
+authorURL: https://github.com/sabertazimi
+authorImageURL: https://github.com/sabertazimi.png
+tags: [AI, LLM, Agent]
+---
+
+# Agent
+
+## Agent Principles
+
+### First-Principles Agents
+
+从李世石与 AlphaGo 的围棋对战中的第 37 手,
+我们可以总结出[第一性原理](https://www.chasewhughes.com/writing/beyond-the-replica-the-case-for-first-principles-agents)
+智能体的基本原则:
+
+- Replica agents: 当流程需要人工审核、代理作为用户的副驾驶员或与仅限 UI 的旧版工具集成时，使用仿生学。
+- Alien agents: 当目标是纯粹的结果效率时，使用第一性原理。
+
+## Agent Instructions
+
+- Use existing documents:
+  使用现有的操作程序、支持脚本或政策文档来创建 LLM 友好的 routines.
+- Prompt agents to break down tasks:
+  提供更小、更清晰的步骤有助于最大限度地减少歧义, 并帮助模型更好地遵循指令.
+- Define clear actions:
+  确保 routine 中的每一步都对应一个特定的行动或输出.
+- Capture edge cases:
+  实际交互通常会产生决策点, 一个健壮的 routine 会预测常见的变化,
+  并包含关于如何通过条件步骤或分支来处理它们的指令, e.g. 在缺少所需信息时提供替代步骤.
+
+```md
+您是 LLM 智能体指令编写专家.
+请将以下帮助中心文档转换为一组清晰的指令, 以编号列表形式编写.
+该文档将成为 LLM 遵循的政策. 确保没有歧义, 并且指令是以智能体的指示形式编写的.
+要转换的帮助中心文档如下 {{help_center_doc}}
+```
+
+### Vibe Coding Development
+
+`Spec` → `Onboard` → `Direct` → `Verify` → `Integrate`.
+
+1. Spec the work:
+   - 目标: picking next highest-leverage goal
+   - 分解: breaking the work into small and verifiable slice (pull request)
+   - 标准: writing acceptance criteria, e.g. inputs, outputs, edge cases, UX constraints
+   - 风险: calling out risks up front, e.g. performance hot-spots, security boundaries, migration concerns
+2. Give agents context:
+   - 仓库: Repository conventions
+   - 组件: Component system, design tokens and patterns
+   - 约束: Defining constraints: what not to touch, what must stay backward compatible
+3. Direct agents `what`, not `how`:
+   - 工具: Assigning right tools
+   - 文件: Pointing relevant files and components
+   - 约束: Stating explicit guardrails, e.g. `don't change API shape`, `keep this behavior`, `no new deps`
+4. Verification and code review:
+   - 正确性 (correctness): edge cases, race conditions, error handling
+   - 性能 (performance): `N+1` queries, unnecessary re-renders, overfetching
+   - 安全性 (security): auth boundaries, injection, secrets, SSRF
+   - 测试 (tests): coverage for changed behaviors
+5. Integrate and ship:
+   - Break big work into tasks agents can complete reliably
+   - Merge conflicts
+   - Verify CI
+   - Stage roll-outs
+   - Monitor regressions
+
+### AI Agent Prompts
+
+[System prompts](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools) for AI tools and agents.
+
+OpenAI [Codex](https://openai.com/index/introducing-codex) [prompts](./prompts/codex-agent.md):
+
+- Instructions.
+- Git instructions.
+- `AGENTS.md` spec.
+- Citations instructions.
+
+### Coding Agent Prompts
+
+[Writing](https://github.com/agentsmd/agents.md)
+good [`AGENTS.md`](https://github.com/agentsmd/agents.md):
+
+- `AGENTS.md` should define your project's **WHY**, **WHAT**, and **HOW**.
+- **Less is more**.
+  Include as few instructions as reasonably possible in the file.
+- Keep the contents of your `AGENTS.md` **concise and universally applicable**.
+- Use **Progressive Disclosure**.
+  Don't tell Agent all the information to know, tell Agent when to needs, how to find and use it.
+- Agent is not a linter.
+  Use linters and code formatters,
+  and use other features like [Hooks](https://code.claude.com/docs/en/hooks) and [Slash Commands](https://code.claude.com/docs/en/slash-commands).
+- `AGENTS.md` is the highest leverage point of the harness, so avoid auto-generating it.
+  You should carefully craft its contents for best results.
+
+### Pull Request Agent Prompts
+
+GitHub [copilot](https://github.blog/ai-and-ml/github-copilot/how-to-use-github-copilot-spaces-to-debug-issues-faster):
+to debug issues faster:
+
+```md
+You are an experienced engineer working on this codebase.
+Always ground your answers in the linked docs and sources in this space.
+Before writing code, produce a 3–5 step plan that includes:
+
+- The goal
+- The approach
+- The execution steps
+
+Cite the exact files that justify your recommendations.
+After I approve a plan, use the Copilot coding agent to propose a PR.
+```
+
+### Docs Agent Prompts
+
+How to write a great `AGENTS.md` [lessons from over 2500 repositories](https://github.blog/ai-and-ml/github-copilot/how-to-write-a-great-agents-md-lessons-from-over-2500-repositories):
+
+1. States a clear **role**:
+  Defines who the agent is (expert technical writer),
+  what skills it has (Markdown, TypeScript),
+  and what it does (read code, write docs).
+2. Executable **commands**: Gives AI tools it can run (npm run docs:build and npx markdownlint docs/). Commands come first.
+3. **Project** knowledge: Specifies tech stack with versions (React 18, TypeScript, Vite, Tailwind CSS) and exact file locations.
+4. Real **examples**: Shows what good output looks like with actual code. No abstract descriptions.
+5. Three-tier **boundaries**: Set clear rules using always do, ask first, never do. Prevents destructive mistakes.
+
+> Role -> Tool -> Context -> Example -> Boundary
+
+### Test Agent Prompts
+
+```md
+Create a test agent for this repository. It should:
+
+- Have the persona of a QA software engineer.
+- Write tests for this codebase
+- Run tests and analyzes results
+- Write to “/tests/” directory only
+- Never modify source code or remove failing tests
+- Include specific examples of good test structure
+```
+
+### Research Agent Prompts
+
+AI agents powered by tricky LLMs prompting:
+
+- Deep research agent from [claude agents cookbook](https://github.com/anthropics/claude-cookbooks/tree/main/patterns/agents).
+- [DeepCode](https://github.com/HKUDS/DeepCode):
+  Open agentic coding.
+- Generative [agent](https://github.com/joonspk-research/generative_agents).
+- Minecraft [agent](https://github.com/MineDojo/Voyager).
+
+## Agent Orchestration
+
+单智能体系统 (Single-agent systems):
+
+```mermaid
+graph TD
+    A[Input] --> B[Agent]
+    B --> C[Output]
+    D[Instructions] --> B
+    E[Tools] --> B
+    F[Guardrails] --> B
+    G[Hooks] --> B
+```
+
+多智能体系统中心模式 (Multi-agent systems in manager pattern):
+其余智能体作为工具, 由中心智能体调用:
+
+```mermaid
+graph LR
+    A[Translate 'hello' to Spanish, French and Italian for me!] --> B[Manager]
+    C[...] --> B
+    B --> D[Task]
+    B --> E[Task]
+    B --> F[Task]
+    D --> G[Spanish agent]
+    E --> H[French agent]
+    F --> I[Italian agent]
+```
+
+```python
+from agents import Agent, Runner
+
+manager_agent = Agent(
+  name="manager_agent",
+  instructions=(
+    "您是一名翻译代理. 您使用给定的工具进行翻译."
+    "如果要求进行多次翻译, 您将调用相关工具."
+  ),
+  tools=[
+    spanish_agent.as_tool(
+      tool_name="translate_to_spanish",
+      tool_description="将用户的消息翻译成西班牙语",
+    ),
+    french_agent.as_tool(
+      tool_name="translate_to_french",
+      tool_description="将用户的消息翻译成法语",
+    ),
+    italian_agent.as_tool(
+      tool_name="translate_to_italian",
+      tool_description="将用户的消息翻译成意大利语",
+    ),
+  ],
+)
+
+async def main():
+  msg = input("Translate 'hello' to Spanish, French and Italian for me!")
+
+  orchestrator_output = await Runner.run(manager_agent, msg)
+
+  for message in orchestrator_output.new_messages:
+    print(f"翻译步骤: {message.content}")
+```
+
+多智能体系统去中心模式 (Multi-agent systems in decentralized pattern),
+多个代理作为对等体运行:
+
+```mermaid
+graph LR
+    A[Where is my order?] --> B[Triage]
+    B -->|Issues and Repairs| C[Issues and Repairs]
+    B -->|Sales| D[Sales]
+    B -->|Orders| E[Orders]
+    E --> F[On its way!]
+```
+
+```python
+from agents import Agent, Runner
+
+technical_support_agent = Agent(
+  name="Technical Support Agent",
+  instructions=(
+    "您提供解决技术问题、系统中断或产品故障排除的专家协助."
+  ),
+  tools=[search_knowledge_base]
+)
+
+sales_assistant_agent = Agent(
+  name="Sales Assistant Agent",
+  instructions=(
+    "您帮助企业客户浏览产品目录、推荐合适的解决方案并促成购买交易."
+  ),
+  tools=[initiate_purchase_order]
+)
+
+order_management_agent = Agent(
+  name="Order Management Agent",
+  instructions=(
+    "您协助客户查询订单跟踪、交付时间表以及处理退货或退款."
+  )
+)
+
+tools=[track_order_status, initiate_refund_process]
+
+triage_agent = Agent(
+  name="Triage Agent",
+  instructions="您作为第一个接触点, 评估客户查询并迅速将其引导至正确的专业代理.",
+  handoffs=[technical_support_agent, sales_assistant_agent, order_management_agent],
+)
+
+await Runner.run(triage_agent, input("您能提供我最近购买商品的配送时间表更新吗?"))
+```
+
+## Agent Guardrails
+
+构建防护措施:
+
+- 相关性分类器:
+  确保智能体响应保持在预期范围内, 通过标记偏离主题的查询.
+- 安全分类器:
+  检测试图利用系统漏洞的不安全输入 (越狱或提示注入).
+- PII 过滤器:
+  通过审查模型输出中任何潜在的个人身份信息 (PII), 防止不必要的个人身份信息泄露.
+- 内容审核:
+  标记有害或不当的输入 (仇恨言论、骚扰、暴力), 以保持安全、尊重的互动.
+- 工具安全措施:
+  通过评估您代理可用的每个工具的风险,
+  并根据只读与写入访问、可逆性、所需的账户权限和财务影响等因素分配低、中或高评级.
+  使用这些风险评级来触发自动化操作,
+  例如在高风险功能执行前暂停进行防护措施检查, 或在需要时升级到人工干预.
+- 基于规则的保护:
+  简单的确定性措施 (黑名单、输入长度限制、正则表达式过滤器) 以防止已知的威胁,
+  如禁止的术语或 SQL 注入.
+- 输出验证:
+  通过提示工程和内容检查确保响应与品牌价值一致, 防止可能损害品牌完整性的输出.
+
+```python
+from agents import (
+  Agent,
+  GuardrailFunctionOutput,
+  InputGuardrailTripwireTriggered,
+  RunContextWrapper,
+  Runner,
+  TResponseInputItem,
+  input_guardrail,
+  Guardrail,
+  GuardrailTripwireTriggered
+)
+from pydantic import BaseModel
+
+class ChurnDetectionOutput(BaseModel):
+  is_churn_risk: bool
+  reasoning: str
+
+churn_detection_agent = Agent(
+  name="Churn Detection Agent",
+  instructions="识别用户消息是否表示潜在的客户流失风险.",
+  output_type=ChurnDetectionOutput,
+)
+
+@input_guardrail
+async def churn_detection_tripwire(
+   ctx: RunContextWrapper[None],
+   agent: Agent,
+   input: str | list[TResponseInputItem]
+) -> GuardrailFunctionOutput:
+  result = await Runner.run(churn_detection_agent, input, context=ctx.context)
+
+  return GuardrailFunctionOutput(
+    output_info=result.final_output,
+    tripwire_triggered=result.final_output.is_churn_risk,
+  )
+
+customer_support_agent = Agent(
+  name="Customer support agent",
+  instructions="您是客户支持代理. 您帮助客户解决他们的问题.",
+  input_guardrails=[Guardrail(guardrail_function=churn_detection_tripwire)]
+)
+
+async def main():
+  # 这应该没问题
+  await Runner.run(customer_support_agent, "你好！")
+  print("你好消息已通过")
+
+  # 这应该触发防护措施
+  try:
+    await Runner.run(customer_support_agent, "我想取消订阅")
+    print("防护措施未触发 - 这是意料之外的")
+  except GuardrailTripwireTriggered:
+    print("流失检测防护措施已触发")
+```
+
+当超出失败阈值或高风险操作时, 触发人工干预计划, 是一项关键的安全保障措施:
+
+## Agent Tools
+
+### Instruction
+
+- [AGENTS.md](https://github.com/agentsmd/agents.md):
+  Open format for guiding coding agents.
+- [llms.txt](https://github.com/AnswerDotAI/llms-txt):
+  Helping language models use website.
+
+### RAG
+
+- [RAGFlow](https://github.com/infiniflow/ragflow):
+  Superior context layer for AI agents.
+
+### Project
+
+- [VibeKanban](http://github.com/BloopAI/vibe-kanban):
+  Run coding agents in parallel without conflicts, and perform code review.
+
+### Documentation
+
+- [DeepWiki](https://github.com/AsyncFuncAI/deepwiki-open).
+- [ZRead](https://zread.ai):
+  AI-powered github repository reader.
+
+## Agent Benchmarks
+
+[Benchmarks](https://blog.sshh.io/p/understanding-ai-benchmarks):
+
+- Aggregate: Don’t obsess over a 1-2% lead on one benchmark, focus on specific and comprehensive domain.
+- Relative: Compare within the same model family or lab, how did the score change from v1 to v2?
+- Verify: The only benchmark that matters at the end of the day is your workload.
+
+## Agents Reference
+
+- Vibe coding [prompts](https://docs.google.com/spreadsheets/d/1ngoQOhJqdguwNAilCl1joNwTje7FWWN9WiI2bo5VhpU).
+- Vibe coding [guide](https://github.com/tukuaiai/vibe-coding-cn).
+- Agent system [prompts](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools).
