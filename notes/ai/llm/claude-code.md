@@ -298,4 +298,6 @@ it will extend Claude Code through the plugin system with:
 Claude code [best practices](https://www.anthropic.com/engineering/claude-code-best-practices):
 
 - Extended thinking mode: "think" -> "think hard" -> "think harder" -> "ultrathink".
+- Plan mode: 对于复杂的任务, 使用 plan mode 先进行规划, 会比直接执行更高效.
+- Avoid `/compact`: dump plan and progress + `/clear` the state + restart from dump file.
 - Use Claude Code [GitHub Actions](https://github.com/anthropics/claude-code-action).
