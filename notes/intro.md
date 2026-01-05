@@ -25,9 +25,7 @@ Personal learning [Notes](https://notes.tazimi.dev): **awesome notes** for mysel
 
 #### LLM
 
-- [LLM](./ai/llm/large-language-model/)
-- [Prompt Engineering](./ai/llm/prompt-engineering/)
-- [Agent](./ai/llm/agent/)
+- [LLM](./ai/llm/)
 
 #### Theory
 

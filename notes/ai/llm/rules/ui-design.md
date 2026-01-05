@@ -3,6 +3,7 @@ description: UI 设计规范文档
 globs:
 alwaysApply: false
 ---
+
 # UI 设计规范文档
 
 ## 1. 设计原则
