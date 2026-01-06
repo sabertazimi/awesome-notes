@@ -1,9 +1,13 @@
 ---
-tags: [Web, Vue]
-sidebar_position: 25
+tags: [Web, Vue, Lifecycle]
+sidebar_position: 23
 ---
 
-# Mounting Workflow
+# Lifecycle
+
+![Lifecycle](./figures/lifecycle.png)
+
+## Mounting Workflow
 
 `new Vue()` -> 初始化 -> 编译 -> 渲染 -> 挂载 -> 更新:
 
@@ -42,6 +46,8 @@ sidebar_position: 25
     - `update`.
     - `remove`.
     - `destroy`.
+
+## Initialization
 
 ```ts
 const app = new Vue({ el: '#app', ...restOptionsAPI })
@@ -101,6 +107,70 @@ Vue.prototype._init = function (options?: object) {
 }
 ```
 
+## Instance Properties
+
+```ts
+// Vue.prototype._init: core/instance/init.js
+vm._uid = uid++ // 每个Vue实例都拥有一个唯一的 id
+vm._isVue = true // 这个表示用于避免Vue实例对象被观测(observed)
+vm.$options = options // 当前Vue实例的初始化选项, 注意: 这是经过 mergeOptions() 后的
+vm._renderProxy = vm // 渲染函数作用域代理
+vm._self = vm // 实例本身
+```
+
+```ts
+// initLifecycle(vm): core/instance/lifecycle.js
+vm.$parent = vmParent
+vm.$root = vmParent ? vmParent.$root : vm
+
+vm.$children = []
+vm.$refs = {}
+```
+
+```ts
+// initEvents(vm): core/instance/events.js
+vm._events = Object.create(null)
+vm._hasHookEvent = false
+```
+
+```ts
+// initRender(vm): core/instance/render.js
+vm._vnode = null // root of child tree
+vm._staticTrees = null // v-once cached trees
+
+vm.$vnode = vnode
+vm.$slots = slots
+vm.$scopedSlots = scopedSlots
+```
+
+```ts
+// initState(vm): core/instance/state.js
+vm._watchers = []
+vm._data = data
+```
+
+```ts
+// mountComponent(): core/instance/lifecycle.js
+vm.$el = el
+```
+
+```ts
+// initComputed(): core/instance/state.js
+vm._computedWatchers = Object.create(null)
+```
+
+```ts
+// initProps(): core/instance/state.js
+vm._props = {}
+```
+
+```ts
+// initProvide(): core/instance/inject.js
+vm._provided = provided
+```
+
+## Mounting Component
+
 `core/instance/lifecycle.js`:
 
 ```ts
@@ -146,6 +216,8 @@ export function mountComponent(
 }
 ```
 
+## Rendering
+
 `core/instance/render.js`:
 
 ```ts
@@ -163,7 +235,7 @@ Vue.prototype._render = function (): VNode {
   // render self
   const vnode = render.call(vm._renderProxy, vm.$createElement)
 
-  // return empty vnode in case render function errored out
+  // return empty vnode in case the render function errored out
   if (!(vnode instanceof VNode))
     vnode = createEmptyVNode()
 
@@ -255,10 +327,14 @@ export function createElement(
         vnode = createComponent(Ctor, data, context, children, tag)
       } else {
         // unknown or unlisted namespaced elements
+        // check at runtime because it may get assigned a namespace when its
+        // parent normalizes children
         vnode = new VNode(tag, data, children, undefined, undefined, context)
       }
     } else {
       // unknown or unlisted namespaced elements
+      // check at runtime because it may get assigned a namespace when its
+      // parent normalizes children
       vnode = new VNode(tag, data, children, undefined, undefined, context)
     }
   } else {
@@ -280,6 +356,8 @@ export function createElement(
 }
 ```
 
+## Updating
+
 `core/instance/lifecycle.js`:
 
 ```ts
@@ -291,7 +369,7 @@ Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
   vm._vnode = vnode
 
   // Vue.prototype.__patch__ is injected in entry points
-  // based on rendering backend used.
+  // based on the rendering backend used.
   if (!prevVnode) {
     // initial render
     vm.$el = vm.__patch__(vm.$el, vnode, hydrating, false /* removeOnly */)
@@ -315,5 +393,72 @@ Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
 
   // updated hook is called by scheduler
   // to ensure that children are updated in a parent's updated hook.
+}
+```
+
+## Vue Options Lifecycle
+
+`beforeCreate`/`created` in `core/instance/init.js`:
+
+- `beforeCreate` cannot access `props`/`data`/`methods`.
+- `created` can access `props`/`data`/`methods`.
+- `beforeCreate`/`created` cannot access DOM.
+
+`beforeMount`/`mounted` in `core/instance/lifecycle.js`:
+
+- 对于同步渲染的子组件, `mounted` 执行顺序为**先子后父**.
+- `mounted` is called for render-created child components in its inserted hook.
+
+`beforeDestroy`/`destroyed` in `core/instance/lifecycle.js`:
+
+- 调用 `beforeDestroy` 钩子函数.
+- 从 `parent` 的 `$children` 中删掉自身.
+- 删除 `watcher`.
+- 当前渲染的 VNode 执行销毁钩子函数.
+- 调用 `destroyed` 钩子函数.
+- 在 `$destroy` 的执行过程中,
+  会执行 `vm.__patch__(vm._vnode, null)` 触发子组件的销毁钩子函数 (递归),
+  `destroyed` 钩子函数执行顺序为**先子后父**.
+
+## Vue Composition Lifecycle
+
+```ts
+const currentInstance = null
+
+function mountComponent(vnode, container, anchor) {
+  const componentOptions = vnode.type
+  const { setup, data, props, attrs, slots } = componentOptions
+  const instance = {
+    state: reactive(data),
+    props: shallowReadonly(props),
+    isMounted: false,
+    subTree: null,
+    slots,
+    mounted: [],
+  }
+
+  const setupContext = { attrs, slots }
+  setCurrentInstance(instance)
+
+  const setupResult = setup(allowReadonly(instance.props), setupContext)
+  setCurrentInstance(null)
+
+  effect(
+    () => {
+      const subTree = render.call(renderContext, renderContext)
+
+      if (!instance.mounted)
+        instance.mounted?.forEach(hook => hook.call(renderContext))
+    },
+    {
+      scheduler: queueJob,
+    }
+  )
+}
+
+function onMounted(fn) {
+  if (currentInstance)
+    currentInstance.mounted.push(fn)
+  else console.error('`onMounted()` can only be called in `setup()`.')
 }
 ```
