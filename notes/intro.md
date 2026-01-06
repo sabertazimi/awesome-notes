@@ -21,177 +21,61 @@ Personal learning [Notes](https://notes.tazimi.dev): **awesome notes** for mysel
 
 ## Notes
 
-### AI
-
-#### LLM
-
-- [LLM](./ai/llm/)
-
-#### Theory
-
-- [Theory](./ai/theory/)
-
-### ComputerScience
-
-#### Algorithms
-
-- [Algorithm](./cs/algorithms/algorithms-basic-notes/)
-- [OJ](./cs/algorithms/oj-basic-notes/)
-
-#### Architecture
-
-- [Architecture](./cs/architecture/architecture-basic-notes/)
-- [Graph Processing](./cs/architecture/graph-processing-basic-notes/)
-
-#### Compilers
-
-- [Compiler](./cs/compilers/compilers-basic-notes/)
-
-#### Database
-
-- [Database](./cs/database/database-basic-notes/)
-
-#### LaTeX
-
-- [LaTeX](./cs/latex/latex-basic-notes/)
-
-#### Math
-
-- [Economics](./cs/math/economics-basic-notes/)
-- [Mahjong](./cs/math/mahjong-basic-notes/)
-
-#### Operating Systems
-
-- [Computer Systems: A Programmer's Perspective](./cs/operating-systems/csapp/)
-- [Operating System](./cs/operating-systems/operating-systems-basic-notes/)
-
-#### Virtualization
-
-- [Virtualization](./cs/virtualization/virtualization-basic-notes/)
-
-### Programming
-
-#### Android
-
-- [Android](./programming/android/android-basic-notes/)
-
-#### DevOps
-
-- [Clean Code](./programming/devops/clean-code-basic-notes/)
-- [Clean Architecture](./programming/devops/clean-architecture-basic-notes/)
-- [Docker](./programming/devops/docker-basic-notes/)
-
-#### Functional Programming
-
-- [Functional Programming](./programming/functional-programming/functional-programming-basic-notes/)
-
-#### Gaming
-
-- [Game Design](./programming/gaming/game-design-basic-notes/)
-
-#### Linux
-
-- [Linux](./programming/linux/linux-basic-notes/)
-
-#### Tools
-
-- [CMake](./programming/tools/build-tools/cmake-basic-notes/)
-- [Git](./programming/tools/git/git-basic-notes/)
-- [Vim](./programming/tools/vim/vim-basic-notes/)
-
-### Language
-
-- [Assembly](./language/assembly/assembly-basic-notes/)
-- [C](./language/c/c-basic-notes/)
-- [C++](./language/cpp/cpp-basic-notes/)
-- [Go](./language/go/go-basic-notes/)
-- [Haskell](./language/haskell/haskell-basic-notes/)
-- [Java](./language/java/java-basic-notes/)
-- [Python](./language/python/python-basic-notes/)
-- [Rust](./language/rust/rust-basic-notes/)
-- [Verilog](./language/verilog/verilog-basic-notes/)
-
-### Web
-
-#### Library
-
-- [Library List](./web/library/library-basic-notes/)
-
-#### Angular
-
-- [Angular](./web/angular/angular-basic-notes/)
-
-#### CSS
-
-- [CSS](./web/css/)
-- [CSS Components](./web/css/components/)
-- [Bootstrap](./web/css/bootstrap/)
-- [Sass](./web/css/sass/)
-
-### Design
-
-- [Design](./web/design/)
-
-#### HTML
-
-- [HTML](./web/html/html-basic-notes/)
-
-#### JavaScript
-
-- [JavaScript](./web/javascript/)
-
-#### TypeScript
-
-- [TypeScript](./web/typescript/)
-
-#### Web DevOps
-
-- [DevOps](./web/devops/)
-
-#### Testing
-
-- [Testing](./web/testing/)
-
-#### Performance
-
-- [Performance](./web/performance/)
-
-#### Network
-
-- [Network](./web/network/network-basic-notes/)
-
-#### Node
-
-- [Express](./web/node/express-basic-notes/)
-- [GraphQL](./web/node/graphql-basic-notes/)
-- [Message Queue](./web/node/message-queue-basic-notes/)
-- [Node](./web/node/node-basic-notes/)
-- [Redis](./web/node/redis-basic-notes/)
-
-#### React
-
-- [React](./web/react/react-basic-notes/)
-- [React Advanced](./web/react/react-advanced-notes/)
-- [React Hooks](./web/react/react-hooks-notes/)
-- [React Router](./web/react/react-router-basic-notes/)
-- [Redux](./web/react/redux-basic-notes/)
-
-#### Vue
-
-- [Vue](./web/vue/vue-basic-notes/)
-- [Vue Advanced](./web/vue/vue-advanced-notes/)
-
-#### Electron
-
-- [Electron](./web/electron/electron-basic-notes/)
-
-#### jQuery
-
-- [jQuery](./web/jquery/jquery-basic-notes/)
-
-#### Security
-
-- [Security](./web/security/security-basic-notes/)
+```bash
+notes
+├── ai
+│   ├── llm
+│   └── theory
+├── cs
+│   ├── algorithms
+│   ├── architecture
+│   ├── compilers
+│   ├── database
+│   ├── graph
+│   ├── latex
+│   ├── math
+│   ├── operating-systems
+│   └── virtualization
+├── intro.md
+├── language
+│   ├── assembly
+│   ├── c
+│   ├── cpp
+│   ├── go
+│   ├── haskell
+│   ├── java
+│   ├── python
+│   ├── rust
+│   └── verilog
+├── programming
+│   ├── android
+│   ├── devops
+│   ├── functional-programming
+│   ├── gaming
+│   ├── linux
+│   └── tools
+└── web
+    ├── angular
+    ├── css
+    ├── design
+    ├── devops
+    ├── electron
+    ├── graphql
+    ├── html
+    ├── javascript
+    ├── jquery
+    ├── library
+    ├── message-queue
+    ├── network
+    ├── node
+    ├── performance
+    ├── react
+    ├── redis
+    ├── security
+    ├── testing
+    ├── typescript
+    └── vue
+```
 
 ## License
 

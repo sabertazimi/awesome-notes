@@ -1,4 +1,5 @@
 ---
+sidebar_position: 32
 author: Sabertazimi
 authorTitle: Web Developer
 authorURL: https://github.com/sabertazimi
@@ -146,7 +147,7 @@ alert(element.getAttribute('align')) // "left"
 ```
 
 Further reading:
-[DOM properties reflection on HTML attributes](../html/html-basic-notes.md#dom-properties-reflection).
+[DOM properties reflection on HTML attributes](../html/html.md#dom-properties-reflection).
 
 ### DOM Text Node
 

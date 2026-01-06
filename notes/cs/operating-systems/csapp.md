@@ -6,7 +6,7 @@ authorImageURL: https://github.com/sabertazimi.png
 tags: [CS, System, OS, Architecture]
 ---
 
-# Computer Systems: A Programmer's Perspective Basic Notes
+# Computer Systems: A Programmer's Perspective
 
 ## 机器码与进制转换
 
