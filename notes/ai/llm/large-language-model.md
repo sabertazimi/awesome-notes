@@ -81,6 +81,10 @@ Generative videos as world models simulator.
 - Instruction following.
 - Step-by-step reasoning.
 
+## Group Relative Policy Optimization
+
+- GRPO [tricks](https://cameronrwolfe.substack.com/p/grpo-tricks).
+
 ## LLM Toolchain
 
 ### LangChain
