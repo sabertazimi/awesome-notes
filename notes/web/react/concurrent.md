@@ -1,9 +1,9 @@
 ---
 sidebar_position: 8
-tags: [Web, React, Asynchronous, Suspense]
+tags: [Web, React, Suspense]
 ---
 
-# Async
+# Concurrent
 
 ## Concurrent Features
 
