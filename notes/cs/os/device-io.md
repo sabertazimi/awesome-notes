@@ -53,7 +53,7 @@ ssize_t rio_read_n(int fd, void *usr_buf, size_t n) {
         buf_p += n_read; // remove data from buf_p
     }
 
-    return (n - left);
+    return (n - n_left);
 }
 
 ssize_t rio_write_n(int fd, void *usr_buf, size_t n) {

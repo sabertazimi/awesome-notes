@@ -207,7 +207,7 @@ void load_elf_tables(int argc, char *argv[]) {
   /* Load section header string table */
   char *section_header_string_table = malloc(sh[elf->e_shstrndx].sh_size);
   fseek(fp, sh[elf->e_shstrndx].sh_offset, SEEK_SET);
-  ret = fread(section_header_string_table  sh[elf->e_shstrndx].sh_size, 1, fp);
+  ret = fread(section_header_string_table, sh[elf->e_shstrndx].sh_size, 1, fp);
   assert(ret == 1);
 
   int i;
@@ -232,7 +232,7 @@ void load_elf_tables(int argc, char *argv[]) {
   }
 
   free(sh);
-  free(section_header_string_table ;
+  free(section_header_string_table);
 
   assert(strtab != NULL && symtab != NULL);
 

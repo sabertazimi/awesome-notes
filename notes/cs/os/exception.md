@@ -85,7 +85,7 @@ int main(void) {
         unix_error("signal error");
     }
 
-    for (i = 0; i < 3; I++) {
+    for (i = 0; i < 3; i++) {
         pid = fork();
 
         if (pid ==0) {
@@ -143,7 +143,7 @@ int main(int argc, char **argv) {
     int pid;
     sigset_t mask;
 
-    signal(SIGCHLD, handler;)
+    signal(SIGCHLD, handler);
     init_job();
 
     while (1) {

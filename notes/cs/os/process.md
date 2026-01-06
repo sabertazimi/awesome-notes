@@ -112,7 +112,7 @@ int main(void) {
     // parent reaps(回收) N children in order
     i = 0;
     while((ret_pid = waitpid(pid[i++], &status, 0)) > 0) {
-        if (WIFEXITED(statue)) {
+        if (WIFEXITED(status)) {
             printf("child: %d terminated normally with exit status=%d\n",
               ret_pid, WEXITSTATUS(status));
         } else {
