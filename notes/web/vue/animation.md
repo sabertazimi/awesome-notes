@@ -204,7 +204,6 @@ transition JavaScript hooks helps a lot.
   @leave-cancelled="leaveCancelled"
   :css="false"
 >
-  >
   <div class="card" v-for="card in cards" :key="card.id">
     <p>{{ card.title }}</p>
   </div>

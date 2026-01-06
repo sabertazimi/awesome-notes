@@ -29,7 +29,7 @@ const store = createStore<State>({
   },
 })
 
-const useAppStore = () => useStore < State >> (key)
+const useAppStore = () => useStore<State>(key)
 
 export { key, useAppStore }
 export type { State }
