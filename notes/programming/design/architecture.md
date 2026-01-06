@@ -1,8 +1,8 @@
 ---
-tags: [Programming, DevOps, Design Pattern, Clean Architecture]
+tags: [Programming, DevOps, Design Pattern, Architecture]
 ---
 
-# Clean Architecture
+# Architecture
 
 ![Clean Architecture](./figures/clean-architecture.png 'Clean Architecture')
 
@@ -69,7 +69,7 @@ Domain 层是领域模型系统的核心,
   `I = 0` 表示不依赖任何模块 (最稳定),
   `I = 1` 表示不被任何模块依赖 (最不稳定).
 
-## 高并发系统设计
+## High Concurrency Design
 
 ### Concurrent Code Layer
 
@@ -98,7 +98,7 @@ Domain 层是领域模型系统的核心,
 - Data PreFetch
 - Multi-Level Caches
 
-## 高可用系统设计
+## High Availability Design
 
 ### Resource Isolation
 
