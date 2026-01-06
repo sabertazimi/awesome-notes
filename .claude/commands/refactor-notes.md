@@ -55,7 +55,7 @@ description: 重构大笔记文件，进行扁平化拆分
    - 创建 figures 子目录（`Bash`）
    - 移动图片到对应子目录（`Bash`）
    - 使用 `Write` 创建新文件，包含：
-     - 调整后的 frontmatter（标题、标签）
+     - 调整后的 frontmatter（`sidebar_position`、标题、标签）
      - 原 H2-H4 内容
      - 更新后的图片路径
    - 创建索引文件
@@ -63,6 +63,7 @@ description: 重构大笔记文件，进行扁平化拆分
 4. **验证与清理**：
    - [ ] 使用 `Grep` 检查并修复内部链接
    - [ ] 验证所有图片路径已更新
+   - [ ] 验证索引文件中列出的顺序与 sidebar_position 顺序一致
    - [ ] 运行 `pnpm build` 确保构建成功
    - [ ] 运行 `pnpm lint:notes` 确保 markdown 格式正确
    - [ ] 手动检查生成的索引文件
@@ -71,6 +72,6 @@ description: 重构大笔记文件，进行扁平化拆分
 
 ## 注意事项
 
-- 保持原始 frontmatter 格式，仅调整 title 和 tags
+- 保持原始 frontmatter 格式，仅调整 sidebar_position、title 和 tags
 - 图片路径格式：`./figures/subdirectory/filename.ext`
 - 提交时遵循项目的 Conventional Commits 规范
