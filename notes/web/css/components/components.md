@@ -1,9 +1,5 @@
 ---
 sidebar_position: 30
-author: Sabertazimi
-authorTitle: Web Developer
-authorURL: https://github.com/sabertazimi
-authorImageURL: https://github.com/sabertazimi.png
 tags: [Web, CSS, Components]
 ---
 
