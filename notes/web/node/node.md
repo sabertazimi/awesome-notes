@@ -1,9 +1,4 @@
 ---
-sidebar_position: 0
-author: Sabertazimi
-authorTitle: Web Developer
-authorURL: https://github.com/sabertazimi
-authorImageURL: https://github.com/sabertazimi.png
 tags: [Web, Node.js]
 ---
 

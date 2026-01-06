@@ -141,7 +141,7 @@ server.listen(8000)
 const net = require('node:net')
 
 const chatServer = net.createServer()
-// 用于检测僵尸客户端,用于及时清楚僵尸客户端
+// 用于检测僵尸客户端,用于及时清除僵尸客户端
 const clientList = []
 
 chatServer.on('connection', (client) => {
@@ -175,7 +175,7 @@ function broadcast(message, client) {
     }
   }
 
-  // 清楚僵尸客户端
+  // 清除僵尸客户端
   for (let i = 0; i < cleanup.length; i += 1)
     clientList.splice(clientList.indexOf(cleanup[i]), 1)
 }

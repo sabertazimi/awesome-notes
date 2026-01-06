@@ -15,12 +15,12 @@ tags: [Web, Node.js, NPM]
 
 ```bash
 npm config set disturl https://npmmirror.com/mirrors/node/
-npm config set chromedriver_cdnurl http://npmmirror.com/mirrors/chromedriver/
+npm config set chromedriver_cdnurl https://npmmirror.com/mirrors/chromedriver/
 npm config set electron_mirror https://npmmirror.com/mirrors/electron/
 npm config set electron_builder_binaries_mirror https://npmmirror.com/mirrors/electron-builder-binaries/
-npm config set operadriver_cdnurl http://npmmirror.com/mirrors/operadriver/
+npm config set operadriver_cdnurl https://npmmirror.com/mirrors/operadriver/
 npm config set phantomjs_cdnurl https://npmmirror.com/mirrors/phantomjs/
-npm config set profiler_binary_host_mirror http://npmmirror.com/mirrors/node-inspector/
+npm config set profiler_binary_host_mirror https://npmmirror.com/mirrors/node-inspector/
 npm config set puppeteer_download_host https://npmmirror.com/mirrors/
 npm config set python_mirror https://npmmirror.com/mirrors/python/
 npm config set robotjs_binary_host https://npmmirror.com/mirrors/robotjs/

@@ -81,7 +81,7 @@ Modify package in `node_modules` conveniently:
 - After modify source code of `package`,
   run `yarn patch-commit /tmp/xfs-xxxxxxxx/user --save`.
 
-## Yarn Berry Read World Case
+## Yarn Berry Real World Case
 
 - [Gatsby](https://github.com/gatsbyjs/gatsby):
   yarn 1 with `.yarn/` directory.
