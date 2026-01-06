@@ -49,3 +49,14 @@ tags: [Web, React]
 
 - [Toolchain](./toolchain.md) - Build tools and dev environment
 - [CRA](./cra.md) - Create React App
+
+## Internals
+
+- [Core](./core.md) - React architecture, virtual DOM, and core workflow
+- [Scheduler](./scheduler.md) - Task scheduling and time slicing
+- [Fiber](./fiber.md) - Fiber architecture and data structures
+- [Reconciler](./reconciler.md) - Reconciliation algorithm
+- [Render](./render.md) - Render workflow
+- [Update](./update.md) - Update workflow
+- [Diff](./diff.md) - Diff workflow
+- [Commit](./commit.md) - Commit workflow
