@@ -20,6 +20,12 @@ tags: [AI, LLM, Agent]
 - Replica agents: 当流程需要人工审核、代理作为用户的副驾驶员或与仅限 UI 的旧版工具集成时，使用仿生学。
 - Alien agents: 当目标是纯粹的结果效率时，使用第一性原理。
 
+### Asymmetry of Verification and Verifiers Law
+
+[Asymmetry of verification and verifiers law](https://www.jasonwei.net/blog/asymmetry-of-verification-and-verifiers-law):
+
+所有可解决且易于验证的问题, 都将被 AI 解决.
+
 ## Agent Instructions
 
 - Use existing documents:
