@@ -33,3 +33,4 @@ tags: [Web, TypeScript]
 
 - [Decorator](./decorator.md) - Decorators
 - [Internals](./internals.md) - Type System, TypeScript Internals
+- [Performance](./performance.md) - TypeScript Performance
