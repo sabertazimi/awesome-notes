@@ -19,7 +19,7 @@ tags: [Web, React]
 
 ## Advanced Topics
 
-- [Async](./async.md) - Suspense, concurrent features, data fetching
+- [Concurrent](./concurrent.md) - Suspense, concurrent features, data fetching
 - [Server Components](./server-components.md) - React Server Components
 - [Refs](./refs.md) - Refs and forward refs
 - [Router](./router.md) - React Router guide

@@ -1,9 +1,9 @@
 ---
-tags: [Web, Vue, Asynchronous, Suspense]
+tags: [Web, Vue, Suspense]
 sidebar_position: 14
 ---
 
-# Async
+# Concurrent
 
 ## Async Component
 

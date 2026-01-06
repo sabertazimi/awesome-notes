@@ -16,7 +16,7 @@ These notes cover both Vue 2 (Options API) and Vue 3 (Composition API), includin
 - [Components](./components.md) - Computed properties, slots, provide/inject
 - [Composition API](./composition-api.md) - Setup, lifecycle, reactivity
 - [Animation](./animation.md) - Transitions and animation system
-- [Async](./async.md) - Async component, suspense
+- [Concurrent](./concurrent.md) - Async component, suspense
 - [Keep Alive and Teleport](./keep-alive-teleport.md) - Component caching and DOM teleportation
 - [Router](./router.md) - Vue Router guide
 - [Vuex](./vuex.md) - Vuex for state management
