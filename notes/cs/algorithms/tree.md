@@ -259,8 +259,7 @@ Hibbard Deletion
      * @throws IllegalArgumentException if {@code key} is {@code null}
      */
     public void delete(Key key) {
-        if (key == null) throw new IllegalArgumentException("argument to
-        delete() is null");
+        if (key == null) throw new IllegalArgumentException("argument to delete() is null");
         if (!contains(key)) return;
 
         // if both children of root are black, set root to red

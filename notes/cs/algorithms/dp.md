@@ -83,7 +83,7 @@ int dfs(int pos, int state, bool flag) {
         return state == target_state;
     }
     if (!exception && ~f[pos][state]) {
-        return f[pos][state]
+        return f[pos][state];
     }
 
     int ans = 0;
