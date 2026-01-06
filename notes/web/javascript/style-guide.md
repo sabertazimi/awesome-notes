@@ -1,6 +1,6 @@
 ---
 sidebar_position: 29
-tags: [Web, JavaScript, ECMAScript]
+tags: [Web, JavaScript, ECMAScript, Style Guide]
 ---
 
 # Style Guide

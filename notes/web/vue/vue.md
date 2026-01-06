@@ -19,7 +19,7 @@ These notes cover both Vue 2 (Options API) and Vue 3 (Composition API), includin
 - [Async](./async.md) - Async component, suspense
 - [Keep Alive and Teleport](./keep-alive-teleport.md) - Component caching and DOM teleportation
 - [Router](./router.md) - Vue Router guide
-- [Vuex](./vuex.md) - State management
+- [Vuex](./vuex.md) - Vuex for state management
 - [Toolchain](./toolchain.md) - Vite, CLI
 
 ## Advanced Internals

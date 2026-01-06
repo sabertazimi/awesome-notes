@@ -1,14 +1,9 @@
 ---
+sidebar_position: 11
 tags: [Web, React, Router]
 ---
 
-# React Router Basic Notes
-
-## Router and Route
-
-parent routes are active when child routes are active
-
-### Basic Usage
+# Router
 
 ```tsx
 import {
@@ -42,7 +37,7 @@ class App extends Component {
 }
 ```
 
-### Nested Route
+## Nested Route
 
 Key Notes: In component of parent route, should render `{this.props.children}`.
 
@@ -69,7 +64,7 @@ render(
 - In `App.js`: `render() { return (<div>... {this.props.children}</ div>); }`.
 - In `Repos.js`: `render() { return (<div>... {this.props.children}</ div>); }`.
 
-### Private Route
+## Private Route
 
 ```tsx
 import { Redirect, Route } from 'react-router-dom'
@@ -107,7 +102,7 @@ export default function PrivateRoute({
 }
 ```
 
-### URL Params
+## URL Params
 
 ```tsx
 import { Route } from 'react-router-dom'
@@ -129,7 +124,7 @@ export default function Repo() {
 }
 ```
 
-### Component Props
+## Component Props
 
 - subRoutes.
 - id/size.
@@ -149,7 +144,7 @@ export default function RenderRoute({
 }
 ```
 
-### Link and URL Props
+## Link and URL Props
 
 ```tsx
 import Component from './Component'
@@ -168,11 +163,11 @@ export default function App() {
 }
 ```
 
-### Clean URLs
+## Clean URLs
 
 Switch from `hashHistory` to `browserHistory`.
 
-### Change Route
+## Change Route
 
 - `onEnter = { () => store.dispatch(createRouteAction(params))}`.
 - Return `<Redirect />` conditionally and `withRouter` wrapper (`this.props.history.push('nextURL')`).
@@ -525,6 +520,6 @@ function navigate(href) {
 }
 ```
 
-## Reference
+## React Router Reference
 
 - [React Router Tutorial](https://www.youtube.com/playlist?list=PLqrUy7kON1mfJ1cQfJJ1FiULLNngvlFTD)

@@ -47,7 +47,7 @@ tags: [Web, CSS]
 
 ## CSS Best Practices
 
-- [Style Guide](./style.md)
+- [Style Guide](./style-guide.md)
 - [Accessibility](./a11y.md)
 - [Hacks](./hacks.md)
 

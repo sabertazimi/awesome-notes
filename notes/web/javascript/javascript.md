@@ -70,7 +70,7 @@ tags: [Web, JavaScript, ECMAScript]
 
 ## Style Guide
 
-- [Style](./style.md) - JavaScript Style Guide
+- [Style Guide](./style-guide.md) - JavaScript Style Guide
 
 ## Engine
 

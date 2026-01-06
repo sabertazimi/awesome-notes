@@ -1,6 +1,6 @@
 ---
 sidebar_position: 27
-tags: [Web, CSS]
+tags: [Web, CSS, Style Guide]
 ---
 
 # Style Guide

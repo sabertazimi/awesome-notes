@@ -5,8 +5,6 @@ sidebar_position: 16
 
 # Router
 
-- [Composition API Reference](https://next.router.vuejs.org/guide/advanced/composition-api.html)
-
 ## Basic Routes
 
 ```ts
@@ -73,6 +71,8 @@ we cannot directly access `this.$router` or `this.$route` anymore.
 :::
 
 ## Routes Composition API
+
+[Composition API](https://next.router.vuejs.org/guide/advanced/composition-api.html):
 
 ```ts
 import type { RouteRecordRaw } from 'vue-router'

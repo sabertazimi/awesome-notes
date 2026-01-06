@@ -1,8 +1,9 @@
 ---
+sidebar_position: 12
 tags: [Web, React, Redux, State Management]
 ---
 
-# Redux Basic Notes
+# Redux
 
 ## Redux Concepts
 
