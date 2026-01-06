@@ -19,4 +19,4 @@ tags: [Web, Testing]
 
 ## Debugging
 
-- [Debug](./debug.md) - Debugging, Chrome DevTools
+- [Debugging](./debugging.md) - Debugging, Chrome DevTools
