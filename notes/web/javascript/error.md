@@ -1,9 +1,5 @@
 ---
 sidebar_position: 25
-author: Sabertazimi
-authorTitle: Web Developer
-authorURL: https://github.com/sabertazimi
-authorImageURL: https://github.com/sabertazimi.png
 tags: [Web, JavaScript, ECMAScript, Error, Exception]
 ---
 
