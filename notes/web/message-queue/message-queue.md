@@ -1,5 +1,5 @@
 ---
-tags: [Web, Node, Message Queue]
+tags: [Web, Message Queue]
 ---
 
 # Message Queue

@@ -1,5 +1,5 @@
 ---
-tags: [Web, Node, Redis]
+tags: [Web, Redis]
 ---
 
 # Redis

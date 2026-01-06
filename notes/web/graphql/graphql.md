@@ -1,5 +1,5 @@
 ---
-tags: [Web, Node, GraphQL]
+tags: [Web, GraphQL]
 ---
 
 # GraphQL
