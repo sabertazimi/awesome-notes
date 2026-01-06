@@ -2,7 +2,7 @@
 tags: [Web, React, Hook]
 ---
 
-# React Hooks
+# Hooks
 
 React Hooks allow you to use state and other React features in functional components.
 
