@@ -1,9 +1,8 @@
 ---
 tags: [Web, Vue]
-sidebar_position: 1
 ---
 
-# Vue Notes
+# Vue
 
 :::tip[Version Coverage]
 

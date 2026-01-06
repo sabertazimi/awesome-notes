@@ -3,7 +3,7 @@ tags: [Web, Vue, Animation]
 sidebar_position: 13
 ---
 
-# Vue Animation and Transition
+# Animation
 
 - `v-enter-from`.
 - `v-enter-to`: CSS defaults.

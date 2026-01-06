@@ -3,7 +3,7 @@ tags: [Web, Vue, Options API]
 sidebar_position: 22
 ---
 
-# Vue Options API
+# Options API
 
 Parent component options:
 

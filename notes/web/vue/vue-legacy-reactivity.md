@@ -3,7 +3,7 @@ tags: [Web, Vue, Reactivity]
 sidebar_position: 28
 ---
 
-# Vue Legacy Reactivity
+# Legacy Reactivity
 
 ![Reactive](./figures/proxy.png)
 

@@ -3,7 +3,7 @@ tags: [Web, Vue, Component]
 sidebar_position: 11
 ---
 
-# Vue Components
+# Components
 
 ## Computed Properties
 

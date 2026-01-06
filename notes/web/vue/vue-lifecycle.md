@@ -3,7 +3,7 @@ tags: [Web, Vue, Lifecycle]
 sidebar_position: 23
 ---
 
-# Vue Lifecycle
+# Lifecycle
 
 ![Lifecycle](./figures/lifecycle.png)
 

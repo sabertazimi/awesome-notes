@@ -3,7 +3,7 @@ tags: [Web, Vue, Virtual DOM]
 sidebar_position: 26
 ---
 
-# Vue Virtual DOM
+# Virtual DOM
 
 VNode Type:
 
