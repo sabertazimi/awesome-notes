@@ -347,7 +347,19 @@ async def main():
 
 当超出失败阈值或高风险操作时, 触发人工干预计划, 是一项关键的安全保障措施:
 
-## Agent Tools
+## Context
+
+### Dynamic Context
+
+[Dynamic context discovery](https://cursor.com/cn/blog/dynamic-context-discovery):
+
+- 工具响应 -> 文件.
+- 终端会话 -> 文件.
+- 上下文压缩时引用对话历史.
+- 按需加载.
+- 渐进式披露.
+
+## Library
 
 ### Instruction
 
