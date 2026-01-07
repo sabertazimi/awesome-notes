@@ -1,6 +1,6 @@
 ---
 sidebar_position: 8
-tags: [Programming, OS, Linux, System, Boot, Grub, SSH , Administration, Monitoring, Crontab]
+tags: [Programming, OS, Linux, System, Boot, Grub, SSH, Administration, Monitoring, Crontab]
 ---
 
 # System

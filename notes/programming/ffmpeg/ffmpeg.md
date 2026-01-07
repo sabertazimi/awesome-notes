@@ -21,7 +21,7 @@ ffmpeg -hide_banner -i input.mkv
 
 ## FFmpeg Transform
 
-- `MP4`: `H264`Video + `ACC`Audio
+- `MP4`: `H264`Video + `AAC`Audio
 - `WebM`: `VP8`Video + `Vorbis`Audio
 - `OGG`: `Theora`Video + `Vorbis`Audio
 

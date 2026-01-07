@@ -32,7 +32,7 @@ rpm 校验(查看 Cracker 信息):
 ```bash
 cd /etc/yum.repos.d
 mv CentOS-Base.repo CentOS-Base.repo.bk
-wget http://mirrors.163.com/.help/CentOS7-Base-163.repo
+wget https://mirrors.163.com/.help/CentOS7-Base-163.repo
 yum makecache
 ```
 
