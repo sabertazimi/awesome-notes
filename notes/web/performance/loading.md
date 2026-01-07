@@ -273,13 +273,13 @@ requireScript('the_rest.js', () => {
 <script nomodule src="legacy.js"></script>
 ```
 
-## Web Loading Best Practice
+## Web Loading Best Practices
 
 - 非必要静态资源上传 CDN: Client -> CDN Server -> CDN 骨干网络 (极度优化) -> CDN Server -> Server.
 - 冷启动开启数据预拉取.
 - 页面路由切换时进行数据预拉取 (并缓存数据).
 
-## Web Loading Reference
+## Web Loading References
 
 - Fetch priority [guide](https://web.dev/priority-hints).
 - Resources priority [guide](https://web.dev/prioritize-resources).

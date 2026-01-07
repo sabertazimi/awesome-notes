@@ -243,6 +243,6 @@ console.log(delete name) // false
 console.log(delete age) // true
 ```
 
-## Operator Reference
+## Operator References
 
 - [Operator Lookup](https://www.joshwcomeau.com/operator-lookup)

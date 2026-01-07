@@ -207,6 +207,6 @@ for await (const result of processor.processStream()) {
 }
 ```
 
-## Reference
+## References
 
 - Files read and write complete modern [guide](https://nodejsdesignpatterns.com/blog/reading-writing-files-nodejs).

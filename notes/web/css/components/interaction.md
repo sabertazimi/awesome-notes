@@ -262,7 +262,7 @@ a.btn-custom {
 }
 ```
 
-### Button Reference
+### Button References
 
 - 100 modern CSS [buttons](https://github.com/ui-buttons/core).
 

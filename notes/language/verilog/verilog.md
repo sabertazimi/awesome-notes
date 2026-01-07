@@ -748,7 +748,7 @@ always @(posedge f_clk) begin
 end
 ```
 
-## Tips
+## Verilog Best Practices
 
 ### 不可综合结构
 

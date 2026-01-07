@@ -1361,7 +1361,7 @@ Make sure there's no webpack deprecation warnings.
 node --trace-deprecation node_modules/webpack/bin/webpack.js
 ```
 
-## Webpack Reference
+## Webpack References
 
 - [Webpack 4 Tutorial](https://nystudio107.com/blog/an-annotated-webpack-4-config-for-frontend-web-development)
 - [Custom Plugin](https://juejin.cn/post/6870055445034172424)

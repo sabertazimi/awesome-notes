@@ -327,7 +327,6 @@ strings.sort((a, b) => new Intl.Collator('en').compare(a, b))
 ```
 
 ```ts
-// Tips
 // 反转字符串
 const reverseStr = normalizedStr.split('').reverse().join('')
 ```

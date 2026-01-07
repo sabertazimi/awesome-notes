@@ -260,6 +260,6 @@ for animation performance:
 
 `link` is parallel, `@import` isn't parallel.
 
-## CSS Performance Reference
+## CSS Performance References
 
 - CSS optimization [guide](https://kinsta.com/blog/optimize-css).

@@ -351,6 +351,6 @@ const svgRectElement = document.createElementNS(
 )
 ```
 
-## SVG Reference
+## SVG References
 
 - SVG filter complete [guide](https://blog.logrocket.com/complete-guide-using-css-filters-svgs).

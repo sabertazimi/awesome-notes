@@ -244,7 +244,7 @@ registerPaint('checkerboard', CheckerboardPainter)
 <textarea></textarea>
 ```
 
-## Canvas Reference
+## Canvas References
 
 - [Canvas API](https://developer.mozilla.org/docs/Web/API/Canvas_API)
 - [Canvas Tutorial](https://developer.mozilla.org/docs/Web/API/Canvas_API/Tutorial)

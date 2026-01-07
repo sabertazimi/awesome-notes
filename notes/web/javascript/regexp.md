@@ -280,7 +280,7 @@ if (!String.prototype.trim) {
 }
 ```
 
-## RegExp Best Practice
+## RegExp Best Practices
 
 - 不使用 new RegExp(),使用正则表达式字面量
 - 将正则表达式赋值给变量, 防止正则表达式重复创建

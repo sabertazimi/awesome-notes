@@ -130,7 +130,7 @@ provide 3 ~ 5 different sizes reduce image transfer sizes by average of **~20%**
 - [Jimp](https://github.com/oliver-moran/jimp)
 - [Imagemin](https://github.com/Klathmon/imagemin-webpack-plugin)
 
-## Images Performance Reference
+## Images Performance References
 
 - Images format [guide](https://evilmartians.com/chronicles/images-done-right-web-graphics-good-to-the-last-byte-optimization-techniques).
 - Low effort images optimization [tips](https://blog.sentry.io/low-effort-image-optimization-tips).

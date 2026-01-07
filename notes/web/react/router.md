@@ -520,6 +520,6 @@ function navigate(href) {
 }
 ```
 
-## React Router Reference
+## React Router References
 
 - [React Router Tutorial](https://www.youtube.com/playlist?list=PLqrUy7kON1mfJ1cQfJJ1FiULLNngvlFTD)

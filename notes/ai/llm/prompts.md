@@ -492,7 +492,7 @@ Midjourney [cookbook](https://fka.gumroad.com/l/the-art-of-midjourney-ai-guide-t
   - Schlieren, Disposable camera, Polaroid, Instax, Lomo, Pinhole photography.
   - VistaVision, Technirama, Techniscope, Panavision, Ambrotype.
 
-## Prompts Reference
+## Prompts References
 
 - Awesome ChatGPT [prompts](https://github.com/f/awesome-chatgpt-prompts).
 - Gemini prompts [cookbook](https://services.google.com/fh/files/misc/gemini-for-google-workspace-prompting-guide-101.pdf).

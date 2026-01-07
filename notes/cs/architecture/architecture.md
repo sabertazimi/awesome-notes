@@ -321,6 +321,6 @@ x86 服务器基于`网络的分布式`具有天然的缺陷:
 - PC 机的硬件不够可靠，故障率高
 - 很难有效监控，隔离故障速度慢
 
-## Reference
+## References
 
 - [Modern Microprocessors – A 90-Minute Guide. Jason R. C. Patterson. Technical paper, Lighterra, May 2015](http://www.lighterra.com/papers/modernmicroprocessors)

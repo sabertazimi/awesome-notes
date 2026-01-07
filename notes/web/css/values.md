@@ -157,7 +157,7 @@ In `position`/`size`/`margin`/`padding`/`border`/`text alignment`:
 
 [![Logical Properties](./figures/logical-properties.webp)](https://web.dev/learn/css/logical-properties)
 
-### CSS Logical Reference
+### CSS Logical References
 
 - W3C CSS logical [draft](https://drafts.csswg.org/css-logical).
 - CSS logical properties [guide](https://css-tricks.com/css-logical-properties-and-values).
@@ -628,6 +628,6 @@ optgroup > * {
 }
 ```
 
-## Reference
+## References
 
 - MDN CSS value [formal syntax](https://developer.mozilla.org/docs/Web/CSS/Value_definition_syntax).

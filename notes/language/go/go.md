@@ -459,7 +459,11 @@ func (v Vertex) Abs() {
 (&v).Abs() => v.Abs()
 ```
 
-- Best Practice: 在同一个类型上定义的所有方法最好统一 receiver 类型(全部 value receivers 或 全部 pointer receivers)
+:::tip[Best Practice]
+
+在同一个类型上定义的所有方法最好统一 receiver 类型(全部 value receivers 或 全部 pointer receivers)
+
+:::
 
 ### Interface
 

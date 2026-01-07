@@ -869,7 +869,7 @@ JavaScript 阻塞渲染:
 
 CSS transform animation only runs on `compositor` thread and `Viz` process.
 
-## Browser Engine Reference
+## Browser Engine References
 
 - Chromium rendering engine: [RenderingNG](https://developer.chrome.com/blog/renderingng).
 - Chromium `RenderingNG` [architecture](https://developer.chrome.com/blog/renderingng-architecture).

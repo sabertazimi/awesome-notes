@@ -55,14 +55,7 @@ clean:
   rm -f ${filename}-blx.bib
 ```
 
-## Basis
-
-- [Simple Introduction](https://liam0205.me/2014/09/08/latex-introduction)
-- [HaiYang Liu Tutorial](https://yun.weicheng.men/Book/LaTeX%E5%85%A5%E9%97%A8.pdf)
-- [Paper Tips and Tricks](https://github.com/Wookai/paper-tips-and-tricks)
-- Writing Scientific Documents Using LaTeX.
-
-### Layout
+## Layout
 
 ```latex
 \footnote{}
@@ -72,13 +65,13 @@ clean:
 \raggedleft
 ```
 
-#### Page Size
+### Page Size
 
 ```latex
 \usepackage[left=1cm,right=1cm,top=2cm,bottom=3cm]{geometry}
 ```
 
-#### Font Size
+### Font Size
 
 ```latex
 \zihao{0}  % 初号
@@ -269,3 +262,9 @@ tlmgr install <package>
 tlmgr update --self --all
 tlmgr update --list
 ```
+
+## LaTeX References
+
+- Simple LaTeX [introduction](https://liam0205.me/2014/09/08/latex-introduction).
+- HaiYang Liu's LaTeX [tutorial](https://yun.weicheng.men/Book/LaTeX%E5%85%A5%E9%97%A8.pdf).
+- Paper [best practices](https://github.com/Wookai/paper-tips-and-tricks).

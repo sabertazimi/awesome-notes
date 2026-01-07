@@ -390,6 +390,6 @@ LLM 并未统一利用其上下文,
 优化相关信息的数量并最小化不相关上下文以实现可靠的性能.
 e.g. custom gemini CLI [command](./prompts/url2md.toml).
 
-## Prompt Engineering Reference
+## Prompt Engineering References
 
 - Prompt engineering [guide](https://github.com/dair-ai/Prompt-Engineering-Guide).

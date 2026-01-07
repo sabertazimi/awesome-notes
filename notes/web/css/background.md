@@ -574,7 +574,7 @@ Two opposite sides box shadow:
 
 [![Conic Gradient](./figures/conic-gradient.png)](https://developer.mozilla.org/docs/Web/CSS/gradient/conic-gradient#composition_of_a_conic_gradient)
 
-### Gradient Reference
+### Gradient References
 
 - Background gradient [loading spinner](https://css-tricks.com/single-element-loaders-the-spinner).
 - Background gradient [shapes](https://css-tricks.com/drawing-images-with-css-gradients).

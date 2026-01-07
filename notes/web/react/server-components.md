@@ -256,7 +256,7 @@ export default function Page() {
 - Wrap them into a wrapper component using `'use client'`.
 - Library authors [add `'use client'` to components](https://github.com/ant-design/antd-tools/blob/050a91cfeaba87c2892bf19d721665a3770ebde0/lib/gulpfile.js#L197-L213).
 
-## React Server Components Reference
+## React Server Components References
 
 - React Server Components in [Next.js](https://vercel.com/blog/understanding-react-server-components).
 - React Server Components [introduction](https://www.joshwcomeau.com/react/server-components).

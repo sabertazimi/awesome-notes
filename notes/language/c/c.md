@@ -72,7 +72,7 @@ tags: [Language, C]
 - 有符号类型转换: 进行符号扩展
 - 无符号类型转换: 进行零扩展
 
-## Pointer Tips and Best Practice
+## Pointer Best Practices
 
 ### Error Prone Pointers
 

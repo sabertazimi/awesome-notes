@@ -180,7 +180,7 @@ export default function App() {
 }
 ```
 
-### Type Gymnastics Reference
+### Type Gymnastics References
 
 - Type [challenges](https://github.com/type-challenges/type-challenges).
 - Type [gymnastics](https://github.com/g-plane/type-gymnastics).
@@ -355,7 +355,7 @@ console.log(detectedComponents)
 // ["Foo", "Bar"]
 ```
 
-## TypeScript Reference
+## TypeScript References
 
 - [Learning TypeScript](https://github.com/LearningTypeScript/projects)
 - [Tackling TypeScript](https://exploringjs.com/tackling-ts/index.html)

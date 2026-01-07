@@ -194,7 +194,7 @@ export default function App() {
 13. optional render methods like renderNavigation() or renderProfilePicture()
 14. render
 
-## Project Structure Best Practice
+## Project Structure
 
 - `components`:
   - 模块化隔离, 最小依赖, 测试友好.
@@ -205,7 +205,7 @@ export default function App() {
 - `services`: 服务中只存在基础 Hooks, 自定义 Hooks, 第三方 Hooks,
   静态数据, 工具函数, 工具类.
 
-## React Style Best Practice
+## React Style Guide Best Practices
 
 - 组件细分化.
 - 组件:

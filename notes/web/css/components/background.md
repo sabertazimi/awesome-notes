@@ -112,6 +112,6 @@ Transparent border with mask composite:
 }
 ```
 
-## Background Reference
+## Background References
 
 - Gallery for [background patterns](https://github.com/LeaVerou/css3patterns).

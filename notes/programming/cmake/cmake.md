@@ -868,7 +868,7 @@ rm -f z.o
 - subst
 - wildcard
 
-### Makefile Best Practice
+### Makefile Best Practices
 
 ```makefile
 $(filter %.o,$(files)): %.o: %.c
@@ -894,7 +894,7 @@ sed 's,/($*/)/.o[ :]*,/1.o $@ : ,g' < $@.$$$$ > $@; /
 $(RM) -f $@.$$$$
 ```
 
-## Reference
+## CMake References
 
 - [Official Reference](https://cmake.org/cmake/help/latest)
 - [CMake Practice](http://file.ncnynl.com/ros/CMake%20Practice.pdf)

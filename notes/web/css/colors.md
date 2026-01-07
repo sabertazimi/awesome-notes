@@ -230,7 +230,7 @@ Creating color palettes with [`color-mix()`](https://developer.mozilla.org/en-US
 }
 ```
 
-## CSS Color Reference
+## CSS Color References
 
 - CSS color module level 5 [guide](https://blog.logrocket.com/exploring-css-color-module-level-5):
   - hwb.

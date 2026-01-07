@@ -87,7 +87,7 @@ target.addEventListener('ping', () => console.log('pong'))
 target.dispatchEvent(new Event('ping'))
 ```
 
-## Node.js Reference
+## Node.js References
 
 - Node.js [modern patterns](https://kashw1n.com/blog/nodejs-2025).
 - Node.js official [tutorial](https://nodejs.org/en/learn/getting-started/introduction-to-nodejs).

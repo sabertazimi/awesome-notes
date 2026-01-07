@@ -1566,7 +1566,7 @@ All Last 自摸逆转条件:
 - 子家对子家: (`点差 / 5`, `点差 / 5 * 2`).
 - 子家对亲家: (`点差 / 6`, `点差 / 3`).
 
-## Mahjong Reference
+## Mahjong References
 
 - `Beginner's Luck` [guide](http://beginners.biz/kihon).
 - `魔女` [ブログ (Blog)](https://puyokururu.medium.com).

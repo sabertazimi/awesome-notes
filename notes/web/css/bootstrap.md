@@ -10,7 +10,7 @@ tags: [Web, CSS, Bootstrap]
 - [Bootstrap CMS Theme](https://github.com/sabertazimi/hust-web/tree/main/css/bootstrap-cms)
 - [Advanced Webpack Configuration](https://medium.com/@estherfalayi/setting-up-webpack-for-bootstrap-4-and-font-awesome-eb276e04aaeb)
 
-### Bootstrap Reboot Tips
+### Bootstrap Reboot
 
 - `@import '~bootstrap/scss/reboot`;
 
@@ -234,6 +234,6 @@ $input-btn-focus-width: 0; /* remove focus box-shadow */
 $custom-control-indicator-checked-color: $primary;
 ```
 
-## Reference
+## References
 
 - [BootStrap 5 CheatSheet](https://github.com/themeselection/bootstrap-cheatsheet)

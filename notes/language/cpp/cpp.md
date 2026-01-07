@@ -1102,7 +1102,7 @@ transform
 for_each
 ```
 
-## Awesome Tips and Best Practice
+## C++ Best Practices
 
 - 普通函数成员 与 析构函数 全部定义为虚函数
 - 不改变对象实例的函数 全部定义为 const 函数

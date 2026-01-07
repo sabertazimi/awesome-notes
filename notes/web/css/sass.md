@@ -483,7 +483,7 @@ it might be interesting to group them by topic rather than type,
 for instance typography (`_typography.scss`), theming (`_theming.scss`), etc.
 Each file contains all the related helpers: variables, functions, mixins and placeholders.
 
-## Best Practice
+## Best Practices
 
 ### Performance
 

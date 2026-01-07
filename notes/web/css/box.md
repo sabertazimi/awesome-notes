@@ -704,6 +704,6 @@ article a {
 内联元素 `margin-top` 设置过大时 `margin-top` 会直接失效,
 内联元素依然会处于基线对齐位置.
 
-## Box Reference
+## Box References
 
 - CSS box [model](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/The_box_model).
