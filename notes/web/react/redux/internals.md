@@ -3,7 +3,7 @@ sidebar_position: 8
 tags: [Web, React, Redux, State Management]
 ---
 
-# Internal
+# Internals
 
 ## Store Constructor
 
