@@ -9,7 +9,7 @@ tags: [Language, Haskell, Module]
 
 ```haskell
 import Data.List
-import Data.List (nub，sort)
+import Data.List (nub, sort)
 import Data.List hiding (nub)
 ```
 
@@ -34,11 +34,11 @@ Data.Map.filter <-> M.filter
 ```haskell
 module Geometry
 ( sphereVolume
-，sphereArea
-，cubeVolume
-，cubeArea
-，cuboidArea
-，cuboidVolume
+, sphereArea
+, cubeVolume
+, cubeArea
+, cuboidArea
+, cuboidVolume
 ) where
 
 sphereVolume :: Float -> Float
@@ -81,7 +81,7 @@ import Geometry
 ```haskell
 module Geometry.Sphere
 ( volume
-，area
+, area
 ) where
 
 volume :: Float -> Float
@@ -96,7 +96,7 @@ area radius = 4 * pi * (radius ^ 2)
 ```haskell
 module Geometry.Cuboid
 ( volume
-，area
+, area
 ) where
 
 volume :: Float -> Float -> Float -> Float
@@ -115,7 +115,7 @@ rectangleArea a b = a * b
 ```haskell
 module Geometry.Cube
 ( volume
-，area
+, area
 ) where
 
 import qualified Geometry.Cuboid as Cuboid
@@ -210,7 +210,8 @@ ghci> any (`elem` ['A'..'Z']) "HEYGUYSwhatsup"
 True
 ```
 
-**iterate** 取一个函数和一个值作参数。它会用该值去调用该函数并用所得的结果再次调用该函数，产生一个无限的 List.
+**iterate** 取一个函数和一个值作参数.
+它会用该值去调用该函数并用所得的结果再次调用该函数, 产生一个无限的 List.
 
 ```haskell
 ghci> take 10 $ iterate (*2) 1
@@ -246,7 +247,8 @@ ghci> sum $ takeWhile (<10000) $ map (^3) [1..]
 53361
 ```
 
-**dropWhile** 扔掉符合条件的元素。一旦限制条件返回 `False`，它就返回 List 的余下部分
+**dropWhile** 扔掉符合条件的元素.
+一旦限制条件返回 `False`, 它就返回 List 的余下部分
 
 ```haskell
 ghci> dropWhile (/=' ') "This is a sentence"
@@ -258,9 +260,9 @@ ghci> dropWhile (<3) [1,2,2,2,3,4,5,4,3,2,1]
 **span** - 扩展`takeWhile`
 
 ```haskell
-ghci> let (fw，rest) = span (/=' ')
-\ "This is a sentence" in "First word:" ++ fw ++ "，the rest:" ++ rest
-"First word: This，the rest: is a sentence"
+ghci> let (fw, rest) = span (/=' ')
+\ "This is a sentence" in "First word:" ++ fw ++ ", the rest:" ++ rest
+"First word: This, the rest: is a sentence"
 ```
 
 **break** - 取反`span`
@@ -357,7 +359,7 @@ ghci> :t find
 find :: (a -> Bool) -> [a] -> Maybe a
 ```
 
-**elemIndex** '可能' (Maybe)返回我们找的元素的索引,若这一元素不存在，就返回 `Nothing`.
+**elemIndex** '可能' (Maybe)返回我们找的元素的索引,若这一元素不存在, 就返回 `Nothing`.
 
 ```haskell
 ghci> :t elemIndex
@@ -394,7 +396,7 @@ ghci> zip4 [2,3,3] [2,2,2] [5,5,3] [2,2,2]
 [(2,2,5,2),(3,2,5,2),(3,2,3,2)]
 ```
 
-在处理来自文件或其它地方的输入时，**lines** 会非常有用.
+在处理来自文件或其它地方的输入时, **lines** 会非常有用.
 
 ```haskell
 ghci> lines "first line\nsecond line\nthird line"
@@ -404,7 +406,7 @@ ghci> lines "first line\nsecond line\nthird line"
 **unlines** 是 `lines` 的反函数.
 
 ```haskell
-ghci> unlines ["first line"，"second line"，"third line"]
+ghci> unlines ["first line", "second line", "third line"]
 "first line\nsecond line\nthird line\n"
 ```
 
@@ -477,16 +479,16 @@ ghci> insert 3 [1,2,4,3,2,1]
 
 #### 修正 Prelude 模块
 
-`length`，`take`，`drop`，`splitAt`，`!!` 和 `replicate`
+`length`, `take`, `drop`, `splitAt`, `!!` 和 `replicate`
 `Data.List` 中包含了更通用的替代版,如:
-`genericLength，genericTake，genericDrop，genericSplitAt，genericIndex` 和 `genericReplicate`
+`genericLength`, `genericTake`, `genericDrop`, `genericSplitAt`, `genericIndex` 和 `genericReplicate`
 
 `nub`, `delete`, `union`, `intsect` 和 `group` 函数
-也有各自的通用替代版 `nubBy`，`deleteBy`，`unionBy`，`intersectBy` 和 `groupBy`，
-它们的区别就是前一组函数使用 `(==)` 来测试是否相等，而带 `By` 的那组则取一个函数作参数来判定相等性.
+也有各自的通用替代版 `nubBy`, `deleteBy`, `unionBy`, `intersectBy` 和 `groupBy`,
+它们的区别就是前一组函数使用 `(==)` 来测试是否相等, 而带 `By` 的那组则取一个函数作参数来判定相等性.
 
 ```haskell
-ghci> let values = [-4.3，-2.4，-1.2，0.4，2.3，5.9，10.5，29.1，5.3，-2.4，-14.5，2.9，2.3]
+ghci> let values = [-4.3, -2.4, -1.2, 0.4, 2.3, 5.9, 10.5, 29.1, 5.3, -2.4, -14.5, 2.9, 2.3]
 ghci> groupBy (\x y -> (x > 0) == (y > 0)) values
 [[-4.3,-2.4,-1.2],[0.4,2.3,5.9,10.5,29.1,5.3],[-2.4,-14.5],[2.9,2.3]]
 ```
@@ -501,8 +503,8 @@ ghci> groupBy ((==) `on` (> 0)) values
 [[-4.3,-2.4,-1.2],[0.4,2.3,5.9,10.5,29.1,5.3],[-2.4,-14.5],[2.9,2.3]]
 ```
 
-`sort`，`insert`，`maximum` 和 `min` 都有各自的通用版本。
-如 `groupBy` 类似，**sortBy**，**insertBy**，**maximumBy**
+`sort`, `insert`, `maximum` 和 `min` 都有各自的通用版本.
+如 `groupBy` 类似, **sortBy**, **insertBy**, **maximumBy**
 和 **minimumBy** 都取一个函数来比较两个元素的大小.
 
 ```haskell
@@ -513,10 +515,10 @@ ghci> sortBy (compare `on` length) xs
 
 ### Data Char
 
-- **isControl** 判断一个字符是否是控制字符。
-- **isSpace** 判断一个字符是否是空格字符，包括空格，tab，换行符等.
+- **isControl** 判断一个字符是否是控制字符.
+- **isSpace** 判断一个字符是否是空格字符, 包括空格, tab, 换行符等.
 - **isLower** 判断一个字符是否为小写.
-- **isUpper** 判断一个字符是否为大写。
+- **isUpper** 判断一个字符是否为大写.
 - **isAlpha** 判断一个字符是否为字母.
 - **isAlphaNum** 判断一个字符是否为字母或数字.
 - **isPrint** 判断一个字符是否是可打印的.
@@ -524,12 +526,12 @@ ghci> sortBy (compare `on` length) xs
 - **isOctDigit** 判断一个字符是否为八进制数字.
 - **isHexDigit** 判断一个字符是否为十六进制数字.
 - **isLetter** 判断一个字符是否为字母.
-- **isMark** 判断是否为 unicode 注音字符，你如果是法国人就会经常用到的.
+- **isMark** 判断是否为 unicode 注音字符, 你如果是法国人就会经常用到的.
 - **isNumber** 判断一个字符是否为数字.
 - **isPunctuation** 判断一个字符是否为标点符号.
 - **isSymbol**判断一个字符是否为货币符号.
 - **isSeparator** 判断一个字符是否为 unicode 空格或分隔符.
-- **isAscii** 判断一个字符是否在 unicode 字母表的前 128 位。
+- **isAscii** 判断一个字符是否在 unicode 字母表的前 128 位.
 - **isLatin1** 判断一个字符是否在 unicode 字母表的前 256 位.
 - **isAsciiUpper** 判断一个字符是否为大写的 ascii 字符.
 - **isAsciiLower** 判断一个字符是否为小写的 ascii 字符.
@@ -569,10 +571,10 @@ ghci> map generalCategory " \t\nA9?|"
 [Space,Control,Control,UppercaseLetter,DecimalNumber,OtherPunctuation,MathSymbol]
 ```
 
-- **toUpper** 将一个字符转为大写字母，若该字符不是小写字母，就按原值返回.
-- **toLower** 将一个字符转为小写字母，若该字符不是大写字母，就按原值返回.
-- **toTitle** 将一个字符转为 title-case，对大多数字元而言，title-case 就是大写.
-- **digitToInt** 将一个字符转为 Int 值，而这一字符必须得在 `'1'..'9','a'..'f'`或`'A'..'F'` 的范围之内.
+- **toUpper** 将一个字符转为大写字母, 若该字符不是小写字母, 就按原值返回.
+- **toLower** 将一个字符转为小写字母, 若该字符不是大写字母, 就按原值返回.
+- **toTitle** 将一个字符转为 title-case, 对大多数字元而言, title-case 就是大写.
+- **digitToInt** 将一个字符转为 Int 值, 而这一字符必须得在 `'1'..'9','a'..'f'`或`'A'..'F'` 的范围之内.
 
 ```haskell
 ghci> map digitToInt "34538"
@@ -634,10 +636,10 @@ findKey :: (Eq k) => k -> [(k,v)] -> Maybe v
 findKey key = foldr (\(k,v) acc -> if key == k then Just v else acc) Nothing
 ```
 
-**fromList** 取一个关联列表，返回一个与之等价的 Map。
+**fromList** 取一个关联列表, 返回一个与之等价的 Map.
 
 ```haskell
-Map.fromList :: (Ord k) => [(k，v)] -> Map.Map k v
+Map.fromList :: (Ord k) => [(k, v)] -> Map.Map k v
 ```
 
 若其中存在重复的键,就将其忽略.
@@ -733,17 +735,17 @@ ghci> Map.lookup "patsy" $ phoneBookToMap phoneBook
 ghci> Map.lookup "wendy" $ phoneBookToMap phoneBook
 "939-8282"
 ghci> Map.lookup "betty" $ phoneBookToMap phoneBook
-"342-2492，555-2938"
+"342-2492, 555-2938"
 ```
 
 ```haskell
-phoneBookToMap :: (Ord k) => [(k，a)] -> Map.Map k [a]
+phoneBookToMap :: (Ord k) => [(k, a)] -> Map.Map k [a]
 phoneBookToMap xs = Map.fromListWith (++) $ map (\(k,v) -> (k,[v])) xs
 ghci> Map.lookup "patsy" $ phoneBookToMap phoneBook
 ["827-9162","943-2929","493-2928"]
 ```
 
-在遇到重复元素时，单选最大的那个值.
+在遇到重复元素时, 单选最大的那个值.
 
 ```haskell
 ghci> Map.fromListWith max [(2,3),(2,5),(2,100),(3,29),(3,22),(3,11),(4,22),(4,15)]
@@ -804,7 +806,7 @@ ghci> Set.union set1 set2
 fromList " !.?AIRTabcdefghijlmnorstuvwy"
 ```
 
-`null`，`size`，`member`，`empty`，`singleton`，`insert`，`delete`
+`null`, `size`, `member`, `empty`, `singleton`, `insert`, `delete`
 
 ```haskell
 ghci> Set.null Set.empty
