@@ -150,7 +150,7 @@ Use the same query hook multiple times,
 pass it different query parameters,
 and each result will be cached separately in Redux `store`.
 
-It iss important to note that the query parameter must be a **single value**
+It's important to note that the query parameter must be a **single value**
 (a primitive value or an object containing multiple fields, same as with `createAsyncThunk`).
 RTK Query will do **shallow stable** comparison of fields,
 and re-fetch the data if any of them have changed.

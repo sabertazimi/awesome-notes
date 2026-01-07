@@ -176,7 +176,7 @@ app.listen(port)
 ### Middleware Tools
 
 - [Redux Thunk](https://github.com/reduxjs/redux-thunk)
-- [Redux Sage](https://github.com/yelouafi/redux-saga)
+- [Redux Saga](https://github.com/yelouafi/redux-saga)
 - [Redux Promise](https://github.com/acdlite/redux-promise)
 - [Redux Diff Logger](https://github.com/fcomb/redux-diff-logger)
 - [Redux Dynamic Modules](https://github.com/microsoft/redux-dynamic-modules):
