@@ -3,16 +3,14 @@ sidebar_position: 10
 tags: [Web, Node.js, Security, Crypto]
 ---
 
-# Security
+# Crypto
 
-## Crypto
+- Hash algorithm.
+- HMAC algorithm.
+- Cipher/decipher algorithms.
+- Signature/validate.
 
-- hash algorithm
-- hmac algorithm
-- cipher/decipher algorithms
-- signature/validate
-
-### Hash API
+## Hash
 
 ```ts
 const crypto = require('node:crypto')
@@ -23,7 +21,7 @@ md5.update('foo')
 md5.digest('hex') // 'acbd18db4cc2f85cedef654fccc4a4d8'
 ```
 
-### HMAC API
+## HMAC
 
 ```bash
 openssl genrsa -out key.pem 1024

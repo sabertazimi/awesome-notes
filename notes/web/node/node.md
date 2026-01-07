@@ -21,7 +21,7 @@ tags: [Web, Node.js]
 - [Concurrency](./concurrency.md) - Cluster, Worker Threads, Event Loop
 - [Filesystem](./filesystem.md) - File System, Path, Stream
 - [Network](./network.md) - Fetch, HTTP, WebSocket, DNS, URL
-- [Security](./security.md) - Crypto, TLS/SSL
+- [Crypto](./crypto.md) - Crypto, TLS/SSL
 
 ## Development
 
