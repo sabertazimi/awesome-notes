@@ -85,26 +85,21 @@ git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
 
 ## Easy Motion
 
-- `<leader><leader> w`: start of word forwards.
-- `<leader><leader> b`: start of word backwards.
-- `<leader><leader> j`: start of line forwards.
-- `<leader><leader> k`: start of line backwards.
-
 | Motion Command                      | Description                           |
 | ----------------------------------- | ------------------------------------- |
+| `<leader><leader> w`                | Start of word forwards                |
+| `<leader><leader> b`                | Start of word backwards               |
+| `<leader><leader> j`                | Start of line forwards                |
+| `<leader><leader> k`                | Start of line backwards               |
 | `<leader><leader> s <char>`         | Search character                      |
 | `<leader><leader> f <char>`         | Find character forwards               |
 | `<leader><leader> F <char>`         | Find character backwards              |
 | `<leader><leader> t <char>`         | Til character forwards                |
 | `<leader><leader> T <char>`         | Til character backwards               |
-| `<leader><leader> w`                | Start of word forwards                |
-| `<leader><leader> b`                | Start of word backwards               |
 | `<leader><leader> l`                | Matches begin & end of word forwards  |
 | `<leader><leader> h`                | Matches begin & end of word backwards |
 | `<leader><leader> e`                | End of word forwards                  |
 | `<leader><leader> ge`               | End of word backwards                 |
-| `<leader><leader> j`                | Start of line forwards                |
-| `<leader><leader> k`                | Start of line backwards               |
 | `<leader><leader> / <char>... <CR>` | Search n-character                    |
 | `<leader><leader><leader> bdt`      | Til character                         |
 | `<leader><leader><leader> bdw`      | Start of word                         |
