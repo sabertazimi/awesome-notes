@@ -101,7 +101,7 @@ usernameInput.addEventListener('invalid', () => {
 `enctype` (HTTP `Content-Type` header):
 
 - 默认值: `application/x-www-form-urlencoded`, 提交前编码所有字符.
-- `multipart/form-data` 不编码字符, **上传控件表单元素**必须使用改值.
+- `multipart/form-data` 不编码字符, **上传控件表单元素**必须使用该值.
 - `text/plain`: 表单元素数据中的空格编码为 `+`.
 
 ```html
@@ -242,7 +242,7 @@ textbox.value = '666666' //  等同于 input.value = '666666';
 <input type="search" />
 <!-- displays date picker or wheel controls -->
 <input type="date" />
-<input type="date picker(data,month,week,time,datetime,datetime-local)" />
+<input type="date picker(date,month,week,time,datetime,datetime-local)" />
 
 <input type="range" />
 <input type="color" />
