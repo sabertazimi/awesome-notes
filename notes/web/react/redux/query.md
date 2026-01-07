@@ -289,6 +289,6 @@ export const { selectAll: selectAllUsers, selectById: selectUserById }
   = usersAdapter.getSelectors(state => selectUsersData(state) ?? initialState)
 ```
 
-## RTK Query Reference
+## RTK Query References
 
 - RTK Query real world [example](https://www.toptal.com/react/redux-toolkit-and-rtk-query).

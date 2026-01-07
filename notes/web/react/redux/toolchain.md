@@ -3,7 +3,6 @@ sidebar_position: 5
 tags: [Web, React, Redux, State Management]
 ---
 
-
 # Toolchain
 
 ## React Redux Binding Library
@@ -54,7 +53,7 @@ export default function useActions(actions) {
 }
 ```
 
-### React Redux API Reference
+### React Redux API
 
 [`batch`](https://react-redux.js.org/api/batch):
 
