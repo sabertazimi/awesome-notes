@@ -23,7 +23,7 @@ tags: [Web, React]
 - [Server Components](./server-components.md) - React Server Components
 - [Refs](./refs.md) - Refs and forward refs
 - [Router](./router.md) - React Router guide
-- [Redux](./redux.md) - Redux for state management
+- [Redux](./redux/redux.md) - Redux for state management
 
 ## Performance
 
