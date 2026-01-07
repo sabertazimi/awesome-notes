@@ -143,7 +143,7 @@ alert(element.getAttribute('align')) // "left"
 ```
 
 Further reading:
-[DOM properties reflection on HTML attributes](../html/html.md#dom-properties-reflection).
+[DOM properties reflection on HTML attributes](../html/attributes.md#dom-properties-reflection).
 
 ### DOM Text Node
 
