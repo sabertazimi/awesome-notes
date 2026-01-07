@@ -7,12 +7,12 @@ tags: [Language, Haskell]
 ## Getting Started
 
 - [Basics](./basics.md) - Toolchain, unique marks, expressions, and generics
-- [Pattern Matching](./pattern-matching.md) - Match patterns, guards, and bindings
+- [Class](./class.md) - Type classes: Eq, Ord, Show, Functor, Applicative, Monad
+- [Data](./data.md) - Data types, records, type parameters, and deriving
 
 ## Core Concepts
 
-- [Class](./class.md) - Type classes: Eq, Ord, Show, Functor, Applicative, Monad
-- [Data](./data.md) - Data types, records, type parameters, and deriving
+- [Pattern Matching](./pattern-matching.md) - Match patterns, guards, and bindings
 - [Function](./function.md) - Recursion, higher-order functions, folds, and common functions
 - [Module](./module.md) - Imports, module structure, and standard libraries
 
