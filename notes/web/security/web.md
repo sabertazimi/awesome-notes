@@ -177,6 +177,8 @@ Web crypto [API](https://developer.mozilla.org/docs/Web/API/SubtleCrypto):
 
 ### User Fingerprint
 
+[User fingerprint](https://github.com/neberej/exposedbydefault) can generate by:
+
 - Use Canvas or WebGL to generate user
   [fingerprint](https://yinzhicao.org/TrackingFree/crossbrowsertracking_NDSS17.pdf).
 - Location information:
