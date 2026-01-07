@@ -5,30 +5,33 @@ tags: [Programming, Git, Diff]
 
 # Diff
 
-查看未暂存(un-staged)差异
+查看未暂存 (un-staged) 差异
 
 ```bash
 git diff
+git diff --name-only
 ```
 
-查看已暂存(staged)差异
+查看已暂存 (staged) 差异
 
 ```bash
 git diff --staged
 ```
 
-显示空白字符错误(space/tab/return)
+显示空白字符错误 (space/tab/return)
 
 ```bash
 git diff --check
 ```
 
+Generate patch (`-u`):
+
 ```bash
-diff -u <src> <dist>
-diff -Nur <src_dir> <dist_dir>
+git diff -u <src> <dist>
+git diff -Nur <src_dir> <dist_dir>
 ```
 
-删除 squash 分支:
+删除 squash branch:
 
 ```bash
 # Output the diff between main and fix/components branches
