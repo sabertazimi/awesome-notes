@@ -22,6 +22,26 @@ CSS vendor prefix order:
 
 ### CSS Normalize
 
+[Minimal normalize](https://meiert.com/blog/a-minimal-css-starter):
+
+```css
+html {
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+  text-wrap: pretty;
+}
+
+::selection,
+::target-text {
+  color: #fff;
+  background: #000;
+}
+
+@view-transition {
+  navigation: auto;
+}
+```
+
 [Modern normalize](https://github.com/sindresorhus/modern-normalize):
 
 ```css
