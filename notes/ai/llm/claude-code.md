@@ -5,7 +5,7 @@ tags: [AI, LLM, Agent]
 
 # Claude Code
 
-## Claude Code Config
+## Setup
 
 `~/.bashrc`:
 
@@ -39,15 +39,22 @@ export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 }
 ```
 
+### Switch
+
 Quick configuration with All-in-One assistant tool
 [Claude Code Switch](https://github.com/farion1231/cc-switch).
 
-## Claude Code Tools
+### Bootstrap
+
+Opinionated [project initialization](https://github.com/alinaqi/claude-bootstrap)
+for Claude Code.
+
+## Tools
 
 Claude code has [built-in tools](https://code.claude.com/docs/en/settings#tools-available-to-claude),
 follow [certain paradigm](https://www.vtrivedy.com/posts/claudecode-tools-reference) to use them.
 
-## Claude Code Commands
+## Commands
 
 `.claude/commands/api/api-new.md`:
 
@@ -64,12 +71,12 @@ Create a new POST $ARGUMENTS endpoint with:
 /api-new /api/users
 ```
 
-## Claude Code Memory
+## Memory
 
 Captures everything Claude does during your coding sessions, compresses it with Claude `agent-sdk`,
 and [injects relevant context](http://github.com/thedotmack/claude-mem) back into future sessions.
 
-## Claude Code Session
+## Session
 
 Resume from [session](https://stevekinney.com/courses/ai-development/claude-code-session-management):
 
@@ -82,7 +89,7 @@ claude -r
 claude -r [session_id]
 ```
 
-## Claude Code Skills
+## Skills
 
 ```mermaid
 ---
@@ -230,7 +237,7 @@ grep -r "eval" .
 - Agent skills [best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices).
 - Claude skills [cookbook](https://github.com/anthropics/claude-cookbooks/tree/main/skills).
 
-## Claude Code Plugins
+## Plugins
 
 Install [plugins](https://github.com/anthropics/claude-code/tree/main/plugins)
 from [marketplace](https://code.claude.com/docs/en/plugin-marketplaces),
@@ -290,7 +297,7 @@ it will extend Claude Code through the plugin system with:
 - [Plugins](https://github.com/Kamalnrf/claude-plugins):
   Lightweight registry to discover and manage Claude plugins and agent skills.
 
-## Claude Code Best Practices
+## Best Practices
 
 Claude code [best practices](https://www.anthropic.com/engineering/claude-code-best-practices):
 
