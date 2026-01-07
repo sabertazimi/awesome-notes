@@ -1283,7 +1283,7 @@ if (httpResponse.getStatusLine().getStatusCode() == 200) {
 }
 ```
 
-### Network Best Practice
+### Network Best Practices
 
 ```java
 public interface HttpCallbackListener {
@@ -1528,7 +1528,7 @@ Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
 
 ---
 
-## Best Practice
+## Best Practices
 
 ### Global Context
 

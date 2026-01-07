@@ -790,7 +790,7 @@ function polygon(n = 3) {
 }
 ```
 
-## Shape Reference
+## Shape References
 
 - Modern CSS [shapes](https://www.smashingmagazine.com/2024/05/modern-guide-making-css-shapes).
 - Pure CSS [icons](https://github.com/wentin/cssicon).

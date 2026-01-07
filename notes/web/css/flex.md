@@ -311,7 +311,7 @@ main {
 }
 ```
 
-## Flex Reference
+## Flex References
 
 - Flexbox complete [guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox).
 - Flexbox alignment [guide](https://developer.mozilla.org/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container).

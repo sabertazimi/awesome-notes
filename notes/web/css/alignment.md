@@ -234,7 +234,7 @@ a.button::before {
 }
 ```
 
-## Reference
+## References
 
 - Centering layout complete [guide](https://css-tricks.com/centering-css-complete-guide).
 - CSS layout [guide](https://www.smashingmagazine.com/2018/05/guide-css-layout).

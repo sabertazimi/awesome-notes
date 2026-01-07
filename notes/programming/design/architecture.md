@@ -45,7 +45,7 @@ Domain 层是领域模型系统的核心,
 - Third-party tools, Message Queue, File, Cache, Database, Search etc.
 - 实现仓储接口 DB, 通常真正读写 DB.
 
-### Domain Driven Design Reference
+### Domain Driven Design References
 
 - Front-end domain driven design [guide](https://dev.to/bespoyasov/clean-architecture-on-frontend-4311).
 - Scalable React project structure [guide](https://github.com/developerway/example-react-project).

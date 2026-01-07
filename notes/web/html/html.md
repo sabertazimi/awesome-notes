@@ -2032,7 +2032,7 @@ listExpander.addEventListener('click', (e) => {
 <div role="search"></div>
 ```
 
-### Accessibility Best Practice
+### Accessibility Best Practices
 
 A11y audit [list](https://web.dev/lighthouse-accessibility):
 
@@ -2075,7 +2075,7 @@ A11y audit [list](https://web.dev/lighthouse-accessibility):
 - [ESLint JSX A11Y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
 - [React A11Y](https://github.com/reactjs/react-a11y)
 
-### Accessibility Reference
+### Accessibility References
 
 - `WAI-ARIA`: improve website’s accessibility with [`WAI-ARIA`](https://www.sitepoint.com/wai-aria).
 - `ARIA`: W3C [official examples](https://github.com/w3c/aria-practices).

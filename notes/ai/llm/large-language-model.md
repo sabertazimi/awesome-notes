@@ -203,7 +203,7 @@ const result = await agent.invoke({ input: '...' })
 - [ChatterBox](https://github.com/resemble-ai/chatterbox):
   SoTA open-source TTS model.
 
-## LLM Reference
+## LLM References
 
 - LLM survey: [大语言模型](https://github.com/LLMBook-zh/LLMBook-zh.github.io).
 - LLM survey: [efficient architectures](https://github.com/weigao266/Awesome-Efficient-Arch).

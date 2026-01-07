@@ -394,7 +394,7 @@ Google [Core Web Vitals](https://web.dev/articles/vitals):
   minimize amount of requests to server and enable better offline experience.
 - Lazily loading routes and assets that aren’t requested as frequently.
 
-## Performance Best Practice
+## Performance Best Practices
 
 - Code optimization:
   - Fast CSS styles: `CSS Performance`.
@@ -447,7 +447,7 @@ Speed tools [list](https://web.dev/speed-tools):
   - SEO [audit](https://web.dev/lighthouse-seo).
 - Chrome inspector: `chrome://inspect/#devices` to start inspecting.
 
-## Web Vitals Reference
+## Web Vitals References
 
 - LCP optimization [guide](https://web.dev/optimize-lcp).
 - INP optimization [guide](https://web.dev/explore/how-to-optimize-inp).
@@ -457,7 +457,7 @@ Speed tools [list](https://web.dev/speed-tools):
 - Web vitals field data debugging [guide](https://web.dev/debug-web-vitals-in-the-field).
 - Web vitals real world [case](https://mp.weixin.qq.com/s/zJMM4SF7pc6LZPCsQfWOxw).
 
-## Performance Reference
+## Performance References
 
 - `web.dev` performance optimization [guide](https://web.dev/explore/fast).
 - `web.dev` performance newbie [course](https://web.dev/learn/performance).

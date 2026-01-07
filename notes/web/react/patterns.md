@@ -188,7 +188,7 @@ class Menu extends React.Component {
 - Recap related-logic into separate well-structured hooks.
 - Reuse same stateful logic with custom hooks.
 
-## React Patterns Reference
+## React Patterns References
 
 - React component library [patterns](https://www.gabe.pizza/notes-on-component-libraries).
 - React interview [questions](https://github.com/semlinker/reactjs-interview-questions).

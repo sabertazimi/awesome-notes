@@ -703,7 +703,7 @@ function WebSocketTest() {
 - 对于无线设备, 注意节能:
   消除周期性无效数据, 减少冗余数据, 消除不必要的长连接.
 
-### WebSocket Reference
+### WebSocket References
 
 - [WebSocket Guide](https://hpbn.co/websocket)
 - [WebSocket vs Long Polling](https://ably.com/blog/websockets-vs-long-polling)
@@ -815,7 +815,7 @@ signalingChannel.onmessage = function (msg) {
     - 设置适当的重传次数和超时间隔.
     - 正确的设置取决于消息大小, 应用数据类型, 端与端之间的延迟.
 
-### WebRTC Reference
+### WebRTC References
 
 - [WebRTC Guide](https://hpbn.co/webrtc)
 - [WebRTC Security List](https://dzone.com/articles/webrtc-security-vulnerabilities-you-should-know-ab)

@@ -290,7 +290,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 :::
 
-### SSR Reference
+### SSR References
 
 - Universal JavaScript [presentation](http://peerigon.github.io/talks/2018-07-20-js-camp-barcelona-bumpy-road-universal-javascript/#1).
 - React SSR [complete guide](https://mp.weixin.qq.com/s/j2rB8qE5OOPmLHAS7qdCrQ):
@@ -420,7 +420,7 @@ export default function App() {
 }
 ```
 
-## SEO Best Practice
+## SEO Best Practices
 
 - [Server side rendering](https://css-tricks.com/server-side-react-rendering)
   (e.g. Next.js).
@@ -432,7 +432,7 @@ export default function App() {
 - `<title>` and `<meta>` in `<head>` (with tool like `react-helmet`).
 - Includes a `robots.txt` file.
 
-## SEO Reference
+## SEO References
 
 - Build your own [RSC framework](https://www.cmrg.me/blog/rsc-part-2-the-code).
 - Build your own [Next.js](https://hire.jonasgalvez.com.br/2022/may/18/building-a-mini-next-js).

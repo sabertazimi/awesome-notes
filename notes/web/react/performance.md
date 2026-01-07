@@ -330,7 +330,7 @@ export default class App extends Component {
 }
 ```
 
-## React Performance Best Practice
+## React Performance Best Practices
 
 - Use `key` correctly.
 - `React.useMemo` and `React.useCallback` (no anonymous functions).
@@ -379,7 +379,7 @@ Production [case studies](https://largeapps.dev/case-studies/advanced):
    - Consistent UX across devices.
    - Feedback and user-centric metrics.
 
-## React Performance Reference
+## React Performance References
 
 - [Progressive React](https://houssein.me/progressive-react).
 - Sentry performance [guide](https://blog.sentry.io/react-js-performance-guide) for React.

@@ -380,7 +380,7 @@ async def main():
 - Relative: Compare within the same model family or lab, how did the score change from v1 to v2?
 - Verify: The only benchmark that matters at the end of the day is your workload.
 
-## Agents Reference
+## Agents References
 
 - Vibe coding [prompts](https://docs.google.com/spreadsheets/d/1ngoQOhJqdguwNAilCl1joNwTje7FWWN9WiI2bo5VhpU).
 - Vibe coding [guide](https://github.com/tukuaiai/vibe-coding-cn).

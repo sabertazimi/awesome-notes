@@ -11,5 +11,5 @@ tags: [Web, React, Redux, State Management]
 - [Query](./query) - RTK Query 服务端状态管理、缓存机制
 - [Toolchain](./toolchain) - React Redux 绑定库、Hooks、SSR、开发工具
 - [Performance](./performance) - 性能优化技巧、代码拆分、常见陷阱
-- [Best Practice](./best-practice) - 最佳实践、风格指南、状态管理策略
+- [Best Practices](./best-practices) - 最佳实践、风格指南、状态管理策略
 - [Internals](./internals) - 内部实现原理（Store 构造器、Action 验证、Provider 连接）

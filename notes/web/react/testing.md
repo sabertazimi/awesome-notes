@@ -424,7 +424,7 @@ test('if amount and note is entered, pay button becomes enabled', async () => {
 })
 ```
 
-## React Testing Library Reference
+## React Testing Library References
 
 - [Custom Jest DOM Matchers](https://github.com/testing-library/jest-dom)
 - [React testing library cheat sheet](https://testing-library.com/docs/react-testing-library/cheatsheet)

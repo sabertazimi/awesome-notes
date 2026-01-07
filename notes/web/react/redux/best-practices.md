@@ -3,30 +3,7 @@ sidebar_position: 7
 tags: [Web, React, Redux, State Management]
 ---
 
-# Best Practice
-
-## Redux Necessity
-
-Necessity for importing Redux
-(状态多, 变化快, 更新复杂):
-
-- Lots of state.
-- Frequent update state.
-- Complex update state.
-
-## Redux Style Guide
-
-Redux style [guide](https://redux.js.org/style-guide/style-guide):
-
-- Only one store per app.
-- Avoid mutate state without ImmerJS.
-- Avoid side effects in reducers.
-- Avoid non-serializable values in state store.
-- Normalize complex nested/relational state.
-- Keep state minimal and derive additional values.
-- Split large data selection into multiple small `useSelector`.
-
-## Redux Tips
+# Best Practices
 
 - 区分 Smart Component (know the state) 和 Dump Component (stateless)
 - Component 里不要出现任何 async calls，交给 action creator 来做
@@ -109,6 +86,27 @@ const fluxStandardAction = {
   error: true,
 }
 ```
+
+## Redux Necessity
+
+Necessity for importing Redux
+(状态多, 变化快, 更新复杂):
+
+- Lots of state.
+- Frequent update state.
+- Complex update state.
+
+## Redux Style Guide
+
+Redux style [guide](https://redux.js.org/style-guide/style-guide):
+
+- Only one store per app.
+- Avoid mutate state without ImmerJS.
+- Avoid side effects in reducers.
+- Avoid non-serializable values in state store.
+- Normalize complex nested/relational state.
+- Keep state minimal and derive additional values.
+- Split large data selection into multiple small `useSelector`.
 
 ## State Management
 

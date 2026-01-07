@@ -295,6 +295,6 @@ Individual transform [property](https://drafts.csswg.org/css-transforms-2/#indiv
 }
 ```
 
-## Transform Reference
+## Transform References
 
 - Transform 101 [guide](https://learn.shayhowe.com/advanced-html-css/css-transforms).

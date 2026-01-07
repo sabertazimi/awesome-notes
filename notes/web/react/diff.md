@@ -26,8 +26,12 @@ Reconciler:
 - Only update changed attributes.
 - Use `key` attribute to match children.
 
-`Best Practice`: give `key` to `<li>/<tr>/<tc>` elements
+:::tip[Best Practice]
+
+Give `key` to `<li>/<tr>/<tc>` elements
 (stable, predictable, unique and not array indexed).
+
+:::
 
 ## Same Type Component Elements
 

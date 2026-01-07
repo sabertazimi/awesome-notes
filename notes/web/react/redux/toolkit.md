@@ -515,7 +515,7 @@ const state3 = getState()
 selectPostsByUser(state3, 'user2')
 ```
 
-### Selector Best Practice and Pitfalls
+### Selector Best Practices and Pitfalls
 
 ```ts
 // ❌ DO NOT memoize: will always return a consistent reference

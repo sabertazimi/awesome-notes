@@ -688,7 +688,7 @@ Use `@container` style query to
 }
 ```
 
-### Container Query Reference
+### Container Query References
 
 - An interactive and comprehensive CSS container queries [guide](https://ishadeed.com/article/css-container-query-guide).
 

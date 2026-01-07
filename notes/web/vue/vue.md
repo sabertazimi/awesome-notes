@@ -32,7 +32,7 @@ These notes cover both Vue 2 (Options API) and Vue 3 (Composition API), includin
 - [Legacy Reactivity](./legacy-reactivity.md) - Vue 2 reactivity system
 - [Modern Reactivity](./modern-reactivity.md) - Vue 3 reactivity system
 
-## Quick Reference
+## Quick Start
 
 ### For Beginners
 

@@ -99,7 +99,7 @@ The optimal line length for body text is `50`–`75` characters:
   and align headings with data.
 - Put white space to work to group and separate.
 
-### Typography Reference
+### Typography References
 
 - Understanding typography [guide](https://material.io/design/typography/understanding-typography).
 - Practical typography [guide](https://practicaltypography.com).
@@ -762,6 +762,6 @@ for AI Interfaces:
 - AI Integration, where work happens:
   Integrate AI into the user’s workflow and daily used tools.
 
-## Design Reference
+## Design References
 
 - [Pricing page](https://pricingpages.design).

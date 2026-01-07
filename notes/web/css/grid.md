@@ -697,6 +697,6 @@ selected elements in grid container:
 - Chrome debates on [masonry layouts](https://developer.chrome.com/blog/masonry).
 - Webkit invents masonry layouts for [CSS grid level 3](https://webkit.org/blog/15269/help-us-invent-masonry-layouts-for-css-grid-level-3).
 
-## Grid Reference
+## Grid References
 
 - Grid complete [guide](https://css-tricks.com/snippets/css/complete-guide-grid).

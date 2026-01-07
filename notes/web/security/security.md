@@ -1446,7 +1446,7 @@ Distributed denial of service attack:
 - [ ] 使用 [Netflix Scumblr](https://github.com/Netflix/Scumblr) 及时了解
       你的组织 (公司) 在社交网络或者搜索引擎上的一些讨论信息, 比如黑客攻击/漏洞等等.
 
-## Security Reference
+## Security References
 
 - List of useful [payloads and bypass](https://github.com/swisskyrepo/PayloadsAllTheThings)
   for web application security and pentest.

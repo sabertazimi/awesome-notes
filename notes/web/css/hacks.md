@@ -71,6 +71,6 @@ tag-not-found::backdrop,
 }
 ```
 
-## CSS Hacks Reference
+## CSS Hacks References
 
 - Browser [hacks](https://github.com/4ae9b8/browserhacks).

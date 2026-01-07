@@ -216,6 +216,6 @@ function updateView(event) {
 }
 ```
 
-## Transition Reference
+## Transition References
 
 - Transition 101 [guide](https://zellwk.com/blog/css-transitions).

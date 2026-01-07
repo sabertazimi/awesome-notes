@@ -162,7 +162,7 @@ const beacon = new Image()
 beacon.src = `http://www.example.com/logger/beacon.gif?page=${encodeURI(thisPage)}&ref=${encodeURI(referringPage)}`
 ```
 
-## Performance Monitoring Reference
+## Performance Monitoring References
 
 - Performance monitoring data collection and report [case](https://zhuanlan.zhihu.com/p/420330110).
 - Performance monitoring real world [case](https://juejin.cn/post/7078512301665419295).

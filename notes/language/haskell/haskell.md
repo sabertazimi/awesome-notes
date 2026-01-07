@@ -117,11 +117,13 @@ Data.Word - unsigned int
 - tail List 除去首元素的部分.
 - length List 长度.
 
-_Tips_:
+:::tip
 
 ```haskell
 fromIntegral (length [1,2,3,4]) + 3.2
 ```
+
+:::
 
 - null List BestPractice: 检查一个 List 是否为空
 
@@ -427,7 +429,7 @@ describeList xs = "The list is " ++ case xs of [] -> "empty."
                                                xs -> "a longer list."
 ```
 
-### Pattern Matching Best Practice
+### Pattern Matching Best Practices
 
 - 代替 if-else/switch 语句
 - 递归算法(将递归基础作为首模式,递归函数体作为尾模式)
@@ -487,7 +489,11 @@ Ord 成员必为 Eq 成员: class (Eq a) => Ord a where
 - 成员: 大部分基本类型(不包含函数类型)
 - 方法: show 函数 (Show a) => a -> String
 
-_Tips_: 结合 Read, 可用于字符串与数值之间的转化
+:::tip
+
+结合 Read, 可用于字符串与数值之间的转化
+
+:::
 
 #### Read
 
@@ -495,7 +501,11 @@ _Tips_: 结合 Read, 可用于字符串与数值之间的转化
 - 成员: 大部分基本类型(不包含函数类型)
 - 方法: read 函数 (Read a) => String -> a
 
-_Tips_: 结合 Show, 可用于字符串与数值之间的转化
+:::tip
+
+结合 Show, 可用于字符串与数值之间的转化
+
+:::
 
 #### Enum
 
@@ -728,7 +738,6 @@ ghci> [1,2,3,4] >>= (\x -> return x)
 ghci> putStrLn "Wah!" >>= (\x -> return x)
 Wah!
 
-{-Tips: 利用结合律合并两个 Monadic Function-}
 (<=<) :: (Monad m) => (b -> m c) -> (a -> m b) -> (a -> m c)
 f <=< g = (\x -> g x >>= f)
 ghci> let f x = [x,-x]
@@ -955,8 +964,11 @@ instance Monoid Ordering where
     LT `mappend` _ = LT
     EQ `mappend` y = y
     GT `mappend` _ = GT
+```
 
--- Tips:
+:::tip
+
+```haskell
 -- mappend 在左边不等于 EQ 的情况下都会回传左边的值。相反地则回传右边的值
 -- 可代替多个 if/else 语句
 import Data.Monoid
@@ -967,6 +979,8 @@ lengthCompare x y = (length x `compare` length y) `mappend`
                     (x `compare` y)
     where vowels = length . filter (`elem` "aeiou")
 ```
+
+:::
 
 ```haskell
 instance Monoid a => Monoid (Maybe a) where
@@ -1569,7 +1583,9 @@ fn x = ceiling (negate (tan (cos (max 50 x))))
 -> Curry化: fn = ceiling . negate . tan . cos . max 50
 ```
 
-- Best Practice: 三种不同的函数写法
+:::tip[Best Practice]
+
+三种不同的函数写法:
 
 ```haskell
 oddSquareSum :: Integer
@@ -1584,6 +1600,8 @@ oddSquareSum =
         belowLimit = takeWhile (<10000) oddSquares
     in  sum belowLimit
 ```
+
+:::
 
 ### 常用函数
 
@@ -2992,6 +3010,6 @@ ghci> strMsg "boom!" :: String
 - `{- -}` 块注释
 - `{-# #-}` (文件头部)编译器参数
 
-## Reference
+## Haskell References
 
 - [Haskell Book](https://github.com/MnO2/learnyouahaskell-zh)

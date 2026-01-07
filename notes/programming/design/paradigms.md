@@ -185,7 +185,7 @@ Nest.js 通过 AOP 的架构方式, 实现了松耦合, 易于维护与扩展的
 - Dependency injection pattern:
   custom plugin system.
 
-## Framework Paradigms Reference
+## Paradigms References
 
 - Even You presentation on [JSConf Asia 2019](https://www.youtube.com/watch?v=ANtSWq-zI0s).
 - Framework paradigms [guide](https://mp.weixin.qq.com/s/mZ7KuFjyCWNCAq7HnXg96A).

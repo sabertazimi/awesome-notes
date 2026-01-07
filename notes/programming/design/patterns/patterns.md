@@ -54,7 +54,7 @@ Software design is the art of managing dependencies and abstractions.
   将组件间的依赖关系从程序内部提到外部来管理, 将组件的依赖通过外部以参数或其他形式注入.
 - [Mixin](./mixin.md) (混入模式): 将多个对象的属性混入同一个对象, 达到继承/扩展/组合的效果.
 
-## Patterns Reference
+## Patterns References
 
 - JavaScript [patterns](https://www.patterns.dev).
 - JavaScript design [patterns](http://www.dofactory.com/javascript/design-patterns).

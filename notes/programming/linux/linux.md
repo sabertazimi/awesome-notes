@@ -1229,7 +1229,7 @@ sudo apt-get install neofetch
 sudo apt-get install screenfetch
 ```
 
-### Linux Documentation Reference
+### Linux Documentation References
 
 - [DashDash: Beautiful Linux Manual Pages](https://dashdash.io)
 - [TLDR](https://github.com/tldr-pages/tldr)
@@ -2380,7 +2380,7 @@ set -e
 set -o pipefail
 ```
 
-### Interactive Shell Script Tips
+### Interactive Shell Script
 
 #### Check Root Validation
 
@@ -2680,9 +2680,9 @@ set-window-option -g window-status-current-bg red
 bind 'set bell-style none'
 ```
 
-## Linux Tools
+## Linux Toolchain
 
-### Modern Unix Tools
+### Modern Unix
 
 - Cross-platform Rust rewrite of the [GNU core utils](https://github.com/uutils/coreutils).
 - Modern alternatives to [common unix commands](https://github.com/ibraheemdev/modern-unix).
@@ -3090,7 +3090,7 @@ scoop install curlie
 alias curl="curlie"
 ```
 
-### Performance Tools
+### Performance
 
 ![Linux Perf Tools](./figures/linux-perf-tools.png 'Linux Perf Tools')
 
@@ -3413,6 +3413,6 @@ server {
 }
 ```
 
-### Linux Tools Reference
+### Linux Toolchain References
 
 - Linux [cheatsheets](https://github.com/trimstray/the-book-of-secret-knowledge).

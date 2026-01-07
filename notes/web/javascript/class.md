@@ -450,7 +450,7 @@ class SubClass extends SuperClass {
 // 'static block 2 SubClass'
 ```
 
-## Class Best Practice
+## Class Best Practices
 
 Avoid using `class` when:
 

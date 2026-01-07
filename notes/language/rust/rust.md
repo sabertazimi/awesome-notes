@@ -4098,7 +4098,7 @@ console.log(result)
 - [Criterion: Benchmarking Library](https://github.com/bheisler/criterion.rs)
 - [Clog: Conventional Changelog](https://github.com/clog-tool/clog-cli)
 
-## Reference
+## Rust References
 
 - [Rust Book](https://github.com/rust-lang/book)
 - [Rust Nomicon](https://github.com/rust-lang/nomicon)

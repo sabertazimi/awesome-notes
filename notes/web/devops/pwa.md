@@ -221,7 +221,7 @@ globalThis.addEventListener('activate', (event) => {
 })
 ```
 
-## PWA Reference
+## PWA References
 
 - Service worker [overview](https://developer.chrome.com/docs/workbox/service-worker-overview).
 - Workbox [library](https://github.com/GoogleChrome/workbox).

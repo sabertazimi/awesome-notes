@@ -96,6 +96,6 @@ const animation = document
   .animate(animationKeyframes, animationTiming)
 ```
 
-## Web Animations Reference
+## Web Animations References
 
 - Using Web Animations [API](https://developer.mozilla.org/docs/Web/API/Web_Animations_API/Using_the_Web_Animations_API).

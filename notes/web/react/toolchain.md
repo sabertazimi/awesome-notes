@@ -122,7 +122,7 @@ tags: [Web, React, Toolchain]
 
 `低代码出码`: 将 `schema.json` 通过 `Generator` 转化生成业务代码.
 
-### Low-Code Reference
+### Low-Code References
 
 - [Low-Code Engine Technical White Paper](https://developer.aliyun.com/ebook/7507)
 

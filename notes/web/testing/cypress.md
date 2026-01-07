@@ -473,7 +473,7 @@ it('should be accessible', () => {
 - Cypress accessibility testing [plugin](https://github.com/component-driven/cypress-axe).
 - Cypress visual regression testing [plugin](https://github.com/percy/percy-cypress).
 
-## Cypress Reference
+## Cypress References
 
 - Cypress official [guide](https://learn.cypress.io).
 - Cypress CI [action](https://github.com/cypress-io/github-action).

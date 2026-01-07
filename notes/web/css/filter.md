@@ -195,7 +195,7 @@ main::before {
 }
 ```
 
-## Filter and Blend Reference
+## Filter and Blend References
 
 - Instagram [filters](https://github.com/una/CSSgram).
 - Image [effects](https://github.com/bennettfeely/image-effects).
