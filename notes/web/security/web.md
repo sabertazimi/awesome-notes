@@ -16,8 +16,8 @@ Security headers [list](https://web.dev/security-headers):
 - [X-XSS-Protection](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-XSS-Protection):
   - `0` :表示禁用这个策略.
   - `1`: 默认, 对危险脚本做一些标志或修改, 以阻止在浏览器上渲染执行.
-  - `1; mode=block`:, 强制不渲染.
-- Setting `Context-Security-Policy` header.
+  - `1; mode=block`: 强制不渲染.
+- Setting `Content-Security-Policy` header.
 - Ensure all connections to be HTTPS.
 - Avoid Clicking-jacking using `X-Frame-Options`.
 - Disable `X-Powered-By` header.
@@ -214,7 +214,7 @@ Web crypto [API](https://developer.mozilla.org/docs/Web/API/SubtleCrypto):
   - WebGL vendor.
   - WebGL renderer.
   - Battery level.
-  - Batter status.
+  - Battery status.
 
 ```ts
 function getCanvasFingerprint() {

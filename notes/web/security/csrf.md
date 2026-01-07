@@ -70,7 +70,7 @@ def allow_request(req):
     return True
 
   # Allow simple top-level navigation from anywhere
-  if req['sec-fetch-mode'] === 'navigate' and req.method === 'GET':
+  if req['sec-fetch-mode'] == 'navigate' and req.method == 'GET':
     return True
 
   return False

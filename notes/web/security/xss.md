@@ -60,8 +60,9 @@ Don't trust user:
 
 - Escape control characters (输入校验):
   - `"` -> `&quot;`, `&` -> `&amp;`, `'` -> `&apos;`, `<` -> `&lt;`, `>` -> `&gt;`.
-  - `input.replace(/<script>|<script/>/g, '')`.
   - `input.trim()`.
+  - Use a well-vetted HTML sanitization library,
+    e.g. `DOMPurify.sanitize(input)`, instead of ad-hoc regex replacements.
   - React DOM escapes any values embedded in JSX before rendering them.
 - Secure encode output result (输出编码):
   保证**编码方式一致**, e.g. 混用单字节编码与多字节编码, 导致攻击者绕过 `\` 系统转义符.

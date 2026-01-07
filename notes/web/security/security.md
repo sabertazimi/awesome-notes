@@ -13,7 +13,7 @@ including defense strategies and best practices for building secure applications
 
 ## Core Concepts
 
-- [Web](./web.md) - Security headers, same-origin policy, CSP, trusted types, sandbox, crypto, and user privacy
+- [Web](./web.md) - Security headers, same-origin policy, CSP, trusted types, crypto, and user privacy
 - [Sandbox](./sandbox.md) - Snapshot, proxy, and iframe sandbox techniques
 - [Zero Trust](./zero-trust.md) - Zero trust architecture and access control
 
