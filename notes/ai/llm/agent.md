@@ -160,7 +160,7 @@ AI agents powered by tricky LLMs prompting:
 
 ## Context
 
-### Dynamic
+### Dynamic Discovery
 
 Dynamic context [discovery](https://cursor.com/cn/blog/dynamic-context-discovery):
 
@@ -169,6 +169,18 @@ Dynamic context [discovery](https://cursor.com/cn/blog/dynamic-context-discovery
 - 上下文压缩时引用对话历史.
 - 按需加载.
 - 渐进式披露.
+
+### Context Engineering
+
+LLM 并未统一利用其上下文,
+它们的准确性和可靠性会[随着输入令牌数量的增加而下降](https://research.trychroma.com/context-rot),
+称之为上下文腐烂 (`Context Rot`).
+
+因此, 仅仅在模型的上下文中拥有相关信息是不够的:
+信息的呈现方式对性能有显著影响.
+这凸显了 `上下文工程` 的必要性,
+优化相关信息的数量并最小化不相关上下文以实现可靠的性能.
+e.g. custom gemini CLI [command](./prompts/url2md.toml).
 
 ## Orchestration
 
