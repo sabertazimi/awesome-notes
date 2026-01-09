@@ -154,7 +154,7 @@ AI agents powered by tricky LLMs prompting:
 
 ### Dynamic
 
-[Dynamic context discovery](https://cursor.com/cn/blog/dynamic-context-discovery):
+Dynamic context [discovery](https://cursor.com/cn/blog/dynamic-context-discovery):
 
 - 工具响应 -> 文件.
 - 终端会话 -> 文件.
