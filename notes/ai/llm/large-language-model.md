@@ -193,6 +193,8 @@ const result = await agent.invoke({ input: '...' })
 
 ### Text-to-Speech
 
+- [MiniMax](https://www.minimax.io/audio/text-to-speech):
+  MiniMax voice agent.
 - [ChatTTS](https://github.com/2noise/ChatTTS):
   Generative speech model for daily dialogue.
 - [ChatterBox](https://github.com/resemble-ai/chatterbox):
