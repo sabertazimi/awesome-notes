@@ -152,11 +152,12 @@ Let's break down this problem and give me the solution with code format.
 
 ![Task Planning](./figures/task-planning.png 'Task Planning')
 
-## Program
+## Codegen
 
 [Program-aided prompting](https://proceedings.mlr.press/v202/gao23f.html)
 make LLMs **output code** (生成代码),
-then offloads solution step to programmatic runtime such as `Python interpreter`:
+then offloads solution step to programmatic runtime
+such as `Python`, `Node.js`:
 
 ```python
 import openai
