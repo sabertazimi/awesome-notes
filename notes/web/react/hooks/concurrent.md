@@ -202,15 +202,15 @@ export default function App() {
 
 ## useSyncExternalStore
 
-`Props`/`Context`/`useState`/`useReducer` are internal states
-not affected by concurrent features.
+`props`/`context`/`useState`/`useReducer`
+are internal states not affected by concurrent features.
 
 External stores affected by concurrent features including:
 
 - Global variables: `document.body`.
-- Date.
-- Redux store.
-- Zustand store.
+- Browser APIs: `matchMedia`, page visibility, scroll position, `Date`.
+- External stores: Redux, Zustand.
+- Anything performance-sensitive or event-driven.
 
 `useSyncExternalStore` allows external stores to support concurrent reads
 by forcing updates to the store to be synchronous:
