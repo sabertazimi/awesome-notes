@@ -39,8 +39,9 @@ MIPS, SPARC, x86 added it later and the ARM architecture
 was the first architecture with a **fully predicated** instruction set
 (though the early ARM processors only had short pipelines and small mispredict penalties).
 
-## VLIW (Very Long Instruction Word)
+## VLIW
 
+Very long instruction word:
 In cases where backward compatibility is not an issue,
 it is possible for the instruction set itself to be designed
 to explicitly group instructions to be executed in parallel.
@@ -49,7 +50,7 @@ except the decode/dispatch stage is much simpler
 and only occurs for each group of sub-instructions.
 No VLIW designs have yet been commercially successful as mainstream CPUs.
 
-## Out of Order Execution (OoO or OoE)
+## Out of Order Execution
 
 If branches and long-latency instructions are going to cause bubbles in the pipeline(s),
 then perhaps those empty cycles can be used to do other work.
@@ -96,7 +97,7 @@ due to a combination of load latencies, cache misses,
 branches and dependencies between instructions.
 This limit of available instruction-level parallelism is called the ILP wall.
 
-### Decoupled x86 microarchitecture
+### Decoupled x86 micro-architecture
 
 Dynamically decode the x86 instructions into simple,
 RISC-like micro-instructions (μops, pronounced "micro-ops"),
@@ -109,8 +110,9 @@ it is 14 stages when the processor is running from its L0 μop cache
 but 19 stages when running from the L1 instruction cache
 and having to decode x86 instructions and translate them into μops.
 
-## SMT (Hardware Threads)
+## SMT
 
+Hardware threads:
 Even the most aggressively brainiac OOO superscalar processor
 will still almost never exceed an average of about 2-3 instructions per cycle
 when running most mainstream, real-world software,
@@ -198,8 +200,9 @@ Some modern ARM designs also use an asymmetric approach,
 with several large cores paired with one or a few smaller, simpler "companion" cores,
 to increase battery life.
 
-## DLP (data-level parallelism)
+## DLP
 
+data-level parallelism:
 Rather than looking for ways to execute groups of instructions in parallel,
 the idea is to look for ways to make one instruction
 apply to a group of data values in parallel.
@@ -219,7 +222,7 @@ then widened to 256 bits with AVX.
 
 ## Memory
 
-### Memory Wall
+### Wall
 
 Latency is especially bad for loads from memory,
 which make up about a quarter of all instructions.
@@ -261,14 +264,14 @@ with around 90% caches hit rates.
 | RAM        | 8+GB   | ~117             | SDRAM DIMMs on motherboard |
 | Swap       | 100+GB | 10000+           | hard disk or SSD           |
 
-#### Cache Locality
+#### Locality
 
 Temporal locality is exploited by merely keeping recently accessed data in the cache.
 To take advantage of spatial locality,
 data is transferred from main memory up into the cache
 in blocks of a few dozen bytes at a time, called a cache line.
 
-#### Cache Layout
+#### Layout
 
 Using the virtual address might cause caches
 need to be flushed on every context switch (**thrashing**)
@@ -291,7 +294,7 @@ The large L2/L3 cache (LLC for "last-level cache")
 is also usually highly associative, perhaps as much as 12- or 16-way.
 External E-cache is sometimes direct-mapped for flexibility of size and implementation.
 
-### Memory Latency and Bandwidth
+### Latency and Bandwidth
 
 Lower-latency designs will be better for pointer-chasing code,
 such as compilers and database systems.
@@ -323,4 +326,4 @@ x86 服务器基于`网络的分布式`具有天然的缺陷:
 
 ## References
 
-- [Modern Microprocessors – A 90-Minute Guide. Jason R. C. Patterson. Technical paper, Lighterra, May 2015](http://www.lighterra.com/papers/modernmicroprocessors)
+- Modern microprocessors: a 90-minute [guide](http://www.lighterra.com/papers/modernmicroprocessors).
