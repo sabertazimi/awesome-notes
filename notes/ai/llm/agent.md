@@ -179,6 +179,25 @@ Dynamic context [discovery](https://cursor.com/cn/blog/dynamic-context-discovery
 - 按需加载.
 - 渐进式披露.
 
+### Personalization
+
+Metaprompting for [memory extraction](https://cookbook.openai.com/examples/agents_sdk/context_personalization#2-shape-of-a-memory):
+
+```md
+You are a [USE CASE] agent whose goal is [GOAL].
+What information would be important to keep in working memory during a single session?
+List both fixed attributes (always needed) and inferred attributes (derived from user behavior or context).
+```
+
+:::tip[Memory System]
+
+[Memory system](https://cookbook.openai.com/examples/agents_sdk/context_personalization#memory-guardrails):
+
+- Repeatable memory loop: inject → reason → distill → consolidate.
+- Enforce precedence: current user message > session context > memory.
+
+:::
+
 ### Context Engineering
 
 LLM 并未统一利用其上下文,
