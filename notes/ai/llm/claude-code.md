@@ -271,10 +271,10 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 - [Edmuds](https://github.com/edmund-io/edmunds-claude-code):
   Personal configuration for productive web development.
 
-### Math
+### Browser
 
-- [Scientific](https://github.com/K-Dense-AI/claude-scientific-skills):
-  Comprehensive collection of ready-to-use scientific skills.
+- [DevBrowser](http://github.com/SawyerHood/dev-browser):
+  Browser automation.
 
 ### Integration
 
@@ -287,10 +287,13 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 - [Notion](https://github.com/makenotion/claude-code-notion-plugin):
   Notion official skills, commands and MCP server.
 
-### DevOps
+### Math
 
-- [DevBrowser](http://github.com/SawyerHood/dev-browser):
-  Browser automation.
+- [Scientific](https://github.com/K-Dense-AI/claude-scientific-skills):
+  Comprehensive collection of ready-to-use scientific skills.
+
+### Guardrails
+
 - [SafetyNet](https://github.com/kenryu42/claude-code-safety-net):
   Catching destructive git and filesystem commands before they execute.
 
