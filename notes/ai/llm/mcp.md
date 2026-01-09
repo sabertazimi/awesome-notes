@@ -7,20 +7,25 @@ tags: [AI, LLM, Agent, MCP]
 
 ## Library
 
-### Recommended
+### API
 
-- [Sequential thinking](https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking).
 - [Context7](https://github.com/upstash/context7).
-- [Playwright](https://github.com/microsoft/playwright-mcp).
-- [Puppeteer](https://github.com/modelcontextprotocol/servers/tree/main/src/puppeteer).
-- [Browser tools](https://github.com/AgentDeskAI/browser-tools-mcp).
-- [StageWise](https://github.com/stagewise-io/stagewise).
-- [Git](https://github.com/modelcontextprotocol/servers/tree/main/src/git).
-- [GitHub](https://github.com/github/github-mcp-server).
-- [MySQL](https://github.com/benborla/mcp-server-mysql).
-- [Figma](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server).
-- [Notion](https://github.com/makenotion/notion-mcp-server).
 - [APIFox](https://github.com/apifox/apifox-mcp-server).
+
+### Browser
+
+- [Playwright](https://github.com/microsoft/playwright-mcp).
+- [StageWise](https://github.com/stagewise-io/stagewise).
+
+### Integration
+
+- [Figma](https://github.com/figma/mcp-server-guide).
+- [Notion](https://github.com/makenotion/claude-code-notion-plugin).
+
+### Memory
+
+- [Memory](http://github.com/doobidoo/mcp-memory-service):
+  Automatically captures project context, architecture decisions, and code patterns.
 
 ### Collections
 
