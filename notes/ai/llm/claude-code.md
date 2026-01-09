@@ -243,7 +243,7 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 
 ## Library
 
-### Boilerplate
+### Templates
 
 - [Switch](https://github.com/farion1231/cc-switch):
   Quick configuration with All-in-One assistant.
@@ -251,33 +251,48 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
   Opinionated project initialization.
 - [Showcase](https://github.com/ChrisWiles/claude-code-showcase):
   Comprehensive Claude Code project configuration.
+- [Seekers](https://github.com/yusufkaraaslan/Skill_Seekers):
+  Convert documentation websites, GitHub repositories, and PDFs
+  into Claude AI skills with automatic conflict detection.
 
-### Recommended Skills
+### Architecture
 
 - [Superpowers](https://github.com/obra/superpowers):
   Complete software development workflow.
-- [DevBrowser](http://github.com/SawyerHood/dev-browser):
-  Browser automation.
-- [NotebookLM](https://github.com/PleasePrompto/notebooklm-skill):
-  Communicate directly with Google NotebookLM notebooks.
-- [Scientific](https://github.com/K-Dense-AI/claude-scientific-skills):
-  Comprehensive collection of ready-to-use scientific skills.
-
-### Recommended Plugins
-
 - [Agents](https://github.com/wshobson/agents):
   Comprehensive production-ready system combining agents, multi-agent workflow orchestrators, skills, and slash commands.
 - [Continuous](https://github.com/parcadei/Continuous-Claude-v2):
   Context management.
+
+### Frontend
+
+- [Edmuds](https://github.com/edmund-io/edmunds-claude-code):
+  Personal configuration for productive web development.
+
+### Math
+
+- [Scientific](https://github.com/K-Dense-AI/claude-scientific-skills):
+  Comprehensive collection of ready-to-use scientific skills.
+
+### Integration
+
+- [NotebookLM](https://github.com/PleasePrompto/notebooklm-skill):
+  Communicate directly with Google NotebookLM notebooks.
 - [Figma](https://github.com/figma/mcp-server-guide):
   Figma official skills and MCP server.
 - [Notion](https://github.com/makenotion/claude-code-notion-plugin):
   Notion official skills, commands and MCP server.
+
+### DevOps
+
+- [DevBrowser](http://github.com/SawyerHood/dev-browser):
+  Browser automation.
 - [SafetyNet](https://github.com/kenryu42/claude-code-safety-net):
   Catching destructive git and filesystem commands before they execute.
-- [Edmuds](https://github.com/edmund-io/edmunds-claude-code):
-  Personal configuration for productive web development.
-- [LifeAssistant](https://github.com/lout33/claude_life_assistant):
+
+### Assistant
+
+- [Life](https://github.com/lout33/claude_life_assistant):
   Personal coach that remembers, notices patterns, and holds accountable.
 
 ### Collections
@@ -288,9 +303,6 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
   Curated list of Claude Code skills.
 - [Marketplace](https://skillsmp.com):
   Agent skills marketplace.
-- [Seekers](https://github.com/yusufkaraaslan/Skill_Seekers):
-  Convert documentation websites, GitHub repositories, and PDFs
-  into Claude AI skills with automatic conflict detection.
 - [Plugins](https://github.com/anthropics/claude-plugins-official):
   Anthropic-managed directory of high quality Claude Code plugins.
 - [Registry](https://github.com/Kamalnrf/claude-plugins):
