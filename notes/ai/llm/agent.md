@@ -182,6 +182,22 @@ LLM 并未统一利用其上下文,
 优化相关信息的数量并最小化不相关上下文以实现可靠的性能.
 e.g. custom gemini CLI [command](./prompts/url2md.toml).
 
+:::tip[Planning with Files]
+
+1. Design around **KV-cache**
+2. **Plan** is required
+3. **Files** are memory
+4. Don't get few-shotted: get rid of repetitive actions
+5. Manipulate attention through **recitation**
+
+```md
+Start of context: [Original goal - far away, forgotten]
+...many tool calls...
+End of context: [Recently read task_plan.md - gets ATTENTION!]
+```
+
+:::
+
 ## Orchestration
 
 单智能体系统 (Single-agent systems):

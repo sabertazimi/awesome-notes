@@ -261,8 +261,10 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
   Complete software development workflow.
 - [Agents](https://github.com/wshobson/agents):
   Comprehensive production-ready system combining agents, multi-agent workflow orchestrators, skills, and slash commands.
+- [Manus](https://github.com/OthmanAdi/planning-with-files):
+  Manus-style persistent markdown planning.
 - [Continuous](https://github.com/parcadei/Continuous-Claude-v2):
-  Context management.
+  Session continuity, token-efficient MCP execution, and agentic workflows.
 
 ### Frontend
 
