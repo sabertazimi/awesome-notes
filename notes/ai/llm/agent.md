@@ -150,6 +150,14 @@ AI agents powered by tricky LLMs prompting:
 - Generative [agent](https://github.com/joonspk-research/generative_agents).
 - Minecraft [agent](https://github.com/MineDojo/Voyager).
 
+## Tool
+
+[Tool execution](https://www.youtube.com/watch?v=TqC1qOfiVcQ):
+
+1. Tool calling: atomic toolkit
+2. Bash: composable static scripts
+3. Codegen: dynamic programs
+
 ## Context
 
 ### Dynamic
