@@ -39,7 +39,7 @@ function handleEvent(event) {
 
 ## Global
 
-`DOMContentLoaded` event:
+`DOMContentLoaded`:
 
 - 当文档中没有脚本时, 浏览器解析完 `HTML` 文档便能触发 `DOMContentLoaded` 事件.
 - 如果文档中包含脚本, 则脚本会阻塞文档的解析,
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 })
 ```
 
-`readystatechange` event:
+`readystatechange`:
 
 ```ts
 document.addEventListener('readystatechange', (event) => {
@@ -81,7 +81,7 @@ document.addEventListener('readystatechange', (event) => {
 })
 ```
 
-`load` event (加载完成):
+`load` (加载完成):
 
 ```ts
 window.addEventListener('load', () => {
@@ -111,7 +111,7 @@ window.addEventListener('load', () => {
 })
 ```
 
-`visibilitychange` event, 切换标签页时改变网页标题/声音/视频:
+`visibilitychange`, 切换标签页时改变网页标题/声音/视频:
 
 ```ts
 window.addEventListener('visibilitychange', () => {
@@ -146,7 +146,7 @@ function handleVisibilityChange() {
 document.addEventListener('visibilitychange', handleVisibilityChange, false)
 ```
 
-`pageshow` event (e.g. [BFCache compatible](https://www.sabatino.dev/bfcache-explained)):
+`pageshow` (e.g. [BFCache compatible](https://www.sabatino.dev/bfcache-explained)):
 
 ```ts
 window.addEventListener('pageshow', (event) => {
@@ -155,17 +155,17 @@ window.addEventListener('pageshow', (event) => {
 })
 ```
 
-- `beforeunload` event.
-- `unload` event: 卸载完成.
-- `abort` event: 提前终止.
-- `error` event.
-- `select` event: 在文本框 (`<input>` 或 `textarea`) 上选择字符.
-- `resize` event: 缩放.
-- `scroll` event: 滚动.
+- `beforeunload`.
+- `unload`: 卸载完成.
+- `abort`: 提前终止.
+- `error`.
+- `select`: 在文本框 (`<input>` 或 `textarea`) 上选择字符.
+- `resize`: 缩放.
+- `scroll`: 滚动.
 
 ## Form
 
-- `submit`/`reset` event.
+- `submit`/`reset`.
 - [FromData API](https://developer.mozilla.org/docs/Web/API/FormData)
 - [CheckValidity API](https://developer.mozilla.org/docs/Web/API/HTMLSelectElement/checkValidity)
 
@@ -263,10 +263,10 @@ export default function Page() {
 
 ## Input
 
-- `blur`/`focus`/`focusin`/`focusout` event.
-- `input`/`change` event.
-- `select` event: 在文本框 (`<input>` 或 `textarea`) 上选择字符.
-- [`composition` event](https://developer.mozilla.org/docs/Web/API/CompositionEvent):
+- `blur`/`focus`/`focusin`/`focusout`.
+- `input`/`change`.
+- `select`: 在文本框 (`<input>` 或 `textarea`) 上选择字符.
+- [`composition`](https://developer.mozilla.org/docs/Web/API/CompositionEvent):
   中文输入事件.
 
 ### Focus
@@ -297,11 +297,11 @@ console.log(document.hasFocus()) // true
 
 ### Change
 
-- `input` event:
+- `input`:
   - `<input type="text" />`.
   - `<input type="password"/>`.
   - `<textarea />`.
-- `change` event:
+- `change`:
   - `<input type="checkbox" />`.
   - `<input type="radio" />`.
   - `<input type="file" />`.
@@ -342,9 +342,9 @@ input.addEventListener('select', (event) => {
 [Clipboard API](https://developer.mozilla.org/docs/Web/API/Clipboard_API)
 (modern alternative for `document.execCommand(command)`):
 
-- `copy` event.
-- `cut` event.
-- `paste` event.
+- `copy`.
+- `cut`.
+- `paste`.
 
 ```ts
 const source = document.querySelector('div.source')
@@ -361,26 +361,26 @@ source.addEventListener('copy', (event) => {
 
 ## Mouse
 
-- `mousedown` event.
-- `mouseup` event.
-- `click` event:
+- `mousedown`.
+- `mouseup`.
+- `click`:
   - `mousedown` 与 `mouseup` 都触发后, 触发此事件.
   - `event.clientX`/`event.clientY`.
   - `event.pageX`/`event.pageY`.
   - `event.screenX`/`event.screenY`.
   - `event.shiftKey`/`event.ctrlKey`/`event.altKey`/`event.metaKey`.
-- `dbclick` event: `click` 两次触发后, 触发此事件.
-- `mousemove` event.
-- `mouseenter` event.
-- `mouseleave` event:
+- `dbclick`: `click` 两次触发后, 触发此事件.
+- `mousemove`.
+- `mouseenter`.
+- `mouseleave`:
   pointer has exited the element and all of its descendants.
-- `mouseout` event:
+- `mouseout`:
   pointer leaves the element or leaves one of the element's descendants.
-- `mouseover` event.
+- `mouseover`.
 - [`wheel`](https://developer.mozilla.org/docs/Web/API/Element/wheel_event)
-  event (replace deprecated `mousewheel` event).
+  (replace deprecated `mousewheel`).
 
-For `click` event, no need for X/Y to judge internal/outside state.
+For `click`, no need for X/Y to judge internal/outside state.
 Use `element.contains` to check is a better way.
 
 ```ts
@@ -419,7 +419,7 @@ noContext.addEventListener('contextmenu', (e) => {
 
 ## Keyboard
 
-`keydown`/`keypress`/`keyup` event:
+`keydown`/`keypress`/`keyup`:
 
 ```ts
 const textbox = document.getElementById('myText')
@@ -460,21 +460,63 @@ textbox.addEventListener('keyup', (event) => {
 
 ## Device
 
-- `deviceorientation` event.
-- `devicemotion` event.
-- `touchstart` event.
-- `touchmove` event.
-- `touchend` event.
-- `touchcancel` event.
+- `deviceorientation`.
+- `devicemotion`.
 
-Use
-[`touch`](https://developer.mozilla.org/docs/Web/API/Touch_events)
-events:
+Animating with mobile accelerometers:
 
-- Dispatch custom
-  `tap`/`press`/`swipe`/`pinch`/`drag`/`drop`/`rotate` event.
-- Dispatch standard
-  `click`/`dbclick`/mousedown`/`mouseup`/`mousemove` event.
+```ts
+// call on user gesture
+async function enableMotion() {
+  // Check if the browser requires explicit permission (iOS 13+)
+  if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+    try {
+      const permissionState = await DeviceOrientationEvent.requestPermission()
+
+      if (permissionState === 'granted') {
+        window.addEventListener('devicemotion', handleMotion)
+      } else {
+        console.warn('Permission denied by user')
+      }
+    } catch (error) {
+      console.error('DeviceMotion prompt failed', error)
+    }
+  } else {
+    // Non-iOS devices or older browsers
+    window.addEventListener('devicemotion', handleMotion)
+  }
+}
+
+// Mapping rotation rate to CSS variables
+function handleMotion(event) {
+  const rotation = event.rotationRate
+  const acceleration = event.acceleration
+
+  // We multiply by 0.2 to dampen the effect for a smoother feel.
+  // A higher number will make the rotation more intense.
+  // Notice that the Y-axis is multiplied by a negative number to align with physical movement.
+  rings.style.setProperty('--rotateX', `${rotation.alpha * 0.2}deg`)
+  rings.style.setProperty('--rotateY', `${rotation.beta * -0.2}deg`)
+  rings.style.setProperty('--rotateZ', `${rotation.gamma * 0.2}deg`)
+
+  // Translation logic: moving the object in space
+  rings.style.setProperty('--translateX', `${acceleration.x * -25}px`)
+  rings.style.setProperty('--translateY', `${acceleration.y * 25}px`)
+  rings.style.setProperty('--translateZ', `${acceleration.z * -25}px`)
+}
+```
+
+## Touch
+
+- `touchstart`.
+- `touchmove`.
+- `touchend`.
+- `touchcancel`.
+
+Use [`touch`](https://developer.mozilla.org/docs/Web/API/Touch_events) events:
+
+- Dispatch custom `tap`/`press`/`swipe`/`pinch`/`drag`/`drop`/`rotate`.
+- Dispatch standard `click`/`dbclick`/`mousedown`/`mouseup`/`mousemove`.
 
 ```ts
 interface Pointer {
