@@ -22,6 +22,15 @@ Asymmetry of verification and verifiers [law](https://www.jasonwei.net/blog/asym
 
 所有可解决且易于验证的问题, 都将被 AI 解决.
 
+:::caution[Agent Traffic]
+
+[Among the agents](https://www.hyperdimensional.co/p/among-the-agents):
+
+Value of highly polished UI and enterprise applications will decrease,
+value of performant, reliable, extensible API will increase.
+
+:::
+
 ## Instructions
 
 - Use existing documents:
