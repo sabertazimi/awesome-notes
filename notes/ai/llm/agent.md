@@ -61,11 +61,13 @@ How to write a great `AGENTS.md` [lessons from over 2500 repositories](https://g
 4. Real **examples**: Shows what good output looks like with actual code. No abstract descriptions.
 5. Three-tier **boundaries**: Set clear rules using always do, ask first, never do. Prevents destructive mistakes.
 
-> Role -> Tool -> Context -> Example -> Boundary
+:::tip
+
+Role -> Tool -> Context -> Example -> Boundary
+
+:::
 
 ### Vibe Coding
-
-`Spec` → `Onboard` → `Direct` → `Verify` → `Integrate`.
 
 1. Spec the work:
    - 目标: picking next highest-leverage goal
@@ -91,6 +93,12 @@ How to write a great `AGENTS.md` [lessons from over 2500 repositories](https://g
    - Verify CI
    - Stage roll-outs
    - Monitor regressions
+
+:::tip
+
+Spec → Onboard → Direct → Verify → Integrate
+
+:::
 
 ### System
 
