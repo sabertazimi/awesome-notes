@@ -294,6 +294,8 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 
 - [Life](https://github.com/lout33/claude_life_assistant):
   Personal coach that remembers, notices patterns, and holds accountable.
+- [Health](https://github.com/huifer/Claude-Ally-Health):
+  Intelligent healthcare assistant.
 
 ### Collections
 
