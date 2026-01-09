@@ -128,8 +128,7 @@ good [`AGENTS.md`](https://github.com/agentsmd/agents.md):
 
 ### Pull Request
 
-GitHub [copilot](https://github.blog/ai-and-ml/github-copilot/how-to-use-github-copilot-spaces-to-debug-issues-faster):
-to debug issues faster:
+GitHub [copilot](https://github.blog/ai-and-ml/github-copilot/how-to-use-github-copilot-spaces-to-debug-issues-faster) to debug issues faster:
 
 ```md
 You are an experienced engineer working on this codebase.
