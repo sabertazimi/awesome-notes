@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-tags: [Web, CSS]
+tags: [Web, CSS, Cascading, Layer, Scope, Specificity, Inheritance]
 ---
 
 # Cascading
@@ -18,7 +18,7 @@ tags: [Web, CSS]
 
 [![W3C Standard Process](./figures/w3c-standard-process.svg)](https://www.w3.org/Consortium/Process)
 
-## Cascading Order
+## Order
 
 1. Inherit styles.
 2. User agent normal styles.
@@ -45,7 +45,7 @@ tags: [Web, CSS]
 
 ## Layer
 
-### Layer Formal Syntax
+### Formal Syntax
 
 [`@layer`](https://developer.mozilla.org/docs/Web/CSS/@layer) formal syntax:
 
@@ -78,7 +78,7 @@ tags: [Web, CSS]
 <link rel="stylesheet" href="reset.css" layer="reset" media="supports(at-rule(@layer))" />
 ```
 
-### Layer Specificity
+### Priority
 
 ```css
 /* utilities > components > layout > theme */
@@ -290,7 +290,7 @@ Increasing specificity by **duplicating selector**:
 - `unset` value resets a non-inherited property to its `initial` value.
 - `revert` reverses the CSS default values to the browser user-agent styles.
 
-### Inheritable CSS Property
+Inheritable Properties:
 
 - [visibility](https://developer.mozilla.org/docs/Web/CSS/visibility)
 - [cursor](https://developer.mozilla.org/docs/Web/CSS/cursor)

@@ -5,7 +5,7 @@ tags: [Web, Security, Command, Injection, Vulnerability]
 
 # Command Injection
 
-## Command Injection Attack
+## Attack
 
 ```json
 {
@@ -13,7 +13,7 @@ tags: [Web, Security, Command, Injection, Vulnerability]
 }
 ```
 
-## Command Injection Protection
+## Protection
 
 - Escape control characters: `<`/`>`/`?`/`=`/`&&`.
 - Disable code execution during deserialization.

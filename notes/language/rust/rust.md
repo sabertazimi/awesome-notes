@@ -6,7 +6,7 @@ tags: [Language, Rust]
 
 ## Getting Started
 
-- [Toolchain](./toolchain.md) - Cargo, rustup, and development tools
+- [Toolchain](./toolchain.md) - Cargo and rustup
 - [Types](./types.md) - Primitive and compound types
 - [Format](./format.md) - String formatting and display traits
 
@@ -26,7 +26,7 @@ tags: [Language, Rust]
 - [Collections](./collections.md) - Vectors, HashMap, and collections
 - [Concurrency](./concurrency.md) - Threads, async, and concurrent programming
 - [Macros](./macros.md) - Declarative and procedural macros
-- [IO](./io.md) - Input/output operations
+- [I/O](./io.md) - Input/output operations
 - [System](./system.md) - FFI, unsafe code, and system programming
 
 ## Development

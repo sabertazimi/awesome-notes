@@ -1,6 +1,6 @@
 ---
 sidebar_position: 23
-tags: [Web, React, Hook]
+tags: [Web, React, Hook, Media]
 ---
 
 # Media

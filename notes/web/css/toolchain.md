@@ -1,6 +1,6 @@
 ---
-sidebar_position: 26
-tags: [Web, CSS]
+sidebar_position: 52
+tags: [Web, CSS, Toolchain, PostCSS, StyleLint, Tailwind]
 ---
 
 # Toolchain
@@ -10,7 +10,7 @@ tags: [Web, CSS]
 - [PostCSS Preset Env](https://github.com/csstools/postcss-plugins)
 - [PostCSS Flexbox Bug Checker](https://github.com/luisrudge/postcss-flexbugs-fixes)
 
-### CSS Vendor Prefix
+### Vendor Prefix
 
 CSS vendor prefix order:
 
@@ -20,7 +20,7 @@ CSS vendor prefix order:
 - `-webkit-` rule.
 - Standard rule.
 
-### CSS Normalize
+### Normalize
 
 [Minimal normalize](https://meiert.com/blog/a-minimal-css-starter):
 
@@ -122,7 +122,7 @@ button {
 }
 ```
 
-### CSS Feature Detection
+### Feature Detection
 
 ```html
 <script>
@@ -360,7 +360,7 @@ module.exports = {
 
 ## Tailwind
 
-### Tailwind Configuration
+### Configuration
 
 :::danger[JIT Mode]
 
@@ -369,7 +369,7 @@ will lead to class purged.
 
 :::
 
-### Tailwind Directives
+### Directives
 
 ```css
 @layer base {

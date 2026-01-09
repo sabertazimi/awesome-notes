@@ -1,13 +1,13 @@
 ---
 sidebar_position: 2
-tags: [Web, CSS]
+tags: [Web, CSS, Selector, Pseudo-class, Pseudo-element]
 ---
 
 # Selectors
 
 [![CSS Selectors](./figures/selectors.png)](https://developer.mozilla.org/docs/Web/CSS/CSS_Selectors)
 
-## Universal Selector
+## Universal
 
 `*`:
 
@@ -15,7 +15,7 @@ tags: [Web, CSS]
 - 匹配自定义元素, `<script>`, `<style>`, `<title>`.
 - 不匹配伪元素.
 
-## Type Selector
+## Type
 
 ```css
 p {
@@ -24,7 +24,7 @@ p {
 }
 ```
 
-## Attribute Selector
+## Attribute
 
 `E[attr]`:
 
@@ -101,7 +101,7 @@ a[title*='link'] {
 }
 ```
 
-## Descendant Combinator
+## Descendant
 
 `E F` 后代选择器:
 
@@ -124,7 +124,7 @@ For `.container ul li a` selector:
 - finally, filter down the above selection to
   the ones contained in an element with the class `.container`
 
-## Child Combinator
+## Child
 
 `E > F` 子代选择器:
 
@@ -134,7 +134,7 @@ ul > li {
 } /* 仅限ul的直接子元素li, 忽略嵌套子元素 */
 ```
 
-## General Sibling Combinator
+## General Sibling
 
 `E ~ F` 一般兄弟选择器:
 
@@ -167,7 +167,7 @@ input.checkbox:checked ~ nav {
 }
 ```
 
-## Adjacent Sibling Combinator
+## Adjacent Sibling
 
 `E + F` 相邻兄弟选择器:
 
@@ -183,16 +183,16 @@ li + li {
 }
 ```
 
-## Location Pseudo Class
+## Location
 
-### Link Pseudo Class
+### Link
 
 `:link`:
 
 - 只匹配未访问的 `<a href>`.
 - 可用 `a`/`[href]` 选择器代替.
 
-### Visited Pseudo Class
+### Visited
 
 `:visited`:
 
@@ -203,14 +203,14 @@ li + li {
 - 只支持重置已有颜色, 不能新增设置样式.
 - `window.getComputedStyle` 无法获取到 `:visited` 设置颜色.
 
-### Any Link Pseudo Class
+### Any Link
 
 `:any-link`:
 
 - 同时匹配 `:link` 与 `:visited` 元素.
 - 匹配所有设置了 `[href]` 的链接元素: `<a href>`/`<link href>`/`<area href>`.
 
-### Target Pseudo Class
+### Target
 
 `:target`:
 
@@ -250,16 +250,16 @@ li + li {
 
 - Selected when any children targeted.
 
-## User Action Pseudo Class
+## User Action
 
-### Hover Pseudo Class
+### Hover
 
 [`:hover`](https://codepen.io/Chokcoco/pen/rRLJrR):
 
 - 鼠标移动到容器时的状态.
 - 不仅限于链接, 可用于页面中的任何元素.
 
-### Active Pseudo Class
+### Active
 
 `:active`:
 
@@ -305,7 +305,7 @@ button:active,
 }
 ```
 
-### Focus Pseudo Class
+### Focus
 
 `:focus`:
 
@@ -349,7 +349,7 @@ Separate focus styles:
 }
 ```
 
-## Input Pseudo Class
+## Input
 
 - `:autofill`.
 - `:enabled`:
@@ -410,7 +410,7 @@ Separate focus styles:
 }
 ```
 
-## Structural Pseudo Class
+## Structural
 
 - `:root`:
   - 根元素, 始终指 html 元素.
@@ -462,7 +462,7 @@ li:first-child:nth-last-child(n + 2):nth-last-child(-n + 6) ~ li {
 
 :::
 
-## Logical Pseudo Class
+## Logical
 
 - `:not(<selector>)`:
   - Selector priority.
@@ -477,7 +477,7 @@ li:first-child:nth-last-child(n + 2):nth-last-child(-n + 6) ~ li {
   - A target element has child elements: `:has(> selector)`.
   - A target element has sibling elements: `:has(+ selector)`.
 
-### IS Pseudo Class
+### Is
 
 ```css
 :is(ol, ul) :is(ol, ul) li {
@@ -485,7 +485,7 @@ li:first-child:nth-last-child(n + 2):nth-last-child(-n + 6) ~ li {
 }
 ```
 
-### Has Pseudo Class
+### Has
 
 [`:has()`](https://www.joshwcomeau.com/css/has):
 
@@ -604,7 +604,7 @@ section {
 
 :::
 
-## Linguistic Pseudo Class
+## Linguistic
 
 - `:dir(ltr)`/`:dir(rtl)`.
 - `:lang(en)`: 具有使用双字母缩写 (`en`) 表示的语言的元素.
@@ -623,11 +623,11 @@ section {
 }
 ```
 
-## Misc Pseudo Class
+## Miscellaneous
 
 - `:fullscreen`.
 
-## First Letter and Line Pseudo Element
+## First
 
 `::first-letter`/`::first-line`:
 
@@ -648,7 +648,7 @@ section {
     `border-color`.
   - `float`.
 
-## Selection Pseudo Element
+## Selection
 
 `::selection` 匹配突出显示的文本:
 
@@ -672,7 +672,7 @@ section {
 }
 ```
 
-## Target Text Pseudo Element
+## Target Text
 
 [`::target-text`](https://developer.mozilla.org/docs/Web/CSS/::target-text):
 
@@ -683,7 +683,7 @@ section {
 }
 ```
 
-## Before and After Pseudo Element
+## Before and After
 
 使用 `content` 属性生成额外的内容并插入在标记中:
 
@@ -751,7 +751,7 @@ output -->
 }
 ```
 
-## Backdrop Pseudo Element
+## Backdrop
 
 [`::backdrop`](https://developer.mozilla.org/docs/Web/CSS/::backdrop):
 
@@ -766,7 +766,7 @@ video::backdrop {
 }
 ```
 
-## Marker Pseudo Element
+## Marker
 
 [`::marker`](https://web.dev/css-marker-pseudo-element):
 
@@ -790,17 +790,17 @@ li::marker {
 }
 ```
 
-## Shadow DOM Pseudo Class and Element
+## Shadow DOM
 
 - `:host`: shadow DOM root element.
 - `:host-context`: shadow DOM root parent element.
 - `::part()`.
 - `::slotted()`.
 
-## Focusable Selector
+## Focusable
 
 ```ts
-const FOCUSABLE_SELECTOR = [
+const FocusableSelectors = [
   '[contenteditable]',
   '[tabindex="0"]:not([disabled])',
   'a[href]',

@@ -1,11 +1,11 @@
 ---
-sidebar_position: 3
-tags: [Web, CSS]
+sidebar_position: 32
+tags: [Web, CSS, Component, Form]
 ---
 
 # Form
 
-[Form Design Pattern](https://adamsilver.io/articles/form-design-from-zero-to-hero-all-in-one-blog-post):
+Form [design](https://adamsilver.io/articles/form-design-from-zero-to-hero-all-in-one-blog-post):
 
 - 由于表单组件多为 `Replaced Element`, 通过 CSS 控制样式存在困难,
   一般利用 `label`/`span` 代替 `input` 的方式,
@@ -65,7 +65,7 @@ tags: [Web, CSS]
 
 [![Form Input Style](figures/form-input-style.png)](https://css-tricks.com/html-inputs-and-labels-a-love-story)
 
-## Reset Form Styles
+## Presets
 
 ```css
 input[type='email'],
@@ -148,7 +148,7 @@ label > .label-body {
 }
 ```
 
-## Custom Form Button
+## Button
 
 隐藏 `<input>`, 添加样式至 `<label>`/`<span>`:
 
@@ -177,7 +177,7 @@ label > .label-body {
 </style>
 ```
 
-## Custom Form Checkbox
+## Checkbox
 
 Input itself as border shape,
 pseudo elements as center shape (checked transform animation):
@@ -223,7 +223,7 @@ input[type='checkbox']:disabled + label::before {
 }
 ```
 
-## Custom Form Switch
+## Switch
 
 [Pseudo element switch](https://web.dev/articles/building/a-switch-component)
 from circle to circle:
@@ -258,7 +258,7 @@ from circle to circle:
 }
 ```
 
-## Custom Form Select
+## Select
 
 ```css
 .custom-select {

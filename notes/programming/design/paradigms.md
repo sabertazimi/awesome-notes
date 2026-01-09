@@ -4,7 +4,7 @@ tags: [Programming, DevOps, Design Pattern, Paradigm]
 
 # Paradigms
 
-## Programming Paradigms
+## Programming
 
 Each programming language realizes one or more paradigms.
 Each paradigm is defined by a set of programming concepts.
@@ -14,7 +14,7 @@ Each paradigm is defined by a set of programming concepts.
 - 面向对象编程是对程序控制权的间接转移的限制.
 - 函数式编程是对程序中赋值操作的限制.
 
-## Taxonomy of Paradigms
+## Taxonomy
 
 ![Taxonomy of Programming Paradigms](./figures/programming-paradigms.jpg 'Taxonomy of Programming Paradigms')
 
@@ -65,7 +65,7 @@ Adding ports or cells, gives message passing or shared state
 Based on the concept of first-class function or closure,
 which makes it equivalent to the λ-calculus which is `Turing complete`.
 
-## Framework Paradigms
+## Framework
 
 - full-featured frameworks vs composing micro-libs
 - JSX vs templates
@@ -82,7 +82,7 @@ on [JSConf.Asia 2019](https://www.youtube.com/watch?v=ANtSWq-zI0s):
 > 打破框架的范式之争, 其实是改变思路. 从思考不同范式之间的竞争关系, 转变成思考多个范式之间的协同关系.
 > UseRef in React, Composition in Vue
 
-### Third-party Libraries Usage
+### Third-party Libraries
 
 - Look for Libraries that Have Accessibility Built in.
 - Limit the Number of Third-party Libraries Use.
@@ -98,14 +98,16 @@ function DatePicker(props) {
 export default DatePicker
 ```
 
-### Framework Paradigms Comparison
+:::tip[Frameworks]
 
 - 初始渲染: Virtual DOM > 脏检查 >= 依赖收集.
 - 小量数据更新: 依赖收集 >> Virtual DOM + 优化 > 脏检查（无法优化） > Virtual DOM 无优化.
 - 大量数据更新: 脏检查 + 优化 >= 依赖收集 + 优化 > Virtual DOM（无法/无需优化）>> MVVM 无优化.
 - Angular: 脏检查, React: Virtual DOM, Vue: Watch.
 
-## MVC Pattern
+:::
+
+## MVC
 
 组件三要素: 状态、外观、行为:
 
@@ -137,14 +139,14 @@ MVVM 进一步允许我们创建一个模型的特定视图子集, 包含了状�
 - 选择 Model 和 Service.
 - 处理 Session 和 Cookies.
 
-## MVVM Pattern
+## MVVM
 
 - `View` and `ViewModel` communicate using data-bindings and events.
 - `ViewModel` can expose `Model` attributes for data-binding.
 - `ViewModel` can contain interfaces
   for fetching and manipulating properties exposed in `View`.
 
-## AOP Pattern
+## AOP
 
 AOP (Aspect Oriented Programming)
 把通用逻辑抽离出来,
@@ -167,7 +169,7 @@ Middleware 在最外层, 到达某个路由之后,
 
 Nest.js 通过 AOP 的架构方式, 实现了松耦合, 易于维护与扩展的架构.
 
-## jQuery Pattern
+## jQuery
 
 - Adapter pattern:
   adapted `$.css()` API.
@@ -185,7 +187,7 @@ Nest.js 通过 AOP 的架构方式, 实现了松耦合, 易于维护与扩展的
 - Dependency injection pattern:
   custom plugin system.
 
-## Paradigms References
+## References
 
 - Even You presentation on [JSConf Asia 2019](https://www.youtube.com/watch?v=ANtSWq-zI0s).
 - Framework paradigms [guide](https://mp.weixin.qq.com/s/mZ7KuFjyCWNCAq7HnXg96A).

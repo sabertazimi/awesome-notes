@@ -5,7 +5,7 @@ tags: [Web, React, Style Guide]
 
 # Style Guide
 
-## Naming Style
+## Naming Conventions
 
 - use PascalCase for `.jsx` and component constructor
 - use camelCase for component instance reference
@@ -57,7 +57,7 @@ function withFoo(WrappedComponent) {
 }
 ```
 
-## Props Style
+## Props
 
 - use `prop` not `prop={true}`
 - filter out unnecessary props
@@ -80,7 +80,7 @@ class Component {
 }
 ```
 
-## Refs Style
+## Refs
 
 - use callback refs
 
@@ -105,7 +105,7 @@ export default function Component() {
 }
 ```
 
-## Alignment Style
+## Alignment
 
 ```tsx
 // good
@@ -129,7 +129,7 @@ export default function App() {
 }
 ```
 
-## Quotes Style
+## Quotes
 
 - Use `"` for JSX attributes, use `'` for all other JS:
 
@@ -151,7 +151,7 @@ export default function App() {
 }
 ```
 
-## Spacing Style
+## Spacing
 
 - A single space in self-closing tag.
 - No pad JSX curly spaces>.
@@ -177,22 +177,22 @@ export default function App() {
 }
 ```
 
-## Ordering of Class Component
+## Class
 
-1. optional static methods
-2. constructor
-3. getChildContext
-4. getDerivedStateFromProps
-5. componentDidMount
-6. getDerivedStateFromProps
-7. shouldComponentUpdate
-8. getSnapshotBeforeUpdate
-9. componentDidUpdate
-10. componentWillUnmount
-11. clickHandlers or eventHandlers like onClickSubmit() or onChangeDescription()
-12. getter methods for render like getSelectReason() or getFooterContent()
-13. optional render methods like renderNavigation() or renderProfilePicture()
-14. render
+1. Optional static methods
+2. Constructor
+3. `getChildContext`
+4. `getDerivedStateFromProps`
+5. `componentDidMount`
+6. `getDerivedStateFromProps`
+7. `shouldComponentUpdate`
+8. `getSnapshotBeforeUpdate`
+9. `componentDidUpdate`
+10. `componentWillUnmount`
+11. Click handlers or event handlers like `onClickSubmit()` or `onChangeDescription()`
+12. Getter methods for render like `getSelectReason()` or `getFooterContent()`
+13. Optional render methods like `renderNavigation()` or `renderProfilePicture()`
+14. `render()`
 
 ## Project Structure
 
@@ -205,7 +205,7 @@ export default function App() {
 - `services`: 服务中只存在基础 Hooks, 自定义 Hooks, 第三方 Hooks,
   静态数据, 工具函数, 工具类.
 
-## React Style Guide Best Practices
+## Best Practices
 
 - 组件细分化.
 - 组件:

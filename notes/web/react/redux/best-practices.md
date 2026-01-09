@@ -1,6 +1,6 @@
 ---
 sidebar_position: 7
-tags: [Web, React, Redux, State Management]
+tags: [Web, React, Redux, State Management, Best Practice]
 ---
 
 # Best Practices
@@ -87,7 +87,7 @@ const fluxStandardAction = {
 }
 ```
 
-## Redux Necessity
+## Necessity
 
 Necessity for importing Redux
 (状态多, 变化快, 更新复杂):
@@ -96,7 +96,7 @@ Necessity for importing Redux
 - Frequent update state.
 - Complex update state.
 
-## Redux Style Guide
+## Style Guide
 
 Redux style [guide](https://redux.js.org/style-guide/style-guide):
 
@@ -108,7 +108,7 @@ Redux style [guide](https://redux.js.org/style-guide/style-guide):
 - Keep state minimal and derive additional values.
 - Split large data selection into multiple small `useSelector`.
 
-## State Management
+## States
 
 - Remote state:
   Anything coming from backend, API, database, etc.,

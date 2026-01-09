@@ -51,9 +51,7 @@ try {
 
 ## Http
 
-### Request Object
-
-#### 属性
+### Request
 
 ```ts
 const request = {
@@ -61,17 +59,13 @@ const request = {
 }
 ```
 
-### Response Object
-
-#### 类型
+### Response
 
 ```cpp
 typedef Stream response
 ```
 
-#### 事件
-
-- 监听事件
+监听事件:
 
 ```ts
 response.on('data', (data) => {
@@ -85,13 +79,11 @@ response.on('end', () => {
 })
 ```
 
-- 发出事件
+发出事件:
 
 ```ts
 response.end() //  传输结束
 ```
-
-#### 方法
 
 ```ts
 response.setEncoding('utf8') // 自动将 data 事件中 Buffer 对象转换成 String
@@ -101,7 +93,7 @@ response.setEncoding('utf8') // 自动将 data 事件中 Buffer 对象转换成 
 response.writeHead(200, { 'Content-Type': '' })
 ```
 
-### Http Get
+### Get
 
 ```ts
 http.get(url, (response) => {})
@@ -122,7 +114,7 @@ http.get(url, (response) => {
 })
 ```
 
-### Http Server
+### Server
 
 ```ts
 const server = http.createServer((request, response) => {
@@ -130,8 +122,6 @@ const server = http.createServer((request, response) => {
 })
 server.listen(8000)
 ```
-
-### Sample
 
 ```ts
 const net = require('node:net')
@@ -181,15 +171,11 @@ chatServer.listen(9000)
 
 ## Socket
 
-### Socket Object
-
 ```ts
 socket.write(data)
 socket.end(data)
 socket.end()
 ```
-
-### Socket IO
 
 ```ts
 const fs = require('node:fs')
@@ -218,19 +204,11 @@ socket.of('/weather').on('connection', (client) => {
 })
 ```
 
-### Basic Methods
-
-```ts
-const serverInstance = net.createServer((socket) => {})
-
-serverInstance.listen(portNumber) // 开始监听特定端口
-```
-
 ## DNS
 
-- dns.resolve
-- dns.reverse
-- dns.lookup
+- `dns.resolve`
+- `dns.reverse`
+- `dns.lookup`
 
 ```ts
 const dns = require('node:dns')
@@ -269,16 +247,16 @@ dns.resolve('github.com', 'MX', (err, res) => {
 
 解析处 URL 各个组成部分:
 
-- href
-- protocol
-- host
-- auth
-- hostname
-- port
-- pathname
-- search
-- query
-- hash
+- `href`
+- `protocol`
+- `host`
+- `auth`
+- `hostname`
+- `port`
+- `pathname`
+- `search`
+- `query`
+- `hash`
 
 ```ts
 // true 表示调用 queryString 模块查询字符串

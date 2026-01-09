@@ -41,7 +41,7 @@ assert.deepEqual(
 )
 ```
 
-## Bigint Conversion
+## Conversion
 
 | `x`         | `BigInt(x)`                                         |
 | ----------- | --------------------------------------------------- |
@@ -92,7 +92,7 @@ BigInt({
 | `number`   | `Number(7n)` → `7`      | `+int` → `TypeError`           |
 | `string`   | `String(7n)` → `'7'`    | `''+7n` → `'7'`                |
 
-## Bigint Static Properties
+## Static Properties
 
 - `BigInt.asIntN(width, theInt)`:
   Casts theInt to width bits (signed).

@@ -1,11 +1,11 @@
 ---
 sidebar_position: 22
-tags: [Web, React, Hook]
+tags: [Web, React, Hook, Form]
 ---
 
 # Form
 
-## State Form
+## State
 
 - `useState` for form entire state and form control data.
 - Custom logic via hooks `params` function.
@@ -40,7 +40,7 @@ function useForm(callback) {
 export default useForm
 ```
 
-## State and Ref Form
+## Ref
 
 - `useState` for form entire state.
 - `useRef` for form control data.
@@ -286,7 +286,7 @@ export default function App(props) {
 }
 ```
 
-## State and Ref with DOM Refs Form
+## DOM Ref
 
 - `useState` for form entire state.
 - `useRef` for form control data.

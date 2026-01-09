@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-tags: [Web, CSS]
+tags: [Web, Performance, CSS]
 ---
 
 # Effective CSS
@@ -116,7 +116,7 @@ for (const element of document.querySelectorAll('.content-visibility-auto'))
   observer.observe(element)
 ```
 
-## CSS Selectors Performance
+## Selectors
 
 减少选择器的复杂性, 与构造样式本身的其他工作相比,
 选择器复杂性可以占用计算元素样式所需时间的 50%以上:
@@ -128,7 +128,7 @@ for (const element of document.querySelectorAll('.content-visibility-auto'))
 - 避免使用标签子代选择器:
   `.list > li` -> `.list > .item` (better) -> `.list-item` (best).
 
-## CSS Triggers Performance
+## Triggers
 
 - CSS triggers [list](https://github.com/GoogleChromeLabs/css-triggers).
 - JavaScript triggers [list](https://gist.github.com/paulirish/5d52fb081b3570c81e3a).
@@ -170,7 +170,7 @@ and call JavaScript API triggering layout stage (`reflow`):
   - `transform`.
   - `z-index`.
 
-## CSS Loading Performance
+## Loading
 
 - Avoid `@import`:
   - In HTML.
@@ -198,7 +198,7 @@ and call JavaScript API triggering layout stage (`reflow`):
 <link rel="stylesheet" href="/path/to/split.css" media="print" onload="this.media = 'all'" />
 ```
 
-## Animation Performance
+## Animation
 
 [High performance animations](http://web.dev/articles/animations-guide):
 
@@ -214,7 +214,7 @@ and call JavaScript API triggering layout stage (`reflow`):
   - Rotation animation: `transform: rotate(deg)` is better.
   - Opacity/visibility animation: `opacity: 0...1` is better.
 
-### Animation Frame
+### Frame
 
 `window.requestAnimationFrame`:
 
@@ -245,7 +245,7 @@ function step(timestamp) {
 window.requestAnimationFrame(step)
 ```
 
-### Animation DevTools
+### DevTools
 
 [DevTools](https://calibreapp.com/blog/investigate-animation-performance-with-devtools)
 for animation performance:
@@ -256,10 +256,10 @@ for animation performance:
 - Paint flashing in `rendering` panel.
 - `layers` panel.
 
-## CSS Imports Performance
+## Imports
 
 `link` is parallel, `@import` isn't parallel.
 
-## CSS Performance References
+## References
 
 - CSS optimization [guide](https://kinsta.com/blog/optimize-css).

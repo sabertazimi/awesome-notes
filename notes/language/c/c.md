@@ -4,67 +4,6 @@ tags: [Language, C]
 
 # C
 
-## 编程习惯
-
-### Macro(宏)
-
-#### 括号
-
-尽量添加足够的括号,减少宏定义的二义性
-
-#### 特殊用法
-
-- `#`: 字符串化
-- `##`: 强制连接符
-- `do { ... } while (0)`: 防止语法错误
-
-### 头文件
-
-#### 缺少标准库头文件
-
-##### 缺少函数原型
-
-链接成功 - 链接器自动装载库函数，不影响程序执行 **只警告，不报错**
-
-##### 覆盖标准库函数原型
-
-- 定义过多参数原型，调用时传入过多参数，函数正确执行(无视多余参数)
-- 定义缺少参数原型，调用时传入不完整参数，函数错误执行，误把 0xc(%ebp)，0x10(%ebp)，…等更多内存单元当作函数参数
-
-##### 缺少宏定义
-
-链接失败 - 宏定义会被识别为函数，但链接器查找不到相应库函数
-
-#### 防止重复包括头文件
-
-```cpp
-#ifndef _FILENAME_H_
-#define _FILENAME_H_
-
-...
-...
-...
-
-#endif
-```
-
-#### 头文件不申请内存单元
-
-除了全局共享静态变量外, 头文件中的定义不允许申请实际的内存单元
-
-### 检查
-
-#### 边界检查
-
-- 空/满栈检查
-- 参数合法性检查 e.g. elemSize > 0 检查
-
-#### 指针检查
-
-- Alloctor 失败，需添加 NULL 检查:
-  - assert
-  - exit
-
 ## 类型转换
 
 ### 机器码转换
@@ -72,9 +11,52 @@ tags: [Language, C]
 - 有符号类型转换: 进行符号扩展
 - 无符号类型转换: 进行零扩展
 
-## Pointer Best Practices
+## Types
 
-### Error Prone Pointers
+- 可检测字符
+
+getc、fgetc、getchar 函数可返回值(EOF 值/unsigned char 类型)
+
+- 不可检测字符
+
+非 EOF 值/非 unsigned char 类型(_会引发严重错误_)
+
+![CType Functions](./figures/ctype.h.jpg 'CType Functions')
+
+## String
+
+- men 系函数：操作任意字符序列
+- strn 系函数：操作非空字符序列
+- str 系函数：操作字符串序列('\0')
+
+### Strdup
+
+string duplicate - `char *strdup(string)` 封装 allocator 细节
+
+### Strchr and Strstr
+
+返回字符/串在字符串中出现的位置(地址)
+
+### Strtok
+
+### Strcasecmp
+
+### Getopt
+
+解析命令行参数, 轻松地提取以 - 或 / 开头的参数
+
+## Float and Limits
+
+- 宏定义：`CHAR/UCHAR/SCHAR/SHRT/USHRT/INT/UINT/LONG/ULONG/FLT/DBL/LDBL`有关的`MIN/MAX/EPSILON`
+
+## 联合体
+
+- 机器码 e.g. 理解 IEEE 754 标准
+- 区分大/小端模式
+
+## Pointer
+
+### Error Prone
 
 ```cpp
 int i = 37;
@@ -97,17 +79,15 @@ short s = *(short *)&f;
 
 ### Debugging Malloc
 
-#### 处理 void 指针
-
 Tips: 中途运用强制类型转换,使得 void 指针可以执行指针加减运算
 
 ```cpp
 void *target = (char *)void_pointer + ...;
 ```
 
-### 利用 void 指针实现 Generic
+## Generics
 
-#### 通用型 Swap 函数
+### Swap
 
 ```cpp
 void swap(void *vp1, void *vp2, int size) {
@@ -118,9 +98,7 @@ void swap(void *vp1, void *vp2, int size) {
 }
 ```
 
-#### 通用型 Search Function
-
-##### 实现
+### Search
 
 ```cpp
 void *lsearch(void *key, void *base, int n, int elemSize,
@@ -135,8 +113,6 @@ void *lsearch(void *key, void *base, int n, int elemSize,
     return NULL;
 }
 ```
-
-##### int 实例
 
 ```cpp
 int IntCmp(void *elem1, void *elem2) {
@@ -161,8 +137,6 @@ if (found == NULL) {
 }
 ```
 
-##### string 实例
-
 ```cpp
 int StrCmp(void *vp1, void *vp2) {
     // 必须进行强制类型转换
@@ -178,9 +152,7 @@ char *notes[] = {"Ab", "F#", "B", "Gb", "D"},
 char ** found = lsearch(&target, notes, 5, sizeof(char *), StrCmp);
 ```
 
-#### 泛型数据结构
-
-##### 通用型栈
+### Stack
 
 ```cpp
 typedef struct {
@@ -241,54 +213,46 @@ void StackPop(stack *s, void *elemAddr) {
 }
 ```
 
-#### Tools
+## Memory
 
-Valgrind - [GitHub Repo](https://github.com/svn2github/valgrind)
+### Memset
 
-## Useful Functions
-
-### memset
-
-### free
+### Free
 
 **free 函数会回退 4/8 字节，取出 heap 块的长度/信息,根据此信息进行 heap 块的释放.**
 
-### Strings
+## Locale
 
-#### strdup
-
-string duplicate - `char *strdup(string)` 封装 allocator 细节
-
-#### strchr and strstr
-
-返回字符/串在字符串中出现的位置(地址)
-
-#### strtok
-
-#### strcasecmp
-
-#### getopt
-
-解析命令行参数, 轻松地提取以 - 或 / 开头的参数
-
-### I/O
-
-#### String Scanf
-
-可以用作简易匹配读取函数
+- 实现时间/单位/货币等一系列的国际化
+- 常用函数
 
 ```cpp
-// 提取除 http:// 外的字符串
-sscanf(buf, "http://%s", url_part);
+_CRTIMP char * __cdecl setlocale(int, const char *);
+_CRTIMP struct lconv * __cdecl localeconv(void);
 ```
 
-### Exceptions
+- int 值
 
-perror(string) - 用来将上一个函数发生错误的原因输出到标准设备(stderr)
+```cpp
+#define LC_ALL          0
+#define LC_COLLATE      1
+#define LC_CTYPE        2
+#define LC_MONETARY     3
+#define LC_NUMERIC      4
+#define LC_TIME         5
+```
 
-### Process
+## Math
 
-#### Fork and Execve
+数学函数库(包括后缀 f(float)/l(long double))
+
+## Process
+
+- `getpid()`.
+- `wait(int *child_status)`/`waitpid(pid)`.
+- `exit()`.
+
+### Fork and Execve
 
 - fork(): 创建当前进程的拷贝
 - execve(): 用另一程序的代码代替当前进程的代码
@@ -309,15 +273,9 @@ void fork_exec(char *path, char *argv[]) {
 }
 ```
 
-#### Other
+## Thread
 
-- `getpid()`.
-- `wait(int *child_status)`/`waitpid(pid)`.
-- `exit()`.
-
-### Threads
-
-#### PThread
+### PThread
 
 ```cpp
 typedef unsigned long int pthread_t;
@@ -386,7 +344,7 @@ SemaphoreWait(lock);
 SemaphoreSignal(lock);
 ```
 
-#### Semaphore
+### Semaphore
 
 - 哲学家就餐问题
 - 将 Semaphore 变量的值在允许范围内(不至于使得线程锁失效)使得其取最大值，减少线程阻塞
@@ -416,121 +374,11 @@ void SellTickets(int agent, int *ticketsNum, Semaphore lock) {
 }
 ```
 
-## 联合体
+## Exceptions
 
-- 机器码 e.g. 理解 IEEE 754 标准
-- 区分大/小端模式
+perror(string) - 用来将上一个函数发生错误的原因输出到标准设备(stderr)
 
-## Naming Conventions
-
-### 常用缩写词
-
-| 原词           | 缩写        |
-| :------------- | :---------- |
-| addition       | add         |
-| answer         | ans         |
-| array          | arr         |
-| average        | avg         |
-| buffer         | buf 或 buff |
-| capture        | cap 或 capt |
-| check          | chk         |
-| count          | cnt         |
-| column         | col         |
-| control        | ctrl        |
-| decode         | dec         |
-| define         | def         |
-| delete         | del         |
-| destination    | dst 或 dest |
-| display        | disp        |
-| division       | div         |
-| encode         | enc         |
-| environment    | env         |
-| error          | err         |
-| float          | flt         |
-| frequency      | freq        |
-| header         | hdr         |
-| index          | idx         |
-| image          | img         |
-| increment      | inc         |
-| initialize     | init        |
-| iteration      | itr         |
-| length         | len         |
-| memory         | mem         |
-| middle         | mid         |
-| make           | mk          |
-| message        | msg         |
-| multiplication | mul         |
-| number         | num         |
-| operand        | opnd        |
-| optimization   | opt         |
-| operator       | optr        |
-| packet         | pkt         |
-| position       | pos         |
-| previous       | pre/prev    |
-| payload        | type        |
-| pointer        | ptr/pt      |
-| return         | code        |
-| record         | rcd/rc      |
-| receive        | recv        |
-| result         | res         |
-| return         | ret         |
-| source         | src         |
-| stack          | stk         |
-| string         | str         |
-| subtraction    | sub         |
-| table          | tab         |
-| temporary      | tmp 或 temp |
-| total          | tot         |
-| time           | stamp       |
-| value          | val         |
-
-### Header File
-
-防止其他文件重复#include 本文件
-
-```cpp
-#ifndef MONGOOSE_HEADER_INCLUDED
-#define MONGOOSE_HEADER_INCLUDED
-
-/*.................................
- * do something here
- *.................................
- */
-
-#endif /* MONGOOSE_HEADER_INCLUDED */
-```
-
-## C Standard Library
-
-### Assert
-
-- 关闭断言
-
-```cpp
-#define NDEBUG
-#include <assert.h>
-```
-
-- 开启断言
-
-```cpp
-#undef NDEBUG
-#include <assert.h>
-```
-
-### Types
-
-- 可检测字符
-
-getc、fgetc、getchar 函数可返回值(EOF 值/unsigned char 类型)
-
-- 不可检测字符
-
-非 EOF 值/非 unsigned char 类型(_会引发严重错误_)
-
-![CType Functions](./figures/ctype.h.jpg 'CType Functions')
-
-### Errno
+## Errno
 
 - errno 的值在程序启动时为零，但是不会被任何库函数设为零
 
@@ -672,36 +520,18 @@ if (errno != 0) {
 #endif
 ```
 
-### Float and Limits
+## I/O
 
-- 宏定义：`CHAR/UCHAR/SCHAR/SHRT/USHRT/INT/UINT/LONG/ULONG/FLT/DBL/LDBL`有关的`MIN/MAX/EPSILON`
+### String Scanf
 
-### Locale
-
-- 实现时间/单位/货币等一系列的国际化
-- 常用函数
+可以用作简易匹配读取函数
 
 ```cpp
-_CRTIMP char * __cdecl setlocale(int, const char *);
-_CRTIMP struct lconv * __cdecl localeconv(void);
+// 提取除 http:// 外的字符串
+sscanf(buf, "http://%s", url_part);
 ```
 
-- int 值
-
-```cpp
-#define LC_ALL          0
-#define LC_COLLATE      1
-#define LC_CTYPE        2
-#define LC_MONETARY     3
-#define LC_NUMERIC      4
-#define LC_TIME         5
-```
-
-### Math
-
-数学函数库(包括后缀 f(float)/l(long double))
-
-### SetJMP
+## SetJMP
 
 - 常用函数
 
@@ -717,7 +547,7 @@ void longjmp(jmp_buf env, int val);
   1. 实现非本地(局部)跳转(跨越多层函数调用栈进行跳转)
   2. 实现类 Java 异常机制(异常抛出及捕获)
 
-### Signal
+## Signal
 
 信号处理程序中所有数据应为 volatile 类型
 
@@ -726,7 +556,7 @@ _CRTIMP int __cdecl raise(int);
 _CRTIMP void (__cdecl * __cdecl signal(int, void (__cdecl *)(int)))(int);
 ```
 
-### Stdarg
+## Stdarg
 
 用于编写可变参数函数
 
@@ -744,7 +574,7 @@ void printargs(int arg1, ...) /* 输出所有int类型的参数，直到-1结束
 }
 ```
 
-### Stddef
+## Stddef
 
 - 宏
   - NULL Null 指针常量
@@ -758,15 +588,39 @@ void printargs(int arg1, ...) /* 输出所有int类型的参数，直到-1结束
   - `size_t`
     无符号整数类型, 用来表示 sizeof 操作符的结果类型
 
-### String
+## Assert
 
-- men 系函数：操作任意字符序列
-- strn 系函数：操作非空字符序列
-- str 系函数：操作字符串序列('\0')
+- 关闭断言
 
-## GDB Tutorial
+```cpp
+#define NDEBUG
+#include <assert.h>
+```
 
-### Basic Command
+- 开启断言
+
+```cpp
+#undef NDEBUG
+#include <assert.h>
+```
+
+## GCC
+
+- -E: cpp(c preprocessor) 预处理 => .i
+- -S: cll 编译 => .s
+- -c: as(assemble) 汇编 => .o
+- -time Time the execution of each subprocess
+- `-std=<standard>` Assume that the input sources are for `<standard>`
+- `-B <directory>` Add `<directory>` to the compiler's search paths
+- -v Display the programs invoked by the compiler
+- `-o <file>` Place the output into `<file>`
+- -shared Create a shared library
+- `-Wall`
+- `-v --help`
+
+## GDB
+
+### Commands
 
 - r(run)
 - l(list)
@@ -812,25 +666,23 @@ e.g. size:w(2 字节) format:x/d/s(十六进制/十进制/字符串)
 - bt(back trace) function stack 显示堆栈回溯信息
 - info breakpoints/register
 
-### GDB Set Command
+### Set
 
 - set disassembly
 - set variable
 
-### GDB Shell
+### Shell
 
 shell command
 
-### GDB Assemble
-
-#### GDB Core Dump
+### Core Dump
 
 ```bash
 ulimit -c unlimited
 gdb -c core_file_path target_exe_path
 ```
 
-#### GDB Disasm
+### Disasm
 
 - CS Segment
 
@@ -852,7 +704,7 @@ gdb -c core_file_path target_exe_path
 - DS Segment
 - SS Segment
 
-### GDB Stack Frame
+### Stack Frame
 
 ```bash
 (gdb) bt
@@ -860,21 +712,117 @@ gdb -c core_file_path target_exe_path
 (gdb) info locals
 ```
 
-## GCC
+## Style Guide
 
-- -E: cpp(c preprocessor) 预处理 => .i
-- -S: cll 编译 => .s
-- -c: as(assemble) 汇编 => .o
-- -time Time the execution of each subprocess
-- `-std=<standard>` Assume that the input sources are for `<standard>`
-- `-B <directory>` Add `<directory>` to the compiler's search paths
-- -v Display the programs invoked by the compiler
-- `-o <file>` Place the output into `<file>`
-- -shared Create a shared library
-- `-Wall`
-- `-v --help`
+### Abbreviations
 
-## Awesome Tools
+| 原词           | 缩写        |
+| :------------- | :---------- |
+| addition       | add         |
+| answer         | ans         |
+| array          | arr         |
+| average        | avg         |
+| buffer         | buf 或 buff |
+| capture        | cap 或 capt |
+| check          | chk         |
+| count          | cnt         |
+| column         | col         |
+| control        | ctrl        |
+| decode         | dec         |
+| define         | def         |
+| delete         | del         |
+| destination    | dst 或 dest |
+| display        | disp        |
+| division       | div         |
+| encode         | enc         |
+| environment    | env         |
+| error          | err         |
+| float          | flt         |
+| frequency      | freq        |
+| header         | hdr         |
+| index          | idx         |
+| image          | img         |
+| increment      | inc         |
+| initialize     | init        |
+| iteration      | itr         |
+| length         | len         |
+| memory         | mem         |
+| middle         | mid         |
+| make           | mk          |
+| message        | msg         |
+| multiplication | mul         |
+| number         | num         |
+| operand        | opnd        |
+| optimization   | opt         |
+| operator       | optr        |
+| packet         | pkt         |
+| position       | pos         |
+| previous       | pre/prev    |
+| payload        | type        |
+| pointer        | ptr/pt      |
+| return         | code        |
+| record         | rcd/rc      |
+| receive        | recv        |
+| result         | res         |
+| return         | ret         |
+| source         | src         |
+| stack          | stk         |
+| string         | str         |
+| subtraction    | sub         |
+| table          | tab         |
+| temporary      | tmp 或 temp |
+| total          | tot         |
+| time           | stamp       |
+| value          | val         |
+
+### Macro
+
+尽量添加足够的括号,减少宏定义的二义性:
+
+- `#`: 字符串化
+- `##`: 强制连接符
+- `do { ... } while (0)`: 防止语法错误
+
+## Best Practices
+
+### Header File
+
+防止其他文件重复 `#include` 本文件
+
+```cpp
+#ifndef MONGOOSE_HEADER_INCLUDED
+#define MONGOOSE_HEADER_INCLUDED
+
+/*.................................
+ * do something here
+ *.................................
+ */
+
+#endif /* MONGOOSE_HEADER_INCLUDED */
+```
+
+- 除了全局共享静态变量外, 头文件中的定义不允许申请实际的内存单元.
+- 缺少标准库头文件:
+  - 缺少函数原型: **链接成功**, 链接器自动装载库函数，不影响程序执行 **只警告，不报错**
+  - 缺少宏定义: **链接失败**, 宏定义会被识别为函数，但链接器查找不到相应库函数
+  - 覆盖标准库函数原型:
+    - 定义过多参数原型，调用时传入过多参数，函数正确执行(无视多余参数)
+    - 定义缺少参数原型，调用时传入不完整参数，函数错误执行，误把 0xc(%ebp)，0x10(%ebp)，…等更多内存单元当作函数参数
+
+### 检查
+
+#### 边界检查
+
+- 空/满栈检查
+- 参数合法性检查 e.g. elemSize > 0 检查
+
+#### 指针检查
+
+- Alloctor 失败，需添加 NULL 检查:
+  - assert
+  - exit
+
+## Library
 
 - 用于创建代码文档资料的 NDoc
 - 用于生成解决方案的 NAnt
@@ -885,3 +833,4 @@ gdb -c core_file_path target_exe_path
 - 用于生成正则表达式的 Regulator
 - 用于分析程序集的 .NET Reflector
 - 用于单元测试的 NUnit
+- Valgrind: 内存分析工具.

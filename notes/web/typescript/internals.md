@@ -1,6 +1,6 @@
 ---
-sidebar_position: 18
-tags: [Web, TypeScript, Internals]
+sidebar_position: 23
+tags: [Web, TypeScript, Internals, Compiler, Covariant, Contravariant]
 ---
 
 # Internals
@@ -110,85 +110,7 @@ logger(user) // Oops! `user.isSuperAdmin` is undefined.
 
 :::
 
-## Type Gymnastics
-
-### Type Gymnastics Programming
-
-[Type programming](https://exploringjs.com/tackling-ts/ch_computing-with-types-overview.html):
-
-| Level         | Environment  | Operands       | Operations    |
-| ------------- | ------------ | -------------- | ------------- |
-| Program level | Runtime      | Values         | Functions     |
-| Type level    | Compile time | Specific types | Generic types |
-
-| `TypeScript` Term         | Set Term                 |
-| ------------------------- | ------------------------ |
-| `never`                   | `∅` (Empty set)          |
-| Literal type              | Single element set       |
-| `Value` assignable to `T` | `Value ∈ T` (Member)     |
-| `T1` assignable to `T2`   | `T1 ⊆ T2` (Subset)       |
-| `T1 extends T2`           | `T1 ⊆ T2` (Subset)       |
-| `T1 \| T2`                | `T1 ∪ T2` (Union)        |
-| `T1 & T2`                 | `T1 ∩ T2` (Intersection) |
-| `unknown`                 | Universal set            |
-
-### Type Gymnastics Tools
-
-- [Template literal types](./literal.md#template-literal-types).
-- [Index signature](./signature.md#index-signature).
-- [Mapped types](./mapped.md).
-- [Conditional types](./conditional.md):
-  - [Nested conditional types](./conditional.md#nested-conditional-types).
-  - [Index conditional types](./conditional.md#index-conditional-types).
-  - [Mapped conditional types](./conditional.md#mapped-conditional-types).
-  - [Distributive conditional types](./conditional.md#distributive-conditional-types).
-- `infer` [inference types](./narrowing.md#type-inference).
-- `...` [rest types](./function.md#rest-parameters): `Items extends [infer Head, ...infer Tail]`.
-- [Recursive types](./utility.md#recursive-types).
-
-### Type Gymnastics Examples
-
-- `PathOf<Form>` complex recursive [types](https://mp.weixin.qq.com/s/KJdUdwbLN4g4M7xy34m-fA).
-- Type-safe React router advanced [types](https://speakerdeck.com/zoontek/advanced-typescript-how-we-made-our-router-typesafe).
-
-```tsx
-type PathSegments<Path extends string>
-  = Path extends `${infer SegmentA}/${infer SegmentB}`
-    ? ParamOnly<SegmentA> | PathSegments<SegmentB>
-    : ParamOnly<Path>
-type ParamOnly<Segment extends string> = Segment extends `:${infer Param}`
-  ? Param
-  : never
-type RouteParams<Path extends string> = {
-  [Key in PathSegments<Path>]: string
-}
-
-interface RouteProps<Path extends string> {
-  path: Path
-  render: (routeProps: { match: { params: RouteParams<Path> } }) => void
-}
-
-export default function App() {
-  return (
-    <Route
-      path="/user/:username"
-      render={(routeProps) => {
-        const params = routeProps.match.params
-      }}
-    />
-  )
-}
-```
-
-### Type Gymnastics References
-
-- Type [challenges](https://github.com/type-challenges/type-challenges).
-- Type [gymnastics](https://github.com/g-plane/type-gymnastics).
-- Type [trident](https://github.com/anuraghazra/type-trident).
-
-## TSC Workflow
-
-### TypeScript Compiler
+## Compiler
 
 [Compiler](https://github.com/Microsoft/TypeScript/tree/main/src/compiler):
 
@@ -206,7 +128,7 @@ AST + Symbols ~~Checker~~> Type Validation
 AST + Checker ~~Emitter~~> JavaScript
 ```
 
-### TypeScript Scanner
+## Scanner
 
 ```ts
 // 单例扫描器
@@ -234,7 +156,7 @@ while (token !== ts.SyntaxKind.EndOfFileToken) {
 }
 ```
 
-### TypeScript Parser
+## Parser
 
 ```bash
 程序 ->
@@ -265,7 +187,7 @@ const sourceFile = ts.createSourceFile(
 printAllChildren(sourceFile)
 ```
 
-### TypeScript Binder
+## Binder
 
 ```bash
 program.getTypeChecker ->
@@ -275,7 +197,7 @@ program.getTypeChecker ->
             for each SourceFile `ts.mergeSymbolTable`（检查器中）
 ```
 
-### TypeScript Checker
+## Checker
 
 初始化检查器:
 
@@ -303,7 +225,7 @@ program.emit ->
             // 通过对本地函数 createResolver() 的调用，resolver 已在 createTypeChecker 中初始化。
 ```
 
-### TypeScript Emitter
+## Emitter
 
 ```bash
 Program.emit ->
@@ -311,7 +233,7 @@ Program.emit ->
         `emitFiles` （emitter.ts 中的函数）
 ```
 
-## TypeScript Internals API
+## APIs
 
 ```ts
 // Path of the file we want to analyze.
@@ -354,11 +276,3 @@ for (const statement of sourceFile.statements) {
 console.log(detectedComponents)
 // ["Foo", "Bar"]
 ```
-
-## TypeScript References
-
-- [Learning TypeScript](https://github.com/LearningTypeScript/projects)
-- [Tackling TypeScript](https://exploringjs.com/tackling-ts/index.html)
-- [TypeScript Deep Dive](https://github.com/basarat/typescript-book)
-- [Clean TypeScript Code](https://github.com/labs42io/clean-code-typescript)
-- [Effective TypeScript](https://github.com/danvk/effective-typescript)

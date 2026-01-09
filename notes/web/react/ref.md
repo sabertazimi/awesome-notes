@@ -3,7 +3,7 @@ sidebar_position: 10
 tags: [Web, React, Ref]
 ---
 
-# Refs
+# Ref
 
 Refs 用于返回对元素的引用.
 但在大多数情况下, 应该避免使用它们.
@@ -53,7 +53,7 @@ class CssThemeProvider extends React.PureComponent<Props> {
 }
 ```
 
-## String Refs
+## String
 
 **不建议使用** [`String Refs`](https://github.com/facebook/react/pull/8333#issuecomment-271648615):
 
@@ -95,7 +95,7 @@ class App extends React.Component<{ data: object }> {
 }
 ```
 
-## Forward Refs
+## Forward
 
 Before React 19, 不能在函数式组件上使用`ref`属性,
 因为它们没有实例, 但可以在函数式组件内部使用`ref`.
@@ -143,7 +143,7 @@ const FancyButton = React.forwardRef<Ref, Props>(Button)
 export default FancyButton
 ```
 
-## Prop Refs
+## Prop
 
 Starting in React 19, you can now access ref as a prop for function components:
 
@@ -155,7 +155,7 @@ function MyInput({ placeholder, ref }) {
 <MyInput ref={ref} />
 ```
 
-## Callback Refs
+## Callback
 
 ```tsx
 class UserInput extends Component {

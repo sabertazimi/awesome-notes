@@ -45,14 +45,7 @@ Domain 层是领域模型系统的核心,
 - Third-party tools, Message Queue, File, Cache, Database, Search etc.
 - 实现仓储接口 DB, 通常真正读写 DB.
 
-### Domain Driven Design References
-
-- Front-end domain driven design [guide](https://dev.to/bespoyasov/clean-architecture-on-frontend-4311).
-- Scalable React project structure [guide](https://github.com/developerway/example-react-project).
-- Nest.js clean architecture [template](https://medium.com/@jonathan.pretre91/clean-architecture-with-nestjs-e089cef65045).
-- Domain driven design layout in [Golang](https://github.com/lupguo/ddd-layout).
-
-## Scalability Design
+## Scalability
 
 - Prefer composites over mixins.
 - Always clone objects between components.
@@ -69,7 +62,7 @@ Domain 层是领域模型系统的核心,
   `I = 0` 表示不依赖任何模块 (最稳定),
   `I = 1` 表示不被任何模块依赖 (最不稳定).
 
-## High Concurrency Design
+## High Concurrency
 
 ### Concurrent Code Layer
 
@@ -98,11 +91,11 @@ Domain 层是领域模型系统的核心,
 - Data PreFetch
 - Multi-Level Caches
 
-## High Availability Design
+## High Availability
 
 ### Resource Isolation
 
-### Load Balance Design
+### Load Balance
 
 - Hardware Load Balance
 - Software Load Balance
@@ -113,11 +106,11 @@ Domain 层是领域模型系统的核心,
 - Services Retry Automation
 - Recovery Services Auto Detection
 
-### Idempotence Design
+### Idempotence
 
 在编程中一个幂等操作的特点是其任意多次执行所产生的影响均与一次执行的影响相同.
 
-#### Write Idempotence Design
+#### Write Idempotence
 
 - Mutex
 - Key Index
@@ -125,7 +118,7 @@ Domain 层是领域模型系统的核心,
 - Data Version
 - State Machine
 
-### CAP Theory
+### CAP
 
 A distributed system to simultaneously provide
 more than two out of the following three guarantees:
@@ -144,7 +137,7 @@ more than two out of the following three guarantees:
 
 ### 服务限流
 
-#### 服务限流算法
+#### 算法
 
 一定程度上可以参考计算机网络拥塞控制算法:
 
@@ -161,7 +154,7 @@ more than two out of the following three guarantees:
   拥有令牌可进入, 无则拒绝.
   可以平滑流量, 可以容忍突发流量.
 
-#### 服务限流策略
+#### 策略
 
 - 服务拒绝
 - 延时处理
@@ -170,10 +163,17 @@ more than two out of the following three guarantees:
 - 动态限流
 - 动态扩容
 
-#### 服务限流位置
+#### 位置
 
 - 接入层限流: 通过 Nginx/API Router 对 DNS/IP 限流.
 - 应用限流: 每个服务拥有自己的集群限流服务.
 - 基础服务限流: 对消息队列/数据库限流.
 
 ### 服务降级
+
+## References
+
+- Front-end domain driven design [guide](https://dev.to/bespoyasov/clean-architecture-on-frontend-4311).
+- Scalable React project structure [guide](https://github.com/developerway/example-react-project).
+- Nest.js clean architecture [template](https://medium.com/@jonathan.pretre91/clean-architecture-with-nestjs-e089cef65045).
+- Domain driven design layout in [Golang](https://github.com/lupguo/ddd-layout).

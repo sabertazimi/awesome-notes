@@ -1,11 +1,11 @@
 ---
-sidebar_position: 11
-tags: [Web, CSS, Layout]
+sidebar_position: 15
+tags: [Web, CSS, Layout, Flex]
 ---
 
 # Flex
 
-## Flex Box Width
+## Width
 
 最终尺寸计算:
 
@@ -78,7 +78,7 @@ flex item 的 `min-width` 和 `min-height` 的默认值是 `auto`,
 | min-width | 0    | 允许对象收缩到比其内容的固有尺寸更小，防止溢出 | 解决 Flexbox 溢出问题          |
 | max-width | none | 允许对象伸展到任意尺寸，填满可用空间           | 移除最大尺寸限制，确保完全伸展 |
 
-## Flex Shorthand Property
+## Shorthand
 
 [`flex`](https://developer.mozilla.org/docs/Web/CSS/flex)
 = `none | [<'flex-grow'> <'flex-shrink'>? || <'flex-basis'>]`:
@@ -113,7 +113,7 @@ flex item 的 `min-width` 和 `min-height` 的默认值是 `auto`,
 
 :::
 
-## Flex Children Display
+## Display
 
 Flexbox 会改变子元素 `display` 属性值:
 
@@ -139,11 +139,11 @@ Flexbox 子元素:
   `z-index` 不为 `auto` 时创建层叠上下文.
 - `absolute` 定位子元素会脱离弹性布局.
 
-## Flex Flow
+## Flow
 
 `flex-flow`: `<'flex-direction'> || <'flex-wrap'>`.
 
-### Flex Direction
+### Direction
 
 `flex-direction`:
 
@@ -156,7 +156,7 @@ Flexbox 子元素:
 
 ![Flex Direction](./figures/flex-direction.png 'Flex Direction')
 
-### Flex Wrap
+### Wrap
 
 `flex-wrap`:
 
@@ -164,9 +164,9 @@ Flexbox 子元素:
 - `wrap`: 换行.
 - `wrap-reverse`.
 
-## Flex Alignment
+## Alignment
 
-### Flex Parent Alignment
+### Parent
 
 - [`justify-content`](https://developer.mozilla.org/docs/Web/CSS/justify-content),
   defines alignment along main axis:
@@ -193,7 +193,7 @@ Flexbox 子元素:
 
 ![Flex Parent Alignment](./figures/flex-parent-alignment.png 'Flex Parent Alignment')
 
-### Flex Children Alignment
+### Children
 
 - [`align-self`](https://developer.mozilla.org/docs/Web/CSS/align-self):
   - `auto`: computes to parent `align-items` value.
@@ -205,7 +205,7 @@ Flexbox 子元素:
 
 ![Flex Children Alignment](./figures/flex-children-alignment.png 'Flex Children Alignment')
 
-### Flex Margin Alignment
+### Auto Margin
 
 Aligning with [auto `margin`](https://www.w3.org/TR/css-flexbox-1/#auto-margins):
 
@@ -244,7 +244,7 @@ Aligning with [auto `margin`](https://www.w3.org/TR/css-flexbox-1/#auto-margins)
 }
 ```
 
-### Flex Centering Alignment
+### Centering
 
 ```css
 /* 子元素全部居中对齐 */
@@ -269,7 +269,7 @@ Aligning with [auto `margin`](https://www.w3.org/TR/css-flexbox-1/#auto-margins)
 }
 ```
 
-## Flexbox Pseudo Element
+## Pseudo Element
 
 Set `flex` to pseudo elements of flex box
 will change width of pseudo elements.
@@ -285,7 +285,7 @@ will change width of pseudo elements.
 }
 ```
 
-## Fixed Sidebar Flexbox
+## Fixed Sidebar
 
 ```html
 <body>
@@ -311,7 +311,7 @@ main {
 }
 ```
 
-## Flex References
+## References
 
 - Flexbox complete [guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox).
 - Flexbox alignment [guide](https://developer.mozilla.org/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container).

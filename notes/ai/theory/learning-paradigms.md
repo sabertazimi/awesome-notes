@@ -233,7 +233,7 @@ Pre-trained models + fine-tuning (downstream tasks):
 
 ### Pre-trained Models
 
-#### Pre-trained Data
+Pre-trained data:
 
 - Content filtering: 去除有害内容.
 - Text extraction: 去除 HTML 标签.

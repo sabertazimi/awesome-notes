@@ -1,5 +1,5 @@
 ---
-tags: [Web, Vue, Toolchain]
+tags: [Web, Vue, Toolchain, Vite]
 sidebar_position: 18
 ---
 
@@ -7,7 +7,7 @@ sidebar_position: 18
 
 ## Vite
 
-### Basic Configuration
+### Configuration
 
 ```ts
 import path from 'node:path'
@@ -25,7 +25,7 @@ export default defineConfig({
 })
 ```
 
-### Environment Variables and Modes
+### Environment Variables
 
 - `import.meta.env.MODE`: `{string}` running mode.
 - `import.meta.env.BASE_URL`: `{string}` vite `base` url.
@@ -59,7 +59,7 @@ interface ImportMeta {
 
 ## Vue CLI
 
-### SCSS Configuration
+### SCSS
 
 [Build with Bulma](https://css-tricks.com/how-to-increase-your-page-size-by-1500-with-webpack-and-vue):
 

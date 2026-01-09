@@ -1,11 +1,11 @@
 ---
 sidebar_position: 30
-tags: [Web, React, Architecture]
+tags: [Web, React, Internals, Architecture]
 ---
 
-# Core Architecture
+# Architecture
 
-## React Virtual DOM
+## Virtual DOM
 
 - Reduce rendering times with reconciliation algorithm,
   improving rendering efficiency:
@@ -18,7 +18,7 @@ tags: [Web, React, Architecture]
 - [SnabbDOM](https://github.com/snabbdom/snabbdom):
   virtual DOM library focus on modularity and performance.
 
-## React Core Packages
+## Packages
 
 - `Scheduler` 调度器: 调度任务的优先级, 高优任务优先进入 `Reconciler`.
 - `Reconciler` 协调器:
@@ -34,8 +34,8 @@ tags: [Web, React, Architecture]
 
 其中 `Reconciler` 构建 Fiber Tree 的过程被包装成一个回调函数, 传入 `Scheduler` 模块等待调度.
 `Scheduler` 将回调函数进一步包装成任务对象, 放入多优先级调度的任务队列, 循环消费任务队列, 直至队列清空.
-Scheduler Work Loop (任务调度循环) 负责调度 `Task`,
-Reconciler Work Loop (`Fiber` 构造循环) 负责实现 `Task`.
+Scheduler work loop (任务调度循环) 负责调度 `Task`,
+Reconciler work loop (`Fiber` 构造循环) 负责实现 `Task`.
 
 `React` runtime main logic:
 
@@ -57,7 +57,7 @@ Reconciler Work Loop (`Fiber` 构造循环) 负责实现 `Task`.
 
 [![React Core Packages](./figures/react-core-packages.png)](https://7kms.github.io/react-illustration-series/main/macro-structure)
 
-## React Core Workflow
+## Workflow
 
 [![React Core Workflow](./figures/react-core-workflow.png)](https://jser.dev/2023-07-14-initial-mount/#how-react-does-initial-mount-first-time-render-)
 
@@ -192,7 +192,7 @@ const Renderer = {
 export default Renderer
 ```
 
-### ReactComponent SetState
+### SetState
 
 - [react-dom/src/events/ReactDOMEventListener](https://github.com/facebook/react/blob/main/packages/react-dom/src/events/ReactDOMEventListener.js):
   - dispatchDiscreteEvent.
@@ -235,7 +235,7 @@ export default Renderer
   - updateProperties:
     Apply diff.
 
-### ClassComponent Update
+### ClassComponent
 
 - [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.js):
   - performSyncWorkOnRoot.
@@ -253,7 +253,7 @@ export default Renderer
 - [react-reconciler/src/ReactChildFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactChildFiber.js):
   - reconcileChildFibers.
 
-### FunctionComponent Update
+### FunctionComponent
 
 - [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.js):
   - performSyncWorkOnRoot.

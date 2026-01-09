@@ -1,11 +1,9 @@
 ---
-tags: [Web, Vue, Composition API]
+tags: [Web, Vue, Composition]
 sidebar_position: 12
 ---
 
-# Composition API
-
-- [SFC with Script Setup](https://v3.vuejs.org/api/sfc-script-setup.html).
+# Composition
 
 :::tip
 
@@ -14,7 +12,9 @@ we cannot directly access `this.$emit` or `this.$route` anymore.
 
 :::
 
-## Setup Method
+## Setup
+
+SFC with `script` [setup](https://vuejs.org/api/sfc-script-setup.html):
 
 - Executes before
   `Components`,
@@ -50,7 +50,7 @@ export default {
 }
 ```
 
-## Composition Lifecycle Hooks
+## Lifecycle
 
 - `onBeforeMount`.
 - `onMounted`.
@@ -68,7 +68,7 @@ export default {
 No need for `onBeforeCreate` and `onCreated` hooks,
 just put code in `setup` methods.
 
-## Reactive Value
+## Reactive
 
 ```ts
 import { reactive, toRefs } from 'vue'
@@ -87,7 +87,7 @@ title.value = 'Vue 3 Detailed Guide'
 console.log(book.title) // 'Vue 3 Detailed Guide'
 ```
 
-## Ref Value
+## Ref
 
 `ref` API:
 
@@ -187,7 +187,7 @@ const map = reactive(new Map([['count', ref(0)]]))
 console.log(map.get('count').value)
 ```
 
-## Computed Value
+## Computed
 
 计算属性的计算函数应只做计算而没有任何其他的副作用,
 不要在计算函数中做异步请求或者更改 DOM:
@@ -216,7 +216,7 @@ plusOne.value = 1 // 可写计算属性
 console.log(count.value) // 0
 ```
 
-## Watch Value
+## Watch
 
 Watch single value:
 
@@ -334,7 +334,7 @@ watchPostEffect(() => {
 })
 ```
 
-## Composable Functions
+## Composable
 
 组合式函数始终返回一个包含多个 ref 的普通的非响应式对象,
 该对象在组件中被解构为 ref 之后仍可以保持响应性:

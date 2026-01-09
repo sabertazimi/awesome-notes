@@ -15,7 +15,7 @@ const truthy = Function[[proto]] === Function.prototype // true
 const truthy = Function[[proto]][[proto]] === Object.prototype // true
 ```
 
-## Implicit Invocation
+## Implicit
 
 - `Function Invocation` 普通调用模式: `this` 绑定至全局对象/`undefined` (`strict mode`)
   - setTimeout 和 setInterval 中传入的 Callbacks
@@ -81,7 +81,7 @@ setTimeout(batman.logName, 1000)
 // after 1 second logs "undefined"
 ```
 
-## Explicit Invocation
+## Explicit
 
 `Apply`/`Bind`/`Call` Invocation:
 函数引用不可以改变函数定义作用域 (scope), 但可以改变函数执行作用域 (context).
@@ -117,7 +117,7 @@ String.prototype.stringStaticFunction.apply()
 context.function(arguments)
 ```
 
-### Explicit Bind Invocation
+### Bind
 
 - Change function runtime context (ignore innovation pattern `function/method/new/call/apply`).
 - Curry function.
@@ -127,7 +127,7 @@ context.function(arguments)
 const boundFunc = func.bind(context, arg1, arg2, argN)
 ```
 
-### Explicit Call and Apply Invocation
+### Call and Apply
 
 ```ts
 function bind(o, m) {
@@ -150,7 +150,7 @@ const twoSay = bind(two, one.say)
 twoSay('yo') // "yo, another object"
 ```
 
-## Constructor Invocation
+## Constructor
 
 Constructor invocation (`new` call):
 
@@ -179,7 +179,7 @@ default invocation.
 
 :::
 
-## Arrow Function Invocation
+## Arrow Function
 
 - No `this` binding (**lexical scope**):
   - `this` defined where arrow function defined (not called).
@@ -234,7 +234,7 @@ graph TD
     style H fill:#009688,stroke:#009688,stroke-width:2px,color:#fff
 ```
 
-## This Binding Invocation
+## This Binding
 
 |                                 | `function` Call | Method Call | `new` Call  |
 | ------------------------------- | --------------- | ----------- | ----------- |
@@ -298,7 +298,7 @@ const result = compare({ name: 'Nicholas' }, { name: 'Matt' })
 但它的活动对象仍然会保留在内存中,
 直到匿名函数被销毁后才会被销毁.
 
-## Function Name
+## Name
 
 - 所有函数对象都会暴露一个只读的 `name` 属性, 其中包含关于函数的信息.
 - The spec operation
@@ -340,14 +340,14 @@ console.log(propertyDescriptor.get.name) // get age
 console.log(propertyDescriptor.set.name) // set age
 ```
 
-## Function Prototype
+## Prototype
 
 - **实例化对象没有 prototype 属性**.
 - 每个函数都有 `prototype` 属性.
 - `prototype` 属性指向函数的原型对象 (由 JS 引擎自动创建).
 - 每个函数的 `__proto__` 都指向 `Function.prototype`.
 
-## Function Arguments
+## Arguments
 
 - 函数的参数在内部表现为一个数组:
   函数不关心参数个数与参数类型, 不存在验证命名参数的机制.
@@ -370,7 +370,7 @@ try {
 }
 ```
 
-## Function Parameters
+## Parameters
 
 - 所有函数参数都是按值传递 (复制原子值/引用值).
 - `function.length`:
@@ -393,7 +393,7 @@ function setValuePure(obj, val) {
 }
 ```
 
-### Default Parameter
+### Default
 
 默认参数:
 
@@ -406,7 +406,7 @@ function setValuePure(obj, val) {
 function foo(required = throwException()) {}
 ```
 
-### Rest Parameter
+### Rest
 
 - Rest parameter is array containing all remaining arguments.
 - Rest parameter can only be **last** parameter.
@@ -419,7 +419,7 @@ function f(x, y, ...empty) {
 }
 ```
 
-## Function Declaration
+## Declaration
 
 - 函数声明提升: 函数声明会在代码执行之前获得定义.
 
@@ -446,7 +446,7 @@ const b = 10
 // print out function b { ... }
 ```
 
-## Function Expression
+## Expression
 
 任何时候,
 只要函数被当作值来使用,
@@ -476,12 +476,10 @@ assert.equal(func(), func)
 assert.throws(() => funcExpr(), ReferenceError)
 ```
 
-## Immediately Invoked Function Expression
+## IIFE
 
-### IIFE Pattern
-
-立即函数模式, 通过调用立即匿名函数,
-返回一个对象, 暴露公共接口 (Exposed to Public):
+立即函数模式 (Immediately Invoked Function Expression),
+通过调用立即匿名函数, 返回一个对象, 暴露公共接口 (Exposed to Public):
 
 - IIFE Syntax:
   - 函数表达式.
@@ -496,8 +494,6 @@ assert.throws(() => funcExpr(), ReferenceError)
 })()
 ```
 
-### IIFE Return Value
-
 Left hand side 不被赋予 function 值, 而被赋予函数执行后的返回值:
 此返回值可设为函数, 可产生闭包.
 
@@ -509,8 +505,6 @@ const getResult = (function () {
   }
 })()
 ```
-
-### IIFE Usage
 
 - 使得匿名函数内部的代码能够立即执行.
 - 不泄漏只使用一次的局部变量与方法.
@@ -669,29 +663,6 @@ MyObject.prototype.getMessage = function () {
 }
 ```
 
-### Closure Structure
-
-- 优先级: this > 局部变量 > 形参 > arguments > 函数名.
-- `innerFunc()` has access to `outerVar` from its lexical scope,
-  even being **executed outside of its lexical scope**.
-
-```ts
-function outerFunc() {
-  const outerVar = 'I am outside!'
-
-  function innerFunc() {
-    console.log(outerVar) // => logs "I am outside!"
-  }
-
-  return innerFunc
-}
-
-const myInnerFunc = outerFunc()
-myInnerFunc()
-```
-
-### Closure Usage
-
 - 闭包实现封装.
 - 闭包实现私有属性与方法.
 - 闭包实现工厂方法.
@@ -722,7 +693,28 @@ called() // Called : 1
 called() // Called : 2
 ```
 
-## Callback Function
+### Structure
+
+- 优先级: this > 局部变量 > 形参 > arguments > 函数名.
+- `innerFunc()` has access to `outerVar` from its lexical scope,
+  even being **executed outside of its lexical scope**.
+
+```ts
+function outerFunc() {
+  const outerVar = 'I am outside!'
+
+  function innerFunc() {
+    console.log(outerVar) // => logs "I am outside!"
+  }
+
+  return innerFunc
+}
+
+const myInnerFunc = outerFunc()
+myInnerFunc()
+```
+
+## Callback
 
 ```ts
 // check if callback is callable
@@ -777,9 +769,9 @@ function findNodes(callbackObj, callback) {
 }
 ```
 
-## Lazy Function Definition
+## Lazy
 
-Lazy Function Definition (Self-Defining Function):
+Lazy function definition (self-defining function):
 
 - 第一次执行时,进行初始化并重新定义函数变量.
 - 第二次执行时,不再进行初始化(函数被重定义至真正函数).
@@ -820,7 +812,7 @@ let addEvent = function (el, type, handle) {
 }
 ```
 
-## Polymorphism Function
+## Polymorphism
 
 ```ts
 function greet(options, ...rest) {
@@ -844,7 +836,7 @@ function greet(options, ...rest) {
 
 :::
 
-## Eval Function
+## Eval
 
 - 不要使用`eval()`函数
 - 不要使用字符串作参数 new Function();(会调用`eval`函数)

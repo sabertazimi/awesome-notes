@@ -5,20 +5,10 @@ tags: [Web, Security, DoS, DDoS, ReDoS, Vulnerability]
 
 # Denial of Service
 
-## DoS Attack
+## DoS
 
-DoS 攻击, 攻击者不断地提出服务请求, 让合法用户的请求无法及时处理:
-
-- DNS 服务.
-- Email 服务.
-- FTP 服务.
-- ICMP 服务.
-- TCP 服务.
-- Telnet 服务.
-- Web 服务.
-- 即时通讯服务.
-
-## DoS Protection
+DoS 攻击, 攻击者不断地提出服务请求, 让合法用户的请求无法及时处理,
+包括但不限于 DNS, Email, FTP, ICMP, TCP, Telnet, Web, 即时通讯服务:
 
 - Application firewall.
 - Intrusion prevention system.
@@ -27,18 +17,18 @@ DoS 攻击, 攻击者不断地提出服务请求, 让合法用户的请求无法
 - 获取云缓存提供商的服务: mature CDN service support DDoS protection.
 - Scalable job queue.
 
-## DDoS Attack
+## DDoS
 
-Distributed denial of service attack:
+Distributed denial of service:
 
 - SYN flood:
   伪造 IP 不应答服务器 `SYN/ACK` 报文, 导致服务器消耗资源 (retry time) 处理这种半连接.
 - UDP flood.
 - ICMP flood.
 - Slow connection attack: 构造 `Content-Length` 大值, 低速度发包 (10s ~ 100s 发送一个字节), 占用服务器资源.
-- Redirect attack: 入侵了一个大网站后, 通过篡改页面, 将巨大的用户流量分流到目标网站.
+- Redirect: 入侵了一个大网站后, 通过篡改页面, 将巨大的用户流量分流到目标网站.
 
-## DDoS Protection
+加固服务器:
 
 - SYN cookie: 每个 IP 地址分配一个 cookie, 限制访问频率, 超过一定频率后不响应 IP.
 - 限制请求频率与请求力度:
@@ -54,13 +44,9 @@ Distributed denial of service attack:
   - 负载均衡.
   - CDN.
 
-## ReDoS Attack
+## ReDoS
 
-正则表达式 DoS 攻击:
-
-正则表达式引擎采用回溯的方式匹配所有可能性, 导致性能问题.
-
-## ReDoS Protection
+正则表达式引擎采用回溯的方式匹配所有可能性, 导致性能问题:
 
 - 不使用 NFA 实现的正则表达式引擎, 使用 DFA 实现的正则表达式引擎.
 - 不定义性能消耗过大的正则表达式.

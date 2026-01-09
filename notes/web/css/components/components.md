@@ -1,36 +1,34 @@
 ---
-sidebar_position: 30
-tags: [Web, CSS, Components]
+sidebar_position: 100
+tags: [Web, CSS, Component]
 ---
 
-# CSS Components
+# Components
 
-## Layout Components
+## Layout
 
-- [Layout Utilities](./layout.md)
+- [Utility](./utility.md) - Resizable, hidden, and typography utilities
+- [Navigation](./navigation.md) - Float, inline block, dropdown, and tab navigation
+- [Footer](./footer.md) - Sticky footer patterns
 
-## Navigation Components
+## Display
 
-- [Navigation](./navigation.md)
+- [Hero](./hero.md) - Jumbotron, video, and search light effects
+- [Display](./display.md) - Table, tree view, slide, gallery, and timeline
 
-## Form Components
+## Interaction
 
-- [Form](./form.md)
-
-## Interactive Components
-
-- [Interaction](./interaction.md)
-
-## Display Components
-
-- [Display](./display.md)
+- [Button](./button.md) - Gradient and 3D shadow button styles
+- [Styled Link](./link.md) - Styled, animated, and GitHub corner links
+- [Form](./form.md) - Form presets, checkbox, switch, and select
+- [Interaction](./interaction.md) - Modal, dialog, and tooltip
 
 ## Visual Effects
 
-- [Background](./background.md)
-- [Filter](./filter.md)
-- [Shape](./shape.md)
+- [Background](./background.md) - Gradient border and box shadow
+- [Filter](./filter.md) - Dark mode, frosted glass, liquid glass, and gradient text
+- [Shape](./shape.md) - Geometric shapes, borders, and patterns
 
-## Animation Components
+## Animation
 
-- [Animation](./animation.md)
+- [Animation](./animation.md) - Keyframe animations and transitions

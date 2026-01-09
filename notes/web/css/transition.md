@@ -1,11 +1,11 @@
 ---
-sidebar_position: 22
-tags: [Web, CSS, Animation]
+sidebar_position: 41
+tags: [Web, CSS, Animation, Transition, Internals]
 ---
 
 # Transition
 
-## Transition Property
+## Property
 
 - `transition-property`: `all` (initial value).
 - `transition-duration`.
@@ -34,7 +34,7 @@ tags: [Web, CSS, Animation]
 
 :::
 
-## Transition Timing Function
+## Timing Function
 
 [`<easing-function>`](https://developer.mozilla.org/docs/Web/CSS/easing-function):
 
@@ -78,7 +78,7 @@ tags: [Web, CSS, Animation]
 
 [![Step Timing Function](./figures/step-timing-function.png)](https://css-tricks.com/clever-uses-step-easing)
 
-## Transition Direction
+## Direction
 
 By specifying the transition on the element itself,
 define the transition to occur in both directions
@@ -111,7 +111,7 @@ Change `transition` when `:hover` etc state bring magic effect:
 }
 ```
 
-## Transition Class Controls
+## Class Controls
 
 With `transition: opacity 0.5s` set,
 first add `.opacity-0` class,
@@ -151,36 +151,7 @@ setTimeout(() => {
 }, 20)
 ```
 
-## Transition Internals
-
-`transition` take effect only when
-browser detecting different styles between `style` stage.
-
-```ts
-// transition not working
-panel.style.transform = 'scale(0)'
-panel.style.transition = 'transform .5s'
-// previous `transform` is empty
-panel.style.transform = 'scale(1)'
-
-// transition working
-panel.style.transform = 'scale(0)'
-panel.style.transition = 'transform .5s'
-// previous `transform` is `scale(0)`
-requestAnimationFrame(() => {
-  panel.style.transform = 'scale(1)'
-})
-
-// transition working
-panel.style.transform = 'scale(0)'
-// `getComputedStyle(element).property` trigger a new `style` stage
-const computedTransform = getComputedStyle(panel).transform
-panel.style.transition = 'transform .5s'
-// previous `transform` is `scale(0)`
-panel.style.transform = 'scale(1)'
-```
-
-## CSS View Transitions
+## APIs
 
 CSS view transitions [API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API):
 
@@ -216,6 +187,35 @@ function updateView(event) {
 }
 ```
 
-## Transition References
+## Internals
+
+`transition` take effect only when
+browser detecting different styles between `style` stage.
+
+```ts
+// transition not working
+panel.style.transform = 'scale(0)'
+panel.style.transition = 'transform .5s'
+// previous `transform` is empty
+panel.style.transform = 'scale(1)'
+
+// transition working
+panel.style.transform = 'scale(0)'
+panel.style.transition = 'transform .5s'
+// previous `transform` is `scale(0)`
+requestAnimationFrame(() => {
+  panel.style.transform = 'scale(1)'
+})
+
+// transition working
+panel.style.transform = 'scale(0)'
+// `getComputedStyle(element).property` trigger a new `style` stage
+const computedTransform = getComputedStyle(panel).transform
+panel.style.transition = 'transform .5s'
+// previous `transform` is `scale(0)`
+panel.style.transform = 'scale(1)'
+```
+
+## References
 
 - Transition 101 [guide](https://zellwk.com/blog/css-transitions).

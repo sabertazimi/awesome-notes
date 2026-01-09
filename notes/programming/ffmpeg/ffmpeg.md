@@ -12,14 +12,14 @@ ffmpeg -global_options -input_1_options -i input_1 -input_2_options -i input_2 \
   -output_1_options output_1 ...
 ```
 
-## FFmpeg Probe
+## Probe
 
 ```bash
 ffprobe input.mp4
 ffmpeg -hide_banner -i input.mkv
 ```
 
-## FFmpeg Transform
+## Transform
 
 - `MP4`: `H264`Video + `AAC`Audio
 - `WebM`: `VP8`Video + `Vorbis`Audio
@@ -93,7 +93,7 @@ ffmpeg -i video.mp4 \
 ffmpeg -i input.jpg -vf scale=320:240 output_320x240.png
 ```
 
-## FFmpeg Cutting
+## Cutting
 
 ```bash
 # audio only
@@ -116,7 +116,7 @@ ffmpeg -i input.mkv -ss 00:02:00.0 -t 30 -c copy output.mkv
 ffmpeg -ss 00:01:30.0 -i input.mkv -ss 00:00:30.0 -t 30 output.mkv
 ```
 
-## FFmpeg Mixing
+## Mixing
 
 ```bash
 # replace audio
@@ -137,7 +137,7 @@ ffmpeg -i input.mkv -i output.aac \
 ffmpeg -i 1.png -i 2.png -filter_complex "vstack" output.png
 ```
 
-## FFmpeg Screenshot
+## Screenshot
 
 ```bash
 # -vf -> -filter:v
@@ -145,7 +145,7 @@ ffmpeg -ss 00:30:14.435 -i input.mkv -vframes 1 out.png
 ffmpeg -i input.mkv -vf fps=1/60 -strftime 1 out_%Y%m%d%H%M%S.jpg
 ```
 
-## FFmpeg Gif
+## Gif
 
 ```bash
 ffmpeg -i video.mp4 -ss 7.5 -to 8.5 -s 640x320 -r 15 video_gif.gif
@@ -157,21 +157,21 @@ ffmpeg -ss 30 -t 5 -i input.mp4 -i $palette \
   -filter_complex "$filters [x]; [x][1:v] paletteuse" -y output.gif
 ```
 
-## FFmpeg Subtitle
+## Subtitle
 
 ```bash
 ffmpeg -i input.mkv -vf subtitles=input.srt output.mp4
 ffmpeg -i input.mkv -vf ass=input.ass output.mp4
 ```
 
-## FFmpeg Watermark
+## Watermark
 
 ```bash
 ffmpeg -i input.mkv -i input.png \
   -filter_complex "overlay=W-w-5:5" -c copy -c:v libx264 output.mkv
 ```
 
-## FFmpeg Desktop Recording
+## Desktop Recording
 
 ```bash
 # windows
@@ -181,7 +181,7 @@ ffmpeg -f gdigrab -i desktop rec.mp4
 sudo ffmpeg -f fbdev -framerate 10 -i /dev/fb0 rec.mp4
 ```
 
-## FFmpeg Live Streaming
+## Live Streaming
 
 ```bash
 ffmpeg -re i rec.mp4 按照网站要求编码 -f flv "你的 RTMP 地址/你的直播码"

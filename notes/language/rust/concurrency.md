@@ -1,11 +1,11 @@
 ---
 sidebar_position: 21
-tags: [Language, Rust, Concurrency]
+tags: [Language, Rust, Concurrency, Asynchronous, Thread, Await, Mutex, Semaphore]
 ---
 
 # Concurrency
 
-## Concurrency Model
+## Model
 
 | Name         | Pros                 | Cons                                   |
 | ------------ | -------------------- | -------------------------------------- |
@@ -148,7 +148,7 @@ fn main() {
 }
 ```
 
-## Threads Communication
+## Communication
 
 Message channel:
 
@@ -416,7 +416,7 @@ fn main() {
 }
 ```
 
-## Send and Sync Trait
+## Send and Sync
 
 Send and Sync:
 
@@ -579,7 +579,7 @@ pub fn main() {
 }
 ```
 
-## Future Trait
+## Future
 
 - `Future` 代表一组计算, 惰性求值. 当 `.await` 调用时才真正开始执行.
 - `Future` 启动后会因资源等原因阻塞, 转入 `pending` 状态.

@@ -5,7 +5,7 @@ tags: [Programming, OS, Linux, Shell]
 
 # Shell Scripts
 
-## Shell Warnings
+## Warnings
 
 - `=` 左右无空格.
 - `()` `[]` 内部最好有空格.
@@ -45,9 +45,7 @@ plot "$1" using 1:7 title "snd_cwnd", \\
 EOF
 ```
 
-## 变量
-
-### 基本变量
+## Variables
 
 - `=` : 左右两端不可有空格.
 - `' '`: 完全标准字符串.
@@ -55,7 +53,7 @@ EOF
 - 调用变量值：`$变量名`.
 - `set`/`unset`: 设置/取消变量.
 
-### built-in 变量
+### Built-in
 
 - `$*`/`$@`: `argv[1], ..., argv[n]`
 - `$0/$1/../$n`: `argv[0], ..., argv[n]`
@@ -110,7 +108,7 @@ while [[ -n $1 ]]; do
 done
 ```
 
-### 环境变量
+### Environment
 
 - `/etc/profile.d/*.sh`.
 - `~/.bash_profile`.
@@ -121,17 +119,13 @@ done
 - `PS1` 环境变量: shell 头行打印信息.
 - `PATH` 环境变量.
 
-#### Environment Command
+```bash
+export PATH=$PATH:/usr/local/bin
+env
+printenv
+```
 
-- `env`: 查看环境变量.
-- `export 变量名=变量值`: 设置环境变量.
-- `printenv`.
-
-## 数值运算
-
-### declare 命令
-
-## Bash Expansions
+## Expansions
 
 - `$(())` or `$[]`: arithmetic expansion
 
@@ -245,9 +239,9 @@ JPG.jpg
 - `""`: allow expansions string.
 - `''`: disallow expansions string.
 
-## 流程控制语句
+## Flow Control
 
-### if 语句
+### If
 
 ```bash
 if [[ 条件判断式 ]] ; then
@@ -297,7 +291,7 @@ fi
 
 <!-- markdownlint-enable line-length -->
 
-### case 语句
+### Case
 
 ```bash
 case $变量名 in
@@ -412,7 +406,7 @@ case $REPLY in
 esac
 ```
 
-### for 语句
+### For
 
 ```bash
 for 变量 in 值1 值2 值3 …… 值n
@@ -429,7 +423,7 @@ for (( 初始值;循环控制条件;变量变化 )); do
 done
 ```
 
-### while 语句与 until 语句
+### While and Until
 
 ```bash
 while [[ 条件判断式 ]]
@@ -504,7 +498,7 @@ while read dist version release; do
 done < dist.txt
 ```
 
-### do while statement
+### Do While
 
 ```bash
 while : ; do
@@ -513,17 +507,17 @@ while : ; do
 done
 ```
 
-## Bash Array
+## Array
 
 - [Array Reference](http://billie66.github.io/TLCL/book/chap36.html)
 
-## Bash Function
+## Function
 
 - 函数局部变量 `local 变量名`.
 - 函数参数 : `$`/`+`/`#`/`?`/`@`/`n`.
 - 引用函数库文件: `source sh 文件名`/`. sh 文件名`, 可修改 `~/.bashrc` 文件.
 
-## Bash IO
+## I/O
 
 ```bash
 #!/bin/bash
@@ -631,7 +625,7 @@ if [[ -n $interactive ]]; then
 fi
 ```
 
-## 信号
+## Signal
 
 - `man 7 signal`: 传递信号给进程.
 - `CTRL + C`: SIGINT.
@@ -640,7 +634,7 @@ fi
 - `trap SIG*`/`trap EXIT`: 捕捉信号(后 + 忽略信号/默认处理信号/自定义处理信号).
 - `trap – SIG*`/`trap - EXIT`: 移除信号.
 
-## Bash Debugging
+## Debugging
 
 `-x` option:
 
@@ -669,33 +663,9 @@ fi
 set +x # Turn off tracing
 ```
 
-## Shell Script Best Practices
+## Interaction
 
-- [Google Shell Style Guide](https://google.github.io/styleguide/shellguide.html)
-- 指定默认解释器`cat /etc/shells`
-- 设置`bash strict mode`
-- 条件判断使用`[[ ]]`
-- 使用变量时用双引号把变量包起来 `cp -r "$src_dir" "$dest_dir"`
-- 使用`$()`获取表达式的值
-- 使用`${arr[@]}`进行列表循环
-
-```bash
-#!/usr/bin/env bash
-
-# 设置命令回显
-set -x
-
-# 遇到未声明的变量则报错停止
-set -u
-# 遇到执行错误则停止
-set -e
-# 管道命令其中一步失败则中止
-set -o pipefail
-```
-
-## Interactive Shell Script
-
-### Check Root Validation
+### Root Validation
 
 ```bash
 if (( $EUID != 0 )); then
@@ -710,7 +680,7 @@ sudo chown root <filename>
 sudo chmod +s <filename>
 ```
 
-### Bash help option
+### Help Option
 
 ```bash
 #!/bin/sh
@@ -720,7 +690,7 @@ if [[ ${#@} -ne 0 ]] && [[ "${@#"--help"}" = "" ]]; then
 fi;
 ```
 
-### Bash Silent Option
+### Silent Option
 
 ```bash
 #!/bin/sh
@@ -737,7 +707,7 @@ stty +echo;
 exit 0;
 ```
 
-### Check Command Validation
+### Command Validation
 
 ```bash
 #!/bin/sh
@@ -750,7 +720,7 @@ if [[ "$?" != "0" ]]; then
 fi;
 ```
 
-#### Get Absolute Path
+### Get Absolute Path
 
 ```bash
 #!/bin/sh
@@ -759,7 +729,7 @@ printf -- 'moving application to /opt/app.jar';
 mv "${CUR_DIR}/application.jar" /opt/app.jar;
 ```
 
-### Bash error handle
+### Error Handle
 
 ```bash
 #!/bin/sh
@@ -777,7 +747,7 @@ fi;
 # ...
 ```
 
-### Bash loading progress
+### Loading Progress
 
 ```bash
 #!/bin/sh
@@ -835,4 +805,28 @@ bash ohmyzsh/tools/install.sh
 if [ -t 1 ]; then
 exec zsh
 fi
+```
+
+## Best Practices
+
+- [Google Shell Style Guide](https://google.github.io/styleguide/shellguide.html)
+- 指定默认解释器`cat /etc/shells`
+- 设置`bash strict mode`
+- 条件判断使用`[[ ]]`
+- 使用变量时用双引号把变量包起来 `cp -r "$src_dir" "$dest_dir"`
+- 使用`$()`获取表达式的值
+- 使用`${arr[@]}`进行列表循环
+
+```bash
+#!/usr/bin/env bash
+
+# 设置命令回显
+set -x
+
+# 遇到未声明的变量则报错停止
+set -u
+# 遇到执行错误则停止
+set -e
+# 管道命令其中一步失败则中止
+set -o pipefail
 ```

@@ -4,19 +4,25 @@ tags: [Language, Java]
 
 # Java
 
-## CLI Tools
+## Toolchain
 
 ### 编译
 
+```bash
 javac name.java
+```
 
 ### 运行
 
+```bash
 java name(无后缀类名)
+```
 
 ### 反汇编
 
+```bash
 javap –c name(无后缀类名)
+```
 
 ### 打包
 
@@ -37,7 +43,7 @@ jar {c t x u f} [v m e 0 M i][-c 目录] 文件名
 - M: 不产生 manifest.mf 文件, 覆盖 m 参数的设置
 - i: 创建索引文件
 - C: 进入某目录后再执行 jar 命令
-- 生成 API 文档: java doc –d [ ] 类名/包名
+- 生成 API 文档: `java doc –d [ ] 类名/包名`.
 
 可选参数:
 
@@ -45,7 +51,7 @@ jar {c t x u f} [v m e 0 M i][-c 目录] 文件名
 - -link superlink 标准类名: 为标准类添加超链接
 - -linksourse: 方法/类名转化为超链接, 指向生成的 html 格式的源文件
 
-## Gradle Tool
+## Gradle
 
 ```bash
 sudo apt install gradle
@@ -569,7 +575,7 @@ class Person {
 }
 ```
 
-### Java Code Structure
+### Code Structure
 
 ```java
 package packageName;              //指定文件中的类所在的包, 0个或1个
@@ -761,7 +767,7 @@ Java 语言规范还定义了一种特殊的 Javadoc 注释:
 
 #### 包注释
 
-新建 package-info.java 源文件:
+新建 `package-info.java` 源文件:
 
 ```java
 package 包路径
@@ -939,17 +945,17 @@ Student s = new Person();  //ERROR:e.g. s.getStuID();
 
 ### 对象包装器与自动装箱
 
-| 基本类型 | 对应的引用类型      |
-| -------- | ------------------- |
-| void     | java.lang.Void      |
-| boolean  | java.lang.Boolean   |
-| char     | java.lang.Character |
-| byte     | java.lang.Byte      |
-| short    | java.lang.Short     |
-| int      | java.lang.Integer   |
-| long     | java.lang.Long      |
-| float    | java.lang.Float     |
-| double   | java.lang.Double    |
+| 基本类型  | 对应的引用类型        |
+| --------- | --------------------- |
+| `void`    | `java.lang.Void`      |
+| `boolean` | `java.lang.Boolean`   |
+| `char`    | `java.lang.Character` |
+| `byte`    | `java.lang.Byte`      |
+| `short`   | `java.lang.Short`     |
+| `int`     | `java.lang.Integer`   |
+| `long`    | `java.lang.Long`      |
+| `float`   | `java.lang.Float`     |
+| `double`  | `java.lang.Double`    |
 
 #### 父类
 
@@ -1673,14 +1679,16 @@ e.g. 两个线程互相等待状态
 
 ### 线程安全
 
-java.util.concurrent 并发 API: 线程安全(同时只有一个线程调用某对象)
+`java.util.concurrent` 并发 API: 线程安全(同时只有一个线程调用某对象)
 
 #### 原子整数
 
 ```java
-AtomicInteger.getAndIncrement();     //cnt++;
-AtomicInteger.getAndDecrement();    //cnt—
-AtomicBoolean、AtomicLong、AtomicReference类
+AtomicInteger.getAndIncrement();    // cnt++
+AtomicInteger.getAndDecrement();    // cnt—
+AtomicBoolean
+AtomicLong
+AtomicReference
 ```
 
 #### 线程安全集合
@@ -1768,7 +1776,7 @@ GC 优化的核心思路:
 - Young GC 触发频率, 对象进入老年代的速率
 - 老年代占用内存, Full GC 触发频率, Full GC 触发的原因, 长时间 Full GC 的原因
 
-### GC Tools
+### Library
 
 - 监控告警系统: Zabbix、Prometheus、Open-Falcon
 - jdk 自动实时内存监控工具: VisualVM
@@ -1791,7 +1799,7 @@ jmap -dump:live,format=b,file=dump.prof <pid>
 jinfo <pid>
 ```
 
-## Java Naming Conventions
+## Naming Conventions
 
 ### 使用前注意事项
 
@@ -1831,18 +1839,14 @@ web 层操作: 一般定义在 net.vschool.xxx.action 中.
 
 类名必须使用名词, 如果一个类名内含多个单词, 那么各个单词第一个字母大写, 后续字母小写, 起伏呈驼峰状, 人称驼峰式命名.
 给类名命名时, 必须保证准确、简洁且容易理解.
-尽量使用完整单词, 避免使用缩写词 (除了大家公认的).
-
-#### Class 一般要求
+尽量使用完整单词, 避免使用缩写词 (除了大家公认的):
 
 - 选择有意义的名字, 能快速地传达该类的用途.
-- 参照 java 驼峰命名法, 类名的首字母必须采用大写的形式, 如果类名为多词组合而成的话, 那么每个词的首字母必须采用大写.
-  如: StudentAnswer.java.
+- 参照 Java 驼峰命名法, 类名的首字母必须采用大写的形式, 如果类名为多词组合而成的话, 那么每个词的首字母必须采用大写.
+  如: `StudentAnswer.java`.
 - 当要区别接口类和实现类的时候, 可以在类的后面加上 `Impl`.
 - 推荐实体类没有后缀名.
-- public class 应与.java 文件同名
-
-#### Class 实际应用
+- `public class` 应与 `.java` 文件同名.
 
 应用系统中经常应用分层, Dao 层 (数据库访问)、Service 层 (业务处理)、Web 层 (页面控制 action 类), 每一层的类的名称尽量带上该层后缀.
 
@@ -1862,7 +1866,7 @@ web 层操作: 一般定义在 net.vschool.xxx.action 中.
 ##### Var 一般要求
 
 - 选择有意义的名字, 能快速地传达该变量的用途.
-- 参照 java 驼峰命名法, 首字母以小写开头, 每个单词首字母大写 (第一个单词除外).
+- 参照 Java 驼峰命名法, 首字母以小写开头, 每个单词首字母大写 (第一个单词除外).
 
 ##### Var 实际应用
 
@@ -1897,7 +1901,7 @@ web 层操作: 一般定义在 net.vschool.xxx.action 中.
 #### 静态变量
 
 - 选择有意义的名字, 能快速地传达该变量的用途.
-- 参照 java 驼峰命名法, 采用全部大写的形式来书写, 对于采用多词合成的变量采用`-`来连接各单词.
+- 参照 Java 驼峰命名法, 采用全部大写的形式来书写, 对于采用多词合成的变量采用`-`来连接各单词.
   如: `USER_LIST`
 
 ### 方法的命名
@@ -1905,7 +1909,7 @@ web 层操作: 一般定义在 net.vschool.xxx.action 中.
 #### Method 一般要求
 
 - 选择有意义的名字, 能快速地传达该方法的用途.
-- 参照 java 驼峰命名法, 首字母以小写开头, 每个单词首字母大写 (第一个单词除外).
+- 参照 Java 驼峰命名法, 首字母以小写开头, 每个单词首字母大写 (第一个单词除外).
 
 #### Method 实际应用
 

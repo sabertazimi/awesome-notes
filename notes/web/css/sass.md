@@ -1,5 +1,5 @@
 ---
-sidebar_position: 24
+sidebar_position: 50
 tags: [Web, CSS, Sass]
 ---
 
@@ -7,7 +7,7 @@ tags: [Web, CSS, Sass]
 
 ## Variable
 
-### Normal Variable
+### Normal
 
 - start with `$`
 
@@ -19,11 +19,11 @@ h1 {
 }
 ```
 
-### String Variable
+### String
 
 - `#{$var}`: combine with string
 
-### Nesting Variable
+### Nesting
 
 refer to parent-selector, only use it on:
 
@@ -84,7 +84,7 @@ $colors: (
 }
 ```
 
-### arguments list
+### Arguments list
 
 ```scss
 @mixin dummy($a, $b, $c) {
@@ -114,13 +114,13 @@ $params: (
 @include dummy($params...);
 ```
 
-### `!default` flag
+### `!default` Flag
 
 only assign when variables hadn't been assigned
 
 ## Directive
 
-### Mixin and Include Directive
+### Mixin and Include
 
 ```scss
 @mixin box-shadow($x, $y, $blur, $c) {
@@ -139,7 +139,7 @@ div {
 }
 ```
 
-### If Else Directive
+### If Else
 
 ```scss
 @mixin border-stroke($val) {
@@ -169,7 +169,7 @@ div {
 }
 ```
 
-### for loop
+### For
 
 ```scss
 @for $i from 1 through 12 {
@@ -179,7 +179,7 @@ div {
 }
 ```
 
-### while loop
+### While
 
 ```scss
 $x: 1;
@@ -192,7 +192,7 @@ $x: 1;
 }
 ```
 
-### each
+### Each
 
 ```scss
 @each $color in blue, red, green {
@@ -202,7 +202,7 @@ $x: 1;
 }
 ```
 
-### import
+### Import
 
 ```scss
 // import _variables.scss in main.scss
@@ -215,7 +215,7 @@ $x: 1;
 @import '~bootstrap/scss/bootstrap';
 ```
 
-### extend
+### Extend
 
 `@extend` is basically about moving selectors around:
 
@@ -276,7 +276,7 @@ $x: 1;
 }
 ```
 
-#### Media Queries with extend
+:::caution[With Media Query]
 
 ```scss
 %foo {
@@ -322,9 +322,9 @@ $x: 1;
 }
 ```
 
-## Built-in Functions
+:::
 
-[Official Documentation](https://sass-lang.com/documentation/Sass/Script/Functions.html)
+## Functions
 
 ### Color
 
@@ -358,22 +358,22 @@ $length: $value * 1em;
 }
 ```
 
-### type and unit
+### Type and Unit
 
 - `unit($length)`.
 - `unitless($length)`.
 - `type-of($var)`.
 - `is-type-of($var, $type)`.
 
-## Error Handle
+## Error
 
-- type-of
-- is-type-of
-- unit
-- unitless
-- @warn/@error
+- `type-of`
+- `is-type-of`
+- `unit`
+- `unitless`
+- `@warn`/`@error`
 
-### function error handle
+### Function
 
 ```scss
 @function add-10($number) {
@@ -387,7 +387,7 @@ $length: $value * 1em;
 }
 ```
 
-### mixin error handle
+### Mixin
 
 ```scss
 @mixin module($name) {
@@ -487,7 +487,7 @@ Each file contains all the related helpers: variables, functions, mixins and pla
 
 ### Performance
 
-- mixin better than extend
+Mixin better than extend.
 
 ### Children Selector
 
@@ -517,9 +517,9 @@ Each file contains all the related helpers: variables, functions, mixins and pla
 }
 ```
 
-## Tools
+## Library
 
-### Framework
+### Frameworks
 
 - [Compass](http://compass-style.org)
 - [Bourbon](https://www.bourbon.io)
@@ -540,3 +540,7 @@ Each file contains all the related helpers: variables, functions, mixins and pla
 - [Sass MQ](https://github.com/sass-mq/sass-mq)
 - [Breakpoint Sass](http://breakpoint-sass.com)
 - [Include Media](https://github.com/eduardoboucas/include-media)
+
+## References
+
+- Official documentation for [built-in functions](https://sass-lang.com/documentation/Sass/Script/Functions.html).

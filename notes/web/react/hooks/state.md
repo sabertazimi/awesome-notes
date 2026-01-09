@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-tags: [Web, React, Hook]
+tags: [Web, React, Hook, State]
 ---
 
 # State
@@ -18,7 +18,7 @@ tags: [Web, React, Hook]
   - 将 Update 对象添加到 hook.queue.pending 队列.
   - 根据 reducerEagerState 与 currentState, 决定是否发起新的 Reconciler 调度.
 
-## useState Dispatcher
+## Dispatcher
 
 ```ts
 function mountState<T>(initialState: T) {
@@ -128,7 +128,7 @@ export function getFinalState(baseState, queue) {
 }
 ```
 
-## useState Usage
+## useState
 
 ```ts
 setState((prevState) => {

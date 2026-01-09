@@ -1,11 +1,11 @@
 ---
-sidebar_position: 14
-tags: [Web, CSS]
+sidebar_position: 20
+tags: [Web, CSS, Border, Outline]
 ---
 
 # Border
 
-## Border Radius
+## Radius
 
 [`border-radius`](https://developer.mozilla.org/docs/Web/CSS/border-radius):
 
@@ -60,9 +60,9 @@ $$
 }
 ```
 
-## Border Color
+## Color
 
-### Alpha Border
+### Alpha
 
 半透明边框:
 
@@ -74,7 +74,7 @@ $$
 }
 ```
 
-### Transparent Border
+### Transparent
 
 利用透明边框扩大元素点击区域,
 并利用 `background-clip: padding-box` 隐藏边框:
@@ -88,7 +88,7 @@ $$
 }
 ```
 
-## Border Style
+## Style
 
 利用 `solid` border 模拟链接下划线:
 
@@ -100,7 +100,7 @@ $$
 }
 ```
 
-## Border Image
+## Image
 
 [`border-image`](https://developer.mozilla.org/docs/Web/CSS/border-image):
 
@@ -141,7 +141,7 @@ $$
 }
 ```
 
-## Border Collapse
+## Collapse
 
 ```css
 table,
@@ -155,16 +155,7 @@ table {
 }
 ```
 
-## Box Decoration Break
-
-[`box-decoration-break`](https://developer.mozilla.org/docs/Web/CSS/box-decoration-break):
-
-- Control `background`/`border`/`border-image`/`box-shadow`/`clip-path`/`margin`/`padding`
-  styles when lines break.
-- `slice`: initial value, 断开部分样式直接切割.
-- `clone`: 断开部分样式独立渲染.
-
-## Multiple Border
+## Multiple
 
 [Multiple border](https://css-tricks.com/animating-border):
 
@@ -178,7 +169,7 @@ table {
 - Pseudo element.
 - SVG [`stroke-dasharray`](https://codepen.io/Chokcoco/pen/gOOKYmV).
 
-## CSS Outline
+## Outline
 
 [`outline`](https://developer.mozilla.org/docs/Web/CSS/outline):
 
@@ -211,3 +202,12 @@ table {
   outline-offset: -50px;
 }
 ```
+
+## Box Decoration Break
+
+[`box-decoration-break`](https://developer.mozilla.org/docs/Web/CSS/box-decoration-break):
+
+- Control `background`/`border`/`border-image`/`box-shadow`/`clip-path`/`margin`/`padding`
+  styles when lines break.
+- `slice`: initial value, 断开部分样式直接切割.
+- `clone`: 断开部分样式独立渲染.

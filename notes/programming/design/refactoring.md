@@ -11,7 +11,7 @@ tags: [Programming, DevOps, Design Pattern, Refactoring]
 - Change function declaration: 优化可读性.
 - Rename variable: 优化可读性.
 
-## Encapsulation Refactoring
+## Encapsulation
 
 - Introduce parameter object: 减少函数参数, 封装数据.
 - Encapsulate record: 将键值对封装成对象.
@@ -25,7 +25,7 @@ tags: [Programming, DevOps, Design Pattern, Refactoring]
 - 用组合 (Composite) 与委托 (Delegate) 代替继承 (Extend):
   将紧耦合转化为松耦合.
 
-## Condition Refactoring
+## Condition
 
 - Decompose conditional statement: 引入解释性条件语句或函数.
 - Use guard clause and assertion: 消除复杂嵌套条件语句.
@@ -33,7 +33,7 @@ tags: [Programming, DevOps, Design Pattern, Refactoring]
   - Introduce special case.
   - Polymorphism: e.g. strategy pattern.
 
-## API Refactoring
+## API
 
 - Split query from modifier: 提取副作用语句.
 - Parameterize function:

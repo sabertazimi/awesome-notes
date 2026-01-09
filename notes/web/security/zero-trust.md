@@ -54,7 +54,7 @@ tags: [Web, Security, Zero Trust, Access Control]
 - 在主机之间建立连接时要求双方提供主机完整性证明.
 - 在微服务获取特定用户数据时要求提供该用户的授权令牌 (Authorization Token).
 
-## Zero Trust Basement
+## Basement
 
 零信任的实施依赖于扎实的基础安全架构, 没有基础就没有上层建筑.
 谷歌零信任依赖于以下基础设施提供的基本安全保障:

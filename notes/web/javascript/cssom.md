@@ -10,19 +10,7 @@ is a set of APIs allowing the manipulation of CSS from JavaScript.
 It is much like the DOM, but for the CSS rather than the HTML.
 It allows users to read and modify CSS style dynamically.
 
-## Inline Styles
-
-```ts
-interface Element {
-  style: CSSStyleDeclaration
-}
-
-const style = element.style.XX
-const font = element.style.fontFamily
-const mt = element.style.marginTopWidth
-```
-
-## Styles Getter and Setter
+## Getter and Setter
 
 - `cssText`: 一次生效.
 - `length`.
@@ -52,6 +40,18 @@ for (let i = 0, len = myDiv.style.length; i < len; i++)
   console.log(myDiv.style[i]) // 或者用 myDiv.style.item(i)
 ```
 
+## Inline Styles
+
+```ts
+interface Element {
+  style: CSSStyleDeclaration
+}
+
+const style = element.style.XX
+const font = element.style.fontFamily
+const mt = element.style.marginTopWidth
+```
+
 ## Computed Styles
 
 - Shorthand style for full property.
@@ -73,7 +73,7 @@ const backgroundColor = window.getComputedStyle(el)['background-color']
 window.getComputedStyle(el).getPropertyValue('background-color')
 ```
 
-## CSS Class List
+## Class List
 
 ```ts
 element.classList.add('class')
@@ -95,7 +95,7 @@ function addClassPolyfill(element, value) {
 }
 ```
 
-## DOM StyleSheets API
+## Rules
 
 以下是 `CSSStyleSheet` 从 `StyleSheet` 继承的属性:
 
@@ -111,7 +111,7 @@ function addClassPolyfill(element, value) {
 - `deleteRule(index)`: 在指定位置删除 cssRules 中的规则.
 - `insertRule(rule, index)`: 在指定位置向 cssRules 中插入规则.
 
-### CSS Rules Definition
+### Definition
 
 `CSSRule`:
 
@@ -159,7 +159,7 @@ for (i of myRules) {
 }
 ```
 
-### Media Rules
+### Media
 
 - `conditionText` property of media rule.
 - Nested `cssRules`.
@@ -178,7 +178,7 @@ for (i of myRules) {
 }
 ```
 
-### Keyframe Rules
+### Keyframe
 
 - `name` property of keyframe rule
 - `keyText` property of keyframe rule.
@@ -198,7 +198,7 @@ for (i of myRules) {
 }
 ```
 
-### Manipulate CSS Rules
+### Manipulation
 
 ```ts
 const myStylesheet = document.styleSheets[0]
@@ -219,9 +219,9 @@ myStylesheet.deleteRule(3)
 console.log(myStylesheet.cssRules.length) // 7
 ```
 
-## CSS Typed Object Model API
+## Typed Object Model
 
-[CSS Typed Object Model API](https://developer.mozilla.org/docs/Web/API/CSS_Typed_OM_API)
+CSS typed object model [API](https://developer.mozilla.org/docs/Web/API/CSS_Typed_OM_API)
 simplifies CSS property manipulation by exposing CSS values
 as **typed JavaScript objects** rather than strings.
 

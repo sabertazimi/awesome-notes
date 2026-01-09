@@ -1,16 +1,16 @@
 ---
-sidebar_position: 25
+sidebar_position: 51
 tags: [Web, CSS, Bootstrap]
 ---
 
 # Bootstrap
 
-## Custom Bootstrap Theme
+## Custom Theme
 
 - [Bootstrap CMS Theme](https://github.com/sabertazimi/hust-web/tree/main/css/bootstrap-cms)
 - [Advanced Webpack Configuration](https://medium.com/@estherfalayi/setting-up-webpack-for-bootstrap-4-and-font-awesome-eb276e04aaeb)
 
-### Bootstrap Reboot
+### Reboot
 
 - `@import '~bootstrap/scss/reboot`;
 
@@ -32,7 +32,7 @@ Some useful best practices:
   as horizontal resizing often “breaks” page layout
 - `summary` are set to `cursor: pointer`
 
-### Useful Custom Functions
+### Functions
 
 - `@import '~bootstrap/scss/functions';`
 - `@import '~bootstrap/scss/mixins';`
@@ -69,7 +69,7 @@ Some useful best practices:
 }
 ```
 
-### Custom Colors
+## Colors
 
 - `@import '~bootstrap/scss/variables';`
 
@@ -100,7 +100,7 @@ $colors: (
 );
 ```
 
-### Custom Spacing
+## Spacing
 
 key variable - `$spacer`:
 
@@ -142,14 +142,14 @@ key variable - `$spacer`:
 }
 ```
 
-### Custom Layout
+## Layout
 
 ```css
 $grid-columns: 12;
 $grid-gutter-width: 30px;
 ```
 
-### Custom Borders
+## Borders
 
 ```css
 $border-width: 1px;
@@ -159,7 +159,7 @@ $border-radius-lg: 0.3rem;
 $border-radius-sm: 0.2rem;
 ```
 
-### Custom Navbar and Navigation
+## Navbar and Navigation
 
 ```css
 /* $nav-link-padding-x: 1.5rem; */
@@ -186,7 +186,7 @@ $nav-pills-link-active-color: $white;
 $nav-pills-link-active-bg: $primary;
 ```
 
-### Custom Dropdown
+## Dropdown
 
 custom `$dropdown-` variables
 
@@ -201,13 +201,13 @@ $dropdown-item-padding-y: 0.5rem;
 $dropdown-item-padding-x: 3rem;
 ```
 
-### Custom List Group
+## List Group
 
 ```css
 $list-group-border-color: $primary;
 ```
 
-### Custom Card
+## Card
 
 ```css
 $card-border-color: $primary;
@@ -215,7 +215,7 @@ $card-color: $primary;
 $card-bg: $violet-0;
 ```
 
-### Custom Breadcrumb
+## Breadcrumb
 
 ```css
 $breadcrumb-bg: $violet-0;
@@ -225,7 +225,7 @@ $breadcrumb-active-color: $violet-3;
 $breadcrumb-divider: quote('>');
 ```
 
-### Custom Form
+## Form
 
 ```css
 $input-btn-padding-y: 0.75rem;

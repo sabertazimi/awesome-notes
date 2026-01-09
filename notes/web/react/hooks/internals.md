@@ -1,6 +1,6 @@
 ---
 sidebar_position: 100
-tags: [Web, React, Hook]
+tags: [Web, React, Hook, Internals]
 ---
 
 # Internals
@@ -16,7 +16,7 @@ tags: [Web, React, Hook]
   more details on
   [Overreacted](https://overreacted.io/how-are-function-components-different-from-classes/).
 
-## Hooks Types
+## Types
 
 Hooks
 [definition](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.js):
@@ -89,7 +89,7 @@ type HookType
     | 'useCacheRefresh'
 ```
 
-## Hooks Memoized State
+## Memoized State
 
 - `FunctionComponent` 内部所有 Hooks memoized state
   组成 `FunctionComponent` `Fiber` memoized state.
@@ -103,7 +103,7 @@ type HookType
 | useState    | `state`                                        |
 | useEffect   | `effect: { tag, create, destroy, deps, next }` |
 
-## Hooks Workflow
+## Workflow
 
 - `Reconciler.Render`/`Reconciler.Update`:
   `performUnitOfWork` -> `beginWork` -> `updateFunctionComponent`
@@ -465,7 +465,7 @@ function commitHookEffectListUnmount(tag: number, finishedWork: Fiber) {
 }
 ```
 
-## Minimal Hooks Implementation
+## Hook
 
 ```ts
 const MyReact = (function () {

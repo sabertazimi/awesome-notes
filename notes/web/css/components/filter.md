@@ -1,11 +1,11 @@
 ---
-sidebar_position: 7
-tags: [Web, CSS]
+sidebar_position: 41
+tags: [Web, CSS, Component, Filter]
 ---
 
 # Filter
 
-## Dark Mode Effect
+## Dark Mode
 
 ```css
 html[theme='dark'] {
@@ -23,7 +23,7 @@ html {
 }
 ```
 
-## Fusion Effect
+## Fusion
 
 - Parent element: `background-color` + `filter: contrast()`.
 - Child element: `filter: blur()`.
@@ -51,7 +51,7 @@ emulation:
 </style>
 ```
 
-## Frosted Glass Effect
+## Frosted Glass
 
 毛玻璃效果 (`bg-white/30 shadow-lg backdrop-blur-sm`):
 
@@ -137,7 +137,7 @@ Tweaked frosted glass header menu:
 </header>
 ```
 
-## Liquid Glass Effect
+## Liquid Glass
 
 Simple [liquid glass](https://designfast.io/liquid-glass 'Liquid Glass') effect:
 
@@ -295,7 +295,7 @@ Advanced [liquid glass](https://kube.io/blog/liquid-glass-css-svg) effect with C
 </script>
 ```
 
-## Gradient Text Effect
+## Gradient Text
 
 [Gradient text](https://codepen.io/Chokcoco/pen/Rwoybzr):
 
@@ -377,7 +377,7 @@ Advanced [liquid glass](https://kube.io/blog/liquid-glass-css-svg) effect with C
 }
 ```
 
-## Sun Effect
+## Sun
 
 ```css
 .sun-rise {
@@ -386,7 +386,7 @@ Advanced [liquid glass](https://kube.io/blog/liquid-glass-css-svg) effect with C
 }
 ```
 
-## Night Effect
+## Night
 
 ```css
 .night {
@@ -398,7 +398,7 @@ Advanced [liquid glass](https://kube.io/blog/liquid-glass-css-svg) effect with C
 }
 ```
 
-## Movie Effect
+## Movie
 
 ```css
 .movie {
@@ -407,7 +407,7 @@ Advanced [liquid glass](https://kube.io/blog/liquid-glass-css-svg) effect with C
 }
 ```
 
-## Old Effect
+## Old
 
 ```css
 .old-1977 {
@@ -428,7 +428,7 @@ Advanced [liquid glass](https://kube.io/blog/liquid-glass-css-svg) effect with C
 }
 ```
 
-## Sketch Effect
+## Sketch
 
 ```css
 .sketch {

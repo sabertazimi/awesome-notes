@@ -5,7 +5,7 @@ tags: [Web, Security, ClickJacking, Vulnerability]
 
 # Click Jacking
 
-## Click Jacking Attack
+## Attack
 
 Hover transparent malicious link upon trusted true button:
 
@@ -13,7 +13,7 @@ Hover transparent malicious link upon trusted true button:
 - `drag` and `drop`.
 - `touch`.
 
-## Click Jacking Protection
+## Protection
 
 `X-Frame-Options`:
 

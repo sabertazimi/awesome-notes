@@ -1,6 +1,6 @@
 ---
 sidebar_position: 4
-tags: [Web, HTML, Attribute]
+tags: [Web, HTML, DOM, Attribute, Property]
 ---
 
 # Attributes
@@ -21,7 +21,7 @@ function onChange(event) {
 }
 ```
 
-## Global Attributes
+## Global
 
 [Global attributes](https://html.spec.whatwg.org/multipage/dom.html#global-attributes)
 are attributes common to all HTML elements,
@@ -68,7 +68,7 @@ The `class`, `id`, and `slot` attributes may be specified on all HTML elements.
 
 ## DOM Properties
 
-### DOM Properties Differences
+### Differences
 
 HTML attributes vs DOM properties [differs in](https://jakearchibald.com/2024/attributes-vs-properties):
 
@@ -154,7 +154,7 @@ console.log(details.getAttribute('open')) // ''
 console.log(details.open) // true
 ```
 
-### DOM Properties Reflection
+### Reflection
 
 For convenience, most specs will create a property equivalent for every defined attribute.
 Here's the spec for [`<ol>`](https://html.spec.whatwg.org/multipage/grouping-content.html#the-ol-element).

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 21
-tags: [Web, React, Hook]
+tags: [Web, React, Hook, Event, Debounce, Observer]
 ---
 
 # Event

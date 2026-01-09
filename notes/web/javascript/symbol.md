@@ -26,19 +26,7 @@ const otherFooGlobalSymbol = Symbol.for('foobar') // 重用已有符号
 console.log(fooGlobalSymbol === otherFooGlobalSymbol) // true
 ```
 
-## Symbol Conversion
-
-| Convert To | Explicit Conversion       | Coercion (Implicit Conversion) |
-| ---------- | ------------------------- | ------------------------------ |
-| `boolean`  | `Boolean(sym)` → OK       | `!sym` → OK                    |
-| `number`   | `Number(sym)` → TypeError | `sym * 2` → TypeError          |
-| `string`   | `String(sym)` → OK        | `'' + sym` → TypeError         |
-|            | `sym.toString()` → OK     | `${sym}` → TypeError           |
-| `object`   | `Object(sym)` → OK        | `Object.keys(sym)` → OK        |
-
-## Built-in Symbol Methods
-
-[Symbol methods](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Symbol#static_properties):
+Symbol [methods](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Symbol#static_properties):
 
 - `[Symbol.iterator]()`: `for of`.
 - `[Symbol.asyncIterator]()`: `for await of`.
@@ -48,7 +36,17 @@ console.log(fooGlobalSymbol === otherFooGlobalSymbol) // true
 - `[Symbol.toPrimitive](hint)`: 强制类型转换.
 - `[Symbol.toStringTag]()`: string used by `Object.prototype.toString()`.
 
-`iterator`:
+## Conversion
+
+| Convert To | Explicit Conversion       | Coercion (Implicit Conversion) |
+| ---------- | ------------------------- | ------------------------------ |
+| `boolean`  | `Boolean(sym)` → OK       | `!sym` → OK                    |
+| `number`   | `Number(sym)` → TypeError | `sym * 2` → TypeError          |
+| `string`   | `String(sym)` → OK        | `'' + sym` → TypeError         |
+|            | `sym.toString()` → OK     | `${sym}` → TypeError           |
+| `object`   | `Object(sym)` → OK        | `Object.keys(sym)` → OK        |
+
+## Iterator
 
 ```ts
 const arr = ['a', 'b', 'c']
@@ -60,7 +58,7 @@ iter.next() // { value: 'c', done: false }
 iter.next() // { value: undefined, done: true }
 ```
 
-`hasInstance`:
+## HasInstance
 
 ```ts
 class Bar {}
@@ -95,7 +93,7 @@ console.log(obj2 instanceof Object) // false
 console.log(obj2 instanceof ReferenceType) // true
 ```
 
-`species`:
+## Species
 
 ```ts
 class MyClass {
@@ -133,7 +131,7 @@ console.log(clone2 instanceof MyClass) // true
 console.log(clone2 instanceof MyDerivedClass2) // false
 ```
 
-`toPrimitive`:
+## ToPrimitive
 
 ```ts
 class Temperature {
@@ -160,7 +158,7 @@ console.log(freezing / 2) // 16
 console.log(String(freezing)) // "32째"
 ```
 
-`toStringTag`:
+## ToStringTag
 
 ```ts
 class Person {

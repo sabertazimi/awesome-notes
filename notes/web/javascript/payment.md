@@ -1,9 +1,9 @@
 ---
-sidebar_position: 41
-tags: [Web, JavaScript, ECMAScript]
+sidebar_position: 57
+tags: [Web, JavaScript, ECMAScript, Payment]
 ---
 
-# Web Payment
+# Payment
 
 [Payment API](https://web.dev/life-of-a-payment-transaction):
 

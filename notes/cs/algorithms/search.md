@@ -1,14 +1,14 @@
 ---
-sidebar_position: 7
+sidebar_position: 20
 tags: [CS, Algorithm, Search]
 ---
 
 # Search
 
-## First Search
+## First
 
-- DFS(深度优先)：栈实现
-- BFS(广度优先)：队列实现
+- DFS (深度优先)：栈实现
+- BFS (广度优先)：队列实现
 
 ![Search Algorithms Performance](./figures/search/search-performance.jpg 'Search Algorithms Performance')
 
@@ -23,9 +23,9 @@ a = b+1;b = c+1;c = a+1;
 //a extends b;b extends c;c extends a;
 ```
 
-## Sorted Array Search
+## Sorted Array
 
-### Binary Search
+### Binary
 
 - Binary Search
 - Divide and Conquer
@@ -46,7 +46,7 @@ while (lo <= hi) {
 }
 ```
 
-## Max Min Search
+## Max Min
 
 ```ts
 Math.min(...nums)
@@ -84,7 +84,7 @@ void solve(void) {
 }
 ```
 
-## Range Max Min Query
+## Range Max Min
 
 - Segment Tree (线段树)
 - Binary Indexed Tree (树状数组)

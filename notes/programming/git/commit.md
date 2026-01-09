@@ -18,20 +18,16 @@ git commit -a -v
 git commit --amend -a -v
 ```
 
-## Commit Style Guide
+## Style Guide
 
-- [Conventional Commits Specification](https://github.com/conventional-commits/conventionalcommits.org)
-- [Commit Linter](https://github.com/conventional-changelog/commitlint)
-- [Commitizen: Conventional Commits CLI Tool](https://github.com/commitizen/cz-cli)
-- [Commitizen Conventional Changelog](https://github.com/commitizen/cz-conventional-changelog)
-- [Standard Version: Automate Versioning and CHANGELOG Generation](https://github.com/conventional-changelog/standard-version)
+Conventional Commits [specification](https://github.com/conventional-commits/conventionalcommits.org):
 
 ```bash
-npm i -D standard-version
+pnpm add -D commit-and-tag-version
 ```
 
 ```bash
-npx commitizen init cz-conventional-changelog --save-dev --save-exact
+pnpm dlx commitizen init cz-conventional-changelog --save-dev --save-exact
 ```
 
 ```md
@@ -43,11 +39,11 @@ npx commitizen init cz-conventional-changelog --save-dev --save-exact
 <footer>
 ```
 
-### Message Subject
+## Subject
 
-no more than 50 characters
+No more than 50 characters.
 
-### Commit Type
+## Type
 
 - feat: 新增了一个功能 (MINOR Version).
 - fix: 修复了一个 bug (PATCH Version）.
@@ -61,7 +57,7 @@ no more than 50 characters
 - chore: 其他不修改 src 或 test 文件 e.g. `chore(release)`.
 - revert: commit 回退.
 
-### Scope Values
+## Scope
 
 - init
 - runner
@@ -71,12 +67,12 @@ no more than 50 characters
 - proxy
 - empty
 
-### Message Body
+## Body
 
 - uses the imperative, present tense: “change” not “changed” nor “changes”
 - includes **motivation** for the change and contrasts with previous behavior
 
-### Message Footer
+## Footer
 
 - referencing issues e.g. close #666, #888
 - BREAKING CHANGE (`<type>!`) (MAJOR Version)
@@ -85,50 +81,7 @@ no more than 50 characters
   To migrate your project, change all the commands, where you use `--port-runner`
   to `--runner-port`.
 
-## Git Commit Tool
-
-[Commitizen CLI](https://github.com/commitizen/cz-cli):
-
-```bash
-npm i -g commitizen cz-conventional-changelog
-echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
-git cz # replace for `git commit`
-```
-
-[CommitLint](https://github.com/conventional-changelog/commitlint):
-
-```bash
-yarn add -D @commitlint/config-conventional @commitlint/cli
-echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
-
-yarn add -D husky
-yarn husky install
-yarn husky add .husky/commit-msg 'yarn commitlint --edit "$1"'
-```
-
-[Husky](https://github.com/typicode/husky):
-
-```bash
-npx husky-init
-npx husky add .husky/pre-commit "lint-staged"
-npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
-```
-
-```json
-{
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"],
-    "*.{md,mdx}": ["prettier --write"]
-  }
-}
-```
-
-## Git Commit Emoji
+## Emoji
 
 - [GitEmoji](https://github.com/carloscuesta/gitmoji)
 
@@ -175,3 +128,53 @@ npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
 | Code review changes      | :ok_hand: `:ok_hand:`                         |
 | Accessibility            | :wheelchair: `:wheelchair:`                   |
 | Move/rename repository   | :truck: `:truck:`                             |
+
+## Toolchain
+
+[Commitizen](https://github.com/commitizen/cz-cli):
+
+```bash
+npm i -g commitizen cz-conventional-changelog
+echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
+git cz # replace for `git commit`
+```
+
+[CommitLint](https://github.com/conventional-changelog/commitlint):
+
+```bash
+yarn add -D @commitlint/config-conventional @commitlint/cli
+echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
+
+yarn add -D husky
+yarn husky install
+yarn husky add .husky/commit-msg 'yarn commitlint --edit "$1"'
+```
+
+[Husky](https://github.com/typicode/husky):
+
+```bash
+npx husky-init
+npx husky add .husky/pre-commit "lint-staged"
+npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
+```
+
+```json
+{
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"],
+    "*.{md,mdx}": ["prettier --write"]
+  }
+}
+```
+
+## Library
+
+- Commit [linter](https://github.com/conventional-changelog/commitlint).
+- Commitizen conventional [changelog](https://github.com/commitizen/cz-conventional-changelog).
+- [Version](https://github.com/absolute-version/commit-and-tag-version):
+  Automate versioning and CHANGELOG generation.

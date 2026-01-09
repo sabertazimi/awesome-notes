@@ -1,11 +1,11 @@
 ---
-sidebar_position: 42
+sidebar_position: 58
 tags: [Web, JavaScript, ECMAScript, Device]
 ---
 
-# Web Devices
+# Device
 
-## Web Gamepad
+## Gamepad
 
 [Gamepad API](https://web.dev/gamepad):
 
@@ -31,7 +31,7 @@ window.addEventListener('gamepaddisconnected', (e) => {
 })
 ```
 
-## Web Bluetooth
+## Bluetooth
 
 [Bluetooth API](https://web.dev/bluetooth):
 
@@ -56,7 +56,7 @@ navigator.bluetooth
   })
 ```
 
-## Web USB
+## USB
 
 [USB API](https://web.dev/usb):
 
@@ -90,7 +90,7 @@ navigator.usb
   })
 ```
 
-## Web NFC
+## NFC
 
 [NFC API](https://web.dev/nfc):
 
@@ -116,7 +116,7 @@ const ndef = new NDEFReader()
 await ndef.write({ records: [jsonRecord, imageRecord] })
 ```
 
-## Web Serial
+## Serial
 
 [Serial API](https://web.dev/serial):
 
@@ -156,7 +156,7 @@ const writer = textEncoder.writable.getWriter()
 await writer.write('hello')
 ```
 
-## Web HID
+## HID
 
 [Human interface devices API](https://web.dev/hid):
 

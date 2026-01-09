@@ -1,13 +1,11 @@
 ---
 sidebar_position: 8
-tags: [Web, TypeScript]
+tags: [Web, TypeScript, Signature]
 ---
 
-# Type Signature
+# Signature
 
 ## Call Signature
-
-### Call Signature Type
 
 Call signature looks similar to a function type,
 but with a `:` colon instead of an `=>` arrow:
@@ -25,8 +23,6 @@ const typedFunctionAlias: FunctionAlias = input => input.length // Ok
 // Type: (input: string) => number
 const typedCallSignature: CallSignature = input => input.length // Ok
 ```
-
-### Call Signature Property
 
 Call signatures can be used to describe functions
 that have some **additional user-defined property** on them:
@@ -96,7 +92,7 @@ function getProperty<T, K extends keyof T>(o: T, propertyName: K): T[K] {
 }
 ```
 
-### Index Signature Type Check
+### Type Check
 
 ```ts
 const x: { foo: number, [x: string]: any }
@@ -131,7 +127,7 @@ interface FieldState {
 type FormState = { isValid: boolean } & Record<string, FieldState>
 ```
 
-### Select Index Types
+### Select
 
 ```ts
 type Index = 'a' | 'b' | 'c'
@@ -149,7 +145,7 @@ const bad: FromIndex = { b: 1, c: 2, d: 3 }
 type FromSomeIndex<K extends string> = { [key in K]: number }
 ```
 
-### Symbol Index Types
+### Symbol
 
 Since [typescript v4.4.0](https://github.com/microsoft/TypeScript/pull/44512):
 
@@ -180,7 +176,7 @@ const redVal = colors[red] // 'redVal' has the type 'number'
 colors[blue] = 'da ba dee' // Error: Type 'string' is not assignable to type 'number'.
 ```
 
-### Template Literal Index Types
+### Template Literal
 
 Since [typescript v4.4.0](https://github.com/microsoft/TypeScript/pull/44512):
 

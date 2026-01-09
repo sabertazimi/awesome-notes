@@ -1,9 +1,9 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 tags: [Web, DevOps, Authentication]
 ---
 
-# Web Authentication
+# Authentication
 
 ## Cookie
 
@@ -22,7 +22,7 @@ tags: [Web, DevOps, Authentication]
 
 :::
 
-## HTTP Basic Authentication
+## HTTP
 
 HTTP basic authentication is 401 authentication:
 
@@ -57,8 +57,6 @@ Authorization: Basic d2FuZzp3YW5n==
 
 ## Session Cookie
 
-### Session Cookie Basis
-
 HTTP 协议是一个无状态的协议,
 服务器不会知道到底是哪一台浏览器访问了它,
 因此需要一个标识用来让服务器区分不同的浏览器.
@@ -91,14 +89,14 @@ Set-Cookie: weight=100; domain=me.github.com
 
 [![Session Cookie](./figures/session-cookie.jpg)](https://developer.mozilla.org/docs/Web/HTTP/Cookies#define_the_lifetime_of_a_cookie)
 
-### Session Cookie Cons
+:::caution[Cons]
 
 - 认证方式局限于在浏览器 (Cookie).
 - 非 HTTPS 协议下使用 Cookie, 容易受到 CSRF 跨站点请求伪造攻击.
 - Session ID 不包含具体用户信息, 需要 Key-Value Store (e.g. **Redis**) 持久化,
   在分布式环境下需要在每个服务器上都备份, 占用了大量的存储空间.
 
-### Session Cookie Usage
+:::
 
 Session authentication with Lucia in [Next.js](https://www.robinwieruch.de/next-authentication):
 
@@ -385,9 +383,7 @@ export default function RootLayout() {
 }
 ```
 
-## Token Authentication
-
-### Token Authentication Basis
+## Token
 
 - 客户端发送登录信息 (ID, Password).
 - 服务端收到请求验证成功后, 服务端会签发一个 Token (包含用户信息) 并发送给客户端.
@@ -395,7 +391,7 @@ export default function RootLayout() {
   客户端每次向服务端请求都需在 Request Header 中设置: `Authorization: <Token>`.
 - 服务端收到请求并验证 Token, 成功发送资源 (鉴权成功), 不成功发送 401 错误代码 (鉴权失败).
 
-### Token Authentication Pros
+:::tip[Pros]
 
 - 多端兼容性: Token 认证不局限于浏览器 (Cookie).
 - 安全性: 不使用 Cookie 可以规避 CSRF 攻击.
@@ -404,7 +400,9 @@ export default function RootLayout() {
   服务器端变成无状态, 服务器端只需要根据定义的规则校验 Token 合法性.
   上述两点使得 Token Authentication 具有更好的扩展性.
 
-### Token Authentication Cons
+:::
+
+:::caution[Cons]
 
 - Token 认证 (加密解密过程) 比 Session Cookie 更消耗性能.
 - Token (包含用户信息) 比 Session ID 大, 更占带宽.
@@ -413,14 +411,14 @@ export default function RootLayout() {
   - Token 应使用 HTTPS 协议.
   - 对于重要权限, 需使用二次验证 (Two Factor Authentication).
 
+:::
+
 ## JSON Web Token
 
 JSON Web Tokens is small, object-friendly
 (compared to SAML, Security Assertion Markup Language Tokens)
 and security for public/private key pair
-(compared to SWT, Simple Web Tokens).
-
-### JSON Web Token Basis
+(compared to SWT, Simple Web Tokens):
 
 - 基于 Token 的解决方案中最常用的是 JWT.
 - 服务器认证用户密码以后, 生成一个 JSON 对象并签名加密后作为 Token 返回给用户.
@@ -439,7 +437,7 @@ and security for public/private key pair
 
 [![JSON Web Token](./figures/json-web-token.jpg)](https://jwt.io/introduction)
 
-### JSON Web TOken Pros
+:::tip[Pros]
 
 - JWT 默认是不加密.
 - JWT 不加密的情况下, 不能将秘密数据写入 JWT.
@@ -447,14 +445,18 @@ and security for public/private key pair
 - JWT 不仅可用于认证, 也可用于交换信息.
   有效使用 JWT, 可以降低服务器查询数据库的次数.
 
-### JSON Web Token Cons
+:::
+
+:::caution[Cons]
 
 - 不保存 Session 状态, 无法中止或更改 Token 权限, Token 到期前会始终有效, 存在盗用风险:
   - JWT 有效期应短.
   - JWT 应使用 HTTPS 协议.
   - 对于重要权限, 需使用二次验证 (Two Factor Authentication).
 
-### JWT Client
+:::
+
+### Client
 
 - HTTP request with credential data (email/password) for first request,
   get token data or error code from first response.
@@ -464,7 +466,7 @@ and security for public/private key pair
 - Store token in `Redux`/`Vuex` global state.
 - Store token in `localStorage`/`sessionStorage`.
 
-## OAuth Authentication
+## OAuth
 
 OAuth (Open Authorization) 是一个开放标准, 作用于第三方授权和第三方访问.
 用户数据的所有者告诉系统, 同意授权第三方应用进入系统, 获取这些数据.
@@ -478,8 +480,6 @@ OAuth Token 特征:
 1. 授权短 (Short Expire Time).
 2. 可撤销 (Revoke).
 3. 权限小 (Scope).
-
-### OAuth Authentication Basis
 
 - 在 GitHub Developer Settings 中备案第三方应用,
   拿到属于它的客户端 ID 和客户端密钥
@@ -498,7 +498,7 @@ OAuth Token 特征:
   可以构建第三方网站自己的 Token, 做进一步相关鉴权操作 (如 Session Cookie).
   (3rd-Party Server vs Resource Server)
 
-### OAuth 2.0
+### 2.0
 
 OAuth 2.0 允许自动更新令牌.
 资源所有者颁发令牌时一次性颁发两个令牌,
@@ -513,10 +513,6 @@ https://github.com/login/oauth/access_token
 &grant_type=refresh_token
 &refresh_token=REFRESH_TOKEN
 ```
-
-### OAuth Usage
-
-- Modern guide to [OAuth](https://fusionauth.io/learn/expert-advice/oauth/modern-guide-to-oauth).
 
 ## Single Sign On
 
@@ -547,3 +543,7 @@ https://github.com/login/oauth/access_token
 - 局部会话存在, 全局会话一定存在.
 - 全局会话存在, 局部会话不一定存在.
 - 全局会话销毁, 局部会话必须销毁.
+
+## References
+
+- Modern guide to [OAuth](https://fusionauth.io/learn/expert-advice/oauth/modern-guide-to-oauth).

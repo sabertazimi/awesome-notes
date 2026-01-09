@@ -5,7 +5,7 @@ tags: [Web, Node.js, Debugging]
 
 # Debugging
 
-## Inspector CLI
+## Inspector
 
 [Enable inspector](https://nodejs.org/en/docs/guides/debugging-getting-started);
 
@@ -20,7 +20,7 @@ node --inspect-brk server.js # Start debugging and break.
 NODE_DEBUG=fs,net,stream yarn test
 ```
 
-## Node.js Web Crawler
+## Crawler
 
 [Simple example](https://www.zenrows.com/blog/web-scraping-with-javascript-and-nodejs):
 

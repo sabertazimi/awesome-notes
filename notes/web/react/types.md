@@ -5,10 +5,7 @@ tags: [Web, React, TypeScript]
 
 # Types
 
-- [React TypeScript CheatSheet](https://github.com/typescript-cheatsheets/react)
-- [@types/react API](https://github.com/typescript-cheatsheets/react/blob/main/docs/advanced/types-react-ap.md)
-
-## Props Types
+## Props
 
 ```ts
 export declare interface AppProps {
@@ -19,51 +16,44 @@ export declare interface AppProps {
 }
 ```
 
-## React Refs Types
+`ComponentProps`:
+
+- `React.ComponentProps`
+- `React.ComponentPropsWithRef`
+- `React.ComponentPropsWithoutRef`
 
 ```tsx
-class CssThemeProvider extends React.PureComponent<Props> {
-  private rootRef: React.RefObject<HTMLDivElement> = React.createRef()
+import { Button } from 'library'
 
-  render() {
-    return <div ref={this.rootRef}>{this.props.children}</div>
-  }
-}
-```
+type ButtonProps = React.ComponentProps<typeof Button>
+type AlertButtonProps = Omit<ButtonProps, 'onClick'>
 
-## Function Component Types
-
-Don't use `React.FC`/`React.FunctionComponent`:
-
-- React 17:
-  Unnecessary addition of `children` (hide some run-time error).
-- React 18:
-  `@types/react` v18 [remove implicit `children` in `React.FunctionComponent`](https://github.com/ant-design/ant-design/pull/34937).
-- `React.FC` doesn't support generic components.
-- Barrier for `<Comp>` with `<Comp.Sub>` types (**component as namespace pattern**).
-- `React.FC` doesn't work correctly with `defaultProps`.
-
-```tsx
-// Declaring type of props
-interface Props {
-  message: string
-}
-
-// Inferred return type
-const Message = ({ message }: Props) => <div>{message}</div>
-
-// Explicit return type annotation
-const Message = ({ message }: Props): JSX.Element => <div>{message}</div>
-
-// Inline types annotation
-const Message = ({ message }: { message: string }) => <div>{message}</div>
+const AlertButton: React.FC<AlertButtonProps> = props => (
+  <Button onClick={() => alert('hello')} {...props} />
+)
 
 export default function App() {
-  return <Message message="message" />
+  return <AlertButton />
 }
 ```
 
-## Class Component Types
+Typing existing untyped React components:
+
+```ts
+declare module 'react-router-dom' {
+  import * as React from 'react'
+
+  interface NavigateProps<T> {
+    to: string | number
+    replace?: boolean
+    state?: T
+  }
+
+  export class Navigate<T = any> extends React.Component<NavigateProps<T>> {}
+}
+```
+
+## Class
 
 - `React.Component<P, S>`
 - `readonly state: State`
@@ -111,7 +101,7 @@ class ButtonCounter extends React.Component<Props, State> {
 }
 ```
 
-## Generic Component Types
+## Generics
 
 ```tsx
 // 一个泛型组件
@@ -136,44 +126,37 @@ use `extends {}` to avoid it:
 const foo = <T extends object>(arg: T) => arg
 ```
 
-## Component Props Type
+## Function
 
-- `React.ComponentProps`
-- `React.ComponentPropsWithRef`
-- `React.ComponentPropsWithoutRef`
+Don't use `React.FC`/`React.FunctionComponent`:
+
+- React 17:
+  Unnecessary addition of `children` (hide some run-time error).
+- React 18:
+  `@types/react` v18 [remove implicit `children` in `React.FunctionComponent`](https://github.com/ant-design/ant-design/pull/34937).
+- `React.FC` doesn't support generic components.
+- Barrier for `<Comp>` with `<Comp.Sub>` types (**component as namespace pattern**).
+- `React.FC` doesn't work correctly with `defaultProps`.
 
 ```tsx
-import { Button } from 'library'
+// Declaring type of props
+interface Props {
+  message: string
+}
 
-type ButtonProps = React.ComponentProps<typeof Button>
-type AlertButtonProps = Omit<ButtonProps, 'onClick'>
+// Inferred return type
+const Message = ({ message }: Props) => <div>{message}</div>
 
-const AlertButton: React.FC<AlertButtonProps> = props => (
-  <Button onClick={() => alert('hello')} {...props} />
-)
+// Explicit return type annotation
+const Message = ({ message }: Props): JSX.Element => <div>{message}</div>
+
+// Inline types annotation
+const Message = ({ message }: { message: string }) => <div>{message}</div>
 
 export default function App() {
-  return <AlertButton />
+  return <Message message="message" />
 }
 ```
-
-Typing existing untyped React components:
-
-```ts
-declare module 'react-router-dom' {
-  import * as React from 'react'
-
-  interface NavigateProps<T> {
-    to: string | number
-    replace?: boolean
-    state?: T
-  }
-
-  export class Navigate<T = any> extends React.Component<NavigateProps<T>> {}
-}
-```
-
-## Component Return Type
 
 - `JSX.Element`: return value of `React.createElement`.
 - `React.ReactNode`: return value of a component.
@@ -186,7 +169,19 @@ function foo(bar: string) {
 type FooReturn = ReturnType<typeof foo> // { baz: number }
 ```
 
-## React Event Types
+## DOM
+
+HTML and CSS:
+
+- `React.DOMAttributes<HTMLElement>`
+- `React.AriaAttributes<HTMLElement>`
+- `React.SVGAttributes<HTMLElement>`
+- `React.HTMLAttributes<HTMLElement>`
+- `React.ButtonHTMLAttributes<HTMLButtonElement>`
+- `React.HTMLProps<HTMLElement>`
+- `React.CSSProperties`
+
+## Event
 
 - `React.SyntheticEvent`.
 - `React.AnimationEvent`:
@@ -228,12 +223,48 @@ type FooReturn = ReturnType<typeof foo> // { baz: number }
   `InputEvent` is still an experimental interface
   and not fully supported by all browsers.
   Use `SyntheticEvent` instead.
-
-### React Event Handler Types
-
 - `React.ChangeEventHandler<HTMLElement>`.
 
-### React Form Event Types
+```ts
+import type { RefObject } from 'react'
+import { useEffect, useRef } from 'react'
+
+function useEventListener<T extends HTMLElement = HTMLDivElement>(
+  eventName: keyof WindowEventMap,
+  handler: (event: Event) => void,
+  element?: RefObject<T>,
+) {
+  // Create a ref that stores handler
+  const savedHandler = useRef<(event: Event) => void>()
+
+  useEffect(() => {
+    // Define the listening target
+    const targetElement: T | Window = element?.current || window
+    if (!(targetElement && targetElement.addEventListener))
+      return
+
+    // Update saved handler if necessary
+    if (savedHandler.current !== handler)
+      savedHandler.current = handler
+
+    // Create event listener that calls handler function stored in ref
+    const eventListener = (event: Event) => {
+      savedHandler?.current(event)
+    }
+
+    targetElement.addEventListener(eventName, eventListener)
+
+    // Remove event listener on cleanup
+    return () => {
+      targetElement.removeEventListener(eventName, eventListener)
+    }
+  }, [eventName, element, handler])
+}
+
+export default useEventListener
+```
+
+## Form
 
 ```tsx
 interface State {
@@ -302,17 +333,7 @@ export default function Form() {
 }
 ```
 
-## React HTML and CSS Types
-
-- `React.DOMAttributes<HTMLElement>`
-- `React.AriaAttributes<HTMLElement>`
-- `React.SVGAttributes<HTMLElement>`
-- `React.HTMLAttributes<HTMLElement>`
-- `React.ButtonHTMLAttributes<HTMLButtonElement>`
-- `React.HTMLProps<HTMLElement>`
-- `React.CSSProperties`
-
-### React Input Types
+## Input
 
 ```ts
 type StringChangeHandler = (newValue: string) => void
@@ -348,7 +369,7 @@ type Input
     | CheckboxInputDefinition
 ```
 
-## React Portal Types
+## Portal
 
 ```tsx
 const modalRoot = document.getElementById('modal-root') as HTMLElement
@@ -420,7 +441,7 @@ export default function App() {
 }
 ```
 
-## React Redux Types
+## Redux
 
 ```ts
 const initialState = {
@@ -488,7 +509,7 @@ function reducer(state: State, action: Action): Reducer<State, Action> {
 }
 ```
 
-## React Hook Types
+## Hooks
 
 - `useState<T>`
 - `Dispatch<T>`
@@ -497,7 +518,48 @@ function reducer(state: State, action: Action): Reducer<State, Action> {
 - `MutableRefObject<T>`
 - More [TypeScript Hooks](https://github.com/juliencrn/useHooks.ts).
 
-### UseState Hook Type
+Use `as const` type assertion to avoid type inference
+(especially for `[first, second]` type).
+
+```ts
+export function useLoading() {
+  const [isLoading, setState] = React.useState(false)
+  const load = () => {
+    setState(true)
+  }
+
+  // return `[boolean, () => void]` as want
+  // instead of `(boolean | () => void)[]`
+  return [isLoading, load] as const
+}
+```
+
+```ts
+import type { Dispatch, SetStateAction } from 'react'
+import { useState } from 'react'
+
+interface ReturnType {
+  value: boolean
+  setValue: Dispatch<SetStateAction<boolean>>
+  setTrue: () => void
+  setFalse: () => void
+  toggle: () => void
+}
+
+function useBoolean(defaultValue?: boolean): ReturnType {
+  const [value, setValue] = useState(!!defaultValue)
+
+  const setTrue = () => setValue(true)
+  const setFalse = () => setValue(false)
+  const toggle = () => setValue(x => !x)
+
+  return { value, setValue, setTrue, setFalse, toggle }
+}
+
+export default useBoolean
+```
+
+## State
 
 ```tsx
 export default function App() {
@@ -508,7 +570,7 @@ export default function App() {
 }
 ```
 
-### UseReducer Hook Type
+## Reducer
 
 - Use [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html#discriminated-unions)
   for reducer actions.
@@ -557,9 +619,9 @@ export default function Counter() {
 }
 ```
 
-### UseRef Hook Type
+## Ref
 
-#### DOM Element Ref Type
+### DOM Element
 
 - If possible, prefer as specific as possible.
 - Return type is `RefObject<T>`.
@@ -579,7 +641,7 @@ export default function Foo() {
 }
 ```
 
-#### Mutable Value Ref
+### Mutable Value
 
 - Return type is `MutableRefObject<T>`.
 
@@ -602,87 +664,7 @@ export default function Foo() {
 }
 ```
 
-### Custom Hooks Types
-
-Use `as const` type assertion to avoid type inference
-(especially for `[first, second]` type).
-
-```ts
-export function useLoading() {
-  const [isLoading, setState] = React.useState(false)
-  const load = () => {
-    setState(true)
-  }
-
-  // return `[boolean, () => void]` as want
-  // instead of `(boolean | () => void)[]`
-  return [isLoading, load] as const
-}
-```
-
-```ts
-import type { Dispatch, SetStateAction } from 'react'
-import { useState } from 'react'
-
-interface ReturnType {
-  value: boolean
-  setValue: Dispatch<SetStateAction<boolean>>
-  setTrue: () => void
-  setFalse: () => void
-  toggle: () => void
-}
-
-function useBoolean(defaultValue?: boolean): ReturnType {
-  const [value, setValue] = useState(!!defaultValue)
-
-  const setTrue = () => setValue(true)
-  const setFalse = () => setValue(false)
-  const toggle = () => setValue(x => !x)
-
-  return { value, setValue, setTrue, setFalse, toggle }
-}
-
-export default useBoolean
-```
-
-```ts
-import type { RefObject } from 'react'
-import { useEffect, useRef } from 'react'
-
-function useEventListener<T extends HTMLElement = HTMLDivElement>(
-  eventName: keyof WindowEventMap,
-  handler: (event: Event) => void,
-  element?: RefObject<T>,
-) {
-  // Create a ref that stores handler
-  const savedHandler = useRef<(event: Event) => void>()
-
-  useEffect(() => {
-    // Define the listening target
-    const targetElement: T | Window = element?.current || window
-    if (!(targetElement && targetElement.addEventListener))
-      return
-
-    // Update saved handler if necessary
-    if (savedHandler.current !== handler)
-      savedHandler.current = handler
-
-    // Create event listener that calls handler function stored in ref
-    const eventListener = (event: Event) => {
-      savedHandler?.current(event)
-    }
-
-    targetElement.addEventListener(eventName, eventListener)
-
-    // Remove event listener on cleanup
-    return () => {
-      targetElement.removeEventListener(eventName, eventListener)
-    }
-  }, [eventName, element, handler])
-}
-
-export default useEventListener
-```
+## Fetch
 
 ```ts
 import type { AxiosRequestConfig } from 'axios'
@@ -773,3 +755,7 @@ function useFetch<T = unknown>(
 
 export default useFetch
 ```
+
+## References
+
+- React TypeScript [cheat sheets](https://github.com/typescript-cheatsheets/react).

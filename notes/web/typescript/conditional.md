@@ -1,9 +1,9 @@
 ---
 sidebar_position: 12
-tags: [Web, TypeScript]
+tags: [Web, TypeScript, Conditional, Gymnastics]
 ---
 
-# Conditional Types
+# Conditional
 
 - Basic conditional types
   just like `if else` statement.
@@ -13,8 +13,6 @@ tags: [Web, TypeScript]
   just like `map` statement (`loop` statement) on `union` type.
 - Conditional types make `TypeScript` become real programming type system:
   `TypeScript` type system is [Turing Complete](https://github.com/microsoft/TypeScript/issues/14833).
-
-## Basic Conditional Types
 
 ```ts
 interface Animal {
@@ -31,7 +29,7 @@ type Example2 = RegExp extends Animal ? number : string
 // => type Example2 = string
 ```
 
-## Nested Conditional Types
+## Nested
 
 - Conditional types can be nested.
 - 通过嵌套条件类型, 可以将类型约束收拢到精确范围.
@@ -50,7 +48,7 @@ type TypeName<T> = T extends string
           : 'object'
 ```
 
-## Index Conditional Types
+## Index
 
 Conditional types are able to access members of provided types:
 
@@ -77,7 +75,7 @@ await retrieve('2', { throwIfNotFound: Math.random() > 0.5 })
 await retrieve('3', { throwIfNotFound: true })
 ```
 
-## Mapped Conditional Types
+## Mapped
 
 ```ts
 type MakeAllMembersFunctions<T> = {
@@ -95,7 +93,7 @@ type MemberFunctions = MakeAllMembersFunctions<{
 // }
 ```
 
-## Distributive Conditional Types
+## Distributive
 
 Type distributivity:
 

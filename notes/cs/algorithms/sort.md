@@ -1,32 +1,30 @@
 ---
 sidebar_position: 3
-tags: [CS, Algorithm, Sorting]
+tags: [CS, Algorithm, Sort]
 ---
 
-# Sorting
+# Sort
 
 ![Sorting Algorithms](./figures/sorting/sorting-algorithms.png 'Sorting Algorithms')
 
-## Summary
+强制稳定: 增加(唯一)时间戳, 修改 CompareTo 接口定义 => 当主元素相同时, 时间戳小的元素更小.
 
-- 强制稳定: 增加(唯一)时间戳, 修改 CompareTo 接口定义 => 当主元素相同时, 时间戳小的元素更小
-
-## Selection Sort
+## Selection
 
 - swap: O(n)
 - compare: O(n^2)
 
-## Insertion Sort
+## Insertion
 
 - swap: O(n^2/4)
 - compare: O(n^2/4)
 
-## Shell Sort
+## Shell
 
 - swap: O(n^2/4)
 - compare: O(n^2/4)
 
-## Merge Sort
+## Merge
 
 - 利用 Merge Sort 计算逆序对个数: left[i] > right[j] => inversions += (mid - i + 1),
   即所有 i~mid 元素都与 j 元素为逆序对
@@ -104,7 +102,7 @@ tags: [CS, Algorithm, Sorting]
     }
 ```
 
-## Quick Sort
+## Quick
 
 - partition: 哨兵(最后再将其归位) + 大循环 + 2 小循环, 交换元素法
 - partition: 辅助数组 brr, 3 循环(3 次扫描 arr) 分别将小/等/大于 guard 的数加入 brr
@@ -129,7 +127,7 @@ void quick3waySort(int *a, int lo, int hi) {
 }
 ```
 
-## Heap Sort
+## Heap
 
 - Built on Priority Queue
 - swap: 2NlgN + 2N (2NlgN for sink N times, 2N for construct MaxHeap)
@@ -155,7 +153,7 @@ void sink(int k) {
 }
 ```
 
-## Radix Sort
+## Radix
 
 基数排序 (可用于混乱 shuffle 数组):
 

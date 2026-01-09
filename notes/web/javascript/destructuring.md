@@ -3,7 +3,7 @@ sidebar_position: 11
 tags: [Web, JavaScript, ECMAScript]
 ---
 
-# Destructuring Pattern Matching
+# Destructuring
 
 - **建议只要有可能, 就不要在模式中放置圆括号**.
 - 赋值语句的非模式部分, 可以使用圆括号.
@@ -12,7 +12,7 @@ tags: [Web, JavaScript, ECMAScript]
 - Destructure as early as possible.
 - Remember to include default values, especially in nested destructuring.
 
-## Destructuring Default Value
+## Default Value
 
 - ES6 内部使用严格相等运算符 (===), 判断一个位置是否有值. 若此位置无值, 则使用默认值.
 - 如果一个数组成员不严格等于 undefined, 默认值不会生效.
@@ -32,7 +32,7 @@ let [x = 1, y = x] = [1, 2] // x=1; y=2
 let [x = y, y = 1] = [] // ReferenceError
 ```
 
-## Object Destructuring
+## Object
 
 - 解构赋值的规则: 只要等号右边的值不是对象, 就先将其**转为对象**.
 - `undefined`/`null` 无法转化为对象:
@@ -74,7 +74,7 @@ const arr = []
 console.log(arr) // [true]
 ```
 
-### JSON Object Destructuring
+### JSON
 
 ```ts
 const jsonData = {
@@ -89,13 +89,13 @@ console.log(id, status, number)
 // 42, "OK", [867, 5309]
 ```
 
-### Import Destructuring
+### Import
 
 ```ts
 const { SourceMapConsumer, SourceNode } = require('source-map')
 ```
 
-### Number and Boolean Destructuring
+### Number and Boolean
 
 `number`/`boolean` 会自动构造原始值包装对象:
 
@@ -107,7 +107,7 @@ let { toString: s } = true
 const truthy = s === Boolean.prototype.toString // true
 ```
 
-## Iterator Destructuring
+## Iterator
 
 等号右边必须为数组等实现了 Iterator 接口的对象, 否则报错:
 
@@ -160,7 +160,7 @@ let y = 2
 ;[x, y] = [y, x]
 ```
 
-### Map and List Destructuring
+### Map and List
 
 - `for index in Iterable<T>`: key.
 - `for [key, value] of Iterable<T>`: entry.
@@ -187,7 +187,7 @@ for (const [, value] of map) {
 }
 ```
 
-### String Destructuring
+### String
 
 ```ts
 const [a, b, c, d, e] = 'hello'
@@ -201,7 +201,7 @@ const { length: len } = 'hello'
 console.log(len) // 5
 ```
 
-## Function Parameters Destructuring
+## Parameters
 
 - 可用于工厂 (`factory`) / 设置 (`options`) 模式传参一般为 `options` 对象,
 - 具有固定的属性名.
@@ -234,7 +234,7 @@ jQuery.ajax = function (
 }
 ```
 
-## Function Return Value Destructuring
+## Return Value
 
 返回多个值:
 

@@ -5,7 +5,7 @@ tags: [Language, Rust, Error]
 
 # Error
 
-## Result Type
+## Result
 
 ```rust
 use std::fs::File;
@@ -27,7 +27,7 @@ fn main() {
 }
 ```
 
-## Result Type Compositor
+## Compositor
 
 - `or`: logic or.
 - `and`: logic and.
@@ -41,7 +41,7 @@ fn main() {
 - `ok_or`: `Option` -> `Result` with error message.
 - `ok_or_else`: `Option` -> `Result` with error message function.
 
-## Error Handling Macro
+## Macro
 
 `?` for `Result` type:
 
@@ -70,9 +70,9 @@ fn last_char_of_first_line(text: &str) -> Option<char> {
 }
 ```
 
-## Error Trait
+## Trait
 
-### Standard Error Trait
+Standard error trait:
 
 ```rust
 use std::fmt::{Debug, Display};
@@ -99,7 +99,7 @@ fn render() -> Result<String, Box<dyn Error>> {
 }
 ```
 
-### Custom Error Type
+Custom error type:
 
 ```rust
 use std::error;
@@ -142,7 +142,7 @@ fn main(){
 }
 ```
 
-### Convert From Standard Error
+## Conversion
 
 ```rust
 use std::fs::File;

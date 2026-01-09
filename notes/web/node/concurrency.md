@@ -1,6 +1,6 @@
 ---
 sidebar_position: 7
-tags: [Web, Node.js, Concurrency]
+tags: [Web, Node.js, Concurrency, Asynchronous, Thread, Worker]
 ---
 
 # Concurrency

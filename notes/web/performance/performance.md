@@ -4,19 +4,23 @@ tags: [Web, Performance]
 
 # Performance
 
-## Code Performance
+## Code
 
-- [DOM](./dom.md) - DOM Performance, Event Delegation, Layout/Paint
-- [JavaScript](./javascript.md) - Effective JavaScript, Memory Leak, Function/Loop/Math Performance
-- [CSS](./css.md) - CSS Performance, Layout/Paint
+- [DOM](./dom.md) - DOM manipulation optimization, reflow/repaint, requestAnimationFrame, CSSOM
+- [JavaScript](./javascript.md) - Memory leaks, function, async scheduling, event delegation
+- [CSS](./css.md) - Properties, selector optimization, CSS triggers, loading and animation
 
-## Loading Performance
+## Loading
 
-- [Cache](./cache.md) - Browser Caches, HTTP Cache, Code Cache, BFCache
-- [Image](./image.md) - Images Performance, Responsive, Lazy Loading
-- [Loading](./loading.md) - Web Loading Performance, Preloading, Prefetching
+- [Cache](./cache.md) - HTTP cache hierarchy, Cache-Control directives, code cache lifecycle, BFCache
+- [Image](./image.md) - Responsive images, loading strategies, WebP/AVIF formats, optimization tools
+- [Loading](./loading.md) - Render blocking resources, preloading/prefetching, lazy loading, loading priorities
 
 ## Monitoring
 
-- [Monitoring](./monitoring.md) - Performance Monitoring, RUM, Synthetic
-- [Vitals](./vitals.md) - Web Vitals, FP, FCP, LCP, INP, CLS, PRPL Pattern
+- [Monitoring](./monitoring.md) - Synthetic vs RUM, APIs, timing metrics, reporting strategies
+- [Vitals](./vitals.md) - FP/FCP/LCP/INP/CLS metrics, observers, PRPL pattern
+
+## Best Practices
+
+- [Best Practices](./best-practices.md) - Comprehensive optimization checklist and toolchain

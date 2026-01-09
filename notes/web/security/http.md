@@ -5,15 +5,13 @@ tags: [Web, Security, HTTP, Injection, Vulnerability]
 
 # HTTP Injection
 
-## Malicious Redirect Attack
+## Malicious Redirect
 
 ```json
 {
   "query": "?redirect=google.com%3BEcho%20%22Hacked%22"
 }
 ```
-
-## Malicious Redirect Protection
 
 - 检查第三方网站 `URL`, 显示第三方地址跳转警告页面:
   - Remove sensitive data in URL query and `Referer` header.
@@ -29,13 +27,11 @@ function isRelative(url) {
 }
 ```
 
-## HTTP Header Injection Attack
+## Header Injection
 
 通过截断 HTTP 响应头 (换行符/空字符),
 覆盖 `Location`/`Referer` 响应头,
-注入攻击者设置的 HTTP 响应头.
-
-## HTTP Header Injection Protection
+注入攻击者设置的 HTTP 响应头:
 
 - 不将外部输入作为 HTTP 响应头.
 - 检验 HTTP 响应头特殊字符: e.g. 换行符.

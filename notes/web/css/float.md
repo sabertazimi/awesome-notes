@@ -1,11 +1,11 @@
 ---
-sidebar_position: 9
-tags: [Web, CSS, Layout]
+sidebar_position: 13
+tags: [Web, CSS, Layout, Float]
 ---
 
 # Float
 
-## Float Element
+## Element
 
 - 包裹性:
   - 宽度受子元素影响.
@@ -30,7 +30,7 @@ BFC 会收缩以容纳浮动盒子,
 
 [![Float Element](./figures/float-element.png)](https://developer.mozilla.org/docs/Web/CSS/CSS_Flow_Layout/Intro_to_formatting_contexts)
 
-## Float Block Formatting Context
+## Block Formatting Context
 
 `float` make element specified value of `display`:
 
@@ -52,7 +52,7 @@ Floating won't work inside `fixed` or `absolute` `div` unless specify width:
 }
 ```
 
-## Float Clear Fix
+## Clear Fix
 
 为父容器 (`.row`) 添加 `.clearfix`:
 

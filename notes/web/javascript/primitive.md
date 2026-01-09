@@ -21,7 +21,7 @@ JavaScript = ECMAScript + DOM + BOM:
 - BOM: Browser Object Model API (HTML5)
   (`window`/`navigator`/`location`/`screen`/`performance` etc).
 
-## Primitive Values
+## Types
 
 Primitive data types:
 
@@ -51,7 +51,7 @@ Primitive data types:
 
 ## Boolean
 
-### Zero Value Expression
+### Zero Value
 
 零值表达式:
 
@@ -63,7 +63,7 @@ Primitive data types:
 - `0n`.
 - `''`.
 
-### Boolean Conversion
+### Conversion
 
 | `x`         | `Boolean(x)`                   |
 | ----------- | ------------------------------ |

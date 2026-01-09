@@ -1,6 +1,6 @@
 ---
 sidebar_position: 32
-tags: [Web, React, Fiber]
+tags: [Web, React, Internals, Fiber]
 ---
 
 # Fiber
@@ -14,7 +14,7 @@ tags: [Web, React, Fiber]
 - Ability to prioritize updates.
 - Ability to work on multiple tasks concurrently.
 
-## Fiber Type
+## Type
 
 `Fiber` [definition](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactInternalTypes.js):
 
@@ -71,7 +71,7 @@ export interface Fiber {
 }
 ```
 
-## Fiber Work Tag
+## Work Tag
 
 常见的 Fiber [类型](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactWorkTags.js):
 
@@ -108,7 +108,7 @@ type WorkTag
     | 'LegacyHiddenComponent'
 ```
 
-## Fiber Mode
+## Mode
 
 React [运行模式](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactTypeOfMode.js):
 所有 `Fiber.mode` 保持一致 (包括 `FiberRoot`).
@@ -125,7 +125,7 @@ const StrictEffectsMode = /*              */ 0b010000
 const ConcurrentUpdatesByDefaultMode = /* */ 0b100000
 ```
 
-## Fiber Effects
+## Effects
 
 - Insert DOM elements: `Placement` tag.
 - Update DOM elements: `Update` tag.
@@ -176,7 +176,7 @@ const MountLayoutDev = /*               */ 0b010000000000000000
 const MountPassiveDev = /*              */ 0b100000000000000000
 ```
 
-## Fiber Lanes
+## Lanes
 
 [Assign `Lane` to `Update`](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.js):
 
@@ -363,7 +363,7 @@ batchOfTasks |= task // Add task.
 const isTaskIncludedInBatch = (task & batchOfTasks) !== 0
 ```
 
-## Fiber Trees
+## Trees
 
 - `current` Fiber tree: rendered to screen.
 - `workInProgress` Fiber tree: under reconciliation.
@@ -382,6 +382,6 @@ const isTaskIncludedInBatch = (task & batchOfTasks) !== 0
 
 [![React Fiber Trees](./figures/react-fiber-trees.png)](https://7kms.github.io/react-illustration-series/main/fibertree-prepare)
 
-## Fiber Work Loop
+## Work Loop
 
 [![React Fiber Work Loop](./figures/react-fiber-work-loop.png)](https://7kms.github.io/react-illustration-series/main/reconciler-workflow)

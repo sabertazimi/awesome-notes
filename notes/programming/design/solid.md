@@ -2,7 +2,7 @@
 tags: [Programming, DevOps, Design Pattern, SOLID]
 ---
 
-# SOLID Principles
+# SOLID
 
 - Single Responsibility Principle: 单一功能原则.
 - Open-closed Principle: 开闭原则.
@@ -10,7 +10,7 @@ tags: [Programming, DevOps, Design Pattern, SOLID]
 - Interface Segregation Principle: 接口隔离原则.
 - Dependency Inversion Principle: 依赖反转原则.
 
-:::tip[SOLID Principles]
+:::tip[SOLID]
 
 - 单一职责是所有设计原则的基础.
 - 开闭原则是设计的终极目标.
@@ -20,7 +20,7 @@ tags: [Programming, DevOps, Design Pattern, SOLID]
 
 :::
 
-## Single Responsibility Principle
+## Single Responsibility
 
 Too much functionality is in one class and you modify a piece of it,
 it can be difficult to understand how that will affect other dependent modules:
@@ -70,7 +70,7 @@ class AnimalDB {
 
 :::
 
-## Open-Closed Principle
+## Open-Closed
 
 Allow users to add new functionalities without changing existing code,
 open for extension, close for modification:
@@ -193,7 +193,7 @@ class SuperVIPDiscount extends VIPDiscount {
 }
 ```
 
-## Liskov Substitution Principle
+## Liskov Substitution
 
 Objects of ParentType can be replaced with objects of SubType without altering.
 Altering shows that SubType should not be subtype of ParentType
@@ -240,7 +240,7 @@ function AnimalLegCount(a: Array<Animal>) {
 AnimalLegCount(animals)
 ```
 
-## Interface Segregation Principle
+## Interface Segregation
 
 - Make **fine grained** interfaces that are client specific.
 - Clients should not be forced to depend upon interfaces that they do not use:
@@ -377,18 +377,22 @@ class Rectangle implements IShape {
 }
 ```
 
-## Dependency Inversion Principle
+## Dependency Inversion
 
 Dependency should be on **abstractions** not concretions:
 
-- High-level modules should not depend upon low-level modules.
-  Both should depend upon **abstractions**
-- Abstractions should not depend on details.
-  Details should depend upon abstractions
-- Pros:
-  - Loosely coupled modules.
-  - Better reusability.
-  - Better testability.
+- High-level modules should not depend upon low-level modules,
+  both should depend upon **abstractions**
+- Abstractions should not depend on details,
+  details should depend upon abstractions
+
+:::tip[Pros]
+
+- Loosely coupled modules
+- Better reusability
+- Better testability
+
+:::
 
 ```ts
 class XMLHttpService extends XMLHttpRequestService {}
@@ -446,7 +450,7 @@ class MockHttpService implements Connection {
 }
 ```
 
-## Least Knowledge Principle
+## Least Knowledge
 
 最少知识原则 (Law of Demeter):
 

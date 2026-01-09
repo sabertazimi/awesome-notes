@@ -5,7 +5,7 @@ sidebar_position: 10
 
 # Directives
 
-## Control Flow Directives
+## Control Flow
 
 ```html
 <template>
@@ -84,7 +84,7 @@ export function genElement(el: ASTElement, state: CodegenState): string {
 
 :::
 
-## Attributes Binding Directives
+## Attributes
 
 ```html
 <template>
@@ -94,7 +94,7 @@ export function genElement(el: ASTElement, state: CodegenState): string {
 </template>
 ```
 
-## Class and Style Binding Directives
+## Class and Style
 
 - Static class.
 - Array binding.
@@ -136,9 +136,9 @@ export function genElement(el: ASTElement, state: CodegenState): string {
 </template>
 ```
 
-## Event Handlers Directives
+## Event
 
-### Event Handlers and Modifiers
+### Handlers and Modifiers
 
 ```html
 <div id="handler">
@@ -224,7 +224,7 @@ Vue.createApp({
 }).mount('#inline-handler')
 ```
 
-### Custom Events
+### Custom
 
 Form events:
 
@@ -308,7 +308,7 @@ Drag and Drop events:
 </script>
 ```
 
-## Model Directives
+## Model
 
 本质为语法糖 (`v-model = v-bind + v-on`):
 
@@ -445,7 +445,7 @@ Custom component `v-model` modifier:
 </template>
 ```
 
-## Custom Directives
+## Customization
 
 Custom [build-in directives](https://github.com/vuejs/core/tree/main/packages/runtime-dom/src/directives):
 

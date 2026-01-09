@@ -1,11 +1,11 @@
 ---
-sidebar_position: 18
+sidebar_position: 28
 tags: [Web, CSS, SVG]
 ---
 
 # SVG
 
-## SVG Size
+## Size
 
 Shape will zoom to fill size of SVG `width` and `height`:
 
@@ -14,7 +14,7 @@ Shape will zoom to fill size of SVG `width` and `height`:
 <svg width="198px" height="188px" viewBox="0 0 99 94"></svg>
 ```
 
-## SVG Fill
+## Fill
 
 ```html
 <svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="...">
@@ -31,7 +31,7 @@ Shape will zoom to fill size of SVG `width` and `height`:
 </style>
 ```
 
-## SVG Stroke
+## Stroke
 
 ```css
 circle {
@@ -76,7 +76,7 @@ circle {
 </style>
 ```
 
-## SVG Marker
+## Marker
 
 [`<marker>`](https://developer.mozilla.org/docs/Web/SVG/Element/marker):
 
@@ -88,7 +88,7 @@ polyline {
 }
 ```
 
-## SVG Shape
+## Shape
 
 - Rectangles and squares: `<rect>`.
 - Circles: `<circle>`.
@@ -98,7 +98,7 @@ polyline {
 - Polygon: `<polygon>`.
 - Path: `<path>`.
 
-## SVG Text
+## Text
 
 The text tag `<text>` is used to create **selectable** and **accessible** text:
 
@@ -120,18 +120,18 @@ text {
 }
 ```
 
-## SVG Title
+## Title
 
 The title `<title>` and description `<desc>` tags
 are specifically for providing accessibility content.
 
-## SVG Group
+## Group
 
 The group tag `<g>` is used to group elements together
 to add class names and apply animations, filters, patterns and effects
 to a group of elements.
 
-## SVG Defs
+## Defs
 
 The defs tag `<defs>` is used to define elements for later reuse.
 This is where you create
@@ -157,7 +157,7 @@ This is also used to create **icon systems**.
 </svg>
 ```
 
-## SVG Path
+## Path
 
 [SVG path text](https://codepen.io/Chokcoco/pen/NEpqMK):
 
@@ -176,7 +176,7 @@ This is also used to create **icon systems**.
 </div>
 ```
 
-## SVG Clip Path
+## Clip Path
 
 <!-- markdownlint-disable line-length -->
 
@@ -198,7 +198,7 @@ This is also used to create **icon systems**.
 }
 ```
 
-## SVG Mask
+## Mask
 
 Avatar with circle status indicator:
 
@@ -215,7 +215,7 @@ Avatar with circle status indicator:
 </svg>
 ```
 
-## SVG Filter
+## Filter
 
 内投影滤镜:
 
@@ -299,9 +299,9 @@ SVG
 </svg>
 ```
 
-## SVG Animation
+## Animation
 
-### SVG CSS Animation
+### CSS
 
 CSS animation on SVG properties:
 
@@ -321,9 +321,9 @@ circle {
 }
 ```
 
-### SVG SMIL Animation
+### SMIL
 
-SVG [SMIL animation](https://css-tricks.com/guide-svg-animations-smil):
+[SMIL animation](https://css-tricks.com/guide-svg-animations-smil):
 
 ```html
 <svg width="360" height="200" xmlns="http://www.w3.org/2000/svg">
@@ -341,7 +341,7 @@ SVG [SMIL animation](https://css-tricks.com/guide-svg-animations-smil):
 </svg>
 ```
 
-## SVG API
+## APIs
 
 ```ts
 const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
@@ -351,6 +351,6 @@ const svgRectElement = document.createElementNS(
 )
 ```
 
-## SVG References
+## References
 
 - SVG filter complete [guide](https://blog.logrocket.com/complete-guide-using-css-filters-svgs).

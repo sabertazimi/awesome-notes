@@ -5,7 +5,7 @@ tags: [Web, Node.js, Deno]
 
 # Modern Node.js
 
-## Node.js App Structure
+## Structure
 
 - Main ./index.js, ./server.js, or ./yourEntryFile.js in the root
 - Supporting files in ./lib/
@@ -20,7 +20,7 @@ tags: [Web, Node.js, Deno]
 - Performance analysis in ./benchmarks/
 - Native C/C++ source in ./source/
 
-## Modern Features
+## Features
 
 Modern [features](https://nodesource.com/blog/nodejs-features-replacing-npm-packages)
 replacing npm packages:
@@ -87,7 +87,7 @@ target.addEventListener('ping', () => console.log('pong'))
 target.dispatchEvent(new Event('ping'))
 ```
 
-## Node.js References
+## References
 
 - Node.js [modern patterns](https://kashw1n.com/blog/nodejs-2025).
 - Node.js official [tutorial](https://nodejs.org/en/learn/getting-started/introduction-to-nodejs).

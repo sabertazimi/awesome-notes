@@ -10,7 +10,7 @@ npx create-react-app app-name --scripts-version @sabertazimi/react-scripts --use
 npm init react-app app-name --scripts-version @sabertazimi/react-scripts --use-npm
 ```
 
-## CRA CLI
+## Workflow
 
 `createReactApp.js`:
 
@@ -25,7 +25,7 @@ npm init react-app app-name --scripts-version @sabertazimi/react-scripts --use-n
 
 ## React Scripts
 
-### React Scripts Initialization
+### Initialization
 
 Initialization in `react-scripts/scripts/init.js`:
 
@@ -58,7 +58,7 @@ module.exports = registries
 - Print available scripts.
 - Done.
 
-### React Scripts Commands
+### Commands
 
 Locating in `react-scripts/scripts/`:
 
@@ -67,7 +67,7 @@ Locating in `react-scripts/scripts/`:
 - `test.js` for `react-scripts test`.
 - `eject.js` for `react-scripts eject`.
 
-#### React Scripts Start
+### Start
 
 When develop `react-scripts` locally
 with `react-scripts start`,
@@ -75,7 +75,7 @@ it will use `templatePath` located in
 `react-scripts/config/paths.js`
 to find local template.
 
-### React Scripts Configuration
+### Configuration
 
 Config in `react-scripts/config/` directory:
 
@@ -126,7 +126,7 @@ const webpackConfig = {
 }
 ```
 
-## CRA CSS
+## CSS
 
 ```css
 @import-normalize; /* bring in normalize.css styles */
@@ -134,7 +134,7 @@ const webpackConfig = {
 /* rest of app styles */
 ```
 
-## CRA Public Folder
+## Public Folder
 
 - None of the files in public folder get post-processed or minified.
 - Missing files will not be called at compilation time,
@@ -157,7 +157,7 @@ class Component {
 }
 ```
 
-## CRA Environment Variables
+## Environment Variables
 
 - Create custom environment variables beginning with `REACT_APP_`.
   Any other variables except `NODE_ENV` will be ignored.
@@ -211,7 +211,7 @@ export default function App() {
 </div>
 ```
 
-## CRA Code Splitting
+## Code Splitting
 
 Code splitting for [production build](https://create-react-app.dev/docs/production-build)
 with `import('dep').then();`:
@@ -235,11 +235,11 @@ function reportWebVitals(onPerfEntry?: ReportHandler) {
 export default reportWebVitals
 ```
 
-## CRA Service Worker
+## Service Worker
 
 - [PWA Template](https://github.com/cra-template/pwa)
 
-## CRA Deployment
+## Deployment
 
 - [Official Documentation](https://facebook.github.io/create-react-app/docs/deployment).
 - [Deploy Subdirectory](https://medium.com/@svinkle/how-to-deploy-a-react-app-to-a-subdirectory-f694d46427c1).
@@ -264,7 +264,7 @@ export default function App() {
 }
 ```
 
-### SPA Deployment
+### SPA
 
 - Deployment services [guide](https://hiddedevries.nl/en/blog/2020-06-27-how-deployment-services-make-client-side-routing-work).
 
@@ -304,7 +304,7 @@ GitHub Pages:
 ln -s index.html 404.html
 ```
 
-## Custom CRA
+## Customization
 
 - Custom `packages/cra-template-*`: change HTML/CSS/JS boilerplate.
 - Custom `packages/react-scripts/config/`:
@@ -312,7 +312,7 @@ ln -s index.html 404.html
 - Custom `packages/react-scripts/scripts/`: change react-scripts CLI behaviors.
 - Custom [react scripts](https://auth0.com/blog/how-to-configure-create-react-app).
 
-### CRA MonoRepo
+### Monorepo
 
 - `babel-preset-react-app`: babel preset configuration.
 - `cra-template`/`cra-template-typescript`: CRA default templates.
@@ -321,7 +321,7 @@ ln -s index.html 404.html
 - `react-dev-utils`:
   most utility functions for paths, helpers, middleware, and webpack plugins.
 
-### Custom React Scripts
+### Scripts
 
 In `Create React App`
 [code](https://github.com/facebook/create-react-app/blob/main/packages/create-react-app/createReactApp.js):
@@ -343,7 +343,7 @@ Due to version checking for template feature,
 custom react scripts should
 publish with version `^3.3.0` or `^4.x.x`.
 
-### Custom CRA Templates
+### Templates
 
 HTML/CSS/JSX boilerplate in `react-scripts/template/` directory,
 now Templates are always named in the format cra-template-[template-name]

@@ -159,6 +159,6 @@ $$
 \end{split}
 $$
 
-## Linear Algebra References
+## References
 
 - Interactive book: [impressive linear algebra](https://immersivemath.com/ila/index.html).

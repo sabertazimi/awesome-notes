@@ -1,15 +1,9 @@
 ---
 sidebar_position: 13
-tags: [Web, TypeScript]
+tags: [Web, TypeScript, Mapped, Gymnastics]
 ---
 
-# Mapped Types
-
-## Builtin Mapped Types
-
-- [Builtin mapped types](https://github.com/microsoft/TypeScript/blob/7d60dc1f5db04cc01cba2e1def292432fa41a7ee/src/lib/es5.d.ts#L1468-L1612).
-
-## Basic Mapped Types
+# Mapped
 
 ```ts
 type Readonly<T> = { readonly [P in keyof T]: T[P] }
@@ -22,7 +16,7 @@ type Clone<T> = { [P in keyof T]: T[P] }
 type Stringify<T> = { [P in keyof T]: string }
 ```
 
-## Union Mapped Types
+## Union
 
 With distributive conditional type:
 
@@ -31,7 +25,7 @@ type Extract<T, U> = T extends U ? T : never
 type Exclude<T, U> = T extends U ? never : T
 ```
 
-## Key Mapped Types
+## Key
 
 ```ts
 type Pick<T, K extends keyof T> = { [P in K]: T[P] }
@@ -39,7 +33,7 @@ type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>
 type Record<K extends keyof any, T> = { [P in K]: T }
 ```
 
-## Function Mapped Types
+## Function
 
 ```ts
 type Parameters<T extends (...args: any) => any> = T extends (
@@ -68,7 +62,7 @@ type ThisParameterType<T> = T extends (this: infer U, ...args: any[]) => any
   : unknown
 ```
 
-## Custom Mapped Types
+## Gymnastics
 
 Combine with:
 
@@ -161,3 +155,7 @@ type ObjectsNeedingGDPRDeletion = ExtractPII<DBFields>
 //   name: true;
 // }
 ```
+
+## References
+
+- [Builtin](https://github.com/microsoft/TypeScript/blob/main/src/lib/es5.d.ts#L1519-L1667) mapped types.

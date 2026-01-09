@@ -1,6 +1,6 @@
 ---
 sidebar_position: 24
-tags: [Web, JavaScript, ECMAScript, Proxy]
+tags: [Web, JavaScript, ECMAScript, Proxy, Reflect]
 ---
 
 # Proxy and Reflect
@@ -61,6 +61,29 @@ const handler = {
 const proxy = new Proxy(new Date('2020-12-24'), handler)
 proxy.getDate() // 24
 ```
+
+:::tip[Proxy vs DefineProperty]
+
+- Simple: `Proxy` 使用上比 `Object.defineProperty` 方便.
+  - `Object.defineProperty` 只能监听对象, 导致 `Vue 2` `data` 属性必须通过一个返回对象的函数方式初始化,
+  - `Vue 3` 更加多元化, 可以监听任意数据.
+- Performant: `Proxy` 代理整个对象, `Object.defineProperty` 只代理对象上的某个属性.
+  - `Object.defineProperty` 由于每次只能监听对象一个键的 `get`/`set`, 导致需要循环监听浪费性能.
+  - `Proxy` 可以一次性监听到所有属性.
+- Lazy: `Proxy` 性能优于 `Object.defineProperty`.
+  - 如果对象内部要全部递归代理, 则 `Proxy` 可以只在调用时递归.
+  - `Object.defineProperty` 需要在一开始就全部递归.
+- Feature:
+  - 对象上定义新属性时, 只有 `Proxy` 可以监听到:
+    - Vue2: 提供 `Vue.set`/`Vue.delete` 等辅助方法.
+    - Vue3: `Proxy` 监听新属性.
+  - 数组新增删除修改时, 只有 `Proxy` 可以监听到:
+    - `Object.defineProperty` 无法监听数组, `Proxy` 则可以直接监听数组变化.
+    - Vue2: 重写数组方法监听数组变化.
+    - Vue3: `Proxy` 监听数组变化.
+- `Proxy` 不兼容 IE, `Object.defineProperty` 不兼容 IE8 及以下.
+
+:::
 
 ## Reflect
 
@@ -149,9 +172,9 @@ const esm = esm$1.exports
 export { esm as default }
 ```
 
-## Proxy Usage
+## Protection
 
-### Default Zero Value Protection
+### Default Zero Value
 
 ```ts
 function withZeroValue(target, zeroValue = 0) {
@@ -166,7 +189,7 @@ pos = withZeroValue(pos)
 console.log(pos.z) // => 0
 ```
 
-### Hiding Properties Protection
+### Hiding Properties
 
 ```ts
 function hide(target, prefix = '_') {
@@ -191,7 +214,7 @@ const keys = Object.keys(userData) // ownKeys: ['firstName', 'mediumHandle']
 console.log(userData._favoriteRapper) // get: undefined
 ```
 
-### Read Only Object Protection
+### Read Only Object
 
 ```ts
 function NOPE() {
@@ -215,120 +238,7 @@ const NOPE_HANDLER = {
 const readOnly = target => new Proxy(target, NODE_HANDLER)
 ```
 
-### Range Validation
-
-`in` operator capture:
-
-```ts
-function range(min, max) {
-  return new Proxy(Object.create(null), {
-    has: (_, prop) => +prop >= min && +prop <= max,
-  })
-}
-
-const X = 10.5
-const nums = [1, 5, X, 50, 100]
-
-if (X in range(1, 100)) {
-  // => true
-}
-
-nums.filter(n => n in range(1, 10))
-// => [1, 5]
-```
-
-### Property Validation
-
-`set` operator capture:
-
-```ts
-const target = {
-  onlyNumbersGoHere: 0,
-}
-
-const proxy = new Proxy(target, {
-  set(target, property, value) {
-    if (typeof value !== 'number')
-      return false
-    else
-      return Reflect.set(target, property, value)
-  },
-})
-
-proxy.onlyNumbersGoHere = 1
-console.log(proxy.onlyNumbersGoHere) // 1
-proxy.onlyNumbersGoHere = '2'
-console.log(proxy.onlyNumbersGoHere) // 1
-```
-
-### Function Parameter Validation
-
-`apply` operator capture:
-
-```ts
-function median(...nums) {
-  return nums.sort()[Math.floor(nums.length / 2)]
-}
-
-const proxy = new Proxy(median, {
-  apply(target, thisArg, argumentsList) {
-    for (const arg of argumentsList) {
-      if (typeof arg !== 'number')
-        throw new TypeError('Non-number argument provided')
-    }
-
-    return Reflect.apply(target, thisArg, argumentsList)
-  },
-})
-
-console.log(proxy(4, 7, 1)) // 4
-console.log(proxy(4, '7', 1))
-// TypeError: Non-number argument provided
-
-class Person {
-  constructor(name) {
-    this.name = name
-  }
-}
-
-const PersonProxy = new Proxy(Person, {
-  apply(TrapTarget, thisArg, argumentList) {
-    return new TrapTarget(...argumentList)
-  },
-})
-
-const me = PersonProxy('Nicholas')
-console.log(me.name) // "Nicholas"
-console.log(me instanceof Person) // true
-console.log(me instanceof PersonProxy) // true
-```
-
-### Constructor Parameter Validation
-
-`new` operator capture:
-
-```ts
-class User {
-  constructor(id) {
-    this.id_ = id
-  }
-}
-
-const ProxyUser = new Proxy(User, {
-  construct(target, argumentsList, newTarget) {
-    if (argumentsList[0] === undefined)
-      throw new Error('User cannot be instantiated without id')
-    else
-      return Reflect.construct(target, argumentsList, newTarget)
-  },
-})
-
-const obj = new ProxyUser(1)
-const throwError = new ProxyUser()
-// Error: User cannot be instantiated without id
-```
-
-### Negative Array Indices Protection
+### Negative Array Indices
 
 ```ts
 function negativeArray(els) {
@@ -343,7 +253,7 @@ function negativeArray(els) {
 }
 ```
 
-### Array Manipulation Protection
+### Array Manipulation
 
 ```ts
 function toUint32(value) {
@@ -401,7 +311,7 @@ console.log(colors[1]) // "green"
 console.log(colors[0]) // "red"
 ```
 
-### Exception Protection
+### Exception
 
 ```ts
 function createExceptionProxy(target) {
@@ -469,7 +379,122 @@ proxy.say()
 proxy.coding()
 ```
 
-### Proxy Pattern Implementation
+## Validation
+
+### Range
+
+`in` operator capture:
+
+```ts
+function range(min, max) {
+  return new Proxy(Object.create(null), {
+    has: (_, prop) => +prop >= min && +prop <= max,
+  })
+}
+
+const X = 10.5
+const nums = [1, 5, X, 50, 100]
+
+if (X in range(1, 100)) {
+  // => true
+}
+
+nums.filter(n => n in range(1, 10))
+// => [1, 5]
+```
+
+### Property
+
+`set` operator capture:
+
+```ts
+const target = {
+  onlyNumbersGoHere: 0,
+}
+
+const proxy = new Proxy(target, {
+  set(target, property, value) {
+    if (typeof value !== 'number')
+      return false
+    else
+      return Reflect.set(target, property, value)
+  },
+})
+
+proxy.onlyNumbersGoHere = 1
+console.log(proxy.onlyNumbersGoHere) // 1
+proxy.onlyNumbersGoHere = '2'
+console.log(proxy.onlyNumbersGoHere) // 1
+```
+
+### Function Parameter
+
+`apply` operator capture:
+
+```ts
+function median(...nums) {
+  return nums.sort()[Math.floor(nums.length / 2)]
+}
+
+const proxy = new Proxy(median, {
+  apply(target, thisArg, argumentsList) {
+    for (const arg of argumentsList) {
+      if (typeof arg !== 'number')
+        throw new TypeError('Non-number argument provided')
+    }
+
+    return Reflect.apply(target, thisArg, argumentsList)
+  },
+})
+
+console.log(proxy(4, 7, 1)) // 4
+console.log(proxy(4, '7', 1))
+// TypeError: Non-number argument provided
+
+class Person {
+  constructor(name) {
+    this.name = name
+  }
+}
+
+const PersonProxy = new Proxy(Person, {
+  apply(TrapTarget, thisArg, argumentList) {
+    return new TrapTarget(...argumentList)
+  },
+})
+
+const me = PersonProxy('Nicholas')
+console.log(me.name) // "Nicholas"
+console.log(me instanceof Person) // true
+console.log(me instanceof PersonProxy) // true
+```
+
+### Constructor Parameter
+
+`new` operator capture:
+
+```ts
+class User {
+  constructor(id) {
+    this.id_ = id
+  }
+}
+
+const ProxyUser = new Proxy(User, {
+  construct(target, argumentsList, newTarget) {
+    if (argumentsList[0] === undefined)
+      throw new Error('User cannot be instantiated without id')
+    else
+      return Reflect.construct(target, argumentsList, newTarget)
+  },
+})
+
+const obj = new ProxyUser(1)
+const throwError = new ProxyUser()
+// Error: User cannot be instantiated without id
+```
+
+## Patterns
 
 - Remote mock and placeholder:
   - Data mock.
@@ -479,24 +504,3 @@ proxy.coding()
   - Memoized functions.
 - Profiling.
 - Observer and watcher: Vue 3 reactivity, ImmerJS draft state.
-
-## Proxy and DefineProperty
-
-- Simple: `Proxy` 使用上比 `Object.defineProperty` 方便.
-  - `Object.defineProperty` 只能监听对象, 导致 `Vue 2` `data` 属性必须通过一个返回对象的函数方式初始化,
-  - `Vue 3` 更加多元化, 可以监听任意数据.
-- Performant: `Proxy` 代理整个对象, `Object.defineProperty` 只代理对象上的某个属性.
-  - `Object.defineProperty` 由于每次只能监听对象一个键的 `get`/`set`, 导致需要循环监听浪费性能.
-  - `Proxy` 可以一次性监听到所有属性.
-- Lazy: `Proxy` 性能优于 `Object.defineProperty`.
-  - 如果对象内部要全部递归代理, 则 `Proxy` 可以只在调用时递归.
-  - `Object.defineProperty` 需要在一开始就全部递归.
-- Feature:
-  - 对象上定义新属性时, 只有 `Proxy` 可以监听到:
-    - Vue2: 提供 `Vue.set`/`Vue.delete` 等辅助方法.
-    - Vue3: `Proxy` 监听新属性.
-  - 数组新增删除修改时, 只有 `Proxy` 可以监听到:
-    - `Object.defineProperty` 无法监听数组, `Proxy` 则可以直接监听数组变化.
-    - Vue2: 重写数组方法监听数组变化.
-    - Vue3: `Proxy` 监听数组变化.
-- `Proxy` 不兼容 IE, `Object.defineProperty` 不兼容 IE8 及以下.

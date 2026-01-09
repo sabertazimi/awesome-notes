@@ -5,7 +5,7 @@ tags: [Web, React, Performance]
 
 # Performance
 
-## React Performance Mental Model
+## Mental Model
 
 **3L** - Less render times, less render calculations, less render nodes:
 
@@ -13,7 +13,7 @@ tags: [Web, React, Performance]
 - 计算: 精确判断更新时机和范围, 减少计算量, 优化 render 过程.
 - 渲染: 精细粒度, 降低组件复杂度, 减少 DOM 数量.
 
-## Re-rendering Problem
+## Re-rendering
 
 React will [recursively render **all child components**](https://blog.isquaredsoftware.com/2020/05/blogged-answers-a-mostly-complete-guide-to-react-rendering-behavior)
 inside of it (because `props.children` is always a new reference when parent re-rendering).
@@ -330,7 +330,7 @@ export default class App extends Component {
 }
 ```
 
-## React Performance Best Practices
+## Best Practices
 
 - Use `key` correctly.
 - `React.useMemo` and `React.useCallback` (no anonymous functions).
@@ -379,7 +379,7 @@ Production [case studies](https://largeapps.dev/case-studies/advanced):
    - Consistent UX across devices.
    - Feedback and user-centric metrics.
 
-## React Performance References
+## References
 
 - [Progressive React](https://houssein.me/progressive-react).
 - Sentry performance [guide](https://blog.sentry.io/react-js-performance-guide) for React.

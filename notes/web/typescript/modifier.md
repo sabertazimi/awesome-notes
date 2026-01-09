@@ -1,11 +1,11 @@
 ---
 sidebar_position: 7
-tags: [Web, TypeScript]
+tags: [Web, TypeScript, Modifier, Public, Protected, Private, Readonly]
 ---
 
-# Type Modifiers
+# Modifiers
 
-## Member Access Modifiers
+## Member Access
 
 `public`, `protected` and `private`:
 
@@ -31,7 +31,7 @@ const someThing = new Singleton() // Error: constructor of 'singleton' is privat
 const instance = Singleton.getInstance() // do some thing with the instance
 ```
 
-## Readonly Type Modifier
+## Readonly
 
 `readonly`:
 

@@ -1,5 +1,5 @@
 ---
-tags: [Web, Vue, Lifecycle]
+tags: [Web, Vue, Internals, Lifecycle]
 sidebar_position: 23
 ---
 
@@ -7,7 +7,7 @@ sidebar_position: 23
 
 ![Lifecycle](./figures/lifecycle.png)
 
-## Mounting Workflow
+## Workflow
 
 `new Vue()` -> 初始化 -> 编译 -> 渲染 -> 挂载 -> 更新:
 
@@ -107,7 +107,7 @@ Vue.prototype._init = function (options?: object) {
 }
 ```
 
-## Instance Properties
+## Instance
 
 ```ts
 // Vue.prototype._init: core/instance/init.js
@@ -169,7 +169,7 @@ vm._props = {}
 vm._provided = provided
 ```
 
-## Mounting Component
+## Mounting
 
 `core/instance/lifecycle.js`:
 
@@ -396,7 +396,7 @@ Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
 }
 ```
 
-## Vue Options Lifecycle
+## Options
 
 `beforeCreate`/`created` in `core/instance/init.js`:
 
@@ -420,7 +420,7 @@ Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
   会执行 `vm.__patch__(vm._vnode, null)` 触发子组件的销毁钩子函数 (递归),
   `destroyed` 钩子函数执行顺序为**先子后父**.
 
-## Vue Composition Lifecycle
+## Composition
 
 ```ts
 const currentInstance = null

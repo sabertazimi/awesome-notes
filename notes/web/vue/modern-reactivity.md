@@ -1,11 +1,11 @@
 ---
-tags: [Web, Vue, Reactivity]
+tags: [Web, Vue, Internals, Reactivity]
 sidebar_position: 29
 ---
 
 # Modern Reactivity
 
-## Reactive System
+## System
 
 - `effect.ts`: `effect`, `track`, `trigger`.
 - `baseHandlers.ts`: proxy handler (`get` and `set`).
@@ -15,7 +15,7 @@ sidebar_position: 29
   - `ref` performant over `reactive`.
 - `computed.ts`: `computed` using `effect` and return a `ref`.
 
-## Reactive Effects
+## Effects
 
 Data `getter`/`setter` -> Notify -> Watcher -> Trigger --> Renderer:
 
@@ -192,7 +192,7 @@ console.assert(salePrice.value === 5.4)
 console.assert(total.value === 21.6)
 ```
 
-## Reactive Proxy
+## Proxy
 
 - Simple: `Proxy` 使用上比 `Object.defineProperty` 方便.
   - `Object.defineProperty` 只能监听对象, 导致 `Vue 2` `data` 属性必须通过一个返回对象的函数方式初始化.

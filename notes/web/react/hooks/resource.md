@@ -1,6 +1,6 @@
 ---
 sidebar_position: 25
-tags: [Web, React, Hook]
+tags: [Web, React, Hook, Resource, Storage]
 ---
 
 # Resource

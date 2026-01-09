@@ -17,7 +17,7 @@ tags: [CS, System, Architecture, Graph Processing]
 |                | PowerLyra  |             |
 |                |   Gemini   |             |
 
-## NUMA Architecture
+## NUMA
 
 引入了 Node 和 Distance:
 
@@ -28,12 +28,12 @@ tags: [CS, System, Architecture, Graph Processing]
 
 每个进程(或线程)都会从父进程继承 NUMA 策略, 并分配有一个优先 node. 如果 NUMA 策略允许的话，进程可以调用其他 node 上的资源.
 
-### CPU Schedule
+### CPU
 
 - CPU Node Bind: 规定进程运行在某几个 node 之上
 - Physical CPU Bind: 精细地规定进程运行在哪些核上
 
-### Memory Schedule
+### Memory
 
 - Local Allocation: 从当前 Node 上请求分配内存
 - Preferred: 比较宽松地指定了一个推荐的 node 来获取内存, 如果被推荐的 node 上没有足够内存, 进程可以尝试别的 node
@@ -43,42 +43,32 @@ tags: [CS, System, Architecture, Graph Processing]
 NUMA 默认的内存分配策略是优先在进程所在 CPU 的本地内存中分配, 会导致 CPU 节点之间内存分配不均衡.
 当某个 CPU 节点的内存不足时, 会导致 swap 产生, 而不是从远程节点分配内存, 这就是 **swap insanity** 现象
 
+### Toolchain
+
+```bash
+grep -i numa /var/log/dmesg
+```
+
+```bash
+sudo apt install -y numactl
+numactl --show
+numactl --hardware
+numactl --interleave=all
+```
+
+```bash
+numastat
+```
+
 ## Dataset
 
 - [LiveJournal social network](http://snap.stanford.edu/data/soc-LiveJournal1.html)
 - [twitter rv](http://an.kaist.ac.kr/traces/WWW2010.html)
 - [us road](http://www.dis.uniroma1.it/challenge9/download.shtml)
 
-## Tools
+## GCC
 
-### Concurrency Lib
-
-- [TaskFlow](https://github.com/cpp-taskflow/cpp-taskflow)
-
-### Perf Tools
-
-- [FlameGraph](https://github.com/brendangregg/FlameGraph)
-
-### Hardware Performance Counter
-
-- [Intel PCM](https://software.intel.com/en-us/articles/intel-performance-counter-monitor)
-- [PAPI](https://www.icl.utk.edu/publications/papi-portable-interface-hardware-performance-counters)
-
-### Parallel Programming
-
-- [OpenMP](https://www.openmp.org)
-
-### Other Libs
-
-- [Lib BLAS](http://www.netlib.org/blas/)
-
-### DRAMSim2
-
-- [Overview of DRAMSim2’s Memory Structure](https://cinwell.wordpress.com/2013/09/25/general-overview-of-dramsim2s-memory-structure/)
-
-### GCC
-
-#### strict-alias warnings
+### Strict-alias Warnings
 
 for strict-aliasing warnings:
 
@@ -88,13 +78,13 @@ for strict-aliasing warnings:
 3. use a type which has `__attribute__((__may_alias__))`
 4. turn off the aliasing assumptions globally using -fno-strict-aliasing
 
-### Time Stamp Counter
+## Time Stamp Counter
 
 - [definition](http://en.wikipedia.org/wiki/Time_Stamp_Counter)
 
-#### RDTSC
+### RDTSC
 
-#### Clock Get Time
+### Clock Get Time
 
 ```bash
 gcc *.c -o *.o ... -lrt # link with librt
@@ -108,30 +98,26 @@ clock_gettime(CLOCK_MONOTONIC, ts);
 printf("%d %d", ts.tv_sec, ts.tv_nsec);
 ```
 
-### NUMA Tool
+## Library
 
-```bash
-grep -i numa /var/log/dmesg
-```
+### Concurrency
 
-#### NUMA Control
+- [TaskFlow](https://github.com/cpp-taskflow/cpp-taskflow)
 
-##### installation
+### Performance
 
-```bash
-sudo apt install -y numactl
-```
+- [FlameGraph](https://github.com/brendangregg/FlameGraph)
+- [Intel PCM](https://software.intel.com/en-us/articles/intel-performance-counter-monitor)
+- [PAPI](https://www.icl.utk.edu/publications/papi-portable-interface-hardware-performance-counters)
 
-##### usage
+### Parallelism
 
-```bash
-numactl --show
-numactl --hardware
-numactl --interleave=all
-```
+- [OpenMP](https://www.openmp.org)
 
-#### NUMA Status
+### Math
 
-```bash
-numastat
-```
+- [Lib BLAS](http://www.netlib.org/blas/)
+
+### DRAMSim2
+
+- [Overview of DRAMSim2’s Memory Structure](https://cinwell.wordpress.com/2013/09/25/general-overview-of-dramsim2s-memory-structure/)

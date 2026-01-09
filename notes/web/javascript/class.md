@@ -5,7 +5,7 @@ tags: [Web, JavaScript, ECMAScript, Class]
 
 # Class
 
-## Class Prototype
+## Prototype
 
 - `Class` 定义不能提升.
 - `Class` 具有块作用域.
@@ -63,7 +63,7 @@ console.log(bb[[proto]] === BB.prototype) // true
 | Static properties `Foo.*`              | true     | false      | true         |
 | Prototype properties `Foo.prototype.*` | true     | false      | true         |
 
-## Class Inheritance
+## Inheritance
 
 - 隔离: 添加到 `this` 的所有属性都会存在于不同的实例上.
 - 共享:
@@ -116,7 +116,7 @@ Person.locate() // class, class Person {}
 
 :::
 
-### Super Class
+### Super
 
 `super`:
 
@@ -129,7 +129,7 @@ Person.locate() // class, class Person {}
 - 若显式定义了派生类构造函数, 则必须在其中调用 `super()` , 或返回一个对象.
 - 实例化时检测 `new.target` 是不是抽象基类, 可以阻止对抽象基类的实例化.
 
-### Abstract Base Class
+### Abstract
 
 ```ts
 class Shape {
@@ -152,7 +152,7 @@ const y = new Rectangle(3, 4) // no error
 console.log(y instanceof Shape) // true
 ```
 
-## Class Expression
+## Expression
 
 ```ts
 // Anonymous class expression
@@ -171,7 +171,7 @@ console.log(Person.name) // PersonName
 console.log(PersonName) // ReferenceError: PersonName is not defined
 ```
 
-## Class Constructor
+## Constructor
 
 ```ts
 class A {
@@ -207,7 +207,7 @@ const c = new C() // logs class C{constructor(){console.log(new.target);}}
 const d = new D() // logs class D extends C{constructor(){super();}}
 ```
 
-## Class Private Member
+## Private
 
 - Private access.
 - Aren't stored in `.prototype`.
@@ -343,7 +343,7 @@ class Dong {
 }
 ```
 
-## Class Public Fields
+## Public
 
 ```ts
 class SuperClass {
@@ -373,7 +373,7 @@ const sub = new SubClass()
 // 'AFTER super()'
 ```
 
-## Class Static Blocks
+## Static
 
 Static blocks have access to class private member.
 Its mainly useful whenever set up multiple static fields.
@@ -450,7 +450,7 @@ class SubClass extends SuperClass {
 // 'static block 2 SubClass'
 ```
 
-## Class Best Practices
+## Best Practices
 
 Avoid using `class` when:
 

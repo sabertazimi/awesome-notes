@@ -5,9 +5,115 @@ tags: [Web, JavaScript, ECMAScript, Object]
 
 # Inheritance
 
-## Object Clone
+## Prototype Proxy
 
-### Object Shallow Clone
+可用于所有继承模式中, 减少内存消耗:
+
+```ts
+const inherit = (function () {
+  // 减少继承过程中父类的实例化,减少资源消耗
+  // 实例化一个空类所需资源更少
+  const F = function () {}
+  return function (C, P) {
+    // c.__proto__ = C.prototype = f
+    // f.__proto__ = F.prototype
+    // F.prototype = P.prototype
+    // c.__proto__.__proto__ = f.__proto__ = P.prototype
+    F.prototype = P.prototype // f.__proto__ = F.prototype = P.prototype
+    C.prototype = new F() // C.prototype = f
+    C.prototype.constructor = C
+    C.super = P.prototype // 此句可提高代码的重用性
+  }
+})()
+
+Child.prototype.add = function () {
+  return Child.super.add.call(this)
+}
+```
+
+## Class Simulation
+
+复制式地继承, 将会消耗大量内存单元:
+
+```ts
+function classSim(Parent, props) {
+  // 新的构造函数
+  const Child = function (...args) {
+    if (
+      Child.uber
+      && Object.prototype.hasOwnProperty.call(Child.uber, '_construct')
+    ) {
+      Child.uber._construct.apply(this, args)
+    }
+
+    if (Object.prototype.hasOwnProperty.call(Child.prototype, '_construct'))
+      Child.prototype._construct.apply(this, args)
+  }
+
+  // 类式继承
+  Parent = Parent || Object
+
+  // 代理构造函数F
+  const F = function () {}
+  F.prototype = Parent.prototype
+  Child.prototype = new F()
+  Child.prototype.constructor = Child
+
+  // 添加属性与方法
+  for (const i in props) {
+    if (Object.prototype.hasOwnProperty.call(props, i))
+      Child.prototype[i] = props[i]
+  }
+
+  // return the "class"
+  return Child
+}
+
+const SuperMan = classSim(Man, {
+  _construct(what) {
+    console.log('SuperMan\'s constructor')
+  },
+  getName() {
+    const name = SuperMan.uber.getName.call(this)
+    return `I am ${name}`
+  },
+})
+```
+
+## Composite
+
+原型继承 (**设置原型**)
+与类式继承 (**借用构造函数**)
+组合继承模式:
+
+- `child.prototype = new Parent(); Child.prototype.constructor = Child`.
+- `Parent.apply(this, arguments)`: 借用构造函数可以防止引用类型被迫共享.
+- 此模式会调用两次父类构造函数, 使得子类属性继承两次, 存在一定的效率问题.
+
+```ts
+function Parent(name) {
+  this.name = name || 'Adam'
+}
+// Adding functionality to the prototype
+Parent.prototype.say = function () {
+  return this.name
+}
+
+// Child constructor
+function Child(...args) {
+  // 解决引用类型共享问题
+  Parent.apply(this, args)
+  this.childName = 'Child Name'
+}
+
+// Child.prototype = Object.create(Parent.prototype);
+Child.prototype = new Parent() // 设置原型链,建立继承关系
+Child.prototype.constructor = Child // 使得 Prototype 对象与 Constructor 对象形成闭环
+```
+
+## Clone
+
+### Shallow
 
 `Object.assign`:
 
@@ -50,7 +156,7 @@ const copy = { ...original }
 assert.equal(copy instanceof MyClass, false)
 ```
 
-### Object Deep Clone
+### Deep
 
 Recursively copy all properties of an object:
 
@@ -135,114 +241,6 @@ room1.people.pop()
 
 console.log(room2.people) // ["Alan", "Bob", "Charlie"]
 console.log(room1.people) // ["Alan"]
-```
-
-## Object Inheritance
-
-### Prototype Proxy Inheritance
-
-可用于所有继承模式中, 减少内存消耗:
-
-```ts
-const inherit = (function () {
-  // 减少继承过程中父类的实例化,减少资源消耗
-  // 实例化一个空类所需资源更少
-  const F = function () {}
-  return function (C, P) {
-    // c.__proto__ = C.prototype = f
-    // f.__proto__ = F.prototype
-    // F.prototype = P.prototype
-    // c.__proto__.__proto__ = f.__proto__ = P.prototype
-    F.prototype = P.prototype // f.__proto__ = F.prototype = P.prototype
-    C.prototype = new F() // C.prototype = f
-    C.prototype.constructor = C
-    C.super = P.prototype // 此句可提高代码的重用性
-  }
-})()
-
-Child.prototype.add = function () {
-  return Child.super.add.call(this)
-}
-```
-
-### Class Simulation Inheritance
-
-复制式地继承, 将会消耗大量内存单元:
-
-```ts
-function classSim(Parent, props) {
-  // 新的构造函数
-  const Child = function (...args) {
-    if (
-      Child.uber
-      && Object.prototype.hasOwnProperty.call(Child.uber, '_construct')
-    ) {
-      Child.uber._construct.apply(this, args)
-    }
-
-    if (Object.prototype.hasOwnProperty.call(Child.prototype, '_construct'))
-      Child.prototype._construct.apply(this, args)
-  }
-
-  // 类式继承
-  Parent = Parent || Object
-
-  // 代理构造函数F
-  const F = function () {}
-  F.prototype = Parent.prototype
-  Child.prototype = new F()
-  Child.prototype.constructor = Child
-
-  // 添加属性与方法
-  for (const i in props) {
-    if (Object.prototype.hasOwnProperty.call(props, i))
-      Child.prototype[i] = props[i]
-  }
-
-  // return the "class"
-  return Child
-}
-
-const SuperMan = classSim(Man, {
-  _construct(what) {
-    console.log('SuperMan\'s constructor')
-  },
-  getName() {
-    const name = SuperMan.uber.getName.call(this)
-    return `I am ${name}`
-  },
-})
-```
-
-### Composite Inheritance
-
-原型继承 (**设置原型**)
-与类式继承 (**借用构造函数**)
-组合继承模式:
-
-- `child.prototype = new Parent(); Child.prototype.constructor = Child`.
-- `Parent.apply(this, arguments)`: 借用构造函数可以防止引用类型被迫共享.
-- 此模式会调用两次父类构造函数, 使得子类属性继承两次, 存在一定的效率问题.
-
-```ts
-function Parent(name) {
-  this.name = name || 'Adam'
-}
-// Adding functionality to the prototype
-Parent.prototype.say = function () {
-  return this.name
-}
-
-// Child constructor
-function Child(...args) {
-  // 解决引用类型共享问题
-  Parent.apply(this, args)
-  this.childName = 'Child Name'
-}
-
-// Child.prototype = Object.create(Parent.prototype);
-Child.prototype = new Parent() // 设置原型链,建立继承关系
-Child.prototype.constructor = Child // 使得 Prototype 对象与 Constructor 对象形成闭环
 ```
 
 ## Global Object

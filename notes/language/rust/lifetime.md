@@ -27,7 +27,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 }
 ```
 
-## Function Lifetime
+## Function
 
 函数或者方法中,
 参数的生命周期被称为`输入生命周期`,
@@ -39,12 +39,12 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - 若存在多个输入生命周期, 且其中一个是`&self`/`&mut self`,
   则`&self`生命周期被赋给所有输出生命周期 (除非显式地声明输出生命周期).
 
-## Static Lifetime
+## Static
 
 生命周期`'static`表示持续整个程序,
 例如字符串字面量和特征对象.
 
-## Lifetime Constraint
+## Constraint
 
 - `'a: 'b`: `'a` 生命周期更长.
 - `T: 'a`: `T` 生命周期更长.

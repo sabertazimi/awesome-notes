@@ -5,7 +5,7 @@ tags: [Web, Security, Session, Vulnerability]
 
 # Session
 
-## Session Hijacking Protection
+## Hijacking
 
 Same site cookie [recipe](https://web.dev/first-party-cookie-recipes),
 `Set-Cookie: session_id=278283910977381992837; HttpOnly; Secure; SameSite=Lax`:
@@ -20,7 +20,7 @@ Same site cookie [recipe](https://web.dev/first-party-cookie-recipes),
   use HTTPS connection:
   `Set-Cookie: session_id=278283910977381992837; Secure`.
 
-## Session Fixation Protection
+## Fixation
 
 在 **HTTP Cookie** 中传输**复杂**的 session ID, 并在**成功连接**/**恶意篡改**后重置 session ID:
 

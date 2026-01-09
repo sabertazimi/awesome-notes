@@ -139,11 +139,7 @@ import qualified Geometry.Cuboid as Cuboid
 import qualified Geometry.Cube as Cube
 ```
 
-## 常用基础模块
-
-[Learn you a haskell for great good](https://github.com/MnO2/learnyouahaskell-zh/blob/develop/zh-cn/ch07/module.md)
-
-### Data.List
+## List
 
 - intersperse
 - intercalate
@@ -477,7 +473,7 @@ ghci> insert 3 [1,2,4,3,2,1]
 [1,2,3,4,3,2,1]
 ```
 
-#### 修正 Prelude 模块
+### 修正 Prelude 模块
 
 `length`, `take`, `drop`, `splitAt`, `!!` 和 `replicate`
 `Data.List` 中包含了更通用的替代版,如:
@@ -513,7 +509,7 @@ ghci> sortBy (compare `on` length) xs
 [[],[2],[2,2],[1,2,3],[3,5,4,3],[5,4,5,4,4]]
 ```
 
-### Data Char
+## Char
 
 - **isControl** 判断一个字符是否是控制字符.
 - **isSpace** 判断一个字符是否是空格字符, 包括空格, tab, 换行符等.
@@ -614,7 +610,7 @@ decode :: Int -> String -> String
 decode shift msg = encode (negate shift) msg
 ```
 
-### Data Map
+## Map
 
 ```haskell
 findKey :: (Eq k) => k -> [(k,v)] -> v
@@ -766,7 +762,7 @@ ghci> Map.insertWith (+) 3 100 $ Map.fromList [(3,4),(5,103),(6,339)]
 fromList [(3,104),(5,103),(6,339)]
 ```
 
-### Data Set
+## Set
 
 内部元素排序且唯一
 
@@ -854,3 +850,7 @@ ghci> setNub "HEY WHATS CRACKALACKIN"
 ghci> nub "HEY WHATS CRACKALACKIN"
 "HEY WATSCRKLIN"
 ```
+
+## References
+
+- Learn you a haskell [guide](https://github.com/MnO2/learnyouahaskell-zh/blob/develop/zh-cn/ch07/module.md).

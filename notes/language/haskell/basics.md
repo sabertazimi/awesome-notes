@@ -13,7 +13,7 @@ apt-get install ghc-mod
 atom plugins : language-haskell autocomplete-haskell ide-haskell haskell-ghc-mod
 ```
 
-### ghci
+### Ghci
 
 - `:l`: load file.
 - `:r`: reload file.
@@ -26,7 +26,7 @@ atom plugins : language-haskell autocomplete-haskell ide-haskell haskell-ghc-mod
 - `:t`: type function.
 - `:info`: data/TypeClass.
 
-### ghc
+### Ghc
 
 ```bash
 runghc *.hs/*.lhs
@@ -47,7 +47,7 @@ if 语句也是表达式
 doubleSmallNumber' x = (if x > 100 then x else x*2) + 1
 ```
 
-## Primitive Types
+## Primitives
 
 ```haskell
 ghci> :t 'a'
@@ -203,7 +203,7 @@ ghci> sum (takeWhile (<10000) (filter odd (map (^2) [1..])))
 take 24 [13,26..]
 ```
 
-### List Comprehension
+### Comprehension
 
 由类似集合定义的离散数学定义,来定义复杂的 List:
 
@@ -255,9 +255,7 @@ ghci> [ [ x | x <- xs, even x ] | xs <- xxs]
   - 不可置于同一 List 中
   - 不同长度的 Tuple 不可比较(比较符只可用于相同 Type)
 
-### Tuple Function
-
-#### 二元组
+### Pair
 
 - `fst/snd tuple`: 返回首项/尾项.
 - `zip List1 List2`: 对应项配对, 组成二元组 List.
@@ -270,7 +268,7 @@ ghci> zip [1..] ["apple", "orange", "cherry", "mango"]
 [(1,"apple"),(2,"orange"),(3,"cherry"),(4,"mango")]
 ```
 
-#### 三元组
+### Triple
 
 ```haskell
 first :: (a, b, c) -> a
@@ -283,7 +281,7 @@ third :: (a, b, c) -> c
 third (_, _, z) = z
 ```
 
-## Generic
+## Generics
 
 运用 Type 变量 (只可为**单字符**), 实现泛型参数与多态函数.
 
@@ -303,14 +301,12 @@ ghci> :t (*)
 (*) :: (Num a) => a -> a -> a
 ```
 
-## 注释
-
-### 符号
+## Comments
 
 - `--` 单行注释
 - `{- -}` 块注释
 - `{-# #-}` (文件头部)编译器参数
 
-## Haskell References
+## References
 
 - Haskell [book](https://github.com/MnO2/learnyouahaskell-zh).

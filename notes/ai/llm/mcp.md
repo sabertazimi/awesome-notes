@@ -5,9 +5,9 @@ tags: [AI, LLM, Agent, MCP]
 
 # MCP
 
-## MCP Servers
+## Library
 
-### Featured MCP Servers
+### Recommended
 
 - [Sequential thinking](https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking).
 - [Context7](https://github.com/upstash/context7).
@@ -22,7 +22,7 @@ tags: [AI, LLM, Agent, MCP]
 - [Notion](https://github.com/makenotion/notion-mcp-server).
 - [APIFox](https://github.com/apifox/apifox-mcp-server).
 
-### MCP Servers List
+### Collections
 
 - [MCP](https://mcpservers.org):
   Collection of MCP servers and Claude Code skills.

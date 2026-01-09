@@ -7,7 +7,7 @@ tags: [Web, Security, Supply Chain, Vulnerability]
 
 [![Supply Chain Threats](./figures/supply-chain-threats.svg)](https://slsa.dev/spec)
 
-## Supply Chain Attack
+## Attack
 
 - [Running file encryption attack in Node.js module](https://dev.to/devdevcharlie/running-a-ransomware-attack-in-a-nodejs-module-4hgb).
 - [left-pad](https://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm).
@@ -20,7 +20,7 @@ tags: [Web, Security, Supply Chain, Vulnerability]
 - [event-source-polyfill](https://github.com/Yaffle/EventSource/commit/de137927e13d8afac153d2485152ccec48948a7a).
 - [styled-components](https://github.com/styled-components/styled-components/commit/ba9d732ca7da53f2a095e35450ecffd592c6f5ba).
 
-## Supply Chain Protection
+## Protection
 
 评估 NPM package 质量:
 
@@ -50,11 +50,7 @@ trustPolicyExclude:
   - package-that-migrated-cicd@1.2.3
 ```
 
-## Malicious Package Attack
-
-名字与流行包相近, 通过 `postinstall` 脚本执行病毒脚本, 获取系统环境变量信息 e.g. `crossenv`.
-
-## Malicious Package Protection
+名字与流行包相近, 通过 `postinstall` 脚本执行病毒脚本, 获取系统环境变量信息 e.g. `crossenv`:
 
 - No typo in `package.json`:
   - NPM package [database](https://openbase.com).

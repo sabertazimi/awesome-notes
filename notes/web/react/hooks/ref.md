@@ -1,6 +1,6 @@
 ---
 sidebar_position: 5
-tags: [Web, React, Hook]
+tags: [Web, React, Hook, Ref]
 ---
 
 # Ref
@@ -11,7 +11,7 @@ tags: [Web, React, Hook]
 - During committing, react will detach/attach the ref by checking flags.
 - `useRef()` is a simple hook which just holds the ref object.
 
-## useRef Dispatcher
+## Dispatcher
 
 ```ts
 function mountRef<T>(initialValue: T) {
@@ -30,7 +30,7 @@ function updateRef<T>(initialValue: T) {
 }
 ```
 
-## useRef Features
+## Features
 
 - Mutable Value:
   `useRef()` is useful for for keeping any mutable value around.
@@ -66,7 +66,7 @@ export default function Example() {
 }
 ```
 
-## useRef Update Mechanism
+## Update Mechanism
 
 - Update a `ref`, no re-renderings happens.
 - Update a `state`, the deep rendering mechanism works to re-render components.
@@ -118,7 +118,7 @@ export default function User() {
 }
 ```
 
-## useRef Usage
+## useRef
 
 If your component needs to store some value,
 but it doesn’t impact the rendering logic,

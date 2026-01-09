@@ -1,11 +1,11 @@
 ---
 sidebar_position: 2
-tags: [Web, Node.js, NPM]
+tags: [Web, Node.js, Package Manager, NPM]
 ---
 
 # NPM
 
-## NPM Mirrors
+## Mirrors
 
 [NPM mirror list](https://github.com/cnpm/binary-mirror-config):
 
@@ -31,9 +31,10 @@ npm config set swc_binary_site https://npmmirror.com/mirrors/node-swc/
 
 ## Node Version Manager
 
-- [Volta: Install and Run JS Tool Quickly and Seamlessly](https://github.com/volta-cli/volta)
-- [FNM: Rust Node Manager](https://github.com/Schniz/fnm)
-- [NVM: Node Version Manager](https://github.com/nvm-sh/nvm)
+- [Volta](https://github.com/volta-cli/volta):
+  Install and run tool quickly and seamlessly.
+- [FNM](https://github.com/Schniz/fnm):
+  Fast Node.js manager written in Rust.
 
 ```bash
 curl https://get.volta.sh | bash
@@ -76,7 +77,14 @@ nvm uninstall 14
 nvm uninstall 12
 ```
 
-## Basic Steps
+## Tab Completion
+
+```bash
+npm completion >> ~/.bashrc (or ~/.zshrc)
+source ~/.zshrc
+```
+
+## Commands
 
 ```bash
 npm adduser
@@ -95,7 +103,22 @@ npm ls
 npm outdated   # 去除过期包
 ```
 
-## Test Steps
+`npm ci` for cache install (speed up installation):
+
+```bash
+# With package-lock.json exists:
+npm ci
+```
+
+Remove useless package:
+
+```bash
+# Uninstall node_modules not in package.json
+npm prune
+npm outdated
+```
+
+## Testing
 
 ```json
 {
@@ -109,7 +132,7 @@ npm outdated   # 去除过期包
 npm test
 ```
 
-## Publish Steps
+## Publish
 
 `latest` or `alpha`:
 
@@ -246,7 +269,7 @@ function updatePackage(version) {
 main().catch(err => console.error(err))
 ```
 
-## Semantic Version
+:::tip[Semantic Version]
 
 Semver:
 
@@ -269,30 +292,9 @@ npm version major
 npm publish
 ```
 
-## Tab Completion
+:::
 
-```bash
-npm completion >> ~/.bashrc (or ~/.zshrc)
-source ~/.zshrc
-```
-
-## Basic Command
-
-best practice: `npm ci` for cache install (speed up installation)
-
-```bash
-// With package-lock.json exists:
-npm ci
-```
-
-remove useless package
-
-```bash
-npm prune // uninstall node_modules not in package.json
-npm outdated
-```
-
-## Link Command
+## Link
 
 ```bash
 cd path/to/my-project
@@ -306,14 +308,14 @@ npm link
 npm link B
 ```
 
-## Security Command
+## Security
 
 ```bash
 npm audit fix
 npm audit fix --force
 ```
 
-## NPX Command
+## NPX
 
 Run local node_modules:
 
@@ -366,7 +368,7 @@ npx clear-npx-cache
 npx create-react-app app
 ```
 
-## NPM Dependencies
+## Dependencies
 
 - Dependency Nesting/Hell (NPM v1).
 - Dependency Flatten/Hoist (NPM v3).
@@ -392,12 +394,12 @@ npx create-react-app app
   低版本的包会分散在某些依赖的 `node_modules` 目录.
 - **Lockfile** 保证项目依赖结构的确定性, 保障项目在多环境运行的稳定性.
 
-### NPM Doppelgangers
+### Doppelgangers
 
 - Singleton conflict: multiple version of same package in `node_modules`.
 - Types conflict: global `types` naming conflict.
 
-### NPM Ghost Dependency
+### Ghost
 
 NPM ghost (phantom) dependency:
 
@@ -414,7 +416,7 @@ NPM ghost (phantom) dependency:
   such imported packages will missing,
   cause they aren't located in library `package.json`.
 
-### NPM Invalid Dependency
+### Invalid
 
 ```bash
 $ npm ls
@@ -424,7 +426,7 @@ package@version invalid
 Modify `package-lock.json`
 to remove locked invalid package version.
 
-## Package JSON
+## `package.json`
 
 ### Bin
 
@@ -441,7 +443,7 @@ npm version minor
 npm version patch
 ```
 
-### NPM Workspaces
+### Workspaces
 
 In root `package.json`:
 
@@ -467,7 +469,7 @@ npm i lodash -w package-b
 npm i -D eslint -w package-c
 ```
 
-### Exports Field
+### Exports
 
 `exports` can define [public API](https://zellwk.com/blog/npm-exports):
 
@@ -533,9 +535,9 @@ will help to [fix broken version too](https://github.com/ant-design/ant-design/p
 }
 ```
 
-## Package Lockfile
+## Lockfile
 
-[Dependency pinning](https://docs.renovatebot.com/dependency-pinning):
+Dependency [pinning](https://docs.renovatebot.com/dependency-pinning):
 
 When kept in sync with its associated `package.json`,
 a lockfile will further lock down the exact dependencies and sub-dependencies,
@@ -552,7 +554,7 @@ even if the lockfile is still holding things together.
   should keep using SemVer ranges for **dependencies** (purge multiple version `node_modules`)
   but can use pinned devDependencies.
 
-## CLI Environment
+## Environment
 
 配置文件以 `.env`/`JS(Object)`/`JSON`/`JSONP`/`XML`/`YML` 格式单独存放,
 方便读取.
@@ -584,27 +586,4 @@ module.exports = {
 const { port } = require('./config')
 
 console.log(`Your port is ${port}`) // 8626
-```
-
-## Corepack
-
-[Corepack](https://github.com/nodejs/corepack) is a tool to help with
-managing versions of your package managers (package manager manager).
-
-It exposes binary proxies for each supported package manager.
-It will identify whatever package manager is configured for current project,
-transparently install it if needed,
-and finally run it without requiring explicit user interactions.
-
-```bash
-# In npm project
-corepack yarn
-
-# In npm project
-corepack pnpm
-```
-
-```bash
-corepack enable yarn
-corepack disable pnpm
 ```

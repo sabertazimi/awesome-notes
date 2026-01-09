@@ -5,13 +5,10 @@ tags: [Web, Security, Authentication, Vulnerability]
 
 # Authentication
 
-## Password Attack
+## Password
 
-Password [mis-management](https://www.hacksplaining.com/prevention/password-mismanagement):
-
-- Reused key attack: 使用同一个密钥进行多次加/解密, 将使得破解流密码变得非常简单.
-
-## Password Protection
+Password [mis-management](https://www.hacksplaining.com/prevention/password-mismanagement),
+使用同一个密钥 (reused key) 进行多次加/解密, 将使得破解流密码变得非常简单:
 
 - Require complex password.
 - Require multi-factor authentication.
@@ -25,16 +22,14 @@ Password [mis-management](https://www.hacksplaining.com/prevention/password-mism
   - 定期更换密钥.
   - 采用安全的密钥管理系统: Web 应用通过 service API 动态获取密钥, 只加载到内存中, 不写入本地文件.
 
-## User Enumeration Attack
+## User Enumeration
 
 通过暴力工具得到被攻击网站的用户名单, 并利用社工得到密码:
 
 REST API 无法抵抗此种攻击,
 e.g. GitHub [user profile](https://github.com).
 
-## User Enumeration Protection
-
-### User API Protection
+### API
 
 - 限制 API 访问频率与次数.
 - 设置 IP 黑名单.
@@ -43,7 +38,7 @@ e.g. GitHub [user profile](https://github.com).
   completely automated public turing test to tell computers and humans apart.
 - 隐藏用户 ID, 只显示昵称.
 
-### Login Protection
+### Login
 
 使攻击者无法枚举用户名, 他无法确定是用户不存在还是密码错误:
 
@@ -51,7 +46,7 @@ e.g. GitHub [user profile](https://github.com).
 - All login code-paths take **same time** on average: time consuming operations.
 - All login code-paths take **same context**: session ID, cookie.
 
-### Sign Up and Reset Protection
+### Signup and Reset
 
 Not with name, should with email:
 

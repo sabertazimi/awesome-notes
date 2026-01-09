@@ -1,6 +1,6 @@
 ---
 sidebar_position: 35
-tags: [Web, React, Reconciler]
+tags: [Web, React, Internals, Reconciler]
 ---
 
 # Update

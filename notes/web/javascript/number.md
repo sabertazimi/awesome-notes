@@ -31,7 +31,7 @@ const massOfElectronInKg = 9.109_383_56e-31
 const trillionInShortScale = 1e1_2
 ```
 
-## Number Conversion
+## Conversion
 
 | `x`         | `Number(x)`                                                 |
 | ----------- | ----------------------------------------------------------- |
@@ -61,7 +61,7 @@ assert.equal(
 )
 ```
 
-## Number Static Properties
+## Static Properties
 
 - `Number.NaN`.
 - `Number.NEGATIVE_INFINITY`.
@@ -104,7 +104,7 @@ assert.equal(
 // '1.23'
 ```
 
-## Not A Number
+## NaN
 
 ```ts
 const numberType = typeof Number.NaN // 'number'
@@ -129,7 +129,7 @@ function isNumber(value) {
 
 :::
 
-## Infinity Number
+## Infinity
 
 Infinity represents all values greater than 1.7976931348623157e+308.
 Infinity will be converted to `null` with `JSON.stringify()`.
@@ -165,7 +165,7 @@ Number.isFinite(123)
 // true
 ```
 
-## Safe Number
+## Safety
 
 - Safe integers:
   - Precision: 53 bits plus sign.
@@ -203,7 +203,7 @@ Number.isInteger(Number.POSITIVE_INFINITY)
 // false
 ```
 
-## Float Number
+## Float
 
 - 计算浮点数时, 应先计算整数, 再利用移位/乘法/除法转化为浮点数.
 - 浮点值的精确度最高可达 17 位小数.

@@ -5,9 +5,9 @@ tags: [Programming, Vim]
 
 # Buffer
 
-## File Search
+## Search
 
-built-in fuzzy file search `:find` or `:tabnew`
+Built-in fuzzy file search `:find` or `:tabnew`
 
 ```vim
 set nocompatible

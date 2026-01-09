@@ -5,7 +5,7 @@ tags: [CS, Algorithm, String]
 
 # String
 
-## String Manipulation
+## Manipulation
 
 ```cpp
 sstream::stringstream
@@ -24,7 +24,7 @@ getline(cin/sin, strbuf)
 
 - string::size_type pre, post 指针: 进行逐行匹配
 
-## KMP Algorithm
+## KMP
 
 在字符串 s 中寻找模式串 p,
 不回溯 s 与 p 的字符指针 (暴力枚举法采取回溯指针法),
@@ -109,7 +109,7 @@ function search(s: string, p: string): number {
 }
 ```
 
-## Rotate String Problem
+## Rotate
 
 ```cpp
 #include <string>
@@ -125,13 +125,13 @@ string left_rotate(string str, int offset) {
 }
 ```
 
-## Repeated String Problem
+## Repeat
 
 - Combine with `Rotate String` to get solutions.
 - Find two same character as boundary.
 - `(s + s).slice(1, -1).includes(s)`.
 
-## Palindrome String Problem
+## Palindrome
 
 - Reverse: `reverse === original`.
 - Recursion: `s[0] === s[length - 1] && isPalindrome(s.slice(1, length - 1))`

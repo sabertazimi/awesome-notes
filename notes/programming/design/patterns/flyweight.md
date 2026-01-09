@@ -24,7 +24,7 @@ tags: [Programming, Design, Design Pattern, Structural Pattern]
 
 :::
 
-## Flyweight Factory
+## Factory
 
 ```ts
 class Flyweight {
@@ -94,7 +94,7 @@ console.log(`Computers: ${computers.getCount()}`) // 6.
 console.log(`Flyweights: ${FlyweightFactory.getCount()}`) // 2.
 ```
 
-## Flyweight Pool
+## Pool
 
 DOM pool:
 

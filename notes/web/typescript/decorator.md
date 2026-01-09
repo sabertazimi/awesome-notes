@@ -1,5 +1,5 @@
 ---
-sidebar_position: 17
+sidebar_position: 20
 tags: [Web, TypeScript, Decorator]
 ---
 
@@ -39,7 +39,7 @@ class MyComponent extends React.Component<Props, State> {
 }
 ```
 
-## Decorators Pros
+:::tip[Pros]
 
 - 实现 Open-closed 原则.
 - 分离辅助性功能逻辑 (Before/After 钩子, Trace, Log, Report, Debounce/Throttle)
@@ -48,7 +48,7 @@ class MyComponent extends React.Component<Props, State> {
 - 装饰器模式是 Class 继承的一个替代模式.
   (类似于组合模式)
 
-## Decorators Types
+:::
 
 ```ts
 type Decorator = (value: Input, context: {
@@ -125,7 +125,7 @@ type ClassAutoAccessorDecorator = (
 } | void
 ```
 
-## Class Decorators
+## Class
 
 ```ts
 type Constructor<T = object> = new (...args: any[]) => T
@@ -163,7 +163,7 @@ const person = new Person('Simon')
  */
 ```
 
-## Property Decorators
+## Property
 
 ```ts
 function upperCase<T>(
@@ -183,7 +183,7 @@ class MyClass {
 console.log(new MyClass().prop1) // Logs: HELLO!
 ```
 
-## Method Decorators
+## Method
 
 ```ts
 function log<This, Args extends any[], Return>(
@@ -215,7 +215,7 @@ class MyClass {
 new MyClass().sayHello()
 ```
 
-## Getter and Setter Decorators
+## Getter and Setter
 
 ```ts
 function range<This, Return extends number>(min: number, max: number) {

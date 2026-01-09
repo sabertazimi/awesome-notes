@@ -5,15 +5,15 @@ tags: [Programming, OS, Linux, System, Boot, Grub, SSH, Administration, Monitori
 
 # System
 
-## Boot System
+## Grub
+
+### Boot System
 
 - 自动挂载项 /etc/fstab etc/rc.local
 - 自定义脚本-新建目录(加入环境变量)
 - 自定义别名 ~/.bashrc
 
-## Grub
-
-### Grub Configuration
+### Configuration
 
 - `/etc/default/grub`配置文件, 用于一些基本的修改项,
   如默认启动项, Grub 界面等待时长, Grub 主题 etc.
@@ -52,7 +52,7 @@ sudo apt install boot-repair
 boot-repair
 ```
 
-## SSH Commands
+## SSH
 
 ### Key
 
@@ -75,7 +75,7 @@ AllowUsers root
 AllowUsers sabertaz
 ```
 
-### SSH Config File
+### Config File
 
 `~/.ssh/config`:
 
@@ -115,7 +115,7 @@ ssh -qTfnN -D 1080 bwg
 google-chrome socks5 127.0.0.1 1080
 ```
 
-### 密钥文件
+### Key File
 
 Setup [SSH key](https://github.com/appleboy/ssh-action):
 
@@ -157,7 +157,7 @@ sshpass -p "$DEPLOY_PASSWORD" \
       -r ./build $DEPLOY_USER@$DEPLOY_ADDR:/var/www/html
 ```
 
-## Systemctl Command
+## Systemctl
 
 ```bash
 systemctl enable local
@@ -185,7 +185,7 @@ sysctl vm [-options] CONFIG
 swapoff
 ```
 
-### Custom Systemctl Service
+### Custom Service
 
 ```bash
 sudo vim /etc/systemd/system/ruoyi-server.service
@@ -212,7 +212,7 @@ RestartSec=5s
 WantedBy=multi-user.target
 ```
 
-## Crontab Commands
+## Crontab
 
 - `/etc/crontab`
 - [Crontab Quick Tutorial](https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html)
@@ -232,9 +232,9 @@ crontab -e(establish)
 - `/etc/cron.*ly`: 时间表.
 - `/etc/anacrontab`: 异步时间表.
 
-## Job Commands
+## Job
 
-### Background Jobs
+### Background
 
 - jobs —— 所有作业
 - atq —— 延时作业队列
@@ -246,7 +246,7 @@ crontab -e(establish)
 - nice -n number 作业号/名
 - renice number -p PID
 
-### Startup Jobs
+### Startup
 
 - /etc/rc.local —— 系统开机任务
 - /etc/profile/ /etc/bash.bashrc —— bash 启动任务/远程登陆任务

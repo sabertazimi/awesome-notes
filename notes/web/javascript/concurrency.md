@@ -1,11 +1,11 @@
 ---
 sidebar_position: 22
-tags: [Web, JavaScript, ECMAScript, Asynchronous, Concurrency]
+tags: [Web, JavaScript, ECMAScript, Concurrency, Asynchronous, Thread, Worker]
 ---
 
 # Concurrency
 
-## Sleep Function
+## Sleep
 
 ```ts
 function sleep(time) {
@@ -32,7 +32,6 @@ add(1, 2)
 - Keep latest updates.
 - Recover from failures.
 - Online and offline sync ([PouchDB](https://github.com/pouchdb/pouchdb)).
-- Tools: [redux-saga](https://github.com/redux-saga/redux-saga).
 
 ```ts
 export default {
@@ -113,31 +112,6 @@ globalThis.addEventListener(
 )
 ```
 
-### Web Worker Runtime
-
-- Web Worker 无法访问一些非常关键的 JavaScript 特性:
-  DOM (线程不安全), `window` 对象, `document` 对象, `parent` 对象.
-- `self` 上可用的属性是 `window` 对象上属性的严格子集,
-  [`WorkerGlobalScope`](https://developer.mozilla.org/docs/Web/API/WorkerGlobalScope):
-  - `navigation` 对象: `appName`, `appVersion`, `userAgent`, `platform`.
-  - `location` 对象: 所有属性只读.
-  - ECMAScript 对象: `Object`/`Array`/`Date`.
-  - `console` 对象.
-  - `setTimeout`/`setInterval` 方法.
-  - `XMLHttpRequest` 方法.
-  - `fetch` 方法.
-  - `caches` 对象: `ServicerWorker` `CacheStorage` 对象.
-  - `self` 对象: 指向全局 worker 对象.
-  - `close` 方法: 停止 worker.
-  - `importScripts` 方法: 加载外部依赖.
-  - [`MessagePort`](https://developer.mozilla.org/docs/Web/API/MessagePort)
-    方法: `postMessage`/`onmessage`/`onmessageerror`.
-- 工作者线程的脚本文件只能从与父页面相同的源加载,
-  从其他源加载工作者线程的脚本文件会导致错误.
-  在工作者线程内部可以使用 `importScripts()` 可以加载其他源的脚本.
-
-### Web Worker Basic Usage
-
 - 先 `on`, 后 `post`.
 - `main.js`/`worker.js` 的 `onmessage` 与 `postMessage` 相互触发.
 - 有两种方法可以停止 Worker:
@@ -205,7 +179,30 @@ testWorker('message from main thread').then((message) => {
 })
 ```
 
-### Web Worker Pool
+### Runtime
+
+- Web Worker 无法访问一些非常关键的 JavaScript 特性:
+  DOM (线程不安全), `window` 对象, `document` 对象, `parent` 对象.
+- `self` 上可用的属性是 `window` 对象上属性的严格子集,
+  [`WorkerGlobalScope`](https://developer.mozilla.org/docs/Web/API/WorkerGlobalScope):
+  - `navigation` 对象: `appName`, `appVersion`, `userAgent`, `platform`.
+  - `location` 对象: 所有属性只读.
+  - ECMAScript 对象: `Object`/`Array`/`Date`.
+  - `console` 对象.
+  - `setTimeout`/`setInterval` 方法.
+  - `XMLHttpRequest` 方法.
+  - `fetch` 方法.
+  - `caches` 对象: `ServicerWorker` `CacheStorage` 对象.
+  - `self` 对象: 指向全局 worker 对象.
+  - `close` 方法: 停止 worker.
+  - `importScripts` 方法: 加载外部依赖.
+  - [`MessagePort`](https://developer.mozilla.org/docs/Web/API/MessagePort)
+    方法: `postMessage`/`onmessage`/`onmessageerror`.
+- 工作者线程的脚本文件只能从与父页面相同的源加载,
+  从其他源加载工作者线程的脚本文件会导致错误.
+  在工作者线程内部可以使用 `importScripts()` 可以加载其他源的脚本.
+
+### Pool
 
 ```ts
 class TaskWorker extends Worker {
@@ -348,13 +345,13 @@ Promise.all(partialSumPromises)
 
 <!-- eslint-enable no-restricted-globals -->
 
-### Web Worker Performance
+### Performance
 
 - Web Worker performance [guide](https://mp.weixin.qq.com/s/IJHI9JB3nMQPi46b6yGVWw).
 
 ## Abort Controller
 
-### Abort Fetching
+### Fetch
 
 ```ts
 import { useEffect, useState } from 'react'
@@ -417,7 +414,7 @@ function usePostLoading() {
 export default usePostLoading
 ```
 
-### Abort Promise
+### Promise
 
 ```ts
 function wait(time: number, signal?: AbortSignal) {
@@ -447,7 +444,7 @@ wait(5000, abortController.signal)
   })
 ```
 
-### Abort Controller Helpers
+### Polyfill
 
 Abort controller [helpers polyfill](https://whistlr.info/2022/abortcontroller-is-your-friend):
 
@@ -474,7 +471,7 @@ if ((!any) in AbortSignal) {
 }
 ```
 
-## Asynchronous API Comparison
+## Asynchronous APIs
 
 - `promise` 和 `async/await` 专门用于处理异步操作.
 - `generator` 并不是专门为异步设计, 它还有其他功能 (对象迭代/控制输出/Iterator Interface/etc).

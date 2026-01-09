@@ -3,7 +3,7 @@ sidebar_position: 30
 tags: [Web, JavaScript, ECMAScript, Engine]
 ---
 
-# JavaScript Engine
+# Engine
 
 ## Variables Lifecycle
 
@@ -14,14 +14,14 @@ tags: [Web, JavaScript, ECMAScript, Engine]
 
 ## Execution Context
 
-### Global Execution Context
+### Global
 
 - Create global object (`window`).
 - Create `this` object (refer to `window`).
 - Declare and initialize variable/function (`undefined`),
   setup memory space for them.
 
-### Function Execution Context
+### Function
 
 - Create arguments object.
 - Create `this` object.
@@ -38,7 +38,7 @@ tags: [Web, JavaScript, ECMAScript, Engine]
 
 ## Event Loop
 
-### Browser Event Loop
+### Browser
 
 ![Event Loop](./figures/event-loop.jpg 'Event Loop')
 
@@ -280,7 +280,7 @@ test()
 // children3-1
 ```
 
-### Node Event Loop
+### Node.js
 
 Node.js can run I/O operations in a non-blocking way,
 meaning other code (and even other I/O operations) can be executed
@@ -408,7 +408,7 @@ console.log('glob2')
 - **TurboFan** optimizing compiler (2 for SpiderMonkey/Edge, 3 for Safari)
 - JavaScript implementation [list](https://notes.eatonphil.com/javascript-implementations.html).
 
-### V8 Object Shape
+### Object Shape
 
 V8 object [shapes](https://mathiasbynens.be/notes/shapes-ics):
 
@@ -441,7 +441,7 @@ const o = { x: 1 }
 
 Array shape: `Shape('length'), 'length' => 0 Offset, Writable`.
 
-### V8 Inline Cache
+### Inline Cache
 
 V8 use [ICs](https://blog.frontend-almanac.com/js-optimisation-ic)
 to memorize information (same shape) where to find properties on objects:
@@ -456,7 +456,7 @@ V8 为了提高对象属性的访问效率, 将属性分为[多种类型](https:
 - 常规属性 (properties): 字符串类型的属性 (包括负数/浮点数/Symbol), 存储为线性结构, 可快速访问.
 - 慢属性: 属性需要反复增删时, 会将属性存储类型从线性结构 (快属性) 改为字典结构 (慢属性).
 
-### V8 Object Structure
+### Object Structure
 
 Basic [object structure](https://blog.frontend-almanac.com/js-object-structure):
 
@@ -532,7 +532,7 @@ Object.defineProperty(arr, '0', { writable: false })
 // }}
 ```
 
-### V8 Garbage Collection
+### Garbage Collection
 
 V8 [garbage collection](https://mp.weixin.qq.com/s/VbAUPGt3sUVzEQHxWYmlBw)
 分代垃圾回收算法, 将堆分为两个空间:
@@ -540,7 +540,7 @@ V8 [garbage collection](https://mp.weixin.qq.com/s/VbAUPGt3sUVzEQHxWYmlBw)
 - 新生代: 存放短周期对象, 空间小, 使用 `Scavenge` 回收算法, 副垃圾回收器.
 - 老生代: 存放长周期对象, 空间大, 使用 `Mark-Sweep-Compact` 回收算法, 主垃圾回收器.
 
-### V8 Scavenge GC Algorithm
+### Scavenge
 
 - 空间换时间算法 (复制算法).
 - 标记活动对象和非活动对象.
@@ -550,14 +550,14 @@ V8 [garbage collection](https://mp.weixin.qq.com/s/VbAUPGt3sUVzEQHxWYmlBw)
 - 新生代对象晋升 (计算存活周期, 初始为 nursery 子代):
   allocation -> nursery 子代 -> intermediate 子代 -> 老生代.
 
-### V8 Mark-Sweep-Compact GC Algorithm
+### Mark-Sweep-Compact
 
 - 老生代空间大, 无法使用空间换时间 (复制) 算法.
 - 标记阶段: 对老生代对象进行第一次扫描, 对活动对象进行标记.
 - 清理阶段: 对老生代对象进行第二次扫描, 清除未标记的对象.
 - 压缩阶段: 每次清理完非活动对象, 把剩下活动对象整理到内存的一侧, 回收掉边界上的内存 (以备后续大对象老生代).
 
-### V8 GC Stop-The-World
+### Stop-The-World
 
 垃圾回收优先于代码执行, 会先停止代码的执行,
 等到垃圾回收完毕, 再执行 JS 代码, 成为全停顿.
@@ -569,7 +569,7 @@ Orinoco 优化 (优化全停顿现象):
 - Concurrent GC.
 - Parallel GC.
 
-### V8 Performance Tools
+### Performance
 
 - [Deoptigate](https://github.com/thlorenz/deoptigate)
 - [Turbolizer](https://github.com/thlorenz/turbolizer)
@@ -583,7 +583,7 @@ Orinoco 优化 (优化全停顿现象):
 - Firefox: Gecko + SpiderMonkey.
 - Safari: Webkit (fork of `KHTML` and `KJS` from `KDE`) + JavaScriptCore (Nitro).
 
-## Browser Process Architecture
+Browser process architecture:
 
 - 浏览器进程:
   - Singleton.
@@ -615,9 +615,11 @@ Orinoco 优化 (优化全停顿现象):
 - 插件进程:
   主要是负责插件的运行, 因插件易崩溃, 所以需要通过隔离以保证插件进程崩溃不会对浏览器和页面造成影响.
 
-## Chromium Rendering Engine
+## RenderingNG
 
-### RenderingNG Architecture
+Chromium rendering engine.
+
+### Architecture
 
 [![RenderingNG Architecture](./figures/rendering-ng.webp)](https://developer.chrome.com/articles/renderingng)
 
@@ -645,7 +647,7 @@ Orinoco 优化 (优化全停顿现象):
 - De-duplication of work:
   only compute each thing once.
 
-### RenderingNG Pipeline
+### Pipeline
 
 [RenderingNG](https://developer.chrome.com/articles/renderingng-architecture)
 [pipeline](https://developer.chrome.com/articles/renderingng-architecture/#the-pipeline-stages)
@@ -671,9 +673,7 @@ Scrolling and visual effects animation can skip `layout`, `pre-paint` and `paint
 If `layout`, `pre-paint`, and `paint` can be skipped for visual effects,
 they can be run entirely on `compositor` thread and **skip `main` thread**.
 
-### RenderingNG Render Process
-
-Render process:
+### Render Process
 
 - Download HTML.
 - Parser/Script.
@@ -735,7 +735,7 @@ Threads help achieve:
 
 :::
 
-### RenderingNG HTML Parser
+### HTML Parser
 
 DTD is context-sensitive grammar.
 Use State Machine pattern to implement a tokenizer:
@@ -761,7 +761,7 @@ HTML parser performance:
 - `<= 60` children nodes.
 - `<= 32` levels.
 
-### RenderingNG CSS Parser
+### CSS Parser
 
 CSS is context-free grammar.
 Webkit use flex/bison (bottom-to-up), Gecko use up-to-bottom.
@@ -793,7 +793,7 @@ pseudo
   ;
 ```
 
-### RenderingNG Layout Engine
+### Layout Engine
 
 为避免对所有细小更改都进行整体布局, 浏览器采用了一种 `dirty bit` 系统.
 如果某个呈现器发生了更改, 或者将自身及其子代标注为 `dirty`, 则需要进行布局:
@@ -818,7 +818,7 @@ It helps mitigate layout bugs including:
 - [Over-invalidation](https://developer.chrome.com/articles/layoutng/#over-invalidation-and-performance).
 - [Hysteresis](https://developer.chrome.com/articles/layoutng/#hysteresis).
 
-### RenderingNG Paint Engine
+### Paint Engine
 
 Paint order:
 
@@ -849,27 +849,27 @@ JavaScript 阻塞渲染:
 - JavaScript 阻塞了同在主线程的 `Layout` 阶段与 `Paint` 阶段,
   间接阻塞了 `compositor` thread 与 `Viz` process 的绘制操作.
 
-### RenderingNG Video Engine
+### Video Engine
 
 [![RenderingNG Video Engine](figures/rendering-ng-video-engine.webp)](https://developer.chrome.com/articles/videong)
 
 - Each video talks directly to `Viz` process:
   video rendering is largely decoupled from `RenderingNG` main rendering pipeline.
 
-### RenderingNG Scrolling Performance
+### Scrolling Performance
 
 - Cached GPU textures and display lists:
   help battery life and animation frame rate for scrolling.
 - Every possible scroll is threaded:
   don't have to depend on the JavaScript and layout thread.
 
-### RenderingNG Animation Performance
+### Animation Performance
 
 [![RenderingNG Transform Animation](./figures/rendering-ng-animation.webp)](https://developer.chrome.com/articles/renderingng-architecture/#an-example-in-practice)
 
 CSS transform animation only runs on `compositor` thread and `Viz` process.
 
-## Browser Engine References
+## References
 
 - Chromium rendering engine: [RenderingNG](https://developer.chrome.com/blog/renderingng).
 - Chromium `RenderingNG` [architecture](https://developer.chrome.com/blog/renderingng-architecture).

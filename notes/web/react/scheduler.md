@@ -1,6 +1,6 @@
 ---
 sidebar_position: 31
-tags: [Web, React, Scheduler]
+tags: [Web, React, Internals, Scheduler]
 ---
 
 # Scheduler
@@ -10,7 +10,7 @@ not only including `Reconciler.performSyncWorkOnRoot`/`Reconciler.performConcurr
 but also for non-react tasks
 (meaning `Scheduler` module can work standalone without `React`).
 
-## Scheduler Priority
+## Priority
 
 React 16, unstable concurrent mode with
 [`Priorities`](https://github.com/facebook/react/blob/main/packages/scheduler/src/SchedulerPriorities.js):
@@ -79,7 +79,7 @@ export const IdleLane: Lanes = /*                       */ 0b0100000000000000000
 export const OffscreenLane: Lane = /*                   */ 0b1000000000000000000000000000000
 ```
 
-## Scheduler Workflow
+## Workflow
 
 Scheduler main [workflow](https://github.com/facebook/react/blob/main/packages/scheduler/src/forks/Scheduler.js):
 
@@ -101,7 +101,7 @@ Scheduler main [workflow](https://github.com/facebook/react/blob/main/packages/s
 会将其先放入 Timer Queue,
 等待延时完成后再将其放入 Task Queue.
 
-## Scheduler Time Slicing
+## Time Slicing
 
 ```ts
 // 时间切片周期, 默认是 5ms.
@@ -204,7 +204,7 @@ function performWorkUntilDeadline() {
 }
 ```
 
-## Scheduler Task Queue
+## Task Queue
 
 Task queue is [MinHeap](https://github.com/facebook/react/blob/main/packages/scheduler/src/SchedulerMinHeap.js),
 storing Tasks.
@@ -283,7 +283,7 @@ function handleTimeout(currentTime) {
 }
 ```
 
-## Scheduler Work Loop
+## Work Loop
 
 当 `callback()` 返回函数时, 表明产生连续回调 (e.g. 出现更高优先任务/时间分片用完, 渲染中断),
 需将返回的函数再次放入任务队列, 继续进行调度直至清空任务队列 (渲染恢复).

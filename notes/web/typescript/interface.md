@@ -29,7 +29,7 @@ name = {
 }
 ```
 
-## Interface Function
+## Function
 
 - Use a method function for class instances (`this` binding to function).
 - Use a property function otherwise.
@@ -41,7 +41,7 @@ interface HasBothFunctionTypes {
 }
 ```
 
-## Interface Implementation
+## Implements
 
 Implementing interface is purely safety check,
 does not copy any interface members onto class definition:
@@ -63,7 +63,7 @@ class CrazyClass implements Crazy {
 const crazy = new CrazyClass() // crazy would be { hello:123 }
 ```
 
-## Interface Extension
+## Extends
 
 ### Overridden Properties
 
@@ -89,7 +89,7 @@ interface WithNumericName extends WithNullableName {
 //       Type 'number' is not assignable to type 'string'.
 ```
 
-### Interface Merging
+### Merging
 
 Interface merging isn’t used often in day-to-day `TypeScript` development,
 but useful for augmenting interfaces from
@@ -122,7 +122,7 @@ declare module '3rd-party-module' {
 }
 ```
 
-## Interface and Type Alias
+## Type Alias
 
 - Type aliases may not participate in declaration merging, but interfaces can.
 - Interfaces may only be used to declare the shapes of object, not re-name primitives.

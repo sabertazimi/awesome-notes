@@ -15,7 +15,7 @@ Software design is the art of managing dependencies and abstractions.
 
 ![Common Design Patterns](./figures/design-patterns.png 'Common Design Patterns')
 
-## Creation Patterns
+## Creation
 
 - [Factory Method](./factory-method.md) (工厂方法): 通过将数据和事件接口化来构建若干个子类.
 - [Abstract Factory](./abstract-factory.md) (抽象工厂): 建立若干族类的一个实例, 这个实例不需要具体类的细节信息 (抽象类).
@@ -23,7 +23,7 @@ Software design is the art of managing dependencies and abstractions.
 - [Prototype](./prototype.md) (原型): 一个完全初始化的实例, 用于拷贝或者克隆.
 - [Singleton](./singleton.md) (单例): 一个类只有唯一的一个实例, 这个实例在整个程序中有一个全局的访问点.
 
-## Structural Patterns
+## Structural
 
 - [Adapter](./adapter.md) (适配器模式): 将不同类的接口进行匹配与调整, 使得内部接口不兼容的类可以协同工作.
 - [Bridge](./bridge.md) (桥接模式): 将对象的接口从其实现中分离出来, 这样对象的实现和接口可以独立的变化.
@@ -35,7 +35,7 @@ Software design is the art of managing dependencies and abstractions.
 - [Flyweight](./flyweight.md) (享元模式) 一个细粒度对象, 用于将包含在其它地方的信息 在不同对象之间高效地共享.
 - [Proxy](./proxy.md) (代理模式): 一个充当占位符的对象用来代表一个真实的对象.
 
-## Behavioral Patterns
+## Behavioral
 
 - [Chain of Responsibility](./chain-of-responsibility.md) (响应链): 一种将请求在一串对象中传递的方式, 寻找可以处理这个请求的对象.
 - [Command](./command.md) (命令): 封装命令请求为一个对象, 从而使记录日志, 队列缓存请求, 未处理请求进行错误处理 这些功能称为可能.
@@ -48,13 +48,13 @@ Software design is the art of managing dependencies and abstractions.
 - [Template Method](./template-method.md) (模板方法): 在一个方法中为某个算法建立一层外壳, 将算法的具体步骤交付给子类去做.
 - [Visitor](./visitor.md) (访问者): 为类增加新的操作而不改变类本身.
 
-## Dependency Patterns
+## Dependency
 
 - [IoC and DI](./ioc-di.md) (控制反转与依赖注入模式):
   将组件间的依赖关系从程序内部提到外部来管理, 将组件的依赖通过外部以参数或其他形式注入.
 - [Mixin](./mixin.md) (混入模式): 将多个对象的属性混入同一个对象, 达到继承/扩展/组合的效果.
 
-## Patterns References
+## References
 
 - JavaScript [patterns](https://www.patterns.dev).
 - JavaScript design [patterns](http://www.dofactory.com/javascript/design-patterns).

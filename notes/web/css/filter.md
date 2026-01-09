@@ -1,6 +1,6 @@
 ---
-sidebar_position: 17
-tags: [Web, CSS]
+sidebar_position: 27
+tags: [Web, CSS, Filter, Blend]
 ---
 
 # Filter
@@ -195,7 +195,7 @@ main::before {
 }
 ```
 
-## Filter and Blend References
+## References
 
 - Instagram [filters](https://github.com/una/CSSgram).
 - Image [effects](https://github.com/bennettfeely/image-effects).

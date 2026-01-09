@@ -1,6 +1,6 @@
 ---
 sidebar_position: 29
-tags: [Web, JavaScript, ECMAScript, Style Guide]
+tags: [Web, JavaScript, ECMAScript, Style Guide, ESLint]
 ---
 
 # Style Guide
@@ -75,7 +75,7 @@ tags: [Web, JavaScript, ECMAScript, Style Guide]
 }
 ```
 
-## Naming Style
+## Naming Conventions
 
 - 变量: 名词前缀.
 - 方法 / 函数: 动词前缀.
@@ -85,14 +85,19 @@ tags: [Web, JavaScript, ECMAScript, Style Guide]
 - 缩略词和缩写都必须是全部大写 / 小写.
 - 对于 `jQuery` 对象的变量使用 `$` 作为前缀.
 
-## Variable Style
+## Variable
 
 - No single `let/const` for multiple variables.
 - Sort `let/const`.
 - No chains assignment (create implicit global variable).
 - Prefer `()` wrap multiple line.
 
-## Object Style
+## String
+
+- Prefer `'` not `"`.
+- Prefer template literals not `'str1' + 'str2'`.
+
+## Object
 
 - Prefer literal not `Object()` constructor.
 - Prefer object-shorthand.
@@ -127,7 +132,7 @@ function getProp(prop) {
 }
 ```
 
-## Array Style
+## Array
 
 - Prefer literal.
 - Prefer `push` not `[]`.
@@ -143,115 +148,7 @@ const nodes = Array.from(foo)
 const nodes = [...foo]
 ```
 
-## Destruct Style
-
-对于多个返回值使用对象解构, 而不是数组解构:
-
-```ts
-// bad
-function processInputBad(input) {
-  // 处理代码...
-  return [left, right, top, bottom]
-}
-
-// 调用者需要考虑返回数据的顺序.
-const [left, __, top] = processInputBad(input)
-
-// good
-function processInput(input) {
-  // 处理代码 ...
-  process()
-
-  return { left, right, top, bottom }
-}
-
-// 调用者只选择他们需要的数据.
-const { left, top } = processInput(input)
-```
-
-## String Style
-
-- Prefer `'` not `"`.
-- Prefer template literals not `'str1' + 'str2'`.
-
-## Function Style
-
-- No reassign parameters (implicit side effect and bad performance).
-- Prefer `...args` not `arguments`.
-- Prefer ES6 default parameters not default expression pattern.
-
-## Arrow Function Style
-
-- Prefer `()` wrap multiple line return value.
-
-## Module Style
-
-- No duplicated export path:
-
-```ts
-// bad
-// import foo from 'foo';
-// import { named1, named2 } from 'foo';
-
-// good
-import foo, { named1, named2 } from 'foo'
-```
-
-- No export `let`:
-
-```ts
-// bad
-// let foo = 3;
-// export { foo };
-
-// good
-const foo = 3
-export { foo }
-```
-
-## Iterator and Generator Style
-
-- 使用 `Object.keys() / Object.values() / Object.entries()` 迭代对象生成数组.
-- 使用 `map/reduce/filter/any/every/some/find/findIndex/ ...` 遍历数组.
-- Prefer functional style iterator:
-
-```ts
-const numbers = [1, 2, 3, 4, 5]
-
-// bad
-let sum = 0
-for (const num of numbers)
-  sum += num
-
-console.log(sum === 15)
-
-// good
-let sum = 0
-numbers.forEach((num) => {
-  sum += num
-})
-console.log(sum === 15)
-
-// best (use the functional force)
-const sum = numbers.reduce((total, num) => total + num, 0)
-console.log(sum === 15)
-
-// bad
-const increasedByOne = []
-for (let i = 0; i < numbers.length; i++)
-  increasedByOne.push(numbers[i] + 1)
-
-// good
-const increasedByOne = []
-numbers.forEach((num) => {
-  increasedByOne.push(num + 1)
-})
-
-// best (keeping it functional)
-const increasedByOne = numbers.map(num => num + 1)
-```
-
-## Expression Style
+## Expression
 
 `if` 语句使用 ToBoolean 的抽象方法来计算表达式的结果:
 
@@ -324,7 +221,107 @@ switch (foo) {
 }
 ```
 
-## Space Style
+## Function
+
+- No reassign parameters (implicit side effect and bad performance).
+- Prefer `...args` not `arguments`.
+- Prefer ES6 default parameters not default expression pattern.
+- Arrow function: prefer `()` wrap multiple line return value.
+
+## Destructuring
+
+对于多个返回值使用对象解构, 而不是数组解构:
+
+```ts
+// bad
+function processInputBad(input) {
+  // 处理代码...
+  return [left, right, top, bottom]
+}
+
+// 调用者需要考虑返回数据的顺序.
+const [left, __, top] = processInputBad(input)
+
+// good
+function processInput(input) {
+  // 处理代码 ...
+  process()
+
+  return { left, right, top, bottom }
+}
+
+// 调用者只选择他们需要的数据.
+const { left, top } = processInput(input)
+```
+
+## Module
+
+- No duplicated export path:
+
+```ts
+// bad
+// import foo from 'foo';
+// import { named1, named2 } from 'foo';
+
+// good
+import foo, { named1, named2 } from 'foo'
+```
+
+- No export `let`:
+
+```ts
+// bad
+// let foo = 3;
+// export { foo };
+
+// good
+const foo = 3
+export { foo }
+```
+
+## Iterator and Generator
+
+- 使用 `Object.keys() / Object.values() / Object.entries()` 迭代对象生成数组.
+- 使用 `map/reduce/filter/any/every/some/find/findIndex/ ...` 遍历数组.
+- Prefer functional style iterator:
+
+```ts
+const numbers = [1, 2, 3, 4, 5]
+
+// bad
+let sum = 0
+for (const num of numbers)
+  sum += num
+
+console.log(sum === 15)
+
+// good
+let sum = 0
+numbers.forEach((num) => {
+  sum += num
+})
+console.log(sum === 15)
+
+// best (use the functional force)
+const sum = numbers.reduce((total, num) => total + num, 0)
+console.log(sum === 15)
+
+// bad
+const increasedByOne = []
+for (let i = 0; i < numbers.length; i++)
+  increasedByOne.push(numbers[i] + 1)
+
+// good
+const increasedByOne = []
+numbers.forEach((num) => {
+  increasedByOne.push(num + 1)
+})
+
+// best (keeping it functional)
+const increasedByOne = numbers.map(num => num + 1)
+```
+
+## Spacing
 
 - 键入最后一个运算符后再换行, 运算符置于行尾可使 `Automatic Semicolon Insertion` 机制失效.
 - 换行后保持 2 个缩进层次.
@@ -348,7 +345,7 @@ if (a && b && c) {
 }
 ```
 
-## Comments Style
+## Comments
 
 `JSDoc` [best practice](https://deno.com/blog/document-javascript-package):
 

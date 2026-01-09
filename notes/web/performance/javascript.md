@@ -31,15 +31,17 @@ tags: [Web, Performance, JavaScript]
   `hidden class` (`V8` 为了优化属性访问时间而创建的隐藏类) 失效,
   让对象变成 `slow object`.
 
-## Danger Features
+:::danger[Anti Patterns]
 
 - `eval()`.
 - `with () {}`.
 - `new Function()`.
 
-## Function Performance
+:::
 
-### Local Variables Performance
+## Function
+
+### Local Variables
 
 - 局部变量引用全局变量/全局变量作为参数传入函数: 加快符号解析.
 - 局部变量缓存 DOM 元素.
@@ -53,14 +55,14 @@ const DOM = tazimi.util.Dom
 DOM.method.call(/* 关注 this 指针 */)
 ```
 
-### Scope Chain Performance
+### Scope Chain
 
 由于作用域链的关系, 标识符解析时,
 寻找局部变量速度远快于寻找全局变量速度 (作用域链越长, 查找变量所需时间越长).
 故应将全局变量作为参数传入函数进行调用, 不但效率高, 而且易于维护与测试.
 即**利用局部变量引用全局变量, 加快标识符解析**.
 
-### Memoization Function
+### Memoization
 
 ```ts
 function memoize(fn) {
@@ -78,7 +80,7 @@ memoizedGetDistance('Murcia', 'Madrid') // => computed, slow
 memoizedGetDistance('Murcia', 'Madrid') // => cached, fast!
 ```
 
-## Loop Performance
+## Loop
 
 倒序循环可提升性能:
 
@@ -121,7 +123,7 @@ while (i) {
 }
 ```
 
-## Math Performance
+## Math
 
 ### Bit Operators
 
@@ -138,12 +140,14 @@ const OPTION_E = 16
 const options = OPTION_A | OPTION_C | OPTION_D
 ```
 
-## Reduce Repeat Manipulation
+## Repeat
+
+Reduce repeat:
 
 - 特性/浏览器检测代码只运行一次.
 - 惰性定义模式/自定义模式.
 
-## Timer Performance
+## Timer
 
 JavaScript 代码与 UI 共享线程.
 
@@ -232,7 +236,7 @@ function pollTimerTask(time) {
 }
 ```
 
-### Time Slicing
+### Slice
 
 ```ts
 function saveDocument(id) {
@@ -270,7 +274,7 @@ function processArray(items, process, callback) {
 }
 ```
 
-### Task Batching and Scheduling
+### Batch and Scheduler
 
 [Prioritized task scheduler API](https://developer.mozilla.org/en-US/docs/Web/API/Prioritized_Task_Scheduling_API):
 
@@ -508,7 +512,7 @@ _.throttle = function (func, wait, options) {
 }
 ```
 
-### Animation Frame Throttling
+### Animation Frame
 
 ```ts
 function useAnimation() {
@@ -540,7 +544,7 @@ function useAnimation() {
 }
 ```
 
-## Event Delegation
+## Event Delegate
 
 - 事件委托利用的是事件冒泡机制, 只制定一事件处理程序, 就可以管理某一类型的所有事件.
 - Increases performance and reduces memory consumption:

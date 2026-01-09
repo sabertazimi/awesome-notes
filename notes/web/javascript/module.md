@@ -1,11 +1,13 @@
 ---
 sidebar_position: 23
-tags: [Web, JavaScript, ECMAScript, Module]
+tags: [Web, JavaScript, ECMAScript, Module, CJS, AMD, UMD, ESM]
 ---
 
 # Module
 
-## CRUST Principles
+## Principles
+
+CRUST:
 
 - Consistent: ES6 API design `Array.XXX(fn)`.
 - Resilient: jQuery sizzle API design `$(element)`/`$(selector)`/`$(selector, context)`.
@@ -13,9 +15,7 @@ tags: [Web, JavaScript, ECMAScript, Module]
 - Simple: Simple `fetch` API design.
 - Tiny: Tiny surface areas.
 
-## Namespace Module Pattern
-
-### Namespace Module Constructor
+## Namespace
 
 - 命名空间.
 - 依赖模式.
@@ -56,8 +56,6 @@ APP.namespace('modules.module51')
 // long namespace
 APP.namespace('once.upon.a.time.there.was.this.long.nested.property')
 ```
-
-### Namespace Module Usage
 
 通过传参匿名函数, 创建命名空间, 进行模块包裹:
 
@@ -132,9 +130,7 @@ APP.utilities.array = (function (app, global) {
 })(APP, this)
 ```
 
-## Sandbox Module Pattern
-
-### Sandbox Module Constructor
+## Sandbox
 
 - 私有属性绑定至 this/prototype.
 - 特权方法绑定至 modules/prototype.
@@ -206,8 +202,6 @@ Sandbox.modules.ajax = function (box) {
 }
 ```
 
-### Sandbox Module Usage
-
 ```ts
 Sandbox(['ajax', 'event'], (box) => {
   // console.log(box);
@@ -233,7 +227,7 @@ Sandbox('dom', 'event', (box) => {
 })
 ```
 
-## CommonJS Pattern
+## CommonJS
 
 - 无论一个模块在 `require()` 中被引用多少次, 模块永远是单例, 只会被加载一次.
 - 模块第一次加载后会被缓存, 后续加载会取得缓存的模块.
@@ -259,7 +253,7 @@ function require(moduleId) {
 }
 ```
 
-## AMD Pattern
+## AMD
 
 Asynchronous module definition:
 
@@ -286,7 +280,7 @@ define('moduleA', ['require', 'exports'], (require, exports) => {
 })
 ```
 
-## UMD Pattern
+## UMD
 
 Universal module definition:
 
@@ -322,9 +316,9 @@ Universal module definition:
 )
 ```
 
-## ES6 Module
+## ESM
 
-### ES6 Module Features
+### Features
 
 - Singleton:
   - 模块是单例.
@@ -372,7 +366,7 @@ Universal module definition:
 <script nomodule src="script.js"></script>
 ```
 
-### ES6 Module Syntax
+### Syntax
 
 ```ts
 import * as Bar from './bar.js' // Object.freeze(Bar)
@@ -408,7 +402,7 @@ export { foo as myFoo } from 'node:module'
 export * from 'utils'
 ```
 
-### ES6 Module Imports
+### Imports
 
 Import meta `import.meta`:
 
@@ -462,7 +456,7 @@ Import map `importmap`:
 
 :::
 
-### ES6 Module Exports
+### Exports
 
 - CommonJS 模块是运行时加载, ES6 模块是编译时输出接口.
 - CommonJS 是单个值导出, ES6 Module 可以导出多个.

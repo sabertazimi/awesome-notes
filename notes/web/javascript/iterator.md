@@ -5,7 +5,7 @@ tags: [Web, JavaScript, ECMAScript, Iterator]
 
 # Iterator
 
-## Iteration Protocol
+## Protocol
 
 Iteration [protocol](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Iteration_protocols):
 
@@ -66,9 +66,9 @@ interface IteratorResult<T> {
 }
 ```
 
-## Synchronous Iterator
+## Synchronous
 
-### Iterable Object
+### Object
 
 ```ts
 function methodsIterator() {
@@ -145,7 +145,7 @@ for (const x of zipped)
 // ['c', 'f']
 ```
 
-### Iterable Class
+### Class
 
 ```ts
 class Counter {
@@ -200,8 +200,6 @@ const counter3 = new Counter(5)
 const [a, b] = counter3
 // Exiting early
 ```
-
-### Class Iterator
 
 ```ts
 // Class Iterator:
@@ -270,7 +268,7 @@ for (const { x, y, value } of matrix)
 // → 1 1 value 1, 1
 ```
 
-## Asynchronous Iterator
+## Asynchronous
 
 ```ts
 const AsyncIterable = {
@@ -363,7 +361,7 @@ function remotePostsAsyncIteratorsFactory() {
 })()
 ```
 
-## Closable Iterator
+## Closable
 
 - An iterator is closable if it has a method `return()`.
 

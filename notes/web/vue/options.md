@@ -1,9 +1,9 @@
 ---
-tags: [Web, Vue, Options API]
+tags: [Web, Vue, Internals, Options]
 sidebar_position: 22
 ---
 
-# Options API
+# Options
 
 Parent component options:
 
@@ -79,7 +79,7 @@ vm.$options = {
 `core/instance/state.js/initProps()`: `this.XXX` -> `this._props.XXX`.
 `core/instance/state.js/initData()`: `this.XXX` -> `this._data.XXX`.
 
-## Vue Merge Options
+## Merge
 
 `mergeOptions` (`core/util/options.js`):
 
@@ -140,7 +140,7 @@ function mergeField(key) {
 }
 ```
 
-## Vue Normalize Options
+## Normalize
 
 Props:
 

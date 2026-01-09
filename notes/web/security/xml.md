@@ -5,7 +5,7 @@ tags: [Web, Security, XML, Vulnerability]
 
 # XML
 
-## XML Attack
+## Attack
 
 Inline document type definition in XML
 led to dangerous macros:
@@ -13,7 +13,7 @@ led to dangerous macros:
 - XML bombs.
 - XML external entities.
 
-## XML Protection
+## Protection
 
 - Disable DTD (Document Type Definitions) parse in XML parser:
   `xml2js`, `parse-xml`, `node-xml`.

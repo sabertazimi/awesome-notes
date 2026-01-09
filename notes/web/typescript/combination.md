@@ -1,11 +1,11 @@
 ---
 sidebar_position: 10
-tags: [Web, TypeScript]
+tags: [Web, TypeScript, Combination, Union, Intersection]
 ---
 
-# Combination Types
+# Combination
 
-## Union Type
+## Union
 
 ```ts
 function formatCommandLine(command: string[] | string) {
@@ -20,7 +20,7 @@ function formatCommandLine(command: string[] | string) {
 }
 ```
 
-## Discriminated Union Type
+## Discriminated Union
 
 ```ts
 interface Square {
@@ -129,7 +129,7 @@ interface PointLayer {
 type GoodLayer = FillLayer | LineLayer | PointLayer
 ```
 
-## Intersection Type
+## Intersection
 
 `intersection` type 具有所有类型的功能:
 

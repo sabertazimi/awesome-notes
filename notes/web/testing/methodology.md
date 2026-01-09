@@ -3,9 +3,9 @@ sidebar_position: 1
 tags: [Web, Testing]
 ---
 
-# Testing Methodology
+# Methodology
 
-## Testing Pyramid
+## Pyramid
 
 - Unit testing.
 - Module testing.
@@ -13,15 +13,15 @@ tags: [Web, Testing]
 - System testing.
 - E2E testing.
 
-## Testing Model
+## Model
 
-### PIE Model
+### PIE
 
 - (Execution) Fault.
 - (Infection) Error.
 - (Propagation) Failure.
 
-### Heuristic Test Strategy Model
+### Heuristic Strategy
 
 软件功能测试 (难以实现完全自动化):
 
@@ -37,7 +37,7 @@ tags: [Web, Testing]
 - 时间(Time):影响产品的时间因素
 - 组合元素:测试产品功能间协作
 
-### User Experience Testing
+### User Experience
 
 对软件功能测试的有益补充:
 
@@ -46,16 +46,16 @@ tags: [Web, Testing]
 - 性能体验
 - 可靠性体验(如软件兼容性)
 
-### Mobile Testing
+### Mobile
 
 - 机型碎片化.
 - 屏幕碎片化.
 - 环境碎片化.
 - 耗电量.
 
-## Testing Design
+## Patterns
 
-### FAIR Principle
+### FAIR
 
 - Fast tests:
   break down into small separate and well structured tests.
@@ -71,7 +71,7 @@ tags: [Web, Testing]
   - `Math.random()` API: `jest.spyOn()`/`jest.mock()`/`cy.stub()`.
 - 如果不能保持测试套件的**确定性**和**速度**, 那么它将成为生产力的障碍.
 
-### AAA Pattern
+### AAA
 
 Structure every test to 3 part code:
 
@@ -83,30 +83,7 @@ Structure every test to 3 part code:
 
 起始顶点至终止顶点.
 
-### Test-Driven Development
-
-#### Test-Driven Development Upside
-
-- Reduce costs: find bugs early.
-- Reduce fear and anxiety.
-- Lead to better-designed and more testable code.
-- Make tests more thorough (彻底的).
-  Easy to refactor legacy code.
-
-#### Test-Driven Development Use Case
-
-- Pure function.
-  - 工具函数.
-  - 数据转换函数.
-  - 后端接口函数.
-- Bug fix:
-  - Add failed testing first.
-  - One bug fixed, one or more testing added.
-- UI interaction.
-
-## Testing Methods
-
-### Basic Testing Types
+## Methods
 
 - Positive tests:
   valid inputs,
@@ -121,28 +98,28 @@ Structure every test to 3 part code:
 - Top-down testing:
   allows to iterate more quickly but will generate more coarse feedback.
 
-### 图结构覆盖方法
+### 图结构
 
 - 顶点覆盖,边覆盖,边对覆盖(三顶点,两邻边)
 - VC/EC/EPC 法
 
-### 数据流覆盖方法
+### 数据流
 
 - 数据流覆盖:定义处覆盖,使用处覆盖
 - DU 法(Data&Use)
 
-### 逻辑覆盖方法
+### 逻辑测试
 
 - 逻辑覆盖:条件处覆盖,判定处覆盖
 - DC(Decision),CC(Condition)法
 - MC/DC 法
 - MCC 法(完全覆盖)
 
-### 随机测试方法
+### 随机测试
 
 - ART(随机测试):每个用例间"距离"尽可能远
 
-### 黑盒测试方法
+### 黑盒测试
 
 - 等价类划分:合法输入(软件功能),非法输入(异常处理)
 - 等价类的边界值分析:合法 MIN,MIN+,MAX-,MAX 非法:MIN-,MAX+
@@ -159,7 +136,7 @@ Structure every test to 3 part code:
 
 即在执行过目标代码的测试用例中失败测试用例占比
 
-### Fuzzing Testing
+### Fuzzing
 
 Fuzzing 是一种通过向目标系统提供非预期的输入并监视异常结果来发现软件漏洞的方法.
 
@@ -249,21 +226,21 @@ O.makeBread({ type: wheat, size: 99, name: 'foo' })
 
 0 级耦合度.
 
-## Unit Testing
+## Units
 
-### Unit Testing Principles
+### Principles
 
 - 代码覆盖率.
 - 非法值测试.
 - 边界测试.
 - 非边界测试.
 
-### Testing Code Isolation
+### Code Isolation
 
 - 编写代码时, 保持最小复杂度(最小依赖, 最低耦合).
 - 利用 mock/stub 模拟外部依赖/测试数据.
 
-### Testing Mocks
+### Mocks
 
 - mock: 模拟对象中的方法/接口
 - stub: 模拟对象中的返回值
@@ -301,10 +278,9 @@ describe('Sum suite File', () => {
 })
 ```
 
-## Headless Testing
+## Headless Automation
 
-- [Puppeteer](https://pptr.dev/#?product=Puppeteer&version=v1.16.0&show=api-class-page)
-- [Puppeteer Recipes](https://addyosmani.com/blog/puppeteer-recipes)
+Puppeteer [recipes](https://addyosmani.com/blog/puppeteer-recipes):
 
 ```ts
 const puppeteer = require('puppeteer')
@@ -315,6 +291,12 @@ await page.goto('https://example.com')
 await page.screenshot({ path: 'example.png' })
 await browser.close()
 ```
+
+- `page.setOfflineMode`
+- `page.setGeolocation`
+- `page.metrics`
+- `page.accessibility`
+- `page.coverage`
 
 ### Browser Context
 
@@ -329,11 +311,11 @@ await page.goto('https://example.com')
 await context.close()
 ```
 
-### DOM Testing
+### DOM
 
 `page.$(selector)` same to `querySelector`
 
-### Event Testing
+### Events
 
 ```ts
 // wait for selector
@@ -388,7 +370,7 @@ const newWindowTarget = await browserContext.waitForTarget(
 )
 ```
 
-### Operation Simulation Testing
+### Operation Simulation
 
 ```ts
 const [response] = await Promise.all([
@@ -420,7 +402,7 @@ await page.keyboard.press('Backspace')
 // Result text will end up saying 'Hello!'
 ```
 
-### Tracing Testing
+### Tracing
 
 ```ts
 await page.tracing.start({ path: 'trace.json' })
@@ -428,30 +410,33 @@ await page.goto('https://www.google.com')
 await page.tracing.stop()
 ```
 
-### Puppeteer Testing API
+## Test-Driven Development
 
-- `page.setOfflineMode`
-- `page.setGeolocation`
-- `page.metrics`
-- `page.accessibility`
-- `page.coverage`
+- Reduce costs: find bugs early.
+- Reduce fear and anxiety.
+- Lead to better-designed and more testable code.
+- Make tests more thorough (彻底的).
+  Easy to refactor legacy code.
 
-## Testing Frameworks
+### Workflow
 
-### Unit Testing Frameworks
+- Pure function.
+  - 工具函数.
+  - 数据转换函数.
+  - 后端接口函数.
+- Bug fix:
+  - Add failed testing first.
+  - One bug fixed, one or more testing added.
+- UI interaction.
+
+## Library
 
 - Jest.
 - Jasmine.
 - Mocha.
-
-### UI Testing Frameworks
-
 - Cypress/PlayWright/Puppeteer.
 - 用户行为: Karma/Selenium.
 - 功能测试: Phantom.js/Slimer.js/Karma.
-
-### Testing Tools
-
 - JUnit.
 - SeleniumIDE.
 - PICT.
@@ -460,6 +445,6 @@ await page.tracing.stop()
 - Apache Jmeter: 压力测试.
 - Monkey: Random testing.
 
-## Testing References
+## References
 
 - JavaScript testing [best practices](https://github.com/goldbergyoni/javascript-testing-best-practices).

@@ -1,6 +1,6 @@
 ---
-sidebar_position: 9
-tags: [CS, Algorithm, DP, DynamicProgramming]
+sidebar_position: 22
+tags: [CS, Algorithm, DP]
 ---
 
 # Dynamic Programming
@@ -16,14 +16,14 @@ tags: [CS, Algorithm, DP, DynamicProgramming]
   每个子问题最多 O(n) 种选择, 则算法时间复杂度为 O(n^2).其对应子问题图有 n 个顶点, 每个顶点最多有 n-1 条边.
 - 递归生成可以重复求解的子问题,而不是不断生成新的子问题
 
-## Examples
+## Problems
 
 - 切割钢条问题: `max{p[i], r[n-i]}`
 - 矩阵相乘链问题
 - 最大公共子序列问题: `r[i, j]` = `max{r[i, j-1], r[i-1, j]}`
 - 无权最短路径: `path[i, j]` = `min{path[i, r], [r, j]}`
 
-## Basic Dynamic Programming Problem
+## Optimization
 
 dp 数组可以滚动使用, 从而节省空间:
 
@@ -37,7 +37,7 @@ dp 数组可以滚动使用, 从而节省空间:
 - 多重部分和问题 e.g. 数组中是否存在一对数的和为 xx
 - 计数问题/分组问题/分划问题
 
-## Digital Bits Dynamic Programming Problem
+## Digital Bits
 
 数位 DP:
 

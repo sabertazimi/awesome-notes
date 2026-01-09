@@ -10,7 +10,7 @@ tags: [Programming, OS, Linux]
 - [Shell](./shell.md) - Bash scripting, variables, expansions, flow control, functions, and Zsh
 - [Terminal](./terminal.md) - Terminal basics and Tmux configuration
 
-## Development Tools
+## Development
 
 - [Toolchain](./toolchain.md) - Package managers (RPM, Yum), source installation, and startup services
 

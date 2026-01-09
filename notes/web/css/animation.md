@@ -1,18 +1,18 @@
 ---
-sidebar_position: 23
+sidebar_position: 42
 tags: [Web, CSS, Animation]
 ---
 
 # Animation
 
-## Animation Property
+## Properties
 
 [`animation` formal syntax](https://developer.mozilla.org/docs/Web/CSS/animation#formal_syntax):
 
 - `animation-name`.
 - `animation-duration`.
 - `animation-timing-function`:
-  [`<easing-function>`](./transition.md#transition-timing-function).
+  [`<easing-function>`](./transition.md#timing-function).
 - `animation-delay`:
   支持负值.
 - `animation-iteration-count`:
@@ -36,7 +36,7 @@ tags: [Web, CSS, Animation]
 }
 ```
 
-## Animation Fill Mode
+## Fill Mode
 
 [`animation-fill-mode`](https://developer.mozilla.org/docs/Web/CSS/animation-fill-mode):
 
@@ -60,7 +60,7 @@ tags: [Web, CSS, Animation]
 | `normal`/`alternate`          | 0%             |
 | `reverse`/`alternate-reverse` | 100%           |
 
-## Animation Play State
+## Play State
 
 利用 `animation-paly-state`
 与 JavaScript 添加 `.animate` 类控制动画开始和停止.
@@ -98,7 +98,7 @@ element.classList.add('animate')
 setTimeout(() => element.classList.remove('animate'), duration)
 ```
 
-## Animation Timeline
+## Timeline
 
 Implement [scroll-driven animation](https://webkit.org/blog/17101/a-guide-to-scroll-driven-animations-with-just-css)
 with CSS `animation-timeline`:
@@ -154,7 +154,7 @@ with CSS `animation-timeline`:
 }
 ```
 
-## Offset Animation
+## Offset
 
 [`offset`](https://developer.mozilla.org/docs/Web/CSS/offset),
 animating an element along a defined path:
@@ -192,9 +192,9 @@ animating an element along a defined path:
 }
 ```
 
-## Animation Patterns
+## Patterns
 
-### Animation FLIP Pattern
+### FLIP
 
 - First: 初始状态.
 - Last: 动画结束状态.
@@ -220,14 +220,14 @@ animating an element along a defined path:
 }
 ```
 
-### Animation Bounce Cache Pattern
+### Bounce Cache
 
 - First `-100`.
 - Then `+5`/`+20`.
 - Finally `0`.
 - 切换动画时, 需要先把之前的动画清除: 防止出现闪烁 Bug.
 
-### Animation Helper
+### Helpers
 
 - `opacity`.
 - `overflow: hidden`.
@@ -280,7 +280,7 @@ animating an element along a defined path:
 }
 ```
 
-## Animation API
+## APIs
 
 DOM events:
 
@@ -288,7 +288,7 @@ DOM events:
 - `animationend`: triggered after an animation completes.
 - `animationstart`: triggered at the start of an animation.
 
-## GreenSock Library
+## GreenSock
 
 ### TweenMax
 
@@ -318,7 +318,7 @@ tl.staggerFrom(
 )
 ```
 
-## Animation References
+## References
 
 - Animatable CSS [properties](https://developer.mozilla.org/docs/Web/CSS/CSS_animated_properties).
 - Animation 101 [guide](https://github.com/cssanimation/css-animation-101).

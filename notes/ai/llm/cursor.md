@@ -1,6 +1,6 @@
 ---
 sidebar_position: 6
-tags: [AI, LLM, Agent]
+tags: [AI, LLM, Agent, Cursor]
 ---
 
 # Cursor
@@ -20,12 +20,6 @@ to link to a file.
 
 :::
 
-## Cursor Rules
-
-- Cursor [directory](https://cursor.directory).
-- Awesome Cursor [rules](https://github.com/PatrickJS/awesome-cursorrules).
-- Awesome Cursor [rules](https://github.com/sanjeed5/awesome-cursor-rules-mdc).
-
 ## User Rule
 
 ```md
@@ -43,7 +37,7 @@ to link to a file.
 12. 在一个文件中，如果要创建新的方法或变量，你需要先梳理当前已经存在的方法和变量，确保当前需求没有被已存在的方法处理过，才生成新的方法。否则，你需要与我确认，然后再采取行动。
 ```
 
-## Plan Act Rule
+## Plan and Act
 
 ```md
 You have two modes of operation:
@@ -66,7 +60,7 @@ Useful plan and task management system:
 - [Task Master](https://github.com/eyaltoledano/claude-task-master)。
 - [Shrimp Task Manager](https://github.com/cjo4m06/mcp-shrimp-task-manager)。
 
-## RIPER-5 Rule
+## RIPER-5
 
 [RIPER-5](https://github.com/johnpeterman72/cursor_memory_riper_framework) rule
 给 AI 规定了 [5 种行为模式](./rules/riper-5.md)：
@@ -79,7 +73,7 @@ Useful plan and task management system:
 - "ENTER REVIEW MODE" // 进入审查模式
 ```
 
-## Technical Design Rule
+## Technical Design
 
 ```md
 **参考资料:**
@@ -102,7 +96,7 @@ Useful plan and task management system:
 8. 输出一份腾讯文档
 ```
 
-## UI Design Rule
+## UI Design
 
 UI design [rule](./rules/ui-design.md):
 
@@ -114,7 +108,7 @@ UI design [rule](./rules/ui-design.md):
 - 交互规范.
 - 响应式设计.
 
-## Prototype Implementation Rule
+## Prototype Implementation
 
 Prototype implementation [rule](./rules/prototype-implementation.md):
 
@@ -133,7 +127,7 @@ Prototype implementation [rule](./rules/prototype-implementation.md):
 - 错误处理与边界情况.
 - 代码检查清单.
 
-## Cursor Research Mode
+## Research Mode
 
 1. 在提出解决方案之前，从工作空间和代码库的多个来源中收集全面信息。
 2. 分析代码和近期变更，但不得自动修复问题。
@@ -142,7 +136,7 @@ Prototype implementation [rule](./rules/prototype-implementation.md):
 5. 避免基于不明确的假设进行分析或建议，必要时向用户请求澄清。
 6. 以一致的格式（如代码块、列表或标题）呈现分析结果和解决方案，便于用户快速阅读。
 
-## Cursor Plan Mode
+## Plan Mode
 
 **充分研究和审查**：在开始制定计划前，需全面研究和审查所有相关细节，包括我们讨论过的内容、文档、代码库和外部资源。
 
@@ -164,3 +158,9 @@ Prototype implementation [rule](./rules/prototype-implementation.md):
   - `{id}` 为 `.plans/` 目录及其子目录中的唯一编号。
   - `{summary}` 为任务的简短描述。
 - 文件采用 Markdown 格式，包含任务完成状态（如 `[ ]` 未完成，`[x]` 已完成）等。
+
+## References
+
+- Cursor [directory](https://cursor.directory).
+- Awesome Cursor [rules](https://github.com/PatrickJS/awesome-cursorrules).
+- Awesome Cursor [rules](https://github.com/sanjeed5/awesome-cursor-rules-mdc).

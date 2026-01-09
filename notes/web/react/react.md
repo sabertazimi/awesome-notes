@@ -9,29 +9,26 @@ tags: [Web, React]
 - [Components](./components.md) - Component patterns, refs, compound components
 - [State](./state.md) - State management, props, context
 - [Events](./event.md) - Synthetic events, event handling
-- [Types](./types.md) - TypeScript with React
+- [Types](./types.md) - TypeScript
 
-## React Patterns
+## Advanced Topics
 
 - [Patterns](./patterns.md) - HOC, render props, hooks patterns
 - [Features](./features.md) - Error boundaries, fragments, portals
 - [Context](./context.md) - Context API and provider pattern
-
-## Advanced Topics
-
 - [Concurrent](./concurrent.md) - Suspense, concurrent features, data fetching
-- [Server Components](./server-components.md) - React Server Components
-- [Refs](./refs.md) - Refs and forward refs
-- [Router](./router.md) - React Router guide
+- [Server Components](./server-components.md) - Server Components
+- [Ref](./ref.md) - String, forward, prop and callback refs
+- [Router](./router.md) - Router guide
 - [Redux](./redux/redux.md) - Redux for state management
 
 ## Performance
 
-- [Performance](./performance.md) - React performance optimization
+- [Performance](./performance.md) - Performance optimization
 
 ## Testing
 
-- [Testing](./testing.md) - React testing strategies
+- [Testing](./testing.md) - Testing strategies
 
 ## Styling
 
@@ -39,11 +36,11 @@ tags: [Web, React]
 
 ## Style Guide
 
-- [Style Guide](./style-guide.md) - React style guide
+- [Style Guide](./style-guide.md) - Style guide
 
 ## Internationalization
 
-- [i18n](./i18n.md) - React internationalization
+- [i18n](./i18n.md) - Internationalization
 
 ## Toolchain
 
@@ -52,7 +49,7 @@ tags: [Web, React]
 
 ## Internals
 
-- [Core](./core.md) - React architecture, virtual DOM, and core workflow
+- [Architecture](./architecture.md) - Architecture, virtual DOM, and workflow
 - [Scheduler](./scheduler.md) - Task scheduling and time slicing
 - [Fiber](./fiber.md) - Fiber architecture and data structures
 - [Reconciler](./reconciler.md) - Reconciliation algorithm

@@ -18,5 +18,4 @@ Explain the decision of a single instance
 
 ## Global Explanation
 
-Explain the whole model
-(what does a `cat` look like).
+Explain the whole model (what does a `cat` look like).

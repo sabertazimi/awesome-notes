@@ -30,7 +30,7 @@ let v = if let Some(x) = o {
 
 ## Loop
 
-### For Loop
+### For
 
 ```rust
 for i in 1..=5 {}
@@ -41,7 +41,7 @@ for item in &mut collection {}
 for (i, v) in collection.iter().enumerate() {}
 ```
 
-### While Loop
+### While
 
 ```rust
 fn main() {
@@ -54,7 +54,7 @@ fn main() {
 }
 ```
 
-### Loop Expression
+### Expression
 
 ```rust
 fn main() {

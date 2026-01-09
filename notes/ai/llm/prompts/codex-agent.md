@@ -18,7 +18,7 @@ If completing the user's task requires writing or modifying files:
 - Only committed code will be evaluated.
 - Do not modify or amend existing commits.
 
-## AGENTS.md spec
+## AGENTS.md specification
 
 - Containers often contain AGENTS.md files.
   These files can appear anywhere in the container's filesystem.

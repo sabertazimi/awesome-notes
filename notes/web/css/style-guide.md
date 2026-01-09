@@ -1,15 +1,15 @@
 ---
-sidebar_position: 27
+sidebar_position: 60
 tags: [Web, CSS, Style Guide]
 ---
 
 # Style Guide
 
-## CSS Property Order
+## Order
 
 > 显示属性 -> 自身属性 -> 文本属性.
 
-### Display Property Order
+### Display
 
 - position.
 - z-index.
@@ -23,7 +23,7 @@ tags: [Web, CSS, Style Guide]
 - float.
 - clear.
 
-### Self Property Order
+### Self
 
 - width.
 - min-width.
@@ -71,7 +71,7 @@ tags: [Web, CSS, Style Guide]
 - background-repeat.
 - background-position.
 
-### Text Property Order
+### Text
 
 - color.
 - font.
@@ -92,9 +92,9 @@ tags: [Web, CSS, Style Guide]
 - content.
 - quotes.
 
-## CSS Naming Convention
+## Naming Conventions
 
-### Layout Structure Naming Convention
+### Structure
 
 - 容器: container.
 - 页头: header.
@@ -107,7 +107,7 @@ tags: [Web, CSS, Style Guide]
 - 页面外围控制整体佈局宽度: wrapper.
 - 左右中: left right center.
 
-### Navigation Naming Convention
+### Navigation
 
 - 导航: nav.
 - 主导航: main-nav.
@@ -121,7 +121,7 @@ tags: [Web, CSS, Style Guide]
 - 标题: title.
 - 摘要: summary.
 
-### Functional Component Naming Convention
+### Components
 
 - 标志: logo.
 - 广告: banner.
@@ -152,7 +152,7 @@ tags: [Web, CSS, Style Guide]
 - 友情链接: link.
 - 版权: copyright.
 
-### CSS Files Naming Convention
+### Files
 
 - `abstracts`: `$variables`, `@mixin` function.
 - `vendors`: external libraries (font-awesome, bootstrap).
@@ -165,7 +165,7 @@ tags: [Web, CSS, Style Guide]
 - `themes`: `color.css`, `font.css`.
 - `main.css`/`app.css`.
 
-## CSS Naming System and Architecture
+## Naming Systems
 
 - BEM: [blocks, elements and modifiers](https://www.smashingmagazine.com/2018/06/bem-for-beginners).
 - OOCSS: [object oriented CSS](https://www.smashingmagazine.com/2011/12/an-introduction-to-object-oriented-css-oocss).

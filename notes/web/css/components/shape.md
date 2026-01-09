@@ -1,11 +1,11 @@
 ---
-sidebar_position: 8
-tags: [Web, CSS]
+sidebar_position: 42
+tags: [Web, CSS, Component, Shape]
 ---
 
 # Shape
 
-## Pseudo Element Shape
+## Pseudo Element
 
 [利用伪类画额外图形](https://css-tricks.com/examples/ShapesOfCSS):
 
@@ -23,9 +23,9 @@ tags: [Web, CSS]
 }
 ```
 
-## Border Shape
+## Border
 
-### Horizontal and Vertical Border
+### Horizontal and Vertical
 
 Separate set horizontal and vertical radius to make well-designed shapes:
 
@@ -80,7 +80,7 @@ Separate set horizontal and vertical radius to make well-designed shapes:
 }
 ```
 
-### Transparent Border
+### Transparent
 
 Mix `transparent` with non-`transparent` border to make shapes (e.g. triangle):
 
@@ -118,7 +118,7 @@ Mix `transparent` with non-`transparent` border to make shapes (e.g. triangle):
 }
 ```
 
-## Background Shape
+## Background
 
 ```css
 .btn-add,
@@ -156,7 +156,7 @@ Mix `transparent` with non-`transparent` border to make shapes (e.g. triangle):
 
 ![Background Shape](./figures/background-shape.png 'Background Shape')
 
-## Stretch Line
+## Stretch
 
 - `background` line.
 - `border` line.
@@ -193,7 +193,7 @@ Mix `transparent` with non-`transparent` border to make shapes (e.g. triangle):
 }
 ```
 
-## Dash Line
+## Dash
 
 - `background` dash line.
 - `border` dash line.
@@ -215,7 +215,7 @@ Mix `transparent` with non-`transparent` border to make shapes (e.g. triangle):
 }
 ```
 
-## Bar Line
+## Bar
 
 Background gradient [bar](https://css-tricks.com/single-element-loaders-the-bars/#aa-lets-make-some-bars):
 
@@ -269,7 +269,7 @@ Grid pseudo element border [bar](https://css-tricks.com/single-element-loaders-t
 }
 ```
 
-## Wave line
+## Wave
 
 Rotate border [wave](https://codepen.io/Chokcoco/pen/EXJrdB):
 
@@ -330,7 +330,7 @@ Rotate border [wave](https://codepen.io/Chokcoco/pen/EXJrdB):
 </style>
 ```
 
-## Menu Line
+## Menu
 
 ```css
 .icon-menu {
@@ -353,7 +353,7 @@ Rotate border [wave](https://codepen.io/Chokcoco/pen/EXJrdB):
 }
 ```
 
-## Grid Line
+## Grid
 
 - `background-image` for line color,
 - `background-size` for line gap.
@@ -423,8 +423,6 @@ More spinner see [SpinKit](https://github.com/tobiasahlin/SpinKit).
 
 ## Dot
 
-### Border Dot
-
 `background` and `border` dot:
 
 ```css
@@ -445,8 +443,6 @@ More spinner see [SpinKit](https://github.com/tobiasahlin/SpinKit).
   border-radius: 50%;
 }
 ```
-
-### Gradient Dot
 
 [`radial-gradient` dot](https://css-tricks.com/single-element-loaders-the-dots):
 
@@ -697,7 +693,7 @@ Background gradient square shape:
 
 ## Polygon
 
-### Gradient Polygon
+### Gradient
 
 Background gradient polygon:
 
@@ -717,7 +713,7 @@ Background gradient polygon:
 }
 ```
 
-### Clip Path Polygon
+### Clip Path
 
 `clip-path` polygon:
 
@@ -759,7 +755,7 @@ function polygon(n = 3) {
 }
 ```
 
-### Transform Polygon
+### Transform
 
 `transform` polygon:
 
@@ -790,7 +786,7 @@ function polygon(n = 3) {
 }
 ```
 
-## Shape References
+## References
 
 - Modern CSS [shapes](https://www.smashingmagazine.com/2024/05/modern-guide-making-css-shapes).
 - Pure CSS [icons](https://github.com/wentin/cssicon).

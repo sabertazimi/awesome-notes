@@ -8,7 +8,7 @@ tags: [Programming, Design, Design Pattern, Creation Pattern]
 Creating objects without specify exact object class:
 not calling a constructor directly.
 
-## Static Factory Method
+## Static
 
 ```ts
 CoordinateSystem = {
@@ -41,7 +41,7 @@ const point = PointFactory.newPolarPoint(5, Math.PI / 2)
 const point2 = PointFactory.newCartesianPoint(5, 6)
 ```
 
-## Dynamic Factory Method
+## Dynamic
 
 ```ts
 class Vehicle {
@@ -171,7 +171,7 @@ const bigTruck = truckFactory.createVehicle({
 })
 ```
 
-## Asynchronous Factory Method
+## Asynchronous
 
 ```ts
 class DataContainer {

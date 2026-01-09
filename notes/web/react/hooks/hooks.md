@@ -6,7 +6,7 @@ tags: [Web, React, Hook]
 
 React Hooks allow you to use state and other React features in functional components.
 
-## Intrinsic Hooks
+## Intrinsic
 
 - [State](./state.md) - useState for component state
 - [Reducer](./reducer.md) - useReducer for complex state
@@ -15,7 +15,7 @@ React Hooks allow you to use state and other React features in functional compon
 - [Ref](./ref.md) - useRef for refs
 - [Context](./context.md) - useContext for global state
 
-## Effect Hooks
+## Effects
 
 - [Effects](./effects.md) - useEffect, useLayoutEffect, useInsertionEffect
 
@@ -27,12 +27,9 @@ React Hooks allow you to use state and other React features in functional compon
 
 - [Servers](./servers.md) - UseOptimistic, useActionState, useFormStatus
 
-## Utility Hooks
+## Utility
 
 - [Utility](./utility.md) - useId, useEvent, useImperativeHandle, useDebugValue
-
-## Custom Hooks
-
 - [Lifecycle](./lifecycle.md) - componentDidMount, componentWillUnmount, componentDidUpdate, forceUpdate, isMounted
 - [Event](./event.md) - useInterval, useDebounce for event handling
 - [Form](./form.md) - useForm with state and ref implementations for form management

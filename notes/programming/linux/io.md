@@ -22,7 +22,7 @@ location /video/ {
 }
 ```
 
-## Swap File
+## Swap
 
 ```bash
 dd if=/dev/zero of=/swapfile bs=1G count=4
@@ -75,7 +75,7 @@ n p e l 新 主 逻辑 扩展 分区 w 激活
 - unit 选择单位
 - quit 结束分区
 
-## Du
+### Du
 
 ```bash
 du -sh /home/user

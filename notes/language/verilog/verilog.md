@@ -98,7 +98,7 @@ module testBench();
 endmodule
 ```
 
-## Timing in Circuits
+## Timing
 
 ### Combination Circuit Timing
 
@@ -117,7 +117,7 @@ T_clock >= T_pcq + T_pd + (T_setup + T_skew)
 T_ccq + T_cd > (T_hold + T_skew)
 ```
 
-## Key Words
+## Keywords
 
 ```verilog
 module
@@ -190,7 +190,7 @@ module scram_b (
 endmodule
 ```
 
-## function
+## Function
 
 - 不含时间/事件控制
 - 至少 1 个输入
@@ -669,7 +669,7 @@ endgenerate
 // ...
 ```
 
-## Delay(时延)
+## Delay
 
 - 语句内时延
 - 语句间时延
@@ -699,172 +699,12 @@ sum = (a ^ b) ^ cin;
 - 其中数据文件中地址必须在系统任务中定义的范围内，系统任务中定义的地址必须在存储器定义的地址范围内
 - 优先考虑数据文件中的地址>系统任务中定义的起始地址和结束地址>存储器定义的起始地址和结束地址
 
-## Demos
-
-- [GitBook](https://hom-wang.gitbooks.io/verilog-hdl/content/Chapter_07.html)
-- [Xilinx Lab](http://www.xilinx.com/support/university/ise/ise-teaching-material/hdl-design.html)
-
-### Binary Multiplier
-
-```verilog
-   1100 (the multiplicand)
-x  1011 (the multiplier)
-   ----
-   0000 (initial partial product, start with 0000)
-   1100 (1st multiplier bit is 1, so add the multiplicand)
-   ----
-   1100 (sum)
-   ----
-   01100 (shift sum one position to the right)
-   1100 (2nd multiplier bit is 1, so add multiplicand again)
-   ----
-  100100 (sum, with a carry generated on the left)
-   ----
-   100100 (shift sum once to the right, including carry)
-   0100100 (3rd multiplier bit is 0, so skip add, shift once)
-   ----
-   1100 (4th multiplier bit is 1, so add multiplicand again)
-   ----
-  10000100 (sum, with a carry generated on the left)
-   10000100 (shift sum once to the right, including carry)
-```
-
-### Multi-Hz
-
-```verilog
-/*
- * 利用计数器实现任意分频
- */
-always @(posedge f_clk) begin
-
-    //设定频率控制字p
-    if (i == p) begin
-        i=0;
-        f_out=~f_out;
-    end
-    else begin
-        i=i+1;
-    end
-end
-```
-
-## Verilog Best Practices
-
-### 不可综合结构
-
-- initial: 只用于 test bench
-- events: Events 同步测试各个组件
-- real: Real 数据类型不可综合
-- time: Time 数据类型不可综合
-- force/release
-- assign(reg)/deassign(reg)
-- fork join
-- primitive: 只有门级的原语（primitives）可综合
-- table: 用户自定义原语（UDP）及 table 不可综合
-- `#1` 延迟只用于仿真，综合器直接忽略延迟
-
-### 混合编程
-
-- 内部变量用 assign 赋值
-- 输出变量通过监听 内部变量 改变输出值
-
-```verilog
-    assign DT0 = ...;
-    assign DT1 = ...;
-
-    always @(DT0) begin
-        AOut <= DT0;
-    end
-    always @(DT1) begin
-        BOut <= DT1;
-    end
-```
-
-### 上升沿/下降沿
-
-```verilog
-    always @(posedge A or negedge B) begin
-        if (A) ...
-        else if (!B) ...
-        else ...
-    end
-```
-
-### Parameter
-
-- 只在定义的模块内部起作用
-
-#### Overload Method
-
-```verilog
-module data_path
-#(parameter DATA_WIDTH = 8)
-(
-    input A,
-    input [(DATA_WIDTH - 1): 0] B,
-    output [(DATA_WIDTH - 1): 0] C
-);
-
-    ......
-
-endmodule
-```
-
-```verilog
-module data_path_tb
-(
-);
-    data_path #(.DATA_WIDTH(16)) DUT (.A(A), .B(B), .C(C));
-
-    ......
-
-endmodule
-```
-
-#### Constant Variable
-
-```verilog
-reset_value = {{(DATA_WIDTH/2){1'b0}}, {(DATA_WIDTH/2){1'b1}}};
-```
-
-#### Test Bench
-
-```verilog
-always begin
-    clk = 0;
-    forever #DELAY clk = ~clk;
-end
-```
-
-```verilog
-reg clock;
-integer no_of_clocks;
-
-parameter CLOCK_PERIOD = 5;
-parameter TIME = 50000;
-
-initial no_of_clocks = 0;
-initial clock = 1'b0;
-
-always #(CLOCK_PERIOD/2.0) clock = ~clock;
-
-always @(posedge clock)
-    no_of_clocks = no_of_clocks +1 ;
-
-initial begin
-    #TIME;
-    $display("End of simulation time is %d ,
-      total number of clocks seen is %d expected is %d",$time,no_of_clocks,($time/5));
-    $finish;
-end
-```
-
-## 有限状态机(FSM)
+## Finite State Machine
 
 - reset: initial state
 - default: illegal/unreachable state
 
-## 算术状态机(ASM)
+## Arithmetic State Machine
 
 - state box: moore fsm
 - conditional box: mealy fsm
@@ -1051,7 +891,7 @@ module top;
 endmodule
 ```
 
-## U280 Platform
+## U280
 
 ```bash
 -xp param (clock frequency etc.)
@@ -1059,14 +899,6 @@ endmodule
 -slr SLR region setting
 -sp memory resources mapping
 ```
-
-tools:
-
-- xbutil query
-- platforminfo
-- kernelinfo
-- **xclbinutil**
-- dmesg
 
 ### Host Application
 
@@ -1101,7 +933,13 @@ free(Device_IDs);
 It is advisable to use the `posix_spawn()` system call
 to launch another process from the SDAccel environment application.
 
-### U280 Tools
+### Toolchain
+
+- `xbutil query`.
+- `platforminfo`.
+- `kernelinfo`.
+- `xclbinutil`.
+- `dmesg`.
 
 #### GDB Based Debugging
 
@@ -1190,7 +1028,7 @@ q.enqueueMigrateMemObjects(inBufVec,0/* 0 means from host*/);
 q.enqueueTask(kernel_vAdd);
 ```
 
-## AXI Protocol
+## AXI
 
 Advanced eXtensible Interface Protocol:
 
@@ -1268,7 +1106,51 @@ burst length = AxLEN[7:0] + 1 (up to 256 transfers in each burst)
 
 ![Write Burst Example](./figures/axi-write-burst.png 'Write Burst Example')
 
-## Verilog Components
+## Components
+
+### Binary Multiplier
+
+```verilog
+   1100 (the multiplicand)
+x  1011 (the multiplier)
+   ----
+   0000 (initial partial product, start with 0000)
+   1100 (1st multiplier bit is 1, so add the multiplicand)
+   ----
+   1100 (sum)
+   ----
+   01100 (shift sum one position to the right)
+   1100 (2nd multiplier bit is 1, so add multiplicand again)
+   ----
+  100100 (sum, with a carry generated on the left)
+   ----
+   100100 (shift sum once to the right, including carry)
+   0100100 (3rd multiplier bit is 0, so skip add, shift once)
+   ----
+   1100 (4th multiplier bit is 1, so add multiplicand again)
+   ----
+  10000100 (sum, with a carry generated on the left)
+   10000100 (shift sum once to the right, including carry)
+```
+
+### Multi-Hz
+
+```verilog
+/*
+ * 利用计数器实现任意分频
+ */
+always @(posedge f_clk) begin
+
+    //设定频率控制字p
+    if (i == p) begin
+        i=0;
+        f_out=~f_out;
+    end
+    else begin
+        i=i+1;
+    end
+end
+```
 
 ### Clock Unit
 
@@ -1845,3 +1727,119 @@ module dmem
 
 endmodule // dmem
 ```
+
+## Best Practices
+
+### 不可综合结构
+
+- initial: 只用于 test bench
+- events: Events 同步测试各个组件
+- real: Real 数据类型不可综合
+- time: Time 数据类型不可综合
+- force/release
+- assign(reg)/deassign(reg)
+- fork join
+- primitive: 只有门级的原语（primitives）可综合
+- table: 用户自定义原语（UDP）及 table 不可综合
+- `#1` 延迟只用于仿真，综合器直接忽略延迟
+
+### 混合编程
+
+- 内部变量用 assign 赋值
+- 输出变量通过监听 内部变量 改变输出值
+
+```verilog
+    assign DT0 = ...;
+    assign DT1 = ...;
+
+    always @(DT0) begin
+        AOut <= DT0;
+    end
+    always @(DT1) begin
+        BOut <= DT1;
+    end
+```
+
+### 上升沿/下降沿
+
+```verilog
+    always @(posedge A or negedge B) begin
+        if (A) ...
+        else if (!B) ...
+        else ...
+    end
+```
+
+### Parameter
+
+- 只在定义的模块内部起作用
+
+#### Overload Method
+
+```verilog
+module data_path
+#(parameter DATA_WIDTH = 8)
+(
+    input A,
+    input [(DATA_WIDTH - 1): 0] B,
+    output [(DATA_WIDTH - 1): 0] C
+);
+
+    ......
+
+endmodule
+```
+
+```verilog
+module data_path_tb
+(
+);
+    data_path #(.DATA_WIDTH(16)) DUT (.A(A), .B(B), .C(C));
+
+    ......
+
+endmodule
+```
+
+#### Constant Variable
+
+```verilog
+reset_value = {{(DATA_WIDTH/2){1'b0}}, {(DATA_WIDTH/2){1'b1}}};
+```
+
+#### Test Bench
+
+```verilog
+always begin
+    clk = 0;
+    forever #DELAY clk = ~clk;
+end
+```
+
+```verilog
+reg clock;
+integer no_of_clocks;
+
+parameter CLOCK_PERIOD = 5;
+parameter TIME = 50000;
+
+initial no_of_clocks = 0;
+initial clock = 1'b0;
+
+always #(CLOCK_PERIOD/2.0) clock = ~clock;
+
+always @(posedge clock)
+    no_of_clocks = no_of_clocks +1 ;
+
+initial begin
+    #TIME;
+    $display("End of simulation time is %d ,
+      total number of clocks seen is %d expected is %d",$time,no_of_clocks,($time/5));
+    $finish;
+end
+```
+
+## References
+
+- [GitBook](https://hom-wang.gitbooks.io/verilog-hdl/content/Chapter_07.html)
+- [Xilinx Lab](http://www.xilinx.com/support/university/ise/ise-teaching-material/hdl-design.html)

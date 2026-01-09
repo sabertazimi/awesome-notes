@@ -1,13 +1,11 @@
 ---
-sidebar_position: 1
-tags: [Web, CSS]
+sidebar_position: 10
+tags: [Web, CSS, Component, Utility]
 ---
 
-# Layout
+# Utility
 
-## Utilities
-
-### Resizable Class
+## Resizable
 
 [Resizable `div`](https://codepen.io/ZeroX-DG/pen/vjdoYe):
 
@@ -33,7 +31,7 @@ new_x = element_original_x + (mouseX - original_mouseX)
 new_y = element_original_y + (mouseY - original_mouseY)
 ```
 
-### Hidden Class
+## Hidden
 
 - `display: none`: 元素不在 DOM 流.
 - `visibility: hidden`: 元素在 DOM 流, 隐藏不可见, 不可触发事件.
@@ -92,7 +90,7 @@ h1::after {
 }
 ```
 
-### Text Preset
+### Text Presets
 
 ```css
 .text-primary {
@@ -108,67 +106,7 @@ h1::after {
 }
 ```
 
-## Landing Page
-
-### Jumbotron Background Image
-
-```css
-h1 {
-  background-image: url('bg.jpg');
-  background-clip: text;
-}
-
-.jumbotron {
-  min-height: 100%;
-  background-image: url('');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 0.8;
-}
-```
-
-### Muted Video
-
-```css
-.fullscreen-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -100;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  background-size: cover;
-}
-
-.fullscreen-video video {
-  min-width: 100%;
-  min-height: 100%;
-}
-```
-
-### Search Light Effect
-
-```css
-:root::before {
-  position: fixed;
-  z-index: 1000;
-  display: block;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  content: '';
-  background: radial-gradient(
-    circle 16vmax at var(--cursor-x) var(--cursor-y),
-    rgb(0 0 0 / 0%) 0%,
-    rgb(0 0 0 / 50%) 80%,
-    rgb(0 0 0 / 80%) 100%
-  );
-}
-```
-
-## CSS Components References
+## References
 
 - CSS [tricks](https://github.com/l-hammer/You-need-to-know-css).
 - CSS [inspiration](https://github.com/chokcoco/CSS-Inspiration).

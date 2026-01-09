@@ -5,45 +5,7 @@ tags: [AI, DeepLearning, CNN, RNN, LSTM, ResNet]
 
 # Neural Architectures
 
-## Convolutional Architecture
-
-### Convolution
-
-Convolution is a mathematical operation
-that combines two functions to produce a third function:
-
-$$
-\begin{equation}
-  (f*g)(t):=\int_{-\infty}^{\infty} f(\tau)g(t-\tau)d\tau
-\end{equation}
-$$
-
-Given $\boldsymbol{a}$ and $\boldsymbol{b}$, then:
-$(\boldsymbol{a}*\boldsymbol{b})_n=\sum\limits_{\substack{i,j\\i+j=n}}a_i\cdot{b_j}$,
-e.g. $(1,2,3)*(4,5,6)=(4,13,28,27,18)_{0\dots{4}}$.
-上述计算可以转换为多项式相乘的形式:
-
-$$
-\begin{split}
-  A(x)&=\sum\limits_{i=0}^{M-1}a_i\cdot{x^i}   \\
-  B(x)&=\sum\limits_{i=0}^{N-1}b_i\cdot{x^i}   \\
-  C(x)&=A(x)\cdot{B(x)}                        \\
-  C(x)&=\sum\limits_{i=0}^{M+N-2}c_i\cdot{x^i} \\
-  c_i&=\sum\limits_{j=0}^{i}a_j\cdot{b_{i-j}}
-\end{split}
-$$
-
-可以运用快速傅里叶变换 (FFT) 以 $O(N\log N)$ 的时间复杂度求解 $c_i$ 的值, 从而实现快速卷积运算.
-
-[![Convolution](./figures/neural-networks/convolution.png)](https://www.3blue1brown.com/lessons/convolutions)
-
-For matrix:
-
-$$
-B(i,j)=\sum\limits_{m=0}^{M_k-1}\sum\limits_{n=0}^{N_k-1} K(m, n) A(i-m, j-n)
-$$
-
-### Convolutional Neural Networks
+## Convolutional Neural Networks
 
 CNNs are a class of deep neural networks,
 most commonly applied to analyzing visual imagery.
@@ -134,6 +96,42 @@ model.save("final_model.keras")
 predictions = model.predict(x_test)
 ```
 
+### Convolution
+
+Convolution is a mathematical operation
+that combines two functions to produce a third function:
+
+$$
+\begin{equation}
+  (f*g)(t):=\int_{-\infty}^{\infty} f(\tau)g(t-\tau)d\tau
+\end{equation}
+$$
+
+Given $\boldsymbol{a}$ and $\boldsymbol{b}$, then:
+$(\boldsymbol{a}*\boldsymbol{b})_n=\sum\limits_{\substack{i,j\\i+j=n}}a_i\cdot{b_j}$,
+e.g. $(1,2,3)*(4,5,6)=(4,13,28,27,18)_{0\dots{4}}$.
+上述计算可以转换为多项式相乘的形式:
+
+$$
+\begin{split}
+  A(x)&=\sum\limits_{i=0}^{M-1}a_i\cdot{x^i}   \\
+  B(x)&=\sum\limits_{i=0}^{N-1}b_i\cdot{x^i}   \\
+  C(x)&=A(x)\cdot{B(x)}                        \\
+  C(x)&=\sum\limits_{i=0}^{M+N-2}c_i\cdot{x^i} \\
+  c_i&=\sum\limits_{j=0}^{i}a_j\cdot{b_{i-j}}
+\end{split}
+$$
+
+可以运用快速傅里叶变换 (FFT) 以 $O(N\log N)$ 的时间复杂度求解 $c_i$ 的值, 从而实现快速卷积运算.
+
+[![Convolution](./figures/neural-networks/convolution.png)](https://www.3blue1brown.com/lessons/convolutions)
+
+For matrix:
+
+$$
+B(i,j)=\sum\limits_{m=0}^{M_k-1}\sum\limits_{n=0}^{N_k-1} K(m, n) A(i-m, j-n)
+$$
+
 ### Convolutional Layer
 
 Convolutional Layer is the first layer to extract features from an input image.
@@ -170,9 +168,7 @@ STNs 可以学习一种变换, 这种变换可以将仿射变换后的图像进�
 
 ![Spatial Transformer Networks](./figures/neural-networks/spatial-transformer-networks.gif 'Spatial Transformer Networks')
 
-## Recurrent Architecture
-
-### Recurrent Neural Networks
+## Recurrent Neural Networks
 
 循环神经网络 (RNNs) 是一种具有循环结构的神经网络,
 可以处理序列数据, 例如时间序列数据, 自然语言文本等.
@@ -215,7 +211,7 @@ $$
 
 ![Long Short-Term Memory](./figures/neural-networks/long-short-term-memory.png 'Long Short-Term Memory')
 
-## Residual Architecture
+## Residual Connection
 
 ResNet 通过残差学习解决了深度网络的退化问题 (深度网络的训练问题),
 最短的路, 决定容易优化的程度: 残差连接 (Residual Connection) 可以认为层数是 0.

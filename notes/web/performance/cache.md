@@ -3,7 +3,7 @@ sidebar_position: 4
 tags: [Web, Performance, Cache]
 ---
 
-# Browser Caches
+# Cache
 
 [Browser caches](https://github.com/ljianshu/Blog/issues/23)
 从缓存位置上来说分为四种, 并且各自有优先级,
@@ -42,7 +42,7 @@ globalThis.addEventListener('fetch', (event) => {
 })
 ```
 
-## HTTP Cache
+## HTTP
 
 浏览器缓存, 也称 [HTTP 缓存](https://web.dev/http-cache),
 分为强缓存和协商缓存.
@@ -53,7 +53,7 @@ globalThis.addEventListener('fetch', (event) => {
 
 [![HTTP Cache](./figures/http-cache.webp)](https://developer.mozilla.org/docs/Web/HTTP/Caching)
 
-### Local Cache
+### Local
 
 强缓存是利用 HTTP 头中的 `Expires` 和 `Cache-Control` 两个字段来控制的.
 强缓存中, 当请求再次发出时, 浏览器会根据其中的 `Expires` 和 `Cache-Control` 判断目标资源是否 `命中` 强缓存,
@@ -125,7 +125,7 @@ Astro.response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate'
 Astro.response.headers.set('Netlify-CDN-Cache-Control', 'public, s-maxage=604800, stale-while-revalidate=604800')
 ```
 
-### Server Cache
+### Server
 
 协商缓存机制下,
 浏览器需要向服务器去询问缓存的相关信息,
@@ -179,13 +179,13 @@ If-None-Match: "10c24bc-4ab-457e1c1f"
 HTTP 1.1 304 Not Modified
 ```
 
-## Code Cache
+## Code
 
-- cold run: `download -> compile -> store into on-disk cache`
-- warm run: `fetch from browser cache -> compile -> store metadata`
-- hot run: `fetch scripts and metadata from browser cache -> skip compile`
-- positive case: IIFE function heuristics
-- passive case: too small (`< 1KB`) and inline scripts
+- Cold run: `download -> compile -> store into on-disk cache`
+- Warm run: `fetch from browser cache -> compile -> store metadata`
+- Hot run: `fetch scripts and metadata from browser cache -> skip compile`
+- Positive case: IIFE function heuristics
+- Passive case: too small (`< 1KB`) and inline scripts
 
 ## BFCache
 

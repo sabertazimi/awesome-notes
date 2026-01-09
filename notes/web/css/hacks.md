@@ -1,11 +1,11 @@
 ---
-sidebar_position: 29
-tags: [Web, CSS]
+sidebar_position: 62
+tags: [Web, CSS, Internals]
 ---
 
 # Hacks
 
-## Property Hacks
+## Property
 
 利用低版本浏览器无法识别新的属性值:
 
@@ -22,7 +22,7 @@ tags: [Web, CSS]
 }
 ```
 
-## Selector Hacks
+## Selector
 
 利用低版本浏览器无法识别新的选择器 (`,`):
 
@@ -71,6 +71,6 @@ tag-not-found::backdrop,
 }
 ```
 
-## CSS Hacks References
+## References
 
 - Browser [hacks](https://github.com/4ae9b8/browserhacks).

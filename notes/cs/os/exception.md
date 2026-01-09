@@ -53,7 +53,7 @@ tags: [CS, System, OS, Exceptions, Interrupts]
 - 一种类型至多有一个待处理信号, 多余待处理信号**不会进入处理队列**,只是**被简单丢弃**
 - 不可以用信号对其他事件进行计数, 同一事件多次发生产生的信号有可能被简单丢弃
 
-### 处理信号
+### 处理
 
 ```cpp
 void handler(int sig) {
@@ -108,7 +108,7 @@ int main(void) {
 }
 ```
 
-### 阻塞信号
+### 阻塞
 
 ```cpp
 // how: SIG_BLOCK, SIG_UNBLOCK, SIG_SETMASK, 是否阻塞set中的信号合集
@@ -168,9 +168,9 @@ Interrupt Service Routine/Interrupt Quest:
 - NMI 中断(Non Maskable Interrupt) 与 INTR 中断(可屏蔽中断)
 - x86PC 中断控制芯片: 8259A PIC
 
-## 中断进入
+### 进入
 
-### 保护现场
+保护现场:
 
 - push PSW(Program State Word): (cs:eip + eflags)
 - push PC(Program Counter)
@@ -187,22 +187,18 @@ Interrupt Service Routine/Interrupt Quest:
 - 寻址方法/编址/保护键
 - 响应中断的内容
 
-## 中断实现
+### 流程
 
-### 概述
+硬件发生了某个事件后告诉中断控制器(PIC), 中断控制器汇报给 CPU,
+CPU 从中断控制器处获取中断号, 根据中断号调用对应中断服务例程,
+处理完成后重新回到之前的执行流程:
 
-- 硬件发生了某个事件后告诉中断控制器(PIC), 中断控制器汇报给 CPU
-- CPU 从中断控制器处获取中断号, 根据中断号调用对应中断服务例程
-- 处理完成后重新回到之前的执行流程
-
-### Interrupt 实现
-
-- 发生中断, PIC 报告中断号给 CPU
-- CPU 调用对应处理程序 irsr_x/irq_x
-- irsr_x/irq_x 负责压入相关信息(中断号/错误码), 然后跳转至统一处理函数 `common_stub`
-- `common_stub`: 压栈 -> 调用 fault_handler/req_handler -> 出栈
-- 进入 handler 后, 再根据中断号/错误码(结构体)以及栈帧信息(结构体), 进行实际处理(真正处理逻辑)
-- 在进入 handler 之前, 都是通过汇编代码进行最简单的处理(压入相关信息), 将实际中断处理逻辑放在 C 语言中, 再辅以内联汇编, 可大大地提升中断处理程序的编写效率以及中断处理程序的处理能力
+1. 发生中断, PIC 报告中断号给 CPU
+2. CPU 调用对应处理程序 irsr_x/irq_x
+3. irsr_x/irq_x 负责压入相关信息(中断号/错误码), 然后跳转至统一处理函数 `common_stub`
+4. `common_stub`: 压栈 -> 调用 fault_handler/req_handler -> 出栈
+5. 进入 handler 后, 再根据中断号/错误码(结构体)以及栈帧信息(结构体), 进行实际处理(真正处理逻辑)
+6. 在进入 handler 之前, 都是通过汇编代码进行最简单的处理(压入相关信息), 将实际中断处理逻辑放在 C 语言中, 再辅以内联汇编, 可大大地提升中断处理程序的编写效率以及中断处理程序的处理能力
 
 ## 系统调用
 

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 8
+sidebar_position: 21
 tags: [CS, Algorithm, Greedy]
 ---
 
@@ -10,7 +10,7 @@ tags: [CS, Algorithm, Greedy]
 - 自底向上求解最优解: 每次不进行多次选择, 只进行一次 **贪心选择**
 - 构造最优解(额外信息数组)
 
-## Examples
+## Problems
 
 - 字典排序比较问题
 - Huffman Tree

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 6
-tags: [Web, React]
+tags: [Web, React, Error, Fragment, Portal]
 ---
 
 # Features
@@ -55,7 +55,7 @@ class ErrorBoundary extends React.Component<{ children: ReactElement }> {
 }
 ```
 
-## React Fragment
+## Fragment
 
 - Less node, less memory, faster performance.
 - Avoid extra parent-child relationship for CSS flex and grid layout.
@@ -103,7 +103,7 @@ class Frameworks extends React.Component {
 }
 ```
 
-## React Portal
+## Portal
 
 Portal provide a first-class way to render children into a DOM node
 that exists **outside** the DOM hierarchy of the parent component

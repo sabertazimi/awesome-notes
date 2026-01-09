@@ -1,11 +1,11 @@
 ---
 sidebar_position: 14
-tags: [Web, TypeScript]
+tags: [Web, TypeScript, Moving, Typeof, Keyof]
 ---
 
-# Moving Types
+# Moving
 
-## Typeof Types
+## Typeof
 
 ```ts
 // 捕获字符串的类型与值
@@ -19,7 +19,7 @@ bar = 'Hello World' // ok
 bar = 'anything else' // Error
 ```
 
-## Keyof Types
+## Keyof
 
 `keyof foo` get literal types of `foo` keys (`Object.keys`):
 

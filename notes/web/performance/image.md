@@ -3,7 +3,7 @@ sidebar_position: 5
 tags: [Web, Performance, Image]
 ---
 
-# Images Performance
+# Images
 
 - Responsive images with `srcset` (LCP):
   - Modern format: WebP/SVG.
@@ -15,7 +15,7 @@ tags: [Web, Performance, Image]
   - Images CDN.
 - Images placeholder with `aspect-ratio` (CLS).
 
-## Responsive Images
+## Responsive
 
 [Responsive images](https://danburzo.ro/responsive-images-html)
 provide 3 ~ 5 different sizes reduce image transfer sizes by average of **~20%**:
@@ -61,7 +61,7 @@ provide 3 ~ 5 different sizes reduce image transfer sizes by average of **~20%**
 />
 ```
 
-## Pre-fetch Loading Images
+## Preloading
 
 ```html
 <link
@@ -73,7 +73,7 @@ provide 3 ~ 5 different sizes reduce image transfer sizes by average of **~20%**
 />
 ```
 
-## Lazy Loading Images
+## Lazy Loading
 
 ```html
 <img
@@ -87,7 +87,7 @@ provide 3 ~ 5 different sizes reduce image transfer sizes by average of **~20%**
 />
 ```
 
-## Placeholder Images
+## Placeholder
 
 ```html
 <img
@@ -103,7 +103,7 @@ provide 3 ~ 5 different sizes reduce image transfer sizes by average of **~20%**
 />
 ```
 
-## Images Format
+## Formats
 
 `mp4` smaller than `gif` (`ffmpeg`):
 
@@ -124,13 +124,13 @@ provide 3 ~ 5 different sizes reduce image transfer sizes by average of **~20%**
 </picture>
 ```
 
-## Images Compression and Minification
+## Compression
 
 - [Sharp](https://github.com/lovell/sharp)
 - [Jimp](https://github.com/oliver-moran/jimp)
 - [Imagemin](https://github.com/Klathmon/imagemin-webpack-plugin)
 
-## Images Performance References
+## References
 
 - Images format [guide](https://evilmartians.com/chronicles/images-done-right-web-graphics-good-to-the-last-byte-optimization-techniques).
 - Low effort images optimization [tips](https://blog.sentry.io/low-effort-image-optimization-tips).

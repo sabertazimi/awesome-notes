@@ -1,15 +1,15 @@
 ---
-sidebar_position: 12
-tags: [Web, CSS, Layout]
+sidebar_position: 16
+tags: [Web, CSS, Layout, Grid]
 ---
 
 # Grid
 
 [![Grid Layout](./figures/grid-layout.png)](https://developer.mozilla.org/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout)
 
-## Grid Box Width
+## Width
 
-### Grid Item Automatic Minimum Size
+### Automatic Minimum Size
 
 Grid item default `min-width` is set to `auto`,
 grid item [can't be smaller than its children](https://css-tricks.com/another-collection-of-interesting-facts-about-css-grid/#aa-automatic-minimum-size-of-grid-items):
@@ -70,9 +70,9 @@ grid item [can't be smaller than its children](https://css-tricks.com/another-co
 </style>
 ```
 
-## Grid Property
+## Properties
 
-Parent property:
+### Parent
 
 - [`grid`](https://developer.mozilla.org/docs/Web/CSS/grid):
   - [`grid-template`](https://developer.mozilla.org/docs/Web/CSS/grid-template):
@@ -92,7 +92,7 @@ Parent property:
   - `align-items`.
   - `justify-items`.
 
-Children property:
+### Children
 
 - [`grid-area`](https://developer.mozilla.org/docs/Web/CSS/grid-area):
   - `grid-row`:
@@ -127,9 +127,9 @@ Children property:
 }
 ```
 
-## Grid Data Types
+## Data Types
 
-### Grid Breadth Types
+### Breadth
 
 `<track-breadth>`:
 
@@ -150,7 +150,7 @@ Children property:
 
 - `<length-percentage>`.
 
-### Grid Size Types
+### Size
 
 `<track-size>`:
 
@@ -164,7 +164,7 @@ Children property:
 - `minmax(<fixed-breadth>, <track-breadth>)`.
 - `minmax(<inflexible-breadth>, <fixed-breadth>)`.
 
-### Grid Repeat Types
+### Repeat
 
 `<track-repeat>`:
 
@@ -200,7 +200,7 @@ One of the [all-time great CSS tricks](https://css-tricks.com/books/greatest-css
 
 :::
 
-### Grid Line Types
+### Line
 
 `<grid-line>`:
 
@@ -209,9 +209,9 @@ One of the [all-time great CSS tricks](https://css-tricks.com/books/greatest-css
 - `[<integer> && <custom-ident>?]`.
 - `[span && [<integer> || <custom-ident>]]`.
 
-## Responsive Grid Layout
+## Responsive Layout
 
-### Explicit Responsive Grid Layout
+### Explicit
 
 - `fit-content(limit)`: `clamp([min-content | min-width], limit, max-content)`.
 - `minmax([<fixed-breadth> | <inflexible-breadth>], [<track-breadth> | <fixed-breadth>])`.
@@ -226,7 +226,7 @@ One of the [all-time great CSS tricks](https://css-tricks.com/books/greatest-css
 }
 ```
 
-### Implicit Responsive Grid Layout
+### Implicit
 
 `grid-auto-rows`/`grid-auto-columns`:
 
@@ -315,12 +315,12 @@ Count `auto-fit` columns [guide](https://frontendmasters.com/blog/count-auto-fil
 }
 ```
 
-## Named Grid Layout
+## Named Layout
 
-### Grid Lines
+### Lines
 
 `grid-row` and `grid-column`
-change start and end of [`<grid-line>`](#grid-line-types)
+change start and end of [`<grid-line>`](#line)
 will refactor grid item's size and location:
 
 ```css
@@ -440,7 +440,7 @@ will refactor grid item's size and location:
 }
 ```
 
-### Grid Areas
+### Areas
 
 - 网格线自动命名: `areaName-start`/`areaName-end`.
 
@@ -483,7 +483,7 @@ will refactor grid item's size and location:
 }
 ```
 
-## Grid Gap
+## Gap
 
 [CSS Box Alignment Module Level 3](https://www.w3.org/TR/css-align-3)
 统一了分栏布局, 弹性布局, 网格布局的 `gap` 属性:
@@ -492,7 +492,7 @@ will refactor grid item's size and location:
 - `row-gap`: `normal | <length-percentage>`.
 - `column-gap`: `normal | <length-percentage>`.
 
-## Grid Alignment
+## Alignment
 
 - `justify-content`/`align-content` content within element,
   attach to **parent** css selector
@@ -528,7 +528,7 @@ will refactor grid item's size and location:
 
 ![Grid Alignment](./figures/grid-alignment.png 'Grid Alignment')
 
-## Grid Pseudo Element
+## Pseudo Element
 
 Adding `background` and `border` is a missing feature of
 [CSS Grid specification](https://www.w3.org/TR/css-grid-1),
@@ -692,11 +692,11 @@ selected elements in grid container:
 - Must have enough control to decide which columns will transform and at which point.
 - Classes should ideally still make sense at all breakpoints.
 
-## Masonry Pattern
+## Masonry
 
 - Chrome debates on [masonry layouts](https://developer.chrome.com/blog/masonry).
 - Webkit invents masonry layouts for [CSS grid level 3](https://webkit.org/blog/15269/help-us-invent-masonry-layouts-for-css-grid-level-3).
 
-## Grid References
+## References
 
 - Grid complete [guide](https://css-tricks.com/snippets/css/complete-guide-grid).

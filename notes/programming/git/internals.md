@@ -5,7 +5,7 @@ tags: [Programming, Git, Internals]
 
 # Internals
 
-## Git Objects
+## Objects
 
 `.git/objects` is immutable, `.git/refs` is mutable.
 
@@ -95,7 +95,7 @@ function print_git_objects() {
 print_git_objects
 ```
 
-## Git Packfiles
+## Packfiles
 
 Each `*.pack` file in `.git/objects/pack/`
 is called a `packfile`.

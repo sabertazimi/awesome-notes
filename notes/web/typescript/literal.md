@@ -1,9 +1,9 @@
 ---
 sidebar_position: 9
-tags: [Web, TypeScript, Literal]
+tags: [Web, TypeScript, Literal, String, Template Literal]
 ---
 
-# Literal Types
+# Literal
 
 ```ts
 type CardinalDirection = 'North' | 'East' | 'South' | 'West'
@@ -36,9 +36,9 @@ configure('automatic')
 // to parameter of type 'Options | "auto"'.
 ```
 
-## Template Literal Types
+## Template Literal
 
-### Basic Template Literal Types
+### Basic
 
 Based on literal types:
 
@@ -59,7 +59,7 @@ const colorWrongEnd: BrightnessAndColor = 'light-green'
 // '"dark-blue" | "dark-red" | "light-blue" | "light-red"'.
 ```
 
-### Intrinsic Template Literal Types
+### Intrinsic
 
 4 intrinsic string manipulation types:
 
@@ -68,7 +68,7 @@ const colorWrongEnd: BrightnessAndColor = 'light-green'
 - `Capitalize<StringType>`.
 - `Uncapitalize<StringType>`.
 
-### Advanced Template Literal Types
+### Advanced
 
 Combined with other types:
 
@@ -136,9 +136,9 @@ person.on('fstNameChanged', () => {})
 // parameter of type '"firstNameChanged" | "lastNameChanged" | "ageChanged"'.
 ```
 
-## Mapped Template Literal Types
+## Mapped Template Literal
 
-### Template Literal Keys
+### Keys
 
 ```ts
 type DataKey = 'location' | 'name' | 'year'
@@ -162,7 +162,7 @@ function checkExistence(checks: ExistenceChecks) {
 }
 ```
 
-### Remapping Mapped Type Keys
+### Remapping Mapped Keys
 
 ```ts
 const config = {

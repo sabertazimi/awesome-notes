@@ -5,7 +5,7 @@ tags: [AI, LLM]
 
 # Large Language Model
 
-## Generative Model
+## Generative AI
 
 - Autoregressive (AR) model:
   generate output one token at a time, conditioned on previous tokens.
@@ -49,7 +49,7 @@ and reinforcement learning from human feedback (RLHF).
 
 :::
 
-### Diffusion Model
+### Diffusion
 
 Forward process (diffusion) + reverse process (denoise):
 
@@ -59,7 +59,7 @@ Stable diffusion model:
 
 [![Stable Diffusion](./figures/stable-diffusion.png)](https://ieeexplore.ieee.org/document/9878449)
 
-### Video Model
+### Video
 
 Generative videos as world models simulator.
 
@@ -85,7 +85,7 @@ Generative videos as world models simulator.
 
 - GRPO [tricks](https://cameronrwolfe.substack.com/p/grpo-tricks).
 
-## LLM Toolchain
+## Toolchain
 
 ### LangChain
 
@@ -189,12 +189,7 @@ const agent = createVectorStoreAgent(model, toolkit)
 const result = await agent.invoke({ input: '...' })
 ```
 
-## LLM Platform
-
-- OpenAI GPT [API](https://platform.openai.com).
-- Google Gemini [API](https://ai.google.dev).
-
-## LLM Collection
+## Library
 
 ### Text-to-Speech
 
@@ -203,7 +198,12 @@ const result = await agent.invoke({ input: '...' })
 - [ChatterBox](https://github.com/resemble-ai/chatterbox):
   SoTA open-source TTS model.
 
-## LLM References
+### Platform
+
+- OpenAI GPT [API](https://platform.openai.com).
+- Google Gemini [API](https://ai.google.dev).
+
+## References
 
 - LLM survey: [大语言模型](https://github.com/LLMBook-zh/LLMBook-zh.github.io).
 - LLM survey: [efficient architectures](https://github.com/weigao266/Awesome-Efficient-Arch).

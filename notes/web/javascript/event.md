@@ -1,9 +1,9 @@
 ---
 sidebar_position: 34
-tags: [Web, JavaScript, ECMAScript, DOM]
+tags: [Web, JavaScript, ECMAScript, DOM, Event]
 ---
 
-# DOM Events
+# Event
 
 - `event.preventDefault()`.
 - `event.stopPropagation()`.
@@ -11,9 +11,9 @@ tags: [Web, JavaScript, ECMAScript, DOM]
   (unless set `useCapture` to `true`).
 - `element.dispatchEvent(event)` to trigger events.
 
-## Events Object
+## Properties
 
-| Property/Method            | Type         |                                |
+| Property                   | Type         |                                |
 | -------------------------- | ------------ | ------------------------------ |
 | type                       | String       | 被触发的事件类型               |
 | trusted                    | Boolean      | 浏览器生成/JavaScript 创建     |
@@ -28,7 +28,7 @@ tags: [Web, JavaScript, ECMAScript, DOM]
 | stopPropagation()          | Function     | 用于取消所有后续事件捕获或冒泡 |
 | stopImmediatePropagation() | Function     | 用于取消所有后续事件捕获或冒泡 |
 
-## Events Checking
+## Checker
 
 ```ts
 function handleEvent(event) {
@@ -37,7 +37,7 @@ function handleEvent(event) {
 }
 ```
 
-## Global UI Events
+## Global
 
 `DOMContentLoaded` event:
 
@@ -163,7 +163,7 @@ window.addEventListener('pageshow', (event) => {
 - `resize` event: 缩放.
 - `scroll` event: 滚动.
 
-## Form Events
+## Form
 
 - `submit`/`reset` event.
 - [FromData API](https://developer.mozilla.org/docs/Web/API/FormData)
@@ -261,7 +261,7 @@ export default function Page() {
 }
 ```
 
-## Input Events
+## Input
 
 - `blur`/`focus`/`focusin`/`focusout` event.
 - `input`/`change` event.
@@ -269,7 +269,7 @@ export default function Page() {
 - [`composition` event](https://developer.mozilla.org/docs/Web/API/CompositionEvent):
   中文输入事件.
 
-### Input Focus Event
+### Focus
 
 HTML5 focus management:
 
@@ -295,7 +295,7 @@ console.log(document.hasFocus()) // true
 
 :::
 
-### Input Change Event
+### Change
 
 - `input` event:
   - `<input type="text" />`.
@@ -322,7 +322,7 @@ input.addEventListener('change', () => {
 })
 ```
 
-### Input Select Event
+### Select
 
 ```ts
 const input = document.querySelector('input')
@@ -337,7 +337,7 @@ input.addEventListener('select', (event) => {
 })
 ```
 
-## Clipboard Events
+## Clipboard
 
 [Clipboard API](https://developer.mozilla.org/docs/Web/API/Clipboard_API)
 (modern alternative for `document.execCommand(command)`):
@@ -359,7 +359,7 @@ source.addEventListener('copy', (event) => {
 })
 ```
 
-## Mouse Events
+## Mouse
 
 - `mousedown` event.
 - `mouseup` event.
@@ -417,7 +417,7 @@ noContext.addEventListener('contextmenu', (e) => {
 })
 ```
 
-## Keyboard Events
+## Keyboard
 
 `keydown`/`keypress`/`keyup` event:
 
@@ -458,7 +458,7 @@ textbox.addEventListener('keyup', (event) => {
 'Undo'
 ```
 
-## Device Events
+## Device
 
 - `deviceorientation` event.
 - `devicemotion` event.
@@ -624,7 +624,7 @@ class Recognizer {
 export default Recognizer
 ```
 
-## Dispatch Events
+## Dispatch
 
 Dispatch `MouseEvent`:
 
@@ -685,7 +685,7 @@ if (document.implementation.hasFeature('CustomEvents', '3.0')) {
 }
 ```
 
-## Events Util
+## Utility
 
 ```ts
 class EventUtil {

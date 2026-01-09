@@ -1,6 +1,6 @@
 ---
 sidebar_position: 50
-tags: [Web, React, Hook]
+tags: [Web, React, Hook, Best Practice]
 ---
 
 # Best Practices

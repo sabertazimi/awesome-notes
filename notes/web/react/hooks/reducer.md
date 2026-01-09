@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-tags: [Web, React, Hook]
+tags: [Web, React, Hook, Reducer]
 ---
 
 # Reducer
@@ -12,7 +12,7 @@ tags: [Web, React, Hook]
 - Using useReducer over useState gives us predictable state transitions.
   It comes in very powerful when state changes become more complex.
 
-## useReducer Dispatcher
+## Dispatcher
 
 ```ts
 function mountReducer<S, I, A>(
@@ -171,9 +171,9 @@ function updateReducer<S, I, A>(
 }
 ```
 
-## useReducer Usage
+## useReducer
 
-Use useState if:
+Use `useState` if:
 
 - manage JavaScript primitives as state
 - have simple state transitions
@@ -183,7 +183,7 @@ Use useState if:
 - state is co-located to your component
 - for a small application
 
-Use useReducer if:
+Use `useReducer` if:
 
 - manage JavaScript objects or arrays as state
 - have complex state transitions

@@ -1,11 +1,11 @@
 ---
-sidebar_position: 5
-tags: [Web, CSS]
+sidebar_position: 6
+tags: [Web, CSS, Math]
 ---
 
 # Math
 
-## Calculation Function
+## Calc
 
 [`calc()`](https://developer.mozilla.org/docs/Web/CSS/calc):
 
@@ -41,7 +41,7 @@ lead to broken `calc()` addition and subtraction operator.
 
 :::
 
-## Min and Max Function
+## Min and Max
 
 [Flexible size](https://www.youtube.com/watch?v=8slZJrTK3nE):
 
@@ -77,7 +77,7 @@ lead to broken `calc()` addition and subtraction operator.
 }
 ```
 
-## Clamp Function
+## Clamp
 
 [Fluid size](https://github.com/codeAdrian/modern-fluid-typography-editor):
 

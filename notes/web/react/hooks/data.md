@@ -5,7 +5,7 @@ tags: [Web, React, Hook]
 
 # Data
 
-## Async Data
+## Asynchronous
 
 - `useState` to store url and data.
 - `useEffect` to trigger async `fetch` actions.
@@ -232,7 +232,7 @@ function useFetch<T = unknown>(
 export default useFetch
 ```
 
-## Data Query
+## Query
 
 ```ts
 import type { UseQueryOptions } from 'react-query'

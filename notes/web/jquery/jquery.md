@@ -1,5 +1,5 @@
 ---
-tags: [Web, Framework, jQuery]
+tags: [Web, jQuery]
 ---
 
 # jQuery
@@ -159,11 +159,9 @@ class Promise {
 - runtime tokenizer and parser
 - api from `querySelectorAll`
 
-## DOM Module
+## DOM
 
-### DOM Internal
-
-createDocumentFragment:
+`createDocumentFragment`:
 
 多次使用节点方法(如：appendChild)绘制页面，每次都要刷新页面一次。
 使用 document_createDocumentFragment()创建一个文档碎片，把所有的新结点附加在其上，
@@ -182,7 +180,7 @@ function after(...args) {
 }
 ```
 
-### structure
+### Structure
 
 ```ts
 $('selector').html('tag+text')
@@ -200,7 +198,7 @@ $('selector').children()
 $('selector').index()
 ```
 
-### class
+### Class
 
 ```ts
 $('selector').addClass('')
@@ -208,16 +206,23 @@ $('selector').removeClass('')
 $('selector').hidden()
 ```
 
-### style
+### Style
 
 ```ts
 $('selector').css('color', 'red')
 $('selector').prop('disable', 'true')
 ```
 
-## Events Module
+### APIs
 
-### Events Internal
+```ts
+$(selector).data()
+$(selector).html()
+$(selector).css()
+$(document).ready(() => {})
+```
+
+## Events
 
 1. 通过 on 绑定事件，分析传递的数据，加工变成 add 能够识别的数据
 2. 通过 add 把数据整理放到数据缓存中保存，通过 addEventListener 绑定事件
@@ -246,7 +251,7 @@ $('selector').prop('disable', 'true')
 - focus
 - blur
 
-### Document and Window Event
+### Document and Window
 
 - load
 - resize
@@ -260,18 +265,7 @@ $(window).height() // 返回窗口高度
 $(window).scrollTop() // 返回滚动条距网页顶部距离
 ```
 
-### 常用多态函数
-
-```ts
-$(selector).data()
-$(selector).html()
-$(selector).css()
-$(document).ready(() => {})
-```
-
-## AJAX Module
-
-### JSON API
+## JSON
 
 `$.getJSON`:
 
@@ -283,7 +277,7 @@ $.getJSON('test.js', (json) => {
 })
 ```
 
-### AJAX API
+## AJAX
 
 `$.ajax`:
 
@@ -298,7 +292,7 @@ $.ajax({
 })
 ```
 
-## Animation Module
+## Animation
 
 - 通过多个 animate 方法形成动画链，那么这个动画链其实都是会加入到 queue 队列里面
 - 在每一次 queue 方法中会把动画数据写到队列中，然后取出队列中的第一个序列通过 dequeue 方法执行
