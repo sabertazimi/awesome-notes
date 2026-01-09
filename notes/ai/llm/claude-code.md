@@ -276,6 +276,8 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 
 ### Integration
 
+- [Obsidian](https://github.com/kepano/obsidian-skills):
+  Create and edit Obsidian Bases (`.base`) with Obsidian Flavored Markdown.
 - [NotebookLM](https://github.com/PleasePrompto/notebooklm-skill):
   Communicate directly with Google NotebookLM notebooks.
 - [Figma](https://github.com/figma/mcp-server-guide):
