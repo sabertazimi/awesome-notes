@@ -196,9 +196,9 @@ import {
   useState,
 } from 'react'
 
-const CountContext = createContext()
+const CountContext = createContext(null)
 
-export default function CountProvider(props) {
+function useCountProvider() {
   const [count, setCount] = useState(0)
 
   // Use `useMemo`/`useCallback` to memorize values and functions.
@@ -209,15 +209,21 @@ export default function CountProvider(props) {
     }
   }, [count, setCount])
 
-  return <CountContext value={value} {...props} />
+  return value
+}
+
+export default function CountProvider({ children, ...props }) {
+  const value = useCountProvider()
+  return <CountContext value={value} {...props}>{children}</CountContext>
 }
 
 function useCount() {
   const context = use(CountContext)
 
   // Check whether component under `XXXContextProvider`.
-  if (!context)
+  if (!context) {
     throw new Error('useCount must be used within a CountProvider')
+  }
 
   // Wrap complex context logic, only expose simple API.
   const { count, setCount } = context
