@@ -3,9 +3,9 @@ sidebar_position: 5
 tags: [Web, TypeScript, Function]
 ---
 
-# Function Type
+# Function
 
-## Function Interface
+## Interface
 
 ```ts
 interface ReturnString {
@@ -52,7 +52,7 @@ Animal => WangCai 是 Dog => Dog 的子类型:
 - 函数参数的类型兼容是反向的, 称之为逆变.
 - 返回值的类型兼容是正向的, 称之为协变.
 
-## Arrow Function
+## Arrow
 
 在一个以 number 类型为参数，以 string 类型为返回值的函数中:
 
@@ -60,7 +60,7 @@ Animal => WangCai 是 Dog => Dog 的子类型:
 const simple: (foo: number) => string = foo => foo.toString()
 ```
 
-## Function Overload
+## Overload
 
 函数签名的类型重载:
 
@@ -123,7 +123,7 @@ f3()
 f3(123, 'hello')
 ```
 
-## Function Types Design
+## Gymnastics
 
 - Input types tend to be **broader** than output types.
 - **Optional** properties and **union** types are more common in parameter types.

@@ -15,7 +15,9 @@ tags: [Programming, Game Design]
 - 个性化与自定义
 - 社交性
 
-## 声音设计(音频制作/声音合成)
+## 声音设计
+
+音频制作/声音合成:
 
 - 声音包络 (ASDR): attack decay sustain release
 

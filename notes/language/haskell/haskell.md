@@ -1,5 +1,5 @@
 ---
-tags: [Language, Haskell]
+tags: [Language, Haskell, Functional Programming]
 ---
 
 # Haskell

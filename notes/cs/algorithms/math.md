@@ -5,7 +5,7 @@ tags: [CS, Algorithm, Math]
 
 # Math
 
-## Radix Problem
+## Radix
 
 ```ts
 while (n) {
@@ -14,7 +14,7 @@ while (n) {
 }
 ```
 
-## Matrix Fast Power Algorithm
+## Fast Power
 
 ```cpp
 typedef vector<vector> mat;
@@ -40,7 +40,7 @@ mat pow(mat A, int p) {
 }
 ```
 
-## Mod Power Algorithm
+## Mod Power
 
 ```cpp
 typedef long long ll;
@@ -59,7 +59,7 @@ ll mod_pow(ll x, ll n, ll mod) {
 }
 ```
 
-## XOR Operator Usage
+## XOR Operator
 
 - Binary add via `^`.
 - Remove duplicates via `^`.

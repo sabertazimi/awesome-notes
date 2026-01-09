@@ -1,11 +1,11 @@
 ---
-sidebar_position: 9
-tags: [Web, CSS]
+sidebar_position: 60
+tags: [Web, CSS, Component, Animation]
 ---
 
 # Animation
 
-## Animated Dots
+## Dots
 
 ```css
 .dot {
@@ -40,15 +40,13 @@ tags: [Web, CSS]
 }
 ```
 
-## Hover Animation
+## Hover
 
 - Hover button effects using [background](https://css-tricks.com/cool-hover-effects-using-background-properties).
 - Hover button effects using [text shadow](https://css-tricks.com/cool-hover-effects-that-use-css-text-shadow).
 - Hover button effects using [clip and mask](https://css-tricks.com/css-hover-effects-background-masks-3d).
 
-## Fade Animation
-
-### Visual Fade Animation
+## Fade
 
 ```css
 .dropdown-drawer {
@@ -66,7 +64,7 @@ tags: [Web, CSS]
 }
 ```
 
-### Fade In Animation
+### In
 
 ```css
 @keyframes fade-in {
@@ -82,7 +80,7 @@ tags: [Web, CSS]
 }
 ```
 
-### Fade In Out Animation
+### In Out
 
 ```css
 @keyframes fade-in-out {
@@ -100,7 +98,7 @@ tags: [Web, CSS]
 }
 ```
 
-### Fade Mask Animation
+### Mask
 
 [Fade text](https://codepen.io/Chokcoco/pen/OJbxZLM):
 
@@ -129,7 +127,7 @@ p {
 }
 ```
 
-## Bounce Animation
+## Bounce
 
 ```css
 /* transform-origin: top center */
@@ -151,9 +149,7 @@ p {
 }
 ```
 
-## Rotate Animation
-
-### Rotate In Animation
+## Rotate
 
 ```css
 /* transform-origin: top center */
@@ -183,7 +179,7 @@ p {
 }
 ```
 
-### Circular Spin Animation
+### Circular Spin
 
 ```css
 /**
@@ -207,7 +203,7 @@ p {
 }
 ```
 
-## Fold Flip Animation
+## Fold Flip
 
 ```css
 /* transform-origin: top center */
@@ -228,7 +224,7 @@ p {
 }
 ```
 
-## Accordion Animation
+## Accordion
 
 ```css
 @media only screen and (prefers-reduced-motion: reduce) {
@@ -253,7 +249,7 @@ p {
 }
 ```
 
-## Slides Animation
+## Slide
 
 ```css
 .slide {
@@ -332,7 +328,7 @@ p {
 }
 ```
 
-## Scale Up Animation
+## Scale Up
 
 ```css
 @media only screen and (prefers-reduced-motion: reduce) {
@@ -352,7 +348,7 @@ p {
 }
 ```
 
-## Clear Splash Animation
+## Clear Splash
 
 ```css
 .cube {
@@ -363,7 +359,7 @@ p {
 }
 ```
 
-## Tooltip Animation
+## Tooltip
 
 ```css
 @keyframes tooltip {
@@ -387,7 +383,7 @@ p {
 }
 ```
 
-## Breath Animation
+## Breath
 
 ```css
 .breath {
@@ -406,7 +402,7 @@ p {
 }
 ```
 
-## Pulse Animation
+## Pulse
 
 ```css
 @keyframes radial-pulse {
@@ -433,7 +429,7 @@ p {
 }
 ```
 
-## Clock Animation
+## Clock
 
 ```css
 .clock-pendulum {
@@ -452,7 +448,7 @@ p {
 }
 ```
 
-## Typing Animation
+## Typewriter
 
 ```css
 @keyframes typing {

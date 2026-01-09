@@ -5,7 +5,7 @@ tags: [CS, System, OS, Boot]
 
 # Boot
 
-## GCC 内联汇编
+## GCC Inline Assembly
 
 ```cpp
 asm ( assembler template // assembly language
@@ -28,11 +28,11 @@ constraints:
 - S = esi
 - 0/n = first/nth constraints
 
-## 启动顺序
+## Sequence
 
 寄存器 -> BIOS -> Boot Loader
 
-## 寄存器
+## Registers
 
 - CF: 初值 F000H
 - EIP: 初值 FFF0H
@@ -53,7 +53,7 @@ BIOS 根据设置(硬盘/U 盘/网络启动),
 加载存储设备的主引导扇区(Master Boot Record)(第一个扇区)的 512 字节至内存 0x7c00 处,
 开始执行第一条指令(Boot Loader)
 
-## Boot Loader
+## Loader
 
 实模式与保护模式带来的问题:
 
@@ -71,7 +71,7 @@ BIOS 根据设置(硬盘/U 盘/网络启动),
 - 移动内核镜像至 1MB 之后合适位置
 - 跳转至内核入口(`jmp addr` 用以修改 cs:eip)
 
-### 标志
+### Flags
 
 lab1/tools/sign.c:
 
@@ -135,7 +135,7 @@ make
 sudo cp ./bochs /usr/bin/bochs-dbg
 ```
 
-### Config
+### Configuration
 
 ```bash
 # BIOS与VGA镜像
@@ -188,7 +188,9 @@ bochs -q -f .bochsrc
 - print-stack 打印当前栈顶的值
 - help 显示帮助
 
-## GNU ld
+## GNU Linker
+
+`ld`:
 
 ```cpp
 ENTRY(kmain)

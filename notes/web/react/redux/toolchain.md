@@ -1,18 +1,18 @@
 ---
 sidebar_position: 5
-tags: [Web, React, Redux, State Management]
+tags: [Web, React, Redux, State Management, Toolchain]
 ---
 
 # Toolchain
 
-## React Redux Binding Library
+## React
 
 - `useSelector`.
 - `useDispatch`:
   dispatch function reference will be stable
   as long as same store instance is being passed to the `<Provider>`.
 
-### Typed React Redux Hooks
+### Types
 
 ```ts
 import type { TypedUseSelectorHook } from 'react-redux'
@@ -26,7 +26,7 @@ export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 ```
 
-### Custom React Redux Hooks
+### Hooks
 
 ```ts
 import { shallowEqual, useSelector } from 'react-redux'
@@ -53,7 +53,7 @@ export default function useActions(actions) {
 }
 ```
 
-### React Redux API
+### APIs
 
 [`batch`](https://react-redux.js.org/api/batch):
 
@@ -71,7 +71,7 @@ function myThunk() {
 }
 ```
 
-## Redux Server Side Rendering
+## SSR
 
 - Client side:
   a new Redux store will be created with state provided from server.
@@ -166,28 +166,28 @@ function renderFullPage(html, preloadedState) {
 app.listen(port)
 ```
 
-## Redux Tools
+## Library
 
-### Immutable Data Tools
+### Immutable
 
-- ImmerJS.
-- Immutable.js: decrease useless copy and memory occupation.
+- [Immer](https://github.com/immerjs/immer):
+  Create next immutable state by mutating current one.
+- [Immutable.js](https://github.com/immutable-js/immutable-js):
+  Immutable persistent data collections.
 
-### Middleware Tools
+### Middleware
 
-- [Redux Thunk](https://github.com/reduxjs/redux-thunk)
-- [Redux Saga](https://github.com/yelouafi/redux-saga)
-- [Redux Promise](https://github.com/acdlite/redux-promise)
-- [Redux Diff Logger](https://github.com/fcomb/redux-diff-logger)
-- [Redux Dynamic Modules](https://github.com/microsoft/redux-dynamic-modules):
-  Modularize Redux by dynamically loading reducers and middlewares
-  (contribute to **code splitting**).
+- [Thunk](https://github.com/reduxjs/redux-thunk):
+  Async actions.
+- [Saga](https://github.com/yelouafi/redux-saga):
+  Side effects.
 
-### State Tools
+### State
 
-- Reselect: memorize state transformation.
-- Redux undo.
+- [Reselect](https://github.com/reduxjs/reselect):
+  Memorize state transformation.
 
-### Debugging Tools
+### Debugging
 
-- [Redux Devtools](https://github.com/gaearon/redux-devtools)
+- [Devtools](https://github.com/reduxjs/redux-devtools):
+  Hot reloading and action replay.

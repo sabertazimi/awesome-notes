@@ -1,6 +1,6 @@
 ---
-sidebar_position: 19
-tags: [Web, CSS]
+sidebar_position: 29
+tags: [Web, CSS, Interaction, Cursor, Pointer, Scroll, Parallax]
 ---
 
 # Interaction
@@ -237,7 +237,7 @@ body {
 </style>
 ```
 
-### Scroll Snap Type
+### Type
 
 [`scroll-snap-type`](https://developer.mozilla.org/docs/Web/CSS/scroll-snap-type):
 
@@ -251,14 +251,21 @@ body {
   - `mandatory`: 强制定位, 若存在有效的定位点位置, 则滚动容器必须在滚动结束时进行定位.
   - `proximity`: 大约定位, 让浏览器自己判断要不要定位.
 
-### Scroll Padding
+### Margin
+
+[`scroll-margin`](https://developer.mozilla.org/docs/Web/CSS/scroll-margin):
+
+- `0`.
+- `<length>{1,4}`.
+
+### Padding
 
 [`scroll-padding`](https://developer.mozilla.org/docs/Web/CSS/scroll-padding):
 
 - `auto{1,4}`.
 - `<length-percentage>{1,4}`.
 
-### Scroll Snap Align
+### Align
 
 [`scroll-snap-align`](https://developer.mozilla.org/docs/Web/CSS/scroll-snap-align):
 
@@ -267,19 +274,12 @@ body {
 - `end{1,2}`: 结束位置对齐, 子元素对齐容器右边缘/下边缘.
 - `center{1,2}`: 居中对齐, 子元素中心和滚动容器中心一致.
 
-### Scroll Snap Stop
+### Stop
 
 [`scroll-snap-stop`](https://developer.mozilla.org/docs/Web/CSS/scroll-snap-stop):
 
 - `normal`: 可以忽略捕获位置.
 - `always`: 不能忽略捕获位置, 且必须定位到第一个捕获元素的位置, 保证每次只滚动一屏或一个指定元.
-
-### Scroll Margin
-
-[`scroll-margin`](https://developer.mozilla.org/docs/Web/CSS/scroll-margin):
-
-- `0`.
-- `<length>{1,4}`.
 
 ## Overflow Anchor
 
@@ -299,7 +299,7 @@ body {
 
 ## Horizontal Scrolling
 
-### Horizontal Scrolling Principles
+### Principles
 
 Horizontal scrolling [design](https://designshack.net/articles/navigation/horizontal-scrolling-pros-cons):
 
@@ -316,7 +316,7 @@ Horizontal scrolling [design](https://designshack.net/articles/navigation/horizo
 - Design horizontal scroll bars in the same manner as vertical scroll bars
   to create an element of familiarity for users.
 
-### Horizontal Scrolling Methods
+### Methods
 
 - Transform: rotate `90deg` element.
 - Flex.
@@ -368,7 +368,7 @@ Horizontal scrolling [design](https://designshack.net/articles/navigation/horizo
 
 Scroll bars take up space within `padding box`.
 
-### Standard Custom Scrollbar
+### Width and Color
 
 [`scrollbar-width`](https://developer.mozilla.org/docs/Web/CSS/scrollbar-width):
 
@@ -381,7 +381,7 @@ Scroll bars take up space within `padding box`.
 - `auto`.
 - `<color>{2}`.
 
-### Chrome Custom Scrollbar
+### WebKit
 
 [WebKit scrollbar](https://github.com/henripar/scrollbar):
 
@@ -427,7 +427,7 @@ Scroll bars take up space within `padding box`.
 }
 ```
 
-### Hidden Custom Scrollbar
+### Hidden
 
 ```css
 .scroll-none {
@@ -444,9 +444,9 @@ Scroll bars take up space within `padding box`.
 }
 ```
 
-## Parallax Effect
+## Parallax
 
-### Background Attachment Parallax Effect
+### Background Attachment
 
 ```css
 .parallax {
@@ -459,7 +459,7 @@ Scroll bars take up space within `padding box`.
 }
 ```
 
-### 3D Perspective Transform Parallax Effect
+### Perspective Transform
 
 [3D perspective transform](https://keithclark.co.uk/articles/pure-css-parallax-websites)
 [parallax effect](https://github.com/netlify/matterday.netlify.com):
@@ -515,7 +515,7 @@ Scroll bars take up space within `padding box`.
 </style>
 ```
 
-## Page Progress Indicator
+## Progress Indicator
 
 ```css
 body {

@@ -1,355 +1,9 @@
 ---
-sidebar_position: 7
-tags: [Web, CSS, Layout]
+sidebar_position: 10
+tags: [Web, CSS, Layout, Box]
 ---
 
-# Box
-
-## Box Sizing
-
-`box-sizing`:
-
-- `content-box` (`initial` value).
-- `padding-box`.
-- `border-box`.
-
-```css
-:root {
-  box-sizing: border-box;
-}
-
-*,
-::before,
-::after {
-  box-sizing: inherit;
-}
-```
-
-Box sizing:
-
-- `Intrinsic Sizing` (内在尺寸):
-  表示元素最终的尺寸表现是由内容决定的,
-  e.g. `fit-content`/`min-content`/`max-content`.
-- `Extrinsic Sizing` (外在尺寸):
-  表示元素最终的尺寸表现是由上下文决定的,
-  e.g. `stretch`/`-moz-available`/`-webkit-fill-available`.
-
-## Box Width
-
-### Width Formal Syntax
-
-`width`:
-
-- `auto`: initial value.
-- `<length>`.
-- `<percentage>`.
-- `min-content | max-content | fit-content | fit-content(<length-percentage>)`.
-
-### Percentage Width
-
-`%` width calculate by `containing box` width:
-
-- 普通元素的百分比宽度是相对于父元素 `content box` 宽度计算.
-- 绝对定位元素的百分比宽度是相对于第一个 `position` 不为 `static` 的祖先元素 `padding box` 宽度计算.
-
-### Auto Flow Width
-
-Auto flow with `css-sizing`,
-`fit-content`/`min-content`/`max-content`/`stretch`
-for `width`/`min-width`/`max-width`/`height`/`min-height`/`max-height`/
-`grid-template-rows`/`grid-template-columns`/`flex-basis`:
-
-- `fit-content`: grow but not overflow.
-
-```css
-.content {
-  width: fit-content;
-  margin: auto;
-}
-
-.button {
-  box-sizing: border-box;
-  width: calc(100% - 30px);
-  width: stretch;
-  height: 40px;
-  margin-right: 15px;
-  margin-left: 15px;
-}
-
-.table {
-  box-sizing: border-box;
-  width: 100%;
-  width: stretch;
-  table-layout: fixed;
-}
-```
-
-### Min and Max Width
-
-`min-width` > `max-width` > `width !important`:
-
-```css
-/* 480px */
-.box-1 {
-  min-width: 480px;
-  max-width: 256px;
-}
-
-/* 256px */
-.box-2 {
-  width: 480px !important;
-  max-width: 256px;
-}
-```
-
-## Box Height
-
-### Flow Height
-
-普通文档流是为限定的宽度和无限的高度设计的 (网页元素的默认布局行为):
-
-- 行内元素跟随文字的方向从左到右排列, 当到达容器边缘时会换行.
-- 块级元素会占据完整的一行, 前后都有换行.
-
-这导致处理元素高度的方式跟处理宽度不一样:
-
-`box-sizing` 仍然会影响高度, 但最好避免给元素指定明确的高度.
-容器的高度由内容 (子元素) 天然地决定, 而不是容器自己决定.
-
-### Percentage Height
-
-`%` height calculate by `containing box` height:
-
-- 容器高度为 `auto` (`initial` value) 时, 其高度通常由子元素高度决定:
-  浏览器为避免高度计算死循环, 会忽略子元素百分比高度声明.
-- 容器高度为一个明确值时, 子元素百分比高度才会生效.
-
-### Viewport Height
-
-```css
-.my-element {
-  height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-  height: calc(var(--vh, 1vh) * 100);
-}
-```
-
-```ts
-window.addEventListener('resize', () => {
-  // Get viewport height and multiple it by 1% to get a value for a vh unit
-  const vh = window.innerHeight * 0.01
-  document.documentElement.style.setProperty('--vh', `${vh}px`)
-})
-```
-
-:::tip[`dvh`]
-
-`dvh` 在移动端上会产生抖动问题, 当用户从首屏开始滚动时, 导航栏的消失会导致 `100dvh` 的值发生突变.
-因此, 只有在不需要上下滚动的页面才用 `dvh`.
-
-:::
-
-## Box Aspect Ratio
-
-Things can break [`aspect-ratio`](https://frontendmasters.com/blog/things-that-can-break-aspect-ratio-in-css):
-
-- Setting both dimensions: setting `inline-size` and `block-size` simultaneously.
-- Stretching element: `align-items: stretch`.
-- Content that forces height: inner elements may force the height of the parent.
-
-## Box Margin
-
-### Auto Margin
-
-CSS2 visual formatting model:
-
-- If both margin-left and margin-right are auto,
-  their used values are equal.
-- If margin-top, or margin-bottom are auto,
-  their used value is 0.
-
-### Negative Margin
-
-Negative `margin` change layout flow:
-
-- Negative `margin-top`/`margin-left`: pull self up/left.
-- Negative `margin-bottom`/`margin-right`: pull sibling up/left, overlapping self.
-- Negative `margin` along `float` direction: pull self.
-- Negative `margin` opposite `float` direction: pull sibling.
-
-```css
-.content {
-  float: left;
-  width: 100%;
-  margin-right: -200px;
-}
-
-.sidebar {
-  float: left;
-  width: 200px;
-}
-```
-
-Negative horizontal `margin` on `initial` width element make `width` **stretch**
-(just like positive `padding`):
-
-```css
-/* ul width = 100% + 20px */
-ul {
-  margin-right: -20px;
-}
-
-ul > li {
-  float: left;
-  width: 100px;
-  margin-right: 20px;
-}
-
-.blockquote {
-  margin: 2rem -2rem;
-}
-```
-
-### Percentage Margin
-
-Percentage `margin` calculate by `containing block` inline size (`width`),
-include `margin-top` and `margin-bottom`.
-
-### Collapse Margin
-
-[`margin` collapsing occasion](https://developer.mozilla.org/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing):
-
-- Adjacent siblings: 1's `margin-bottom` with 2's `margin-top`.
-- No content separating parent and descendants:
-  - No `border`/`padding`/`inline part`/`BFC created`/`clear`:
-    can't separate parents `margin-top` from its descendant blocks `margin-top`.
-  - No `border`/`padding`/`inline content`/`height`/`min-height`:
-    can't separate parents `margin-bottom` from its descendant blocks `margin-bottom`.
-  - Collapsed `margin` ends up **outside the parent**.
-- Empty blocks:
-  no `border`/`padding`/`inline content`/`height`/`min-height`
-  to separate block's `margin-top` from its `margin-bottom`.
-
-[![Margin Collapse](./figures/margin-collapse.svg)](https://www.jonathan-harrell.com/blog/what%E2%80%99s-the-deal-with-margin-collapse)
-
-`margin` collapsing calculation:
-
-- 正正取大值.
-- 正负值相加.
-- 负负最负值.
-
-`margin` collapsing prevention:
-
-- BFC creation: add `overflow: auto` to container.
-- Add `padding`.
-- Add `border`.
-
-:::tip[Never Collapse]
-
-Margin collapsing only happen to **normal** block box **vertical** direction:
-
-- [Line box](#line-box) margin **never collapse**.
-- `float` box margin **never collapse**.
-- `absolute`/`fixed` positioned box margin **never collapse**.
-- `flex` children.
-- `grid` children.
-
-:::
-
-### Invalid Margin
-
-- `display: inline` 非替换元素 vertical `margin` 无效.
-- `display: table-cell`/`display: table-row` 元素 `margin` 无效: e.g. `<tr>`, `<td>`.
-- `position: absolute` 绝对定位元素未定位方向 (`auto`) `margin`:
-  `.absolute { top: 10%; left: 30%; }` `margin-right` 与 `margin-bottom` 改变了外部尺寸,
-  但无法影响兄弟元素布局.
-- 定高容器**子元素**的 `margin-bottom` 或者定宽容器**子元素**的 `margin-right` 的定位作用失效.
-
-## Box Padding
-
-### Percentage Padding
-
-Percentage `padding` calculate by `containing block` inline size (`width`),
-include `padding-top` and `padding-bottom`:
-
-```css
-.box {
-  position: relative;
-  padding: 10% 50%;
-}
-
-.box > img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-```
-
-## Box Overflow
-
-[`overflow`](https://developer.mozilla.org/docs/Web/CSS/overflow):
-
-- `visible`.
-- `hidden`: 溢出隐藏基于 `padding box`.
-- `clip`.
-- `scroll`.
-- `auto`.
-
-## Box Line Height
-
-### Inline Element Line Height
-
-行间距:
-
-- 半行间距 = `(line-height * font-size - font-size) / 2`.
-- 行间距 = 第一行下半行间距 + 第二行上半行间距.
-
-### Box Line Height Inheritance
-
-`line-height` 继承:
-
-- `%` 与 `em` 继承计算值, `number` 继承数值.
-- `line-height` 最好使用 `number`, 使得子代继承 `line-height` 时文字正常排版,
-  不会出现 `line-height` `<` `font-size` 导致文字重叠的现象.
-- Inline level element:
-  由于 `line-height` 可继承, 一般给父元素设置 `line-height` 即可,
-  会自动作用至容器内所有内联元素.
-- Block level element:
-  由于行框盒子幽灵空白节点的存在,
-  `line-height * font-size` 会决定 block level element 内部元素的最小高度,
-  e.g. `<div><span></span></div>` 高度不为 `0`.
-
-## Box Vertical Align
-
-### Box Vertical Align Values
-
-`vertical-align` 有效值:
-
-- 线类: `baseline`, `top`, `middle`, `bottom`.
-- 文本类: `text-top`, `text-bottom`.
-- 上标下标类: `sub`, `super`.
-- 数值: 基于 `baseline` 上移 (正数) / 下移 (负数).
-- 百分比: calculate by `line-height`.
-
-[![Vertical Align](./figures/vertical-align.png)](https://developer.mozilla.org/docs/Web/CSS/vertical-align)
-
-### Box Vertical Align Applies
-
-`vertical-align` 作用元素:
-
-- [Inline level element](https://developer.mozilla.org/docs/Web/HTML/Inline_elements):
-  - `<span>`/`<strong>`/`<em>`.
-  - `<img>`/`<button>`/`<input>`.
-  - `::before`/`::after`.
-- `display: table-cell` 元素.
-- 用 `display: inline-*` 或 `display: table-cell` **以外**的方式
-  创建 `Box Formatting Context` 后,
-  `vertical-align` 不再起作用.
-- 当 `line-height` 过小时, `vertical-align` 在视觉上失效,
-  调整 `line-height` 至足够大时, `vertical-align` 正常起作用.
-
-## Box Model
+# Box Model
 
 [Box model](https://learn.shayhowe.com/html-css/opening-the-box-model):
 
@@ -362,7 +16,7 @@ include `padding-top` and `padding-bottom`:
 - `Flex Formatting Context` (FFC).
 - `Grid Formatting Context` (GFC).
 
-## Inline Box Model
+## Inline
 
 [Inline box model](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/The_box_model#the_box_model_and_inline_boxes):
 
@@ -437,11 +91,11 @@ Character box/em-box/selection box:
   当 `Struct` `font-size` 与内联元素 `font-size` 差距过大时,
   进行文字对齐时会撑高容器.
 - `<div><img src="1.jpg"></div>` 下边缘存在空隙:
-  `Strut` 默认基于[基线对齐](#inline-element-baseline).
+  `Strut` 默认基于[基线对齐](./inline.md#baseline).
 
 :::
 
-## Block Box Model
+## Block
 
 [Block box model](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/The_box_model):
 
@@ -450,7 +104,7 @@ Character box/em-box/selection box:
 - `width` and `height` properties are respected.
 - `padding`, `border` and `margin` will push away other elements.
 
-### Block Formatting Context Features
+### Block Formatting Context
 
 BFC 包含创建该上下文元素的所有子元素 (包含性):
 
@@ -472,7 +126,7 @@ BFC 是页面上的一个隔离的独立容器 (隔离性):
   - 内容太宽, 溢出了容器.
   - 设置负外边距, 导致内容被拉到容器外部.
 
-### Block Formatting Context Creation
+Creating BFC:
 
 - 根元素或其它包含它的元素.
 - `overflow`: not `visible` (e.g. `hidden`).
@@ -497,16 +151,348 @@ BFC 是页面上的一个隔离的独立容器 (隔离性):
 }
 ```
 
-## Box Stacking
+## Sizing
 
-### Stacking Level
+`box-sizing`:
+
+- `content-box` (`initial` value).
+- `padding-box`.
+- `border-box`.
+
+```css
+:root {
+  box-sizing: border-box;
+}
+
+*,
+::before,
+::after {
+  box-sizing: inherit;
+}
+```
+
+Box sizing:
+
+- `Intrinsic Sizing` (内在尺寸):
+  表示元素最终的尺寸表现是由内容决定的,
+  e.g. `fit-content`/`min-content`/`max-content`.
+- `Extrinsic Sizing` (外在尺寸):
+  表示元素最终的尺寸表现是由上下文决定的,
+  e.g. `stretch`/`-moz-available`/`-webkit-fill-available`.
+
+## Width
+
+`width`:
+
+- `auto`: initial value.
+- `<length>`.
+- `<percentage>`.
+- `min-content | max-content | fit-content | fit-content(<length-percentage>)`.
+
+`%` width calculate by `containing box` width:
+
+- 普通元素的百分比宽度是相对于父元素 `content box` 宽度计算.
+- 绝对定位元素的百分比宽度是相对于第一个 `position` 不为 `static` 的祖先元素 `padding box` 宽度计算.
+
+### Auto Flow
+
+Auto flow with `css-sizing`,
+`fit-content`/`min-content`/`max-content`/`stretch`
+for `width`/`min-width`/`max-width`/`height`/`min-height`/`max-height`/
+`grid-template-rows`/`grid-template-columns`/`flex-basis`:
+
+- `fit-content`: grow but not overflow.
+
+```css
+.content {
+  width: fit-content;
+  margin: auto;
+}
+
+.button {
+  box-sizing: border-box;
+  width: calc(100% - 30px);
+  width: stretch;
+  height: 40px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+.table {
+  box-sizing: border-box;
+  width: 100%;
+  width: stretch;
+  table-layout: fixed;
+}
+```
+
+### Size Limits
+
+`min-width` > `max-width` > `width !important`:
+
+```css
+/* 480px */
+.box-1 {
+  min-width: 480px;
+  max-width: 256px;
+}
+
+/* 256px */
+.box-2 {
+  width: 480px !important;
+  max-width: 256px;
+}
+```
+
+## Height
+
+`%` height calculate by `containing box` height:
+
+- 容器高度为 `auto` (`initial` value) 时, 其高度通常由子元素高度决定:
+  浏览器为避免高度计算死循环, 会忽略子元素百分比高度声明.
+- 容器高度为一个明确值时, 子元素百分比高度才会生效.
+
+### Flow
+
+普通文档流是为限定的宽度和无限的高度设计的 (网页元素的默认布局行为):
+
+- 行内元素跟随文字的方向从左到右排列, 当到达容器边缘时会换行.
+- 块级元素会占据完整的一行, 前后都有换行.
+
+这导致处理元素高度的方式跟处理宽度不一样:
+
+`box-sizing` 仍然会影响高度, 但最好避免给元素指定明确的高度.
+容器的高度由内容 (子元素) 天然地决定, 而不是容器自己决定.
+
+### Viewport
+
+```css
+.my-element {
+  height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+  height: calc(var(--vh, 1vh) * 100);
+}
+```
+
+```ts
+window.addEventListener('resize', () => {
+  // Get viewport height and multiple it by 1% to get a value for a vh unit
+  const vh = window.innerHeight * 0.01
+  document.documentElement.style.setProperty('--vh', `${vh}px`)
+})
+```
+
+:::tip[`dvh`]
+
+`dvh` 在移动端上会产生抖动问题, 当用户从首屏开始滚动时, 导航栏的消失会导致 `100dvh` 的值发生突变.
+因此, 只有在不需要上下滚动的页面才用 `dvh`.
+
+:::
+
+## Aspect Ratio
+
+Things can break [`aspect-ratio`](https://frontendmasters.com/blog/things-that-can-break-aspect-ratio-in-css):
+
+- Setting both dimensions: setting `inline-size` and `block-size` simultaneously.
+- Stretching element: `align-items: stretch`.
+- Content that forces height: inner elements may force the height of the parent.
+
+## Margin
+
+`%` margin calculate by `containing block` inline size (`width`),
+include `margin-top` and `margin-bottom`.
+
+### Auto
+
+CSS2 visual formatting model:
+
+- If both margin-left and margin-right are auto,
+  their used values are equal.
+- If margin-top, or margin-bottom are auto,
+  their used value is 0.
+
+### Negative
+
+Negative `margin` change layout flow:
+
+- Negative `margin-top`/`margin-left`: pull self up/left.
+- Negative `margin-bottom`/`margin-right`: pull sibling up/left, overlapping self.
+- Negative `margin` along `float` direction: pull self.
+- Negative `margin` opposite `float` direction: pull sibling.
+
+```css
+.content {
+  float: left;
+  width: 100%;
+  margin-right: -200px;
+}
+
+.sidebar {
+  float: left;
+  width: 200px;
+}
+```
+
+Negative horizontal `margin` on `initial` width element make `width` **stretch**
+(just like positive `padding`):
+
+```css
+/* ul width = 100% + 20px */
+ul {
+  margin-right: -20px;
+}
+
+ul > li {
+  float: left;
+  width: 100px;
+  margin-right: 20px;
+}
+
+.blockquote {
+  margin: 2rem -2rem;
+}
+```
+
+### Collapse
+
+[`margin` collapsing occasion](https://developer.mozilla.org/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing):
+
+- Adjacent siblings: 1's `margin-bottom` with 2's `margin-top`.
+- No content separating parent and descendants:
+  - No `border`/`padding`/`inline part`/`BFC created`/`clear`:
+    can't separate parents `margin-top` from its descendant blocks `margin-top`.
+  - No `border`/`padding`/`inline content`/`height`/`min-height`:
+    can't separate parents `margin-bottom` from its descendant blocks `margin-bottom`.
+  - Collapsed `margin` ends up **outside the parent**.
+- Empty blocks:
+  no `border`/`padding`/`inline content`/`height`/`min-height`
+  to separate block's `margin-top` from its `margin-bottom`.
+
+[![Margin Collapse](./figures/margin-collapse.svg)](https://www.jonathan-harrell.com/blog/what%E2%80%99s-the-deal-with-margin-collapse)
+
+`margin` collapsing calculation:
+
+- 正正取大值.
+- 正负值相加.
+- 负负最负值.
+
+`margin` collapsing prevention:
+
+- BFC creation: add `overflow: auto` to container.
+- Add `padding`.
+- Add `border`.
+
+:::tip[Never Collapse]
+
+Margin collapsing only happen to **normal** block box **vertical** direction:
+
+- [Line box](#line-box) margin **never collapse**.
+- `float` box margin **never collapse**.
+- `absolute`/`fixed` positioned box margin **never collapse**.
+- `flex` children.
+- `grid` children.
+
+:::
+
+### Invalid
+
+- `display: inline` 非替换元素 vertical `margin` 无效.
+- `display: table-cell`/`display: table-row` 元素 `margin` 无效: e.g. `<tr>`, `<td>`.
+- `position: absolute` 绝对定位元素未定位方向 (`auto`) `margin`:
+  `.absolute { top: 10%; left: 30%; }` `margin-right` 与 `margin-bottom` 改变了外部尺寸,
+  但无法影响兄弟元素布局.
+- 定高容器**子元素**的 `margin-bottom` 或者定宽容器**子元素**的 `margin-right` 的定位作用失效.
+
+## Padding
+
+`%` padding calculate by `containing block` inline size (`width`),
+include `padding-top` and `padding-bottom`:
+
+```css
+.box {
+  position: relative;
+  padding: 10% 50%;
+}
+
+.box > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+```
+
+## Overflow
+
+[`overflow`](https://developer.mozilla.org/docs/Web/CSS/overflow):
+
+- `visible`.
+- `hidden`: 溢出隐藏基于 `padding box`.
+- `clip`.
+- `scroll`.
+- `auto`.
+
+## Line Height
+
+### Inline Element
+
+行间距:
+
+- 半行间距 = `(line-height * font-size - font-size) / 2`.
+- 行间距 = 第一行下半行间距 + 第二行上半行间距.
+
+### Inheritance
+
+`line-height` 继承:
+
+- `%` 与 `em` 继承计算值, `number` 继承数值.
+- `line-height` 最好使用 `number`, 使得子代继承 `line-height` 时文字正常排版,
+  不会出现 `line-height` `<` `font-size` 导致文字重叠的现象.
+- Inline level element:
+  由于 `line-height` 可继承, 一般给父元素设置 `line-height` 即可,
+  会自动作用至容器内所有内联元素.
+- Block level element:
+  由于行框盒子幽灵空白节点的存在,
+  `line-height * font-size` 会决定 block level element 内部元素的最小高度,
+  e.g. `<div><span></span></div>` 高度不为 `0`.
+
+## Vertical Align
+
+`vertical-align`:
+
+- 线类: `baseline`, `top`, `middle`, `bottom`.
+- 文本类: `text-top`, `text-bottom`.
+- 上标下标类: `sub`, `super`.
+- 数值: 基于 `baseline` 上移 (正数) / 下移 (负数).
+- 百分比: calculate by `line-height`.
+
+[![Vertical Align](./figures/vertical-align.png)](https://developer.mozilla.org/docs/Web/CSS/vertical-align)
+
+### Applicable Elements
+
+`vertical-align` 作用元素:
+
+- [Inline level element](https://developer.mozilla.org/docs/Web/HTML/Inline_elements):
+  - `<span>`/`<strong>`/`<em>`.
+  - `<img>`/`<button>`/`<input>`.
+  - `::before`/`::after`.
+- `display: table-cell` 元素.
+- 用 `display: inline-*` 或 `display: table-cell` **以外**的方式
+  创建 `Box Formatting Context` 后,
+  `vertical-align` 不再起作用.
+- 当 `line-height` 过小时, `vertical-align` 在视觉上失效,
+  调整 `line-height` 至足够大时, `vertical-align` 正常起作用.
+
+## Stacking
+
+### Level
 
 Positioned element (non-`static` `position`), `flex` box, `grid` box
 can use the `z-index` property to adjust its stacking level:
 
 数值越大, 处于可视的优先级越大.
 
-### Stacking Context
+### Context
 
 [Stacking context creation](https://developer.mozilla.org/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context):
 
@@ -565,7 +551,7 @@ are always **relative to parent** current order in its own `stacking context`.
 </style>
 ```
 
-### Stacking Order
+### Order
 
 - The background and borders of the root element.
 - Descendant non-positioned blocks, in order of **appearance in the HTML**.
@@ -644,66 +630,6 @@ are always **relative to parent** current order in its own `stacking context`.
 </style>
 ```
 
-## Inline Element Height
-
-- 内联元素默认的高度完全受 `font-size` 大小控制.
-- 内联元素没有可视宽度和可视高度 (`clientHeight`/`clientWidth` always `0`),
-  垂直方向的行为表现完全受 `line-height` 和 `vertical-align` 的影响.
-
-## Inline Element Baseline
-
-### Inline Block Element Baseline
-
-`inline-block` element:
-
-- 内部没有内联元素, 或者 `overflow` not visible:
-  其基线为 `margin` 底边缘.
-- 内部存在内联元素:
-  其基线为最后一行内联元素的基线.
-
-### Vertical Align Baseline
-
-Inline element 与父元素下边缘存在空隙,
-原因在于文字排版的基线 (`baseline`) 对齐机制:
-
-- 在标准模式中,
-  `Inline Formatting Context` 总是会包含类似字母 'g'/'f' 尾巴伸出部分空间 (针对下行字母).
-- `<img>`/`<a>` inline element 与父元素底部若干像素间隙,
-  实际上是此种情况下的**字母尾巴**预留机制:
-  行框盒子存在幽灵空白节点, 默认基于 `baseline` 对齐 (小写字母 `x` 底部).
-
-清除间隙的方法:
-
-- 清除 `Strut` 高度:
-  父元素 `font-size: 0` / `line-height: 0`,
-  设置 `Inline Formatting Context` 高度为 `0`.
-- 改变对齐方式:
-  子元素 `vertical-align` 设置为 `top`/`middle`/`bottom`.
-- 清除 `Strut` 节点:
-  子元素 `display` 设置为 `inline-block`/`block`,
-  创建 `Block Formatting Context`,
-  直接清除幽灵空白节点.
-
-可以用以上方法解决 `<img>` image 5px problem 或相似问题.
-
-## Inline Element Padding
-
-可以在不影响当前布局的情况下,
-通过增加垂直方向的 `padding`,
-增加链接 (`inline`) 或按钮 (`inline-block`) 的点击区域大小:
-
-```css
-article a {
-  padding: 0.25rem 0;
-}
-```
-
-## Inline Element Margin
-
-非主动触发位移的内联元素是不会位移至计算容器外部,
-内联元素 `margin-top` 设置过大时 `margin-top` 会直接失效,
-内联元素依然会处于基线对齐位置.
-
-## Box References
+## References
 
 - CSS box [model](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/The_box_model).

@@ -22,8 +22,6 @@ tags: [Programming, Android]
 3. Broadcast Receiver(Can invoke(调用) activity;with no UI)
 4. Content Provider(accessing and managing application data)
 
----
-
 ## Android Studio
 
 ### Plugins
@@ -103,8 +101,6 @@ public static void actionStart(Context context, String data1, String data2) {
     context.startActivity(intent);
 }
 ```
-
----
 
 ## UI Design
 
@@ -350,8 +346,6 @@ text.setBackgroundDrawable(color_M);
 //设置背景
 ```
 
----
-
 ## Fragment
 
 android.app.Fragment
@@ -420,8 +414,6 @@ transaction.commit();
   当与碎片关联的视图被移除的时候调用。
 - `onDetach()`
   当碎片和活动解除关联的时候调用。
-
----
 
 ## Broadcast
 
@@ -733,8 +725,6 @@ if(cur!=null) {//游标不为空
 - 调用`setTransactionSuccessful()`表示事务已经执行成功
 - finally 代码块中调用`endTransaction()`来结束事务
 
----
-
 ## Content Provider
 
 ### Read Other App Content
@@ -787,8 +777,6 @@ UriMatcher.addURI(uri, customNumber)/.match(uri)
 ```
 
 - 为传入 URI 指定自定义常量作为代号
-
----
 
 ## Service
 
@@ -1031,8 +1019,6 @@ public int onStartCommand(Intent intent, int flags, int startId) {
     return super.onStartCommand(intent, flags, startId);
 }
 ```
-
----
 
 ## Media
 
@@ -1355,8 +1341,6 @@ String response = HttpUtil.sendHttpRequest(address, new HttpCallbackListener() {
 });
 ```
 
----
-
 ## Map
 
 ### Location
@@ -1486,8 +1470,6 @@ public class MainActivity extends Activity {
 
 ```
 
----
-
 ## Sensor
 
 ```java
@@ -1525,8 +1507,6 @@ Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 ### Orientation Sensor
 
 Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
-
----
 
 ## Best Practices
 

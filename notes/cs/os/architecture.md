@@ -47,14 +47,14 @@ ret
 | WriteBack | E port,dstE M port,dstM    |
 | PCUpdate  | PC                         |
 
-## Special Control Signal
+### Special
 
 - handle ret: `IRET in {D_icode, E_icode, M_icode}`
 - load/use hazard: `E_icode in {IMRMOVL, IPOPL} && E_dstM in {d_srcA, d_srcB}`
 - mispredicted branch: `E_icode in {IJXX} && !e_Cnd`
 - exception: `m_stat in {SADR, SINS, SHLT} || W_stat in {SADR, SINS, SHLT}`
 
-## Procedure Control Signal
+### Procedure
 
 Branch, Loop, Jump:
 
@@ -109,7 +109,7 @@ CPI = 1.0 + lp + mp + rp:
 
 - 用多条 Shift/Add/Sub 指令, 代替 Mul/Div
 
-### Branch
+### Branching
 
 - 利用条件表达式代替条件分支语句: 降低预测错误惩罚
 
@@ -118,9 +118,9 @@ CPI = 1.0 + lp + mp + rp:
 - 将不变测试条件/常变量的计算从循环中移出
 - 将多次访存利用中间自动/寄存器变量改写成一次访存
 
-### Unrolling (Duff's Device)
+### Unrolling
 
-循环展开: 增大循环的步长 - Duff's Device 以 7 为步长:
+循环展开 (Duff's Device), 增大循环的步长, e.g. 以 7 为步长:
 
 - 提升循环的运行效率
 - 一次循环内: 可先将所有数据先读出来(Memory State),将进行计算(Execute State), 从而消除 Load/Use 冒险而产生的 Bubble

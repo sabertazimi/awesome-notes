@@ -5,7 +5,7 @@ tags: [AI, LLM, PromptEngineering]
 
 # Prompt Engineering
 
-## Design Principles
+## Principles
 
 26 guiding principles designed to streamline process of querying and prompting LLMs:
 
@@ -39,13 +39,13 @@ tags: [AI, LLM, PromptEngineering]
 - 明确要求: 清晰陈述模型必须遵循的要求.
 - 文本相似性: 写类似于提供样本的文本时, 使用相同的语言风格.
 
-## In-Context Learning Prompting
+## In-Context Learning
 
 Given examples, generate output:
 
 [![In-Context Learning](./figures/in-context-learning.png)](https://nips.cc/virtual/2023/76728)
 
-## Chain-of-Thought Prompting
+## Chain-of-Thought
 
 [CoT prompting](https://nips.cc/virtual/2022/54087) elicits reasoning in LLMs:
 a series of intermediate reasoning steps
@@ -95,7 +95,7 @@ Half of the golf balls are blue.
 That means that there are 4 blue golf balls.
 ```
 
-## Task Planning Prompting
+## Task Planning
 
 将复杂任务拆解成多个子任务, 并不断修正错误:
 
@@ -152,10 +152,10 @@ Let's break down this problem and give me the solution with code format.
 
 ![Task Planning](./figures/task-planning.png 'Task Planning')
 
-## Program-aided Prompting
+## Program
 
 [Program-aided prompting](https://proceedings.mlr.press/v202/gao23f.html)
-make LLMs output code,
+make LLMs **output code** (生成代码),
 then offloads solution step to programmatic runtime such as `Python interpreter`:
 
 ```python
@@ -211,7 +211,7 @@ exec(llm_out)
 print(born)
 ```
 
-## Machine Prompting
+## Machine
 
 利用机器生成 prompts:
 
@@ -231,9 +231,76 @@ print(born)
     exchange-of-thought, encourage divergent thinking
     through cross-model communication and multi-agent debate.
 
-## Prompts Frameworks
+## Frameworks
 
-### Elvis Saravia Framework
+### Simple
+
+简化框架 (`Instruction`+`Context`+`Input Data`+`Output Indicator`):
+
+- 明确任务: 直接指出你需要模型做什么. 例如: "写一个故事", "回答一个问题", "解释一个概念".
+- 设定角色和风格: 简短描述模型应采用的角色和风格 (`Act as`). 例如: "像专家一样", "幽默地", "正式地".
+- 提供背景信息: 给出足够的信息, 让模型了解任务的上下文. 例如: "关于环保", "在古罗马背景下".
+- 指定输出格式: 告诉模型你期望的回答形式. 例如: "一段文本", "列表", "步骤说明".
+
+操作指南:
+
+- 步骤1 (明确任务): 思考你需要模型完成的具体任务, 尽量具体. 例如: "请写一个关于节约用水的短故事".
+- 步骤2 (设定角色和风格): 考虑任务最适合的表达方式和语气. 例如: "用一个小孩的视角, 轻松幽默地讲述".
+- 步骤3 (提供背景信息): 如果任务涉及特定的主题或需要特定知识, 提供相关的背景信息. 例如: "在一个干旱的城市里".
+- 步骤4 (指定输出格式): 明确你想要的输出类型. 例如: "三段话, 每段不超过五句话".
+
+```md
+我要写一个英语学习计划, 请根据下列规则生成一个合适的 Prompt, 然后再输出内容:
+明确任务: 直接指出你需要模型做什么. 例如: "写一个故事", "回答一个问题", "解释一个概念".
+设定角色和风格: 简短描述模型应采用的角色和风格. 例如: "像专家一样", "幽默地", "正式地".
+提供背景信息: 给出足够的信息, 让模型了解任务的上下文. 例如: "关于环保", "在古罗马背景下".
+指定输出格式: 告诉模型你期望的回答形式. 例如: "一段文本", "列表", "步骤说明".
+
+ChatGPT:
+任务: 创建一个学习英语的计划.
+角色和风格: 请像一位经验丰富的语言教师一样, 正式而清晰地提供指导.
+背景信息: 这个计划是为了帮助一个成年人从初级水平提高到中级水平. 他们每周可以投入约 10 小时的学习时间, 目标是提高口语和听力技能.
+输出格式: 请以清晰的列表形式提供, 包括每周的具体学习活动和目标.
+
+我现在是高中水平的英语, 想要通过雅思考试.
+每一部分提供具体的学习资料.
+```
+
+### Comprehensive
+
+综合框架:
+
+- Role: 指定模型的角色, 如专家, 朋友, 教师等.
+- Background: 提供任务的上下文信息, 以帮助模型更好地理解任务.
+- Profile: 描述模型应该具备的特定技能和知识.
+- Skills: 指定模型需要具备的技能和知识, 以完成任务.
+- Goals: 任务的目标和期望输出.
+- Constrains: 任务的限制条件, 如输出格式, 语言风格等.
+- OutputFormat: 期望的输出格式, 如文本, 列表, 图表等.
+- Workflow: 完成任务的具体步骤和流程.
+- Examples: 提供示例, 以帮助模型更好地理解任务.
+- Initialization: 在第一次对话中, 提供初始信息, 以引导模型开始任务.
+
+```md
+- Role: 外卖体验优化专家和文案撰写顾问
+- Background: 用户希望通过撰写外卖好评来领取代金券，需要一个简洁而有效的文案框架，以表达对外卖服务的满意。
+- Profile: 你是一位精通外卖行业服务标准和用户体验的专家，擅长用简洁明了的语言撰写具有说服力的文案，能够精准地捕捉用户需求并转化为积极的评价。
+- Skills: 你具备文案撰写能力、用户体验分析能力以及对不同外卖平台规则的熟悉程度，能够快速生成符合要求的好评内容。
+- Goals: 生成2-3句简洁好评，突出外卖的优质服务或食品特色，帮助用户成功领取代金券。
+- Constrains: 好评内容需真实、积极，避免过度夸张，确保符合平台要求。
+- OutputFormat: 简洁好评文案，2-3句话。
+- Workflow:
+  1. 确定外卖的主要亮点 (如菜品口味、配送速度、包装等)。
+  2. 用简洁明了的语言撰写好评，突出亮点。
+  3. 确保好评语气真诚，符合平台要求。
+- Examples:
+  - 例子1：菜品美味，配送速度超快，包装也很精致，赞一个！
+  - 例子2：食物很新鲜，味道很棒，服务也很贴心，下次还会点！
+  - 例子3：外卖送到时还是热乎的，味道超棒，包装很用心，好评！
+- Initialization: 在第一次对话中，请直接输出以下：您好，欢迎使用外卖好评撰写服务。我会根据您的外卖体验，帮您快速生成简洁好评，助力您领取代金券。请告诉我您外卖的亮点，比如菜品口味、配送速度等。
+```
+
+### Elvis Saravia
 
 [Elvis Saravia framework](https://github.com/dair-ai/Prompt-Engineering-Guide):
 
@@ -249,7 +316,7 @@ print(born)
   指示期望的输出类型或格式.
   例如, 在文本生成任务中, 指定输出为一段文字.
 
-### CRISPE Framework
+### CRISPE
 
 [CRISPE framework](https://github.com/mattnigh/ChatGPT3-Free-Prompt-List):
 
@@ -290,74 +357,7 @@ My first command is console.log("Hello World").
 
 :::
 
-### Simple Framework
-
-简化框架 (`Instruction`+`Context`+`Input Data`+`Output Indicator`):
-
-- 明确任务: 直接指出你需要模型做什么. 例如: "写一个故事", "回答一个问题", "解释一个概念".
-- 设定角色和风格: 简短描述模型应采用的角色和风格 (`Act as`). 例如: "像专家一样", "幽默地", "正式地".
-- 提供背景信息: 给出足够的信息, 让模型了解任务的上下文. 例如: "关于环保", "在古罗马背景下".
-- 指定输出格式: 告诉模型你期望的回答形式. 例如: "一段文本", "列表", "步骤说明".
-
-操作指南:
-
-- 步骤1 (明确任务): 思考你需要模型完成的具体任务, 尽量具体. 例如: "请写一个关于节约用水的短故事".
-- 步骤2 (设定角色和风格): 考虑任务最适合的表达方式和语气. 例如: "用一个小孩的视角, 轻松幽默地讲述".
-- 步骤3 (提供背景信息): 如果任务涉及特定的主题或需要特定知识, 提供相关的背景信息. 例如: "在一个干旱的城市里".
-- 步骤4 (指定输出格式): 明确你想要的输出类型. 例如: "三段话, 每段不超过五句话".
-
-```md
-我要写一个英语学习计划, 请根据下列规则生成一个合适的 Prompt, 然后再输出内容:
-明确任务: 直接指出你需要模型做什么. 例如: "写一个故事", "回答一个问题", "解释一个概念".
-设定角色和风格: 简短描述模型应采用的角色和风格. 例如: "像专家一样", "幽默地", "正式地".
-提供背景信息: 给出足够的信息, 让模型了解任务的上下文. 例如: "关于环保", "在古罗马背景下".
-指定输出格式: 告诉模型你期望的回答形式. 例如: "一段文本", "列表", "步骤说明".
-
-ChatGPT:
-任务: 创建一个学习英语的计划.
-角色和风格: 请像一位经验丰富的语言教师一样, 正式而清晰地提供指导.
-背景信息: 这个计划是为了帮助一个成年人从初级水平提高到中级水平. 他们每周可以投入约 10 小时的学习时间, 目标是提高口语和听力技能.
-输出格式: 请以清晰的列表形式提供, 包括每周的具体学习活动和目标.
-
-我现在是高中水平的英语, 想要通过雅思考试.
-每一部分提供具体的学习资料.
-```
-
-### Comprehensive Framework
-
-综合框架:
-
-- Role: 指定模型的角色, 如专家, 朋友, 教师等.
-- Background: 提供任务的上下文信息, 以帮助模型更好地理解任务.
-- Profile: 描述模型应该具备的特定技能和知识.
-- Skills: 指定模型需要具备的技能和知识, 以完成任务.
-- Goals: 任务的目标和期望输出.
-- Constrains: 任务的限制条件, 如输出格式, 语言风格等.
-- OutputFormat: 期望的输出格式, 如文本, 列表, 图表等.
-- Workflow: 完成任务的具体步骤和流程.
-- Examples: 提供示例, 以帮助模型更好地理解任务.
-- Initialization: 在第一次对话中, 提供初始信息, 以引导模型开始任务.
-
-```md
-- Role: 外卖体验优化专家和文案撰写顾问
-- Background: 用户希望通过撰写外卖好评来领取代金券，需要一个简洁而有效的文案框架，以表达对外卖服务的满意。
-- Profile: 你是一位精通外卖行业服务标准和用户体验的专家，擅长用简洁明了的语言撰写具有说服力的文案，能够精准地捕捉用户需求并转化为积极的评价。
-- Skills: 你具备文案撰写能力、用户体验分析能力以及对不同外卖平台规则的熟悉程度，能够快速生成符合要求的好评内容。
-- Goals: 生成2-3句简洁好评，突出外卖的优质服务或食品特色，帮助用户成功领取代金券。
-- Constrains: 好评内容需真实、积极，避免过度夸张，确保符合平台要求。
-- OutputFormat: 简洁好评文案，2-3句话。
-- Workflow:
-  1. 确定外卖的主要亮点 (如菜品口味、配送速度、包装等)。
-  2. 用简洁明了的语言撰写好评，突出亮点。
-  3. 确保好评语气真诚，符合平台要求。
-- Examples:
-  - 例子1：菜品美味，配送速度超快，包装也很精致，赞一个！
-  - 例子2：食物很新鲜，味道很棒，服务也很贴心，下次还会点！
-  - 例子3：外卖送到时还是热乎的，味道超棒，包装很用心，好评！
-- Initialization: 在第一次对话中，请直接输出以下：您好，欢迎使用外卖好评撰写服务。我会根据您的外卖体验，帮您快速生成简洁好评，助力您领取代金券。请告诉我您外卖的亮点，比如菜品口味、配送速度等。
-```
-
-## Prompt Compression
+## Compression
 
 ```md
 Compress the given text to short expressions,
@@ -390,6 +390,6 @@ LLM 并未统一利用其上下文,
 优化相关信息的数量并最小化不相关上下文以实现可靠的性能.
 e.g. custom gemini CLI [command](./prompts/url2md.toml).
 
-## Prompt Engineering References
+## References
 
 - Prompt engineering [guide](https://github.com/dair-ai/Prompt-Engineering-Guide).

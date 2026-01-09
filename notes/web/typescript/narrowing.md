@@ -1,9 +1,9 @@
 ---
 sidebar_position: 16
-tags: [Web, TypeScript]
+tags: [Web, TypeScript, Narrowing, Inference, Infer, Guard]
 ---
 
-# Type Narrowing
+# Narrowing
 
 ## Type Inference
 
@@ -75,7 +75,7 @@ type IntersectionType = UnionToIntersection<UnionType>
 
 ## Type Guard
 
-### In Type Guard
+### In
 
 ```ts
 interface Fish {
@@ -93,7 +93,7 @@ function move(animal: Fish | Bird) {
 }
 ```
 
-### Instance Type Guard
+### Instance
 
 ```ts
 function logValue(x: Date | string) {
@@ -104,7 +104,7 @@ function logValue(x: Date | string) {
 }
 ```
 
-### TypeOf Type Guard
+### TypeOf
 
 ```ts
 function fn(x: string | number) {
@@ -137,7 +137,7 @@ function contains(text: string, terms: string | string[]) {
 }
 ```
 
-### Discriminated Union Type Guard
+### Discriminated Union
 
 ```ts
 interface Teacher {
@@ -166,7 +166,7 @@ function getId(attendee: Attendee) {
 }
 ```
 
-### Never Type Guard
+### Never
 
 - The `never` type is assignable to every type.
 - No type is assignable to `never` (except `never` itself).
@@ -217,7 +217,7 @@ function workWithUnsafeParam(param: unknown) {
 
 :::
 
-### Exhaustiveness Check
+### Exhaustiveness
 
 Exhaustiveness check using `never` in `switch` statement:
 
@@ -240,7 +240,7 @@ function toGerman4(value: NoYesStrings): string {
 }
 ```
 
-### Excess Property Check
+### Excess Property
 
 Excess property check:
 types check on assigning object literal to variable/function parameter.
@@ -322,7 +322,7 @@ if (isTypeof(value, 'boolean')) {
 
 ## Type Assertion
 
-### As Assertion
+### As
 
 ```ts
 let foo: any
@@ -333,7 +333,7 @@ function handler(event: Event) {
 }
 ```
 
-### Const Assertion
+### Const
 
 ```ts
 const v1 = {

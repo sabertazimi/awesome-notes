@@ -1,6 +1,6 @@
 ---
 sidebar_position: 15
-tags: [Web, React, Router]
+tags: [Web, React, Router, Internals]
 ---
 
 # Router
@@ -37,7 +37,7 @@ class App extends Component {
 }
 ```
 
-## Nested Route
+## Nested
 
 Key Notes: In component of parent route, should render `{this.props.children}`.
 
@@ -64,7 +64,7 @@ render(
 - In `App.js`: `render() { return (<div>... {this.props.children}</ div>); }`.
 - In `Repos.js`: `render() { return (<div>... {this.props.children}</ div>); }`.
 
-## Private Route
+## Protected
 
 ```tsx
 import { Redirect, Route } from 'react-router-dom'
@@ -102,6 +102,26 @@ export default function PrivateRoute({
 }
 ```
 
+## Props
+
+- subRoutes.
+- id/size.
+- etc....
+
+```tsx
+import { Route } from 'react-router-dom'
+
+interface Props {}
+
+export default function RenderRoute({
+  component,
+}: {
+  component: React.Component<Props>
+}) {
+  return <Route render={props => <Component {...props} />} />
+}
+```
+
 ## URL Params
 
 ```tsx
@@ -124,50 +144,7 @@ export default function Repo() {
 }
 ```
 
-## Component Props
-
-- subRoutes.
-- id/size.
-- etc....
-
-```tsx
-import { Route } from 'react-router-dom'
-
-interface Props {}
-
-export default function RenderRoute({
-  component,
-}: {
-  component: React.Component<Props>
-}) {
-  return <Route render={props => <Component {...props} />} />
-}
-```
-
-## Link and URL Props
-
-```tsx
-import Component from './Component'
-
-export default function App() {
-  const { ...state } = this.props.location.state
-
-  return (
-    <Component
-      to={{
-        pathname: url,
-        state,
-      }}
-    />
-  )
-}
-```
-
-## Clean URLs
-
-Switch from `hashHistory` to `browserHistory`.
-
-## Change Route
+## Navigation
 
 - `onEnter = { () => store.dispatch(createRouteAction(params))}`.
 - Return `<Redirect />` conditionally and `withRouter` wrapper (`this.props.history.push('nextURL')`).
@@ -237,7 +214,7 @@ function Header() {
 }
 ```
 
-### Webpack Dev Server
+### Webpack
 
 - `publicPath: '/'`
 - `historyApiFallback: true`
@@ -270,7 +247,7 @@ module.exports = {
 }
 ```
 
-### Express Config
+### Express.js
 
 ```ts
 app.use(express.static(path.resolve(__dirname, 'build')))
@@ -281,7 +258,7 @@ app.get('*', (req, res) => {
 })
 ```
 
-### Nginx Config
+### Nginx
 
 ```nginx
 # always serve index.html for any request (react-router for single page application)
@@ -294,7 +271,7 @@ location / {
 }
 ```
 
-## React Router Internals
+## Internals
 
 - `<Route>` instances listen to `popstate` event to `forceUpdate`.
 - When click `<Link>`/`<Redirect>`, `historyPush` or `historyReplace` get called,
@@ -317,7 +294,7 @@ function historyReplace(path) {
 }
 ```
 
-### Route Component
+### Route
 
 ```tsx
 function matchPath(pathname, options) {
@@ -397,7 +374,7 @@ class Route extends Component<Props> {
 }
 ```
 
-### Link Component
+### Link
 
 Whenever a `<Link>` is clicked and the location changes,
 each `<Route>` will be aware of that and re-match and re-render with `instances`.
@@ -428,7 +405,7 @@ class Link extends Component<Props> {
 }
 ```
 
-### Redirect Component
+### Redirect
 
 ```tsx
 class Redirect extends Component {
@@ -448,7 +425,7 @@ class Redirect extends Component {
 }
 ```
 
-### Router Hooks
+### Hooks
 
 ```tsx
 /**
@@ -519,7 +496,3 @@ function navigate(href) {
   window.dispatchEvent(navEvent)
 }
 ```
-
-## React Router References
-
-- [React Router Tutorial](https://www.youtube.com/playlist?list=PLqrUy7kON1mfJ1cQfJJ1FiULLNngvlFTD)

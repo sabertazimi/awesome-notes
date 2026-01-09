@@ -1,11 +1,11 @@
 ---
-sidebar_position: 37
+sidebar_position: 53
 tags: [Web, JavaScript, ECMAScript, Animation]
 ---
 
-# Web Animations
+# Animations
 
-## Keyframe Effect API
+## Keyframe
 
 `KeyframeEffect`:
 
@@ -32,7 +32,7 @@ function downHandler() {
 }
 ```
 
-## Animation API
+## Animation
 
 - `animation.currentTime`.
 - `animation.playState`.
@@ -66,7 +66,7 @@ function createPlayer(animations) {
 }
 ```
 
-## Animate API
+## Animate
 
 `element.animate`:
 
@@ -96,6 +96,6 @@ const animation = document
   .animate(animationKeyframes, animationTiming)
 ```
 
-## Web Animations References
+## References
 
 - Using Web Animations [API](https://developer.mozilla.org/docs/Web/API/Web_Animations_API/Using_the_Web_Animations_API).

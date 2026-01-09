@@ -1,9 +1,9 @@
 ---
-sidebar_position: 40
+sidebar_position: 56
 tags: [Web, JavaScript, ECMAScript, Storage]
 ---
 
-# Web Storage
+# Storage
 
 - Cookie for session state.
 - DOM storage for Web Component state.
@@ -269,7 +269,7 @@ request.onsuccess = function (event) {
 }
 ```
 
-## File API
+## File
 
 ```ts
 function readFileText(file) {

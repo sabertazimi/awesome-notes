@@ -1,19 +1,15 @@
 ---
-tags: [Web, Framework, Electron]
+tags: [Web, Electron]
 ---
 
 # Electron
 
 ## Getting Started
 
-- [Electron Forge](https://electronforge.io)
-- [Boilerplate](https://github.com/electron-react-boilerplate)
+Scaffold an Electron project with [Electron Forge](https://github.com/electron/forge):
 
 ```bash
-npm install -g electron-forge
-electron-forge init my-new-project --template=react
-cd my-new-project
-electron-forge start
+pnpm create electron-app@latest
 ```
 
 ## Basic Concepts
@@ -93,7 +89,7 @@ win.loadURL('https://github.com')
 - showHiddenFiles
 - promptToCreate: windows only.
 
-## Electron Security
+## Security
 
 - only load secure content (HTTPS/WSS/FTPS)
 - verify integrity of scripts via CSP and SRI
@@ -124,10 +120,3 @@ globalThis.desktop = {
   files: () => fs.readdirSync(__dirname),
 }
 ```
-
-## Electron Builder
-
-## Electron Cheat Sheet
-
-- [Awesome Live CheatSheet](https://github.com/ConardLi/electron-react)
-- [Electron API Demo App](https://github.com/demopark/electron-api-demos-Zh_CN)

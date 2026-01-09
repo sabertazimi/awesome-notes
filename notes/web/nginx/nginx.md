@@ -4,7 +4,7 @@ tags: [Web, Linux, Server, Nginx]
 
 # Nginx
 
-- `/etc/nginx/sites-available`: sites config
+Sites config located in `/etc/nginx/sites-available`:
 
 ```bash
 nginx -t # check config syntax
@@ -12,7 +12,7 @@ nginx -t # check config syntax
 
 ## Configuration
 
-泛域名路径分离: `xxx.test.dev` -> `/usr/local/html/xxx`
+泛域名路径分离: `xxx.test.dev` -> `/usr/local/html/xxx`:
 
 ```bash
 server {

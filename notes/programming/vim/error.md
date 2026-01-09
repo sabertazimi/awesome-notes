@@ -5,7 +5,7 @@ tags: [Programming, Vim]
 
 # Error
 
-## Swap Backup File
+## Swap Backup
 
 Can't open swap or backup file:
 

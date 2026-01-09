@@ -5,15 +5,12 @@ tags: [Web, Security, Object, Injection, Vulnerability]
 
 # Object Injection
 
-## Object Injection Attack
+## Attack
 
-- `__proto__.XX`.
-- `constructor`.
-- `hasOwnProperty`.
-
-## Insecure Object Comparison
-
-Injection:
+- `__proto__.XX`
+- `constructor`
+- `hasOwnProperty`
+- Insecure object comparison:
 
 ```ts
 const token = req.cookie.token
@@ -24,7 +21,7 @@ if (token && SESSIONS[token])
   next()
 ```
 
-Solutions:
+## Protection
 
-- `crypto.timingSafeEqual`.
-- `object.hasOwnProperty(token)`.
+- `crypto.timingSafeEqual`
+- `object.hasOwnProperty(token)`

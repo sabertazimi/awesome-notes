@@ -1,18 +1,18 @@
 ---
 sidebar_position: 1
-tags: [Web, TypeScript]
+tags: [Web, TypeScript, Toolchain]
 ---
 
 # Toolchain
 
-## TypeScript Installation
+## Installation
 
 ```bash
 npm i -D typescript
 npm i -D react react-dom @types/node @types/react @types/react-dom
 ```
 
-## TypeScript Configuration
+## Configuration
 
 ```bash
 npx tsconfig.json
@@ -115,7 +115,7 @@ Basic [`tsconfig.json`](https://www.typescriptlang.org/tsconfig):
 }
 ```
 
-## Webpack Configuration
+## Webpack
 
 ```bash
 npm i -D typescript ts-loader source-map-loader
@@ -150,7 +150,7 @@ module.exports = {
 }
 ```
 
-## ESLint Configuration
+## ESLint
 
 [ESLint for TypeScript](https://github.com/typescript-eslint/typescript-eslint):
 
@@ -158,7 +158,7 @@ module.exports = {
 npx eslint --init
 ```
 
-## Jest Configuration
+## Jest
 
 ```bash
 npm i -D jest typescript ts-jest @types/jest
@@ -166,7 +166,7 @@ npx ts-jest config:init
 npx jest
 ```
 
-## TypeScript DefinitelyTyped
+## DefinitelyTyped
 
 - Library (`npm` package):
   `@types/*` should be `dependencies`,
@@ -175,28 +175,22 @@ npx jest
   `@types/*` should be `devDependencies`,
   type definitions are just development-time tool.
 
-## TypeScript Compiler Performance
-
-- Faster tools: `swc`/`rome`.
-- Multithread: `ts-loader` + `fork-ts-checker-plugin`.
-- Project references (`tsc -b` build mode):
-  - Find `tsconfig` referenced projects.
-  - Detect if they are up-to-date.
-  - Build out-of-date projects in correct order.
-  - Build provided `tsconfig` if itself or any dependencies have changed.
-- Skip type checking (sometimes).
-- Load `@types/` by need (`include`/`exclude`/`compilerOptions.types`).
-- `tsc --listFiles` 列出编译时包含文件列表,
-  `tsc --traceResolution` 列出编译时包含文件原因.
-
-## TypeScript Project Reference
+## Project Reference
 
 [Project Reference](https://www.typescriptlang.org/docs/handbook/project-references.html)
 for `TypeScript` compile and build [Speed](https://github.com/typescript-cheatsheets/speed).
 
-## TypeScript Monorepo Configuration
+## Monorepo
 
 [TypeScript Monorepo](https://2ality.com/2021/07/simple-monorepos.html):
 
 - NPM workspaces.
 - `TypeScript` references.
+
+## References
+
+- [Learning TypeScript](https://github.com/LearningTypeScript/projects)
+- [Tackling TypeScript](https://exploringjs.com/tackling-ts/index.html)
+- [TypeScript Deep Dive](https://github.com/basarat/typescript-book)
+- [Clean TypeScript Code](https://github.com/labs42io/clean-code-typescript)
+- [Effective TypeScript](https://github.com/danvk/effective-typescript)

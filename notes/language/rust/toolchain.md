@@ -21,7 +21,7 @@ rustc -V
 
 ## Cargo
 
-### Cargo Basic Commands
+### Commands
 
 ```bash
 cargo new hello_world
@@ -64,7 +64,7 @@ post-release-commit-message = "chore(release): {{version}}"
 tag-message = "{{tag_name}}"
 ```
 
-### Cargo Cache
+### Cache
 
 `~/.cargo/`:
 
@@ -80,7 +80,7 @@ tag-message = "{{tag_name}}"
   - `registry/cache/`: dependencies cache (`.crate` gzip files).
   - `registry/src/`: package source files.
 
-### Cargo Configuration
+### Configuration
 
 `Cargo.toml`:
 
@@ -264,9 +264,7 @@ jobs:
           path-to-lcov: ./lcov.info
 ```
 
-## Web Development
-
-### Node.js Bindings
+## Node.js Bindings
 
 Tasks suite for native `Node.js` add-ons:
 
@@ -369,7 +367,7 @@ const result = fibonacci_rs(number)
 console.log(result)
 ```
 
-## Rust Standard Library
+## Standard Library
 
 - `as_`: `borrowed` -> `borrowed`.
 - `into_`: `owned` -> `owned` (移除所有权).
@@ -380,7 +378,7 @@ console.log(result)
 - `try_`: 尝试一次, 失败则返回或报错.
 - `_mut`: 可变借用.
 
-## Rust Library
+## Library
 
 - [Num](https://github.com/rust-num/num):
   Numeric Types and Traits.
@@ -395,7 +393,7 @@ console.log(result)
 - [AsyncStd](https://github.com/async-rs/async-std):
   Asynchronous Version Standard Library.
 - [Crossbeam](https://github.com/crossbeam-rs/crossbeam):
-  Concurrent Programming Tools.
+  Concurrent Programming.
 - [Tokio](https://github.com/tokio-rs/tokio):
   Asynchronous Runtime.
 - [Rayon](https://github.com/rayon-rs/rayon):
@@ -441,7 +439,7 @@ console.log(result)
 - [Clog](https://github.com/clog-tool/clog-cli):
   Conventional Changelog.
 
-## Rust References
+## References
 
 - [Rust Book](https://github.com/rust-lang/book)
 - [Rust Nomicon](https://github.com/rust-lang/nomicon)

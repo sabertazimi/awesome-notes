@@ -3,9 +3,9 @@ sidebar_position: 11
 tags: [Web, TypeScript, Generic]
 ---
 
-# Generic Types
+# Generics
 
-## Generic Function
+## Function
 
 ```ts
 function reverse<T>(items: T[]): T[] {
@@ -17,7 +17,7 @@ function reverse<T>(items: T[]): T[] {
 }
 ```
 
-## Generic Parameters
+## Parameters
 
 ```ts
 type Event
@@ -40,7 +40,7 @@ function sendEvent<Type extends Event['type']>(
 }
 ```
 
-## Generic Class
+## Class
 
 ```ts
 // 创建一个泛型类
@@ -100,7 +100,7 @@ class TypedEvent<T> {
 }
 ```
 
-## Generic Type Alias
+## Type Alias
 
 ```ts
 type CreatesValue<Input, Output> = (input: Input) => Output
@@ -115,7 +115,7 @@ creator = text => text.toUpperCase()
 // Error: Type 'string' is not assignable to type 'number'.
 ```
 
-## Generic Discriminated Union
+## Discriminated Union
 
 ```ts
 type Result<Data> = FailureResult | SuccessfulResult<Data>
@@ -146,7 +146,7 @@ function handleResult(result: Result<string>) {
 }
 ```
 
-## Explicit Generic Types
+## Explicit
 
 ```ts
 class Foo<T> {
@@ -162,7 +162,7 @@ function id<T>(x: T) {
 const idNum = id as { (x: number): number }
 ```
 
-## Default Generic Types
+## Default
 
 ```ts
 interface Quote<T = string> {
@@ -203,7 +203,7 @@ const firstMissing: KeyValuePair = {
 }
 ```
 
-## Constrained Generic Types
+## Constrained
 
 Constrained union types:
 
@@ -305,7 +305,7 @@ type Values = ExtractValues<Props>
 // type Values = 'Foo' | 'Bar' | 'FooBar'
 ```
 
-## Generic Types Programming
+## Gymnastics
 
 在类型编程里, 泛型就是变量:
 

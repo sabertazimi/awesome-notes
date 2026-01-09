@@ -15,7 +15,7 @@ Redux middleware were designed to enable writing side effects logic:
 - Generating random numbers or unique random IDs
   (e.g. `uuid()`/`Math.random()`/`Date.now()`).
 
-## Middleware Basic Concepts
+## Concepts
 
 每一个 Middleware 可以通过上下文获取:
 
@@ -37,48 +37,31 @@ Redux middleware were designed to enable writing side effects logic:
   such as **functions** (`action(dispatch, getState, extraArgument)`) and promises,
   by intercepting them and dispatching real action objects instead.
 
-## Middleware Simple Implementation
-
-- Raw Middleware: `store => next => action => T`.
-- `middleware(store)`: `next => action => T`.
-- `middleware(store)(next)`: `action => T`.
-- `next`: `action => T`.
-- `dispatch`: `action => T`.
-- `middleware(store)(next)`, `next` and `dispatch` have same function signature:
-  `type Dispatch = (action: Action | AsyncAction) => any`.
-- After `middlewares.forEach`, set `next` to `store.dispatch`,
-  make new `dispatch` get all functions from `middlewares`.
+## Types
 
 ```ts
-function applyMiddleware(store, middlewares) {
-  middlewares = middlewares.slice()
-  middlewares.reverse()
-
-  let next = store.dispatch
-  // Reduce middlewares with reverse order in Redux.
-  middlewares.forEach(middleware => (next = middleware(store)(next)))
-
-  // When user app execute `dispatch` function,
-  // middlewares execute with forward order.
-  return Object.assign({}, store, { dispatch: next })
+export interface Middleware<
+  DispatchExt = object,
+  S = any,
+  D extends Dispatch = Dispatch, // type of the dispatch method
+> {
+  ext: DispatchExt
 }
 ```
 
 ```ts
-import { applyMiddleware, combineReducers, createStore } from 'redux'
+import type { Middleware } from 'redux'
+import type { RootState } from '../store'
 
-// applyMiddleware takes createStore() and returns
-// a function with a compatible API.
-const createStoreWithMiddleware = applyMiddleware(
-  logger,
-  crashReporter
-)(createStore)
-
-// Use it like you would use createStore()let todoApp = combineReducers(reducers);
-const store = createStoreWithMiddleware(todoApp)
+export const exampleMiddleware: Middleware<
+  object, // Most middleware do not modify the dispatch return value
+  RootState
+> = store => next => (action) => {
+  const state = store.getState() // correctly typed as RootState
+}
 ```
 
-## Scheduler Middleware
+## Scheduler
 
 ```ts
 /**
@@ -99,7 +82,7 @@ function timeoutScheduler(store) {
 }
 ```
 
-## Thunk Middleware
+## Thunk
 
 ```ts
 // thunk middleware
@@ -138,26 +121,43 @@ function addFave(tweetId) {
 store.dispatch(addFave())
 ```
 
-## Typed Middleware
+## Internals
+
+- Raw Middleware: `store => next => action => T`.
+- `middleware(store)`: `next => action => T`.
+- `middleware(store)(next)`: `action => T`.
+- `next`: `action => T`.
+- `dispatch`: `action => T`.
+- `middleware(store)(next)`, `next` and `dispatch` have same function signature:
+  `type Dispatch = (action: Action | AsyncAction) => any`.
+- After `middlewares.forEach`, set `next` to `store.dispatch`,
+  make new `dispatch` get all functions from `middlewares`.
 
 ```ts
-export interface Middleware<
-  DispatchExt = object,
-  S = any,
-  D extends Dispatch = Dispatch, // type of the dispatch method
-> {
-  ext: DispatchExt
+function applyMiddleware(store, middlewares) {
+  middlewares = middlewares.slice()
+  middlewares.reverse()
+
+  let next = store.dispatch
+  // Reduce middlewares with reverse order in Redux.
+  middlewares.forEach(middleware => (next = middleware(store)(next)))
+
+  // When user app execute `dispatch` function,
+  // middlewares execute with forward order.
+  return Object.assign({}, store, { dispatch: next })
 }
 ```
 
 ```ts
-import type { Middleware } from 'redux'
-import type { RootState } from '../store'
+import { applyMiddleware, combineReducers, createStore } from 'redux'
 
-export const exampleMiddleware: Middleware<
-  object, // Most middleware do not modify the dispatch return value
-  RootState
-> = store => next => (action) => {
-  const state = store.getState() // correctly typed as RootState
-}
+// applyMiddleware takes createStore() and returns
+// a function with a compatible API.
+const createStoreWithMiddleware = applyMiddleware(
+  logger,
+  crashReporter
+)(createStore)
+
+// Use it like you would use createStore()let todoApp = combineReducers(reducers);
+const store = createStoreWithMiddleware(todoApp)
 ```

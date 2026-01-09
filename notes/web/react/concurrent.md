@@ -1,11 +1,11 @@
 ---
 sidebar_position: 8
-tags: [Web, React, Suspense]
+tags: [Web, React, Concurrent, Asynchronous, Suspense]
 ---
 
 # Concurrent
 
-## Concurrent Features
+## Features
 
 ```tsx
 import App from 'App'
@@ -164,7 +164,7 @@ export default function App() {
 
 :::
 
-### Error Boundary Suspense
+### Error Boundary
 
 ```tsx
 function ErrorFallback() {
@@ -205,7 +205,7 @@ export function AppProvider({ children }: AppProviderProps) {
 }
 ```
 
-### Lazy Suspense
+### Lazy
 
 Lazy loading and code splitting:
 
@@ -303,7 +303,7 @@ function lazy(load) {
 }
 ```
 
-### SSR Suspense
+### SSR
 
 React v18+: enable `Suspense` on the server:
 

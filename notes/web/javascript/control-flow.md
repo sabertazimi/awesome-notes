@@ -5,7 +5,7 @@ tags: [Web, JavaScript, ECMAScript]
 
 # Control Flow
 
-## Switch Case Statement
+## Switch Case
 
 用 `Strategy Pattern` 代替 `switch`/`case` 语句:
 

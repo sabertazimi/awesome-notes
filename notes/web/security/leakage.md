@@ -5,7 +5,7 @@ tags: [Web, Security, Leakage, Privacy, Vulnerability]
 
 # Information Leakage
 
-## Information Leakage Attack
+## Attack
 
 - Server in response headers.
 - Cookie: J_SESSION_ID -> Java.
@@ -35,7 +35,7 @@ tags: [Web, Security, Leakage, Privacy, Vulnerability]
 ]
 ```
 
-## Information Leakage Protection
+## Protection
 
 - `NODE_ENV=production`.
 - 处理/混淆/加密原始数据 (raw data).

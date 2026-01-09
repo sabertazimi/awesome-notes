@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-tags: [Programming, Vim]
+tags: [Programming, Vim, Toolchain]
 ---
 
 # Toolchain
@@ -68,7 +68,7 @@ git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
 # Run :MasonInstallAll command after lazy.nvim finishes downloading plugins.
 ```
 
-### NeoVim Language server
+### Language server
 
 - [LSP Config](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md)
 - [LSP Installer](https://github.com/williamboman/nvim-lsp-installer)
@@ -77,7 +77,7 @@ git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
 :LspInstall typescript
 ```
 
-### NeoVim TreeSitter
+### TreeSitter
 
 ```vim
 :TSInstall html css javascript typescript tsx vue json jsonc yaml bash
@@ -213,7 +213,7 @@ command! MakeTags !ctags -R .
 
 ## 内置补全
 
-In insert mode
+In `insert` mode:
 
 | 命令         | 补全类型         |
 | :----------- | :--------------- |

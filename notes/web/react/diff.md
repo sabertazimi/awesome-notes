@@ -1,6 +1,6 @@
 ---
 sidebar_position: 36
-tags: [Web, React, Reconciler]
+tags: [Web, React, Internals, Reconciler]
 ---
 
 # Diff
@@ -17,11 +17,11 @@ Reconciler:
 - `key` prop to hint for Fiber nodes reuse.
 - Detailed diff [algorithm](https://7kms.github.io/react-illustration-series/algorithm/diff).
 
-## Different Types Elements
+## Different Types
 
 - Rebuild element and children.
 
-## Same Type DOM Elements
+## Same Type DOM
 
 - Only update changed attributes.
 - Use `key` attribute to match children.
@@ -33,11 +33,11 @@ Give `key` to `<li>/<tr>/<tc>` elements
 
 :::
 
-## Same Type Component Elements
+## Same Type Component
 
 - Update props to match new element.
 
-## Reconcile Array Elements
+## Array
 
 - 第一次循环: 比较公共序列:
   - 从左到右逐一遍历, 遇到一个无法复用的节点则退出循环.

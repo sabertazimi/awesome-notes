@@ -18,7 +18,7 @@ tags: [Programming, OS, Linux, Terminal, Tmux]
   - Local: PTY Master is Terminal, PTY Slave is `bash` and `ssh client`.
   - Remote: PTY Master is `ssh server`, PTY Slave is `bash`.
 
-## Default Terminal
+## Default
 
 `update-alternatives`: maintain symbolic links determining default commands.
 
@@ -146,7 +146,7 @@ setw -g mode-keys vi      # Vi
 set-window-option -g window-status-current-bg red
 ```
 
-## Windows Terminal
+## Windows
 
 ```bash
 # ~/.bashrc

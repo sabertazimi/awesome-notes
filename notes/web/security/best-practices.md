@@ -1,11 +1,11 @@
 ---
 sidebar_position: 50
-tags: [Web, DevOps, Security]
+tags: [Web, DevOps, Security, Best Practice]
 ---
 
 # Best Practices
 
-## Security Principles
+## Principles
 
 安全三要素:
 
@@ -70,7 +70,7 @@ DREAD 风险分析模型:
   - Medium: 私有区域才可发现漏洞, 需要深入挖掘.
   - Low: 发现漏洞极其困难.
 
-## Software Security Assurance
+## Software
 
 - 逻辑安全.
 - 数据安全:
@@ -86,9 +86,9 @@ DREAD 风险分析模型:
   - 数据长度的最大值和最小值.
   - 数据非法值.
 
-## Security Checklist
+## Checklist
 
-### Access Control System Checklist
+### Access Control
 
 注册/二次验证/密码重置:
 
@@ -110,7 +110,7 @@ DREAD 风险分析模型:
 - [ ] 重置密码成功后, 将重置使用的 token 失效.
 - [ ] Nodejs 等不使用 sudo 运行.
 
-### Authentication Checklist
+### Authentication
 
 - [ ] 诸如`我的购物车`/`我的浏览历史`之类的资源访问, 必须检查当前登录的用户是否有这些资源的访问权限.
 - [ ] 避免资源 ID 被连续遍历访问, 使用 `/me/orders` 代替 `/user/37153/orders` 以防忘记检查权限, 导致数据泄露.
@@ -121,7 +121,7 @@ DREAD 风险分析模型:
       应使用 [RFC compliant](http://www.ietf.org/rfc/rfc4122.txt) 的 `UUID` 而不是整数.
 - [ ] [`JWT`](https://jwt.io) (JSON Web Token): 当构建一个 `SPA`/`API` 时使用 `JWT`.
 
-### Mobile Application Checklist
+### Mobile
 
 - [ ] 支付网关的 `salt` (盐) 不应被硬编码.
 - [ ] 来自第三方的 `secret` 和 `auth token` 不应被硬编码.
@@ -130,7 +130,7 @@ DREAD 风险分析模型:
 - [ ] 在 iOS 系统下, 使用系统的钥匙串来存储敏感信息 (auth token/API key) **不要** 把这类信息存储在用户配置里面.
 - [ ] 强烈推荐证书绑定 ([certificate pinning](https://en.wikipedia.org/wiki/HTTP_Public_Key_Pinning)).
 
-### Server Configuration Checklist
+### Server
 
 - [ ] `添加` [CSP](https://en.wikipedia.org/wiki/Content_Security_Policy) 头信息,
       减缓 XSS 和数据注入攻击. 这很重要.
@@ -155,7 +155,7 @@ DREAD 风险分析模型:
       不要把 CSRF token 通过 HTTP 接口暴露出来, 比如第一次请求更新的时候.
 - [ ] 在 `GET` 请求参数里面, 不要使用临界数据和 token: 暴露服务器日志的同时也会暴露用户数据.
 
-### Client Input Checklist
+### Client
 
 - [ ] `过滤`所有暴露给用户的参数输入,
       防止 [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) 攻击.
@@ -171,7 +171,7 @@ DREAD 风险分析模型:
       攻击.
 - [ ] 在输出显示给用户之前, `过滤`输出信息.
 
-### Operation Checklist
+### Operation
 
 - [ ] 如果你的业务很小或者你缺乏经验, 可以评估一下使用 AWS 或者一个 PaaS 平台来运行代码.
 - [ ] 在云上使用正规的脚本创建虚拟机.
@@ -189,7 +189,7 @@ DREAD 风险分析模型:
       功能.
       如果使用 AWS EC2, 考虑使用磁盘加密功能 (系统启动盘也可加密).
 
-### Teamwork Checklist
+### Teamwork
 
 - [ ] 开一个邮件组 (例如: `security@coolcorp.io`) 和搜集页面, 方便安全研究人员提交漏洞.
 - [ ] 取决于你的业务, 限制用户数据库的访问.
@@ -294,7 +294,7 @@ UI 的防御性:
   - 代码审核.
   - 样式隔离.
 
-## Security References
+## References
 
 - List of useful [payloads and bypass](https://github.com/swisskyrepo/PayloadsAllTheThings)
   for web application security and pentest.

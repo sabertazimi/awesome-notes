@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 10
 tags: [Web, HTML]
 ---
 
@@ -69,7 +69,7 @@ Accordion list:
 </style>
 ```
 
-### Details Summary
+### Summary
 
 展开与收缩时触发 `toggle` 事件:
 
@@ -80,11 +80,11 @@ Accordion list:
 </details>
 ```
 
-### Details Data Grid
+### Data Grid
 
-### Details AutoComplete
+### AutoComplete
 
-### Details Open
+### Open
 
 默认 `open=false`.
 

@@ -23,7 +23,7 @@ Promise style asynchronous programming:
   - `Promise.all`: Converts an `Array` of `Promises` to a `Promise` for an `Array`.
   - `Promise.race`.
 
-## Promise Resolve
+## Resolve
 
 Resolve only accept **one** value:
 
@@ -61,7 +61,7 @@ setTimeout(console.log, 0, p === Promise.resolve(p))
 // true
 ```
 
-## Promise Reject
+## Reject
 
 ```ts
 let p1 = Promise.resolve('foo')
@@ -101,7 +101,7 @@ const p11 = p1.then(null, () => new Error('bar'))
 setTimeout(console.log, 0, p11) // Promise <resolved>: Error: bar
 ```
 
-## Promise Catch
+## Catch
 
 ```ts
 const p = Promise.reject()
@@ -121,7 +121,7 @@ setTimeout(console.log, 0, p2) // Promise <pending>
 setTimeout(console.log, 0, p1 === p2) // false
 ```
 
-## Promise Finally
+## Finally
 
 ```ts
 const p1 = new Promise(() => {})
@@ -217,7 +217,7 @@ promise
   })
 ```
 
-## Promise Thenable and Catch
+## Thenable
 
 The main difference between the forms
 `promise.then(success, error)` and
@@ -264,7 +264,7 @@ const p4 = Promise.reject(new Error('foo')) // 3.
 //   at Promise.resolve.then (test.html:3)
 ```
 
-## Promise Chain
+## Chain
 
 - Promises on the same chain execute orderly.
 - Promises on two separate chains execute in random order.
@@ -310,7 +310,7 @@ function getUsers(users) {
 }
 ```
 
-## Promise Combinator Array Functions
+## Combinators
 
 - `Promise.all(iterable)` fail-fast:
   If at least one promise in the promises array rejects,
@@ -350,7 +350,7 @@ async function loadData() {
 const data = loadData().then(data => console.log(data))
 ```
 
-## Promise Polyfill
+## Polyfill
 
 ```ts
 class Promise {
@@ -598,7 +598,7 @@ class Promise {
 }
 ```
 
-## Memorize Async Function
+## Memorization
 
 ```ts
 const memo = {}

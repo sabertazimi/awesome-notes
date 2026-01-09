@@ -1,11 +1,11 @@
 ---
-tags: [Web, Vue]
+tags: [Web, Vue, Internals, Architecture]
 sidebar_position: 20
 ---
 
 # Core
 
-## Vue Constructor
+## Constructor
 
 `core/instance/index.js`:
 
@@ -120,7 +120,7 @@ export function installRenderHelpers(target: any) {
 }
 ```
 
-## Vue Prototype
+## Prototype
 
 `core/index.js`:
 
@@ -285,7 +285,7 @@ Vue.compile = compileToFunctions
 export default Vue
 ```
 
-## Global API
+## Global APIs
 
 `core/global-api/index.js` 添加 `Vue.XXX` 静态方法:
 
@@ -348,7 +348,7 @@ Vue.version = '__VERSION__'
 Vue.compile = compileToFunctions
 ```
 
-### Global Extend API
+### Extend
 
 `core/global-api/extend.js`:
 
@@ -415,7 +415,7 @@ Vue.extend = function (extendOptions: object): Function {
 }
 ```
 
-### Global NextTick API
+### NextTick
 
 为了减少布局和渲染,
 `Vue` 把 `DOM` 更新设计为异步更新,
@@ -533,7 +533,7 @@ export function nextTick(cb?: Function, ctx?: object) {
 }
 ```
 
-### Global Mixin API
+### Mixin
 
 `core/global-api/mixin.js`:
 
@@ -546,7 +546,7 @@ export function initMixin(Vue: GlobalAPI) {
 }
 ```
 
-### Global Use API
+### Use
 
 `core/global-api/use.js`:
 

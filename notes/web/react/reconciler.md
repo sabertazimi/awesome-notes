@@ -1,11 +1,9 @@
 ---
 sidebar_position: 33
-tags: [Web, React, Reconciler]
+tags: [Web, React, Internals, Reconciler]
 ---
 
 # Reconciler
-
-## Minimal Reconciler
 
 ```ts
 function performWork(deadline) {
@@ -49,7 +47,7 @@ function render(elements, container) {
 }
 ```
 
-## Reconciler Performance
+## Performance
 
 - Render: 通过一些启发式算法跳过没有发生变更的子树.
 - Commit:

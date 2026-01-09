@@ -1,11 +1,11 @@
 ---
-tags: [Web, Vue, Compiler]
+tags: [Web, Vue, Internals, Template, Compiler]
 sidebar_position: 27
 ---
 
 # Template Compiler
 
-## Compilation Workflow
+## Workflow
 
 ```ts
 function compile(template: string, options: CompilerOptions): CompiledResult {
@@ -26,7 +26,7 @@ template 属性存在, render 方法不存在时:
 - runtime with compiler 版本会在 JavaScript 运行时进行模板编译, 生成 render 函数。
 - runtime only 版本会打印警告信息, 提示用户使用 runtime with compiler 版本或者使用使用 `vue-loader` 进行静态编译。
 
-## Compilation Performance
+## Performance
 
 - Shorten template helper function with prefix `_v`/`_s` etc.
 - Hoist static template blocks,

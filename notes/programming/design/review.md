@@ -14,7 +14,7 @@ tags: [Programming, DevOps, Design Pattern, Code Review]
 - 代码误注释.
 - 死循环: 边界检查.
 
-## Code Smell Review
+## Smell
 
 Bad code smell:
 
@@ -30,16 +30,16 @@ Bad code smell:
 - Shotgun surgery (霰弹式修改):
   每遇到某种变化, 必须在许多不同的类内做出许多小修改.
 
-## Security Review
+## Security
 
 - 所有的数据输入是否都进行了检查 (检测正确的类型, 长度, 格式和范围) 并且进行了编码?
 - 在哪里使用了第三方工具, 返回的错误是否被捕获?
 - 输出的值是否进行了检查并且编码?
 - 无效的参数值是否能够处理?
 
-## Documents Review
+## Documents
 
-## Comments Review
+## Comments
 
 - 数据结构.
 - 计量单位.
@@ -50,7 +50,7 @@ Bad code smell:
 - `FIXME` 标记.
 - 第三方库文档.
 
-## Test Review
+## Tests
 
 - 代码是否可以测试? 比如, 不要添加太多的或是隐藏的依赖关系, 不能够初始化对象, 测试框架可以使用方法等.
 - 是否存在测试, 它们是否可以被理解? 比如, 至少达到你满意的代码覆盖 (code coverage).

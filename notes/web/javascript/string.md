@@ -5,13 +5,13 @@ tags: [Web, JavaScript, ECMAScript, String]
 
 # String
 
-## String Primitive Features
+## Primitive
 
 作为基本变量:
 
 - `delete` 无法删除某位字符.
 
-## String Reference Features
+## Reference
 
 - 赋值与传参: 传递 string 字符串常量的引用.
 - 所有 string 字面量都是不可变量,
@@ -51,7 +51,7 @@ console.log(isStringAlternative(goodString)) // true
 console.log(isStringAlternative(badString)) // true
 ```
 
-## String Conversion
+## Conversion
 
 | `x`         | `String(x)`                                             |
 | ----------- | ------------------------------------------------------- |
@@ -64,7 +64,7 @@ console.log(isStringAlternative(badString)) // true
 | `symbol`    | `Symbol('abc')` → `'Symbol(abc)'`                       |
 | `object`    | Configurable (`toPrimitive`/`toStringTag`/`toString()`) |
 
-## String Unicode
+## Unicode
 
 ```ts
 const truthy = '\x7A' === 'z' // true
@@ -72,7 +72,7 @@ const truthy = '\u007A' === 'z' // true
 const truthy = '\u{7A}' === 'z' // true
 ```
 
-## String Char Code
+## Char Code
 
 - `string.charAt(index)`.
 - `string.charCodeAt(index)`.
@@ -90,7 +90,7 @@ const truthy = String.fromCodePoint(0x78, 0x1F680, 0x79) === 'x\uD83D\uDE80y'
 const after = before.charAt(0).toUpperCase() + before.slice(1)
 ```
 
-## String Slice and Merge
+## Slice and Merge
 
 - `string.slice()`.
 - `string.substring()`.
@@ -114,7 +114,7 @@ console.log(stringValue.substring(3, -4)) // "hel"
 console.log(stringValue.substr(3, -4)) // "" (empty string)
 ```
 
-## String Query
+## Query
 
 - `string.includes(substr)`.
 - `string.startsWith(substr)`.
@@ -164,7 +164,7 @@ interface RegExpMatchArray extends Array<string> {
 // 1
 ```
 
-## String Replace
+## Replace
 
 - `string.replace(string | RegExp, replaceValue | replacerFunction)`.
 - `string.replaceAll(string | RegExp, replaceValue | replacerFunction)`.
@@ -198,7 +198,7 @@ Array.from(str.matchAll(regexp), m => m[0])
 // => 'aa..cc'
 ```
 
-## String Pad
+## Pad
 
 - `string.repeat(times)`.
 
@@ -228,12 +228,12 @@ Array.from(str.matchAll(regexp), m => m[0])
 '09-12'.padStart(10, 'YYYY-MM-DD') // "YYYY-09-12"
 ```
 
-## String Trim
+## Trim
 
 - `string.trimLeft()`/`string.trimStart()`: remove start whitespace.
 - `string.trimRight()`/`string.trimEnd()`: remove end whitespace.
 
-## String Template Literals
+## Template Literals
 
 `str` 表示模板字符串:
 
@@ -430,7 +430,7 @@ printRaw`\u00A9${'and'}\n`
 // \n
 ```
 
-## String Utils
+## Utils
 
 ```ts
 function ucWords(string) {

@@ -168,7 +168,7 @@ window.addEventListener(
 | share()                   | 当前平台的原生共享机制                            |
 | vibrate()                 | 触发设备振动                                      |
 
-### Web Online API
+### Online
 
 ```ts
 const connectionStateChange = () => console.log(navigator.onLine)
@@ -180,7 +180,7 @@ window.addEventListener('offline', connectionStateChange)
 // false
 ```
 
-### Web Connection API
+### Connection
 
 ```ts
 const downlink = navigator.connection.downlink
@@ -193,7 +193,7 @@ const saveData = navigator.connection.saveData // Boolean: Reduced data mode.
 navigator.connection.addEventListener('change', changeHandler)
 ```
 
-### Web Protocol Handler API
+### Protocol
 
 ```ts
 navigator.registerProtocolHandler(
@@ -203,7 +203,7 @@ navigator.registerProtocolHandler(
 )
 ```
 
-### Web Battery Status API
+### Battery
 
 ```ts
 navigator.getBattery().then((battery) => {
@@ -226,7 +226,7 @@ navigator.getBattery().then((battery) => {
 })
 ```
 
-### Web Storage Estimate API
+### Storage
 
 ```ts
 navigator.storage.estimate().then((estimate) => {
@@ -234,7 +234,7 @@ navigator.storage.estimate().then((estimate) => {
 })
 ```
 
-### Web Geolocation API
+### Geolocation
 
 ```ts
 if (window.navigator.geolocation) {
@@ -335,7 +335,7 @@ navigator.geolocation.watchPosition(
 )
 ```
 
-### Navigator User Agent
+### User Agent
 
 `navigator.userAgent` 特别复杂:
 
@@ -349,6 +349,89 @@ console.log(navigator.userAgent)
 // 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko)
 // Chrome/101.0.4922.0 Safari/537.36 Edg/101.0.1198.0'
 ```
+
+```ts
+class BrowserDetector {
+  constructor() {
+    // 测试条件编译
+    // IE6~10 支持
+
+    this.isIE_Gte6Lte10 = /* @cc_on!@ */ false
+    // 测试 documentMode
+    // IE7~11 支持
+    this.isIE_Gte7Lte11 = !!document.documentMode
+    // 测试 StyleMedia 构造函数
+    // Edge 20 及以上版本支持
+    this.isEdge_Gte20 = !!window.StyleMedia
+    // 测试 Firefox 专有扩展安装 API
+    // 所有版本的 Firefox 都支持
+    this.isFirefox_Gte1 = typeof InstallTrigger !== 'undefined'
+    // 测试 chrome 对象及其 webstore 属性
+    // Opera 的某些版本有 window.chrome, 但没有 window.chrome.webstore
+    // 所有版本的 Chrome 都支持
+    this.isChrome_Gte1 = !!window.chrome && !!window.chrome.webstore
+    // Safari 早期版本会给构造函数的标签符追加 "Constructor"字样, 如:
+    // window.Element.toString(); // [object ElementConstructor]
+    // Safari 3~9.1 支持
+    this.isSafari_Gte3Lte9_1 = /constructor/i.test(window.Element)
+    // 推送通知 API 暴露在 window 对象上
+    // 使用 IIFE 默认参数值以避免对 undefined 调用 toString()
+    // Safari 7.1 及以上版本支持
+    this.isSafari_Gte7_1 = (({ pushNotification = {} } = {}) =>
+      pushNotification.toString() === '[object SafariRemoteNotification]')(
+      window.safari
+    )
+    // 测试 addons 属性
+    // Opera 20 及以上版本支持
+    this.isOpera_Gte20 = !!window.opr && !!window.opr.addons
+  }
+
+  isIE() {
+    return this.isIE_Gte6Lte10 || this.isIE_Gte7Lte11
+  }
+
+  isEdge() {
+    return this.isEdge_Gte20 && !this.isIE()
+  }
+
+  isFirefox() {
+    return this.isFirefox_Gte1
+  }
+
+  isChrome() {
+    return this.isChrome_Gte1
+  }
+
+  isSafari() {
+    return this.isSafari_Gte3Lte9_1 || this.isSafari_Gte7_1
+  }
+
+  isOpera() {
+    return this.isOpera_Gte20
+  }
+}
+```
+
+:::caution[Feature Detection]
+
+**不使用特性/浏览器推断**, 往往容易推断错误 (且会随着浏览器更新产生新的错误):
+
+```ts
+// 检测浏览器是否支持 Netscape 式的插件
+const hasNSPlugins = !!(navigator.plugins && navigator.plugins.length)
+// 检测浏览器是否具有 DOM Level 1 能力
+const hasDOM1 = !!(
+  document.getElementById
+  && document.createElement
+  && document.getElementsByTagName
+)
+
+// 特性检测
+if (document.getElementById)
+  element = document.getElementById(id)
+```
+
+:::
 
 ## Screen
 
@@ -425,7 +508,7 @@ document.onclick = function (event) {
 
 ## History
 
-### History Navigation
+### Navigation
 
 ```ts
 const history = window.history
@@ -452,7 +535,7 @@ if (history.scrollRestoration)
   history.scrollRestoration = 'manual'
 ```
 
-### History State Management
+### State
 
 ```ts
 const history = window.history
@@ -470,89 +553,4 @@ window.addEventListener('popstate', (event) => {
     processState(state)
   }
 })
-```
-
-## Browser Compatibility
-
-### User Agent Detection
-
-```ts
-class BrowserDetector {
-  constructor() {
-    // 测试条件编译
-    // IE6~10 支持
-
-    this.isIE_Gte6Lte10 = /* @cc_on!@ */ false
-    // 测试 documentMode
-    // IE7~11 支持
-    this.isIE_Gte7Lte11 = !!document.documentMode
-    // 测试 StyleMedia 构造函数
-    // Edge 20 及以上版本支持
-    this.isEdge_Gte20 = !!window.StyleMedia
-    // 测试 Firefox 专有扩展安装 API
-    // 所有版本的 Firefox 都支持
-    this.isFirefox_Gte1 = typeof InstallTrigger !== 'undefined'
-    // 测试 chrome 对象及其 webstore 属性
-    // Opera 的某些版本有 window.chrome, 但没有 window.chrome.webstore
-    // 所有版本的 Chrome 都支持
-    this.isChrome_Gte1 = !!window.chrome && !!window.chrome.webstore
-    // Safari 早期版本会给构造函数的标签符追加 "Constructor"字样, 如:
-    // window.Element.toString(); // [object ElementConstructor]
-    // Safari 3~9.1 支持
-    this.isSafari_Gte3Lte9_1 = /constructor/i.test(window.Element)
-    // 推送通知 API 暴露在 window 对象上
-    // 使用 IIFE 默认参数值以避免对 undefined 调用 toString()
-    // Safari 7.1 及以上版本支持
-    this.isSafari_Gte7_1 = (({ pushNotification = {} } = {}) =>
-      pushNotification.toString() === '[object SafariRemoteNotification]')(
-      window.safari
-    )
-    // 测试 addons 属性
-    // Opera 20 及以上版本支持
-    this.isOpera_Gte20 = !!window.opr && !!window.opr.addons
-  }
-
-  isIE() {
-    return this.isIE_Gte6Lte10 || this.isIE_Gte7Lte11
-  }
-
-  isEdge() {
-    return this.isEdge_Gte20 && !this.isIE()
-  }
-
-  isFirefox() {
-    return this.isFirefox_Gte1
-  }
-
-  isChrome() {
-    return this.isChrome_Gte1
-  }
-
-  isSafari() {
-    return this.isSafari_Gte3Lte9_1 || this.isSafari_Gte7_1
-  }
-
-  isOpera() {
-    return this.isOpera_Gte20
-  }
-}
-```
-
-### Browser Feature Detection
-
-**不使用特性/浏览器推断**, 往往容易推断错误 (且会随着浏览器更新产生新的错误).
-
-```ts
-// 检测浏览器是否支持 Netscape 式的插件
-const hasNSPlugins = !!(navigator.plugins && navigator.plugins.length)
-// 检测浏览器是否具有 DOM Level 1 能力
-const hasDOM1 = !!(
-  document.getElementById
-  && document.createElement
-  && document.getElementsByTagName
-)
-
-// 特性检测
-if (document.getElementById)
-  element = document.getElementById(id)
 ```

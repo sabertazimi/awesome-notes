@@ -5,7 +5,7 @@ tags: [Language, Haskell, Monad]
 
 # Monad
 
-## Writer Monad
+## Writer
 
 Writer 可以让我们在计算的同时搜集所有 log 纪录，并汇集成一个 log 并附加在结果上
 
@@ -20,8 +20,6 @@ ghci> (30, "A freaking platoon.") `applyLog` isBigGang
 ghci> ("BathCat","Got outlaw name.") `applyLog` (\x -> (length x, "Applied length"))
 (7,"Got outlaw name.Applied length")
 ```
-
-### Control Monad Writer
 
 ```haskell
 instance (Monoid w) => Monad (Writer w) where
@@ -42,7 +40,7 @@ multiWithLog = do
     return (a*b)
 ```
 
-## Reader Monad
+## Reader
 
 ```haskell
 instance Monad ((->) r) where
@@ -50,9 +48,7 @@ instance Monad ((->) r) where
     h >>= f = \w -> f (h w) w
 ```
 
-## State Monad
-
-### Control Monad State
+## State
 
 ```haskell
 newtype State s a = State { runState :: s -> (a,s) }
@@ -68,8 +64,6 @@ instance Monad (State s) where
 get = State $ \s -> (s,s)
 put newState = State $ \s -> ((),newState)
 ```
-
-### State Monad Case
 
 ```haskell
 import Control.Monad.State
@@ -87,7 +81,7 @@ stackManipulation = do
   pop
 ```
 
-## Error Monad
+## Error
 
 ```haskell
 instance (Error e) => Monad (Either e) where
@@ -112,6 +106,4 @@ ghci> strMsg "boom!" :: String
 
 ### foldM
 
-### `<=<`(组合函数)
-
-## Self-Defined Monad
+### `<=<` (组合函数)

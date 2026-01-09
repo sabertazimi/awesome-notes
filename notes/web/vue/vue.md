@@ -14,23 +14,23 @@ These notes cover both Vue 2 (Options API) and Vue 3 (Composition API), includin
 
 - [Directives](./directives.md) - Control flow, binding, events, model directives
 - [Components](./components.md) - Computed properties, slots, provide/inject
-- [Composition API](./composition-api.md) - Setup, lifecycle, reactivity
+- [Composition API](./composition.md) - Setup, lifecycle, reactivity
 - [Animation](./animation.md) - Transitions and animation system
 - [Concurrent](./concurrent.md) - Async component, suspense
 - [Keep Alive and Teleport](./keep-alive-teleport.md) - Component caching and DOM teleportation
-- [Router](./router.md) - Vue Router guide
+- [Router](./router.md) - Router guide
 - [Vuex](./vuex.md) - Vuex for state management
 - [Toolchain](./toolchain.md) - Vite, CLI
 
 ## Advanced Internals
 
-- [Core](./core.md) - Vue constructor, prototype, global API
-- [Options API](./options-api.md) - Options merging, normalization
+- [Architecture](./architecture.md) - Constructor, prototype, global API
+- [Options API](./options.md) - Options merging, normalization
 - [Lifecycle](./lifecycle.md) - Component initialization, lifecycle, and rendering
 - [Virtual DOM](./virtual-dom.md) - VNode structure and types
 - [Template Compiler](./template-compiler.md) - Compilation workflow and performance
-- [Legacy Reactivity](./legacy-reactivity.md) - Vue 2 reactivity system
-- [Modern Reactivity](./modern-reactivity.md) - Vue 3 reactivity system
+- [Legacy Reactivity](./legacy-reactivity.md) - Legacy reactivity system
+- [Modern Reactivity](./modern-reactivity.md) - Modern reactivity system
 
 ## Quick Start
 
@@ -40,14 +40,14 @@ Start with:
 
 1. [Directives](./directives.md) - Learn v-if, v-for, v-model, event handling
 2. [Components](./components.md) - Understand computed, slots, props
-3. [Composition API](./composition-api.md) - Explore setup, ref, reactive, computed
+3. [Composition API](./composition.md) - Explore setup, ref, reactive, computed
 
 ### For Advanced Users
 
 Deep dive into:
 
-1. [Core](./core.md) - How Vue is built
-2. [Options API](./options-api.md) - Options merge strategies
+1. [Architecture](./architecture.md) - How Vue is built
+2. [Options API](./options.md) - Options merge strategies
 3. [Lifecycle](./lifecycle.md) - From `new Vue()` to rendering
 4. [Virtual DOM](./virtual-dom.md) - VNode types and rendering
 5. [Template Compiler](./template-compiler.md) - Template to render function

@@ -1,6 +1,6 @@
 ---
-sidebar_position: 7
-tags: [Web, HTML]
+sidebar_position: 12
+tags: [Web, HTML, Form]
 ---
 
 # Form
@@ -66,6 +66,81 @@ tags: [Web, HTML]
 </form>
 ```
 
+```html
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up Form</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <form action="index.html" method="post">
+      <h2>Your basic info</h2>
+
+      <label for="name">Name</label>
+      <input type="text" id="name" name="student_name" />
+
+      <label for="mail">Email</label>
+      <input type="email" id="mail" name="student_email" />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="student_password" />
+
+      <label>Age:</label>
+      <input type="radio" id="under_16" value="under_16" name="user_age" /><label for="under_16" class="light"
+        >Under 16</label
+      ><br />
+      <input type="radio" id="over_16" value="over_16" name="user_age" /><label for="over_16" class="light"
+        >16 or Older</label
+      >
+
+      <h2>Your profile</h2>
+
+      <label for="bio">Biography</label>
+      <textarea id="bio" name="student_bio"></textarea>
+
+      <label for="courses">Select Courses</label>
+      <select id="courses" name="student_courses">
+        <optgroup label="Engineering">
+          <option value="computer_engineering">Computer Science Engineering</option>
+          <option value="electrical_engineering">Electrical Engineering</option>
+          <option value="mechanical_engineering">Mechanical Engineering</option>
+          <option value="civil_engineering">Civil Engineering</option>
+          <option value="chemical_engineering">Chemical Engineering</option>
+        </optgroup>
+        <optgroup label="Management">
+          <option value="finance_management">Finance Management</option>
+          <option value="technology_management">Technology Management</option>
+          <option value="marketing_management">Marketing Management</option>
+          <option value="business_administration">Business Administration</option>
+        </optgroup>
+      </select>
+
+      <label>Interests:</label>
+      <input type="checkbox" id="engineering" value="interest_engineering" name="user_interest" /><label
+        class="light"
+        for="engineering"
+        >Engineering</label
+      ><br />
+      <input type="checkbox" id="business" value="interest_business" name="user_interest" /><label
+        class="light"
+        for="business"
+        >Business</label
+      ><br />
+      <input type="checkbox" id="law" value="interest_law" name="user_interest" /><label class="light" for="law"
+        >Law</label
+      >
+
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
+```
+
 ## Validation
 
 - Form validation complete [guide](https://developer.mozilla.org/docs/Learn/Forms/Form_validation).
@@ -81,17 +156,17 @@ usernameInput.addEventListener('invalid', () => {
 
 ## Attributes
 
-### Form Attribute
+### Attribute
 
 `form=form_name`:
 使表单元素可放置于表单之外
 
-### Form Action
+### Action
 
 `formaction=target_name`:
 使表单元素可提交到不同页面
 
-### Form Method
+### Method
 
 `formmethod=post/get`:
 使表单元素以不同的方式提交
@@ -208,7 +283,7 @@ usernameInput.addEventListener('invalid', () => {
 </form>
 ```
 
-## Labels
+## Label
 
 指定表单元素的标签
 
@@ -437,80 +512,3 @@ Capture device camera:
 
 - hard:换行时加入换行标志，**此时必须指定**`cols`属性
 - soft:不加入换行标志
-
-## Form Demo
-
-```html
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign Up Form</title>
-    <link rel="stylesheet" href="css/normalize.css" />
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" />
-    <link rel="stylesheet" href="css/main.css" />
-  </head>
-  <body>
-    <form action="index.html" method="post">
-      <h2>Your basic info</h2>
-
-      <label for="name">Name</label>
-      <input type="text" id="name" name="student_name" />
-
-      <label for="mail">Email</label>
-      <input type="email" id="mail" name="student_email" />
-
-      <label for="password">Password</label>
-      <input type="password" id="password" name="student_password" />
-
-      <label>Age:</label>
-      <input type="radio" id="under_16" value="under_16" name="user_age" /><label for="under_16" class="light"
-        >Under 16</label
-      ><br />
-      <input type="radio" id="over_16" value="over_16" name="user_age" /><label for="over_16" class="light"
-        >16 or Older</label
-      >
-
-      <h2>Your profile</h2>
-
-      <label for="bio">Biography</label>
-      <textarea id="bio" name="student_bio"></textarea>
-
-      <label for="courses">Select Courses</label>
-      <select id="courses" name="student_courses">
-        <optgroup label="Engineering">
-          <option value="computer_engineering">Computer Science Engineering</option>
-          <option value="electrical_engineering">Electrical Engineering</option>
-          <option value="mechanical_engineering">Mechanical Engineering</option>
-          <option value="civil_engineering">Civil Engineering</option>
-          <option value="chemical_engineering">Chemical Engineering</option>
-        </optgroup>
-        <optgroup label="Management">
-          <option value="finance_management">Finance Management</option>
-          <option value="technology_management">Technology Management</option>
-          <option value="marketing_management">Marketing Management</option>
-          <option value="business_administration">Business Administration</option>
-        </optgroup>
-      </select>
-
-      <label>Interests:</label>
-      <input type="checkbox" id="engineering" value="interest_engineering" name="user_interest" /><label
-        class="light"
-        for="engineering"
-        >Engineering</label
-      ><br />
-      <input type="checkbox" id="business" value="interest_business" name="user_interest" /><label
-        class="light"
-        for="business"
-        >Business</label
-      ><br />
-      <input type="checkbox" id="law" value="interest_law" name="user_interest" /><label class="light" for="law"
-        >Law</label
-      >
-
-      <button type="submit">Submit</button>
-    </form>
-  </body>
-</html>
-```

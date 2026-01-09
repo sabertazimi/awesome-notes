@@ -1,11 +1,11 @@
 ---
 sidebar_position: 21
-tags: [Web, JavaScript, ECMAScript, Asynchronous]
+tags: [Web, JavaScript, ECMAScript, Asynchronous, Await]
 ---
 
 # Async and Await
 
-## Await Features
+## Features
 
 - `async` 异步函数如果不包含 `await` 关键字, 其执行 (除返回值外) 基本上跟普通函数没有什么区别.
 - JavaScript 运行时在碰到 `await` 关键字时, 会记录在哪里暂停执行.
@@ -107,7 +107,7 @@ async function downloadContent(urls) {
 }
 ```
 
-## Await Arrays
+## Arrays
 
 - If you want to execute await calls in series,
   use a for-loop (or any loop without a callback).

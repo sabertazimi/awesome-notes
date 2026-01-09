@@ -1,9 +1,9 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 tags: [Web, DevOps, Deployment]
 ---
 
-# Web Deployment
+# Deployment
 
 ## Static Assets
 
@@ -25,12 +25,12 @@ the fingerprint will change.
 This will cause the remote clients to request a new copy of the content.
 This is generally known as cache busting.
 
-## CI System
+## CI
 
 - Full builds upon continuous deployment.
 - Incremental builds are a product of time.
 
-## Docker Deployment
+## Docker
 
 ```dockerfile
 FROM node:16-alpine as builder
@@ -50,7 +50,7 @@ FROM nginx:alpine
 COPY --from=builder code/build/ /usr/share/nginx/html/
 ```
 
-## Nginx Configuration
+## Nginx
 
 子域名设置:
 
@@ -123,7 +123,7 @@ export default function ABTestComponent() {
 }
 ```
 
-## Blue Green Deployment
+## Blue Green
 
 两套系统, 一套稳定的绿色系统, 一套即将发布的蓝色系统.
 不断切换并迭代发布到生产环境中.
@@ -135,13 +135,11 @@ export default function ABTestComponent() {
 
 ## Gray Release
 
-### Gray Release Introduction
-
 Canary Release: 全量或增量部署新文件, 并逐步把流量切换至新 CDN URL.
 根据灰度白名单, 将灰度测试用户的 CDN Assets
 更换至不同 Version Number 或者 Fingerprint 的新版本前端页面文件.
 
-### Gray Release Solution
+### Solution
 
 通过灰度发布收集用户反馈 (转化率等指标),
 决定后续是否全面将所有流量切至新版本,
@@ -229,7 +227,7 @@ server {
   结合业务来做流量的灰度与切换, 控制 HTML 入口文件,
   使灰度规则与业务代码解耦.
 
-### Gray Release Performance
+### Performance
 
 - 前端优化:
   每一个页面都需要去获取灰度规则, 这个灰度请求将阻塞页面.
@@ -241,7 +239,7 @@ server {
   利用 MemCache 在内存中缓存灰度规则与灰度用户列表,
   提升灰度发布性能.
 
-## DevOps References
+## References
 
 - SaaS/PaaS/IaaS [list](https://github.com/ripienaar/free-for-dev).
 - Free budget [stack](https://github.com/255kb/stack-on-a-budget).

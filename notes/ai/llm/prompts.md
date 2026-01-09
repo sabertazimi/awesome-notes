@@ -5,9 +5,9 @@ tags: [AI, LLM, PromptEngineering, Prompts]
 
 # Prompts
 
-## UI Prompts
+## Design
 
-### Prototype Design Prompt
+### Prototype
 
 ```md
 你是一个专业的 UI 设计师，你需要根据我提供的需求文档来完成页面的设计。
@@ -27,7 +27,7 @@ tags: [AI, LLM, PromptEngineering, Prompts]
 请按照以上要求生成完整的 HTML 代码，并确保其可用于实际开发。
 ```
 
-### Web Design Prompts
+### Web
 
 ```md
 <always_use_rpg_theme>
@@ -76,7 +76,7 @@ Avoid this: it is critical that you think outside the box!
 </frontend_aesthetics>
 ```
 
-### Slide Design Prompt
+### Slide
 
 ```md
 目标受众：{受众，例如：公司高管 / 技术团队 / 产品经理 / 普通用户}
@@ -160,21 +160,9 @@ Avoid this: it is critical that you think outside the box!
 背景： 干净的纯色摄影棚背景，带有柔和的投影。
 ```
 
-### UI Implementation Prompt
+## Frontend
 
-```md
-你是一位资深全栈工程师，参考 `ui-design-rules.mdc` 设计一个 @README.md 中描述的应用，
-模拟产品经理提出需求和信息架构，请自己构思好功能需求和界面，然后设计 UI/UX：
-
-1、要高级有质感，遵守设计规范，注重 UI 细节。
-2、请引入 Tailwind CSS CDN 来完成，而不是编写 CSS Style 样式，图片使用 unslash。
-3、每个页面写一个独立的 HTML 文件，并可以通过点击跳转。
-4、由于页面较多，你每完成一部分就让我来确认，一直持续到结束。
-```
-
-## Frontend Prompts
-
-### Project Porting Prompt
+### Porting
 
 ```md
 Your job is to port assistant-ui-react monorepo (for react)
@@ -203,9 +191,21 @@ Make a commit and push your changes after every single file edit.
 Keep track of your current status in browser-use-ts/agent/TODO.md
 ```
 
-## Backend Prompts
+### UI
 
-### API Integration Prompt
+```md
+你是一位资深全栈工程师，参考 `ui-design-rules.mdc` 设计一个 @README.md 中描述的应用，
+模拟产品经理提出需求和信息架构，请自己构思好功能需求和界面，然后设计 UI/UX：
+
+1、要高级有质感，遵守设计规范，注重 UI 细节。
+2、请引入 Tailwind CSS CDN 来完成，而不是编写 CSS Style 样式，图片使用 unslash。
+3、每个页面写一个独立的 HTML 文件，并可以通过点击跳转。
+4、由于页面较多，你每完成一部分就让我来确认，一直持续到结束。
+```
+
+## Backend
+
+### Integration
 
 ```md
 <核心任务>
@@ -244,7 +244,7 @@ Keep track of your current status in browser-use-ts/agent/TODO.md
 </必须遵守的关键原则>
 ```
 
-### API Mock Prompt
+### Mock
 
 ```md
 所有的 API 请求需要支持 Mock 接口，请设置一个全局变量来控制是否开启 Mock 数据，
@@ -253,7 +253,7 @@ Keep track of your current status in browser-use-ts/agent/TODO.md
 命名规范：`<模块名>-mock.ts`。
 ```
 
-### Mapper Generation Prompt
+### Generation
 
 ```md
 请读取 `tables.md` SQL 语句，为每个表生成独立 Entity，Mapper 接口以及对应的 XML文件，
@@ -269,16 +269,16 @@ Keep track of your current status in browser-use-ts/agent/TODO.md
 - 根据 ids 删除（软删除）。
 ```
 
-## Developer Prompts
+## Developer
 
-### 分步式提示词
+### Step-by-step
 
 ```md
 采用 「原子化任务拆分」+「渐进式验证」 方法, 将复杂需求拆解为独立可测试的小模块.
 帮我设计并且给出我每一步的提示词用来指导 Cursor 编程.
 ```
 
-### 多重选择提示词
+### Multiple Choices
 
 ```md
 Please think through at least 3 possibilities of what could be causing this, write in detail about them.
@@ -290,14 +290,18 @@ When you pick the most probably solution, write in detail how do implement the s
 Make it a thorough plan that even a junior engineer could solve successfully.
 ```
 
-### 日志定位提示词
+### Logging
 
 ```md
 Please add logs to the code to get better visibility into what is going on so we can find the fix.
 I'll run the code and feed you the logs results.
 ```
 
-### 辅助学习提示词
+### Reading
+
+[内容分析师](./prompts/analysis.md)
+
+### Learning
 
 利用 Cursor 的辅助学习新知识, 例如学习 [Next.js](https://github.com/zenyarn/nextjs-study):
 
@@ -317,13 +321,9 @@ I'll run the code and feed you the logs results.
 **避免详细的代码实现细节或逐行解释。**
 ```
 
-### 阅读理解提示词
+## System
 
-[内容分析师](./prompts/analysis.md)
-
-## System Prompts
-
-### System Design Prompt
+### Architecture
 
 System design blueprint:
 
@@ -351,7 +351,7 @@ Here's my planned approach:
 Before I code: What edge cases am I missing? Where might this break at scale?
 ```
 
-### System Analysis Prompt
+### Analysis
 
 [现状分析](https://zhuanlan.zhihu.com/p/1892580714635047120):
 
@@ -371,7 +371,7 @@ Before I code: What edge cases am I missing? Where might this break at scale?
 在想明白后向我说明为什么要这么设计.
 ```
 
-### System Implementation Prompt
+### Implementation
 
 Get implementation guidance:
 
@@ -411,7 +411,7 @@ Walk me through:
 | 提示词 | `@git` 逐个文件分析并总结改动点, 评估是否引入了新的问题 | `@git` 基于代码变更输出自测用例清单          |
 | 效果   | 在列举出每个文件的改动意图后, 会告知潜在问题和修改意见  | 围绕改动, 生成新旧功能在不同场景中的测试用例 |
 
-## Image Prompts
+## Image
 
 Midjourney [cookbook](https://fka.gumroad.com/l/the-art-of-midjourney-ai-guide-to-creating-images-from-text):
 
@@ -492,7 +492,7 @@ Midjourney [cookbook](https://fka.gumroad.com/l/the-art-of-midjourney-ai-guide-t
   - Schlieren, Disposable camera, Polaroid, Instax, Lomo, Pinhole photography.
   - VistaVision, Technirama, Techniscope, Panavision, Ambrotype.
 
-## Prompts References
+## References
 
 - Awesome ChatGPT [prompts](https://github.com/f/awesome-chatgpt-prompts).
 - Gemini prompts [cookbook](https://services.google.com/fh/files/misc/gemini-for-google-workspace-prompting-guide-101.pdf).

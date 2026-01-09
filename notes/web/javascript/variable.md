@@ -5,7 +5,7 @@ tags: [Web, JavaScript, ECMAScript]
 
 # Variable
 
-## Variable Hoisting
+## Hoisting
 
 - 一方面规定, `var`/`function` 声明的全局变量,
   依旧是全局对象的属性, 意味着会`Hoisting`.
@@ -73,7 +73,7 @@ function example() {
 
 <!-- eslint-enable -->
 
-## Let Variable
+## Let
 
 - 块级作用域内定义的变量/函数, 在块级作用域外 ReferenceError.
 - 不存在变量提升, 导致暂时性死区 (Temporal Dead Zone).
@@ -106,7 +106,7 @@ for (let i = 0; i < 5; ++i)
 // 每个 setTimeout 引用的都是不同的变量实例.
 ```
 
-## Const Variable
+## Const
 
 - const 一旦声明变量, 就必须立即初始化, 不能留到以后赋值.
 - 引用一个`Reference`变量时, 只表示此变量地址不可变, 但所引用变量的值/属性可变
@@ -165,7 +165,7 @@ function type(item) {
 }
 ```
 
-### Null Detection
+### Null
 
 不应使用 typeof 检测 null, 应使用 `===`/`!==`.
 
@@ -176,12 +176,12 @@ function type(item) {
 const objectType = typeof null // => object
 ```
 
-### Property Detection
+### Property
 
 - 由于属性值可能为零值值表达式, 不应使用零值表达式(`0`/`NaN`/`''`/`null`/`undefined`) 检测属性值.
 - 应使用 `for in` 进行属性检测.
 
-### Custom Object Detection
+### Object
 
 - `object instanceof Constructor`:
   在原型链上查找**构造器的原型对象** (`Constructor.prototype`).
@@ -209,7 +209,7 @@ function instanceOf(L, R) {
 
 ## Type Conversion
 
-### Type Conversion Context
+### Context
 
 - 字符串 -> 整数: `+string`/`Number(string)`/`parseInt(string, arg1)`.
 - any -> `bool`: `!!any`.
@@ -240,7 +240,7 @@ const hasAge = Boolean(age)
 const hasAge = !!age
 ```
 
-### Type Conversion Algorithms
+### Algorithm
 
 ```ts
 function ToString(argument) {

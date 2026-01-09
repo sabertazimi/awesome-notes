@@ -1,11 +1,9 @@
 ---
-sidebar_position: 38
+sidebar_position: 54
 tags: [Web, JavaScript, ECMAScript, Canvas]
 ---
 
-# Web Canvas
-
-## Canvas Basic Usage
+# Canvas
 
 - Path2D 对象.
 - 绘制路径: `beginPath()` -> `draw()` -> `closePath()`.
@@ -66,7 +64,7 @@ function changeColor(color) {
 </script>
 ```
 
-## Canvas Game Loop
+## Game Loop
 
 For all objects:
 
@@ -100,7 +98,7 @@ function gameLoop(timestamp) {
 requestAnimationFrame(gameLoop)
 ```
 
-## Canvas Performance
+## Performance
 
 Canvas buffer:
 
@@ -184,7 +182,7 @@ async function artwork(ev) {
 }
 ```
 
-## CSS Houdini Painting API
+## Houdini
 
 [`PaintWorklet`](https://developer.mozilla.org/docs/Web/API/PaintWorklet):
 
@@ -244,7 +242,7 @@ registerPaint('checkerboard', CheckerboardPainter)
 <textarea></textarea>
 ```
 
-## Canvas References
+## References
 
 - [Canvas API](https://developer.mozilla.org/docs/Web/API/Canvas_API)
 - [Canvas Tutorial](https://developer.mozilla.org/docs/Web/API/Canvas_API/Tutorial)

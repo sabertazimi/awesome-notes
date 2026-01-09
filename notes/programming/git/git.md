@@ -26,7 +26,7 @@ tags: [Programming, Git]
 
 - [Diff](./diff.md) - Diff options and patch management
 
-## Tools
+## Toolchain
 
 - [GUI](./gui.md) - LazyGit and other Git GUI tools
 - [GitHub](./github.md) - GitHub features, CLI, Actions, and best practices

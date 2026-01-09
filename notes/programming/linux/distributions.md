@@ -1,13 +1,13 @@
 ---
 sidebar_position: 9
-tags: [Programming, OS, Linux, Distributions]
+tags: [Programming, OS, Linux, Distributions, Ubuntu, Arch Linux, WSL]
 ---
 
 # Distributions
 
 ## Ubuntu
 
-### Ubuntu Locale Settings
+### Locale Settings
 
 ```bash
 export LANG=en_US
@@ -23,9 +23,7 @@ sudo locale-gen zh_CN.GB18030
 sudo dpkg-reconfigure locales
 ```
 
-### Ubuntu Themes
-
-#### Icon Themes
+### Icon
 
 Nightly build for Numix Circle icon:
 
@@ -35,7 +33,7 @@ sudo apt update
 sudo apt install numix-icon-theme-circle
 ```
 
-#### GTK Themes
+### GTK
 
 GTK/GNOME themes located in `/usr/share/themes/` or `~/.themes/`:
 
@@ -64,13 +62,13 @@ sudo dpkg-reconfigure gdm3
 sudo apt install --reinstall gdm3 lightdm ubuntu-desktop
 ```
 
-#### GNOME Shell Extension
+### GNOME Shell Extension
 
 - Install GNOME shell extension for browser.
 - Install local binding app: `sudo apt install chrome-gnome-shell`.
 - Visit `extensions.gnome.org` to install extensions.
 
-### Ubuntu Fonts
+### Fonts
 
 ```bash
 mkdir -p ~/.local/share/fonts/
@@ -82,7 +80,7 @@ fc-list : family | sort | uniq
 
 ## Arch Linux
 
-### Setup Arch Linux Configuration
+### Setup
 
 ```bash
 less /usr/share/aif/docs/official_installation_guide_en
@@ -127,7 +125,7 @@ wget https://aur.archlinux.org/packages.gz
 
 ## WSL
 
-### WSL Installation
+### Installation
 
 [Upgrade to WSL2](https://docs.microsoft.com/windows/wsl/install-manual):
 
@@ -144,7 +142,21 @@ wsl --set-version Ubuntu-22.04 2
 wsl -l -v
 ```
 
-### WSL Proxy Connection
+### Connection
+
+[Gzip for WSL2](https://github.com/microsoft/WSL/issues/4461#issuecomment-1174011640):
+
+```bash
+echo -en '\x10' | sudo dd of=/usr/bin/gzip count=1 bs=1 conv=notrunc seek=$((0x189))
+```
+
+[Winsock for WSL2](https://github.com/microsoft/WSL/issues/4194):
+
+```bash
+netsh winsock reset
+```
+
+### Proxy
 
 [Network](https://learn.microsoft.com/windows/wsl/networking)
 and [proxy](https://zinglix.xyz/2020/04/18/wsl2-proxy)
@@ -184,21 +196,7 @@ firewall=true
 autoProxy=true
 ```
 
-### WSL Remote Connection
-
-[Gzip for WSL2](https://github.com/microsoft/WSL/issues/4461#issuecomment-1174011640):
-
-```bash
-echo -en '\x10' | sudo dd of=/usr/bin/gzip count=1 bs=1 conv=notrunc seek=$((0x189))
-```
-
-[Winsock for WSL2](https://github.com/microsoft/WSL/issues/4194):
-
-```bash
-netsh winsock reset
-```
-
-### WSL Wi-Fi Connection
+### Wi-Fi
 
 Win 11 MediaTek Wi-Fi 6 delay start:
 set `Network Connections` and `WLAN AutoConfig`

@@ -3,15 +3,15 @@ sidebar_position: 2
 tags: [Web, Testing, Jest]
 ---
 
-# Jest Testing
+# Jest
 
-## Jest Installation
+## Installation
 
 ```bash
 npm i -D jest ts-jest @types/jest react-test-renderer
 ```
 
-## Jest Configuration
+## Configuration
 
 `jest.config.js`:
 
@@ -159,7 +159,7 @@ import * as EnzymeAdapter from 'enzyme-adapter-react-16'
 configure({ adapter: new EnzymeAdapter() })
 ```
 
-## Jest Basic Testing
+## Getting Started
 
 - `describe` block.
 - `test` statement.
@@ -237,7 +237,7 @@ describe('ListPage', () => {
 })
 ```
 
-## Jest Snapshot Testing
+## Snapshots
 
 - When you run jest first time,
   it will produce an snapshot file.
@@ -261,7 +261,7 @@ describe('ThemeSwitch', () => {
 })
 ```
 
-## Jest Async Testing
+## Asynchronous
 
 Jest async [guide](https://jestjs.io/docs/tutorial-async):
 
@@ -270,11 +270,11 @@ await expect(asyncCall()).resolves.toEqual('Expected')
 await expect(asyncCall()).rejects.toThrowError()
 ```
 
-## Jest Mocks
+## Mocks
 
 ![Mocks](./figures/mocks.png 'Mocks')
 
-### Jest Mocks Utils
+### Utils
 
 `__mocks__`:
 
@@ -292,7 +292,7 @@ await expect(asyncCall()).rejects.toThrowError()
 - `mockModule.mockReset`.
 - `mockModule.mockRestore`.
 
-### Jest Module Mocks
+### Module
 
 ```tsx
 // react-dom.js
@@ -343,7 +343,7 @@ module.exports = {
 }
 ```
 
-### Jest Date Mocks
+### Date
 
 ```ts
 jest
@@ -351,7 +351,7 @@ jest
   .mockReturnValue('2020-06-20T13:37:00.000Z')
 ```
 
-### Jest API Mocks
+### APIs
 
 ```ts
 import { rest } from 'msw'
@@ -418,9 +418,9 @@ describe('AuthButton', () => {
 })
 ```
 
-## Jest Internals
+## Internals
 
-### Jest Runtime Sandbox
+### Runtime Sandbox
 
 Running tests in
 [`ShadowRealms`](https://2ality.com/2022/04/shadow-realms.html#use-cases-for-shadowrealms):
@@ -475,7 +475,7 @@ async function runTestModule(moduleSpecifier) {
 await runTestModule('./demo.test.js')
 ```
 
-### Jest Test Runner
+### Test Runner
 
 A simple
 [test runner](https://github.com/typicode/xv)
@@ -530,7 +530,7 @@ async function run(arg = '.') {
 run(process.argv[2])
 ```
 
-### Jest Native Runner
+### Native Runner
 
 Implement component testing with
 [native `node:test` module](https://whistlr.info/2022/test-react-builtin):
@@ -578,7 +578,7 @@ reactTest('test component', () => {
 })
 ```
 
-## Jest Performance
+## Performance
 
 `Jest` 的整体架构, 其中有 3 个地方比较耗性能:
 
@@ -586,12 +586,12 @@ reactTest('test component', () => {
 - 多线程: 生成新线程耗费的资源.
 - 文件转译: `Jest` 会在执行到该文件再对它进行转译. 使用 `esbuild-jest`/`@swc/jest` 加速转译.
 
-## Jest Plugins
+## Plugins
 
 - Jest debug [tool](https://github.com/nvh95/jest-preview).
 - Jest visual regression testing [tool](https://github.com/americanexpress/jest-image-snapshot).
 
-## Jest Best Practices
+## Best Practices
 
 - Avoid [flaky testing](https://semaphoreci.com/blog/flaky-react).
 - Use [`userEvent`](https://claritydev.net/blog/improving-react-testing-library-tests#use-userevent-instead-of-fireevent)

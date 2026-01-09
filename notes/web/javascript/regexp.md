@@ -9,7 +9,7 @@ tags: [Web, JavaScript, ECMAScript, RegExp]
 const re = /pattern/gi
 ```
 
-## RegExp Flags
+## Flags
 
 [Flags](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Regular_Expressions#advanced_searching_with_flags):
 
@@ -31,7 +31,7 @@ const length = s.length // 4
 codePointLength(s) // 2
 ```
 
-## RegExp Character Classes
+## Character Classes
 
 [Character classes](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Regular_Expressions/Character_Classes):
 
@@ -51,7 +51,7 @@ codePointLength(s) // 2
 | `^`                   | start of string       |
 | `$`                   | end of string         |
 
-## RegExp Quantifiers
+## Quantifiers
 
 [Quantifiers](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Regular_Expressions/Quantifiers):
 
@@ -72,7 +72,7 @@ codePointLength(s) // 2
 | `{n,}?`          | n+                                     |
 | `{n,m}?`         | n ~ m                                  |
 
-## RegExp Group and Ranges
+## Group and Ranges
 
 - [Groups](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Regular_Expressions/Groups_and_Ranges).
 - 零宽断言: lookahead [assertion](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Regular_Expressions/Assertions).
@@ -104,7 +104,7 @@ for (const match of string.matchAll(regex)) {
 }
 ```
 
-## RegExp Back Reference
+## Back Reference
 
 - `$1 $2 $3`: 第 n 个子表达式匹配的结果字符.
 - 位置编号 (左括号的顺序): `\1 \2 \3`: 第 n 个子表达式匹配的结果字符.
@@ -136,7 +136,7 @@ Avoid use them in production:
 
 :::
 
-## RegExp Functions
+## APIs
 
 RegExp [functions](https://exploringjs.com/impatient-js/ch_regexps.html#methods-for-working-with-regular-expressions):
 
@@ -149,7 +149,7 @@ RegExp [functions](https://exploringjs.com/impatient-js/ch_regexps.html#methods-
   - `test`.
   - `exec`.
 
-### RegExp Test
+### Test
 
 ```ts
 ;/[a-z|0-9]/i.test(str)
@@ -188,7 +188,7 @@ export function isJunk(filename) {
 }
 ```
 
-### RexExp Exec
+### Exec
 
 [`exec()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec):
 
@@ -210,13 +210,11 @@ for (
 // Found 88 at 40
 ```
 
-### RegExp Replace
+### Replace
 
 ```ts
 str.replace(regExp, str / func)
 ```
-
-#### RegExp Replace Arguments
 
 第二个参数若为函数式参数, `replace` 方法会向它传递一系列参数:
 
@@ -252,7 +250,7 @@ console.log(
 // 12/31/1999
 ```
 
-#### RegExp Replace Performance
+:::tip[Replace Performance]
 
 - 使用 2 个子表达式修剪字符串, 字符串总长度影响性能.
 - 使用循环修剪字符串 (分别用 正/负循环 修剪 首/尾空白符), 空白字符长度影响性能.
@@ -280,20 +278,9 @@ if (!String.prototype.trim) {
 }
 ```
 
-## RegExp Best Practices
+:::
 
-- 不使用 new RegExp(),使用正则表达式字面量
-- 将正则表达式赋值给变量, 防止正则表达式重复创建
-- 以简单(唯一性)字元开始, 如 `^/$ x \u363A [a-z] \b`, 避免以分组表达式开始:
-  e.g. `\s\s*` 优于 `\s{1,}`.
-- 减少表达式的重叠匹配.
-- 减少分支表达式,并将最常用的分支放在最前面.
-- 无需反向引用时, 使用非捕获组:
-  e.g. `(?:...)` 优于 `(...)`.
-
-## RegExp Use Case
-
-### Common Pattern
+## Patterns
 
 - `/abc/`: Characters sequence.
 - `/[abc]/`: Characters set.
@@ -320,18 +307,29 @@ if (!String.prototype.trim) {
 const pattern = /([^&=]+)=([^&]*)/g
 ```
 
-### 中英文
+### Alphabets
 
 `/^[\u4e00-\u9fa5a-zA-Z]+$/i`
 
-### 数字
+### Numbers
 
 `/^[1-9]*$/i`
 
-### 空字符与空格字符
+### Whitespace
 
 `/[(^\s+)(\s+$)]/g`
 
 ### Markdown Table
 
 `/(?<=\|\w+) /g`: second place to insert `|`.
+
+## Best Practices
+
+- 不使用 new RegExp(),使用正则表达式字面量
+- 将正则表达式赋值给变量, 防止正则表达式重复创建
+- 以简单(唯一性)字元开始, 如 `^/$ x \u363A [a-z] \b`, 避免以分组表达式开始:
+  e.g. `\s\s*` 优于 `\s{1,}`.
+- 减少表达式的重叠匹配.
+- 减少分支表达式,并将最常用的分支放在最前面.
+- 无需反向引用时, 使用非捕获组:
+  e.g. `(?:...)` 优于 `(...)`.

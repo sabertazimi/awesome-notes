@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-tags: [Web, React, Hook]
+tags: [Web, React, Hook, Memo]
 ---
 
 # Memo
@@ -14,7 +14,7 @@ tags: [Web, React, Hook]
   - **Good use** for complex objects or expensive calculations.
   - **Donn't use** for primitive values or simple calculations.
 
-## useMemo Dispatcher
+## Dispatcher
 
 ```ts
 function mountMemo<T>(
@@ -51,7 +51,7 @@ function updateMemo<T>(
 }
 ```
 
-## useMemo Usage
+## useMemo
 
 ```tsx
 export default function Button({

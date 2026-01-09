@@ -5,9 +5,9 @@ tags: [AI, LLM, Agent]
 
 # Agent
 
-## Agent Principles
+## Principles
 
-### First-Principles Agents
+### First-Principles
 
 从李世石与 AlphaGo 的围棋对战中的第 37 手,
 我们可以总结出[第一性原理](https://www.chasewhughes.com/writing/beyond-the-replica-the-case-for-first-principles-agents)
@@ -16,13 +16,13 @@ tags: [AI, LLM, Agent]
 - Replica agents: 当流程需要人工审核、代理作为用户的副驾驶员或与仅限 UI 的旧版工具集成时，使用仿生学。
 - Alien agents: 当目标是纯粹的结果效率时，使用第一性原理。
 
-### Asymmetry of Verification and Verifiers Law
+### Asymmetry of Verification and Verifiers
 
-[Asymmetry of verification and verifiers law](https://www.jasonwei.net/blog/asymmetry-of-verification-and-verifiers-law):
+Asymmetry of verification and verifiers [law](https://www.jasonwei.net/blog/asymmetry-of-verification-and-verifiers-law):
 
 所有可解决且易于验证的问题, 都将被 AI 解决.
 
-## Agent Instructions
+## Instructions
 
 - Use existing documents:
   使用现有的操作程序、支持脚本或政策文档来创建 LLM 友好的 routines.
@@ -41,7 +41,20 @@ tags: [AI, LLM, Agent]
 要转换的帮助中心文档如下 {{help_center_doc}}
 ```
 
-### Vibe Coding Development
+How to write a great `AGENTS.md` [lessons from over 2500 repositories](https://github.blog/ai-and-ml/github-copilot/how-to-write-a-great-agents-md-lessons-from-over-2500-repositories):
+
+1. States a clear **role**:
+   Defines who the agent is (expert technical writer),
+   what skills it has (Markdown, TypeScript),
+   and what it does (read code, write docs).
+2. Executable **commands**: Gives AI tools it can run (npm run docs:build and npx markdownlint docs/). Commands come first.
+3. **Project** knowledge: Specifies tech stack with versions (React 18, TypeScript, Vite, Tailwind CSS) and exact file locations.
+4. Real **examples**: Shows what good output looks like with actual code. No abstract descriptions.
+5. Three-tier **boundaries**: Set clear rules using always do, ask first, never do. Prevents destructive mistakes.
+
+> Role -> Tool -> Context -> Example -> Boundary
+
+### Vibe Coding
 
 `Spec` → `Onboard` → `Direct` → `Verify` → `Integrate`.
 
@@ -70,9 +83,7 @@ tags: [AI, LLM, Agent]
    - Stage roll-outs
    - Monitor regressions
 
-### AI Agent Prompts
-
-[System prompts](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools) for AI tools and agents.
+### System
 
 OpenAI [Codex](https://openai.com/index/introducing-codex) [prompts](./prompts/codex-agent.md):
 
@@ -81,7 +92,7 @@ OpenAI [Codex](https://openai.com/index/introducing-codex) [prompts](./prompts/c
 - `AGENTS.md` spec.
 - Citations instructions.
 
-### Coding Agent Prompts
+### Coding
 
 [Writing](https://github.com/agentsmd/agents.md)
 good [`AGENTS.md`](https://github.com/agentsmd/agents.md):
@@ -98,7 +109,7 @@ good [`AGENTS.md`](https://github.com/agentsmd/agents.md):
 - `AGENTS.md` is the highest leverage point of the harness, so avoid auto-generating it.
   You should carefully craft its contents for best results.
 
-### Pull Request Agent Prompts
+### Pull Request
 
 GitHub [copilot](https://github.blog/ai-and-ml/github-copilot/how-to-use-github-copilot-spaces-to-debug-issues-faster):
 to debug issues faster:
@@ -116,22 +127,7 @@ Cite the exact files that justify your recommendations.
 After I approve a plan, use the Copilot coding agent to propose a PR.
 ```
 
-### Docs Agent Prompts
-
-How to write a great `AGENTS.md` [lessons from over 2500 repositories](https://github.blog/ai-and-ml/github-copilot/how-to-write-a-great-agents-md-lessons-from-over-2500-repositories):
-
-1. States a clear **role**:
-   Defines who the agent is (expert technical writer),
-   what skills it has (Markdown, TypeScript),
-   and what it does (read code, write docs).
-2. Executable **commands**: Gives AI tools it can run (npm run docs:build and npx markdownlint docs/). Commands come first.
-3. **Project** knowledge: Specifies tech stack with versions (React 18, TypeScript, Vite, Tailwind CSS) and exact file locations.
-4. Real **examples**: Shows what good output looks like with actual code. No abstract descriptions.
-5. Three-tier **boundaries**: Set clear rules using always do, ask first, never do. Prevents destructive mistakes.
-
-> Role -> Tool -> Context -> Example -> Boundary
-
-### Test Agent Prompts
+### Testing
 
 ```md
 Create a test agent for this repository. It should:
@@ -144,7 +140,7 @@ Create a test agent for this repository. It should:
 - Include specific examples of good test structure
 ```
 
-### Research Agent Prompts
+### Research
 
 AI agents powered by tricky LLMs prompting:
 
@@ -154,7 +150,19 @@ AI agents powered by tricky LLMs prompting:
 - Generative [agent](https://github.com/joonspk-research/generative_agents).
 - Minecraft [agent](https://github.com/MineDojo/Voyager).
 
-## Agent Orchestration
+## Context
+
+### Dynamic
+
+[Dynamic context discovery](https://cursor.com/cn/blog/dynamic-context-discovery):
+
+- 工具响应 -> 文件.
+- 终端会话 -> 文件.
+- 上下文压缩时引用对话历史.
+- 按需加载.
+- 渐进式披露.
+
+## Orchestration
 
 单智能体系统 (Single-agent systems):
 
@@ -266,7 +274,7 @@ triage_agent = Agent(
 await Runner.run(triage_agent, input("您能提供我最近购买商品的配送时间表更新吗?"))
 ```
 
-## Agent Guardrails
+## Guardrails
 
 构建防护措施:
 
@@ -347,18 +355,6 @@ async def main():
 
 当超出失败阈值或高风险操作时, 触发人工干预计划, 是一项关键的安全保障措施:
 
-## Context
-
-### Dynamic Context
-
-[Dynamic context discovery](https://cursor.com/cn/blog/dynamic-context-discovery):
-
-- 工具响应 -> 文件.
-- 终端会话 -> 文件.
-- 上下文压缩时引用对话历史.
-- 按需加载.
-- 渐进式披露.
-
 ## Library
 
 ### Instruction
@@ -367,6 +363,8 @@ async def main():
   Open format for guiding coding agents.
 - [llms.txt](https://github.com/AnswerDotAI/llms-txt):
   Helping language models use website.
+- [System](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools):
+  System prompts for AI agents.
 
 ### RAG
 
@@ -384,7 +382,7 @@ async def main():
 - [ZRead](https://zread.ai):
   AI-powered github repository reader.
 
-## Agent Benchmarks
+## Benchmarks
 
 [Benchmarks](https://blog.sshh.io/p/understanding-ai-benchmarks):
 
@@ -392,7 +390,7 @@ async def main():
 - Relative: Compare within the same model family or lab, how did the score change from v1 to v2?
 - Verify: The only benchmark that matters at the end of the day is your workload.
 
-## Agents References
+## References
 
 - Vibe coding [prompts](https://docs.google.com/spreadsheets/d/1ngoQOhJqdguwNAilCl1joNwTje7FWWN9WiI2bo5VhpU).
 - Vibe coding [guide](https://github.com/tukuaiai/vibe-coding-cn).

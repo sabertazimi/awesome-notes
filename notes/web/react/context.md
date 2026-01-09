@@ -5,9 +5,7 @@ tags: [Web, React, Context]
 
 # Context
 
-## Context API
-
-Context API provide a Dependency Injection style method,
+Context provide a Dependency Injection style method,
 to provide values to children components.
 
 Context 中只定义被大多数组件所共用的属性
@@ -64,13 +62,12 @@ export default function AuthProvider({ children }: { children: ReactElement }) {
 }
 ```
 
-## Context Refs
+## Refs
 
 ```tsx
 // Context.js
 import { Component, createContext } from 'react'
 
-// React team — thanks for Context API 👍
 const context = createContext()
 const { Provider: ContextProvider, Consumer } = context
 
@@ -129,7 +126,7 @@ export default function TextArea() {
 }
 ```
 
-## Context Internals
+## Internals
 
 `createContext` 创建了一个 `{ _currentValue, Provider, Consumer }` 对象:
 

@@ -1,14 +1,14 @@
 ---
 sidebar_position: 28
-tags: [Web, JavaScript, ECMAScript, Functional]
+tags: [Web, JavaScript, ECMAScript, Functional Programming]
 ---
 
 # Functional JavaScript
 
-- Predictable: pure and immutable.
-- Safe: pure and immutable.
-- Transparent: pure and immutable.
-- Modular: composite with currying and monads.
+- Avoid mutation.
+- First class functions.
+- Recursive data structures and recursive functions.
+- Laziness.
 
 :::tip[Functional JavaScript]
 
@@ -33,18 +33,23 @@ to advance the state of a program in a pure manner:
 
 :::
 
-## Functional JavaScript Pros
+:::tip[Pros]
 
-- Type safe and state safe.
-- Explicit flow of data.
-- Concurrency safety.
+- Predictable: explicit flow of data.
+- Safety: type safety, state safety, and concurrency safety.
+- Transparent: pure and immutable.
+- Modular: composite with currying and monads.
 
-## Functional JavaScript Cons
+:::
+
+:::caution[Cons]:
 
 - Verbose.
 - More object creation.
 - More garbage collection.
 - More memory usage.
+
+:::
 
 With help of `immutable.js`/`immer.js`,
 object creation/garbage collection/memory usage can be alleviated.
@@ -57,6 +62,128 @@ but in immutable.js `map2 === map1` become `true`
 const map1 = { b: 2 }
 const map2 = map1.set('b', 2)
 ```
+
+## Formal Proof
+
+- Syntactic: syntax rules.
+- Semantic: type checking rules.
+- Runtime: evaluation rules.
+
+```haskell
+Syntax: if e1 then e2 else e3
+Type: e1 = bool,  e2 = e3 = any
+Evaluation: e1 ? e2 : e3
+```
+
+## Lambda Calculus
+
+### Expression
+
+- Variable: x
+- Abstraction: λx.M
+- Application: M N
+
+> e.g. λx.y λx.(λy.xy)
+
+- 变量 x 本身就是一个有效的 lambda 项
+- 如果 t 是一个 lambda 项，而 x 是一个变量，则 λx.t 是一个 lambda 项（称为 lambda 抽象）
+- 如果 t 和 s 是 lambda 项，那么 (ts) 是一个 lambda 项（称为应用）
+
+### Reduction
+
+#### α 转换
+
+`α: λx.x ≡ λy.y` 等价变量替换
+
+#### β 归约
+
+`β: ((λV.E) E′) ≡ E[V := E′]` 函数抽象应用(apply)于参数的过程
+
+#### η 归约
+
+`λx.M x ≡ M` 用于清除 lambda 表达式中存在的冗余函数抽象
+
+### Church Numerals
+
+按照皮亚诺公理可得自然数集合表示为 `{0, S(0), S(S(0)), ...}`, 于是得到如下定义:
+
+```haskell
+S ≡ λn.λf.λx.f (n f x)
+
+0 ≡ λf.λx.x
+1 ≡ λf.λx.f x
+2 ≡ λf.λx.f (f x)
+3 ≡ λf.λx.f (f (f x))
+...
+```
+
+对后继函数 S 和丘奇数的简单验证如下：
+
+```haskell
+S 0
+≡ (λn.λf.λx.f (n f x)) λf.λx.x
+= (λn.λg.λy.g (n g y)) λf.λx.x    // alpha
+= (λf.λx.f (n f x))[n := λf.λx.x] // beta
+= λg.λy.g ((λf.λx.x) g y)         // substitute
+= λg.λy.g (x[f := g, x := y])     // beta
+= λg.λy.g y                       // substitute
+= λf.λx.f x                       // alpha
+≡ 1
+```
+
+## Datatype
+
+### Binding
+
+Tagged union, every constructor name as tag,
+fields for different constructors can't exist at the same time.
+
+### Tagged Constructor
+
+- `NONE`
+- `SOME i`
+- `[]`
+- `x :: xs` (infix constructor)
+- `()`
+
+### Type Constructor
+
+Type constructor, datatype bindings with variables:
+
+```haskell
+datatype 'a myList = EMPTY | CONS of 'a * 'a myList
+myList isn't a type, int list is a type
+```
+
+- 'a , 'a equivalent/different
+- 'a, 'b different
+- ''a, ''a equivalent
+
+## Pattern Matching
+
+- `null`/`isSome`: check tag part (variant).
+- `hd`/`tl`/`valOf`: check data part (extract data).
+
+```haskell
+case e of
+      p1 => e1
+    | pn => en
+
+val p = e (* declare multiple variables once time in p(pattern) *)
+
+(* declare multiple callee arguments(hidden to caller) once time in p(pattern) *)
+fun foo p = e
+```
+
+In SML, all functions only take 1 argument, a tuple/record:
+
+fun f (x, y, z) = x + y + z seems that takes 3 arguments,
+but truly owing to pattern matching only takes 1 tuple argument
+Likewise, fun f () = 0 takes 1 empty tuple argument.
+
+Further more, tuples is syntactic sugar for records.
+
+> As a whole: all functions only take 1 record argument owing to pattern matching.
 
 ## Partial Application
 
@@ -147,7 +274,7 @@ Immutable data structure:
 - Quick comparison: different address represent different data.
 - Fast recovery and snapshot: reuse previous data.
 
-### Immutable Array
+### Array
 
 ```ts
 const RE_INDEX_PROP_KEY = /^\d+$/
@@ -188,7 +315,7 @@ assert.throws(
 )
 ```
 
-### Immutable Map
+### Map
 
 ```ts
 class ImmutableMap {
@@ -228,7 +355,7 @@ assert.throws(
 assert.throws(() => map.clear(), /^TypeError: map.clear is not a function$/)
 ```
 
-### Immutable Class
+### Class
 
 Copying class instances without side effects:
 
@@ -276,6 +403,40 @@ class ColorPoint extends Point {
     return new ColorPoint(other.x, other.y, Color.from(other.color))
   }
 }
+```
+
+## Tail Call Optimization
+
+Recursive definition for tail position:
+
+- if E isn't in tail position, then sub expressions of E aren't in tail position
+- if E is in tail position, then some sub expressions of E are in tail position
+
+```haskell
+if eb then e1 else e2
+```
+
+is in tail position, then e1 and e2 are in tail position, not eb:
+
+```haskell
+f (x, e)
+```
+
+is in tail position, then f is in tail position(tail call), not x and e:
+
+```haskell
+fun factorial n =
+    let
+        fun aux(n, acc) =
+            if
+                n = 0
+            then
+                acc
+            else
+                aux (n-1, n*acc)
+    in
+        aux (n,1)
+    end
 ```
 
 ## Lodash

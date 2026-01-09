@@ -107,7 +107,7 @@ const HTMLButtonElement = {
 - `<obj.component />`: 转换为 `React.createElement(obj.component)`.
 - `<Component />`: 转换为 `React.createElement(Component)`.
 
-### JSX Transform
+### Transform
 
 - [New JSX transform](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html).
 
@@ -151,14 +151,82 @@ TypeScript config for new JSX transform:
 }
 ```
 
-## Functional and Class component
+## Lifecycle
 
-- 函数型组件没有实例, 类型组件具有实例, 但实例化的工作由 react 自动完成
-- With React Hooks, functional component can get
-  `state`, `lifecycle hooks` and performance optimization
-  consistent to class component.
+- Reconciliation phase:
+  - constructor.
+  - getDerivedStateFromProps.
+  - getDerivedStateFromError.
+  - shouldComponentUpdate.
+  - `ClassComponent` `render` function.
+  - `setState` updater functions.
+  - `FunctionComponent` body function.
+  - `useState`/`useReducer`/`useMemo` updater functions.
+  - `UNSAFE_componentWillMount`.
+  - `UNSAFE_componentWillReceiveProps`.
+  - `UNSAFE_componentWillUpdate`.
+- Commit phase:
+  - componentDidMount.
+  - getSnapshotBeforeUpdate.
+  - componentDidUpdate.
+  - componentWillUnmount.
+  - componentDidCatch.
 
-## Stateless and Stateful component
+因为协调阶段可能被中断与恢复, 甚至重做,
+React 协调阶段的生命周期钩子可能会被调用多次,
+**协调阶段的生命周期钩子不要包含副作用**: e.g. `fetch` promises, `async` functions.
+通过 [`React.StrictMode`](https://reactjs.org/docs/strict-mode.html#detecting-unexpected-side-effects)
+可以自动检测应用中隐藏的问题.
+
+[![React Component Lifecycle](./figures/react-component-lifecycle.png)](https://reactjs.org/docs/react-component.html#the-component-lifecycle)
+
+### Create and Mount
+
+`constructor(props, context)`
+-> `static getDerivedStateFromProps()`
+-> `render()`
+-> `componentDidMount()`.
+
+### Update
+
+Update for three reasons:
+
+- Parent/top components (re-)rendering.
+- `this.setState()` called.
+- `this.forceUpdate()` called.
+
+`static getDerivedStateFromProps()`
+-> `shouldComponentUpdate(nextProps, nextState)`
+-> `render()`
+-> `getSnapshotBeforeUpdate()`
+-> `componentDidUpdate(prevProps, prevState)`.
+
+`getSnapshotBeforeUpdate()`:
+在最新的渲染输出提交给 DOM 前将会立即调用,
+这对于从 DOM 捕获信息（比如：滚动位置）很有用.
+
+### Unmount
+
+`componentWillUnmount()`.
+
+### Error
+
+`static getDerivedStateFromError()`
+-> `componentDidCatch()`.
+
+## Render Function
+
+- Default render behavior (without any `memo`/`useMemo`/`PureComponent`):
+  when a parent component renders,
+  React will recursively render **all child components** inside of it
+  (because `props.children` is always a new reference when parent re-rendering).
+- Render logic:
+  - Can't mutate existing variables and objects.
+  - Can't create random values like `Math.random()` or `Date.now()`.
+  - Can't make network requests.
+  - Can't queue state updates.
+
+## State
 
 React Component
 [definition](https://github.com/facebook/react/blob/main/packages/react/src/ReactBaseClasses.js):
@@ -226,11 +294,11 @@ class PureComponent<P = object, S = object, SS = any> extends Component<
 > {}
 ```
 
-### Stateless component
+### Stateless
 
 采用函数型声明, 不使用 `setState()`, 一般作为表现型组件.
 
-### Stateful component
+### Stateful
 
 - 采用类型声明, 使用 setState(), 一般作为容器型组件(containers)
 - 结合 Redux 中的 connect 方法, 将 store 中的 state 作为此类组件的 props
@@ -247,265 +315,14 @@ class Component {
 }
 ```
 
-## Component Lifecycle
+## Functional
 
-- Reconciliation phase:
-  - constructor.
-  - getDerivedStateFromProps.
-  - getDerivedStateFromError.
-  - shouldComponentUpdate.
-  - `ClassComponent` `render` function.
-  - `setState` updater functions.
-  - `FunctionComponent` body function.
-  - `useState`/`useReducer`/`useMemo` updater functions.
-  - `UNSAFE_componentWillMount`.
-  - `UNSAFE_componentWillReceiveProps`.
-  - `UNSAFE_componentWillUpdate`.
-- Commit phase:
-  - componentDidMount.
-  - getSnapshotBeforeUpdate.
-  - componentDidUpdate.
-  - componentWillUnmount.
-  - componentDidCatch.
+- 函数型组件没有实例, 类型组件具有实例, 但实例化的工作由 react 自动完成
+- With React Hooks, functional component can get
+  `state`, `lifecycle hooks` and performance optimization
+  consistent to class component.
 
-因为协调阶段可能被中断与恢复, 甚至重做,
-React 协调阶段的生命周期钩子可能会被调用多次,
-**协调阶段的生命周期钩子不要包含副作用**: e.g. `fetch` promises, `async` functions.
-通过 [`React.StrictMode`](https://reactjs.org/docs/strict-mode.html#detecting-unexpected-side-effects)
-可以自动检测应用中隐藏的问题.
-
-[![React Component Lifecycle](./figures/react-component-lifecycle.png)](https://reactjs.org/docs/react-component.html#the-component-lifecycle)
-
-### Creation and Mounting Phase
-
-`constructor(props, context)`
--> `static getDerivedStateFromProps()`
--> `render()`
--> `componentDidMount()`.
-
-### Updating Phase
-
-Update for three reasons:
-
-- Parent/top components (re-)rendering.
-- `this.setState()` called.
-- `this.forceUpdate()` called.
-
-`static getDerivedStateFromProps()`
--> `shouldComponentUpdate(nextProps, nextState)`
--> `render()`
--> `getSnapshotBeforeUpdate()`
--> `componentDidUpdate(prevProps, prevState)`.
-
-`getSnapshotBeforeUpdate()`:
-在最新的渲染输出提交给 DOM 前将会立即调用,
-这对于从 DOM 捕获信息（比如：滚动位置）很有用.
-
-### Unmounting Phase
-
-`componentWillUnmount()`.
-
-### Error Handling Phase
-
-`static getDerivedStateFromError()`
--> `componentDidCatch()`.
-
-## Render Function
-
-- Default render behavior (without any `memo`/`useMemo`/`PureComponent`):
-  when a parent component renders,
-  React will recursively render **all child components** inside of it
-  (because `props.children` is always a new reference when parent re-rendering).
-- Render logic:
-  - Can't mutate existing variables and objects.
-  - Can't create random values like `Math.random()` or `Date.now()`.
-  - Can't make network requests.
-  - Can't queue state updates.
-
-## React Element API
-
-### React Clone Element API
-
-Modify children properties:
-
-```tsx
-function CreateTextWithProps({
-  text,
-  ASCIIChar,
-  ...props
-}: {
-  text: string
-  ASCIIChar: string
-}) {
-  return (
-    <span {...props}>
-      {text}
-      {ASCIIChar}
-    </span>
-  )
-}
-
-function RepeatCharacters({ times, children }) {
-  return React.cloneElement(children, {
-    ASCIIChar: children.props.ASCIIChar.repeat(times),
-  })
-}
-
-export default function App() {
-  return (
-    <div>
-      <RepeatCharacters times={3}>
-        <CreateTextWithProps text="Foo Text" ASCIIChar="." />
-      </RepeatCharacters>
-    </div>
-  )
-}
-```
-
-```tsx
-function RadioGroup({
-  name,
-  children,
-}: {
-  name: string
-  children: ReactElement
-}) {
-  const RenderChildren = () =>
-    React.Children.map(children, (child) => {
-      return React.cloneElement(child, {
-        name,
-      })
-    })
-
-  return (
-    <div>
-      <RenderChildren />
-    </div>
-  )
-}
-
-function RadioButton({
-  value,
-  name,
-  children,
-}: {
-  value: string
-  name: string
-  children: ReactElement
-}) {
-  return (
-    <label>
-      <input type="radio" value={value} name={name} />
-      {children}
-    </label>
-  )
-}
-
-export default function App() {
-  return (
-    <RadioGroup name="numbers">
-      <RadioButton value="first">First</RadioButton>
-      <RadioButton value="second">Second</RadioButton>
-      <RadioButton value="third">Third</RadioButton>
-    </RadioGroup>
-  )
-}
-```
-
-### React Children API
-
-- `React.Children.toArray(children)`.
-- `React.Children.forEach(children, fn)`.
-- `React.Children.map(children, fn)`.
-- `React.Children.count(children)`.
-- `React.Children.only(children)`.
-
-```tsx
-import { Children, cloneElement } from 'react'
-
-function Breadcrumbs({ children }: { children: ReactElement }) {
-  const arrayChildren = Children.toArray(children)
-
-  return (
-    <ul
-      style={{
-        listStyle: 'none',
-        display: 'flex',
-      }}
-    >
-      {Children.map(arrayChildren, (child, index) => {
-        const isLast = index === arrayChildren.length - 1
-
-        if (!isLast && !child.props.link) {
-          throw new Error(
-            `BreadcrumbItem child no. ${index + 1}
-            should be passed a 'link' prop`,
-          )
-        }
-
-        return (
-          <>
-            {child.props.link
-              ? (
-                  <a
-                    href={child.props.link}
-                    style={{
-                      display: 'inline-block',
-                      textDecoration: 'none',
-                    }}
-                  >
-                    <div style={{ marginRight: '5px' }}>
-                      {cloneElement(child, {
-                        isLast,
-                      })}
-                    </div>
-                  </a>
-                )
-              : (
-                  <div style={{ marginRight: '5px' }}>
-                    {cloneElement(child, {
-                      isLast,
-                    })}
-                  </div>
-                )}
-            {!isLast && <div style={{ marginRight: '5px' }}></div>}
-          </>
-        )
-      })}
-    </ul>
-  )
-}
-
-function BreadcrumbItem({
-  isLast,
-  children,
-}: {
-  isLast: boolean
-  children: ReactElement
-}) {
-  return (
-    <li
-      style={{
-        color: isLast ? 'black' : 'blue',
-      }}
-    >
-      {children}
-    </li>
-  )
-}
-
-export default function App() {
-  return (
-    <Breadcrumbs>
-      <BreadcrumbItem link="https://example.com/">Example</BreadcrumbItem>
-      <BreadcrumbItem link="https://example.com/hotels/">Hotels</BreadcrumbItem>
-      <BreadcrumbItem>A Fancy Hotel Name</BreadcrumbItem>
-    </Breadcrumbs>
-  )
-}
-```
-
-## Compound Components
+## Compound
 
 Compound components [example](https://dev.to/alexi_be3/react-component-patterns-49ho):
 
@@ -676,4 +493,187 @@ function App() {
 }
 
 export default App
+```
+
+## Elements
+
+### Clone
+
+Modify children properties:
+
+```tsx
+function CreateTextWithProps({
+  text,
+  ASCIIChar,
+  ...props
+}: {
+  text: string
+  ASCIIChar: string
+}) {
+  return (
+    <span {...props}>
+      {text}
+      {ASCIIChar}
+    </span>
+  )
+}
+
+function RepeatCharacters({ times, children }) {
+  return React.cloneElement(children, {
+    ASCIIChar: children.props.ASCIIChar.repeat(times),
+  })
+}
+
+export default function App() {
+  return (
+    <div>
+      <RepeatCharacters times={3}>
+        <CreateTextWithProps text="Foo Text" ASCIIChar="." />
+      </RepeatCharacters>
+    </div>
+  )
+}
+```
+
+```tsx
+function RadioGroup({
+  name,
+  children,
+}: {
+  name: string
+  children: ReactElement
+}) {
+  const RenderChildren = () =>
+    React.Children.map(children, (child) => {
+      return React.cloneElement(child, {
+        name,
+      })
+    })
+
+  return (
+    <div>
+      <RenderChildren />
+    </div>
+  )
+}
+
+function RadioButton({
+  value,
+  name,
+  children,
+}: {
+  value: string
+  name: string
+  children: ReactElement
+}) {
+  return (
+    <label>
+      <input type="radio" value={value} name={name} />
+      {children}
+    </label>
+  )
+}
+
+export default function App() {
+  return (
+    <RadioGroup name="numbers">
+      <RadioButton value="first">First</RadioButton>
+      <RadioButton value="second">Second</RadioButton>
+      <RadioButton value="third">Third</RadioButton>
+    </RadioGroup>
+  )
+}
+```
+
+### Children
+
+- `React.Children.toArray(children)`.
+- `React.Children.forEach(children, fn)`.
+- `React.Children.map(children, fn)`.
+- `React.Children.count(children)`.
+- `React.Children.only(children)`.
+
+```tsx
+import { Children, cloneElement } from 'react'
+
+function Breadcrumbs({ children }: { children: ReactElement }) {
+  const arrayChildren = Children.toArray(children)
+
+  return (
+    <ul
+      style={{
+        listStyle: 'none',
+        display: 'flex',
+      }}
+    >
+      {Children.map(arrayChildren, (child, index) => {
+        const isLast = index === arrayChildren.length - 1
+
+        if (!isLast && !child.props.link) {
+          throw new Error(
+            `BreadcrumbItem child no. ${index + 1}
+            should be passed a 'link' prop`,
+          )
+        }
+
+        return (
+          <>
+            {child.props.link
+              ? (
+                  <a
+                    href={child.props.link}
+                    style={{
+                      display: 'inline-block',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    <div style={{ marginRight: '5px' }}>
+                      {cloneElement(child, {
+                        isLast,
+                      })}
+                    </div>
+                  </a>
+                )
+              : (
+                  <div style={{ marginRight: '5px' }}>
+                    {cloneElement(child, {
+                      isLast,
+                    })}
+                  </div>
+                )}
+            {!isLast && <div style={{ marginRight: '5px' }}></div>}
+          </>
+        )
+      })}
+    </ul>
+  )
+}
+
+function BreadcrumbItem({
+  isLast,
+  children,
+}: {
+  isLast: boolean
+  children: ReactElement
+}) {
+  return (
+    <li
+      style={{
+        color: isLast ? 'black' : 'blue',
+      }}
+    >
+      {children}
+    </li>
+  )
+}
+
+export default function App() {
+  return (
+    <Breadcrumbs>
+      <BreadcrumbItem link="https://example.com/">Example</BreadcrumbItem>
+      <BreadcrumbItem link="https://example.com/hotels/">Hotels</BreadcrumbItem>
+      <BreadcrumbItem>A Fancy Hotel Name</BreadcrumbItem>
+    </Breadcrumbs>
+  )
+}
 ```

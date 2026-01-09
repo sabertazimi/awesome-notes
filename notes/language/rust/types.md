@@ -5,7 +5,7 @@ tags: [Language, Rust, Type]
 
 # Types
 
-## String Type
+## String
 
 `&str` string slice reference type:
 
@@ -58,7 +58,7 @@ fn main() {
 }
 ```
 
-## Enum Type
+## Enum
 
 ```rust
 enum Message {
@@ -93,7 +93,7 @@ let six = plus_one(five);
 let none = plus_one(None);
 ```
 
-## Array Type
+## Array
 
 ```rust
 let a: [i32; 5] = [1, 2, 3, 4, 5];
@@ -127,7 +127,7 @@ fn main() {
 }
 ```
 
-## Type Alias
+## Alias
 
 ```rust
 type Meters = i32;
@@ -147,7 +147,51 @@ fn takes_long_type(f: Thunk) {}
 fn returns_long_type() -> Thunk {}
 ```
 
-## Type Conversion
+## Conversion
+
+### Explicit
+
+```rust
+fn main() {
+    let a = 3.1 as i8;
+    let b = 100_i8 as i32;
+    let c = 'a' as u8;
+    println!("{}, {}, {}", a, b, c)
+
+    let x: i16 = 1500;
+    let x_: u8 = match x.try_into() {
+        Ok(x1) => x1,
+        Err(e) => {
+            println!("{:?}", e.to_string());
+            0
+        }
+    };
+}
+```
+
+### Implicit
+
+`target.method()`:
+
+1. Call by value: `T::method(target)`.
+2. Call by reference: `T::method(&target)` or `T::method(&mut target)`.
+3. Call by deref: when `T: Deref<Target = U>`, then `(&T).method() => (&U).method()`.
+4. Length-non-determined collection to length-determined slice.
+5. Panic.
+
+```rust
+let array: Rc<Box<[T; 3]>> = ...;
+let first_entry = array[0];
+// 1. `Index` trait grammar sugar: array[0] => array.index(0).
+// 2. Call by: value: `Rc<Box<[T; 3]>>` not impl `Index` trait.
+// 3. Call by reference: `&Rc<Box<[T; 3]>>` not impl `Index` trait.
+// 4. Call by reference: `&mut Rc<Box<[T; 3]>>` not impl `Index` trait.
+// 5. Call by deref -> Call by value: `Box<[T; 3]>` not impl `Index` trait.
+// 6. Call by deref -> Call by reference: `&Box<[T; 3]>` not impl `Index` trait.
+// 7. Call by deref -> Call by reference: `&mut Box<[T; 3]>` not impl `Index` trait.
+// 8. Call by deref -> Call by deref: `[T; 3]` not impl `Index` trait.
+// 9. `[T; 3]` => `[T]` impl `Index` trait.
+```
 
 ### From Trait
 
@@ -205,50 +249,6 @@ fn main() {
     let result: Result<EvenNumber, ()> = 5i32.try_into();
     assert_eq!(result, Err(()));
 }
-```
-
-### Explicit Type Conversion
-
-```rust
-fn main() {
-    let a = 3.1 as i8;
-    let b = 100_i8 as i32;
-    let c = 'a' as u8;
-    println!("{}, {}, {}", a, b, c)
-
-    let x: i16 = 1500;
-    let x_: u8 = match x.try_into() {
-        Ok(x1) => x1,
-        Err(e) => {
-            println!("{:?}", e.to_string());
-            0
-        }
-    };
-}
-```
-
-### Implicit Type Conversion
-
-`target.method()`:
-
-1. Call by value: `T::method(target)`.
-2. Call by reference: `T::method(&target)` or `T::method(&mut target)`.
-3. Call by deref: when `T: Deref<Target = U>`, then `(&T).method() => (&U).method()`.
-4. Length-non-determined collection to length-determined slice.
-5. Panic.
-
-```rust
-let array: Rc<Box<[T; 3]>> = ...;
-let first_entry = array[0];
-// 1. `Index` trait grammar sugar: array[0] => array.index(0).
-// 2. Call by: value: `Rc<Box<[T; 3]>>` not impl `Index` trait.
-// 3. Call by reference: `&Rc<Box<[T; 3]>>` not impl `Index` trait.
-// 4. Call by reference: `&mut Rc<Box<[T; 3]>>` not impl `Index` trait.
-// 5. Call by deref -> Call by value: `Box<[T; 3]>` not impl `Index` trait.
-// 6. Call by deref -> Call by reference: `&Box<[T; 3]>` not impl `Index` trait.
-// 7. Call by deref -> Call by reference: `&mut Box<[T; 3]>` not impl `Index` trait.
-// 8. Call by deref -> Call by deref: `[T; 3]` not impl `Index` trait.
-// 9. `[T; 3]` => `[T]` impl `Index` trait.
 ```
 
 ## Dynamically Sized Type

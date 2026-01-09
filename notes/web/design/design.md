@@ -4,7 +4,7 @@ tags: [Web, CSS, Design]
 
 # Design
 
-## CSS Framework Key Points
+## Key Points
 
 - Design [tokens](https://blog.maximeheckel.com/posts/building-a-design-system-from-scratch).
 - Content.
@@ -17,306 +17,59 @@ tags: [Web, CSS, Design]
 - Font family.
 - Images and links.
 
-## Typography Design
+## Principles
 
-- The typeface (font-family).
-- Type (modular) scale.
-- Responsiveness of the text (size unit and breakpoints).
-- Spacing and vertical rhythm.
-- Colors (theming).
+### Cicada
 
-> Refer to: font-family, font-size, spacing, color.
+[禅原则](https://www.sitepoint.com/the-cicada-principle-and-why-it-matters-to-web-designers):
 
-### Typography Properties
+当用户注意到一个有辨识度的特征 (比如木纹上的节疤) 在以固定的规律循环重复时,
+那它试图营造的自然随机性就会立刻崩塌.
+使用 CSS 实现形状时, 应尽可能地重现大自然的随机性.
 
-[![Typography Properties](./figures/typography-properties.png)](https://material.io/design/typography/understanding-typography.html#type-properties)
+### Fitts Law
 
-### Font Size
+费茨定律:
 
-- Set a base-size.
-- Multiples of base-size.
-- Use `rem` for most font-size, use `em` for some spacing (needing responsive design).
-- `rem` is better.
-- `em` for responsive layout: e.g. layer2 font based-on layer1 font in dropdown menu.
-- Make text legible: at least `16px`.
+人机交互和人体工程学中人类活动的模型,
+它预测了从任意位置快速移动到一个目标位置所需的时间,
+由 2 个位置的距离（D）和目标大小（S）有关, 正比于 D, 反比于 S:
 
-```scss
-$xs: $base / $ratio / $ratio;
-$sm: $base / $ratio;
-$md: $base;
-$lg: $base * $ratio;
-$xl: $base * $ratio * ratio;
-```
+- 关联性强的 UI 放置在一起.
+- 大拇指点击热区.
+- 屏幕边界视为无限大 (容易到达).
+- 关机滑动距离长.
+- 利用透明边框或伪元素扩大可点击区域 (hit area).
 
-### Font Typeface
+### 米勒定律
 
-Prefer [web fonts](https://pimpmytype.com/web-safe-fonts):
+人的短时记忆能力广度为 7±2 个信息块:
 
-- Especially in headings, because of consistency.
-- Keep it to 2 to 5 font files or below 100 kb.
-- Use system fonts for body text or UI text, if you have to.
+- 手机号/银行卡号/超大数字分段放置, 信息分层 e.g. `134 9999 9999`, `999, 999, 999`.
+- 文章布局时增大段落间 margin, 改变部分文字的粗细/字体/颜色.
+- 导航/选项卡不超过 9 个 (超过 9 个可使用 dropdown/subMenu).
 
-### Spacing
+### 席克定律
 
-Make text breathe:
+用户所面临的选择数量越多,
+做出选择所花费的时间就越长,
+在人机交互的界面中选项越多,
+意味着用户做出决策的时间越长:
 
-- `margin/padding`: at least `15px`.
-- `line-height`: `1.4`.
-- `word-spacing`.
-- `letter-spacing`.
-- 60-100 characters per line.
+- 减少选项并提供默认值.
+- 分类分层.
+- 分步分页 (大部分手机应用注册界面).
 
-### Vertical Rhythms
+### 泰斯勒定律
 
-Keep vertical spaces between elements on a page
-[consistent](https://zellwk.com/blog/why-vertical-rhythms)
-(and relative) to each other:
+泰斯勒定律又称复杂性守恒定律,
+该定律认为每一个过程都有其固有的复杂性,
+这个复杂性存在一个临界点,
+超过了这个点就不能再简化了,
+你只能将固有的复杂性从一个地方移动到另外一个地方:
 
-- Set the vertical white space between elements to a multiple of base-size.
-- Set the line-height of all text elements to a multiple of base-size.
-- Set `margin-top` and `margin-bottom` to `<h1>` ~ `<h6>`/`<hr>` elements
-  set `margin-bottom` to normal elements.
-
-### Line Length
-
-The optimal line length for body text is `50`–`75` characters:
-
-- Shorter or longer line lengths can hurt readability.
-
-```css
-.line-length {
-  margin-top: 2em;
-  line-height: 1.5em;
-  word-spacing: 0.16em;
-  letter-spacing: 0.12em;
-}
-```
-
-### Table Typography
-
-- Remove fills, grid lines, border and bolding.
-- Left-align text, right-align numbers
-  and align headings with data.
-- Put white space to work to group and separate.
-
-### Typography References
-
-- Understanding typography [guide](https://material.io/design/typography/understanding-typography).
-- Practical typography [guide](https://practicaltypography.com).
-- Golden rules of web typography [reference](https://noti.st/rar/mz1rIY/golden-rules-of-typography-on-the-web).
-- Typeface [font matrix](https://pimpmytype.com/font-matrix/).
-
-## Responsive Design
-
-[Responsive web design](https://alistapart.com/article/responsive-web-design):
-
-- [Mobile first](https://alistapart.com/article/mobile-first-css-is-it-time-for-a-rethink):
-  `@media only screen and (min-width: 768px)`.
-- Media query.
-- Fluid layout.
-- Flexible image.
-
-### Mobile Viewport
-
-Disable mobile browser auto scale:
-
-```html
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-```
-
-### Responsive Font
-
-- `rem`/`em` font size.
-
-### Responsive Length
-
-- `vw`.
-- `vh`.
-- `vmin`: `min(vw, vh)`.
-- `vmax`: `max(vw, vh)`.
-
-### Responsive Size
-
-[Responsive font size](https://zellwk.com/blog/rem-vs-em);
-
-- Size in `em` if the property scales according to it's `font-size`:
-  e.g. button `padding`.
-- **Modular font size**:
-  Size in `em` if the `font-size` should be modular
-  (relative to it's context/parent).
-- Size **everything else** in `rem` (include `@media` queries).
-
-```css
-/* scales to self font-size */
-.container {
-  margin-top: 1.2em;
-}
-```
-
-```css
-/* modular font size */
-.container {
-  font-size: 1.2rem;
-}
-
-.container p {
-  font-size: 1em;
-}
-
-.container small {
-  font-size: 0.9em;
-}
-```
-
-### Responsive Box
-
-#### Responsive Width and Height
-
-- `min-height`.
-- `max-height`.
-- `min-width`.
-- `max-width`.
-
-```css
-/* responsive images */
-img {
-  display: block;
-  max-width: 100%;
-}
-```
-
-:::caution[Image Display]
-
-Image `display` set to `inline` default.
-
-:::
-
-#### Responsive Inline Box
-
-use `inline-box` with `width`
-
-```css
-.element {
-  display: inline-block;
-  width: 80%;
-}
-```
-
-#### Responsive Flex Box
-
-```css
-.box {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.box > .item {
-  flex: 1;
-}
-```
-
-#### Responsive Grid Box
-
-```css
-.box {
-  display: grid;
-  grid-template-areas:
-    'hd'
-    'st1'
-    '.'
-    'st2'
-    '.';
-  grid-template-columns: 1fr;
-}
-
-@media only screen and (width >= 768px) {
-  .box {
-    grid-template-areas:
-      'hd hd'
-      'st1 .'
-      '. st2';
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media only screen and (width >= 1280px) {
-  .box {
-    grid-template-areas:
-      'hd hd hd'
-      'st1 . st2'
-      'st1 . st2';
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
-
-@media only screen and (width >= 1536px) {
-  .box {
-    grid-template-areas:
-      'hd st1 . st2'
-      'hd st1 . st2';
-    grid-template-columns: 20% 1fr 1fr 1fr;
-  }
-}
-```
-
-### Responsive Image
-
-```css
-.responsive-image {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-```
-
-```html
-<picture>
-  <source srcset="mdn-logo-wide.png" media="(min-width: 600px)" />
-  <img src="mdn-logo-narrow.png" alt="MDN" />
-</picture>
-
-<img
-  src="x-small.png"
-  srcset="x-small.png 300w, small.png 400w, medium.png 600w, large.png 800w, x-large.png 1200w"
-  sizes="
-    (min-width: 70em) 12.6875em,
-    (min-width: 50em) calc(25vw * 0.95 - 2.75em),
-    (min-width: 35em) calc(95vw / 2 - 4.125em),
-    calc(95vw - 1.375em)
-  "
-  alt="Dummy Image"
-/>
-```
-
-### Responsive Table
-
-```css
-table {
-  width: 100%;
-}
-
-@media (width <= 30em) {
-  table,
-  thead,
-  tbody,
-  tr,
-  th,
-  td {
-    display: block;
-  }
-
-  tr {
-    margin-bottom: 1em;
-  }
-
-  /* 隐藏表头 */
-  thead tr {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-  }
-}
-```
+- 智能手机: 按键的复杂度转为手机操作系统的复杂度.
+- 智能推荐: 用户自己选择筛选条件的复杂度转为人工智能算法的复杂度.
 
 ## Design Systems
 
@@ -338,7 +91,7 @@ Think of them as named containers that store your website’s visual DNA:
 - Sizing
 - And more.
 
-### Design Tokens Importance
+Importance of design tokens:
 
 - Consistency:
   A token like “brand-blue” with the value “#006699” ensures
@@ -354,7 +107,7 @@ Think of them as named containers that store your website’s visual DNA:
   Tokens become a shared language between designers and developers,
   a single source of truth for your website’s style.
 
-### Design Tokens Implementation
+### Workflow
 
 Tiered structure: we define tokens at different levels of abstraction:
 
@@ -422,7 +175,7 @@ Implementing design tokens in your workflow:
   - Test your components to ensure the changes are applied correctly.
   - Use version control to track changes.
 
-#### CSS Design Tokens
+### CSS
 
 [Theming with modern CSS](https://piccalil.li/blog/how-were-approaching-theming-with-modern-css):
 
@@ -537,7 +290,7 @@ body {
 }
 ```
 
-#### React Design Variants
+### Variants
 
 ```tsx
 import type { ButtonHTMLAttributes } from 'react'
@@ -588,65 +341,11 @@ export function Button({
 }
 ```
 
-### Design Tokens Naming Convention
+### Naming Convention
 
-- Naming [best practices](https://www.smashingmagazine.com/2024/05/naming-best-practices).
+- Design tokens naming [best practices](https://www.smashingmagazine.com/2024/05/naming-best-practices).
 
-## Design Principles
-
-### Cicada Principle
-
-[禅原则](https://www.sitepoint.com/the-cicada-principle-and-why-it-matters-to-web-designers):
-
-当用户注意到一个有辨识度的特征 (比如木纹上的节疤) 在以固定的规律循环重复时,
-那它试图营造的自然随机性就会立刻崩塌.
-使用 CSS 实现形状时, 应尽可能地重现大自然的随机性.
-
-### Fitts Law
-
-费茨定律:
-
-人机交互和人体工程学中人类活动的模型,
-它预测了从任意位置快速移动到一个目标位置所需的时间,
-由 2 个位置的距离（D）和目标大小（S）有关, 正比于 D, 反比于 S:
-
-- 关联性强的 UI 放置在一起.
-- 大拇指点击热区.
-- 屏幕边界视为无限大 (容易到达).
-- 关机滑动距离长.
-- 利用透明边框或伪元素扩大可点击区域 (hit area).
-
-### 米勒定律
-
-人的短时记忆能力广度为 7±2 个信息块:
-
-- 手机号/银行卡号/超大数字分段放置, 信息分层 e.g. `134 9999 9999`, `999, 999, 999`.
-- 文章布局时增大段落间 margin, 改变部分文字的粗细/字体/颜色.
-- 导航/选项卡不超过 9 个 (超过 9 个可使用 dropdown/subMenu).
-
-### 席克定律
-
-用户所面临的选择数量越多,
-做出选择所花费的时间就越长,
-在人机交互的界面中选项越多,
-意味着用户做出决策的时间越长:
-
-- 减少选项并提供默认值.
-- 分类分层.
-- 分步分页 (大部分手机应用注册界面).
-
-### 泰斯勒定律
-
-泰斯勒定律又称复杂性守恒定律,
-该定律认为每一个过程都有其固有的复杂性,
-这个复杂性存在一个临界点,
-超过了这个点就不能再简化了,
-你只能将固有的复杂性从一个地方移动到另外一个地方:
-
-- 智能手机: 按键的复杂度转为手机操作系统的复杂度.
-- 智能推荐: 用户自己选择筛选条件的复杂度转为人工智能算法的复杂度.
-
-## Components Design
+## Components
 
 - [UX Checklist](https://www.smashingmagazine.com/2022/09/ux-checklists-for-interface-designers)
 - [Components Checklist](https://www.smashingmagazine.com/ebooks/checklist-cards-digital)
@@ -674,7 +373,7 @@ export function Button({
 - [Pronouns Selector](https://uxdesign.cc/asking-users-for-their-pronouns-a-guide-for-ux-designers-4f31736ae808)
 - [Mobile Apps](https://www.smashingmagazine.com/2024/04/things-users-would-appreciate-mobile-apps)
 
-### HomePage User Experience
+### Home
 
 [UX research](https://baymard.com/blog/2021-current-state-of-ecommerce-homepage-ux)
 point out that:
@@ -714,12 +413,16 @@ NNGroup article [homepage design principles](https://www.nngroup.com/articles/ho
   - Provide immediate access to content.
   - Avoid popup windows and splash screens unless legally required.
 
-### Form Design
+### Pricing
+
+- Pricing page design [gallery](https://pricingpages.design).
+
+### Form
 
 - Form design [blog](https://adamsilver.io/articles/form-design-from-zero-to-hero-all-in-one-blog-post).
 - Form design [book](https://www.smashingmagazine.com/printed-books/form-design-patterns).
 
-#### Buttons Placement
+### Button
 
 [Principles](https://adamsilver.io/articles/where-to-put-buttons-in-forms):
 
@@ -743,8 +446,6 @@ High conversion rate can happen [despite poor UX](https://www.linkedin.com/posts
 
 ## AI Interfaces
 
-### AI Interfaces Design Patterns
-
 [Design patterns](https://www.smashingmagazine.com/2025/07/design-patterns-ai-interfaces 'Design Patterns for AI Interfaces')
 for AI Interfaces:
 
@@ -761,7 +462,3 @@ for AI Interfaces:
   Allow users to initiate tasks that AI can perform on their behalf.
 - AI Integration, where work happens:
   Integrate AI into the user’s workflow and daily used tools.
-
-## Design References
-
-- [Pricing page](https://pricingpages.design).

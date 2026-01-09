@@ -11,14 +11,14 @@ tags: [Web, React, Redux, State Management]
   - Fast element lookup in normalized state (other than slow `Array.find()`).
 - Create memorized selectors via `createSelector` API.
 
-## Redux Code Splitting
+## Code Splitting
 
 - [Redux Code Splitting Guide](https://redux.js.org/usage/code-splitting).
 - [Redux Dynamic Modules](https://github.com/microsoft/redux-dynamic-modules):
   Modularize Redux by dynamically loading reducers and middlewares
   (contribute to **code splitting**).
 
-## Redux Performance Pitfalls
+## Pitfalls
 
 - All `reducers` are called to produce the `next` store state.
 - All `mapStateToProps`/`useSelectors` of mounted components are called.

@@ -3,7 +3,7 @@ sidebar_position: 1
 tags: [Web, Performance, DOM]
 ---
 
-# DOM Performance
+# DOM
 
 - 局部变量缓存 DOM 元素.
 - 局部变量缓存布局信息.
@@ -31,7 +31,7 @@ function toArray(coll) {
 - `nextElementSibling` 优于 `nextSibling` 优于 `childNodes[next]`.
 - `previousElementSibling` 优于 `previousSibling`.
 
-## Layout and Paint Performance
+## Engine Pipeline
 
 - 重排 (`reflow`): 重新构造渲染树, 从 `layout` 阶段开始.
 - 重绘 (`repaint`): 重新绘制受影响部分, 从 `paint` 或 `composite` 阶段开始.
@@ -40,7 +40,7 @@ function toArray(coll) {
 执行渲染队列中的**待处理变化**,
 重排 DOM 元素.
 
-## DOM Manipulation Performance
+## Manipulation
 
 - 先 `display="none"`, 修改完成后, `display=""`.
 - 使待修改 DOM 元素脱离标准文档流(改变布局／定位方式), 可减少其他元素的重绘次数.
@@ -62,13 +62,13 @@ appendDataToElement(clone, data)
 old.parentNode.replaceChild(clone, old)
 ```
 
-## Animation Frame Performance
+## Animation Frame
 
 run scripts as early as possible:
 `requestAnimationFrame()` runs after the CPU work is done (UI events and JS scripts),
 and just before the frame is rendered (layout, paint, composite etc.).
 
-## CSSOM Performance
+## CSSOM
 
 在 js 中(除定位属性) 外, 不直接操作 element.style.attr/element.cssText:
 

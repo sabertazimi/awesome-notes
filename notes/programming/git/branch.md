@@ -18,7 +18,7 @@ tags: [Programming, Git, Branch]
 9. work 类型分支, 名为 `work.***/basedOn-?-*` , `***` 代表此描述此 work 的名称,
    `?` 为其所基于的分支的开发代号, 最后一个 `*` 代表其在 `?|basedOn` 上所基于的分支的版本号或状态名.
 
-## Local Branch
+## Local
 
 创建新分支
 
@@ -51,7 +51,7 @@ git checkout -b <new-branch-name>
 git branch -v(详细信息) -vv(详细远程信息) --merged(显示合并至当前分支的分支) --no-merged(显示未合并至当前分支的分支)
 ```
 
-## Remote Branch
+## Remote
 
 - Show all remote branch:
 
@@ -83,7 +83,7 @@ git checkout -b [new-local-branch] [remoteName]/[branch]
 git push --delete origin [remote-branch-name]
 ```
 
-## Upstream Branch
+## Upstream
 
 ```bash
 git status -sb
@@ -91,7 +91,7 @@ git branch -avv
 git remote show origin
 ```
 
-## Develop Branch
+## Develop
 
 _多长期分支模式_:
 master 分支与 develop 分支都是长期分支,
@@ -114,7 +114,7 @@ master 分支上只有我们推送上去的稳定版本的程序, develop 分支
 在使用型任务中使用 gg-work-init 进行版本控制的初始化,
 拉取需要使用的稳定版本程序的 master 分支, 并初始化对应的 basedOn 分支（见 9）.
 
-## Feature Branch
+## Feature
 
 1. 只能从 develop 类型分支上创建.
 2. 最终必须合并到 develop 类型分支.
@@ -128,7 +128,7 @@ master 分支上只有我们推送上去的稳定版本的程序, develop 分支
 在一个 feature 类型分支上使用 gg-feature-close 把这个分支的工作合并到 develop 类型分支上,
 删除此分支, 完成一个特性的开发.
 
-## Release Branch
+## Release
 
 1. 只能从 develop 类型分支上创建.
 2. 最终必须同时合并到 master 类型分支 (发布新的版本) 和 develop 类型分支 (基于新版本的进一步开发).
@@ -138,7 +138,7 @@ master 分支上只有我们推送上去的稳定版本的程序, develop 分支
 在这个分支上允许进行小的改动 (比如修改一下 readme 文件中的版本号),
 然后使用 gg-release-close 将此版本合并（发布）到 master 类型分支上, 同时合并到 develop 类型分支上, 然后删除此分支.
 
-## Hotfix Branch
+## Hotfix
 
 1. 只能从 master 类型分支上创建.
 2. 最终必须同时合并到 master 类型分支(发布新的热补丁版本)和 develop 类型分支(基于新版本的进一步开发).
@@ -150,7 +150,7 @@ master 分支上只有我们推送上去的稳定版本的程序, develop 分支
 然后使用 gg-hotfix-close 将此版本合并（发布）到 master 类型分支上,
 同时合并到 develop 类型分支上, 然后删除此分支.
 
-## Issues Branch
+## Issues
 
 1. 只能从 develop 类型分支上创建.
 2. 最终必须合并到 develop 类型分支.
@@ -165,7 +165,7 @@ master 分支上只有我们推送上去的稳定版本的程序, develop 分支
 然后删除此分支, 解决了一个复杂的问题.
 issues 类型和 feature 类型的实现方式一模一样, 仅仅有名字上面的差别.
 
-## Trials Branch
+## Trials
 
 - 可以从除了 release 类型分支以外的任何类型分支上创建.
 - 在这个分支上请发挥想象力大胆实验:
@@ -177,7 +177,7 @@ issues 类型和 feature 类型的实现方式一模一样, 仅仅有名字上�
 这个时候使用 gg-trials-open trialsName 创建并转向一个名为 A/trials.trialsName 的实验分支,
 在这个分支上进行疯狂的实验.
 
-## BasedOn Branch
+## BasedOn
 
 1. 从 name|master 建立并初始化为 name|basedOn.
 2. 只能从对应的 master 分支 fork 到此分支.
@@ -193,7 +193,7 @@ issues 类型和 feature 类型的实现方式一模一样, 仅仅有名字上�
 `(init)v1.0===>v0.9=====>v0.8======>v1.3`,
 这个分支上的 commit 来源于 master, 但是其分支提交历史与 master 分支无关.
 
-## Work Branch
+## Work
 
 1. 只能从 basedOn 类型分支上创建.
 2. 可以借助 basedOn 分支升级.

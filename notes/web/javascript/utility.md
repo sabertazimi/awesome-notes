@@ -452,7 +452,7 @@ for await (const decodedChunk of decodedStream)
 
 ## Internationalization
 
-### Number i18n
+### Number
 
 ```ts
 const nfFrench = new Intl.NumberFormat('fr')
@@ -460,7 +460,7 @@ nf.format(12345678901234567890n)
 // => 12 345 678 901 234 567 890
 ```
 
-### String i18n
+### String
 
 ```ts
 const lfEnglish = new Intl.ListFormat('en')
@@ -488,7 +488,7 @@ console.log(formatter3.format(vehicles))
 // expected output: "Motorcycle Bus Car"
 ```
 
-### Time i18n
+### Time
 
 ```ts
 const rtfEnglish = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })

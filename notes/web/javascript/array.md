@@ -15,13 +15,13 @@ tags: [Web, JavaScript, ECMAScript, Array]
 const array = [...Array.from({ length: 5 }).keys()] // => [0, 1, 2, 3, 4]
 ```
 
-## Array Length
+## Length
 
 - 数组下标满足 [0, 2^32-1) 即可
 - 运用大于 length 的下标, length 自动增大, 不会发生数组边界错误
 - length 等于 数组最后一个整数属性名+1, length 不一定等于 数组中有效元素个数
 
-## Array Literals
+## Literals
 
 不使用构造函数,使用数组字面量创建数组
 
@@ -39,7 +39,7 @@ if (typeof Array.isArray === 'undefined') {
 }
 ```
 
-## Array Of
+## Of
 
 ```ts
 Array.of(1) // [1]
@@ -47,7 +47,7 @@ Array.of(1, 2, 3) // [1, 2, 3]
 Array.of(undefined) // [undefined]
 ```
 
-## Array From
+## From
 
 强大的**函数式**方法:
 
@@ -113,7 +113,7 @@ Array.from(Array.from({ length: 5 }).keys())
 Array.from<T>({ length: maxSize }).fill(initValue)
 ```
 
-## Array Fill
+## Fill
 
 ```ts
 const numbers = [1, 2, 3, 4]
@@ -125,7 +125,7 @@ numbers.fill(1)
 console.log(numbers.toString()) // 1, 1, 1, 1
 ```
 
-## Array CopyWithin
+## CopyWithin
 
 `copyWithin(dest, start, end)`, 替换数组元素, **修改原数组**:
 
@@ -142,7 +142,7 @@ i32a.copyWithin(0, 2)
 // => Int32Array [3, 4, 5, 4, 5]
 ```
 
-## Array Stack
+## Stack
 
 ```ts
 arr.unshift(value) // 添加数组首元素
@@ -151,7 +151,7 @@ arr.shift() // 删除数组首元素
 arr.pop() // 删除数组尾元素
 ```
 
-## Array Slice and Merge
+## Slice and Merge
 
 - slice 不改变原数组, splice 改变原数组.
 
@@ -162,7 +162,7 @@ arr.pop() // 删除数组尾元素
 ;[].join(separator)
 ```
 
-## Array Query
+## Query
 
 ```ts
 ;[].at(index) // ES2022
@@ -181,7 +181,7 @@ console.log([Number.NaN].includes(Number.NaN))
 // true
 ```
 
-## Array Element Filter
+## Filter
 
 相当于 Haskell 中的 List Filter:
 
@@ -191,20 +191,27 @@ const filterResult = numbers.filter((item, index, array) => item > 2)
 console.log(filterResult) // 3,4,5,4,3
 ```
 
-## Array Boolean Filter
+## Every
 
-- `Array.every(filer)`.
-- `Array.some(filer)`.
+`Array.every(filer)`:
 
 ```ts
 const numbers = [1, 2, 3, 4, 5, 4, 3, 2, 1]
-const everyResult = numbers.every((item, index, array) => item > 2)
-const someResult = numbers.some((item, index, array) => item > 2)
-console.log(everyResult) // false
-console.log(someResult) // true
+const result = numbers.every((item, index, array) => item > 2)
+console.log(result) // false
 ```
 
-## Array With
+## Some
+
+`Array.some(filer)`:
+
+```ts
+const numbers = [1, 2, 3, 4, 5, 4, 3, 2, 1]
+const result = numbers.some((item, index, array) => item > 2)
+console.log(result) // true
+```
+
+## With
 
 [Array.prototype.with](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/with):
 
@@ -221,7 +228,7 @@ console.log(frameworks.with(-1, 'React'))
 // ✅ Returns a copy with the change: ['Nuxt', 'Remix', 'SvelteKit', 'React'].
 ```
 
-## Array Map
+## Map
 
 相当于 Haskell 中的 List Map:
 
@@ -229,11 +236,11 @@ console.log(frameworks.with(-1, 'React'))
 ;[].map(item => item + 1) // map over
 ```
 
-## Array Flat
+## Flat
 
 `[2, [2, 2]] => [2, 2, 2]`
 
-## Array FlatMap
+## FlatMap
 
 map + flat.
 
@@ -261,7 +268,7 @@ flattenDeep([1, [[2], [3, [4]], 5]])
 // => [1, 2, 3, 4, 5]
 ```
 
-## Array Reduce
+## Reduce
 
 `reduce`/`reduceRight`:
 
@@ -301,13 +308,13 @@ const groupByFunction = [1.3, 2.1, 2.4].reduce(
 // {1: [1.3], 2: [2.1, 2.4]}
 ```
 
-## Array Traversal
+## Traversal
 
 ```ts
 array.forEach((val) => {}) // 遍历数组所有元素.
 ```
 
-## Array Sort
+## Sort
 
 `toExchange`:
 
@@ -320,7 +327,7 @@ strings.sort((a, b) => a.localeCompare(b))
 strings.sort((a, b) => new Intl.Collator('en').compare(a, b))
 ```
 
-## Array Reverse
+## Reverse
 
 ```ts
 ;[].reverse()
@@ -331,7 +338,7 @@ strings.sort((a, b) => new Intl.Collator('en').compare(a, b))
 const reverseStr = normalizedStr.split('').reverse().join('')
 ```
 
-## Array Spread
+## Spread
 
 - Shallow Clone.
 - Iterable Consumer.
@@ -352,7 +359,7 @@ obj[Symbol.iterator] = function* () {
 const array = [...obj] // print [1, 2, 3]
 ```
 
-## Array Deep Clone
+## Deep Clone
 
 ```ts
 const nestedArray = [1, [2], 3]
@@ -367,7 +374,7 @@ console.log(arrayCopy) // [ '1', [ '3' ], 3 ]
 console.log(nestedArray) //  1, [ 2 ], 3 ]
 ```
 
-## Typed Array
+## Buffer
 
 [`Typed Array`](https://exploringjs.com/es6/ch_typed-arrays.html)
 是 `ArrayBuffer` (用于 Web GL 高效率内存操作) 其中一种视图:

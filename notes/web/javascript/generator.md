@@ -1,16 +1,33 @@
 ---
 sidebar_position: 19
-tags: [Web, JavaScript, ECMAScript, Generator]
+tags: [Web, JavaScript, ECMAScript, Generator, Iterator]
 ---
 
 # Generator
-
-## Generator Definition
 
 - 函数名称前面加一个星号 (`*`) 表示它是一个生成器函数.
 - 箭头函数不能用来定义生成器函数.
 - 调用生成器函数会产生一个生成器对象, 其是一个**自引用可迭代对象**:
   其本身是一个迭代器, 同时实现了 `Iterable` 接口 (返回 `this`).
+
+```ts
+function* gen() {
+  yield 1
+  yield 2
+  yield 3
+}
+
+const g = gen()
+
+g.next() // { value: 1, done: false }
+g.next() // { value: 2, done: false }
+g.next() // { value: 3, done: false }
+g.next() // { value: undefined, done: true }
+g.return() // { value: undefined, done: true }
+g.return(1) // { value: 1, done: true }
+```
+
+## Types
 
 ```ts
 interface GeneratorFunction {
@@ -61,7 +78,7 @@ console.log(g === g[Symbol.iterator]())
 // true
 ```
 
-## Generator Roles
+## Roles
 
 Generators can play 3 roles:
 
@@ -156,26 +173,7 @@ for await (const vitals of generateVitals()) {
 }
 ```
 
-## Generator Basic Usage
-
-```ts
-function* gen() {
-  yield 1
-  yield 2
-  yield 3
-}
-
-const g = gen()
-
-g.next() // { value: 1, done: false }
-g.next() // { value: 2, done: false }
-g.next() // { value: 3, done: false }
-g.next() // { value: undefined, done: true }
-g.return() // { value: undefined, done: true }
-g.return(1) // { value: 1, done: true }
-```
-
-### Default Iterator Generator
+## Default Iterator
 
 生成器函数和默认迭代器**被调用**之后都产生迭代器
 (生成器对象是**自引用可迭代对象**, 自身是一个迭代器),
@@ -225,7 +223,7 @@ for (const x of f)
 // 3
 ```
 
-### Early Return Generator
+## Early Return
 
 - `return()` 方法会强制生成器进入关闭状态.
 - 提供给 `return()` 的值, 就是终止迭代器对象的值.
@@ -244,7 +242,7 @@ g.return('foo') // { value: "foo", done: true }
 g.next() // { value: undefined, done: true }
 ```
 
-### Error Handling Generator
+## Error Handling
 
 - `throw()` 方法会在暂停的时候将一个提供的错误注入到生成器对象中.
   如果错误未被处理, 生成器就会关闭.
@@ -285,9 +283,7 @@ it.throw(new Error('Not handled!')) // !!! Uncaught Error: Not handled! !!!
 it.next() // {value: undefined, done: true}
 ```
 
-## Generator Advanced Usage
-
-### Next Value Generator
+## Next Value
 
 当为 `next` 传递值进行调用时,
 传入的值会被当作上一次生成器函数暂停时 `yield` 关键字的返回值处理.
@@ -325,22 +321,7 @@ g.next(2) // { value: 20, done: false }
 g.next() // { value: undefined, done: true }
 ```
 
-### Default Asynchronous Iterator Generator
-
-Default asynchronous iterator:
-
-```ts
-const asyncSource = {
-  async* [Symbol.asyncIterator]() {
-    yield await new Promise(resolve => setTimeout(resolve, 1000, 1))
-  },
-}
-
-for await (const chunk of asyncSource)
-  console.log(chunk)
-```
-
-### Asynchronous Generator
+## Asynchronous
 
 ```ts
 async function* remotePostsAsyncGenerator() {
@@ -365,7 +346,22 @@ for await (const chunk of remotePostsAsyncGenerator())
   console.log(chunk)
 ```
 
-### Asynchronous Events Stream
+### Default Asynchronous Iterator
+
+Default asynchronous iterator:
+
+```ts
+const asyncSource = {
+  async* [Symbol.asyncIterator]() {
+    yield await new Promise(resolve => setTimeout(resolve, 1000, 1))
+  },
+}
+
+for await (const chunk of asyncSource)
+  console.log(chunk)
+```
+
+### Events Stream
 
 Asynchronous UI events stream (RxJS):
 
@@ -500,7 +496,7 @@ co(readFileGenerator).then(res => console.log(res))
 readFile().then(res => console.log(res))
 ```
 
-### Delegating Generator
+## Delegation
 
 `yield*` 能够迭代一个可迭代对象 (`yield* iterable`):
 
@@ -566,7 +562,7 @@ for await (const chunk of getRemoteData())
   console.log(chunk)
 ```
 
-### Recursive Generator
+## Recursion
 
 在生成器函数内部,
 用 `yield*` 去迭代自身产生的生成器对象,

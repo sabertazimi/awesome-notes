@@ -1,11 +1,131 @@
 ---
-sidebar_position: 13
-tags: [Web, CSS, Layout]
+sidebar_position: 17
+tags: [Web, CSS, Layout, Alignment, Centering]
 ---
 
 # Alignment
 
-## Height Alignment Pattern
+[![Centering](./figures/centering.png)](https://www.joshwcomeau.com/css/center-a-div)
+
+## Horizontal
+
+### Inline Element
+
+- `text-align: center`.
+- `flex`.
+- `grid`.
+
+```css
+.quote {
+  text-align: center;
+}
+```
+
+### Block Element
+
+- Auto `margin`.
+- `flex`.
+- `grid`.
+
+```css
+.row {
+  width: 100%;
+  max-width: var(--row-max-width);
+  margin: 0 auto;
+}
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+```
+
+父元素 `float`, 父子元素 `relative`:
+
+```css
+.container {
+  position: relative;
+  left: 50%;
+  float: left;
+}
+
+.container ul {
+  position: relative;
+  left: -50%;
+}
+```
+
+## Vertical
+
+### Inline Box
+
+- `line-height`.
+- `vertical-align: middle`:
+  - 作用机制: 对齐基线 (`baseline`) 往上 1/2 `x-height` 高度 (即小写字母 `x` 交叉点处).
+  - 作用环境: parent element `line-height` === `height`.
+  - 作用对象: children `inline`/`inline-block`/`table-cell` element.
+- Vertical parent `padding`.
+- `flex`.
+- `grid`.
+
+Button label (`<a>`) vertical alignment
+([行内块居中法](https://css-tricks.com/centering-in-the-unknown):
+
+```css
+a.button::before {
+  display: inline-block;
+  height: 16px;
+  vertical-align: middle;
+  content: '';
+}
+```
+
+### Block Box
+
+- `top` + `translateY`.
+- `vertical-align: middle` + `display: table-cell`:
+  [表格单元居中法](https://css-tricks.com/centering-in-the-unknown).
+- Vertical `margin`.
+- Vertical `padding`.
+- `flex`.
+- `grid`.
+
+```css
+.viewport-centered-block {
+  width: 18em;
+  margin: 50vh auto 0;
+  transform: translateY(-50%);
+}
+
+.form-item-label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+```
+
+## Mixed
+
+```css
+.box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d; /* Remove blurry in WebKit browsers */
+  backface-visibility: hidden; /* Remove blurry in WebKit browsers */
+}
+
+.dialog {
+  position: absolute;
+  inset: 0;
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+}
+```
+
+## Height
 
 - `border` simulation.
 - Negative `margin`.
@@ -18,7 +138,7 @@ tags: [Web, CSS, Layout]
 - `grid` layout:
   `grid` items 默认等高.
 
-### Border Simulation Height Alignment
+### Border Simulation
 
 ```css
 /* 导航背景区 border 创建 */
@@ -46,7 +166,7 @@ tags: [Web, CSS, Layout]
 }
 ```
 
-### Negative Margin Height Alignment
+### Negative Margin
 
 ```css
 .column-box {
@@ -61,7 +181,7 @@ tags: [Web, CSS, Layout]
 }
 ```
 
-### Layout Height Alignment
+### Layout
 
 ```css
 .table {
@@ -109,128 +229,6 @@ tags: [Web, CSS, Layout]
   .right {
     background: #99afe0;
   }
-}
-```
-
-## Centering Pattern
-
-[![Centering Pattern](./figures/centering-pattern.png)](https://www.joshwcomeau.com/css/center-a-div)
-
-## Horizontal Centering Pattern
-
-### Horizontal Centering Inline Element
-
-- `text-align: center`.
-- `flex`.
-- `grid`.
-
-```css
-.quote {
-  text-align: center;
-}
-```
-
-### Horizontal Centering Block Element
-
-- Auto `margin`.
-- `flex`.
-- `grid`.
-
-```css
-.row {
-  width: 100%;
-  max-width: var(--row-max-width);
-  margin: 0 auto;
-}
-
-.container {
-  max-width: 1024px;
-  margin: 0 auto;
-}
-```
-
-父元素 `float`, 父子元素 `relative`:
-
-```css
-.container {
-  position: relative;
-  left: 50%;
-  float: left;
-}
-
-.container ul {
-  position: relative;
-  left: -50%;
-}
-```
-
-## Vertical Centering Pattern
-
-### Vertical Centering Inline element
-
-- `line-height`.
-- `vertical-align: middle`:
-  - 作用机制: 对齐基线 (`baseline`) 往上 1/2 `x-height` 高度 (即小写字母 `x` 交叉点处).
-  - 作用环境: parent element `line-height` === `height`.
-  - 作用对象: children `inline`/`inline-block`/`table-cell` element.
-- Vertical parent `padding`.
-- `flex`.
-- `grid`.
-
-Button label (`<a>`) vertical alignment
-([行内块居中法](https://css-tricks.com/centering-in-the-unknown):
-
-```css
-a.button::before {
-  display: inline-block;
-  height: 16px;
-  vertical-align: middle;
-  content: '';
-}
-```
-
-### Vertical Centering Block element
-
-- `top` + `translateY`.
-- `vertical-align: middle` + `display: table-cell`:
-  [表格单元居中法](https://css-tricks.com/centering-in-the-unknown).
-- Vertical `margin`.
-- Vertical `padding`.
-- `flex`.
-- `grid`.
-
-```css
-.viewport-centered-block {
-  width: 18em;
-  margin: 50vh auto 0;
-  transform: translateY(-50%);
-}
-
-.form-item-label {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-```
-
-## Mixing Centering Pattern
-
-```css
-.box {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transform-style: preserve-3d; /* Remove blurry in WebKit browsers */
-  backface-visibility: hidden; /* Remove blurry in WebKit browsers */
-}
-
-.dialog {
-  position: absolute;
-  inset: 0;
-  width: fit-content;
-  height: fit-content;
-  margin: auto;
 }
 ```
 

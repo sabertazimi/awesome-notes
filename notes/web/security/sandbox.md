@@ -22,7 +22,7 @@ tags: [Web, Security, Sandbox]
 - `<iframe>` 沙盒: 使用 `<iframe>` 隔离全局上下文.
 - [`ShadowRealm`](https://2ality.com/2022/04/shadow-realms.html) 沙盒.
 
-## Snapshot Sandbox
+## Snapshot
 
 `SnapshotSandbox`:
 
@@ -67,7 +67,7 @@ class SnapshotSandbox {
 }
 ```
 
-## Proxy Sandbox
+## Proxy
 
 `ProxySandbox`:
 
@@ -92,7 +92,7 @@ function ProxySandbox(code) {
 }
 ```
 
-## Iframe Sandbox
+## Iframe
 
 ```ts
 class SandboxWindow {

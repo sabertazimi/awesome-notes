@@ -3,7 +3,7 @@ sidebar_position: 32
 tags: [Web, JavaScript, ECMAScript, DOM]
 ---
 
-# DOM Core
+# DOM
 
 - DOM Level 0.
 - DOM Level 1:
@@ -44,7 +44,7 @@ const hasXmlDom = document.implementation.hasFeature('XML', '1.0')
 const hasHtmlDom = document.implementation.hasFeature('HTML', '1.0')
 ```
 
-## DOM Nodes
+## Nodes
 
 ```ts
 document.createElement('nodeName')
@@ -93,7 +93,7 @@ function showAlert(type, message, duration = 3) {
 }
 ```
 
-### DOM Node Type
+### Node Type
 
 Node 除包括元素结点 (tag) 外,
 包括许多其它结点 (甚至空格符视作一个结点),
@@ -122,7 +122,7 @@ if (someNode.nodeType === Node.ELEMENT_NODE)
   alert('Node is an element.')
 ```
 
-### DOM Attribute Node
+### Attribute
 
 ```ts
 const id = element.attributes.getNamedItem('id').nodeValue
@@ -143,9 +143,9 @@ alert(element.getAttribute('align')) // "left"
 ```
 
 Further reading:
-[DOM properties reflection on HTML attributes](../html/attributes.md#dom-properties-reflection).
+[DOM properties reflection on HTML attributes](../html/attributes.md#reflection).
 
-### DOM Text Node
+### Text
 
 Text node methods:
 
@@ -212,7 +212,7 @@ const innerText = element.innerText
 
 :::
 
-### DOM Document Node
+### Document
 
 `document` node (`#document`):
 
@@ -259,7 +259,7 @@ document.write()
 document.writeln()
 ```
 
-### DOM Document Type Node
+### Document Type
 
 ```html
 <!DOCTYPE html PUBLIC "-// W3C// DTD HTML 4.01// EN" "http:// www.w3.org/TR/html4/strict.dtd">
@@ -285,7 +285,7 @@ const doc = document.implementation.createDocument(
 )
 ```
 
-### DOM Document Fragment Node
+### Document Fragment
 
 减少 DOM 操作次数, 减少页面渲染次数:
 
@@ -349,9 +349,9 @@ function parseHTML(string) {
 }
 ```
 
-## DOM Manipulation
+## Manipulation
 
-### Append DOM Node
+### Append
 
 | Method             | Node | HTML | Text | IE  | Event Listeners | Secure  |
 | ------------------ | ---- | ---- | ---- | --- | --------------- | ------- |
@@ -397,7 +397,7 @@ ul.innerHTML = itemsHtml
 ul.innerHTML = values.map(value => `<li>${value}</li>`).join('')
 ```
 
-### Insert DOM Node
+### Insert
 
 ```ts
 // Append
@@ -446,14 +446,14 @@ p.insertAdjacentText('afterbegin', 'foo')
 p.insertAdjacentElement('beforebegin', link)
 ```
 
-### Replace DOM Node
+### Replace
 
 ```ts
 node.replaceChild(document.createTextNode(text), node.firstChild)
 node.replaceChildren(...nodeList)
 ```
 
-### Remove DOM Node
+### Remove
 
 ```ts
 // 删除第一个子节点
@@ -470,7 +470,7 @@ el.parentNode.removeChild(el)
 el.remove()
 ```
 
-### Traverse DOM Node
+### Traverse
 
 ```ts
 const parent = node.parentNode
@@ -568,7 +568,7 @@ for (
 
 :::
 
-### Attributes DOM Node
+### Attributes
 
 HTML attributes 设置对应的 DOM properties 初始值:
 
@@ -584,7 +584,7 @@ div.removeAttribute('class')
 console.log(el.dataset.src)
 ```
 
-### Select DOM Node
+### Select
 
 [Range API](https://developer.mozilla.org/docs/Web/API/Range):
 
@@ -672,9 +672,175 @@ range.surroundContents(span)
 // <p><b><span style="background-color:yellow">Hello</span></b> world!</p>
 ```
 
-## DOM Loading
+## Geometry
 
-### Dynamic Scripts Loading
+### Dimensions
+
+- outerHeight: 整个浏览器窗口的大小, 包括窗口标题/工具栏/状态栏等.
+- innerHeight: DOM 视口的大小, 包括滚动条.
+- offsetHeight: 整个可视区域大小, 包括 border 和 scrollbar 在内 (content + padding + border).
+- clientHeight: 内部可视区域大小 (content + padding).
+- scrollHeight: 元素内容的高度, 包括溢出部分.
+
+![Client Size](./figures/client-size.png 'Client Size')
+
+```ts
+// const supportInnerWidth = window.innerWidth !== undefined;
+// const supportInnerHeight = window.innerHeight !== undefined;
+// const isCSS1Compat = (document.compatMode || '') === 'CSS1Compat';
+const width
+  = window.innerWidth
+    || document.documentElement.clientWidth
+    || document.body.clientWidth
+const height
+  = window.innerHeight
+    || document.documentElement.clientHeight
+    || document.body.clientHeight
+```
+
+```ts
+// 缩放到 100×100
+window.resizeTo(100, 100)
+// 缩放到 200×150
+window.resizeBy(100, 50)
+// 缩放到 300×300
+window.resizeTo(300, 300)
+```
+
+:::tip[DOM Rect API]
+
+In case of transforms,
+the offsetWidth and offsetHeight returns the layout width and height (all the same),
+while getBoundingClientRect() returns the rendering width and height.
+
+:::
+
+`getBoundingClientRect`:
+
+[![Client Rect](https://developer.mozilla.org/docs/Web/API/Element/getBoundingClientRect/element-box-diagram.png)](https://developer.mozilla.org/docs/Web/API/Element/getBoundingClientRect)
+
+```ts
+function isElementInViewport(el) {
+  const { top, height, left, width } = el.getBoundingClientRect()
+  const w
+    = window.innerWidth
+      || document.documentElement.clientWidth
+      || document.body.clientWidth
+  const h
+    = window.innerHeight
+      || document.documentElement.clientHeight
+      || document.body.clientHeight
+
+  return top <= h && top + height >= 0 && left <= w && left + width >= 0
+}
+```
+
+### Position
+
+- offsetLeft/offsetTop:
+  表示该元素的左上角 (边框外边缘) 与已定位的父容器 (offsetParent 对象) 左上角的距离.
+- clientLeft/clientTop:
+  表示该元素 padding 至 margin 的距离,
+  始终等于 `.getComputedStyle()` 返回的 `border-left-width`/`border-top-width`.
+- scrollLeft/scrollTop:
+  元素滚动条位置, 被隐藏的内容区域左侧/上方的像素位置.
+
+![Offset Size](./figures/offset-size.png 'Offset Size')
+
+```ts
+function getElementLeft(element) {
+  let actualLeft = element.offsetLeft
+  let current = element.offsetParent
+
+  while (current !== null) {
+    actualLeft += current.offsetLeft
+    current = current.offsetParent
+  }
+
+  return actualLeft
+}
+
+function getElementTop(element) {
+  let actualTop = element.offsetTop
+  let current = element.offsetParent
+
+  while (current !== null) {
+    actualTop += current.offsetTop
+    current = current.offsetParent
+  }
+
+  return actualTop
+}
+```
+
+```ts
+// 把窗口移动到左上角
+window.moveTo(0, 0)
+// 把窗口向下移动 100 像素
+window.moveBy(0, 100)
+// 把窗口移动到坐标位置 (200, 300)
+window.moveTo(200, 300)
+// 把窗口向左移动 50 像素
+window.moveBy(-50, 0)
+```
+
+### Scrolling
+
+- scrollLeft/scrollX/PageXOffset: 元素内容向右滚动了多少像素, 如果没有滚动则为 0.
+- scrollTop/scrollY/pageYOffset: 元素内容向上滚动了多少像素, 如果没有滚动则为 0.
+
+![Scroll Size](./figures/scroll-size.png 'Scroll Size')
+
+```ts
+// const supportPageOffset = window.pageXOffset !== undefined;
+// const isCSS1Compat = (document.compatMode || '') === 'CSS1Compat';
+const x
+  = window.pageXOffset
+    || document.documentElement.scrollLeft
+    || document.body.scrollLeft
+const y
+  = window.pageYOffset
+    || document.documentElement.scrollTop
+    || document.body.scrollTop
+```
+
+```ts
+if (window.innerHeight + window.pageYOffset === document.body.scrollHeight)
+  console.log('Scrolled to Bottom!')
+```
+
+```ts
+// 相对于当前视口向下滚动 100 像素
+window.scrollBy(0, 100)
+// 相对于当前视口向右滚动 40 像素
+window.scrollBy(40, 0)
+
+// 滚动到页面左上角
+window.scrollTo(0, 0)
+// 滚动到距离屏幕左边及顶边各 100 像素的位置
+window.scrollTo(100, 100)
+// 正常滚动
+window.scrollTo({
+  left: 100,
+  top: 100,
+  behavior: 'auto',
+})
+// 平滑滚动
+window.scrollTo({
+  left: 100,
+  top: 100,
+  behavior: 'smooth',
+})
+
+document.forms[0].scrollIntoView() // 窗口滚动后, 元素底部与视口底部对齐.
+document.forms[0].scrollIntoView(true) // 窗口滚动后, 元素顶部与视口顶部对齐.
+document.forms[0].scrollIntoView({ block: 'start' })
+document.forms[0].scrollIntoView({ behavior: 'smooth', block: 'start' })
+```
+
+## Loading
+
+### Dynamic Scripts
 
 ```ts
 function loadScript(url) {
@@ -710,7 +876,7 @@ function loadScriptString(code) {
 - Next.js route [loader](https://github.com/vercel/next.js/blob/canary/packages/next/client/route-loader.ts).
 - Next.js `<Script>` [component](https://github.com/vercel/next.js/blob/canary/packages/next/client/script.tsx).
 
-### Dynamic Styles Loading
+### Dynamic Styles
 
 ```ts
 function loadStyles(url) {
@@ -747,90 +913,33 @@ function loadStyleString(css) {
 
 :::
 
-## Table Manipulation
+## XML Namespace
 
-`<table>` 元素添加了以下属性和方法:
-
-- `caption`: 指向 `<caption>` 元素的指针 (如果存在).
-- `tBodies`: 包含 `<tbody>` 元素的 HTMLCollection.
-- `tFoot`: 指向 `<tfoot>` 元素 (如果存在).
-- `tHead`: 指向 `<thead>` 元素 (如果存在).
-- `rows`: 包含表示所有行的 HTMLCollection.
-- `createTHead()`: 创建 `<thead>` 元素, 放到表格中, 返回引用.
-- `createTFoot()`: 创建 `<tfoot>` 元素, 放到表格中, 返回引用.
-- `createCaption()`: 创建 `<caption>` 元素, 放到表格中, 返回引用.
-- `deleteTHead()`: 删除 `<thead>` 元素.
-- `deleteTFoot()`: 删除 `<tfoot>` 元素.
-- `deleteCaption()`: 删除 `<caption>` 元素.
-- `deleteRow(pos)`: 删除给定位置的行.
-- `insertRow(pos)`: 在行集合中给定位置插入一行.
-
-`<tbody>` 元素添加了以下属性和方法:
-
-- `rows`: 包含 `<tbody>` 元素中所有行的 HTMLCollection.
-- `deleteRow(pos)`: 删除给定位置的行.
-- `insertRow(pos)`: 在行集合中给定位置插入一行, 返回该行的引用.
-
-`<tr>` 元素添加了以下属性和方法:
-
-- `cells`: 包含 `<tr>` 元素所有表元的 HTMLCollection.
-- `deleteCell(pos)`: 删除给定位置的表元.
-- `insertCell(pos)`: 在表元集合给定位置插入一个表元, 返回该表元的引用.
-
-```ts
-// 创建表格
-const table = document.createElement('table')
-table.border = 1
-table.width = '100%'
-
-// 创建表体
-const tbody = document.createElement('tbody')
-table.appendChild(tbody)
-
-// 创建第一行
-tbody.insertRow(0)
-tbody.rows[0].insertCell(0)
-tbody.rows[0].cells[0].appendChild(document.createTextNode('Cell 1, 1'))
-tbody.rows[0].insertCell(1)
-tbody.rows[0].cells[1].appendChild(document.createTextNode('Cell 2, 1'))
-
-// 创建第二行
-tbody.insertRow(1)
-tbody.rows[1].insertCell(0)
-tbody.rows[1].cells[0].appendChild(document.createTextNode('Cell 1, 2'))
-tbody.rows[1].insertCell(1)
-tbody.rows[1].cells[1].appendChild(document.createTextNode('Cell 2, 2'))
-
-// 把表格添加到文档主体
-document.body.appendChild(table)
-```
-
-## Iframe
-
-| Attribute                      |                                             |
-| ------------------------------ | ------------------------------------------- |
-| `src="https://google.com/"`    | Sets address of the document to embed       |
-| `srcdoc="<p>Some html</p>"`    | Sets HTML content of the page to show       |
-| `height="100px"`               | Sets iframe height in pixels                |
-| `width="100px"`                | Sets iframe width in pixels                 |
-| `name="my-iframe"`             | Sets name of the iframe (used in JavaScript |
-| `allow="fullscreen"`           | Sets feature policy for the iframe          |
-| `referrerpolicy="no-referrer"` | Sets referrer when fetching iframe content  |
-| `sandbox="allow-same-origin"`  | Sets restrictions of the iframe             |
-| `loading="lazy"`               | Lazy loading                                |
+XML 命名空间可以实现在一个格式规范的文档中混用不同的 XML 语言,
+避免元素命名冲突 (`tagName`/`localName`/`namespaceURI`):
 
 ```html
-<iframe src="https://www.google.com/" height="500px" width="500px"></iframe>
-<iframe src="https://platform.twitter.com/widgets/tweet_button.html"></iframe>
-<iframe srcdoc="<html><body>App</body></html>"></iframe>
-<iframe
-  sandbox="allow-same-origin allow-top-navigation allow-forms allow-scripts"
-  src="http://maps.example.com/embedded.html"
-></iframe>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Example XHTML page</title>
+  </head>
+  <body>
+    <s:svg xmlns:s="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" style="width: 100%; height: 100%">
+      <s:rect x="0" y="0" width="100" height="100" style="fill: red" />
+    </s:svg>
+  </body>
+</html>
 ```
 
 ```ts
-const iframeDocument = iframe.contentDocument
-const iframeStyles = iframe.contentDocument.querySelectorAll('.css')
-iframe.contentWindow.postMessage('message', '*')
+console.log(document.body.isDefaultNamespace('http://www.w3.org/1999/xhtml'))
+console.log(svg.lookupPrefix('http://www.w3.org/2000/svg')) // "s"
+console.log(svg.lookupNamespaceURI('s')) // "http://www.w3.org/2000/svg"
+
+const newSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+const newAttr = document.createAttributeNS('http://www.somewhere.com', 'random')
+const elems = document.getElementsByTagNameNS(
+  'http://www.w3.org/1999/xhtml',
+  '*'
+)
 ```

@@ -1,5 +1,5 @@
 ---
-tags: [CS, Database]
+tags: [CS, Database,SQL, MySQL, MongoDB]
 ---
 
 # Database
@@ -195,9 +195,185 @@ children classes
 
 ### Entity Relationship Model
 
+## Relational Design
+
+### Decomposition
+
+- start with mega-relations: including all attributes
+- decompose into smaller relations(BCNF/4NF)
+
+### Functional Dependencies
+
+- A -> B => 1-1/n-1 mapping
+- key sets: closure of sets contains all attributes
+
+> assuming relation R(A, B, C, D, ..., G)
+> and closure of A, B `{A, B}` + `A->C->D, B->E->F, F->G`
+> => `{A, B}+ = {A, B, C, ..., G}`
+> then, `{A, B}` is a key
+> if there no exists such closure, then treat all-attributes as a key
+
+### BCNF
+
+boyce-codd normal form:
+
+- for each A -> B having A is super key && B isn't key
+- not exists A -> B -> C
+- here's the algorithm:
+
+```cpp
+/*
+ * @brief fixed point algorithm just like most algorithms from compiler
+ *
+ * by decomposing to transform non-key dependent attributes to key dependent attributes
+ */
+
+compute FDs for R
+compute key for R using its FDs
+
+while (there is relation R' aren't in BCNF) {
+    pick any R' with A -> B that violates BCNF (A is not its key)
+    decompose R' into R1(A, B) and R2(A, rest)
+    compute FDs for R1 and R2
+    compute keys for R1 and R2 using their FDs
+}
+```
+
+### Multi Valued Dependencies
+
+- `A -> B && rest attributes` => `A ->> B`.
+- `A ->> B` (1-n mapping), `A ->> C` (1-n mapping),
+  no `B -> C`/`C ->> B`, `B * C` redundant tuples/rows.
+- `A ->>B && A ->>C` => `A ->> B∩C`.
+- `A ->>B && B ->>C` => `A ->> C-B`.
+
+### 4NF
+
+Forth normal form:
+
+- if A ->> B then A is key && B isn't key
+- here's the algorithm:
+
+```cpp
+/*
+ * @brief fixed point algorithm just like most algorithms from compiler
+ *
+ * by decomposing to transform non-key dependent attributes to key dependent attributes
+ */
+
+compute FDs and MVDs for R
+compute key for R using its FDs
+
+while (there is relation R' aren't in 4NF) {
+    pick any R' with A ->> B that violates 4NF(A is not its key)
+    decompose R' into R1(A, B) and R2(A, rest)
+    compute FDs and MVDs for R1 and R2
+    compute keys for R1 and R2 using their FDs
+}
+```
+
+### Normalized Design
+
+- every row has the same number of columns
+- every row has a unique key(PRIMARY KEY)
+- everything in a row is all relevant to unique key
+- everything in a row is all relevant to each other
+
+## Indexes
+
+- primary mechanism to improve performance of database
+- persist data structures stored in database (hash tables/B trees/B+ trees)
+- trade off: `scale of database` and `workload(query/update rate)`
+  as input of physical design advisors
+
+```sql
+CREATE INDEX IndexName on T(A)
+CREATE INDEX IndexName on T(A1, A2, ..., An)
+CREATE UNIQUE INDEX IndexName on T(A)
+DROP INDEX IndexName
+```
+
+## Transactions
+
+- a sequence of one/more SQL operations treated as a unit
+- target: concurrency and failures recovery
+
+### Transaction Standard
+
+- all or nothing(atomicity)
+- transaction begins automatically on first SQL statement
+- on "commit": old transaction ends, new one begins
+- on session termination: current transaction ends
+- "AutoCommit" turns each statement into transaction
+
+### ACID Properties
+
+- Atomicity(Logging)
+- Consistency
+- Isolation: guarantee serializability(Locking)
+- Durability(Logging)
+
+#### Isolation Level
+
+weaker isolation level: read uncommitted < read committed < repeatable read < serializable
+
+- increased concurrency + decreased overhead = increased performance
+- weaker consistency guarantees
+- some system default: repeatable read
+
+```sql
+SET TRANSACTION READ ONLY;
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+```
+
+## Integrity Constraints
+
+```sql
+CREATE TABLE TableName (
+    ... PRIMARY KEY,
+    ... UNIQUE,
+    ... CHECK (Condition),
+    ... references TableName(ForeignKey),
+    ... references TableName(ForeignKey) ON DELETE/UPDATE RESTRICT/SET NULL/CASCADE,
+    ... ,
+    PRIMARY KEY (Attr1, Attr2, ...),
+    UNIQUE (Attr1, Attr2, ...),
+    CHECK (Condition),
+    FOREIGN KEY (Attr1, Attr2, ...) references
+      TableName(Bttr1, Bttr2, ...) [ ON ... (default RESTRICT) ]
+);
+
+CREATE ASSERTION AssertionName
+CHECK (Condition);
+```
+
+## Triggers (DBMS Level Constraints)
+
+```sql
+CREATE TRIGGER TriggerName
+BEFORE|AFTER|INSTEAD OF Events(INSERT/UPDATE OF/DELETE ON TableName)
+[ referencing-variables ]
+[ FOR EACH ROW ]
+WHEN ( Condition )
+[ BEGIN ]
+Action
+[ END ];
+
+CREATE TRIGGER Cascade
+After DELETE ON S
+REFERENCING OLD ROW AS O
+FOR EACH ROW
+DELETE FROM R WHERE A = O.B (R.A = S.B)
+
+CREATE TRIGGER Cascade
+After DELETE ON S
+REFERENCING OLD TABLE AS OT
+DELETE FROM R WHERE A IN (SELECT B FROM BT)
+```
+
 ## SQL
 
-### Basic SQL Statements
+### CRUD
 
 增删查改:
 
@@ -414,182 +590,6 @@ CREATE VIEW Standings AS
 mysqldump -u <user> -p<password> <database> > sync.sql
 
 mysql -u <user> -p<password> <database> < sync.sql
-```
-
-## Relational Design
-
-### Decomposition
-
-- start with mega-relations: including all attributes
-- decompose into smaller relations(BCNF/4NF)
-
-### Functional Dependencies
-
-- A -> B => 1-1/n-1 mapping
-- key sets: closure of sets contains all attributes
-
-> assuming relation R(A, B, C, D, ..., G)
-> and closure of A, B `{A, B}` + `A->C->D, B->E->F, F->G`
-> => `{A, B}+ = {A, B, C, ..., G}`
-> then, `{A, B}` is a key
-> if there no exists such closure, then treat all-attributes as a key
-
-### BCNF
-
-boyce-codd normal form:
-
-- for each A -> B having A is super key && B isn't key
-- not exists A -> B -> C
-- here's the algorithm:
-
-```cpp
-/*
- * @brief fixed point algorithm just like most algorithms from compiler
- *
- * by decomposing to transform non-key dependent attributes to key dependent attributes
- */
-
-compute FDs for R
-compute key for R using its FDs
-
-while (there is relation R' aren't in BCNF) {
-    pick any R' with A -> B that violates BCNF (A is not its key)
-    decompose R' into R1(A, B) and R2(A, rest)
-    compute FDs for R1 and R2
-    compute keys for R1 and R2 using their FDs
-}
-```
-
-### Multi Valued Dependencies
-
-- `A -> B && rest attributes` => `A ->> B`.
-- `A ->> B` (1-n mapping), `A ->> C` (1-n mapping),
-  no `B -> C`/`C ->> B`, `B * C` redundant tuples/rows.
-- `A ->>B && A ->>C` => `A ->> B∩C`.
-- `A ->>B && B ->>C` => `A ->> C-B`.
-
-### 4NF
-
-Forth normal form:
-
-- if A ->> B then A is key && B isn't key
-- here's the algorithm:
-
-```cpp
-/*
- * @brief fixed point algorithm just like most algorithms from compiler
- *
- * by decomposing to transform non-key dependent attributes to key dependent attributes
- */
-
-compute FDs and MVDs for R
-compute key for R using its FDs
-
-while (there is relation R' aren't in 4NF) {
-    pick any R' with A ->> B that violates 4NF(A is not its key)
-    decompose R' into R1(A, B) and R2(A, rest)
-    compute FDs and MVDs for R1 and R2
-    compute keys for R1 and R2 using their FDs
-}
-```
-
-### Normalized Design
-
-- every row has the same number of columns
-- every row has a unique key(PRIMARY KEY)
-- everything in a row is all relevant to unique key
-- everything in a row is all relevant to each other
-
-## Indexes
-
-- primary mechanism to improve performance of database
-- persist data structures stored in database (hash tables/B trees/B+ trees)
-- trade off: `scale of database` and `workload(query/update rate)`
-  as input of physical design advisors
-
-```sql
-CREATE INDEX IndexName on T(A)
-CREATE INDEX IndexName on T(A1, A2, ..., An)
-CREATE UNIQUE INDEX IndexName on T(A)
-DROP INDEX IndexName
-```
-
-## Transactions
-
-- a sequence of one/more SQL operations treated as a unit
-- target: concurrency and failures recovery
-
-### Transaction Standard
-
-- all or nothing(atomicity)
-- transaction begins automatically on first SQL statement
-- on "commit": old transaction ends, new one begins
-- on session termination: current transaction ends
-- "AutoCommit" turns each statement into transaction
-
-### ACID Properties
-
-- Atomicity(Logging)
-- Consistency
-- Isolation: guarantee serializability(Locking)
-- Durability(Logging)
-
-#### Isolation Level
-
-weaker isolation level: read uncommitted < read committed < repeatable read < serializable
-
-- increased concurrency + decreased overhead = increased performance
-- weaker consistency guarantees
-- some system default: repeatable read
-
-```sql
-SET TRANSACTION READ ONLY;
-SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
-```
-
-## Integrity Constraints
-
-```sql
-CREATE TABLE TableName (
-    ... PRIMARY KEY,
-    ... UNIQUE,
-    ... CHECK (Condition),
-    ... references TableName(ForeignKey),
-    ... references TableName(ForeignKey) ON DELETE/UPDATE RESTRICT/SET NULL/CASCADE,
-    ... ,
-    PRIMARY KEY (Attr1, Attr2, ...),
-    UNIQUE (Attr1, Attr2, ...),
-    CHECK (Condition),
-    FOREIGN KEY (Attr1, Attr2, ...) references
-      TableName(Bttr1, Bttr2, ...) [ ON ... (default RESTRICT) ]
-);
-
-CREATE ASSERTION AssertionName
-CHECK (Condition);
-```
-
-## Triggers (DBMS Level Constraints)
-
-```sql
-CREATE TRIGGER TriggerName
-BEFORE|AFTER|INSTEAD OF Events(INSERT/UPDATE OF/DELETE ON TableName)
-[ referencing-variables ]
-[ FOR EACH ROW ]
-WHEN ( Condition )
-[ BEGIN ]
-Action
-[ END ];
-
-CREATE TRIGGER Cascade
-After DELETE ON S
-REFERENCING OLD ROW AS O
-FOR EACH ROW
-DELETE FROM R WHERE A = O.B (R.A = S.B)
-
-CREATE TRIGGER Cascade
-After DELETE ON S
-REFERENCING OLD TABLE AS OT
-DELETE FROM R WHERE A IN (SELECT B FROM BT)
 ```
 
 ## Views

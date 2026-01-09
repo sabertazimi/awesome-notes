@@ -1,15 +1,15 @@
 ---
-sidebar_position: 5
+sidebar_position: 10
 tags: [CS, Algorithm, Tree]
 ---
 
 # Tree
 
-## Binary Search Tree
+## BST
 
-Hibbard Deletion
+Hibbard deletion.
 
-## 2-3 Tree
+## 2-3
 
 2-3 Tree is Balance Tree:
 
@@ -19,10 +19,26 @@ Hibbard Deletion
 - **1+2=3node -> 4node** -> 2node
 - 将 4node 结点中间元素移至父结点, 其余 2 元素分离为子 2node 节点
 
-## Red-Black BST
+## Red-Black
 
-- 基于 2-3Tree, 将 3node 用红色标记
-- 关键: 将红色标记向上传递至根部
+- 基于 2-3 tree, 将 3node 用红色标记.
+- 关键: 将红色标记向上传递至根部.
+
+基本性质:
+
+1. 非红即黑.
+2. 根黑.
+3. 叶黑: `T.null` 为黑哨兵.
+4. 红父孩子黑.
+5. 简单路径同黑.
+6. 右孩子不红:
+   - Flip: 父黑两孩红 -> 父红两孩黑.
+   - Left rotate: 父黑右红 -> 父左旋变红, 右孩子变黑.
+
+基本操作:
+
+1. 插入: 插入红点, 旋转 + 重新着色 (反色) 保持红黑性质.
+2. 删除: 删除红点, 旋转 + 重新着色 (反色) 保持红黑性质.
 
 ```java
     // is node x red; false if x is null ?
@@ -269,43 +285,25 @@ Hibbard Deletion
     }
 ```
 
-### 基本性质
+## B
 
-1. 非红即黑
-2. 根黑
-3. 叶黑 e.g. T.null 黑哨兵
-4. 红父孩子黑
-5. 简单路径同黑
-6. 右孩子不红 e.g. 父黑两孩红 -> 父红两孩黑(flip); 父黑右红 -> 父左旋变红, 右孩子变黑(left-rotate)
+- `t`: 每个内部结点至少 `t` 个孩子 (`t-1` 个 key), 至多 `2t` 个孩子 (`2t-1` 个 key).
+- 插入/删除:
+  - 下溯的同时,分裂满结点.
+  - 合并/上溯的同时,合并空结点.
 
-### 基本操作
+## K-Dimensional
 
-1. 插入(插入红点, 旋转+重新着色(反色)保持红黑性质)
-2. 删除(删除红点, 旋转+重新着色(反色)保持红黑性质)
-
-## B Tree
-
-t: 每个内部结点至少 t 个孩子(t-1 个 key), 至多 2t 个孩子(2t-1 个 key)
-
-### 插入/删除
-
-下溯的同时,分裂满结点
+分隔空间数据:
+e.g. 左子树：左下方, 右子树：右上方.
 
 ## Fibonacci Heap
 
 BST + 循环双向链表:
 
-- 一个根树(根结点)循环双向链表
-- n 个孩子循环双向链表: 每个根树的每层结点形成一个循环双向链表
+- 一个根树 (根结点) 循环双向链表.
+- n 个孩子循环双向链表: 每个根树的每层结点形成一个循环双向链表.
 
-## K-Dimensional Tree
+## Edit Distance
 
-- 分隔空间数据
-
-e.g. 左子树：左下方 右子树：右上方
-
-## Tree Edit Distance
-
-### Definition
-
-Tree Edit Distance: 给定 Cost(edit operation) 时的最小编辑费用
+给定 cost (edit operation) 时的最小编辑费用.

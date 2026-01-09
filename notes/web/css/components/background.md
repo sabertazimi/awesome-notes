@@ -1,6 +1,6 @@
 ---
-sidebar_position: 6
-tags: [Web, CSS]
+sidebar_position: 40
+tags: [Web, CSS, Component, Background]
 ---
 
 # Background
@@ -112,6 +112,6 @@ Transparent border with mask composite:
 }
 ```
 
-## Background References
+## References
 
 - Gallery for [background patterns](https://github.com/LeaVerou/css3patterns).

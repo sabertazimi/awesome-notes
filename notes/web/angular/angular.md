@@ -4,9 +4,9 @@ tags: [Web, Angular]
 
 # Angular
 
-## CLI
+## Commands
 
-- [CLI Commands](https://angular.io/cli)
+[Commands](https://angular.io/cli):
 
 ```bash
 npm install -g @angular/cli
@@ -69,7 +69,7 @@ class HeroComponent {
 
 ### Event
 
-parent
+Parent:
 
 ```ts
 import type { OnInit } from '@angular/core'
@@ -88,7 +88,7 @@ export class AppComponent implements OnInit {
 }
 ```
 
-child
+Child:
 
 ```ts
 import { Component, EventEmitter, Input, Output } from '@angular/core'
@@ -144,22 +144,22 @@ class MessageComponent {
 </div>
 ```
 
-### Pipe
+## Pipe
 
-#### Pure Pipe
+### Pure
 
 Angular 只有在它检测到输入值发生了纯变更时才会执行纯管道.
 纯变更是指对原始类型值 (String、Number、Boolean、Symbol) 的更改,
 或者对对象引用 (Date、Array、Function、Object) 的更改.
 Higher performance.
 
-#### Impure Pipe
+### Impure
 
 Angular 会在每个组件的变更检测周期中执行非纯管道.
 非纯管道可能会被调用很多次,
 和每个按键或每次鼠标移动一样频繁.
 
-#### Async Pipe
+### Async
 
 ```html
 <!-- heroes$ is a Observable -->
@@ -190,8 +190,6 @@ class Logger {}
 - state 变化很复杂时，用 action/state 归一化处理
 - data-input 很复杂时，用 RxJS/observable 归一化处理
 - [reactive.how](https://reactive.how)
-
-### Basis
 
 可观察对象可以发送多个任意类型的值 —— 字面量、消息、事件.
 无论这些值是同步发送的还是异步发送的,
@@ -261,7 +259,7 @@ class Component {
 }
 ```
 
-### RxJS Pipe Helper
+### Pipe Helpers
 
 RxJS 提供了 pipe 辅助函数,
 它存在于 Observable 上,
@@ -279,9 +277,7 @@ of(1, 2, 3).pipe(
 )
 ```
 
-### Operator
-
-#### Creation Operator
+### Creation
 
 - 单值: of, empty, never
 - 多值: from
@@ -290,7 +286,7 @@ of(1, 2, 3).pipe(
 - 从 Promise 创建: fromPromise
 - 自定义创建: create
 
-#### Transformation Operator
+### Transformation
 
 - map
 - mapTo
@@ -311,7 +307,7 @@ of(1, 2, 3).pipe(
 只会返回最近一次 HTTP 方法调用的结果,
 以前的那些请求都会被取消和舍弃.
 
-#### Filter Operator
+### Filter
 
 - audit
 - auditTime
@@ -331,7 +327,7 @@ of(1, 2, 3).pipe(
 - subscribeOn
 - ObserveOn
 
-#### Combination Operator
+### Combination
 
 - concat: 保持原来的序列顺序连接两个数据流
 - merge: 合并序列
@@ -340,13 +336,13 @@ of(1, 2, 3).pipe(
 - zip: 取各来源数据流最后一个值合并为对象
 - combineLatest: 取各来源数据流最后一个值合并为数组
 
-#### Multi-Cast Operator
+### Multi-Cast
 
 - MultiCast
 - Publish
 - Share
 
-#### Error Handling Operator
+### Error Handling
 
 - throw
 - catch/catchError
@@ -354,7 +350,7 @@ of(1, 2, 3).pipe(
 - retryWhen
 - finally
 
-#### Utils Operator
+### Utilities
 
 - do/tap
 - delay
@@ -402,23 +398,19 @@ export class AppRoutingModule {}
 
 ## Directives
 
-### Structural Directives
-
-#### For Directive
+### For
 
 ```html
 <li *ngFor="let hero of heroes">{{hero.name}}</li>
 ```
 
-#### If Directive
+### If
 
 ```html
 <div *ngIf="selectedHero">Selected</div>
 ```
 
-### Attribute Directives
-
-#### Class Directive
+### Class
 
 same to `[ngStyle]`
 
@@ -442,8 +434,6 @@ class Component {
 ```
 
 ## Styles
-
-### CSS Class Binding
 
 ```html
 <!-- toggle the "special" class on/off with a property -->

@@ -5,7 +5,7 @@ tags: [Web, Security, CSRF, Vulnerability]
 
 # CSRF
 
-## CSRF Attack
+## Attack
 
 Cross-site request forgery (跨站请求伪造)
 挟制用户在当前已登录的 Web 应用程序上执行**非本意**的操作,
@@ -36,7 +36,7 @@ Cross-site request forgery (跨站请求伪造)
 
 :::
 
-## CSRF Protection
+## Protection
 
 - `REST` (representational state transfer) 原则:
   - `GET` request: only read objects, 确保无副作用.

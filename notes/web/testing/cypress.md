@@ -3,13 +3,13 @@ sidebar_position: 3
 tags: [Web, Testing, Cypress]
 ---
 
-# Cypress Testing
+# Cypress
 
 When it comes to test heavy visual features,
 (e.g. fixed navigation based on window scroll event),
 E2E testing helps a lot.
 
-## Cypress Installation
+## Installation
 
 ```bash
 yarn add -D cypress typescript
@@ -18,7 +18,7 @@ yarn cypress open
 
 `cypress open` will initialize the cypress folder structure.
 
-## Cypress Configuration
+## Configuration
 
 `cypress/tsconfig.json`:
 
@@ -100,7 +100,7 @@ const config = {
 }
 ```
 
-## Basic Cypress Testing
+## Getting Started
 
 `cypress/support/commands.ts`:
 
@@ -185,7 +185,7 @@ describe('payment', () => {
 })
 ```
 
-## Cypress Principles
+## Principles
 
 - Flake resistance and retry-ability:
   don't wait for fixed time, wait for specific elements (`cy.as`):
@@ -196,9 +196,7 @@ describe('payment', () => {
   use `cy.then`/`cy.wrap` for
   [async nature of Cypress](https://learn.cypress.io/cypress-fundamentals/understanding-the-asynchronous-nature-of-cypress).
 
-## Cypress Commands
-
-### Cypress Basic Commands
+## Commands
 
 - `cy.its`: get property value on previously yielded subject.
 - `cy.invoke`: invoke function on previously yielded subject.
@@ -211,7 +209,83 @@ cy.wait('@publicTransactions')
   .invoke('slice', 0, 5)
 ```
 
-### Cypress Action Commands
+Add custom commands:
+
+```ts
+/// <reference types="cypress" />
+
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      findByRole: (role: string) => Chainable<JQuery<HTMLElement>>
+      findByTestId: (testId: string) => Chainable<JQuery<HTMLElement>>
+      getByRole: (role: string) => Chainable<JQuery<HTMLElement>>
+      getByTestId: (testId: string) => Chainable<JQuery<HTMLElement>>
+    }
+  }
+}
+
+Cypress.Commands.add(
+  'findByRole',
+  { prevSubject: 'element' },
+  (subject, role) => {
+    return cy.wrap(subject, { log: false }).find(`[role="${role}"]`)
+  }
+)
+
+Cypress.Commands.add(
+  'findByTestId',
+  { prevSubject: 'element' },
+  (subject, testId) => {
+    return cy.wrap(subject, { log: false }).find(`[data-testid="${testId}"]`)
+  }
+)
+
+Cypress.Commands.add('getByRole', (role) => {
+  return cy.get(`[role="${role}"]`)
+})
+
+Cypress.Commands.add('getByTestId', (testId) => {
+  return cy.get(`[data-testid="${testId}"]`)
+})
+```
+
+Custom command [log](https://filiphric.com/improve-your-custom-command-logs-in-cypress):
+
+```ts
+Cypress.Commands.add('take', (input: string) => {
+  let element: JQuery<HTMLElement> | HTMLElement[]
+  let count: number
+
+  const log = Cypress.log({
+    autoEnd: false,
+    consoleProps() {
+      return {
+        selector: input,
+        Yielded: element,
+        Elements: count,
+      }
+    },
+    displayName: 'take',
+    name: 'Get by [data-cy] attribute',
+  })
+
+  cy.get(`[data-cy=${input}]`, { log: false }).then(($el) => {
+    element = Cypress.dom.getElements($el)
+    count = $el.length
+    log.set({ $el })
+    log.snapshot().end()
+  })
+
+  cy.on('fail', (err) => {
+    log.error(err)
+    log.end()
+    throw err
+  })
+})
+```
+
+### Action
 
 - `cy.click`.
 - `cy.dbclick`.
@@ -228,7 +302,7 @@ cy.wait('@publicTransactions')
 - `cy.scrollTo`.
 - `cy.scrollIntoView`.
 
-### Cypress Network Commands
+### Network
 
 - `cy.intercept`: mock API response.
 
@@ -300,83 +374,7 @@ describe('GET', () => {
 })
 ```
 
-### Cypress Custom Command
-
-```ts
-/// <reference types="cypress" />
-
-declare global {
-  namespace Cypress {
-    interface Chainable {
-      findByRole: (role: string) => Chainable<JQuery<HTMLElement>>
-      findByTestId: (testId: string) => Chainable<JQuery<HTMLElement>>
-      getByRole: (role: string) => Chainable<JQuery<HTMLElement>>
-      getByTestId: (testId: string) => Chainable<JQuery<HTMLElement>>
-    }
-  }
-}
-
-Cypress.Commands.add(
-  'findByRole',
-  { prevSubject: 'element' },
-  (subject, role) => {
-    return cy.wrap(subject, { log: false }).find(`[role="${role}"]`)
-  }
-)
-
-Cypress.Commands.add(
-  'findByTestId',
-  { prevSubject: 'element' },
-  (subject, testId) => {
-    return cy.wrap(subject, { log: false }).find(`[data-testid="${testId}"]`)
-  }
-)
-
-Cypress.Commands.add('getByRole', (role) => {
-  return cy.get(`[role="${role}"]`)
-})
-
-Cypress.Commands.add('getByTestId', (testId) => {
-  return cy.get(`[data-testid="${testId}"]`)
-})
-```
-
-[Custom command log](https://filiphric.com/improve-your-custom-command-logs-in-cypress):
-
-```ts
-Cypress.Commands.add('take', (input: string) => {
-  let element: JQuery<HTMLElement> | HTMLElement[]
-  let count: number
-
-  const log = Cypress.log({
-    autoEnd: false,
-    consoleProps() {
-      return {
-        selector: input,
-        Yielded: element,
-        Elements: count,
-      }
-    },
-    displayName: 'take',
-    name: 'Get by [data-cy] attribute',
-  })
-
-  cy.get(`[data-cy=${input}]`, { log: false }).then(($el) => {
-    element = Cypress.dom.getElements($el)
-    count = $el.length
-    log.set({ $el })
-    log.snapshot().end()
-  })
-
-  cy.on('fail', (err) => {
-    log.error(err)
-    log.end()
-    throw err
-  })
-})
-```
-
-## Cypress Plugin
+## Plugins
 
 Setup `TypeScript` to transpile tests:
 
@@ -473,7 +471,7 @@ it('should be accessible', () => {
 - Cypress accessibility testing [plugin](https://github.com/component-driven/cypress-axe).
 - Cypress visual regression testing [plugin](https://github.com/percy/percy-cypress).
 
-## Cypress References
+## References
 
 - Cypress official [guide](https://learn.cypress.io).
 - Cypress CI [action](https://github.com/cypress-io/github-action).

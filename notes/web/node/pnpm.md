@@ -1,11 +1,11 @@
 ---
 sidebar_position: 4
-tags: [Web, Node.js, PNPM]
+tags: [Web, Node.js, Package Manager, PNPM]
 ---
 
 # PNPM
 
-## PNPM Installation
+## Installation
 
 Using Corepack or npm (recommended installation):
 
@@ -37,7 +37,7 @@ chmod +x ./pnpm
 ./pnpm setup --force
 ```
 
-## PNPM Configuration
+## Configuration
 
 ```bash
 pnpm config set registry https://registry.npmmirror.com/

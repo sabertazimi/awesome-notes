@@ -1,6 +1,6 @@
 ---
 sidebar_position: 6
-tags: [Web, React, Hook]
+tags: [Web, React, Hook, Context]
 ---
 
 # Context
@@ -17,7 +17,7 @@ tags: [Web, React, Hook]
 - Context 中只定义被大多数组件所共用的属性,
   use context to avoid **Prop Drilling**.
 
-## useContext Dispatcher
+## Dispatcher
 
 - `HooksDispatcherOnMount.useContext = readContext`.
 - `HooksDispatcherOnUpdate.useContext = readContext`.
@@ -185,7 +185,7 @@ function readContext<T>(
 }
 ```
 
-## useContext Usage
+## useContext
 
 ```tsx
 import {

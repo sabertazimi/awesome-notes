@@ -5,7 +5,7 @@ sidebar_position: 17
 
 # Vuex
 
-## Vuex Types
+## Types
 
 - Vuex types [guide](https://dev.to/3vilarthas/vuex-typescript-m4j).
 

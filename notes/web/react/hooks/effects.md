@@ -1,16 +1,11 @@
 ---
 sidebar_position: 7
-tags: [Web, React, Hook]
+tags: [Web, React, Hook, Effect]
 ---
 
 # Effects
 
-## useEffect
-
-- `useEffect` complete [guide](https://overreacted.io/a-complete-guide-to-useeffect).
-- `useEffect` usage [guide](https://react.dev/learn/you-might-not-need-an-effect).
-
-## useEffect Dispatcher
+## Dispatcher
 
 ```ts
 function mountEffect(
@@ -157,14 +152,14 @@ root.render(<App />)
 // 2 -> Parent useEffect normal runs (due to dependency on count)
 ```
 
-## useEffect Lifecycle
+## Lifecycle
 
 1. React renders UI for current props/state to screen.
 2. React cleans up the effect for prev props/state.
 3. React runs the effect for current props/state
    (`useEffect` got invoked after `componentDidMount`).
 
-## useEffect Nasty Loop
+## Nasty Loop
 
 The effect hook runs when the component `mounts`
 but also when the component `updates`.
@@ -173,7 +168,7 @@ the component updates and the effect runs again.
 It fetches the data again and again.
 That’s a bug and needs to be avoided.
 
-## useEffect Deps List
+## Dependencies List
 
 无论是将组件编写为类还是函数,
 都必须为 effect 响应所有 props 和 state 的更新
@@ -188,7 +183,7 @@ to avoid activating it on component updates
 but **only for the mounting** of the component.
 For listeners binding, use `[]` deps list should be better.
 
-### useEffect Omit Deps
+### Omits
 
 Omit stable values from the deps list:
 
@@ -206,7 +201,7 @@ export default function App() {
 }
 ```
 
-### useEffect Primitive Deps
+### Primitives
 
 Primitive values are [better](https://react.dev/learn/removing-effect-dependencies):
 
@@ -226,7 +221,7 @@ function ChatRoom({ options }) {
 }
 ```
 
-### useEffect Functions Deps
+### Functions
 
 Functions in `useEffect`:
 
@@ -273,7 +268,7 @@ function useDataApi(initialUrl, initialData) {
 }
 ```
 
-### useEffect Compare Deps
+### Comparison
 
 ```ts
 import { DependencyList, EffectCallback, useEffect, useRef } from 'react'
@@ -313,7 +308,7 @@ export default function useDeepCompareEffect(
 }
 ```
 
-## useEffect Closure
+## Closure
 
 - useEffect Hook 会丢弃上一次渲染结果,
   它会清除上一次 effect,
@@ -373,7 +368,7 @@ function useInterval(callback, delay) {
 }
 ```
 
-## useEffect State
+## State
 
 - 如 `UseEffect Closure` 所述, 每次调用 useEffect 时,
   会捕获那一次 render 时的 props 和 state.
@@ -449,7 +444,7 @@ class Counter {
 // You clicked 5 times
 ```
 
-## useEffect Cleanup
+## Cleanup
 
 - Avoid memory leaks.
 - Prevent unexpected errors.
@@ -543,7 +538,7 @@ and exposes bugs like race conditions early.
 
 :::
 
-## useEffect Usage
+## useEffect
 
 Effects are typically used to
 [synchronize with external system](https://react.dev/learn/synchronizing-with-effects):
@@ -694,3 +689,8 @@ In commit phase, the ordering of effects are:
 
 It is synchronous from 1 to 3, the last step of Passive Effects are run
 [in next tick](https://jser.dev/react/2022/01/19/lifecycle-of-effect-hook/#flushpassiveeffects).
+
+## References
+
+- `useEffect` complete [guide](https://overreacted.io/a-complete-guide-to-useeffect).
+- `useEffect` usage [guide](https://react.dev/learn/you-might-not-need-an-effect).

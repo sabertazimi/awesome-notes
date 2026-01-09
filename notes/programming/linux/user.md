@@ -9,7 +9,7 @@ tags: [Programming, OS, Linux, Security, User, Group]
 - `last`: 显示所有用户登陆信息(/var/log/wtmp)
 - `lastlog`: 显示所有用户最后一次登陆时间(/var/log/lastlog)
 
-## Group Management
+## 组
 
 ### 创建组
 
@@ -37,7 +37,7 @@ cat /etc/passwd | awk -F [:] ‘{print $4}’
 It is a plain text-based file containing information like
 username, user ID and group ID.
 
-## User Management
+## 用户
 
 ### 增加用户
 
@@ -111,7 +111,7 @@ finger apacheUser 查看单个用户信息
 - passwd -u 用户名 解锁用户
 - passwd -d 用户名 清除用户密码
 
-## Common Privilege Management
+## Common Privilege
 
 - chown 用户名：组名 文件名
 - chgrp 组名 文件名
@@ -120,7 +120,7 @@ finger apacheUser 查看单个用户信息
 - 目录默认权限 = 目录默认最大权限 rwx(777) 减去 umask 值
 - `id <username>`
 
-## ACL Privilege Management
+## ACL Privilege
 
 - 查看分区 ACL 权限是否开启 dumpe2fs -h 设备分区名
 - 临时开启分区 ACL 权限 mount -o remount,acl 设备分区名
@@ -129,7 +129,7 @@ finger apacheUser 查看单个用户信息
 - setfacl -m (d:默认权限) u/g:用户名/组名:权限(rwx) 文件名
 - getfacl 文件名——查看文件 ACL 权限
 
-## Sudo Privilege Management
+## Sudo Privilege
 
 /etc/sudoers.tmp
 

@@ -16,7 +16,7 @@ tags: [Programming, Design, Design Pattern, Creation Pattern]
 
 :::
 
-## Class Singleton
+## Class
 
 ```ts
 class Singleton {
@@ -49,7 +49,7 @@ class Singleton {
 const instance = Singleton.getInstance()
 ```
 
-## Closure Singleton
+## Closure
 
 ```ts
 const createLoginLayer = (function (creator) {

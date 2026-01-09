@@ -5,143 +5,7 @@ tags: [Web, JavaScript, ECMAScript, Object]
 
 # Property
 
-## Object Constructor
-
-- 首字母大写.
-- 所有函数 (包括构造函数) 有 `prototype` 属性.
-
-### Object Literal Creation
-
-对象字面量由 `Object` 构造函数隐式构造;
-
-```ts
-const obj = {
-  name: 'sabertazimi',
-}
-
-console.log(obj[[proto]] === Object.prototype) // true
-```
-
-### Object New Constructor
-
-`new` 构造函数作用原理如下:
-
-- 形成原型链: 隐式原型指向构造函数的原型对象 `obj.__proto__ = constructor.prototype`
-- 构造函数对象 (Constructor) 与原型对象 (Prototype) 之间形成闭环:
-  - `Constructor.prototype = Prototype`.
-  - `Prototype.constructor = Constructor`.
-
-```ts
-function newInstance(constructor, ...args) {
-  // var this = Object.create(Person.prototype);
-  // this.__proto__ = F.prototype
-  // F.prototype = Person.prototype
-  // 即 this.__proto__ = Person.prototype;
-  const obj = {}
-  obj[[proto]] = constructor.prototype
-  constructor.apply(obj, args)
-  return obj
-}
-
-// =>
-const instance = new Constructor(arguments)
-```
-
-```ts
-function Employee(name) {
-  this.name = name
-  this.getName = function () {
-    return this.name
-  }
-}
-
-const employee = newInstance(Employee, 'Jack')
-// =>
-const employee = new Employee('Jack')
-```
-
-`new.target`:
-
-```ts
-function Foo() {
-  if (!new.target)
-    throw new Error('Foo() must be called with new')
-}
-```
-
-```ts
-function Waffle() {
-  // 当未使用 `new` 关键字时, `this` 指向全局对象
-  if (!(this instanceof Waffle))
-    return new Waffle()
-
-  // 正常构造函数
-  this.tastes = 'yummy'
-}
-```
-
-### Object Create Constructor
-
-- 原型式继承非常适合不需要单独创建构造函数, 但仍然需要在对象间共享信息的场合.
-- 属性中包含的引用值始终会在相关对象间共享.
-
-```ts
-Object.create = function (o) {
-  if (arguments.length > 1) {
-    throw new Error(
-      'Object.create implementation only accepts the first parameter.'
-    )
-  }
-
-  function F() {}
-  F.prototype = o
-  return new F()
-}
-// 1. `F.prototype === o`.
-// 2. `new F()` lead to `f.__proto__ === F.prototype`.
-// Finally: `f.__proto__ === o`.
-```
-
-### Constructor Return Value
-
-- 返回 `this` 或 user-defined literal object.
-- 当返回值为**基本类型**时, 仍然可得到 `this` 指针指向的原有对象.
-
-```ts
-function ObjectMaker() {
-  this.name = 'This is it'
-  // user-defined literal object
-  // 直接忽略 this.name.
-  const that = {}
-  that.name = 'And that\'s that'
-  return that
-}
-```
-
-```ts
-function MyClass() {
-  this.name = 'sven'
-  return 'anne' // 返回 string.
-}
-const obj = new MyClass()
-console.log(obj.name) // 输出: sven .
-```
-
-### Constructor Instance Detection
-
-若在实例对象的原型链 (`__proto__`) 中能找到构造函数的 `prototype` 属性 (Prototype 对象),
-则返回`true`, 否则返回`false`:
-
-```ts
-// true only if
-// 1. Foo.__proto__ === Bar.prototype
-// 2. Foo.__proto__......__proto__ === Bar.prototype
-console.log(Foo instanceof Bar)
-```
-
-## Object Property Descriptor
-
-### Property Descriptor Definition
+## Descriptor
 
 对象的属性描述符:
 
@@ -257,8 +121,6 @@ Object keys 遍历顺序:
 - 首先遍历所有数值键, 按照数值升序排列.
 - 其次遍历所有字符串键, 按照加入时间升序排列.
 - 最后遍历所有 `Symbol` 键, 按照加入时间升序排列.
-
-### Property Descriptor Functions
 
 - `Object.create(prototype[, descriptors])`.
 
@@ -489,33 +351,22 @@ console.log(obj.foo.qux)
 // 'abc'
 ```
 
-## Private Property and Method
+## Private
 
-### Private Property
-
-实现方式: 闭包
+利用闭包实现私有属性,
+返回基本类型值/**引用**类型**深拷贝** (POLA 最低授权原则):
 
 ```ts
 function Gadget() {
   // private member
   const name = 'iPod'
+  const pref = {}
+
   // public function
   this.getName = function () {
     return name
   }
-}
-```
-
-### Private Method
-
-getter: 返回基本类型值/**引用**类型**深拷贝**(POLA 最低授权原则).
-
-```ts
-function Gadget() {
-  // private member
-  const pref = {}
-  // public function
-  this.getPref = function () {
+  this.getPref = function (pref) {
     return pref.clone()
   }
 }
@@ -543,29 +394,18 @@ const obj = (function () {
 })()
 ```
 
-## Static Property and Method
+## Static
 
-### Static Property
-
-实现方式: 闭包/原型代理
-
-### Static Method
-
-直接向构造函数添加方法
+利用闭包/原型代理实现静态属性,
+直接向构造函数添加方法:
 
 ```ts
 Object.isArray = function () {}
 ```
 
-## Object Property and Method
+## Object
 
-### Object Property
-
-编写函数时,一般用[]访问对象属性
-
-### Object Method
-
-为 prototype 添加方法,可以通过实现语法糖 method()简化代码(链模式)
+可以通过实现语法糖 `method()` 简化代码 (链模式), 为 `prototype` 添加方法:
 
 ```ts
 if (typeof Function.prototype.method !== 'function') {
@@ -574,9 +414,7 @@ if (typeof Function.prototype.method !== 'function') {
     return this
   }
 }
-```
 
-```ts
 const Person = function (name) {
   this.name = name
 }

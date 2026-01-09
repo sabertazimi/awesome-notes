@@ -1,11 +1,11 @@
 ---
 sidebar_position: 15
-tags: [Web, TypeScript]
+tags: [Web, TypeScript, Utility]
 ---
 
-# Utility Types
+# Utility
 
-## Null Types
+## Null
 
 ```ts
 type Nullish = null | undefined
@@ -14,14 +14,14 @@ type NonUndefinedable<A> = A extends undefined ? never : A
 type NonNullable<T> = T extends null | undefined ? never : T
 ```
 
-## Boolean Types
+## Boolean
 
 ```ts
 type Falsy = false | '' | 0 | null | undefined
 const isFalsy = (val: unknown): val is Falsy => !val
 ```
 
-## Primitive Types
+## Primitive
 
 ```ts
 type Primitive = string | number | boolean | bigint | symbol | null | undefined
@@ -44,7 +44,7 @@ function isPrimitive(val: unknown): val is Primitive {
 }
 ```
 
-## Promise Types
+## Promise
 
 ```ts
 // TypeScript 4.5.
@@ -116,7 +116,7 @@ type DeepSettled<T>
         : T
 ```
 
-## Proxy Types
+## Proxy
 
 ```ts
 interface Proxy<T> {
@@ -127,7 +127,7 @@ interface Proxy<T> {
 type Proxify<T> = { [P in keyof T]: Proxy<T[P]> }
 ```
 
-## Recursive Types
+## Recursive
 
 ```ts
 type DeepReadonly<T> = {
@@ -147,7 +147,7 @@ type DeepRequired<T> = {
 }
 ```
 
-## Nominal Brand Types
+## Nominal Brand
 
 [Nominal type system](https://github.com/microsoft/TypeScript/issues/202):
 
@@ -188,7 +188,7 @@ type Flavor<F extends string, T> = T & {
 }
 ```
 
-## Lodash Types
+## Lodash
 
 ```ts
 type Flatten<Type> = Type extends Array<infer Item> ? Item : Type

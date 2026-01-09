@@ -170,7 +170,7 @@ if (!Object.is) {
 }
 ```
 
-## Conditional Expression
+## Conditional
 
 养成使用分号结束句子的习惯, 需分行显示的语句必须确保单行不会形成完整语义:
 
@@ -178,37 +178,7 @@ if (!Object.is) {
 const i = a ? 1 : b ? 2 : c ? 3 : 4
 ```
 
-## Add Operator
-
-`a + b`:
-
-- 如果有一个是对象, 则遵循对象对原始值的转换过程:
-  - Date 对象直接调用 toString 完成转换.
-  - 其他对象通过 valueOf 转化,
-    如果转换不成功则调用 toString.
-- 如果两个都是对象, 两个对象都遵循步骤 1 转换到字符串.
-- 两个数字, 进行算数运算.
-- 两个字符串, 直接拼接.
-- 一个字符串一个数字, 直接拼接为字符串.
-
-## Dot Operator
-
-`.` 优先级高于 `=`:
-`el.data` 优先求值, 引用 `old`, 指向 `old.data`.
-`5` => `el`, `5` => `el.data` (`old.data`).
-
-```ts
-let el = { data: 1 }
-const old = el
-
-el.data = el = 5
-console.log(el) // 5
-console.log(el.data) // undefined
-console.log(old) // { data: 5 }
-console.log(old.data) // 5
-```
-
-## Logical Operator
+## Logical
 
 - Optional Chaining Operator `?.`:
   Legible property chains that don't throw an error
@@ -225,7 +195,37 @@ console.log(old.data) // 5
 | `a &&= b`           | `a && (a = b)`   | Truthy                |
 | `a ??= b`           | `a ?? (a = b)`   | Nullish               |
 
-## Delete Operator
+## Dot
+
+`.` 优先级高于 `=`:
+`el.data` 优先求值, 引用 `old`, 指向 `old.data`.
+`5` => `el`, `5` => `el.data` (`old.data`).
+
+```ts
+let el = { data: 1 }
+const old = el
+
+el.data = el = 5
+console.log(el) // 5
+console.log(el.data) // undefined
+console.log(old) // { data: 5 }
+console.log(old.data) // 5
+```
+
+## Add
+
+`a + b`:
+
+- 如果有一个是对象, 则遵循对象对原始值的转换过程:
+  - Date 对象直接调用 toString 完成转换.
+  - 其他对象通过 valueOf 转化,
+    如果转换不成功则调用 toString.
+- 如果两个都是对象, 两个对象都遵循步骤 1 转换到字符串.
+- 两个数字, 进行算数运算.
+- 两个字符串, 直接拼接.
+- 一个字符串一个数字, 直接拼接为字符串.
+
+## Delete
 
 `delete` operator returns a boolean value:
 
@@ -243,6 +243,6 @@ console.log(delete name) // false
 console.log(delete age) // true
 ```
 
-## Operator References
+## References
 
 - [Operator Lookup](https://www.joshwcomeau.com/operator-lookup)

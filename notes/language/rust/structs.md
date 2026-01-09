@@ -37,7 +37,7 @@ let user2 = User {
 };
 ```
 
-### Tuple Struct
+### Tuple
 
 ```rust
 struct Color(i32, i32, i32);
@@ -56,7 +56,7 @@ let origin = Point(0, 0, 0);
 struct Meters(u32);
 ```
 
-### Unit-like Struct
+### Unit
 
 ```rust
 struct AlwaysEqual;
@@ -209,7 +209,39 @@ fn main() {
 }
 ```
 
-### Orphan Rule
+- `std::fmt::Display` (better than `std::string::ToString`).
+- `std::fmt::Debug`.
+- `std::ops::Add`/`Mul`/`Div`/`BitAnd`/`BitOr`/`Not`/`Neg`: operators overload.
+- `std::ops::Fn`/`FnMut`/`FnOnce`.
+- `std::ops::Deref`.
+- `std::ops::Drop`.
+- `std::clone::Clone`.
+- `std::iter::Iterator`.
+
+`std::prelude`:
+
+- `std::marker::{Copy, Send, Sized, Sync, Unpin}`.
+- `std::ops::{Drop, Fn, FnMut, FnOnce}`.
+- `std::mem::drop`.
+- `std::boxed::Box`.
+- `std::borrow::ToOwned`.
+- `std::clone::Clone`.
+- `std::cmp::{PartialEq, PartialOrd, Eq, Ord}`.
+- `std::convert::{AsRef, AsMut, Into, From}`.
+- `std::default::Default`.
+- `std::iter::{Iterator, Extend, IntoIterator, DoubleEndedIterator, ExactSizeIterator}`.
+- `std::option::Option::{self, Some, None}`.
+- `std::result::Result::{self, Ok, Err}`.
+- `std::string::{String, ToString}`.
+- `std::vec::Vec`.
+- `std::convert::{TryFrom, TryInto}`.
+- `std::iter::FromIterator`.
+
+```rust
+use std::io::prelude::*;
+```
+
+### Orphan
 
 Rust can’t implement external traits on external types:
 can’t implement the `Display` trait on `Vec<T>` in `some_package` crate,
@@ -217,7 +249,7 @@ because `Display` and `Vec<T>` are **both** defined out of `some_package`.
 This restriction is part of a property of programs called coherence,
 ensures that other people’s code can’t break your code and vice versa.
 
-### Trait Bound
+### Bound
 
 ```rust
 fn notify(item: &impl Summary) {}
@@ -239,7 +271,7 @@ trait SomeTrait: BoundTrait {}
 impl<T: Display> ToString for T {}
 ```
 
-### Trait Derive
+### Derive
 
 ```rust
 #[derive(Debug)]
@@ -281,7 +313,7 @@ fn comp_sci_student_greeting(student: &dyn CompSciStudent) -> String {
 }
 ```
 
-### Trait Object
+### Object
 
 - Define trait object:
   - `Box<dyn some_trait>`.
@@ -356,37 +388,3 @@ fn difference<C: Container>(container: &C) {}
 
 For all **generic trait**,
 use associated types better than `<T>`.
-
-### Common Traits
-
-- `std::fmt::Display` (better than `std::string::ToString`).
-- `std::fmt::Debug`.
-- `std::ops::Add`/`Mul`/`Div`/`BitAnd`/`BitOr`/`Not`/`Neg`: operators overload.
-- `std::ops::Fn`/`FnMut`/`FnOnce`.
-- `std::ops::Deref`.
-- `std::ops::Drop`.
-- `std::clone::Clone`.
-- `std::iter::Iterator`.
-
-`std::prelude`:
-
-- `std::marker::{Copy, Send, Sized, Sync, Unpin}`.
-- `std::ops::{Drop, Fn, FnMut, FnOnce}`.
-- `std::mem::drop`.
-- `std::boxed::Box`.
-- `std::borrow::ToOwned`.
-- `std::clone::Clone`.
-- `std::cmp::{PartialEq, PartialOrd, Eq, Ord}`.
-- `std::convert::{AsRef, AsMut, Into, From}`.
-- `std::default::Default`.
-- `std::iter::{Iterator, Extend, IntoIterator, DoubleEndedIterator, ExactSizeIterator}`.
-- `std::option::Option::{self, Some, None}`.
-- `std::result::Result::{self, Ok, Err}`.
-- `std::string::{String, ToString}`.
-- `std::vec::Vec`.
-- `std::convert::{TryFrom, TryInto}`.
-- `std::iter::FromIterator`.
-
-```rust
-use std::io::prelude::*;
-```

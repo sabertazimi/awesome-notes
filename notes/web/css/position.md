@@ -1,23 +1,23 @@
 ---
-sidebar_position: 8
-tags: [Web, CSS, Layout]
+sidebar_position: 12
+tags: [Web, CSS, Layout, Position, Static, Relative, Absolute, Fixed, Sticky, Anchor]
 ---
 
 # Position
 
-## Static Position
+## Static
 
 - Normal flow.
 - `top`/`bottom`/`left`/`right`/`inset`/`z-index` have **no effect**.
 
-## Relative Position
+## Relative
 
 - 使元素相对于 `static` 布局.
 - 可使用 `top`/`bottom`/`left`/`right`/`inset` 属性进行定位.
 - 相对方向 (opposite) 的定位同时设置: `top` 覆盖 `bottom`, `left` 覆盖 `right`.
 - 初始位置被保留 (仍占用原始空间), 不脱离文档流.
 
-## Absolute Position
+## Absolute
 
 - 使元素相对于 [`containing block`](https://developer.mozilla.org/docs/Web/CSS/Containing_block#identifying_the_containing_block)
   布局:
@@ -88,7 +88,7 @@ tags: [Web, CSS, Layout]
 </html>
 ```
 
-## Fixed Position
+## Fixed
 
 - 使元素相对于 [`containing block`](https://developer.mozilla.org/docs/Web/CSS/Containing_block#identifying_the_containing_block)
   布局:
@@ -106,7 +106,7 @@ tags: [Web, CSS, Layout]
   - `inline-table` computed to `table`.
   - `inline`/`inline-block`/`table-*` computed to `block`.
 
-## Sticky Position
+## Sticky
 
 [`position: sticky` + `top: XXX`](https://developer.mozilla.org/docs/Learn/CSS/CSS_layout/Positioning#sticky_positioning):
 
@@ -139,16 +139,16 @@ tags: [Web, CSS, Layout]
 }
 ```
 
-## Percentage Position
+## Percentage
 
 Positioned elements percentage `top`/`bottom`/`left`/`right`/`inset`
 calculate by containing block `height`:
 
 If `containing block` `height` is `auto`, it calculated to `0`.
 
-## Anchor Position
+## Anchor
 
-[Anchor positioning](https://webkit.org/blog/17240/a-gentle-introduction-to-anchor-positioning):
+Anchor [positioning](https://webkit.org/blog/17240/a-gentle-introduction-to-anchor-positioning):
 
 ```css
 .profile-button {
@@ -178,6 +178,6 @@ If `containing block` `height` is `auto`, it calculated to `0`.
 }
 ```
 
-## Position References
+## References
 
 - `position` property impact on [`display` items](https://dev.to/melnik909/css-isnt-magic-all-tips-about-the-position-property-to-avoid-common-mistakes-398m).

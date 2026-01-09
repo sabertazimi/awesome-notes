@@ -19,7 +19,7 @@ Redux 中只有一个全局唯一 store 状态树, 且由 reducers 创建 store.
 export default appStore = createStore(rootReducers, initState)
 ```
 
-### Create Store
+### Creation
 
 ```ts
 import { applyMiddleware, createStore } from 'redux'
@@ -46,7 +46,7 @@ export default function configureStore(preloadedState) {
 }
 ```
 
-### Configure Store
+### Configuration
 
 By default, `configureStore` from Redux Toolkit will:
 
@@ -89,7 +89,7 @@ export default function configureAppStore(preloadedState) {
 - reducer 只保存最基本的 state, 可计算出的 state 放在 mapStateToProps(selector) 中直接计算后绑定至 props
 - 将数据保存在 Redux 存储中, 并在组件内部保持 UI 相关状态
 
-### Persisted State
+### Persistence
 
 ```ts
 // localStorage.getItem('state')/localStorage.setItem('state', serializedState)
@@ -105,7 +105,7 @@ appStore.subscribe(
 )
 ```
 
-### Normalized State
+### Normalization
 
 [Redux normalizing state shape](https://redux.js.org/usage/structuring-reducers/normalizing-state-shape):
 
@@ -281,7 +281,7 @@ const normalizedBlogPosts = {
 }
 ```
 
-#### Entity Adapter Tool
+### Entity Adapter
 
 [createEntityAdapter](https://redux-toolkit.js.org/api/createEntityAdapter):
 

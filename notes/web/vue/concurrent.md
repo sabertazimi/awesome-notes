@@ -1,5 +1,5 @@
 ---
-tags: [Web, Vue, Suspense]
+tags: [Web, Vue, Concurrent, Asynchronous, Suspense]
 sidebar_position: 14
 ---
 

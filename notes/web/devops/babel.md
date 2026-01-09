@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 11
 tags: [Web, DevOps, Babel]
 ---
 
@@ -10,11 +10,7 @@ babel example.js -o compiled.js
 babel src -d lib -s
 ```
 
-## Babel Node
-
-A read-eval-print loop(REPL) can replace node REPL.
-
-## Babel Core
+## Core
 
 提供 babel 转码 API
 
@@ -44,14 +40,7 @@ babel.transformFromAst(ast, code, options)
 // => { code, map, ast }
 ```
 
-## CodeMod Tool
-
-Use Babel to refactor code:
-
-- [JSCodeshift](https://github.com/facebook/jscodeshift)
-- [ReactCodemod](https://github.com/reactjs/react-codemod)
-
-## Babel Transform Plugin
+## Transform
 
 - Visitor pattern with Babel.
 - Named `babel-plugin-transform-xxx`.
@@ -104,7 +93,7 @@ Babel plugins:
 
 - Define [plugin](https://github.com/FormidableLabs/babel-plugin-transform-define).
 
-## Babel Preset Plugin
+## Preset
 
 - Just like `.babelrc.js`.
 - Named `babel-preset-xxx`.
@@ -159,3 +148,10 @@ module.exports = function buildMeactPreset(context, options) {
   }
 }
 ```
+
+## CodeMod
+
+Use Babel to refactor code:
+
+- [JSCodeshift](https://github.com/facebook/jscodeshift)
+- [ReactCodemod](https://github.com/reactjs/react-codemod)

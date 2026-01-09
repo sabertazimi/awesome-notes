@@ -1,9 +1,9 @@
 ---
-sidebar_position: 39
+sidebar_position: 55
 tags: [Web, JavaScript, ECMAScript, Media]
 ---
 
-# Web Media
+# Media
 
 ## Oscillator
 
@@ -47,7 +47,7 @@ function play(type, delay, pitch, duration) {
 }
 ```
 
-## Music Data
+## Music
 
 ```ts
 const sampleSize = 1024 // number of samples to collect before analyzing data
@@ -112,7 +112,7 @@ function stopSound() {
 }
 ```
 
-## Audio Bar Chart
+## Audio
 
 - [AnalyserNode.getByteFrequencyData API](https://developer.mozilla.org/docs/Web/API/AnalyserNode/getByteFrequencyData)
 - [Github Demo](https://github.com/bogdan-cornianu/swave/blob/master/src/visualizer.ts)
@@ -150,8 +150,8 @@ function draw() {
 draw()
 ```
 
-## Media Session
+## References
 
-- [W3C Media Session Specification](https://w3c.github.io/mediasession)
-- [MDN Media Session Documentation](https://developer.mozilla.org/docs/Web/API/MediaSession)
-- [Google Media Session Blog](https://web.dev/media-session)
+- W3C media session [specification](https://w3c.github.io/mediasession)
+- MDN media session [documentation](https://developer.mozilla.org/docs/Web/API/MediaSession)
+- Google media session [blog](https://web.dev/media-session)

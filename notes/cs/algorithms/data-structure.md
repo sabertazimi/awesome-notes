@@ -7,14 +7,14 @@ tags: [CS, Algorithm, DataStructure]
 
 ## Array
 
-- 可以利用数组元素的正负性表示存在性（或其他特殊意义）
+可以利用数组元素的正负性表示存在性 (或其他特殊意义).
 
-### Array Two Pointers
+### Two Pointers
 
 - 可以在**有穷时间内**判断是否存在**循环**: 一个快指针, 一个慢指针, 当两者相遇时, 表示存在循环.
 - Slide Window: `window = [lo, hi]`.
 
-### Array Float Pointer
+### Float Pointer
 
 利用浮动指针解决相关问题:
 
@@ -23,8 +23,6 @@ tags: [CS, Algorithm, DataStructure]
 
 ## List
 
-### List Two Pointers
-
 Slow and fast pointer:
 
 - Judge cycle.
@@ -32,9 +30,9 @@ Slow and fast pointer:
 
 ## Stack
 
-### Monotonic Stack
+### 单调栈
 
-单调栈: 寻找下一个更小/更大 (Smaller/Greater) 元素.
+寻找下一个更小/更大 (Smaller/Greater) 元素.
 
 ```ts
 const stack: number[] = []

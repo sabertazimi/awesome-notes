@@ -5,7 +5,7 @@ tags: [Web, Security, SQL, Injection, Vulnerability]
 
 # SQL Injection
 
-## SQL Injection Attack
+## Attack
 
 User input `' OR 1=1--`:
 
@@ -16,7 +16,7 @@ SELECT *
    AND pass  = '' OR 1=1--' LIMIT 1
 ```
 
-## SQL Injection Protection
+## Protection
 
 - Don't allow multiple statements.
 - Validate user input: **是否存在/数据类型/取值范围/缺省值/正则表达式/特殊字符**.

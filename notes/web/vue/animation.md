@@ -1,5 +1,5 @@
 ---
-tags: [Web, Vue, Animation]
+tags: [Web, Vue, Animation, Transition, Internals]
 sidebar_position: 13
 ---
 
@@ -33,7 +33,7 @@ sidebar_position: 13
 }
 ```
 
-## Fade Transition
+## Fade
 
 ```html
 <template>
@@ -117,7 +117,7 @@ sidebar_position: 13
 </script>
 ```
 
-## Slide Transition
+## Slide
 
 ```css
 .slide-fade-enter-from {
@@ -138,7 +138,7 @@ sidebar_position: 13
 }
 ```
 
-## Transition Group
+## Group
 
 ```html
 <template>
@@ -170,7 +170,7 @@ sidebar_position: 13
 }
 ```
 
-## Transition Hooks
+## Hooks
 
 `:css="false"` tells Vue don't handle transition classes,
 we're relying on JavaScript hooks instead.
@@ -259,9 +259,9 @@ export default {
 </script>
 ```
 
-## Transition Internals
+## Internals
 
-### Transition Component
+### Component
 
 ```ts
 const Transition = {
@@ -310,7 +310,7 @@ const Transition = {
 }
 ```
 
-### Transition Module
+### Module
 
 `platforms/web/runtime/modules/transition.js`:
 
@@ -335,7 +335,7 @@ function _enter(_: any, vnode: VNodeWithData) {
 }
 ```
 
-### Transition Group Component
+### Group Component
 
 ```ts
 const TransitionGroup = defineComponent({

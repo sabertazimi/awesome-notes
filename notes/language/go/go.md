@@ -4,9 +4,7 @@ tags: [Language, Go]
 
 # Go
 
-## CLI
-
-### Installation
+## Installation
 
 ```bash
 sudo apt install golang
@@ -15,7 +13,9 @@ echo "export PATH=$PATH:$GOPATH/bin"
 go env
 ```
 
-### Basic Command
+## Commands
+
+Go 的大部分工具的作用基本单位为 package (directories).
 
 ```bash
 go version
@@ -23,9 +23,7 @@ go run main.go
 go fmt /path/to/test
 ```
 
-- go 的大部分工具的作用基本单位为 package(directories)
-
-#### Build
+### Build
 
 ```bash
 # generate library
@@ -36,7 +34,7 @@ go install path/to/libpack
 go install path/to/mainpack
 ```
 
-#### Test
+### Test
 
 ```bash
 # path/to/pack/demo.go
@@ -44,13 +42,13 @@ go install path/to/mainpack
 go test path/to/pack
 ```
 
-#### Clean
+### Clean
 
 ```bash
 go clean -i path/to/pack
 ```
 
-#### Modules
+### Module
 
 - Remote packages.
 - `$GOPATH/bin/hello`.
@@ -59,11 +57,9 @@ go clean -i path/to/pack
 go get github.com/golang/example/hello
 ```
 
-## Packages
+## Package
 
-### package and import
-
-- for path/to/pack:
+For `path/to/pack`:
 
 ```go
 package pack
@@ -75,11 +71,11 @@ import (
 )
 ```
 
-- 只有首字母大写的函数才可被成功导出, 首字母小写的函数为文件私有函数
+只有首字母大写的函数才可被成功导出, 首字母小写的函数为文件私有函数.
 
-## Variable
+## Type
 
-### Type Declaration
+### Declaration
 
 - Go 将类型置于变量名后的理由: reads clearly, from left to right
 - `:=` 不可用在函数外
@@ -106,7 +102,7 @@ var (
 )
 ```
 
-### Type conversions
+### Conversion
 
 ```go
 var x int = 3
@@ -114,7 +110,7 @@ var y uint = uint(x)
 z := uint(x)
 ```
 
-### struct
+## Struct
 
 ```go
 type Vertex struct {
@@ -130,7 +126,7 @@ var (
 )
 ```
 
-### array
+## Array
 
 数组的长度是其类型的一部分
 
@@ -143,9 +139,9 @@ fmt.Println(a[0], a[1])
 fmt.Println(a)
 ```
 
-### slice
+## Slice
 
-- s[lo:lo] == nil
+`s[lo:lo] == nil`:
 
 ```go
 p := []int{2, 3, 5, 7, 11, 13}
@@ -155,7 +151,7 @@ fmt.Println("p[:3] ==", p[:3])  // p[0:3]        => 0, 1, 2
 fmt.Println("p[4:]" ==, p[4:])  // p[4:len(p)-1] => 4, ..., len(p)-2
 ```
 
-- make 函数创建 slice
+`make` 函数创建 slice:
 
 ```go
 a := make([]int, 5)     // len(a) = 5
@@ -202,7 +198,7 @@ func main() {
 }
 ```
 
-### map
+## Map
 
 ```go
 type Vertex struct {
@@ -228,7 +224,7 @@ element, ok_flag := m["Google"]
 
 ## Flow Control
 
-### if
+### If
 
 ```go
 if x < 0 {
@@ -243,7 +239,7 @@ if v := math.Pow(x, n); v < lim {
 }
 ```
 
-### for
+### For
 
 ```go
 for sum < 1000 {
@@ -256,7 +252,7 @@ for i := 0; i < 10; i++ {
 }
 ```
 
-### switch
+### Switch
 
 - switch 中的 case 自动 break(除非使用 fallthrough 语句)
 
@@ -293,13 +289,10 @@ switch {    // switch true
 }
 ```
 
-### defer
+### Defer
 
-defer 语句会将函数执行延迟至上层函数返回处(函数参数会立刻生成):
-
-#### 执行时机
-
-函数设置返回值后, 即将返回调用函数前(若 defer 函数修改返回变量, 则会造成返回值与预期不一致)
+`defer` 语句会将函数执行延迟至上层函数返回处 (函数参数会立刻生成).
+函数设置返回值后, 即将返回调用函数前 (若 `defer` 函数修改返回变量, 则会造成返回值与预期不一致):
 
 ```go
 func main() {
@@ -317,9 +310,7 @@ func main() {
 }
 ```
 
-#### 实质
-
-`return_value` = xxx -> invoke defer functions(stack) -> return void
+`return_value` = xxx -> invoke defer functions(stack) -> return void:
 
 ```go
 func f() (result int) {
@@ -343,16 +334,10 @@ func f() (result int) {
 }
 ```
 
-#### 应用场景
-
-- 资源回收
-
-```go
-mu.Lock()
-defer mu.Unlock()
-```
-
-- panic 异常的捕获
+- 保证语句 (在发生异常的情况下) 始终会被执行
+- 有意修改返回值
+- 资源回收: `mu.Lock()` -> `defer mu.Unlock()`
+- Panic 异常的捕获:
 
 ```go
 func f() {
@@ -371,9 +356,6 @@ func g() {
     panic("ERROR")
 }
 ```
-
-- 保证语句(在发生异常的情况下)始终会被执行
-- 有意修改返回值
 
 ## Function
 
@@ -436,11 +418,11 @@ func main() {
     fmt.Println(f.Abs())
 ```
 
-#### Receiver
+### Receiver
 
-- pointer receiver: 可以改变原值(call by reference)
-- value receive: 不可以改变原值(call by value)
-- 调用 methods 时, 可以不考虑 v 是 value/pointer, go 会自动处理
+- Pointer receiver: 可以改变原值 (`call by reference`)
+- Value receiver: 不可以改变原值 (`call by value`)
+- 调用 methods 时, 可以不考虑 `v` 是 `value/pointer`, Go 会自动处理
 
 ```go
 func (v *Vertex) changeV() {
@@ -465,11 +447,9 @@ func (v Vertex) Abs() {
 
 :::
 
-### Interface
+## Interface
 
-#### 值
-
-(value, type)
+`(value, type)`:
 
 ```go
 var i I
@@ -481,7 +461,7 @@ i = t   // => (nil, *T)
 var i I     // => (nil, nil)
 ```
 
-#### Type Assertions
+### Type Assertion
 
 - 单返回值: 断言失败时产生 panic
 - 双返回值: 断言失败时不产生 panic
@@ -496,7 +476,7 @@ f, ok := i.(float64)// => false(no panic)
 f := i.(float64)    // => false with panic
 ```
 
-- type switches
+### Type Switch
 
 ```go
 switch v := i.(type) {
@@ -511,13 +491,13 @@ switch v := i.(type) {
 
 ## Concurrent
 
-### goroutine
+### Goroutine
 
 ```go
 go f(x, y, z)   // => execute in a new goroutine with share memory
 ```
 
-### channels
+### Channels
 
 - typed conduit(类型管道)
 - block execution
@@ -554,9 +534,9 @@ func main() {
 }
 ```
 
-#### select
+### Select
 
-- select(当所有情况都不满足时)可被阻塞
+`select` (当所有情况都不满足时) 可被阻塞:
 
 ```go
 for {
@@ -570,7 +550,7 @@ for {
 }
 ```
 
-#### Worker Pools
+### Worker Pools
 
 ```go
 package main

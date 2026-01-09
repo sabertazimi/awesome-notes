@@ -1,11 +1,11 @@
 ---
 sidebar_position: 5
-tags: [AI, LLM, Agent]
+tags: [AI, LLM, Agent, Claude]
 ---
 
 # Claude Code
 
-## Setup
+## Configuration
 
 `~/.bashrc`:
 
@@ -39,38 +39,6 @@ export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 }
 ```
 
-### Switch
-
-Quick configuration with All-in-One assistant tool
-[Claude Code Switch](https://github.com/farion1231/cc-switch).
-
-### Bootstrap
-
-Opinionated [project initialization](https://github.com/alinaqi/claude-bootstrap)
-for Claude Code.
-
-## Tools
-
-Claude code has [built-in tools](https://code.claude.com/docs/en/settings#tools-available-to-claude),
-follow [certain paradigm](https://www.vtrivedy.com/posts/claudecode-tools-reference) to use them.
-
-## Commands
-
-`.claude/commands/api/api-new.md`:
-
-```md
-Create a new POST $ARGUMENTS endpoint with:
-
-- Auth middleware.
-- Rate limiting middleware.
-- Error handling wrapper.
-- TypeScript interfaces for request and response.
-```
-
-```bash
-/api-new /api/users
-```
-
 ## Memory
 
 Captures everything Claude does during your coding sessions, compresses it with Claude `agent-sdk`,
@@ -87,6 +55,23 @@ claude -c
 # Specific session
 claude -r
 claude -r [session_id]
+```
+
+## Commands
+
+`.claude/commands/api/api-new.md`:
+
+```md
+Create a new POST $ARGUMENTS endpoint with:
+
+- Auth middleware.
+- Rate limiting middleware.
+- Error handling wrapper.
+- TypeScript interfaces for request and response.
+```
+
+```bash
+/api-new /api/users
 ```
 
 ## Skills
@@ -140,7 +125,7 @@ graph TD
 
 :::
 
-### Skills Description
+### Description
 
 **核心原则**: 既要说明`做什么`，也要说明`什么时候用`:
 
@@ -150,7 +135,7 @@ description: Extract text and tables from PDF files, fill forms, merge documents
   forms, or document extraction.
 ```
 
-### Skills Effective Checklist
+### Effective
 
 1. Core quality:
    - [ ] Description is specific and includes key terms
@@ -178,7 +163,7 @@ description: Extract text and tables from PDF files, fill forms, merge documents
    - [ ] Tested with real usage scenarios
    - [ ] Team feedback incorporated (if applicable)
 
-### Skills Security Checklist
+### Security
 
 1. Code Review:
    - [ ] 所有脚本已审查
@@ -209,34 +194,6 @@ grep -r "subprocess" .
 grep -r "eval" .
 ```
 
-### Featured Skills
-
-- [Superpowers](https://github.com/obra/superpowers):
-  Complete software development workflow.
-- [DevBrowser](http://github.com/SawyerHood/dev-browser):
-  Browser automation.
-- [NotebookLM](https://github.com/PleasePrompto/notebooklm-skill):
-  Communicate directly with Google NotebookLM notebooks.
-- [Scientific](https://github.com/K-Dense-AI/claude-scientific-skills):
-  Comprehensive collection of ready-to-use scientific skills.
-
-### Skills List
-
-- [Anthropic](https://github.com/anthropics/skills):
-  Anthropic repository for agent skills.
-- [Awesome](https://github.com/travisvn/awesome-claude-skills):
-  Curated list of Claude Code skills.
-- [Marketplace](https://skillsmp.com):
-  Agent skills marketplace.
-- [Seekers](https://github.com/yusufkaraaslan/Skill_Seekers):
-  Convert documentation websites, GitHub repositories, and PDFs
-  into Claude AI skills with automatic conflict detection.
-
-### Skills Guide
-
-- Agent skills [best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices).
-- Claude skills [cookbook](https://github.com/anthropics/claude-cookbooks/tree/main/skills).
-
 ## Plugins
 
 Install [plugins](https://github.com/anthropics/claude-code/tree/main/plugins)
@@ -248,23 +205,6 @@ it will extend Claude Code through the plugin system with:
 - Hooks.
 - Skills.
 - MCP servers.
-
-### Featured Plugins
-
-- [Agents](https://github.com/wshobson/agents):
-  Comprehensive production-ready system combining agents, multi-agent workflow orchestrators, skills, and slash commands.
-- [Continuous](https://github.com/parcadei/Continuous-Claude-v2):
-  Context management.
-- [Figma](https://github.com/figma/mcp-server-guide):
-  Figma official skills and MCP server.
-- [Notion](https://github.com/makenotion/claude-code-notion-plugin):
-  Notion official skills, commands and MCP server.
-- [SafetyNet](https://github.com/kenryu42/claude-code-safety-net):
-  Catching destructive git and filesystem commands before they execute.
-- [Edmuds](https://github.com/edmund-io/edmunds-claude-code):
-  Personal configuration for productive web development.
-- [LifeAssistant](https://github.com/lout33/claude_life_assistant):
-  Personal coach that remembers, notices patterns, and holds accountable.
 
 ```bash
 /plugin marketplace add anthropics/claude-plugins-official
@@ -290,18 +230,73 @@ it will extend Claude Code through the plugin system with:
 /plugin install sabertaz-claude-code
 ```
 
-### Plugins List
-
-- [Anthropic](https://github.com/anthropics/claude-plugins-official):
-  Anthropic-managed directory of high quality Claude Code plugins.
-- [Plugins](https://github.com/Kamalnrf/claude-plugins):
-  Lightweight registry to discover and manage Claude plugins and agent skills.
-
 ## Best Practices
 
 Claude code [best practices](https://www.anthropic.com/engineering/claude-code-best-practices):
 
-- Extended thinking mode: "think" -> "think hard" -> "think harder" -> "ultrathink".
 - Plan mode: 对于复杂的任务, 使用 plan mode 先进行规划, 会比直接执行更高效.
+- Extended thinking mode: "think" -> "think hard" -> "think harder" -> "ultrathink".
+- Claude code has [built-in toolkit](https://code.claude.com/docs/en/settings#tools-available-to-claude),
+  follow [certain paradigm](https://www.vtrivedy.com/posts/claudecode-tools-reference) to use them.
 - Avoid `/compact`: dump plan and progress + `/clear` the state + restart from dump file.
 - Use Claude Code [GitHub Actions](https://github.com/anthropics/claude-code-action).
+
+## Library
+
+### Boilerplate
+
+- [Switch](https://github.com/farion1231/cc-switch):
+  Quick configuration with All-in-One assistant.
+- [Bootstrap](https://github.com/alinaqi/claude-bootstrap):
+  Opinionated project initialization.
+- [Showcase](https://github.com/ChrisWiles/claude-code-showcase):
+  Comprehensive Claude Code project configuration.
+
+### Recommended Skills
+
+- [Superpowers](https://github.com/obra/superpowers):
+  Complete software development workflow.
+- [DevBrowser](http://github.com/SawyerHood/dev-browser):
+  Browser automation.
+- [NotebookLM](https://github.com/PleasePrompto/notebooklm-skill):
+  Communicate directly with Google NotebookLM notebooks.
+- [Scientific](https://github.com/K-Dense-AI/claude-scientific-skills):
+  Comprehensive collection of ready-to-use scientific skills.
+
+### Recommended Plugins
+
+- [Agents](https://github.com/wshobson/agents):
+  Comprehensive production-ready system combining agents, multi-agent workflow orchestrators, skills, and slash commands.
+- [Continuous](https://github.com/parcadei/Continuous-Claude-v2):
+  Context management.
+- [Figma](https://github.com/figma/mcp-server-guide):
+  Figma official skills and MCP server.
+- [Notion](https://github.com/makenotion/claude-code-notion-plugin):
+  Notion official skills, commands and MCP server.
+- [SafetyNet](https://github.com/kenryu42/claude-code-safety-net):
+  Catching destructive git and filesystem commands before they execute.
+- [Edmuds](https://github.com/edmund-io/edmunds-claude-code):
+  Personal configuration for productive web development.
+- [LifeAssistant](https://github.com/lout33/claude_life_assistant):
+  Personal coach that remembers, notices patterns, and holds accountable.
+
+### Collections
+
+- [Skills](https://github.com/anthropics/skills):
+  Anthropic repository for agent skills.
+- [Awesome](https://github.com/travisvn/awesome-claude-skills):
+  Curated list of Claude Code skills.
+- [Marketplace](https://skillsmp.com):
+  Agent skills marketplace.
+- [Seekers](https://github.com/yusufkaraaslan/Skill_Seekers):
+  Convert documentation websites, GitHub repositories, and PDFs
+  into Claude AI skills with automatic conflict detection.
+- [Plugins](https://github.com/anthropics/claude-plugins-official):
+  Anthropic-managed directory of high quality Claude Code plugins.
+- [Registry](https://github.com/Kamalnrf/claude-plugins):
+  Lightweight registry to discover and manage Claude plugins and agent skills.
+
+## References
+
+- Agent skills [best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices).
+- Claude skills [cookbook](https://github.com/anthropics/claude-cookbooks/tree/main/skills).

@@ -1,6 +1,6 @@
 ---
-sidebar_position: 5
-tags: [Web, CSS]
+sidebar_position: 21
+tags: [Web, CSS, Component, Display, Table, TreeView, Slide, Gallery, Timeline, Step]
 ---
 
 # Display
@@ -104,7 +104,7 @@ GitHub tree view [component](https://ishadeed.com/article/tree-view-css-indent):
 </style>
 ```
 
-## Slides
+## Slide
 
 **锚点定位**本质上改变了 `scrollTop` 或 `scrollLeft` 值,
 即使容器设置 `overflow: hidden` 也会发生滚动,

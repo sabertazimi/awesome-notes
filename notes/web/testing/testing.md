@@ -6,13 +6,14 @@ tags: [Web, Testing]
 
 ## Methodology
 
-- [Methodology](./methodology.md) - Testing Pyramid, Model, Design, Methods, Testable Code
+- [Methodology](./methodology.md) - Testing pyramid, model, design, methods, testable code
 
 ## Frameworks
 
-- [Jest](./jest.md) - Jest Testing
-- [Cypress](./cypress.md) - Cypress Testing
+- [Jest](./jest.md) - Jest
+- [Cypress](./cypress.md) - Cypress
 
 ## Debugging
 
-- [Debugging](./debugging.md) - Debugging, Chrome DevTools
+- [Debugging](./debugging.md) - Debugging
+- [DevTools](./devtools.md) - Browser devtools

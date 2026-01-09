@@ -1,5 +1,5 @@
 ---
-tags: [Web, Vue, Component]
+tags: [Web, Vue, Component, Slot]
 sidebar_position: 11
 ---
 
@@ -66,7 +66,7 @@ Vue.createApp({
   数据作用域为子组件实例 (定义插槽的组件),
   即父组件提供 View, 子组件提供 Data.
 
-### Fallback Slots
+### Fallback
 
 ```html
 <!-- SubmitButton -->
@@ -95,7 +95,7 @@ render to
 <button type="submit">Save</button>
 ```
 
-### Named Slots
+### Named
 
 - `#`: `v-slot` directive shorthand.
 
@@ -146,7 +146,7 @@ Named slot directive shorthand:
 </Layout>
 ```
 
-### Scoped Slots
+### Scoped
 
 Pass data from child to parent
 (like `Render Props` in React):

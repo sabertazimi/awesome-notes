@@ -138,11 +138,3 @@ class MyComponent extends React.Component {
   }
 }
 ```
-
-## Props Validation
-
-- `React.PropTypes.array/bool/func/number/object/string/symbol/node/element`.
-- `React.PropTypes.any.isRequired`.
-- `React.PropTypes.objectOf(React.PropsTypes.number)`.
-- `React.PropTypes.arrayOf(React.PropsTypes.number)`.
-- `React.PropTypes.instanceOf/oneOf/oneOfType(type)`.

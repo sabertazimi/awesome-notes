@@ -1,5 +1,5 @@
 ---
-tags: [Web, Vue, Virtual DOM]
+tags: [Web, Vue, Internals, Virtual DOM]
 sidebar_position: 26
 ---
 

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 34
-tags: [Web, React, Reconciler]
+tags: [Web, React, Internals, Reconciler]
 ---
 
 # Render
@@ -20,7 +20,7 @@ Reconciler construct Fiber tree:
       此函数最后返回一个新的 `performConcurrentWorkOnRoot` 函数,
       等待下一次 Scheduler 调度.
 - renderRootSync / renderRootConcurrent:
-  - 此函数会调用 `prepareFreshStack`, 重置 FiberRoot 上的全局属性, 重置 Fiber Work Loop 全局变量.
+  - 此函数会调用 `prepareFreshStack`, 重置 FiberRoot 上的全局属性, 重置 Fiber work loop 全局变量.
   - 此函数会设置 `workInProgressRoot = FiberRoot`, 表示正在进行 render.
   - 此函数退出前, 会重置 `workInProgressRoot = null`, 表示没有正在进行中的 render.
   - 此函数退出前, 会挂载 `FiberRoot.finishedWork = workInProgressHostRootFiber`.
@@ -500,7 +500,7 @@ function completeWork(
 }
 ```
 
-## Host Root Fiber Rendering
+## Host Root
 
 ```ts
 function updateHostRoot(current, workInProgress, renderLanes) {
@@ -524,7 +524,7 @@ function updateHostRoot(current, workInProgress, renderLanes) {
 }
 ```
 
-## Host Component Fiber Rendering
+## Host Component
 
 ```ts
 function updateHostComponent(
@@ -557,7 +557,3 @@ function updateHostComponent(
   return workInProgress.child
 }
 ```
-
-## Class Component Fiber Rendering
-
-## Function Component Fiber Rendering

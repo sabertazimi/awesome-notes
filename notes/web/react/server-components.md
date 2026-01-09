@@ -179,7 +179,7 @@ it re-uses that description instead of re-generating it:
 - Addresses SEO and loading time issues in CSR.
 - Improves SSR by reducing server load.
 
-## Use Client Directive
+## Directives
 
 `'use client'` [directive](https://demystifying-rsc.vercel.app/client-components/no-ssr):
 
@@ -194,7 +194,7 @@ it re-uses that description instead of re-generating it:
 
 ![Use Client Directive](./figures/rsc-use-client.png 'Use Client Directive')
 
-## React Server Components Composition Pattern
+## Composition
 
 Server Components and Client Components are [different](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns#when-to-use-server-and-client-components):
 
@@ -256,7 +256,7 @@ export default function Page() {
 - Wrap them into a wrapper component using `'use client'`.
 - Library authors [add `'use client'` to components](https://github.com/ant-design/antd-tools/blob/050a91cfeaba87c2892bf19d721665a3770ebde0/lib/gulpfile.js#L197-L213).
 
-## React Server Components References
+## References
 
 - React Server Components in [Next.js](https://vercel.com/blog/understanding-react-server-components).
 - React Server Components [introduction](https://www.joshwcomeau.com/react/server-components).

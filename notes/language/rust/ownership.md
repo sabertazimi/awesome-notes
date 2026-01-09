@@ -7,14 +7,14 @@ tags: [Language, Rust]
 
 ## Memory Model
 
-### Stack Value
+### Stack
 
 - Primitives
 - Fixed size struts.
 - Fixed size arrays.
 - Pointers and references.
 
-### Heap Value
+### Heap
 
 - Collections:
   - Arrays.
@@ -71,7 +71,7 @@ fn main() {
 }
 ```
 
-## Reference Type
+## Reference
 
 Borrowing ownership with reference type:
 
@@ -128,7 +128,7 @@ fn main() {
 
 ## Smart Pointer
 
-### Box Type
+### Box
 
 `Box<T>` 将一个值分配到堆上, 然后在栈上保留一个智能指针指向堆上数据:
 
@@ -258,7 +258,7 @@ Drop order:
 - 变量级别, 按照逆序的方式, 先创建的变量后 drop.
 - 结构体内部, 按照顺序的方式, 结构体中的字段按照定义中的顺序依次 drop.
 
-### Reference Counting Type
+### Reference Counting
 
 通过引用计数的方式, 允许一个数据资源在同一时刻拥有多个所有者.
 
@@ -294,7 +294,7 @@ fn main() {
 }
 ```
 
-### Cell and RefCell Type
+### Cell and RefCell
 
 `Cell` for copyable type.
 
@@ -442,7 +442,7 @@ fn main() {
 }
 ```
 
-## Phantom Type
+## Phantom
 
 虚类型/幽灵类型参数是一种在**运行时不出现**,
 仅进行**静态编译检查**的类型参数.

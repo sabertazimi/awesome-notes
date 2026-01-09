@@ -36,7 +36,7 @@ data Bool = False | True deriving (Ord)
 
 ## 函数特性
 
-data type 也是函数,若省略参数亦会造成 Curry 化.
+`data` type 也是函数, 若省略参数亦会造成 curry 化:
 
 > e.g. map fx list
 
@@ -56,9 +56,9 @@ ghci > Circle 10 20 30
 Circle 10 20 30
 ```
 
-## 记录语法 (Record Syntax)
+## Record Syntax
 
-- 定义
+记录语法:
 
 ```haskell
 data Person = Person { firstName :: String
@@ -77,9 +77,9 @@ ghci> Car {company="Ford", model="Mustang", year=1967}
 Car {company = "Ford", model = "Mustang", year = 1967}
 ```
 
-## 类型参数 (Type Parameters)
+## Type Parameters
 
-提高代码的复用性
+类型参数可提高代码的复用性:
 
 ```haskell
 data Car a b c = Car { company :: a
@@ -94,7 +94,7 @@ tellCar (Car {company = c, model = m, year = y}) =
   "This " ++ c ++ " " ++ m ++ " was made in " ++ show y
 ```
 
-### Maybe value constructor
+### Maybe Value Constructor
 
 ```haskell
 data Maybe a = Nothing | Just a
@@ -106,7 +106,9 @@ data Maybe a = Nothing | Just a
 Just :: a -> Maybe a
 ```
 
-## Deriving (派生)
+## Deriving
+
+派生:
 
 ```haskell
 data Day = Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday
@@ -146,9 +148,9 @@ ghci> [minBound .. maxBound] :: [Day]
 [Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday]
 ```
 
-## type 定义
+## Type Alias
 
-为 data 声明别名 - `typedef`
+`type` 为 `data` 声明别名:
 
 ```haskell
 type String = [Char]

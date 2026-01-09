@@ -42,7 +42,7 @@ git log -p --stat --graph --pretty=format:"%h - %an, %ar : %s" --since=2.weeks p
 | %cr  | 提交日期,按多久以前的方式显示               |
 | %s   | 提交说明                                    |
 
-## Log Options
+## Options
 
 | 选项               | 说明                                                    |
 | :----------------- | :------------------------------------------------------ |
@@ -57,15 +57,15 @@ git log -p --stat --graph --pretty=format:"%h - %an, %ar : %s" --since=2.weeks p
 | --before=/--until= | 限制日志时间 "2008-01-15" "2 years 1 day 3 minutes ago" |
 | --help             |                                                         |
 
-## Log Filter
+## Filter
 
-### Log by Amount
+### Amount
 
 ```bash
 git log -3
 ```
 
-### Log by Date
+### Date
 
 - `before` and `until`
 - `after` and `since`
@@ -76,33 +76,33 @@ git log --after="1 week ago"
 git log --after="2014-7-1" --before="2014-7-4"
 ```
 
-### Log by Author
+### Author
 
 ```bash
 git log --author="John\|Mary"
 ```
 
-### Log by Commit Message
+### Commit Message
 
 ```bash
 git log --grep="feat"
 git log --grep="fix"
 ```
 
-### Log by File
+### File
 
 ```bash
 git log -- src/components/ErrorBoundary/ErrorBoundary.test.tsx
 git log -- "*.test.tsx"
 ```
 
-### Log by Content
+### Content
 
 ```bash
 git log -S"Hello, World!"
 ```
 
-### Log by Range
+### Range
 
 ```bash
 git log main..feature

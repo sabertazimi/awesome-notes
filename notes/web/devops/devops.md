@@ -4,16 +4,17 @@ tags: [Web, DevOps]
 
 # DevOps
 
-## Web Deployment
+## Deployment
 
-- [PWA](./pwa.md) - Progressive Web App
-- [SEO](./seo.md) - JamStack, SEO
-- [Auth](./auth.md) - Web Authentication
-- [Deploy](./deploy.md) - Web Operation and Deployment
+- [Service Worker](./service-worker.md) - Service worker for progressive web app
+- [Render](./render.md) - Rendering patterns
+- [SEO](./seo.md) - SEO optimization
+- [Auth](./auth.md) - Authentication
+- [Deploy](./deploy.md) - Operation and deployment
 
-## Build Tools
+## Toolchain
 
 - [Lint](./lint.md) - ESLint
 - [Babel](./babel.md) - Babel
 - [Webpack](./webpack.md) - Webpack
-- [Bundler](./bundler.md) - Rollup, Vite, ESBuild
+- [Bundler](./bundler.md) - Rollup, vite and esbuild

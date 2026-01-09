@@ -20,7 +20,7 @@ End-to-end principle: implement features in the end-system/hosts where possible.
 
 > Congestion implemented on transport layer.
 
-#### Internet Layer
+Internet layer:
 
 - Application layer protocol: HTTP SMTP (message, stream of data).
 - Transport layer protocol: TCP UDP (segment, segment of data).
@@ -28,7 +28,7 @@ End-to-end principle: implement features in the end-system/hosts where possible.
 - Data link layer protocol: WiFi PPP(点对点) 以太网 (frame).
 - Physical layer protocol.
 
-#### Layering Principle
+Layering principles:
 
 - Modularity.
 - Well defined service: simple service model provided by lower level,
@@ -170,8 +170,6 @@ Use reasonable HTTP status codes:
 
 ## HTTP 2
 
-### HTTP 2 Upside
-
 在 HTTP/1.x 中, 每次请求都会建立一次 HTTP 连接:
 
 - 串行的文件传输. 当请求 a 文件时, b 文件只能等待.
@@ -205,7 +203,7 @@ HTTP/2 = `HTTP` + `HPack / Stream` + `TLS 1.2+` + `TCP`:
   - 服务器可以按照优先级推送资源.
 - HTTPS guaranteed: 事实加密 (Chrome/Firefox 只支持 HTTP/2 over TLS 1.2+).
 
-### HTTP 2 Downside
+:::caution[Cons]
 
 HTTP/2 虽然通过多路复用解决了 HTTP 层的队头阻塞,
 但仍然存在 TCP 层的队头阻塞 (`Head-of-line Blocking`):
@@ -219,6 +217,8 @@ QUIC (基于 UDP 的可靠协议)
 给每一个 Stream 都分配了一个独立的滑动窗口,
 使得一个连接上的多个 Stream 之间没有依赖关系,
 拥有相互独立各自控制的滑动窗口.
+
+:::
 
 ### HTTP 2 Optimization
 
@@ -632,7 +632,7 @@ WebRTC 是符合上述要求的框架.
 - 降低 TLS 延迟:
   - 服务器应该通过 ALPN (Application Layer Protocol Negotiation) 协商支持 TLS.
   - 服务器应该支持 TLS 恢复以最小化握手延迟.
-- TLS testing [tool](https://www.ssllabs.com/ssltest/index.html).
+- TLS testing [toolkit](https://www.ssllabs.com/ssltest/index.html).
 
 ```bash
 openssl s_client -state -CAfile start-ssl.ca.crt -connect server.com:443
@@ -892,7 +892,7 @@ Offline optimization:
   **MAC** (Message Authentication Code) (cryptographic data)
   to prevent malicious attacks.
 
-## Network Tools
+## Network Toolchain
 
 - `ifconfig` + `egrep`.
 - `netstat` + `egrep`.

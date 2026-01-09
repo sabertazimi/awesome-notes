@@ -4,32 +4,32 @@ tags: [Web, JavaScript, ECMAScript]
 
 # JavaScript
 
-## Primitive Types
+## Primitives
 
-- [Primitive Types](./primitive.md) - TC39, Undefined, Null, Boolean, Wrapper Objects
-- [Number](./number.md) - Number Type
-- [String](./string.md) - String Type
-- [Symbol](./symbol.md) - Symbol Type
-- [BigInt](./bigint.md) - BigInt Type
+- [Primitives](./primitive.md) - TC39, undefined, null, boolean and wrapper objects
+- [Number](./number.md) - Number type
+- [String](./string.md) - String type
+- [Symbol](./symbol.md) - Symbol type
+- [BigInt](./bigint.md) - BigInt type
 
-## Reference Types
+## References
 
 - [Array](./array.md) - Array
-- [Collection](./collection.md) - Map, Set, WeakMap, WeakSet
-- [Date](./date.md) - Date, Temporal
+- [Collection](./collection.md) - Map and set
+- [Date](./date.md) - Date and temporal
 
 ## Expressions
 
-- [Variable](./variable.md) - Variable Hoisting, Let, Const, Type Detection, Type Conversion
+- [Variable](./variable.md) - Variable hoisting, let, const, type detection and type conversion
 - [Operator](./operator.md) - Operators
-- [Destructuring](./destructuring.md) - Destructuring Pattern Matching
-- [Control Flow](./control-flow.md) - Control Flow
+- [Destructuring](./destructuring.md) - Destructuring pattern matching
+- [Control Flow](./control-flow.md) - Control flow
 
 ## Object
 
-- [Prototype](./prototype.md) - OOP, Prototype Chain, Object Conversion
-- [Property](./property.md) - Object Constructor, Property Descriptor
-- [Inheritance](./inheritance.md) - Object Clone, Inheritance, Global Object
+- [Prototype](./prototype.md) - OOP, prototype chain, object conversion and constructor
+- [Property](./property.md) - Property descriptor and method
+- [Inheritance](./inheritance.md) - Object clone, inheritance and global object
 - [Class](./class.md) - Class
 
 ## Function
@@ -45,57 +45,59 @@ tags: [Web, JavaScript, ECMAScript]
 
 - [Promise](./promise.md) - Promise
 - [Async](./async.md) - Async/Await
-- [Concurrency](./concurrency.md) - Web Worker, Race Condition
+- [Concurrency](./concurrency.md) - Web worker and race condition
 
 ## Module
 
-- [Module](./module.md) - Module Patterns
+- [Module](./module.md) - Module patterns
 
-## Metaprogramming
+## Meta Programming
 
-- [Proxy](./proxy.md) - Proxy and Reflect
+- [Proxy and Reflect](./proxy.md) - Meta programming with proxy and reflect
 
 ## Error Handling
 
-- [Error](./error.md) - Error and Exception
-- [RegExp](./regexp.md) - Regular Expression
+- [Error](./error.md) - Error and exception
+- [RegExp](./regexp.md) - Regular expression
 
 ## Utility
 
-- [Utility](./utility.md) - Strict Mode, Timer, Math, Atomics, Signals, URI/URL, Encoding
+- [Utility](./utility.md) - Strict mode, timer, math, atomics, signals, URI/URL and encoding
 
-## Functional
+## Functional Programming
 
 - [Functional](./functional.md) - Functional JavaScript
 
 ## Style Guide
 
-- [Style Guide](./style-guide.md) - JavaScript Style Guide
+- [Style Guide](./style-guide.md) - Style guide
 
 ## Engine
 
-- [Engine](./engine.md) - JavaScript Engine, Browser Engine
+- [Engine](./engine.md) - JavaScript engine and browser engine
 
 ## BOM and DOM
 
-- [BOM](./bom.md) - Browser Object Model
-- [DOM Core](./dom-core.md) - DOM Core
-- [DOM Style](./dom-style.md) - CSSOM
-- [DOM Event](./dom-event.md) - DOM Events
-- [DOM API](./dom-api.md) - DOM Rect, Observer
+- [BOM](./bom.md) - Browser object model
+- [DOM Core](./dom.md) - DOM Core
+- [DOM Style](./cssom.md) - CSSOM
+- [DOM Event](./event.md) - DOM events
+- [DOM Observer](./observer.md) - DOM observers
 
 ## Network
 
-- [Network](./network.md) - JSON, AJAX, Fetch, WebSocket, WebRTC
+- [Fetch](./fetch.md) - JSON, AJAX, and fetch
+- [WebSocket](./websocket.md) - WebSocket
+- [WebRTC](./webrtc.md) - WebRTC
 
 ## Media
 
-- [Animation](./animation.md) - Web Animations
-- [Canvas](./canvas.md) - Web Canvas
-- [Media](./media.md) - Web Audio, Media Session
+- [Animation](./animation.md) - Animations
+- [Canvas](./canvas.md) - Canvas APIs
+- [Media](./media.md) - Audio and media session
 
-## Web API
+## Web APIs
 
-- [Storage](./storage.md) - Cookie, LocalStorage, IndexDB
-- [Payment](./payment.md) - Web Payment
-- [Device](./device.md) - Web Devices
+- [Storage](./storage.md) - Cookie, local storage and IndexDB
+- [Payment](./payment.md) - Payment APIs
+- [Device](./device.md) - Device APIs

@@ -58,7 +58,7 @@ no longer become `unverified` state.
 
 ## LICENSE
 
-### Popular LICENSE
+### Popular
 
 ```mermaid
 graph TD
@@ -77,7 +77,7 @@ E -->|No| BSD
 
 ![Free Software License](./figures/6-free-software-licenses.png 'Free Software License')
 
-### Unique LICENSE
+### Unique
 
 - CC BY-NC-SA 3.0 License
 
@@ -154,12 +154,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ```
 
-## Teamwork
+## Collaboration
 
 如果在组织的托管空间创建版本库, 一定要要为版本库指派一个拥有 Push 权限的团队,
 以免以 `Fork + Pull` 模式工作时, Pull Request 没有人响应.
 
-### Pull Request Work Flow
+### Pull Request Workflow
 
 1. Fork it.
 2. Create your feature branch (`git checkout -b my-new-feature`).
@@ -169,7 +169,7 @@ THE SOFTWARE.
 6. Create new Pull Request.
 7. Check `Allow edits from maintainers`.
 
-## GitHub CLI
+## CLI
 
 ### Installation
 
@@ -251,19 +251,17 @@ gh repo list sabertazimi
 
 ## Wiki
 
-### Wiki Git Access
-
 ```bash
 git clone git@github.com:user/repo.wiki.git
 ```
 
-## Shorten GitHub URL
+## Shorten URL
 
 ```bash
 curl -i http://git.io -F "url=https://github.com/technoweenie" -F "code=t"
 ```
 
-## GitHub Flavored Markdown
+## Flavored Markdown
 
 ### Link
 
@@ -294,12 +292,12 @@ Then at the end of the document …
 [mylabel]: https://imageurl.com 'This is a title'
 ```
 
-## GitHub Pages
+## Pages
 
 In `https://github.com/<user>/<repo>/settings/pages`,
 setup `source` of pages and `Enforce HTTPS`.
 
-## GitHub Git Attributes
+## Git Attributes
 
 `.gitattributes`:
 
@@ -308,7 +306,7 @@ setup `source` of pages and `Enforce HTTPS`.
 *.md linguist-documentation=false
 ```
 
-## GitHub Actions
+## Actions
 
 ```yml
 name: Dependencies
@@ -366,7 +364,7 @@ with:
   working-directory: ./
 ```
 
-## GitHub Dependabot
+## Dependabot
 
 ```yml
 version: 2
@@ -384,6 +382,6 @@ updates:
       - sabertazimi
 ```
 
-## GitHub Copilot
+## Copilot
 
 - GitHub Copilot usage [tips](https://github.blog/2024-03-25-how-to-use-github-copilot-in-your-ide-tips-tricks-and-best-practices).

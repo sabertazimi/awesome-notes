@@ -1,11 +1,9 @@
 ---
 sidebar_position: 27
-tags: [Web, React, Hook]
+tags: [Web, React, Hook, Store]
 ---
 
 # Store
-
-## Simple Store
 
 ```ts
 import { useState } from 'react'
@@ -34,7 +32,7 @@ export default function useStore() {
 }
 ```
 
-## Complex Store
+## Pub-Sub
 
 Complex [implementation](https://github.com/timc1/kbar):
 

@@ -5,7 +5,7 @@ tags: [Web, Security, XSS, Vulnerability]
 
 # XSS
 
-## XSS Attack
+## Attack
 
 Cross-site scripting (跨站脚本):
 
@@ -54,7 +54,7 @@ Cross-site scripting (跨站脚本):
   - `cookie`.
   - `localStorage`.
 
-## XSS Protection
+## Protection
 
 Don't trust user:
 

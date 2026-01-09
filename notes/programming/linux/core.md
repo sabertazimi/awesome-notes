@@ -90,14 +90,14 @@ ln -s [源文件] [New Soft Link File]
 !number
 ```
 
-### Ctrl R History
+### Reverse
 
 Press `ctrl-r` 提示符改变, 显示我们正在执行反向增量搜索.
 搜索过程是`反向的`，因为我们按照从`现在`到`过去`某个时间段的顺序来搜寻.
 下一步, 我们开始输入要查找的文本搜索返回我们需要的结果.
 (`enter` to execute, `ctrl-j` to copy)
 
-### History Shortcuts
+### Shortcuts
 
 | command  | function                             |
 | :------- | :----------------------------------- |
@@ -274,35 +274,35 @@ Show `/proc/cpuinfo`.
 
 ### Jobs
 
-list active jobs
+List active jobs.
 
 ### Bg
 
-place a job in the background
+Place a job in the background.
 
 ### Fg
 
-place a job in the foreground
+Place a job in the foreground.
 
 ### Kill
 
-send a signal to a process
+Send a signal to a process.
 
 ### Killall
 
-kill processes by name
+Kill processes by name.
 
 ### Shutdown
 
-shutdown or reboot the system
+Shutdown or reboot the system.
 
 ### Pstree
 
-outputs a process list arranged in a tree-like pattern
+Outputs a process list arranged in a tree-like pattern.
 
 ### Xload and Tload
 
-draws a graph showing system load over time
+Draws a graph showing system load over time.
 
 ### Screen
 
@@ -312,8 +312,8 @@ screen -ls
 screen -r
 ```
 
-- Ctrl+d // detach window
-- Ctrl+k // kill window
+- `Ctrl+d`: detach window
+- `Ctrl+k`: kill window
 
 ## Memory
 
@@ -363,7 +363,7 @@ free -m
 
 ### Help Shell
 
-显示 shell 内部命令帮助，如 cd 命令(shell 内部命令)
+显示 shell 内部命令帮助，如 `cd` 命令 (shell 内部命令)
 
 ### Info
 
@@ -383,12 +383,6 @@ sudo apt-get install neofetch
 sudo apt-get install screenfetch
 ```
 
-### Linux Documentation References
-
-- [DashDash: Beautiful Linux Manual Pages](https://dashdash.io)
-- [TLDR](https://github.com/tldr-pages/tldr)
-- [ArchWiki](https://wiki.archlinux.org)
-
 ## Log
 
 ### Dmesg
@@ -406,7 +400,7 @@ journalctl -u <service_name>
 
 ## Performance
 
-![Linux Performance Tools](./figures/linux-performance-tools.png 'Linux Performance Tools')
+![Linux Performance Toolchain](./figures/linux-performance-toolchain.png 'Linux Performance Toolchain')
 
 - [Uptime](#uptime).
 - [Dmesg](#dmesg).
@@ -473,6 +467,9 @@ perf report -n --stdio
 perf report -n -g 'flamegraph'
 ```
 
-## Linux References
+## References
 
 - Linux [cheatsheets](https://github.com/trimstray/the-book-of-secret-knowledge).
+- [DashDash: Beautiful Linux Manual Pages](https://dashdash.io)
+- [TLDR](https://github.com/tldr-pages/tldr)
+- [ArchWiki](https://wiki.archlinux.org)

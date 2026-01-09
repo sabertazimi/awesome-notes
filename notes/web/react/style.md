@@ -1,11 +1,11 @@
 ---
 sidebar_position: 19
-tags: [Web, React, Style, CSS]
+tags: [Web, React, Style, CSS, Styled Components, Internals]
 ---
 
-# Styled Component
+# Styled Components
 
-## Shared CSS Styles
+## Shared
 
 ```tsx
 // Import styled-components and css
@@ -75,7 +75,7 @@ export default function WrapperContainer() {
 ReactDOM.createRoot(container).render(<WrapperContainer />)
 ```
 
-## Styled Component Extension
+## Extension
 
 ```tsx
 // Import styled-components
@@ -119,7 +119,7 @@ export default function WrapperContainer() {
 ReactDOM.createRoot(container).render(<WrapperContainer />)
 ```
 
-## Styled Component Props
+## Props
 
 ```tsx
 // Import styled-components and css
@@ -174,7 +174,7 @@ export default function WrapperContainer() {
 ReactDOM.createRoot(container).render(<WrapperContainer />)
 ```
 
-## Variants Driven Components
+## Variants
 
 ```ts
 import { styled } from '@stitches/react'
@@ -240,7 +240,7 @@ const Box = styled('div', {
 })
 ```
 
-## Demystifying Styled Components
+## Internals
 
 Styled components [under the hood](https://www.joshwcomeau.com/react/demystifying-styled-components):
 
@@ -273,7 +273,7 @@ styled.button = styled('button')
 // ...And so on, for all DOM nodes!
 ```
 
-## Components Styling References
+## References
 
 - [Tao](https://alexkondov.com/full-stack-tao-styling) of styling:
   How to Style a React Application.

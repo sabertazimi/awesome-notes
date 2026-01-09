@@ -19,13 +19,13 @@ addThree :: Int -> Int -> Int -> Int
 addThree x y z = x + y + z
 ```
 
-## 递归函数
+## Recursive
 
 - 边界条件
 - 递归基础
 - 递归函数体
 
-### List 函数
+### List
 
 - 边界条件: 空 List
 - 递归函数体: x:xs 取出首元素进行一般操作,对尾部进行递归操作.
@@ -95,9 +95,9 @@ quicksort (x:xs) =
   in smallerSorted ++ [x] ++ biggerSorted
 ```
 
-## 高阶函数
+## Higher-Order
 
-### Curry 化
+### Curry
 
 当传入不全参数时,会改变函数的类型,_返回值从单类型变成函数类型_.
 
@@ -149,7 +149,7 @@ foo a = bar b a ->
 foo = bar b
 ```
 
-### map 函数
+### Map
 
 映射函数 - List Comprehension 的函数化
 
@@ -180,7 +180,7 @@ ghci> map fst [(1,2),(3,5),(6,3),(2,6),(2,5)]
 [1,3,6,2,2]
 ```
 
-### filter 函数
+### Filter
 
 过滤函数 - Comprehension 的函数化
 
@@ -207,7 +207,7 @@ ghci> filter (`elem` ['A'..'Z']) "i lauGh At You BecAuse u r aLL the Same"
 "GAYBALLS"
 ```
 
-### fold 函数与 scan 函数
+### Fold and Scan
 
 ![折叠函数](./figures/foldl.png 'Fold Function')
 
@@ -299,7 +299,7 @@ where   foldingFunction (x:y:ys) "*" = (x * y):ys
         foldingFunction xs numberString = read numberString:xs
 ```
 
-### lambda 表达式
+### Lambda
 
 `\args -> function`
 
@@ -314,7 +314,7 @@ flip' :: (a -> b -> c) -> b -> a -> c
 flip' f = \x y -> f y x
 ```
 
-### `$` 函数
+### `$`
 
 `($) :: (a -> b) -> a -> b`
 
@@ -325,7 +325,7 @@ flip' f = \x y -> f y x
 f (g (z x)) <-> f $ g $ z x
 ```
 
-### .函数与 Function composition(函数组合)
+### Composition
 
 `(.) :: (b -> c) -> (a -> b) -> a -> c`
 
@@ -359,9 +359,7 @@ oddSquareSum =
 
 :::
 
-## 常用函数
-
-### 无参函数
+## 无参函数
 
 “定义”(或者“名字”)
 
@@ -369,7 +367,7 @@ oddSquareSum =
 sabertaz = "It's a-me, sabertaz!"
 ```
 
-### 前缀函数
+## 前缀函数
 
 ```haskell
 > succ 8
@@ -383,7 +381,7 @@ sabertaz = "It's a-me, sabertaz!"
 9
 ```
 
-### 中缀函数
+## 中缀函数
 
 `+`: 从类型定义可以看出,+左右两边参数必须为同类型
 
@@ -417,19 +415,19 @@ ghci> [9.4,33.2,96.2,11.2,23.25] !! 1
 33.2
 ```
 
-### 数学函数
+## 数学函数
 
 - x `mod` y
 - `even arg`
 - `odd arg`
 
-#### System Random
+### System Random
 
 - `random :: (RandomGen g, Random a) => g -> (a, g)`
 - getStdGen
 - newStdGen
 
-### 数字函数
+## 数字函数
 
 - fromInteger 函数 (Num a) => Integer -> a
 - fromIntegral 函数 (Integral a, Num b) => a -> b

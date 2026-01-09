@@ -1,6 +1,6 @@
 ---
 sidebar_position: 24
-tags: [Web, React, Hook]
+tags: [Web, React, Hook, Router]
 ---
 
 # Router

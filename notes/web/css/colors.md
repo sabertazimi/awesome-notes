@@ -1,11 +1,11 @@
 ---
-sidebar_position: 4
-tags: [Web, CSS]
+sidebar_position: 5
+tags: [Web, CSS, Color]
 ---
 
 # Colors
 
-## Current Color
+## Current
 
 [`currentcolor`](https://css-tricks.com/currentcolor):
 
@@ -13,13 +13,13 @@ tags: [Web, CSS]
 - `border-color`/`outline-color`/`caret-color`/`text-shadow`/`box-shadow`
   默认表现为 `currentcolor`.
 
-## Accent Color
+## Accent
 
 [`accent-color`](https://developer.mozilla.org/docs/Web/CSS/accent-color):
 
 Change user-interface controls accent color.
 
-## HSL Color
+## HSL
 
 [`hsl()`](https://developer.mozilla.org/docs/Web/CSS/color_value/hsl):
 
@@ -84,7 +84,7 @@ Change `lightness` to get gradient color:
 }
 ```
 
-## HWB Color
+## HWB
 
 [`hwb(H W B [/ A])`](https://developer.mozilla.org/docs/Web/CSS/color_value/hwb):
 
@@ -93,7 +93,7 @@ Change `lightness` to get gradient color:
 - `B`: blackness (`<percentage>`).
 - `A`: alpha (`<percentage>`).
 
-## LCH Color
+## LCH
 
 [`oklch()`](https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl):
 
@@ -163,7 +163,7 @@ button[variant='error'] {
 }
 ```
 
-## Color Scheme
+## Scheme
 
 [`color-scheme`](https://developer.mozilla.org/docs/Web/CSS/color-scheme):
 
@@ -176,7 +176,7 @@ button[variant='error'] {
 }
 ```
 
-## CSS Color Mix
+## Mix
 
 Creating color palettes with [`color-mix()`](https://developer.mozilla.org/en-US/blog/color-palettes-css-color-mix/?utm_source=CSS-Weekly&utm_campaign=Issue-582&utm_medium=web):
 
@@ -230,7 +230,7 @@ Creating color palettes with [`color-mix()`](https://developer.mozilla.org/en-US
 }
 ```
 
-## CSS Color References
+## References
 
 - CSS color module level 5 [guide](https://blog.logrocket.com/exploring-css-color-module-level-5):
   - hwb.

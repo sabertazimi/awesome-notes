@@ -1,6 +1,6 @@
 ---
 sidebar_position: 6
-tags: [CS, System, OS, Concurrency, Synchronization]
+tags: [CS, System, OS, Concurrency, Synchronization, Thread, Mutex, Semaphore]
 ---
 
 # Concurrency

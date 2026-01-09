@@ -87,12 +87,9 @@ const counterReducer = createReducer(0, {
 
 ## Reducer
 
-- [Reducing Boilerplate](https://redux.js.org/recipes/reducing-boilerplate)
-
+[Reducer](https://redux.js.org/recipes/reducing-boilerplate),
 必须保持无任何副作用: 不修改传入参数, 不调用副作用函数
-`(api/date.now()/math.random())`
-
-### Reducer Boilerplate
+`(api/date.now()/math.random())`:
 
 ```ts
 function createReducer(initialState, handlers) {
@@ -111,7 +108,7 @@ const reducer = createReducer(initialState, {
 })
 ```
 
-### Reducer Enhancer
+### Enhancer
 
 Implement reducer enhancer with `higher order reducer`,
 like [Redux Undo](https://github.com/omnidan/redux-undo):
@@ -192,7 +189,7 @@ store.dispatch({
 })
 ```
 
-### RTK Reducer API
+### APIs
 
 `createReducer`: `builder.addCase` and `builder.addMatcher`:
 
@@ -452,7 +449,7 @@ function App() {
 }
 ```
 
-### UseSelector Hook
+### `useSelector`
 
 `useSelector` automatically subscribes to Redux store,
 any time an action is dispatched,
@@ -462,7 +459,7 @@ If value returned by selector changes from last time it ran
 (**strict `===` reference comparisons**),
 `useSelector` will force component to re-render with the new data.
 
-### CreateSelector API
+### `createSelector`
 
 `createSelector` API
 ([Reselect](https://github.com/reduxjs/reselect) under the hood):
@@ -515,7 +512,7 @@ const state3 = getState()
 selectPostsByUser(state3, 'user2')
 ```
 
-### Selector Best Practices and Pitfalls
+### Best Practices and Pitfalls
 
 ```ts
 // ❌ DO NOT memoize: will always return a consistent reference
@@ -539,9 +536,7 @@ const selectTodoDescriptions = state => state.todos.map(todo => todo.text)
 
 Redux Toolkit `configureStore` function automatically
 sets up the thunk middleware by default,
-recommend using thunks as the standard approach for writing async logic with Redux.
-
-### Thunk Middleware Implementation
+recommend using thunks as the standard approach for writing async logic with Redux:
 
 ```ts
 function createThunkMiddleware(extraArgument) {
@@ -561,7 +556,7 @@ thunk.withExtraArgument = createThunkMiddleware
 export default thunk
 ```
 
-### Create Async Thunk API
+### Async
 
 `createAsyncThunk` API provides:
 

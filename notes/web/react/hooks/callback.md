@@ -1,6 +1,6 @@
 ---
 sidebar_position: 4
-tags: [Web, React, Hook]
+tags: [Web, React, Hook, Callback]
 ---
 
 # Callback
@@ -12,7 +12,7 @@ tags: [Web, React, Hook]
   `removeEventListener` 与 `addEventListener`.
 - `useCallback(fn, deps)` is equivalent to `useMemo(() => fn, deps)`.
 
-## useCallback Dispatcher
+## Dispatcher
 
 ```ts
 function mountCallback<T>(callback: T, deps: Array<mixed> | void | null): T {
@@ -41,7 +41,7 @@ function updateCallback<T>(callback: T, deps: Array<mixed> | void | null): T {
 }
 ```
 
-## useCallback Usage
+## useCallback
 
 ```tsx
 export default function Parent() {

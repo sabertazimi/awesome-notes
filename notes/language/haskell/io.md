@@ -5,7 +5,125 @@ tags: [Language, Haskell, I/O]
 
 # I/O
 
-## I/O action
+## ByteString
+
+- `Data.ByteString`
+- `Data.ByteString.Lazy`
+
+lazy byteStrings 像装了一堆大小为 64K 的 strict byteStrings 的 list
+
+```haskell
+import qualified Data.ByteString.Lazy as B
+import qualified Data.ByteString as S
+```
+
+- pack/unpack
+- fromChunks/toChunks
+- cons/empty/head/tail/init/null/length/map/reverse/foldl/foldr/concat/takeWhile/filter
+
+## File
+
+- `hPutStr`
+- `hPutStrLn`
+
+### Handle
+
+- `data IOMode = ReadMode | WriteMode | AppendMode | ReadWriteMode`
+- `openFile :: FilePath(String) -> IOMode -> IO Handle`
+- `hGetContents :: Handle -> IO String`
+- `hClose :: Handle -> IO ()`
+
+- `hGetChar`
+- `hGetLine`
+
+```haskell
+import System.IO
+
+main = do
+    handle <- openFile "girlfriend.txt" ReadMode
+    contents <- hGetContents handle
+    putStr contents
+    hClose handle
+```
+
+### With
+
+`withFile :: FilePath -> IOMode -> (Handle -> IO a) -> IO a`
+
+```haskell
+import System.IO
+
+main = do
+    withFile "girlfriend.txt" ReadMode (\handle -> do
+            contents <- hGetContents handle
+            putStr contents)
+```
+
+### Read
+
+```haskell
+contents <- readFile "girlfriend.txt"
+```
+
+### Write
+
+`writefile :: FilePath -> String -> IO ()` - WriteMode, not AppendMode
+
+### Append
+
+### Directory
+
+- `removeFile`.
+- `renameFile`.
+
+## Input
+
+### Char
+
+`getChar :: IO Char`:
+
+```haskell
+main = do
+    c <- getChar
+    if c /= ' '
+        then do
+            putChar c
+            main
+        else return ()
+```
+
+### Contents
+
+`getContents :: IO String` (lazy I/O),
+内容暂存在文件, 需要使用时读取至内存区:
+
+```haskell
+import Data.Char
+
+main = do
+    contents <- getContents
+    putStr (map toUpper contents)
+```
+
+## Output
+
+### String
+
+`putChar`/`putStr`/`putStrLn`:
+
+```haskell
+putStr :: String -> IO ()
+putStr [] = return ()
+putStr (x:xs) = do
+    putChar x
+    putStr xs
+```
+
+### Print
+
+print = putStrLn . show
+
+## Action
 
 `name <- IO action`: 将 action 绑定至名字上,IO String -> String
 
@@ -46,6 +164,81 @@ main = do
 reverseWords :: String -> String
 reverseWords = unwords . map reverse . words
 ```
+
+### When
+
+Control.Monad.when :: (Applicative f) => Bool -> f () -> f ()
+
+`when bool表达式 I/O-Action` - 真时返回 Action,假时`return ()`
+
+```haskell
+import Control.Monad
+
+main = do
+    c <- getChar
+    when (c /= ' ') $ do
+        putChar c
+        main
+```
+
+### Sequence
+
+sequence :: `[IO a]` -> IO `[a]`
+
+```haskell
+main = do
+    rs <- sequence [getLine, getLine, getLine]
+    print rs
+```
+
+### Map
+
+mapM, Control.Monad.forM:
+
+= sequence . map
+
+```haskell
+ghci> mapM print [1,2,3]
+1
+2
+3
+[(),(),()]
+ghci> mapM_ print [1,2,3]
+1
+2
+3
+```
+
+### Control
+
+接受一个 I/O action 并回传一个永远作同一件事的 I/O action
+
+以下代码实现了循环结构:
+
+```haskell
+import Control.Monad
+import Data.Char
+
+main = forever $ do
+    putStr "Give me some input: "
+    l <- getLine
+    putStrLn $ map toUpper l
+```
+
+### hSetBuffering
+
+`data BufferMode = NoBuffering | LineBuffering | BlockBuffering (Maybe Int)`
+`hSetBuffering :: Handle -> BufferMode -> IO ()`
+
+```haskell
+main = do
+    withFile "something.txt" ReadMode (\handle -> do
+        hSetBuffering handle $ BlockBuffering (Just 2048)
+        contents <- hGetContents handle
+        putStr contents)
+```
+
+### hFlush
 
 ## Command Line
 
@@ -107,193 +300,6 @@ remove [fileName, numberString] = do
     renameFile tempName fileName
 ```
 
-## ByteString
-
-- `Data.ByteString`
-- `Data.ByteString.Lazy`
-
-lazy byteStrings 像装了一堆大小为 64K 的 strict byteStrings 的 list
-
-```haskell
-import qualified Data.ByteString.Lazy as B
-import qualified Data.ByteString as S
-```
-
-- pack/unpack
-- fromChunks/toChunks
-- cons/empty/head/tail/init/null/length/map/reverse/foldl/foldr/concat/takeWhile/filter
-
-## File System
-
-- `hPutStr`
-- `hPutStrLn`
-
-### File Handle
-
-- `data IOMode = ReadMode | WriteMode | AppendMode | ReadWriteMode`
-- `openFile :: FilePath(String) -> IOMode -> IO Handle`
-- `hGetContents :: Handle -> IO String`
-- `hClose :: Handle -> IO ()`
-
-- `hGetChar`
-- `hGetLine`
-
-```haskell
-import System.IO
-
-main = do
-    handle <- openFile "girlfriend.txt" ReadMode
-    contents <- hGetContents handle
-    putStr contents
-    hClose handle
-```
-
-### With File
-
-`withFile :: FilePath -> IOMode -> (Handle -> IO a) -> IO a`
-
-```haskell
-import System.IO
-
-main = do
-    withFile "girlfriend.txt" ReadMode (\handle -> do
-            contents <- hGetContents handle
-            putStr contents)
-```
-
-### Read File
-
-```haskell
-contents <- readFile "girlfriend.txt"
-```
-
-### Write File
-
-`writefile :: FilePath -> String -> IO ()` - WriteMode, not AppendMode
-
-### Append File
-
-## Input
-
-### getChar :: IO Char
-
-```haskell
-main = do
-    c <- getChar
-    if c /= ' '
-        then do
-            putChar c
-            main
-        else return ()
-```
-
-### Get Contents
-
-getContents :: IO String (Lazy I/O) - 内容暂存在文件,需要使用时读取至内存区
-
-```haskell
-import Data.Char
-
-main = do
-    contents <- getContents
-    putStr (map toUpper contents)
-```
-
-## Output
-
-### Output String
-
-`putChar`/`putStr`/`putStrLn`:
-
-```haskell
-putStr :: String -> IO ()
-putStr [] = return ()
-putStr (x:xs) = do
-    putChar x
-    putStr xs
-```
-
-### Print
-
-print = putStrLn . show
-
-## Action
-
-### When
-
-Control.Monad.when :: (Applicative f) => Bool -> f () -> f ()
-
-`when bool表达式 I/O-Action` - 真时返回 Action,假时`return ()`
-
-```haskell
-import Control.Monad
-
-main = do
-    c <- getChar
-    when (c /= ' ') $ do
-        putChar c
-        main
-```
-
-### sequence
-
-sequence :: `[IO a]` -> IO `[a]`
-
-```haskell
-main = do
-    rs <- sequence [getLine, getLine, getLine]
-    print rs
-```
-
-### Map
-
-mapM, Control.Monad.forM:
-
-= sequence . map
-
-```haskell
-ghci> mapM print [1,2,3]
-1
-2
-3
-[(),(),()]
-ghci> mapM_ print [1,2,3]
-1
-2
-3
-```
-
-### Control Monad forever
-
-接受一个 I/O action 并回传一个永远作同一件事的 I/O action
-
-以下代码实现了循环结构:
-
-```haskell
-import Control.Monad
-import Data.Char
-
-main = forever $ do
-    putStr "Give me some input: "
-    l <- getLine
-    putStrLn $ map toUpper l
-```
-
-### hSetBuffering
-
-`data BufferMode = NoBuffering | LineBuffering | BlockBuffering (Maybe Int)`
-`hSetBuffering :: Handle -> BufferMode -> IO ()`
-
-```haskell
-main = do
-    withFile "something.txt" ReadMode (\handle -> do
-        hSetBuffering handle $ BlockBuffering (Just 2048)
-        contents <- hGetContents handle
-        putStr contents)
-```
-
-### hFlush
-
 ## Lines
 
 `lines :: String -> [String]` - 按换行符将段落切割成句子
@@ -324,8 +330,3 @@ respondPalindromes = unlines . map (\xs ->
     if isPalindrome xs then "palindrome" else "not a palindrome") . lines
         where isPalindrome xs = xs == reverse xs
 ```
-
-## System Directory
-
-- removeFile
-- renameFile

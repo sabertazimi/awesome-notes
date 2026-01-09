@@ -32,12 +32,12 @@ tags: [Web, React, Toolchain]
 在 `single-spa` 的开发过程中,
 需要自己手动去写调用子应用的方法.
 
-### Application EntryPoint
+### EntryPoint
 
 - HTML Entry (`import-html-entry` from `qiankun`).
 - JavaScript Entry.
 
-### Styles Isolation
+### Styles
 
 - Shadow DOM container.
 - CSS module.
@@ -45,21 +45,21 @@ tags: [Web, React, Toolchain]
 - CSS selector renaming.
 - CSS in JS.
 
-### Scripts Isolation
+### Scripts
 
 - Snapshot sandbox: 类似中断恢复机制, 备份快照 -> 子应用挂载/运行/卸载 -> 恢复快照.
 - Proxy sandbox: `window` proxy (`fakeWindow` for every sub-app).
 - Runtime sandbox.
 
-### Application Communication
+### Communication
 
 - Pub-Sub Pattern.
 - Callback registration.
 - Global store.
 
-## Low-Code Development
+## Low-Code
 
-### Low-Code Components
+### Components
 
 利用静态解析 (`react-docgen-typescript`) 与动态解析 (`parse-prop-types`)
 从原始组件生成属性文件, 匹配低代码物料协议
@@ -68,7 +68,7 @@ tags: [Web, React, Toolchain]
 
 ![Low-Code Components](./figures/low-code-components.png 'Low-Code Components')
 
-### Low-Code Editor
+### Editor
 
 低代码编辑器目标:
 
@@ -114,17 +114,13 @@ tags: [Web, React, Toolchain]
 
 ![Low-Code Schema](./figures/low-code-schema.png 'Low-Code Schema')
 
-### Low-Code Renderer
+### Renderer
 
 `低代码渲染`: 将 `schema.json` 通过 `Renderer` 渲染生成业务页面.
 
-### Low-Code Generator
+### Generator
 
 `低代码出码`: 将 `schema.json` 通过 `Generator` 转化生成业务代码.
-
-### Low-Code References
-
-- [Low-Code Engine Technical White Paper](https://developer.aliyun.com/ebook/7507)
 
 ## React Compiler
 
@@ -171,3 +167,7 @@ export default function Hello() {
   return t0
 }
 ```
+
+## References
+
+- Low-Code engine [technical white paper](https://developer.aliyun.com/ebook/7507).

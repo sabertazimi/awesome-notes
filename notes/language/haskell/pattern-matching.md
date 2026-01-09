@@ -7,7 +7,7 @@ tags: [Language, Haskell]
 
 当函数拥有多个函数体(模式)时,会从上至下进行匹配各模式,一旦匹配则只应用这一函数体.
 
-## As Pattern Matching
+## As
 
 `all@(pattern)`: all 为指向 pattern 整体的引用.
 
@@ -21,7 +21,7 @@ capital "" = "Empty string, whoops!"
 capital all@(x:xs) = "The first letter of " ++ all ++ " is " ++ [x]
 ```
 
-## List Pattern Matching
+## List
 
 - `x:xs`
 - `x:y:z:xs`.
@@ -44,21 +44,17 @@ sum' [] = 0
 sum' (x:xs) = x + sum' xs
 ```
 
-## Tuple Pattern Matching
+## Tuple
 
 - (x, y)
 - (x, y, z)
 
-## Guard Pattern Matching and Where Binding
+## Guard
 
 子模式匹配: 运用布尔表达式实现判断, 应用对应函数体:
 
-- 关键符号: | 与 where.
-- | 分隔函数体.
-- where:
-  - 可见性: 定义只对本模式可见的 (私有) 名字与 (私有) 函数.
-  - where 定义在最外层, 使得各模式共享 (私有) 名字与 (私有) 函数.
-  - 名字定义时可使用模式匹配 `where (head:_) = firstName`.
+- 关键符号: `|` 与 `where`.
+- `|` 分隔函数体.
 
 ```haskell
 bmiTell :: (RealFloat a) => a -> a -> String
@@ -73,7 +69,15 @@ bmiTell weight height
           fat = 30.0
 ```
 
-## Let Binding
+### Where binding
+
+`where`:
+
+- 可见性: 定义只对本模式可见的 (私有) 名字与 (私有) 函数.
+- `where` 定义在最外层, 使得各模式共享 (私有) 名字与 (私有) 函数.
+- 名字定义时可使用模式匹配 `where (head:_) = firstName`.
+
+### Let binding
 
 类似 where, 绑定对象为表达式/函数:
 
@@ -92,7 +96,7 @@ in  sideArea + 2 * topArea
 - 可使用模式匹配.
 - 可用于 List Range 中.
 
-## Case Pattern Matching
+## Case
 
 - 模式匹配是 case 表达式的特殊情况(语法糖:简化写法).
 - 在函数中, 模式匹配只能用于参数定义中, case 表达式可用于其他地方
@@ -112,7 +116,7 @@ describeList xs = "The list is " ++ case xs of [] -> "empty."
                                                xs -> "a longer list."
 ```
 
-## Pattern Matching Best Practices
+## Best Practices
 
 - 代替 if-else/switch 语句
 - 递归算法(将递归基础作为首模式,递归函数体作为尾模式)

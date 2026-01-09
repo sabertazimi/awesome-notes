@@ -171,9 +171,10 @@ Web crypto [API](https://developer.mozilla.org/docs/Web/API/SubtleCrypto):
 
 ## User Privacy
 
-### Browser Privacy Detection
+### Browser Privacy
 
 - Browser [leaks](https://browserleaks.com).
+- [Exposed](https://github.com/neberej/exposedbydefault) by default.
 
 ### User Fingerprint
 

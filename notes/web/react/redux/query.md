@@ -5,7 +5,7 @@ tags: [Web, React, Redux, State Management]
 
 # Query
 
-## Server State Management
+## Server State
 
 - Tracking loading state in order to show UI spinners.
 - Avoiding duplicate requests for the same data.
@@ -16,7 +16,7 @@ tags: [Web, React, Redux, State Management]
 - [RTK Query](https://redux-toolkit.js.org/rtk-query/overview).
 - [React Query](https://github.com/tannerlinsley/react-query).
 
-## Basic RTK Query Usage
+## APIs
 
 - Query hooks.
 - Mutation hooks.
@@ -141,7 +141,7 @@ export function AddPostForm() {
 }
 ```
 
-## RTK Query Cache Mechanism
+## Cache
 
 RTK Query creates a **cache key** for each `unique endpoint` + `argument` combination,
 and stores the results for each cache key separately.
@@ -202,7 +202,7 @@ export const apiSlice = createApi({
 2. A `GET /posts/:postId` as the getPost query is refetched.
 3. A `GET /posts` as the getPosts query is refetched.
 
-## RTK Query Selector
+## Selector
 
 ```ts
 import {
@@ -228,7 +228,7 @@ export const selectUserById = createSelector(
 )
 ```
 
-## Splitting Query Endpoints
+## Splitting Endpoints
 
 [RTK query code splitting](https://redux-toolkit.js.org/rtk-query/usage/code-splitting):
 
@@ -256,7 +256,7 @@ export const { useGetUsersQuery } = extendedApiSlice
 export const selectUsersResult = extendedApiSlice.endpoints.getUsers.select()
 ```
 
-## Transform Query Response
+## Transform Response
 
 ```ts
 import { apiSlice } from '../api/apiSlice'
@@ -289,6 +289,6 @@ export const { selectAll: selectAllUsers, selectById: selectUserById }
   = usersAdapter.getSelectors(state => selectUsersData(state) ?? initialState)
 ```
 
-## RTK Query References
+## References
 
 - RTK Query real world [example](https://www.toptal.com/react/redux-toolkit-and-rtk-query).

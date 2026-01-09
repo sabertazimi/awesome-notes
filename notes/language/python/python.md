@@ -4,7 +4,7 @@ tags: [Language, Python]
 
 # Python
 
-## Python Installation
+## Installation
 
 ### Anaconda
 
@@ -77,7 +77,7 @@ even_numbers = list(range(2, 11, 2))
 print(even_numbers) # [2, 4, 6, 8, 10]
 ```
 
-### List Comprehension
+### Comprehension
 
 列表解析/列表推导式:
 
@@ -97,7 +97,7 @@ for key, value in my_dict.items(): # my_dict.keys() / my_dict.values()
   print(key, value)
 ```
 
-## Control Flow Statement
+## Control Flow
 
 Special condition:
 
@@ -175,6 +175,16 @@ print(my_dog.name)
 # Guises
 ```
 
+## Module
+
+```python
+import module_name
+import module_name as mn
+from module_name import function_name, ClassName
+from module_name import long_long_name as lln
+from module_name import *
+```
+
 ## Exception
 
 ```python
@@ -186,19 +196,9 @@ else:
   print(answer)
 ```
 
-## Module
-
-```python
-import module_name
-import module_name as mn
-from module_name import function_name, ClassName
-from module_name import long_long_name as lln
-from module_name import *
-```
-
 ## File
 
-### Text File
+### Text
 
 Standard library:
 
@@ -227,7 +227,7 @@ import numpy as np
 x, y = np.loadtxt('input.dat', delimiter=',', unpack=True)
 ```
 
-### JSON File
+### JSON
 
 ```python
  from pathlib import Path
@@ -252,7 +252,7 @@ path.write_text(contents)
 export = data_df.to_json('new_data.json', orient='records')
 ```
 
-### CSV File
+### CSV
 
 ```python
 from pathlib import Path
@@ -313,7 +313,7 @@ print(data.head(5))
 data.to_csv("new_data.csv", sep=",", index=False)
 ```
 
-### XML File
+### XML
 
 ```python
 import xml.etree.ElementTree as ET
@@ -380,6 +380,132 @@ with open('saved_data.csv', 'wb') as output_file:
     dict_writer.writerows(data_listOfDict)
 ```
 
+## Command Line
+
+### Input
+
+- `input(prompt)`: read a line from the user.
+
+### Click
+
+```python
+import click
+
+from caesar_encryption import encrypt
+
+@click.command()
+@click.option(
+    '--input_file',
+    type=click.File('r'),
+    help='File in which there is the text you want to encrypt/decrypt.'
+         'If not provided, a prompt will allow you to type the input text.',
+)
+@click.option(
+    '--output_file',
+    type=click.File('w'),
+    help='File in which the encrypted / decrypted text will be written.'
+         'If not provided, the output text will just be printed.',
+)
+@click.option(
+    '--decrypt/--encrypt',
+    '-d/-e',
+    help='Whether you want to encrypt the input text or decrypt it.'
+)
+@click.option(
+    '--key',
+    '-k',
+    default=1,
+    help='The numeric key to use for the caesar encryption / decryption.'
+)
+def caesar(input_file, output_file, decrypt, key):
+    if input_file:
+        text = input_file.read()
+    else:
+        text = click.prompt('Enter a text', hide_input=not decrypt)
+    if decrypt:
+        key = -key
+    cypherText = encrypt(text, key)
+    if output_file:
+        output_file.write(cypherText)
+    else:
+        click.echo(cypherText)
+
+if __name__ == '__main__':
+    caesar()
+```
+
+### Progress
+
+```python
+import click
+import enchant
+
+from tqdm import tqdm
+
+from caesar_encryption import encrypt
+
+@click.command()
+@click.option(
+    '--input_file',
+    type=click.File('r'),
+    required=True,
+)
+@click.option(
+    '--output_file',
+    type=click.File('w'),
+    required=True,
+)
+def caesar_breaker(input_file, output_file):
+    cypherText = input_file.read()
+    english_dictionary = enchant.Dict("en_US")
+    best_number_of_english_words = 0
+    for key in tqdm(range(26)):
+        plaintext = encrypt(cypherText, -key)
+        number_of_english_words = 0
+        for word in plaintext.split(' '):
+            if word and english_dictionary.check(word):
+                number_of_english_words += 1
+        if number_of_english_words > best_number_of_english_words:
+            best_number_of_english_words = number_of_english_words
+            best_plaintext = plaintext
+            best_key = key
+    click.echo(f'The most likely encryption key is {best_key}. It gives the
+    following plaintext:\n\n{best_plaintext[:1000]}...')
+    output_file.write(best_plaintext)
+
+if __name__ == '__main__':
+    caesar_breaker()
+```
+
+## Testing
+
+```python
+import pytest
+from survey import AnonymousSurvey
+
+@pytest.fixture
+def language_survey():
+  """一个可供所有测试函数使用的 AnonymousSurvey 实例"""
+  question = "What language did you first learn to speak?"
+  language_survey = AnonymousSurvey(question)
+  return language_survey
+
+def test_store_single_response(language_survey):
+  """测试单个答案会被妥善地存储"""
+  language_survey.store_response("English")
+  assert "English" in language_survey.responses
+
+def test_store_three_responses(language_survey):
+  """测试三个答案会被妥善地存储"""
+  responses = ["English", "Spanish", "Mandarin"]
+
+  for response in responses:
+    language_survey.store_response(response)
+
+  for response in responses:
+    assert response in language_survey.responses
+```
+
 ## NumPy
 
 ```python
@@ -388,7 +514,7 @@ import numpy as np
 np.random.seed(seed=1234)
 ```
 
-### NumPy Array Creation
+### Array
 
 ```python
 x = np.array(6)
@@ -405,7 +531,7 @@ np.eye((2))
 np.random.random.((2, 2))
 ```
 
-### NumPy Indexing
+### Indexing
 
 ```python
 x = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])
@@ -433,7 +559,7 @@ print ("x[x > 2]:\n", x[x > 2])
 #  [3 4 5 6]
 ```
 
-### NumPy Matrix Operations
+### Matrix
 
 - math: `x+y`/`x-y`/`x*y` `np.add/subtract/multiply`
 - dot product: `a.dot(b)`
@@ -490,7 +616,7 @@ plt.subplots_adjust()
 plt.show()
 ```
 
-### Plot Type
+### Types
 
 - `bar` plot.
 - `line` plot.
@@ -503,7 +629,7 @@ plt.show()
 - `KDE` plot.
 - `candlestick_ohlc` plot.
 
-### Plot Style
+### Style
 
 ```python
 from matplotlib import style
@@ -514,7 +640,7 @@ style.use('fivethirtyeight')
 plt.style.use('mystylesheet.mplrc')
 ```
 
-### Plot Axis Tick
+### Axis Tick
 
 ```python
 ax3.xaxis.set_major_formatter(mDates.DateFormatter('%Y-%m-%d'))
@@ -528,7 +654,7 @@ plt.setp(ax1.get_xticklabels(), visible=False)
 plt.setp(ax2.get_xticklabels(), visible=False)
 ```
 
-### Plot Legend
+### Legend
 
 Up middle legend:
 
@@ -559,7 +685,7 @@ Double y-axis:
 ax2v = ax2.twinx()
 ```
 
-### 3D Plot
+### 3D
 
 ```python
 from mpl_toolkits.mplot3d import axes3d
@@ -616,7 +742,7 @@ ax1.set_zlabel('z axis')
 plt.show()
 ```
 
-### Paper Figures Plot
+### Figures
 
 [Matplotlib for Papers](https://github.com/jbmouret/matplotlib_for_papers):
 
@@ -726,135 +852,9 @@ fig.set_size_inches(width, height)
 fig.savefig('plot.pdf')
 ```
 
-## CLI Application
-
-### Basic Input
-
-- `input(prompt)`: read a line from the user.
-
-### Click CLI
-
-```python
-import click
-
-from caesar_encryption import encrypt
-
-@click.command()
-@click.option(
-    '--input_file',
-    type=click.File('r'),
-    help='File in which there is the text you want to encrypt/decrypt.'
-         'If not provided, a prompt will allow you to type the input text.',
-)
-@click.option(
-    '--output_file',
-    type=click.File('w'),
-    help='File in which the encrypted / decrypted text will be written.'
-         'If not provided, the output text will just be printed.',
-)
-@click.option(
-    '--decrypt/--encrypt',
-    '-d/-e',
-    help='Whether you want to encrypt the input text or decrypt it.'
-)
-@click.option(
-    '--key',
-    '-k',
-    default=1,
-    help='The numeric key to use for the caesar encryption / decryption.'
-)
-def caesar(input_file, output_file, decrypt, key):
-    if input_file:
-        text = input_file.read()
-    else:
-        text = click.prompt('Enter a text', hide_input=not decrypt)
-    if decrypt:
-        key = -key
-    cypherText = encrypt(text, key)
-    if output_file:
-        output_file.write(cypherText)
-    else:
-        click.echo(cypherText)
-
-if __name__ == '__main__':
-    caesar()
-```
-
-### Progress Bar
-
-```python
-import click
-import enchant
-
-from tqdm import tqdm
-
-from caesar_encryption import encrypt
-
-@click.command()
-@click.option(
-    '--input_file',
-    type=click.File('r'),
-    required=True,
-)
-@click.option(
-    '--output_file',
-    type=click.File('w'),
-    required=True,
-)
-def caesar_breaker(input_file, output_file):
-    cypherText = input_file.read()
-    english_dictionary = enchant.Dict("en_US")
-    best_number_of_english_words = 0
-    for key in tqdm(range(26)):
-        plaintext = encrypt(cypherText, -key)
-        number_of_english_words = 0
-        for word in plaintext.split(' '):
-            if word and english_dictionary.check(word):
-                number_of_english_words += 1
-        if number_of_english_words > best_number_of_english_words:
-            best_number_of_english_words = number_of_english_words
-            best_plaintext = plaintext
-            best_key = key
-    click.echo(f'The most likely encryption key is {best_key}. It gives the
-    following plaintext:\n\n{best_plaintext[:1000]}...')
-    output_file.write(best_plaintext)
-
-if __name__ == '__main__':
-    caesar_breaker()
-```
-
-## Testing
-
-```python
-import pytest
-from survey import AnonymousSurvey
-
-@pytest.fixture
-def language_survey():
-  """一个可供所有测试函数使用的 AnonymousSurvey 实例"""
-  question = "What language did you first learn to speak?"
-  language_survey = AnonymousSurvey(question)
-  return language_survey
-
-def test_store_single_response(language_survey):
-  """测试单个答案会被妥善地存储"""
-  language_survey.store_response("English")
-  assert "English" in language_survey.responses
-
-def test_store_three_responses(language_survey):
-  """测试三个答案会被妥善地存储"""
-  responses = ["English", "Spanish", "Mandarin"]
-
-  for response in responses:
-    language_survey.store_response(response)
-
-  for response in responses:
-    assert response in language_survey.responses
-```
-
 ## UV
 
-### UV Mirrors
+### Mirrors
 
 ```bash
 # Python mirror
@@ -869,7 +869,7 @@ uv python list
 uvx python@3.13.2 -c "print('hello world')"
 ```
 
-### UV Packages
+### Packages
 
 Install packages:
 
@@ -880,7 +880,7 @@ uv pip list
 uv pip list --outdated
 ```
 
-### UV Dependencies
+### Dependencies
 
 Manage dependencies:
 
@@ -896,7 +896,7 @@ uv tree --depth 2
 uv run main.py
 ```
 
-### UV Toolchain
+### Toolchain
 
 Toolchain execution:
 
@@ -909,7 +909,7 @@ uvx ruff format ./myscript.py
 uvx python@3.13.2 -c "print('hello world')"
 ```
 
-### UV Virtual Environment
+### Virtual Environment
 
 Manage virtual environments:
 
@@ -925,7 +925,7 @@ deactivate
 uv venv --seed
 ```
 
-### UV Script
+### Script
 
 Run standalone scripts:
 
@@ -935,7 +935,7 @@ uv add --index "http://mirrors.aliyun.com/pypi/simple" --script example.py 'requ
 uv run example.py
 ```
 
-### UV Project
+### Project
 
 ```toml
 [project]
@@ -961,7 +961,7 @@ url = "https://mirror.sjtu.edu.cn/pytorch-wheels/cu124"
 explicit = true
 ```
 
-### UV Workspace
+### Workspace
 
 Monorepo support:
 
@@ -1010,7 +1010,7 @@ albatross
 uv run --package bird-feeder
 ```
 
-### UV Caching
+### Caching
 
 ```bash
 uv cache dir
@@ -1018,7 +1018,7 @@ uv cache clean
 uv cache prune
 ```
 
-### UV Dockfile
+### Dockerfile
 
 ```Dockerfile
 FROM python:3.12-slim-bookworm
@@ -1040,8 +1040,7 @@ RUN uv pip install -r requirements.txt
 CMD ["uv", "run", "my_app"]
 ```
 
-## Awesome Library
+## Library
 
-### Debugging and Testing
-
-- [PySnooper](https://github.com/cool-RR/PySnooper)
+- [PySnooper](https://github.com/cool-RR/PySnooper):
+  Poor man's debugger.

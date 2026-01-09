@@ -30,13 +30,13 @@ GraphQL [solves](https://mxstbr.com/thoughts/graphql):
   so you can enforce security and performance SLAs
   at as fine-grained a level as you need.
 
-## GraphQL Client
+## Client
 
 - `Ctrl + Enter`: run query.
 - `Ctrl + Space`: auto complete in `()` or `{}`.
 - `Ctrl + Shift + P`: prettify.
 
-## Basic Query Syntax
+## Query Syntax
 
 ```sql
 {

@@ -13,7 +13,7 @@ tags: [Web, Node.js, Module]
   CommonJS 模块整体导出一个包含若干个变量的对象,
   ES6 模块分开导出单个变量.
 
-## CommonJS Module
+## CommonJS
 
 - `CommonJS` 模块一般由包管理器提供的运行时实现.
 - 由于 `require` 语句直接分割了执行的代码块,
@@ -67,7 +67,7 @@ function tryModuleLoad(module) {
 }
 ```
 
-## EcmaScript Module
+## ESM
 
 - `ES6` 模块借助 `JS` 引擎实现.
   `JS` 引擎实现了 `ES6` 模块的底层核心逻辑.
@@ -80,11 +80,9 @@ function tryModuleLoad(module) {
   `ES6` 模块的 `import/export` 位置不影响模块代码语句的执行结果.
 - Experimental `.mjs` file.
 
-## Basic Modular Pattern
+## CallBack
 
-编写具有回调函数参数的模块
-
-- 定义模块
+编写具有回调函数参数的模块:
 
 ```ts
 function foo(x, y, callback) {
@@ -97,11 +95,7 @@ function foo(x, y, callback) {
     callback(error, param)
   }
 }
-```
 
-- 使用模块
-
-```ts
 foo(a, b, (err, param) => {
   if (err)
     processError()
@@ -110,17 +104,7 @@ foo(a, b, (err, param) => {
 })
 ```
 
-## Export Module
-
-```ts
-module.exports = function (args) {
-  /* ... */
-}
-```
-
-## CallBack Function
-
-- 向定义最内层回调,可避免回套嵌套
+向定义最内层回调, 可避免回套嵌套:
 
 ```ts
 server.on('request', (req, res) => {
@@ -139,7 +123,7 @@ server.on('request', (req, res) => {
 })
 ```
 
-## Module Resolution
+## Resolution
 
 `const x = require('./module')`:
 

@@ -18,7 +18,7 @@ tags: [Programming, OS, Linux, Network]
 wget -r -p -np -k -P ~/tmp/ http://java-er.com
 ```
 
-## Certificate Bot
+## Certificate
 
 [CertBot](https://github.com/certbot/certbot)
 for SSL certificates.
@@ -54,7 +54,7 @@ for SSL certificates.
 - [DockerVPN](https://github.com/hwdsl2/docker-ipsec-vpn-server):
   Docker image to run an IPsec VPN server.
 
-## Network Management
+## IP
 
 | 用途           | net-tool(被淘汰) | iproute2         |
 | :------------- | :--------------- | :--------------- |

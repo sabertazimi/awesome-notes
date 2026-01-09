@@ -1,5 +1,5 @@
 ---
-tags: [Web, Vue, Reactivity]
+tags: [Web, Vue, Internals, Reactivity]
 sidebar_position: 28
 ---
 
@@ -30,7 +30,60 @@ Dispatch updates (set):
 - `watcher.run()`.
 - `watcher.get()`: Get new value and recollect deps.
 
-## Vue Watcher and Observer
+## Set and Delete
+
+```ts
+Vue.set = function set(target: Array<any> | object, key: any, val: any): any {
+  if (Array.isArray(target) && isValidArrayIndex(key)) {
+    target.length = Math.max(target.length, key)
+    target.splice(key, 1, val)
+    return val
+  }
+
+  if (key in target && !(key in Object.prototype)) {
+    target[key] = val
+    return val
+  }
+
+  const ob = target.__ob__
+
+  if (target._isVue || (ob && ob.vmCount))
+    return val
+
+  if (!ob) {
+    target[key] = val
+    return val
+  }
+
+  defineReactive(ob.value, key, val)
+  ob.dep.notify()
+  return val
+}
+
+Vue.del = function del(target: Array<any> | object, key: any) {
+  if (Array.isArray(target) && isValidArrayIndex(key)) {
+    target.splice(key, 1)
+    return
+  }
+
+  const ob = target.__ob__
+
+  if (target._isVue || (ob && ob.vmCount))
+    return
+
+  if (!hasOwn(target, key))
+    return
+
+  delete target[key]
+
+  if (!ob)
+    return
+
+  ob.dep.notify()
+}
+```
+
+## Watcher and Observer
 
 `core/observer/watcher.js`:
 
@@ -378,7 +431,7 @@ export function defineReactive(
 }
 ```
 
-## Vue Array Watcher
+## Array
 
 ```ts
 const methodsToPatch = [
@@ -418,60 +471,7 @@ methodsToPatch.forEach((method) => {
 })
 ```
 
-## Vue Global Set and Delete API
-
-```ts
-Vue.set = function set(target: Array<any> | object, key: any, val: any): any {
-  if (Array.isArray(target) && isValidArrayIndex(key)) {
-    target.length = Math.max(target.length, key)
-    target.splice(key, 1, val)
-    return val
-  }
-
-  if (key in target && !(key in Object.prototype)) {
-    target[key] = val
-    return val
-  }
-
-  const ob = target.__ob__
-
-  if (target._isVue || (ob && ob.vmCount))
-    return val
-
-  if (!ob) {
-    target[key] = val
-    return val
-  }
-
-  defineReactive(ob.value, key, val)
-  ob.dep.notify()
-  return val
-}
-
-Vue.del = function del(target: Array<any> | object, key: any) {
-  if (Array.isArray(target) && isValidArrayIndex(key)) {
-    target.splice(key, 1)
-    return
-  }
-
-  const ob = target.__ob__
-
-  if (target._isVue || (ob && ob.vmCount))
-    return
-
-  if (!hasOwn(target, key))
-    return
-
-  delete target[key]
-
-  if (!ob)
-    return
-
-  ob.dep.notify()
-}
-```
-
-## Vue Computed Watcher
+## Computed
 
 `core/instance/state.js`:
 
@@ -576,7 +576,7 @@ function resetStoreVM(store, state, hot) {
 }
 ```
 
-## Vue Router Watcher
+## Router
 
 - `<router-link>` clicked.
 - `vm.$router.push(location)`/`vm.$router.replace(location)`.

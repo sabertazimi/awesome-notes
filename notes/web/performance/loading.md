@@ -3,11 +3,9 @@ sidebar_position: 6
 tags: [Web, Performance, Loading]
 ---
 
-# Web Loading Performance
+# Loading
 
-## Render Blocking Resources
-
-### Render Blocking Resources Type
+## Critical Path
 
 Render blocking resources are files that 'press pause'
 on the critical rendering path.
@@ -27,13 +25,11 @@ They interrupt one or more of the steps:
 
 [![Critical Render Path](./figures/critical-render-path.svg)](https://sia.codes/posts/render-blocking-resources/#critical-render-path-js)
 
-### Render Blocking Resources Performance
-
 - Reduce CSS and JavaScript bytes.
 - Lazy loading non-critical CSS and JavaScript.
 - Use the `defer`, `async`, or `module` attribute on scripts.
 
-## Data Preloading
+## Preloading
 
 - Generally, preloads will load in order parser gets to them for anything >= `Medium`.
 - Font preloads are probably best towards end of `<head>` or beginning of `<body>`.
@@ -70,7 +66,7 @@ Preload scanner can be defeated (can't discover resources quickly):
 - Lazy-loading above-the-fold images or iframes using JavaScript solution.
 - Rendering markup on client that contain document sub-resources using JavaScript.
 
-## Data PreFetching
+## Prefetching
 
 [Quick Link](https://github.com/GoogleChromeLabs/quicklink)
 prefetch:
@@ -88,7 +84,7 @@ Pre-fetch and pre-render
 - Avoid prefetching large resources.
 - Avoid prefetching cross-origin resources.
 
-## Loading Priority
+## Priority
 
 - [Fetch Priority](https://web.dev/priority-hints)
 - [Resources Priority](https://web.dev/prioritize-resources)
@@ -116,7 +112,7 @@ Pre-fetch and pre-render
 </script>
 ```
 
-## Images Lazy Loading
+## Images
 
 Lazy Loading Polyfill:
 
@@ -158,7 +154,7 @@ Native Lazy Loading:
 <img src="flower.jpg" lazyload="off" />
 ```
 
-## JavaScript Lazy Loading
+## Scripts
 
 - [Script Priorities](https://addyosmani.com/blog/script-priorities)
 - `async`:
@@ -194,7 +190,7 @@ export default function PageComponent() {
 }
 ```
 
-### Script Lazy Loading
+### Lazy Loading
 
 ```html
 <html>
@@ -212,7 +208,7 @@ export default function PageComponent() {
 </html>
 ```
 
-### Script Dynamic Loading
+### Dynamic Loading
 
 ```ts
 function requireScript(file, callback) {
@@ -242,7 +238,7 @@ requireScript('the_rest.js', () => {
 })
 ```
 
-### Babel Configuration
+### Babel
 
 - `modules`: always `false`, keep `esm` for bundler (e.g. webpack) tree shaking.
 - `useBuiltIns`:
@@ -273,13 +269,25 @@ requireScript('the_rest.js', () => {
 <script nomodule src="legacy.js"></script>
 ```
 
-## Web Loading Best Practices
+## PRPL Pattern
+
+`PRPL` pattern focuses on 4 main performance considerations:
+
+- Pushing critical resources efficiently:
+  minimize amount of round trips to server and reducing loading time.
+- Rendering initial route soon as possible:
+  improve user experience.
+- Pre-caching assets in the background for frequently visited routes:
+  minimize amount of requests to server and enable better offline experience.
+- Lazily loading routes and assets that aren’t requested as frequently.
+
+## Best Practices
 
 - 非必要静态资源上传 CDN: Client -> CDN Server -> CDN 骨干网络 (极度优化) -> CDN Server -> Server.
 - 冷启动开启数据预拉取.
 - 页面路由切换时进行数据预拉取 (并缓存数据).
 
-## Web Loading References
+## References
 
 - Fetch priority [guide](https://web.dev/priority-hints).
 - Resources priority [guide](https://web.dev/prioritize-resources).

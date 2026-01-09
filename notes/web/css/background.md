@@ -1,13 +1,11 @@
 ---
-sidebar_position: 15
-tags: [Web, CSS]
+sidebar_position: 21
+tags: [Web, CSS, Background, Parallax]
 ---
 
 # Background
 
-## CSS Background
-
-### Background Color
+## Color
 
 [`background-color`](https://developer.mozilla.org/docs/Web/CSS/background-color):
 
@@ -17,7 +15,7 @@ tags: [Web, CSS]
   shorthand property:
   `background-color` value only be included in **last layer** specified.
 
-### Background Image
+## Image
 
 [`background-image`](https://developer.mozilla.org/docs/Web/CSS/background-image):
 
@@ -41,7 +39,7 @@ tags: [Web, CSS]
 }
 ```
 
-### Background Repeat
+## Repeat
 
 ```css
 .background-repeat {
@@ -61,7 +59,7 @@ tags: [Web, CSS]
 }
 ```
 
-### Background Position
+## Position
 
 Percentage background position (`<position> type`):
 
@@ -98,7 +96,7 @@ background-position: top right 10px;
 
 [![Background Position](./figures/background-position.png)](https://developer.mozilla.org/docs/Web/CSS/background-position)
 
-### Background Clip
+## Clip
 
 指定背景显示范围:
 
@@ -171,7 +169,7 @@ p:hover {
 }
 ```
 
-### Background Origin
+## Origin
 
 指定背景绘制起点:
 
@@ -182,7 +180,7 @@ p:hover {
 - 影响 `background-position` 定位.
 - 影响**起点两侧**背景样式细节.
 
-### Background Size
+## Size
 
 [`background-size`](https://developer.mozilla.org/docs/Web/CSS/background-size):
 
@@ -222,7 +220,7 @@ p:hover {
 }
 ```
 
-### Background Attachment
+## Attachment
 
 [`background-attachment`](https://developer.mozilla.org/docs/Web/CSS/background-attachment):
 
@@ -230,7 +228,7 @@ p:hover {
 - `local`: scrolls both with main view and local view.
 - `fixed`: stays fixed no matter what.
 
-#### Background Scroll View
+### Scroll View
 
 对于可以滚动的元素 (`overflow: scroll`):
 
@@ -256,7 +254,7 @@ p:hover {
 }
 ```
 
-#### Background Parallax Effect
+### Parallax
 
 Implement scroll parallax effect `background-attachment: fixed`:
 
@@ -278,442 +276,4 @@ body {
   background-position: center;
   background-size: cover;
 }
-```
-
-## CSS Shadow
-
-### Text Shadow
-
-[`text-shadow](https://developer.mozilla.org/docs/Web/CSS/text-shadow):
-
-- `none`.
-- `<shadow-text>#`: `<length>{2,3} && <color>?`.
-  - 支持多重阴影.
-  - 不支持内阴影.
-  - `<length>{2,3}`: 不支持扩展阴影 `offset-x offset-y blur-radius`.
-  - `<color>?`: default `revert` (user agent color).
-
-```css
-:root {
-  --colo: #c0c0c0;
-  --br-shadow: -6px 6px 15px rgb(0 0 0 / 50%);
-  --tl-shadow: 6px -6px 15px rgb(255 255 255/80%);
-}
-
-body {
-  background: var(--color);
-}
-
-/* 新拟物文字 */
-.neumorphic-text {
-  color: var(--color);
-  text-shadow: var(--br-shadow), var(--tl-shadow);
-}
-
-/* 印刷文字 */
-.press-text {
-  color: hsl(210deg 13% 75%);
-  text-shadow: 0 -1px 1px black;
-  background: hsl(210deg 13% 40%);
-}
-
-/* 描边文字 */
-.stroked-text {
-  color: white;
-  text-shadow:
-    1px 1px black,
-    -1px -1px black,
-    1px -1px black,
-    -1px 1px black;
-}
-
-/* 发光文字 */
-.glow-text {
-  color: #ffc;
-  text-shadow:
-    0 0 0.1em,
-    0 0 0.3em;
-  background: #203;
-}
-
-/* 凸起文字 */
-.extruded-text {
-  color: white;
-  text-shadow:
-    0 1px hsl(0deg 0% 85%),
-    0 2px hsl(0deg 0% 80%),
-    0 3px hsl(0deg 0% 75%),
-    0 4px hsl(0deg 0% 70%),
-    0 5px hsl(0deg 0% 65%),
-    0 5px 10px black;
-  background: #58a;
-}
-
-/* 复古文字 */
-.retro-text {
-  color: white;
-  text-shadow:
-    1px 1px black,
-    2px 2px black,
-    3px 3px black,
-    4px 4px black,
-    5px 5px black,
-    6px 6px black,
-    7px 7px black,
-    8px 8px black;
-  background: hsl(0deg 50% 45%);
-}
-```
-
-### Box Shadow
-
-[`box-shadow`](https://developer.mozilla.org/docs/Web/CSS/box-shadow):
-
-- `none`.
-- `<shadow>#`: `inset? && <length>{2,4} && <color>?`.
-  - 支持多重阴影.
-  - `inset?`: 支持内阴影.
-  - `<length>{2,4}`: 支持扩展阴影 `offset-x offset-y blur-radius spread-radius`.
-  - `<color>?`: default `currentcolor` (text computed color).
-
-#### Basic Box Shadow
-
-```css
-.box {
-  /* offset-x | offset-y | blur-radius | color */
-  box-shadow: 10px 5px 5px black;
-
-  /* offset-x | offset-y | blur-radius | spread-radius | color */
-  box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
-}
-```
-
-#### Side Box Shadow
-
-Bottom side box shadow:
-
-```css
-.box {
-  box-shadow: 0 5px 4px -4px black;
-}
-```
-
-Right and bottom sides box shadow:
-
-```css
-.box {
-  box-shadow: 3px 3px 6px -3px black;
-}
-```
-
-Two opposite sides box shadow:
-
-```css
-.box {
-  box-shadow:
-    5px 0 5px -5px black,
-    -5px 0 5px -5px black;
-}
-```
-
-#### Inset Box Shadow
-
-模拟边框:
-
-```css
-.button-ghost {
-  background-color: #fff;
-
-  /* 模拟边框: 左 右 上 下 */
-  box-shadow:
-    inset 1px 0 #a2a9b6,
-    inset -1px 0 #a2a9b6,
-    inset 0 1px #a2a9b6,
-    inset 0 -1px #a2a9b6;
-}
-```
-
-模拟背景:
-
-```css
-.button:active {
-  box-shadow: inset 0 0 0 999px rgb(0 0 0 / 10%);
-}
-```
-
-#### Neumorphic Box Shadow
-
-[Neumorphic box shadow](https://codepen.io/myacode/pen/PoqQQNM):
-
-```css
-.neumorphic {
-  box-shadow:
-    -10px -10px 15px rgb(255 255 255 / 50%),
-    10px 10px 15px rgb(70 70 70 / 12%);
-}
-
-.neumorphic:active {
-  box-shadow:
-    inset -10px -10px 15px rgb(255 255 255 / 50%),
-    inset 10px 10px 15px rgb(70 70 70 / 12%);
-}
-```
-
-## CSS Gradient
-
-### Color Stop List
-
-`<color-stop-list>`,
-`[<linear-color-stop> [, <linear-color-hint>]?]#, <linear-color-stop>`:
-
-- `<linear-color-stop>`: `<color> <length-percentage>{1,2}?`.
-- `<linear-color-hint>`: `<length-percentage>`, 改变颜色的转换点位置.
-- `<length-percentage>`: `<length> | <percentage>`.
-
-`<angular-color-stop-list>`,
-`[<angular-color-stop> [, <angular-color-hint>]?]#, <angular-color-stop>`:
-
-- `<angular-color-stop>`: `<color> && <angle-percentage>{1,2}?`.
-- `<angular-color-hint>`: `<angle-percentage>`, 改变颜色的转换点位置.
-- `<angle-percentage>`: `<angle> | <percentage>`.
-
-:::tip[Color Stop Position]
-
-若后一个色标的位置值为 `0`,
-则它的位置总是会被浏览器调整为前一个色标的位置值:
-
-```css
-/* 条纹形状 */
-.stripe {
-  background: linear-gradient(yellow 30%, blue 0);
-  background: linear-gradient(yellow 33.3%, blue 0 66.6%, yellowgreen 0);
-  background-size: 100% 45px;
-}
-```
-
-:::
-
-### Linear Gradient
-
-[Linear gradient](https://developer.mozilla.org/docs/Web/CSS/gradient/linear-gradient):
-
-- `[<angle> | to <side-or-corner>]?, <color-stop-list>`.
-- Default angle: `to bottom`.
-- `0deg` angle: `to top`.
-- `90deg` angle: `to right`.
-- `-90deg` angle: `to left`.
-
-```css
-.linear-gradient {
-  width: 300px;
-  height: 150px;
-  background-image: linear-gradient(45deg, white 100px, skyblue 100px 200px, white 200px);
-  border: solid deepskyblue;
-}
-```
-
-[![Linear Gradient](./figures/linear-gradient.png)](https://developer.mozilla.org/docs/Web/CSS/gradient/linear-gradient#composition_of_a_linear_gradient)
-
-### Radial Gradient
-
-[Radial gradient](https://developer.mozilla.org/docs/Web/CSS/gradient/radial-gradient):
-
-- `[<ending-shape> || <size>]? [at <position>]?, <color-stop-list>`.
-- `<ending-shape>`:
-  - `ellipse` (initial value).
-  - `circle`.
-- `<size>`.
-  - `closest-side`.
-  - `farthest-side`.
-  - `closest-corner`.
-  - `farthest-corner`.
-  - `<length>`: 单独一个值不能为 `<percentage>`.
-  - `<length-percentage>{2}`.
-
-[![Radial Gradient Size](./figures/radial-gradient-size.png)](https://developer.mozilla.org/docs/Web/CSS/gradient/radial-gradient#size)
-
-```css
-.radial-gradient {
-  background-image: radial-gradient(50px, white, deepskyblue);
-  /* stylelint-disable-next-line declaration-property-value-no-unknown */
-  background-image: radial-gradient(50px 50%, white, deepskyblue);
-  /* stylelint-disable-next-line declaration-property-value-no-unknown */
-  background-image: radial-gradient(50% 50%, white, deepskyblue);
-  background-image: radial-gradient(100px at 0 0, white, deepskyblue);
-  background-image: radial-gradient(100px at left top, white, deepskyblue);
-  background-image: radial-gradient(100px at right 100px bottom 100px, white, deepskyblue);
-  background-image: radial-gradient(farthest-corner circle at right 100px bottom 100px, white, deepskyblue);
-}
-```
-
-[![Radial Gradient](./figures/radial-gradient.png)](https://developer.mozilla.org/docs/Web/CSS/gradient/radial-gradient#composition_of_a_radial_gradient)
-
-### Conic Gradient
-
-[Conic gradient](https://developer.mozilla.org/docs/Web/CSS/gradient/conic-gradient):
-
-- `[from <angle>]? [at <position>]?, <angular-color-stop-list>`.
-- Default angle: `0deg`.
-
-```css
-.pie {
-  width: 150px;
-  height: 150px;
-  background: conic-gradient(yellowgreen 40%, gold 0deg 75%, deepskyblue 0deg);
-  border-radius: 50%;
-}
-
-.color-picker-wheel {
-  width: 150px;
-  height: 150px;
-  background:
-    radial-gradient(closest-side circle, gray, transparent), conic-gradient(red, magenta, blue, aqua, lime, yellow, red);
-  border-radius: 50%;
-}
-```
-
-[![Conic Gradient](./figures/conic-gradient.png)](https://developer.mozilla.org/docs/Web/CSS/gradient/conic-gradient#composition_of_a_conic_gradient)
-
-### Gradient References
-
-- Background gradient [loading spinner](https://css-tricks.com/single-element-loaders-the-spinner).
-- Background gradient [shapes](https://css-tricks.com/drawing-images-with-css-gradients).
-
-## CSS Object
-
-### Object Fit
-
-[`object-fit`](https://developer.mozilla.org/docs/Web/CSS/object-fit)
-只对替换元素
-([`replaced element`](https://developer.mozilla.org/docs/Web/CSS/Replaced_element))
-有作用:
-
-- `input`.
-- `select`.
-- `textarea`.
-- `img`.
-- `video`.
-- `iframe`.
-- `embed`.
-- `object`.
-
-[`object-fit`](https://developer.mozilla.org/docs/Web/CSS/object-fit)
-是作用于 `replaced element` 的 `background-size`,
-可以处理图片拉伸变形与 `Cumulative Layout Shift` 问题:
-
-- `fill`.
-- `contain`.
-- `cover`.
-- `none`.
-- `scale-down`.
-
-```css
-.image-container {
-  position: relative;
-  padding-bottom: calc(2 / 3 * 100%); /* (height / width) ratio */
-  overflow: hidden;
-}
-
-.image-container > img {
-  position: absolute;
-  width: 100%;
-  max-width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.image-container > .aspect-ratio {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-}
-
-.flexbox-container {
-  display: flex;
-  gap: var(--space-gutter-s);
-  align-items: flex-start;
-  font-size: var(--text-size-meta);
-}
-
-.flexbox-container img.aspect-ratio {
-  flex-shrink: 0;
-  width: clamp(4rem, 30%, 6rem);
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: 50%;
-}
-```
-
-### Object Position
-
-[`object-position`](https://developer.mozilla.org/docs/Web/CSS/object-position)
-是作用于 `replaced element` 的 `background-position`:
-
-```css
-img {
-  /* <percentage> values */
-  object-position: 25% 75%;
-
-  /* Keyword values */
-  object-position: top;
-  object-position: bottom;
-  object-position: left;
-  object-position: right;
-  object-position: center;
-
-  /* <length> values */
-  object-position: 0 0;
-  object-position: 1cm 2cm;
-  object-position: 10ch 8em;
-
-  /* Edge offsets values */
-  object-position: bottom 10px right 20px;
-  object-position: right 3em bottom 10px;
-  object-position: top 0 right 10px;
-}
-```
-
-### Replaced Media Size
-
-Replaced media size [normalize style](./toolchain.md#css-normalize):
-
-```css
-input,
-textarea,
-img,
-video,
-object {
-  box-sizing: border-box;
-  max-width: 100%;
-  height: auto;
-}
-```
-
-### Embed Object Container
-
-```html
-<div class="embed-container">
-  <iframe src="http://www.youtube.com/embed/B1_N28DA3gY" frameborder="0" allowfullscreen></iframe>
-</div>
-
-<style>
-  .embed-container {
-    position: relative;
-    max-width: 100%;
-    height: 0;
-    height: auto;
-    padding-bottom: 56.25%;
-    overflow: hidden;
-  }
-
-  .embed-container iframe,
-  .embed-container object,
-  .embed-container embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>
 ```

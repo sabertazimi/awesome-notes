@@ -1,13 +1,13 @@
 ---
-sidebar_position: 21
-tags: [Web, CSS, Animation]
+sidebar_position: 40
+tags: [Web, CSS, Animation, Transform]
 ---
 
 # Transform
 
 `transform`:
 
-- No affect on the CSS box model layout (excepts [`overflow`](#transform-alignment)).
+- No affect on the CSS box model layout (excepts [`overflow`](#alignment)).
 - No affect on `display: inline` element.
 - Affect the visual rendering.
 - Affect client rectangles exposed by
@@ -18,7 +18,7 @@ tags: [Web, CSS, Animation]
   for `absolute`/`fixed` positioned children.
 - `<transform-function>+`: 多重变换**从右向左**按顺序执行.
 
-## Translate Transform
+## Translate
 
 `translate()`/`translateX()`/`translateY()`/`translateZ()`/`translate3d()`:
 
@@ -38,7 +38,7 @@ tags: [Web, CSS, Animation]
 }
 ```
 
-## Scale Transform
+## Scale
 
 `scale()`/`scaleX()`/`scaleY()`/`scaleZ()`/`scale3d()`:
 
@@ -61,7 +61,7 @@ tags: [Web, CSS, Animation]
 }
 ```
 
-## Rotate Transform
+## Rotate
 
 `rotate()`/`rotateX()`/`rotateY()`/`rotateZ()`/`rotate3d()`:
 
@@ -80,7 +80,7 @@ tags: [Web, CSS, Animation]
 }
 ```
 
-## Skew Transform
+## Skew
 
 `skew()`/`skewX()`/`skewY()`:
 
@@ -99,7 +99,7 @@ tags: [Web, CSS, Animation]
 
 [![Skew Transform](./figures/transform-skew.png)](https://developer.mozilla.org/docs/Web/CSS/transform-function/skew)
 
-## Matrix Transform
+## Matrix
 
 `matrix(a, b, c, d, e, f)`:
 
@@ -174,7 +174,7 @@ $$
 }
 ```
 
-## Transform Origin
+## Origin
 
 [`transform-origin`](https://developer.mozilla.org/docs/Web/CSS/transform-origin)
 change `transform` start point:
@@ -199,7 +199,7 @@ change `transform` start point:
 }
 ```
 
-## Individual Transform
+## Individual
 
 Individual transform [property](https://drafts.csswg.org/css-transforms-2/#individual-transforms):
 
@@ -223,14 +223,14 @@ Individual transform [property](https://drafts.csswg.org/css-transforms-2/#indiv
 }
 ```
 
-## Transform Style
+## Style
 
 `transform-style`:
 
 - `flat`: initial value, 表示平面变换.
 - `preserve-3d`: 表示 3D 透视变换.
 
-## Transform Perspective
+## Perspective
 
 `perspective` 为 **3D** 转换元素定义透视视图:
 
@@ -258,7 +258,7 @@ Individual transform [property](https://drafts.csswg.org/css-transforms-2/#indiv
 
 当元素 `rotateY(180deg)` 时, 元素将被隐藏.
 
-## Transform Container
+## Container
 
 - `:hover` should not add to transformed elements,
   `:hover` should add to parent element.
@@ -275,7 +275,7 @@ Individual transform [property](https://drafts.csswg.org/css-transforms-2/#indiv
 }
 ```
 
-## Transform Alignment
+## Alignment
 
 - Keep `translate(-50%, -50%)` in keyframe transform property list
   when using it for alignment.
@@ -295,6 +295,6 @@ Individual transform [property](https://drafts.csswg.org/css-transforms-2/#indiv
 }
 ```
 
-## Transform References
+## References
 
 - Transform 101 [guide](https://learn.shayhowe.com/advanced-html-css/css-transforms).

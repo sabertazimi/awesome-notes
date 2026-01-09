@@ -3,7 +3,7 @@ sidebar_position: 3
 tags: [Web, TypeScript, Primitive]
 ---
 
-# Primitive Types
+# Primitives
 
 - `boolean`.
 - `number`.

@@ -6,31 +6,29 @@ tags: [Web, TypeScript]
 
 ## Getting Started
 
-- [Toolchain](./toolchain.md) - TypeScript Installation, Configuration, Compiler
-- [Module](./module.md) - Modules, Namespace, Module Resolution
-
-## Basic Types
-
-- [Primitive](./primitive.md) - Basic Types, Enum Types
-- [Enum](./enum.md) - Enum Types
-- [Function](./function.md) - Function Types
+- [Toolchain](./toolchain.md) - Installation, configuration and compiler
+- [Module](./module.md) - Modules, namespace and module resolution
+- [Primitive](./primitive.md) - primitive types
+- [Enum](./enum.md) - Enum types
+- [Function](./function.md) - Function types
 - [Interface](./interface.md) - Interface
 
 ## Type System
 
-- [Modifier](./modifier.md) - Type Modifiers
-- [Signature](./signature.md) - Call Signature, Index Signature
-- [Literal](./literal.md) - Literal Types, Template Literal Types
-- [Combination](./combination.md) - Union Types, Intersection Types
-- [Generic](./generic.md) - Generic Types
-- [Conditional](./conditional.md) - Conditional Types
-- [Mapped](./mapped.md) - Mapped Types
-- [Moving](./moving.md) - Moving Types (Typeof, Keyof)
-- [Utility](./utility.md) - Utility Types
-- [Narrowing](./narrowing.md) - Type Inference, Type Guard, Type Assertion
+- [Modifier](./modifier.md) - Type modifiers
+- [Signature](./signature.md) - call signature and index signature
+- [Literal](./literal.md) - literal types and template literal types
+- [Combination](./combination.md) - union types and intersection types
+- [Generic](./generic.md) - Generic types
+- [Conditional](./conditional.md) - Conditional types
+- [Mapped](./mapped.md) - Mapped types
+- [Moving](./moving.md) - Moving types (typeof, keyof)
+- [Utility](./utility.md) - Utility types
+- [Narrowing](./narrowing.md) - Type inference, type guard and type assertion
 
-## Advanced
+## Advanced Topics
 
 - [Decorator](./decorator.md) - Decorators
-- [Internals](./internals.md) - Type System, TypeScript Internals
-- [Performance](./performance.md) - TypeScript Performance
+- [Gymnastics](./gymnastics.md) - Type gymnastics programming
+- [Performance](./performance.md) - performance
+- [Internals](./internals.md) - Type system and internals

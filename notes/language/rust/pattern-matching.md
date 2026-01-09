@@ -26,7 +26,7 @@ while let pattern = target {
 }
 ```
 
-## Enum Pattern Matching
+## Enum
 
 ```rust
 enum Action {
@@ -60,7 +60,7 @@ fn main() {
 }
 ```
 
-## Tuple Pattern Matching
+## Tuple
 
 ```rust
 fn main() {
@@ -74,7 +74,7 @@ fn main() {
 }
 ```
 
-## Struct Pattern Matching
+## Struct
 
 ```rust
 struct Point {
@@ -109,7 +109,7 @@ fn main() {
 }
 ```
 
-## Match Guard
+## Guard
 
 Combine pattern matching and `if` expression:
 
@@ -123,7 +123,7 @@ match num {
 }
 ```
 
-## Match Assignment
+## Assignment
 
 Combine pattern matching and `@` expression:
 

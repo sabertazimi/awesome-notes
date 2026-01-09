@@ -11,7 +11,7 @@ React and Vue drop `Mixin`:
 - Prototype pollution
 - Dependency uncertainty.
 
-## Prototype Mixin
+## Prototype
 
 ```ts
 // Extend an existing object with a method from another
@@ -33,7 +33,7 @@ function mixin(...args) {
 }
 ```
 
-## Class Mixin
+## Class
 
 ```ts
 function MoveMixin(superclass) {

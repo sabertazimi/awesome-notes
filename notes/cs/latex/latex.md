@@ -4,9 +4,7 @@ tags: [CS, LaTex]
 
 # LaTeX
 
-## Workflow
-
-### Installation
+## Installation
 
 - [Windows Installation Tutorial](https://liam0205.me/texlive)
 - [Linux Installation Tutorial](https://stone-zeng.github.io/fduthesis/2018-05-13-install-texlive-ubuntu/)
@@ -39,7 +37,7 @@ sudo tlmgr update --list
 sudo tlmgr update --self --all
 ```
 
-### Build Script
+## Build Script
 
 ```makefile
 filename=main
@@ -65,13 +63,13 @@ clean:
 \raggedleft
 ```
 
-### Page Size
+### Page
 
 ```latex
 \usepackage[left=1cm,right=1cm,top=2cm,bottom=3cm]{geometry}
 ```
 
-### Font Size
+### Font
 
 ```latex
 \zihao{0}  % 初号
@@ -80,11 +78,9 @@ clean:
 
 ## Math
 
-[Typeset Equations](http://moser-isi.ethz.ch/docs/typeset_equations.pdf)
-
 ### Symbol
 
-- [The Comprehensive LATEX Symbol List](http://tug.ctan.org/info/symbols/comprehensive/symbols-a4.pdf)
+Comprehensive LATEX symbol [list](http://tug.ctan.org/info/symbols/comprehensive/symbols-a4.pdf):
 
 ```latex
 $\gamma \delta \sigma \phi \psi \rho \mu \pi$
@@ -95,7 +91,7 @@ $\rightarrow$
 $\surd \sqrt{2} \frac{x}{y}$
 ```
 
-## template
+## Template
 
 ```latex
 \usepackage{mathbbold}
@@ -239,7 +235,7 @@ $\surd \sqrt{2} \frac{x}{y}$
 \newcommand{\akai}{\CJKfamily{akai}}
 ```
 
-## Tools
+## Toolchain
 
 ### PDF to Tex
 
@@ -248,7 +244,7 @@ sudo apt install abiword
 abiword --to=tex a.pdf
 ```
 
-### tlmgr
+### Tlmgr
 
 ```bash
 sudo apt-get install xzdec
@@ -263,8 +259,9 @@ tlmgr update --self --all
 tlmgr update --list
 ```
 
-## LaTeX References
+## References
 
 - Simple LaTeX [introduction](https://liam0205.me/2014/09/08/latex-introduction).
 - HaiYang Liu's LaTeX [tutorial](https://yun.weicheng.men/Book/LaTeX%E5%85%A5%E9%97%A8.pdf).
 - Paper [best practices](https://github.com/Wookai/paper-tips-and-tricks).
+- LaTeX [equations](http://moser-isi.ethz.ch/docs/typeset_equations.pdf).

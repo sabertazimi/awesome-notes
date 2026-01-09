@@ -3,13 +3,13 @@ sidebar_position: 7
 tags: [Web, Performance, Monitoring]
 ---
 
-# Performance Monitoring
+# Monitoring
 
 前端性能监控分为两种方式,
 一种叫做合成监控 (Synthetic Monitoring, SYN),
 另一种是真实用户监控 (Real User Monitoring, RUM).
 
-## Synthetic Monitoring
+## Synthetic
 
 在一个模拟场景里, 去提交一个需要做性能审计的页面,
 通过一系列的工具/规则去运行你的页面, 提取一些性能指标, 得出一个审计报告.
@@ -23,7 +23,7 @@ tags: [Web, Performance, Monitoring]
 | 不影响真实用户的访问性能               |       单次数据不够稳定       |
 | 可以提供页面加载幻灯片等可视化分析途径 | 数据量较小, 无法发挥更大价值 |
 
-## Real User Monitoring
+## Real User
 
 用户在页面访问之后就会产生各种各样的性能指标,
 之后会将这些性能指标上传的我们的日志服务器上,
@@ -39,7 +39,7 @@ tags: [Web, Performance, Monitoring]
 | 数据样本足够庞大, 可以减少统计误差     | 无法采集完整的资源加载瀑布图     |
 | 新年数据可与其它数据关联, 产生更大价值 | 无法可视化展示加载过程           |
 
-## SYN and RUM
+:::tip[SYN vs RUM]
 
 | 对比项         | 合成监控               | 真实用户监控               |
 | :------------- | :--------------------- | :------------------------- |
@@ -48,7 +48,9 @@ tags: [Web, Performance, Monitoring]
 | 数据样本量     | 较小                   | 大(视业务体量)             |
 | 适合场景       | 定性分析, 小数据量分析 | 定量分析, 业务数据深度挖掘 |
 
-## Monitoring Methods
+:::
+
+## Methods
 
 在真实用户性能数据采集时, 要关注四个方面的东西:
 
@@ -57,7 +59,7 @@ tags: [Web, Performance, Monitoring]
 - 采集正确的数据.
 - 上报关联的维度.
 
-## Monitoring Standard API
+## APIs
 
 采集性能数据时先抹平 Navigation Timing spec 差异
 优先使用 PerformanceTimeline API
@@ -72,7 +74,7 @@ tags: [Web, Performance, Monitoring]
 - DOMReady 时间 = domContentLoadedEventEnd - navigationStart.
 - onload 时间 = loadEventEnd - navigationStart.
 
-## Monitoring Statistics Data
+## Statistics
 
 First Meaningful Paint: 首次有效渲染时长,
 它的一个核心的想法是渲染并不一定代表着用户看到了主要内容,
@@ -93,7 +95,7 @@ Load 也不一定代表用户看到主要内容.
 - Cumulative Layout Shift (CLS): 0 ~ 0.1 ~ 0.25.
 - Time to Interactive (TTI): 0 ~ 3.8 ~ 7.3s.
 
-## Monitoring Report Dimension
+## Reporting
 
 不同的页面操作/页面打开方式/浏览器环境都会对我们页面加载的性能会有影响,
 需要上报这些维度的数据, 以便深入性能分析:
@@ -102,8 +104,6 @@ Load 也不一定代表用户看到主要内容.
 - 页面加载方式: 直接打开/刷新打开/前进后退打开.
 - 是否启用 HTTP2.
 - 是否启用 Service Worker.
-
-## Monitoring Report Performance
 
 解决上报对性能的影响问题有以下方案:
 
@@ -141,7 +141,7 @@ document.addEventListener('visibilitychange', () => {
 })
 ```
 
-## GIF Image Beacon
+### Image Beacon
 
 使用 `GIF` 图片进行前端监控上报:
 
@@ -162,7 +162,7 @@ const beacon = new Image()
 beacon.src = `http://www.example.com/logger/beacon.gif?page=${encodeURI(thisPage)}&ref=${encodeURI(referringPage)}`
 ```
 
-## Performance Monitoring References
+## References
 
 - Performance monitoring data collection and report [case](https://zhuanlan.zhihu.com/p/420330110).
 - Performance monitoring real world [case](https://juejin.cn/post/7078512301665419295).

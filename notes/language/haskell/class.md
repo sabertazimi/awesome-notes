@@ -14,7 +14,7 @@ fromIntegral :: (Integral a, Num b) => a -> b
 ghci> :info typeClassName
 ```
 
-## => 符号
+## =>
 
 => 左部: 类约束(Class Constraint)
 => 右部: 函数类型(参数/返回值类型),其中参数类型同属 Class
@@ -192,7 +192,7 @@ instance Applicative [] where
     fs <*> xs = [f x | f <- fs, x <- xs]
 ```
 
-### IO
+### I/O
 
 ```haskell
 instance Applicative IO where
@@ -556,7 +556,7 @@ ghci> getFirst $ First (Just 'a') `mappend` First Nothing
 Just 'a'
 ```
 
-## Custom Type Class
+## Customization
 
 - 创建新类: _可以只有声明没有实现_
 

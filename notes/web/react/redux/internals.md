@@ -1,11 +1,11 @@
 ---
 sidebar_position: 8
-tags: [Web, React, Redux, State Management]
+tags: [Web, React, Redux, State Management, Internals]
 ---
 
 # Internals
 
-## Store Constructor
+## Constructor
 
 - Use closure to store state and subscribe.
 - Use middleware to change normal dispatch function.
@@ -97,7 +97,7 @@ function validateAction(action) {
 }
 ```
 
-## Provider and Connection
+## Provider
 
 - use Context to provide store (two methods):
   - inject store into every children recursively

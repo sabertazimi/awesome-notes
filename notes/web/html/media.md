@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 11
 tags: [Web, HTML, Media]
 ---
 
@@ -34,7 +34,7 @@ tags: [Web, HTML, Media]
 <img src="picture.jpg" loading="lazy" />
 ```
 
-### Responsive Images
+### Responsive
 
 ```html
 <!-- `img` element -->
@@ -129,7 +129,7 @@ Embed [best practice](https://web.dev/embed-best-practices):
 
 ## Anchor
 
-### Anchor Href
+### Href
 
 `[href]` 超链接指向`超链接`/`#id`/`#name`:
 
@@ -137,15 +137,15 @@ Embed [best practice](https://web.dev/embed-best-practices):
 <a href="https://github.com">Link</a> <a href="#title">Link</a>
 ```
 
-### Anchor ID
+### ID
 
 当前锚点标识.
 
-### Anchor Name
+### Name
 
 当前锚点名字.
 
-### Anchor Target
+### Target
 
 定义被链接文档出现方式:
 
@@ -154,5 +154,3 @@ Embed [best practice](https://web.dev/embed-best-practices):
 - `parent`: 在父框架集中打开被链接文档.
 - `top`: 在整个窗口中打开被链接文档.
 - `framename`: 在指定的框架中打开被链接文档.
-
-## Command

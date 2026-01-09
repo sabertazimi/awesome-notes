@@ -1,6 +1,6 @@
 ---
 sidebar_position: 8
-tags: [Web, Node.js, Filesystem]
+tags: [Web, Node.js, Filesystem, File, Stream, Path, I/O]
 ---
 
 # Filesystem

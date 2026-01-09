@@ -14,7 +14,7 @@ tags: [AI, DeepLearning, Transformer, Attention]
   consistent with Convolutional Neural Networks (CNNs),
   multiple output channels.
 
-## Self-Attention Mechanism
+## Self-Attention
 
 In layman's terms,
 a [self-attention](https://www.3blue1brown.com/lessons/attention)
@@ -270,7 +270,7 @@ print(outputs)
 自注意力的计算过程对于基于硬件的并行优化 (GPU/TPU) 非常友好,
 因此能够支持大规模参数的高效优化.
 
-## Multi-Head Attention Mechanism
+## Multi-Head Attention
 
 Multiple output channels:
 
@@ -347,7 +347,7 @@ class Self_Attention_Multiple_Head(nn.Module):
         return output
 ```
 
-## Positional Encoding Mechanism
+## Positional Encoding
 
 [位置编码](https://kazemnejad.com/blog/transformer_architecture_positional_encoding)
 使用正弦和余弦函数的 d 维向量编码方法,

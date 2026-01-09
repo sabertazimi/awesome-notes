@@ -1,6 +1,6 @@
 ---
 sidebar_position: 8
-tags: [Web, React, Hook]
+tags: [Web, React, Hook, Concurrent, Asynchronous]
 ---
 
 # Concurrent
@@ -277,7 +277,7 @@ function useSyncExternalStore(subscribe, getSnapshot) {
 }
 ```
 
-### Sync Browser API
+### APIs
 
 Sync navigator `online` API:
 
@@ -305,7 +305,7 @@ function ChatIndicator() {
 }
 ```
 
-### Sync Browser Event
+### Event
 
 Sync browser `scroll` event:
 
@@ -343,7 +343,7 @@ export default function ScrollYFloored() {
 }
 ```
 
-### Sync Browser Router
+### Router
 
 ```tsx
 function useHistorySelector(selector) {
@@ -366,7 +366,7 @@ export default function CurrentHash() {
 }
 ```
 
-### Sync External State
+### External State
 
 Simple demo from [React Conf 2021](https://www.youtube.com/watch?v=oPfSC5bQPR8):
 

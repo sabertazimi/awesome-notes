@@ -1,9 +1,9 @@
 ---
 sidebar_position: 1
-tags: [Web, DevOps, PWA, Service Worker]
+tags: [Web, DevOps, Service Worker, PWA]
 ---
 
-# PWA
+# Service Worker
 
 Progressive Web Apps:
 
@@ -15,7 +15,7 @@ Progressive Web Apps:
   service worker, expanded capabilities
   and OS integration.
 
-## Service Worker Pros
+:::tip[Pros]
 
 - Cache.
 - Offline.
@@ -23,18 +23,20 @@ Progressive Web Apps:
 - Custom request to minimize network.
 - [Notification API](https://developer.mozilla.org/docs/Web/API/ServiceWorkerRegistration/showNotification).
 
-## Service Worker Costs
+:::
 
-- Need startup time.
+:::caution[Costs]
 
-```ts
-// 20~100 ms for desktop
-// 100 ms for mobile
-const entry = performance.getEntriesByName(url)[0]
-const swStartupTime = entry.requestStart - entry.workerStart
-```
-
-- cache reads aren't always instant:
+- 服务工作者线程缓存不自动缓存任何请求, 所有缓存都必须明确指定.
+- 服务工作者线程缓存没有到期失效的概念.
+- 服务工作者线程缓存必须手动更新和删除.
+- 缓存版本必须手动管理:
+  每次服务工作者线程更新, 新服务工作者线程负责提供新的缓存键以保存新缓存.
+- 唯一的浏览器强制逐出策略基于服务工作者线程缓存占用的空间.
+  缓存超过浏览器限制时, 浏览器会基于 LRU 原则为新缓存腾出空间.
+- Need startup time: `performance.getEntriesByName(url)[0].requestStart - performance.getEntriesByName(url)[0].workerStart`,
+  20~100 ms for desktop, 100 ms for mobile.
+- Cache reads aren't always instant:
   - cache hit time = read time (only this case better than `NO SW`),
   - cache miss time = read time + network latency,
   - cache slow time = slow read time + network latency,
@@ -56,15 +58,9 @@ async function handleRequest(event) {
 }
 ```
 
-- 服务工作者线程缓存不自动缓存任何请求, 所有缓存都必须明确指定.
-- 服务工作者线程缓存没有到期失效的概念.
-- 服务工作者线程缓存必须手动更新和删除.
-- 缓存版本必须手动管理:
-  每次服务工作者线程更新, 新服务工作者线程负责提供新的缓存键以保存新缓存.
-- 唯一的浏览器强制逐出策略基于服务工作者线程缓存占用的空间.
-  缓存超过浏览器限制时, 浏览器会基于 LRU 原则为新缓存腾出空间.
+:::
 
-## Service Worker Caching Strategy
+## Caching Strategy
 
 ![Service Worker Cache](./figures/service-worker-cache.webp 'Service Worker Cache')
 
@@ -146,9 +142,7 @@ globalThis.addEventListener('fetch', (event) => {
 })
 ```
 
-## Service Worker Usage
-
-### Register Service Worker
+## Registration
 
 ```ts
 // Check that service workers are registered
@@ -160,7 +154,7 @@ if ('serviceWorker' in navigator) {
 }
 ```
 
-### Broken Images Service Worker
+## Broken Images
 
 ```ts
 function isImage(fetchRequest) {
@@ -202,7 +196,7 @@ globalThis.addEventListener('install', (e) => {
 })
 ```
 
-### Caches Version Service Worker
+## Caches Version
 
 ```ts
 globalThis.addEventListener('activate', (event) => {
@@ -221,7 +215,7 @@ globalThis.addEventListener('activate', (event) => {
 })
 ```
 
-## PWA References
+## References
 
 - Service worker [overview](https://developer.chrome.com/docs/workbox/service-worker-overview).
 - Workbox [library](https://github.com/GoogleChrome/workbox).

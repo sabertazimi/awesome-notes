@@ -3,9 +3,9 @@ sidebar_position: 4
 tags: [Web, TypeScript, Enum]
 ---
 
-# Enum Type
+# Enum
 
-## Number Enum
+## Number
 
 ```ts
 enum CardSuit {
@@ -22,7 +22,7 @@ let Card = CardSuit.Clubs
 Card = 'not a member of card suit' // Error: string 不能赋值给 `CardSuit` 类型
 ```
 
-## String Enum
+## String
 
 ```ts
 enum EvidenceTypeEnum {
@@ -35,7 +35,7 @@ enum EvidenceTypeEnum {
 }
 ```
 
-## Enum Parameters
+## Parameters
 
 ```ts
 enum Weekday {
@@ -67,7 +67,7 @@ console.log(Weekday.isBusinessDay(mon)) // true
 console.log(Weekday.isBusinessDay(sun))
 ```
 
-## Enum Flags
+## Flags
 
 ```ts
 enum AnimalFlags {
@@ -107,7 +107,7 @@ animal.flags |= AnimalFlags.HasClaws | AnimalFlags.CanFly
 printAnimalAbilities(animal) // animal has claws, animal can fly
 ```
 
-## Enum Index Signature
+## Index Signature
 
 `keyof typeof EnumType`:
 
@@ -139,7 +139,7 @@ function getColorByName(name = ''): string {
 }
 ```
 
-## Enum Internals
+## Internals
 
 `const` enums don’t have representation at runtime,
 its member values are used directly.

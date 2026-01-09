@@ -5,7 +5,7 @@ tags: [Web, Node.js, Process]
 
 # Process
 
-## Process Properties
+## Environment
 
 - `process.pid`: 当前进程的进程号.
 - `process.version`: Node 的版本, 比如 v0.10.18.
@@ -23,7 +23,7 @@ process.stdin.resume()
 process.stdin.pipe(process.stdout)
 ```
 
-## Process Events
+## Events
 
 - Error events:
   - `uncaughtException`.
@@ -77,19 +77,19 @@ process.on('exit', (code) => {
 })
 ```
 
-## Process Information
+## Information
 
-- process.on()
-- process.uptime(): 进程运行时长
-- process.getgid/setgid/getuid/setuid();
-- process.cwd()
-- process.memoryUsage()
+- `process.on()`
+- `process.uptime()`: 进程运行时长
+- `process.getgid`/`setgid`/`getuid`/`setuid`: 获取/设置用户 ID
+- `process.cwd()`
+- `process.memoryUsage()`
 
-## Process Event Loop and Counter
+## Event Loop
 
-- process.nextTick()
+- `process.nextTick()`: 将回调函数添加到事件循环的末尾
 
-## Child Process
+## Child
 
 - `cp.spawn()`: 创建子进程, 拥有独立的 stdin/stdout/stderr 文件描述符
 - `cp.exec()`: 创建子进程, 并会在进程结束时调用传入的回调函数

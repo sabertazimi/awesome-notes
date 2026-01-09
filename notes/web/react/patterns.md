@@ -5,27 +5,29 @@ tags: [Web, React, Pattern]
 
 # Patterns
 
-## HOC
+## Higher Order Components
 
-Higher Order Components.
-
-Solve:
+Higher Order Components (HoC) to solve:
 
 - Reuse code with using ES6 classes.
 - Compose multiple HOCs.
 
-Upside:
+:::tip[Pros]
 
 - Reusable (abstract same logic).
 - HOC is flexible with input data
   (pass input data as parameters or derive it from props).
 
-Downside:
+:::
+
+:::caution[Cons]
 
 - Wrapper hell: `withA(withB(withC(withD(Comp))))`.
 - Implicit dependencies: which HOC providing a certain prop.
 - Name collision/overlap props: overwrite the same name prop silently.
 - HOC is not flexible with output data (to WrappedComponent).
+
+:::
 
 ```tsx
 // ToggleableMenu.jsx
@@ -88,9 +90,7 @@ class Menu extends React.Component {
 
 ## Render Props
 
-Children/Props as render function:
-
-Solve:
+`children`/`props` as render function to solve:
 
 - Reuse code with using ES6 classes.
 - Lowest level of indirection.
@@ -98,7 +98,7 @@ Solve:
 
 e.g. `Context` or `ThemesProvider` is designed base on Render Props.
 
-Upside:
+:::tip[Pros]
 
 - Separate presentation from logic.
 - Extendable.
@@ -106,7 +106,9 @@ Upside:
 - Render Props is flexible with output data
   (children parameters definition free).
 
-Downside:
+:::
+
+:::caution[Cons]
 
 - Wrapper hell (when many cross-cutting concerns are applied to a component).
 - Minor memory issues when defining a closure for every render.
@@ -114,6 +116,8 @@ Downside:
   due to `render()` function always changes.
 - Render Props is not flexible with input data
   (restricts children components from using the data at outside field).
+
+:::
 
 ```tsx
 interface Props {
@@ -173,7 +177,7 @@ class Menu extends React.Component {
 }
 ```
 
-## React Hooks
+## Hooks
 
 - No wrapper hell: every hook is just one line of code.
 - No implicit dependencies: explicit one certain call for one certain hook.
@@ -188,7 +192,7 @@ class Menu extends React.Component {
 - Recap related-logic into separate well-structured hooks.
 - Reuse same stateful logic with custom hooks.
 
-## React Patterns References
+## References
 
 - React component library [patterns](https://www.gabe.pizza/notes-on-component-libraries).
 - React interview [questions](https://github.com/semlinker/reactjs-interview-questions).

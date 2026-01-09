@@ -5,7 +5,7 @@ sidebar_position: 16
 
 # Router
 
-## Basic Routes
+## Routes
 
 ```ts
 import type { RouteRecordRaw } from 'vue-router'
@@ -43,7 +43,7 @@ import store from './store'
 createApp(App).use(store).use(router).mount('#app')
 ```
 
-## Dynamic Routes
+## Dynamic
 
 Two methods to access route `params` in components:
 
@@ -70,7 +70,7 @@ we cannot directly access `this.$router` or `this.$route` anymore.
 
 :::
 
-## Routes Composition API
+## APIs
 
 [Composition API](https://next.router.vuejs.org/guide/advanced/composition-api.html):
 
@@ -106,7 +106,7 @@ export default router
 </script>
 ```
 
-## Passing Routes Props
+## Passing Props
 
 ```ts
 import type { RouteRecordRaw } from 'vue-router'
@@ -140,7 +140,7 @@ export default router
 </script>
 ```
 
-## Named Routes
+## Named
 
 ```ts
 const routes = [
@@ -160,7 +160,7 @@ const routes = [
 router.push({ name: 'User', params: { username: 'sabertaz' } })
 ```
 
-## Nested Routes
+## Nested
 
 ```ts
 const routes: Array<RouteRecordRaw> = [
@@ -206,7 +206,7 @@ const routes: Array<RouteRecordRaw> = [
 </template>
 ```
 
-## Programmatic Routes Navigation
+## Programmatic Navigation
 
 ```ts
 import { useRouter } from 'vue-router'
@@ -216,7 +216,7 @@ function App() {
 }
 ```
 
-### Navigate to Different Location
+### Navigate
 
 ```ts
 const username = 'eduardo'
@@ -247,7 +247,7 @@ router.push({ path: '/register', query: { plan: 'private' } })
 router.push({ path: '/about', hash: '#team' })
 ```
 
-### Replace Current Location
+### Replace
 
 ```ts
 // replace current location
@@ -256,7 +256,7 @@ router.push({ path: '/home', replace: true })
 router.replace({ path: '/home' })
 ```
 
-### Traverse Routes History
+### Traverse
 
 ```ts
 // go forward by one record, same as router.forward()
@@ -273,9 +273,9 @@ router.go(-100)
 router.go(100)
 ```
 
-## Navigation Guard Routes
+## Navigation Guard
 
-### Guard Routes Configuration
+### Configuration
 
 ```ts
 const routes = [
@@ -300,7 +300,7 @@ don't trigger `beforeEnter` guards.
 
 :::
 
-### Global Navigation Guards
+### Global
 
 ```ts
 router.beforeEach((to, from, next) => {
@@ -335,7 +335,7 @@ router.afterEach((to, from, failure) => {
 })
 ```
 
-## Full Navigation Resolution Flow
+## Navigation Resolution
 
 - Navigation triggered.
 - Call `beforeRouteLeave` guards in deactivated components.

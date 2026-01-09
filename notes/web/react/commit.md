@@ -1,11 +1,11 @@
 ---
 sidebar_position: 37
-tags: [Web, React, Reconciler]
+tags: [Web, React, Internals, Reconciler]
 ---
 
 # Commit
 
-## Renderer and HostConfig Protocol
+## Renderer
 
 `Renderer`:
 
@@ -51,7 +51,7 @@ tags: [Web, React, Reconciler]
   - resetAfterCommit.
   - preparePortalMount.
 
-## Commit Root
+## Root
 
 - `FiberRoot.finishedWork`:
   - 副作用队列挂载在根节点上 (`finishedWork.firstEffect`).
@@ -249,7 +249,7 @@ const MutationMask
 const LayoutMask = Update | Callback | Ref | Visibility
 ```
 
-## Before Mutation Phase
+## Before Mutation
 
 - `Passive` effects:
   - `FunctionComponent` fiber (hooks):
@@ -421,7 +421,7 @@ function commitBeforeMutationEffectsDeletion(deletion: Fiber) {
 }
 ```
 
-## Mutation Phase
+## Mutation
 
 - `ContentReset` effects: `commitResetTextContent` -> `HostConfig.resetTextContext`.
 - `Ref` effects: `commitAttachRef`/`commitDetachRef` -> `HostConfig.getPublicInstance`.
@@ -585,7 +585,7 @@ function commitMutationEffectsOnFiber(
 }
 ```
 
-## Layout Phase
+## Layout
 
 - `Update | Callback` effects:
   - `instance.componentDidMount/componentDidUpdate` (**synchronous**).

@@ -1,17 +1,15 @@
 ---
-sidebar_position: 10
-tags: [Web, CSS, Layout]
+sidebar_position: 14
+tags: [Web, CSS, Layout, Column]
 ---
 
 # Column
 
-## Two Column Pattern
-
-### Block Two Column
+## Block
 
 - `inline-block` + `inline-block`.
 
-### Absolute Two Column
+## Absolute
 
 - `absolute` + `margin-left`:
   absolute element not in normal flow.
@@ -36,54 +34,6 @@ tags: [Web, CSS, Layout]
   width: 200px;
 }
 ```
-
-### Float Two Column
-
-- `float` + `float`.
-- `float` + `margin-left`:
-  block element ignore float element,
-  inline element surround float element.
-- `float` + BFC.
-
-```css
-.container {
-  overflow: hidden; /* BFC creation */
-}
-
-.left {
-  float: left;
-  width: 60px;
-  height: 60px;
-}
-
-.right {
-  margin-left: 70px;
-  overflow: hidden; /* BFC creation */
-}
-```
-
-### Fifty-fifty Two Column
-
-```css
-.fifty-fifty-flex {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.fifty-fifty-flex > * {
-  flex-grow: 1;
-  flex-basis: 250px;
-}
-
-.fifty-fifty-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-}
-```
-
-## Three Column Pattern
-
-### Absolute Three Column
 
 Position `.left` and `.right` with `absolute`,
 add `margin-left` and `margin-right` to `.middle`:
@@ -120,13 +70,38 @@ add `margin-left` and `margin-right` to `.middle`:
 </style>
 ```
 
-### Float Three Column
+## Float
+
+- `float` + `float`.
+- `float` + `margin-left`:
+  block element ignore float element,
+  inline element surround float element.
+- `float` + BFC.
+
+```css
+.container {
+  overflow: hidden; /* BFC creation */
+}
+
+.left {
+  float: left;
+  width: 60px;
+  height: 60px;
+}
+
+.right {
+  margin-left: 70px;
+  overflow: hidden; /* BFC creation */
+}
+```
 
 ```html
 <div class="left"></div>
 <div class="right"></div>
 <div class="middle"></div>
 ```
+
+3 column layout:
 
 ```css
 .left {
@@ -208,7 +183,26 @@ For `float` element:
 }
 ```
 
-### Grid Three Column
+## Flex
+
+```css
+.fifty-fifty-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.fifty-fifty-flex > * {
+  flex-grow: 1;
+  flex-basis: 250px;
+}
+
+.fifty-fifty-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+```
+
+## Grid
 
 Three column layout allows [full-width content](https://www.joshwcomeau.com/css/full-bleed):
 
@@ -229,7 +223,7 @@ Three column layout allows [full-width content](https://www.joshwcomeau.com/css/
 }
 ```
 
-## Multiple Column Pattern
+## Multiple
 
 Multiple `column` layout:
 

@@ -7,7 +7,7 @@ tags: [Web, JavaScript, ECMAScript, Error, Exception]
 
 ## Error
 
-### Error Type
+### Type
 
 - Error.
 - EvalError.
@@ -45,7 +45,7 @@ class CustomError extends Error {
 }
 ```
 
-### Error Object
+### Object
 
 ```ts
 const err = {
@@ -77,7 +77,7 @@ try {
 }
 ```
 
-### Exception Handling
+### Handler
 
 - `try catch`.
 - `Promise.catch`.

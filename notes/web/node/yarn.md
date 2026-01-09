@@ -1,11 +1,13 @@
 ---
 sidebar_position: 3
-tags: [Web, Node.js, Yarn]
+tags: [Web, Node.js, Package Manager, Yarn]
 ---
 
 # Yarn
 
-[Yarn Berry](https://yarnpkg.com/getting-started/migration):
+## Berry
+
+Yarn [berry](https://yarnpkg.com/getting-started/migration):
 
 ```bash
 # Modify `/etc/hosts`
@@ -37,7 +39,7 @@ Update `.gitignore` file:
 .pnp.js
 ```
 
-## Yarn Configuration
+## Configuration
 
 ```bash
 yarn config set nodeLinker node-modules --home
@@ -47,7 +49,7 @@ yarn config set yarnPath .yarn/releases/yarn-berry.cjs --home
 yarn config set unsafeHttpWhitelist --json '["localhost", "*.example.com", "example.com"]'
 ```
 
-## Yarn Updates
+## Updates
 
 One line to update all deps in monorepo:
 
@@ -57,19 +59,19 @@ yarn up @types/react
 yarn dedupe --strategy highest
 ```
 
-## Yarn Workspace
+## Workspace
 
 ```bash
 yarn workspace packageName build
 ```
 
-## Yarn Plugin
+## Plugin
 
 ```bash
 yarn plugin list
 ```
 
-## Yarn Patch
+## Patch
 
 Modify package in `node_modules` conveniently:
 
@@ -77,7 +79,7 @@ Modify package in `node_modules` conveniently:
 - After modify source code of `package`,
   run `yarn patch-commit /tmp/xfs-xxxxxxxx/user --save`.
 
-## Yarn Berry Real World Case
+## References
 
 - [Gatsby](https://github.com/gatsbyjs/gatsby):
   yarn 1 with `.yarn/` directory.
