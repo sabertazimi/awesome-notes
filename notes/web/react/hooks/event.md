@@ -7,16 +7,18 @@ tags: [Web, React, Hook, Event, Debounce, Observer]
 
 ## Interval
 
+`useRef` to get latest value:
+
 ```ts
 import { useEffect, useRef } from 'react'
 
-function useInterval(callback: () => void, delay: number | null) {
-  const savedCallback = useRef(callback)
+function useInterval(onTick: () => void, delay: number | null) {
+  const onTickRef = useRef(onTick)
 
   // Remember the latest callback if it changes.
   useEffect(() => {
-    savedCallback.current = callback
-  }, [callback])
+    onTickRef.current = onTick
+  }, [onTick])
 
   // Set up the interval.
   useEffect(() => {
@@ -24,7 +26,7 @@ function useInterval(callback: () => void, delay: number | null) {
     if (delay === null)
       return
 
-    const id = setInterval(() => savedCallback.current(), delay)
+    const id = setInterval(() => onTickRef.current(), delay)
 
     return () => clearInterval(id)
   }, [delay])
@@ -32,6 +34,28 @@ function useInterval(callback: () => void, delay: number | null) {
 
 export default useInterval
 ```
+
+[`useEffectEvent`](https://react.dev/reference/react/useEffectEvent)
+to read latest props and state:
+
+```ts
+function useInterval(onTick: (tick: number) => void) {
+  const onTickEvent = useEffectEvent(onTick)
+
+  useEffect(() => {
+    let ticks = 0
+    const interval = setInterval(() => onTickEvent(++ticks), 1000)
+    return () => clearInterval(interval)
+  }, [])
+}
+```
+
+:::caution[Dependency Arrays]
+
+Bad dependency arrays that depend on wrong state
+can cause stale closure issues, invalid resets, or even infinite loops.
+
+:::
 
 ## Debounce
 
