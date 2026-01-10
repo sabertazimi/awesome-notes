@@ -249,7 +249,7 @@ Action
 - `SELECT` (no `DISTINCT`) on single table `T`
 - No `GROUP BY/HAVING` or aggregation
 - Attributes can't be `NULL` or default values
-- Sub-queries cant' refer to table `T`
+- Sub-queries can't refer to table `T`
 
 ## MySQL
 
