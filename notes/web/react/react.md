@@ -19,6 +19,7 @@ tags: [Web, React]
 - [Concurrent](./concurrent.md) - Suspense, concurrent features, data fetching
 - [Server Components](./server-components.md) - Server Components
 - [Ref](./ref.md) - String, forward, prop and callback refs
+- [Hooks](./hooks/hooks.md) - Hooks patterns
 - [Router](./router.md) - Router guide
 - [Redux](./redux/redux.md) - Redux for state management
 
