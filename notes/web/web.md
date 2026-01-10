@@ -14,7 +14,7 @@ tags: [Web]
 - [HTML](./html/html.md) - HTML markup
 - [JavaScript](./javascript/javascript.md) - JavaScript language
 - [jQuery](./jquery/jquery.md) - jQuery library
-- [Library](./library/library.md) - Web libraries
+- [Library](./library/library.mdx) - Web libraries
 - [Message Queue](./message-queue/message-queue.md) - Message queues
 - [Network](./network/network.md) - Web networking
 - [Nginx](./nginx/nginx.md) - Nginx server
