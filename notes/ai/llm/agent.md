@@ -102,7 +102,8 @@ Spec → Onboard → Direct → Verify → Integrate
 
 ### System
 
-OpenAI [Codex](https://openai.com/index/introducing-codex) [prompts](./prompts/codex-agent.md):
+OpenAI [Codex](https://openai.com/index/introducing-codex)
+system [prompts](./recipes/prompts/codex.md):
 
 - Instructions.
 - Git instructions.
@@ -216,7 +217,7 @@ LLM 并未统一利用其上下文,
 信息的呈现方式对性能有显著影响.
 这凸显了 `上下文工程` 的必要性,
 优化相关信息的数量并最小化不相关上下文以实现可靠的性能.
-e.g. custom gemini CLI [command](./prompts/url2md.toml).
+e.g. custom gemini CLI [command](./recipes/prompts/url2md.md).
 
 :::tip[Planning with Files]
 

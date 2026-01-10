@@ -299,7 +299,7 @@ I'll run the code and feed you the logs results.
 
 ### Reading
 
-[内容分析师](./prompts/analysis.md)
+[内容分析师](./recipes/prompts/analysis.md).
 
 ### Learning
 
