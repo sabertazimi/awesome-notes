@@ -31,50 +31,34 @@ npm config set swc_binary_site https://npmmirror.com/mirrors/node-swc/
 
 ## Node Version Manager
 
-- [Volta](https://github.com/volta-cli/volta):
-  Install and run tool quickly and seamlessly.
-- [FNM](https://github.com/Schniz/fnm):
-  Fast Node.js manager written in Rust.
+### NVM
+
+[NVM](https://github.com/coreybutler/nvm-windows):
 
 ```bash
-curl https://get.volta.sh | bash
-volta install node
+scoop install nvm
+```
+
+```bash
+nvm i lts
+nvm use lts
 node -v
 ```
 
+### FNM
+
+[FNM](https://github.com/Schniz/fnm):
+
 ```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+brew install fnm
+scoop install fnm
+winget install Schniz.fnm
 ```
 
 ```bash
-# Install and use the latest version
-nvm install node
-nvm use node
-nvm alias default node
-
-# Install and use the latest LTS version
-nvm install --lts
-nvm use --lts
-```
-
-```bash
-# Install and use specific version
-nvm install 16
-nvm use 16
-nvm ls
-```
-
-```bash
-# Update to latest version
-nvm install 16
-nvm install node
-```
-
-```bash
-# Remove version
-nvm uninstall 14
-nvm uninstall 12
+echo 'eval "$(fnm env --use-on-cd --shell bash)"' >> ~/.bashrc
+fnm i --lts
+node -v
 ```
 
 ## Tab Completion

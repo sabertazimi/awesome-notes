@@ -11,10 +11,27 @@ tags: [Programming, OS, Linux, Toolchain, Package, Yum, Rpm]
 - Modern alternatives to [common unix commands](https://github.com/ibraheemdev/modern-unix).
 
 ```bash
-scoop install volta zoxide bat eza delta dust duf fd ripgrep fzf jq fx tlrc bottom gping procs curlie
+scoop install mise zoxide bat eza delta dust duf fd ripgrep fzf jq fx tlrc bottom gping procs curlie
 ```
 
 ```bash
+eval "$(mise activate bash)"
+eval "$(zoxide init bash)"
+eval "$(fzf --bash)"
+source <(fx --comp bash)
+
+bind 'set bell-style none'
+
+# Use fd for listing path candidates
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+
+# Use fd for list directory candidates
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+
 alias app="scoop"
 alias cc="claude"
 alias ccc="claude -c"
@@ -35,24 +52,10 @@ alias ping="gping"
 alias ps="procs"
 alias curl="curlie"
 
-eval "$(zoxide init bash)"
-eval "$(fzf --bash)"
-source <(fx --comp bash)
-
-bind 'set bell-style none'
-
-# Use fd for listing path candidates
-_fzf_compgen_path() {
-  fd --hidden --follow --exclude ".git" . "$1"
-}
-
-# Use fd for list directory candidates
-_fzf_compgen_dir() {
-  fd --type d --hidden --follow --exclude ".git" . "$1"
-}
-
 export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+
+export PATH="$HOME/.local/bin:$PATH"
 ```
 
 ### Scoop
@@ -92,20 +95,20 @@ while WinGet is app installer.
 
 :::
 
-### Volta
+### Mise
 
-[volta](https://github.com/volta-cli/volta):
+[Mise](https://github.com/jdx/mise):
 
 ```bash
-curl https://get.volta.sh | bash
-scoop install volta
-winget install Volta.Volta
+brew install mise
+scoop install mise
+winget install jdx.mise
 ```
 
 ```bash
-volta setup
-volta install node
-volta list
+echo 'eval "$(mise activate bash)"' >> ~/.bashrc
+mise u -g node@lts
+node -v
 ```
 
 ### Zoxide
@@ -119,9 +122,9 @@ winget install ajeetdsouza.zoxide
 ```
 
 ```bash
-alias cd="z"
-
 eval "$(zoxide init bash)"
+
+alias cd="z"
 ```
 
 ### Bat
