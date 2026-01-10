@@ -128,7 +128,8 @@ good [`AGENTS.md`](https://github.com/agentsmd/agents.md):
 
 ### Pull Request
 
-GitHub [copilot](https://github.blog/ai-and-ml/github-copilot/how-to-use-github-copilot-spaces-to-debug-issues-faster) to debug issues faster:
+GitHub [copilot](https://github.blog/ai-and-ml/github-copilot/how-to-use-github-copilot-spaces-to-debug-issues-faster)
+to debug issues faster:
 
 ```md
 You are an experienced engineer working on this codebase.
@@ -425,6 +426,19 @@ async def main():
 ```
 
 当超出失败阈值或高风险操作时, 触发人工干预计划, 是一项关键的安全保障措施:
+
+## Eval
+
+Agents [eval](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents):
+
+1. Start early.
+2. Source realistic tasks from failures.
+3. Define unambiguous, robust success criteria.
+4. Design graders thoughtfully and combine multiple types (code-based, model-based, human).
+5. Make sure the problems are hard enough for model.
+6. Iterate on evaluations to improve signal-to-noise ratio.
+7. Read transcripts (记录).
+8. Pick framework: [prompt foo](https://github.com/promptfoo/promptfoo), [harbor](https://github.com/laude-institute/harbor).
 
 ## Library
 
