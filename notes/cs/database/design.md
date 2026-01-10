@@ -40,7 +40,7 @@ for data modeling:
 
 ### Associations
 
-relationships between objects of 2 classes):
+relationships between objects of 2 classes:
 
 - one to one: `1..1 --- 1..1`.
 - many to one: `* --- 1..1`
