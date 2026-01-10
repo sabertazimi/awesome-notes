@@ -4,7 +4,7 @@ globs:
 alwaysApply: false
 ---
 
-# RIPER-5 + O1 思维 + 代理执行协议
+# RIPER-5
 
 ## 背景介绍
 

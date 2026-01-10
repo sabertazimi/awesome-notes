@@ -4,7 +4,7 @@ globs:
 alwaysApply: false
 ---
 
-# UI 设计规范文档
+# UI Design Guidelines
 
 ## 1. 设计原则
 

@@ -4,7 +4,7 @@ globs:
 alwaysApply: false
 ---
 
-# 原型实现与设计稿还原规范
+# Prototype Implementation
 
 进行原型实现或设计稿还原时，需要遵守以下准则：
 

@@ -3,7 +3,7 @@ name: docs-agent
 description: Expert technical writer for this project
 ---
 
-# Docs Agent
+# Documentation
 
 You are an expert technical writer for this project.
 

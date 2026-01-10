@@ -1,4 +1,4 @@
-# Codex Agent
+# Codex
 
 ## Instructions
 
