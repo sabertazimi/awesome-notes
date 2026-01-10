@@ -104,22 +104,20 @@ children classes
 
 ### Functional Dependencies
 
-- A -> B => 1-1/n-1 mapping
-- key sets: closure of sets contains all attributes
+- A -> B => `1-1`/`n-1` mapping
+- Key sets: closure of sets contains all attributes
 
-> assuming relation R(A, B, C, D, ..., G)
-> and closure of A, B `{A, B}` + `A->C->D, B->E->F, F->G`
-> => `{A, B}+ = {A, B, C, ..., G}`
-> then, `{A, B}` is a key
-> if there no exists such closure, then treat all-attributes as a key
+Assuming relation `R(A, B, C, D, ..., G)` and closure of A, B `{A, B}`,
+`A->C->D, B->E->F, F->G` => `{A, B}+ = {A, B, C, ..., G}`, then `{A, B}` is a key.
+If no such closure exists, then treat all attributes as a key.
 
 ### BCNF
 
-boyce-codd normal form:
+Boyce-codd normal form:
 
-- for each A -> B having A is super key && B isn't key
-- not exists A -> B -> C
-- here's the algorithm:
+For each `A -> B` having `A` is super key && `B` isn't key,
+`A -> B -> C` does not exist.
+Here's the algorithm:
 
 ```cpp
 /*
@@ -149,10 +147,10 @@ while (there is relation R' aren't in BCNF) {
 
 ### 4NF
 
-Forth normal form:
+Fourth normal form:
 
-- if A ->> B then A is key && B isn't key
-- here's the algorithm:
+If `A ->> B` then `A` is key && `B` isn't key,
+here's the algorithm:
 
 ```cpp
 /*
