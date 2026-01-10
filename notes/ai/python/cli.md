@@ -92,8 +92,10 @@ def caesar_breaker(input_file, output_file):
             best_number_of_english_words = number_of_english_words
             best_plaintext = plaintext
             best_key = key
-    click.echo(f'The most likely encryption key is {best_key}. It gives the
-    following plaintext:\n\n{best_plaintext[:1000]}...')
+    click.echo(
+        f'The most likely encryption key is {best_key}. It gives the following plaintext:\n\n'
+        f'{best_plaintext[:1000]}...'
+    )
     output_file.write(best_plaintext)
 
 if __name__ == '__main__':

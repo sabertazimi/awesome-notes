@@ -25,7 +25,7 @@ x.dtype
 np.zeros((2, 2))
 np.ones((2, 2))
 np.eye((2))
-np.random.random.((2, 2))
+np.random.random((2, 2))
 ```
 
 ## Index

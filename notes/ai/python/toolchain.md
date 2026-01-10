@@ -11,7 +11,7 @@ tags: [AI, Language, Python, Toolchain, UV]
 # Python mirror
 export UV_PYTHON_INSTALL_MIRROR="https://gh-proxy.com/github.com/indygreg/python-build-standalone/releases/download"
 # PyPI mirror
-export UV_DEFAULT_INDEX="http://mirrors.aliyun.com/pypi/simple"
+export UV_DEFAULT_INDEX="https://mirrors.aliyun.com/pypi/simple"
 ```
 
 ```bash
@@ -82,7 +82,7 @@ Run standalone scripts:
 
 ```bash
 uv init --script example.py --python 3.13
-uv add --index "http://mirrors.aliyun.com/pypi/simple" --script example.py 'requests<3' 'rich'
+uv add --index "https://mirrors.aliyun.com/pypi/simple" --script example.py 'requests<3' 'rich'
 uv run example.py
 ```
 

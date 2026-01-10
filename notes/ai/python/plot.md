@@ -16,14 +16,18 @@ import matplotlib.pyplot as plt
 fig = plt.figure()
 ax = plt.subplot2grid((1, 1), (0, 0))
 
-ax.fill_between(x, y, y[0],where=(y > y[0]), facecolor='g', alpha=0.5)
+ax.fill_between(x, y, y[0], where=(y > y[0]), facecolor='g', alpha=0.5)
 
 ax.grid(True)
-ax.xaxis.label.set_color('c') ax.yaxis.label.set_color('r') ax.set_yticks([0,25,50,75])
+ax.xaxis.label.set_color('c')
+ax.yaxis.label.set_color('r')
+ax.set_yticks([0,25,50,75])
 ax.xaxis.get_ticklabels()
 
-ax.spines['left'].set_color('c') ax.spines['right'].set_visible(False)
-ax.spines['top'].set_visible(False) ax.spines['left'].set_linewidth(5)
+ax.spines['left'].set_color('c')
+ax.spines['right'].set_visible(False)
+ax.spines['top'].set_visible(False)
+ax.spines['left'].set_linewidth(5)
 ax.tick_params(axis='x', colors='#f06215')
 ax.axhline(20, color='k', linewidth=5)
 
@@ -211,8 +215,8 @@ def latexify(fig_width=None, fig_height=None, columns=1):
 
     MAX_HEIGHT_INCHES = 8.0
     if fig_height > MAX_HEIGHT_INCHES:
-        print("WARNING: fig_height too large:" + fig_height +
-              "so will reduce to" + MAX_HEIGHT_INCHES + "inches.")
+        print("WARNING: fig_height too large:" + str(fig_height) +
+              "so will reduce to" + str(MAX_HEIGHT_INCHES) + "inches.")
         fig_height = MAX_HEIGHT_INCHES
 
     params = {'backend': 'ps',

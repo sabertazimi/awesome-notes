@@ -37,7 +37,7 @@ x, y = np.loadtxt('input.dat', delimiter=',', unpack=True)
 ## JSON
 
 ```python
- from pathlib import Path
+from pathlib import Path
 import json
 import pandas as pd
 
