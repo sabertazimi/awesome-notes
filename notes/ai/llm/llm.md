@@ -22,8 +22,3 @@ Notes on Large Language Models, Prompt Engineering and Agents.
 ## Prompts
 
 - [Prompts](./prompts.md) - Collection of useful prompts and patterns
-  - [Agents](./prompts/agents.md) - Agent-specific prompts
-  - [Analysis](./prompts/analysis.md) - Code analysis prompts
-  - [Codex Agent](./prompts/codex-agent.md) - Code generation prompts
-  - [Docs Agent](./prompts/docs-agent.md) - Documentation agent prompts
-  - [Plan Mode](./prompts/plan-mode.md) - Planning and design prompts
