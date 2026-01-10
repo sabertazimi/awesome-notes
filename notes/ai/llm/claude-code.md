@@ -125,6 +125,17 @@ graph TD
 
 :::
 
+### Name
+
+Using gerund form [`verb + -ing`](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices#naming-conventions):
+this clearly describes activity or capability:
+
+- `processing-pdf`
+- `analyzing-spreadsheets`
+- `managing-databases`
+- `testing-code`
+- `writing-documentation`
+
 ### Description
 
 **核心原则**: 既要说明`做什么`，也要说明`什么时候用`:
