@@ -5,29 +5,43 @@ tags: [CS, Compiler, Grammar]
 
 # Grammar
 
-## Compilers
+:::tip
 
-- `program_code` ---compiler---> executable
-- data ---executable---> output
+```mermaid
+flowchart LR
+    A["Program Code"] -->|Compiler| B["Executable"]
+    C["Data"] -->|Executable| D["Output"]
+```
 
-> e.g. Fortran(formula translation) 1 project
+:::
 
 ## Structure
 
-front-end to back-end:
+Front-end:
 
-- front-end: src ---lexical analysis---> tokens
-  ---parsing/syntax analysis---> AST(Abstract Syntax Tree)
-  ---semantic analysis---> intermediate
-- back-end: intermediate ---...---> ... ---...---> ... ---code generation---> dist
+```mermaid
+flowchart LR
+    A["Src"] -->|Lexical Analysis| B["Tokens"]
+    B -->|Syntax Analysis/Parsing| C["AST"]
+    C -->|Semantic Analysis| D["Intermediate"]
+```
 
-details:
+Back-end:
 
-- lexical analysis(词法分析)
-- parsing/syntax analysis(语法分析)
-- semantic analysis(语义分析): type and scope
-- optimization
-- code generation: translate to other high level language/assembly code/machine code
+```mermaid
+flowchart LR
+    A["Intermediate"] -->|Optimization| B["Optimized"]
+    B -->|Optimization| C["Further Optimized"]
+    C -->|Code Generation| D["Dist"]
+```
+
+Details:
+
+- Lexical analysis (词法分析)
+- Syntax analysis/parsing (语法分析)
+- Semantic analysis (语义分析): type and scope
+- Optimization
+- Code generation: translate to other high level language/assembly code/machine code
 
 ## 符号与符号串
 

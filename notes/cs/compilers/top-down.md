@@ -7,7 +7,10 @@ tags: [CS, Compiler, Syntax]
 
 :::tip
 
-Tokens + Grammar --Syntax Analysis--> AST
+```mermaid
+flowchart LR
+    A["Tokens + Grammar"] -->|Syntax Analysis| B["AST"]
+```
 
 :::
 

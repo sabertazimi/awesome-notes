@@ -7,7 +7,10 @@ tags: [CS, Compiler, Syntax, AST]
 
 :::tip
 
-Tokens + Grammar --Syntax Analysis--> AST
+```mermaid
+flowchart LR
+    A["Tokens + Grammar"] -->|Syntax Analysis| B["AST"]
+```
 
 :::
 
@@ -33,7 +36,14 @@ push(next state);
 
 ## 抽象语法
 
-- 表达语法结构的内部表示, 作为前端(词法语法分析)和后端(代码生成)的中间件, tokens --语法分析器--> 抽象语法(树) --代码生成器--> 目标代码
+- 表达语法结构的内部表示, 作为前端(词法语法分析)和后端(代码生成)的中间件:
+
+```mermaid
+flowchart LR
+    A["tokens"] -->|语法分析器| B["抽象语法(树)"]
+    B -->|代码生成器| C["目标代码"]
+```
+
 - 抽象语法无需考虑左/右递归, 左公因子提取, 分隔符等
 
 ```cpp
