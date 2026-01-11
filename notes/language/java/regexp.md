@@ -1,6 +1,6 @@
 ---
 sidebar_position: 21
-tags: [Language, Java, I/O]
+tags: [Language, Java, Regular Expression]
 ---
 
 # Regular Expression
