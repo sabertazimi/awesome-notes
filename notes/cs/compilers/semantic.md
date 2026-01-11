@@ -7,7 +7,10 @@ tags: [CS, Compiler, Semantic, TypeChecking, SymbolTable]
 
 :::tip
 
-AST + semantic of programming language --semantic analysis--> intermediate
+```mermaid
+flowchart LR
+    A["AST + Semantic of Language"] -->|Semantic Analysis| B["Intermediate"]
+```
 
 :::
 

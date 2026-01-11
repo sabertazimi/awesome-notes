@@ -5,7 +5,14 @@ tags: [CS, Compiler, Lexical, Tokenizer, DFA, NFA]
 
 # Lexical Analysis
 
-Tokens + Grammar --Syntax Analysis--> AST(Abstract Syntax Tree)
+:::tip
+
+```mermaid
+flowchart LR
+    A["Source Code"] -->|Lexical Analysis| B["Tokens"]
+```
+
+:::
 
 ## Tokenizer
 
@@ -124,7 +131,12 @@ transferFunction 中的次态不确定/不唯一(为一个开集合):
 
 ## 自动词法分析器
 
-RegExp --Thompson 算法--> NFA --子集构造算法--> DFA --Hopcroft 最小化算法--> 词法分析器代码
+```mermaid
+flowchart LR
+    A["RegExp"] -->|Thompson 算法| B["NFA"]
+    B -->|子集构造算法| C["DFA"]
+    C -->|Hopcroft 最小化算法| D["词法分析器代码"]
+```
 
 ### Thompson
 
@@ -132,11 +144,11 @@ RegExp --> NFA:
 
 - 直接构造基本 RegExp
 - 递归构造复合 RegExp
-- epsilon : i --epsilon--> f
-- RegExp : i --NFA(RegExp)--> f
-- 选择 : i --NFA(RegExp1)--> f, i --NFA(RegExp2)--> f
-- 连接 : i --NFA(RegExp1)--> m --NFA(RegExp2)--> f
-- 闭包 : i --epsilon--> m --epsilon--> f, m --RegExp--> m
+- epsilon : `i --epsilon--> f`
+- RegExp : `i --NFA(RegExp)--> f`
+- 选择 : `i --NFA(RegExp1)--> f`, `i --NFA(RegExp2)--> f`
+- 连接 : `i --NFA(RegExp1)--> m --NFA(RegExp2)--> f`
+- 闭包 : `i --epsilon--> m --epsilon--> f`, `m --RegExp--> m`
 
 ### 子集构造
 
