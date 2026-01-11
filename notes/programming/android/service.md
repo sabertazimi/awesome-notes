@@ -179,7 +179,7 @@ public void onServiceConnected(ComponentName name, IBinder service) {
 
 ```java
 Notification notification = new Notification(R.drawable.ic_launcher,
-  "Notification comes", System. currentTimeMills());
+  "Notification comes", System. currentTimeMillis());
 Intent notificationIntent = new Intent(this, MainActivity.class);
 PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
   notificationIntent, 0);
