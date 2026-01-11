@@ -52,7 +52,7 @@ E: n
 
 ### Type Checking
 
-`├ e: T` meas e 可计算为类型为 T 的值
+`├ e: T` means e 可计算为类型为 T 的值
 
 ### Type Environments
 
