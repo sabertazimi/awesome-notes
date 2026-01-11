@@ -176,7 +176,7 @@
     @apply inline;
   }
 
-  svg {
+  a svg {
     @apply inline align-baseline;
   }
 }
