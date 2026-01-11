@@ -168,4 +168,6 @@ Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
 ### Orientation
 
+```java
 Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+```
