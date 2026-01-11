@@ -1,3 +1,4 @@
+import Link from '@docusaurus/Link'
 import { Badge } from '@site/src/components/ui/badge'
 import { Card, CardHeader, CardTitle } from '@site/src/components/ui/card'
 import { MagicCard } from '@site/src/components/ui/magic-card'
@@ -55,7 +56,7 @@ const DefaultNotes: Note[][] = [
 
 function NoteCard({ note, className }: { note: Note, className?: string }) {
   return (
-    <a href={note.href} className={cn('block no-underline!', className)}>
+    <Link to={note.href} className={cn('block no-underline!', className)}>
       <Card className="group w-56 h-full truncate border-none p-0 shadow-none">
         <MagicCard gradientColor="#D9D9D955" className="py-6">
           <CardHeader>
@@ -64,7 +65,7 @@ function NoteCard({ note, className }: { note: Note, className?: string }) {
           </CardHeader>
         </MagicCard>
       </Card>
-    </a>
+    </Link>
   )
 }
 
