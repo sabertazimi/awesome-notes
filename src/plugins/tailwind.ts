@@ -5,7 +5,7 @@ export default function tailwindPlugin(): Plugin {
   return {
     name: 'tailwind-plugin',
     configurePostCss(postcssOptions) {
-      postcssOptions.plugins = [tailwind]
+      postcssOptions.plugins = [...(postcssOptions.plugins || []), tailwind]
       return postcssOptions
     },
   }
