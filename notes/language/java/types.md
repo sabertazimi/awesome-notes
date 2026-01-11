@@ -38,7 +38,7 @@ float f = 1.2F;   //OK
 
 科学计数法: 指数均为十进制, 符号为 e(尾数为十进制)/p(尾数为十六进制)
 
-Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.isNaN(检数)
+Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.isNaN() 检测 NaN 值
 
 千分位下划线分隔法 e.g. 123_456.789_000
 
