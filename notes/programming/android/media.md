@@ -11,7 +11,7 @@ tags: [Programming, Android, Media, Notification]
 NotificationManager manager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 
 Notification notification = new Notification(R.drawable.ic_launcher, "This is
-  ticker text", System.currentTimeMills());
+  ticker text", System.currentTimeMillis());
 
 Intent intent = new Intent(this, NotificationActivity.class);
 PendingIntent pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
