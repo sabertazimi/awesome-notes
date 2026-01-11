@@ -18,6 +18,7 @@ tags: [Language, C++]
 - [Template](./template.md) - Templates and generic programming
 - [Scope](./scope.md) - Scope rules and namespaces
 - [Error](./error.md) - Error handling with exceptions and assertions
+- [I/O](./io.md) - Input and output streams, formatting, and file handling
 
 ## Standard Library
 
