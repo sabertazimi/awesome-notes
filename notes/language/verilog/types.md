@@ -136,7 +136,7 @@ always @(posedge CLK)
 - wire/wand/wor
 - 局部变量, 没有记忆性
 - 默认值: z
-- wire 间不可直接相连, wand/wor 间课直接相连
+- wire 间不可直接相连, wand/wor 间可直接相连
 - 可用 wire 定义局部变量
 
 ## Macro
