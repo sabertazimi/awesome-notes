@@ -12,45 +12,45 @@ interface Note {
 }
 
 const DefaultNotes: Note[][] = [
-  // Row 1: Frontend & Modern Web
+  // Row 1: AI & Machine Learning
   [
-    { title: 'State Hooks', category: 'React', href: '/web/react/hooks/state' },
+    { title: 'Neural Architectures', category: 'AI', href: '/ai/theory/neural-architectures' },
+    { title: 'Prompt Engineering', category: 'LLM', href: '/ai/llm/prompt-engineering' },
+    { title: 'Claude Code', category: 'Agent', href: '/ai/llm/claude-code' },
+    { title: 'Transformer', category: 'AI', href: '/ai/theory/transformers' },
+    { title: 'RAG System', category: 'LLM', href: '/ai/llm/rag' },
+  ],
+  // Row 2: Systems & Algorithms
+  [
+    { title: 'Graph Algorithms', category: 'Algorithms', href: '/cs/algorithms/graph' },
+    { title: 'Process Management', category: 'OS', href: '/cs/os/process' },
+    { title: 'Dynamic Programming', category: 'Algorithms', href: '/cs/algorithms/dp' },
+    { title: 'Garbage Collection', category: 'Compilers', href: '/cs/compilers/gc' },
+    { title: 'SQL Indexing', category: 'Database', href: '/cs/database/indexing' },
+  ],
+  // Row 3: Frontend & Modern Web
+  [
     { title: 'Animation', category: 'CSS', href: '/web/css/animation' },
+    { title: 'State Hooks', category: 'React', href: '/web/react/hooks/state' },
     { title: 'Async JavaScript', category: 'JavaScript', href: '/web/javascript/async' },
     { title: 'Generics', category: 'TypeScript', href: '/web/typescript/generic' },
     { title: 'HTTP Protocol', category: 'Network', href: '/web/network/http' },
   ],
-  // Row 2: AI & Machine Learning
-  [
-    { title: 'Transformer', category: 'AI', href: '/ai/theory/transformers' },
-    { title: 'Prompt Engineering', category: 'LLM', href: '/ai/llm/prompt-engineering' },
-    { title: 'RAG System', category: 'LLM', href: '/ai/llm/rag' },
-    { title: 'Neural Architectures', category: 'AI', href: '/ai/theory/neural-architectures' },
-    { title: 'AI Agent', category: 'LLM', href: '/ai/llm/agent' },
-  ],
-  // Row 3: Systems & Algorithms
-  [
-    { title: 'Graph Algorithms', category: 'Algorithms', href: '/cs/algorithms/graph' },
-    { title: 'Dynamic Programming', category: 'Algorithms', href: '/cs/algorithms/dp' },
-    { title: 'Process Management', category: 'OS', href: '/cs/os/process' },
-    { title: 'Garbage Collection', category: 'Compilers', href: '/cs/compilers/gc' },
-    { title: 'SQL Indexing', category: 'Database', href: '/cs/database/indexing' },
-  ],
   // Row 4: Programming Languages
   [
-    { title: 'Ownership', category: 'Rust', href: '/language/rust/ownership' },
     { title: 'Template', category: 'C++', href: '/language/cpp/template' },
     { title: 'Monads', category: 'Haskell', href: '/language/haskell/monad' },
     { title: 'Concurrency', category: 'Java', href: '/language/java/concurrency' },
+    { title: 'Ownership', category: 'Rust', href: '/language/rust/ownership' },
     { title: 'State Machine', category: 'Verilog', href: '/language/verilog/state-machine' },
   ],
   // Row 5: Development Practices
   [
+    { title: 'SOLID Principle', category: 'Design', href: '/programming/design/solid' },
+    { title: 'Shell Scripts', category: 'Linux', href: '/programming/linux/shell' },
     { title: 'Internals', category: 'Git', href: '/programming/git/internals' },
     { title: 'Neovim', category: 'Vim', href: '/programming/vim/toolchain' },
-    { title: 'SOLID Principle', category: 'Design', href: '/programming/design/solid' },
     { title: 'Docker & K8s', category: 'DevOps', href: '/programming/devops/docker' },
-    { title: 'Shell Scripts', category: 'Linux', href: '/programming/linux/shell' },
   ],
 ]
 
