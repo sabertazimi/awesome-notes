@@ -1,5 +1,4 @@
 ---
-sidebar_position: 1
 tags: [Programming, DevOps, Design Pattern]
 ---
 
