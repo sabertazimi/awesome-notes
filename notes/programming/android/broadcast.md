@@ -35,7 +35,7 @@ In AndroidManifest,xml
   <!-- receiver priority -->
   <intent-filter android:priority="100">
     <!-- custom broadcast -->
-    <action android:name="com.example.broadcastTest. MY_BROADCAST" />
+    <action android:name="com.example.broadcastTest.MY_BROADCAST" />
   </intent-filter>
 </receiver>
 ```
