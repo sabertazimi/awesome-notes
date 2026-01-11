@@ -163,3 +163,30 @@ git filter-branch -f --prune-empty --index-filter
 ## Cherry Pick
 
 获得在单个提交中引入的变更, 然后尝试将作为一个新的提交引入到你当前分支上.
+
+## List Files
+
+列出索引中的文件, 或查看工作目录状态:
+
+```bash
+# 列出所有已跟踪文件
+git ls-files
+
+# 只列出未跟踪文件
+git ls-files --others
+
+# 排除 .gitignore 中的文件
+git ls-files --exclude-standard
+
+# 列出未跟踪文件并统计数量
+git ls-files --others --exclude-standard | wc -l
+
+# 只列出特定目录的文件
+git ls-files path/to/directory/
+
+# 显示文件详细模式 (ls -l)
+git ls-files -l
+
+# 显示被删除的文件 (已从索引移除但未提交)
+git ls-files --deleted
+```
