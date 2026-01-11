@@ -74,7 +74,7 @@ Student s = new Person();  //ERROR:e.g. s.getStuID();
 
 ### ToString
 
-- 设计 return getClass().getName() + "" + field + "";
+- 设计 `return getClass().getName() + "[" + field + "]";`
 - Object 类 toString 方法: 用于输出 ClassName 和 hashCode
 - 数组直接继承 Object 类 toString 方法, 输出数组需调用 Arrays.(deep)toString();
 - 自动调用: + 字符串连接符、println(obj)
