@@ -81,7 +81,7 @@ public class MainActivity extends Activity {
         try {
           // 组装反向地理编码的接口地址
           StringBuilder url = new StringBuilder();
-          url.append("http://maps.googleapis.com/maps/api/geocode/json?latlng=");
+          url.append("https://maps.googleapis.com/maps/api/geocode/json?latlng=");
           url.append(location.getLatitude()).append(",")
               .append(location.getLongitude());
           url.append("&sensor=false");
