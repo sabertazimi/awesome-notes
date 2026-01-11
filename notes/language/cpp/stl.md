@@ -88,7 +88,7 @@ String &String::operator=(const String &c) {
 }
 
 String &String::operator+=(const String &c) {
-    return *this = *this+s;
+    return *this = *this + c;
 }
 
 String::String(const char *c) {
