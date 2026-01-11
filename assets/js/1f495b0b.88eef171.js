@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkawesome_notes=self.webpackChunkawesome_notes||[]).push([[38544],{81643:e=>{e.exports=JSON.parse('{"tag":{"label":"Grid","permalink":"/awesome-notes/tags/grid","allTagsPath":"/awesome-notes/tags","count":1,"items":[{"id":"web/css/grid","title":"Grid","description":"Grid Layout","permalink":"/awesome-notes/web/css/grid"}],"unlisted":false}}')}}]);

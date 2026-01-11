@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkawesome_notes=self.webpackChunkawesome_notes||[]).push([[78599],{24666:e=>{e.exports=JSON.parse('{"tag":{"label":"Column","permalink":"/awesome-notes/tags/column","allTagsPath":"/awesome-notes/tags","count":1,"items":[{"id":"web/css/column","title":"Column","description":"Block","permalink":"/awesome-notes/web/css/column"}],"unlisted":false}}')}}]);

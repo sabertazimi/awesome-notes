@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkawesome_notes=self.webpackChunkawesome_notes||[]).push([[99072],{97602:e=>{e.exports=JSON.parse('{"tag":{"label":"Box","permalink":"/awesome-notes/tags/box","allTagsPath":"/awesome-notes/tags","count":1,"items":[{"id":"web/css/box","title":"Box Model","description":"Box model:","permalink":"/awesome-notes/web/css/box"}],"unlisted":false}}')}}]);

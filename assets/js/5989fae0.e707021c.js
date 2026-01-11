@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkawesome_notes=self.webpackChunkawesome_notes||[]).push([[4532],{59970:e=>{e.exports=JSON.parse('{"tag":{"label":"XSS","permalink":"/awesome-notes/tags/xss","allTagsPath":"/awesome-notes/tags","count":1,"items":[{"id":"web/security/xss","title":"XSS","description":"Attack","permalink":"/awesome-notes/web/security/xss"}],"unlisted":false}}')}}]);

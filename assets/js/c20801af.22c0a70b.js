@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkawesome_notes=self.webpackChunkawesome_notes||[]).push([[53288],{44756:e=>{e.exports=JSON.parse('{"tag":{"label":"Babel","permalink":"/awesome-notes/tags/babel","allTagsPath":"/awesome-notes/tags","count":1,"items":[{"id":"web/devops/babel","title":"Babel","description":"Core","permalink":"/awesome-notes/web/devops/babel"}],"unlisted":false}}')}}]);

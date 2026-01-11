@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkawesome_notes=self.webpackChunkawesome_notes||[]).push([[76283],{12263:e=>{e.exports=JSON.parse('{"tag":{"label":"PNPM","permalink":"/awesome-notes/tags/pnpm","allTagsPath":"/awesome-notes/tags","count":1,"items":[{"id":"web/node/pnpm","title":"PNPM","description":"Installation","permalink":"/awesome-notes/web/node/pnpm"}],"unlisted":false}}')}}]);

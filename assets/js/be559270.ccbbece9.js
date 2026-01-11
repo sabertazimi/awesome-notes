@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkawesome_notes=self.webpackChunkawesome_notes||[]).push([[96358],{83529:e=>{e.exports=JSON.parse('{"tag":{"label":"MCP","permalink":"/awesome-notes/tags/mcp","allTagsPath":"/awesome-notes/tags","count":1,"items":[{"id":"ai/llm/mcp","title":"MCP","description":"Library","permalink":"/awesome-notes/ai/llm/mcp"}],"unlisted":false}}')}}]);

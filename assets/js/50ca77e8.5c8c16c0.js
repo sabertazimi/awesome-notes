@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkawesome_notes=self.webpackChunkawesome_notes||[]).push([[6337],{57649:e=>{e.exports=JSON.parse('{"tag":{"label":"LaTex","permalink":"/awesome-notes/tags/la-tex","allTagsPath":"/awesome-notes/tags","count":1,"items":[{"id":"cs/latex/latex","title":"LaTeX","description":"Installation","permalink":"/awesome-notes/cs/latex/"}],"unlisted":false}}')}}]);

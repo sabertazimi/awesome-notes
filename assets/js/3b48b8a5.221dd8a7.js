@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkawesome_notes=self.webpackChunkawesome_notes||[]).push([[77808],{53616:e=>{e.exports=JSON.parse('{"tag":{"label":"Go","permalink":"/awesome-notes/tags/go","allTagsPath":"/awesome-notes/tags","count":1,"items":[{"id":"language/go/go","title":"Go","description":"Installation","permalink":"/awesome-notes/language/go/"}],"unlisted":false}}')}}]);

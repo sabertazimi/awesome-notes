@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkawesome_notes=self.webpackChunkawesome_notes||[]).push([[76470],{77792:e=>{e.exports=JSON.parse('{"tag":{"label":"Color","permalink":"/awesome-notes/tags/color","allTagsPath":"/awesome-notes/tags","count":1,"items":[{"id":"web/css/colors","title":"Colors","description":"Current","permalink":"/awesome-notes/web/css/colors"}],"unlisted":false}}')}}]);

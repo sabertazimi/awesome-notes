@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkawesome_notes=self.webpackChunkawesome_notes||[]).push([[35799],{89426:e=>{e.exports=JSON.parse('{"tag":{"label":"Yarn","permalink":"/awesome-notes/tags/yarn","allTagsPath":"/awesome-notes/tags","count":1,"items":[{"id":"web/node/yarn","title":"Yarn","description":"Berry","permalink":"/awesome-notes/web/node/yarn"}],"unlisted":false}}')}}]);
