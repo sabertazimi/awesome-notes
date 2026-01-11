@@ -177,7 +177,7 @@ values.put("price", 19.95);
 db.insert("Book", null, values); // 插入第二条数据
 
 //update
-contentValues values = new ContentValues();
+ContentValues values = new ContentValues();
 values.put("price", 10.99);
 db.update("Book", values, "name = ?", new String[] { "The DaVinci Code"  });
 
