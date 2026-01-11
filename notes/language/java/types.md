@@ -47,8 +47,8 @@ Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.isNaN() 检测 NaN �
 - 1 个 char 型占 2 个字节(Unicode 编码)
 - ''(定界符)内可用八/十六进制转义字符表示字符
 
-- 八:\\xxx
-- 十六:\\uxxxx(\\u 转义序列可出现在任何地方) e.g. '\\u0061'
+- 八: `\xxx`
+- 十六: `\uxxxx` (`\u` 转义序列可出现在任何地方) e.g. `'\u0061'`
 
 改进的 Unicode 字符集:
 
