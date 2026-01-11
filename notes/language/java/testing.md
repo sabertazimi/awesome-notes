@@ -25,4 +25,4 @@ Logger.getGlobal().info(" ……" + targetVariableName);
 
 ### Stack Trace
 
-- `Throwable.PintStackTrace`
+- `Throwable.printStackTrace()`
