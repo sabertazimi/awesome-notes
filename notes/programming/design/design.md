@@ -12,7 +12,7 @@ tags: [Programming, DevOps, Design Pattern]
 
 - [Paradigms](./paradigms.md) - Programming paradigms and frameworks
 
-## Design Patterns
+## Patterns
 
 - [Patterns](./patterns/patterns.md) - Design patterns catalog
 
