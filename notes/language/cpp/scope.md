@@ -59,7 +59,7 @@ namespace A {
 
 namespace B {
     void g(void) {
-        cout<<"B\n">>;
+        cout<<"B\n";
     }
 }
 
