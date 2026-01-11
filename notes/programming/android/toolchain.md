@@ -10,7 +10,7 @@ tags: [Programming, Android, Toolchain]
 1. register-based machine
    基于寄存器(不写入内存)
 2. minimizing instruction dispatch and memory accesses
-   最小化指令分配黑内存访问
+   最小化指令分配和内存访问
 3. giving more efficient instruction stream(a lot more semantic content)
    提供更加高效的指令流
 
