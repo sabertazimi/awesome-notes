@@ -32,8 +32,7 @@ tags: [Language, Verilog]
 
 ## Components
 
-- [Hardware Components](./components.md) - Complete library of hardware component implementations
-  including multipliers, clock units, signal units, ALU, and memory
+- [Hardware Components](./components.md) - Hardware component implementations including multipliers, clocks, signal units, ALU, and memory
 
 ## Best Practices
 
