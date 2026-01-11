@@ -75,8 +75,8 @@ interface NotesMarqueeProps {
 
 export function NotesMarquee({ notes = DefaultNotes }: NotesMarqueeProps) {
   return (
-    <div className="relative flex w-full flex-col items-center justify-center overflow-hidden py-8">
-      <ScrollVelocityContainer className="w-full">
+    <div className="relative flex container flex-col items-center justify-center overflow-hidden">
+      <ScrollVelocityContainer className="w-full mt-8">
         {notes.map((row, index) => (
           <ScrollVelocityRow
             key={row[0]?.href || index}
