@@ -3,6 +3,7 @@
     "cout",
     "gson",
     "matplotlib",
-    "pytest"
+    "pytest",
+    "verilog"
   ]
 }
