@@ -41,7 +41,7 @@ const DefaultNotes: Note[][] = [
     { title: 'Template', category: 'C++', href: '/language/cpp/template' },
     { title: 'Monads', category: 'Haskell', href: '/language/haskell/monad' },
     { title: 'Concurrency', category: 'Java', href: '/language/java/concurrency' },
-    { title: 'State Machine', category: 'Go', href: '/language/verilog/state-machine' },
+    { title: 'State Machine', category: 'Verilog', href: '/language/verilog/state-machine' },
   ],
   // Row 5: Development Practices
   [
