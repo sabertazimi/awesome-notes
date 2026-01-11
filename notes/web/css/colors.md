@@ -103,6 +103,10 @@ Change `lightness` to get gradient color:
 - P3 colors.
 - Better communication with design teams.
 
+```bash
+pnpm dlx convert-to-oklch ./src/**/*.css
+```
+
 ```css
 /* Simple color modifications */
 .text {
