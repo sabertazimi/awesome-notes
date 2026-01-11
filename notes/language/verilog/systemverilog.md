@@ -129,7 +129,7 @@ class Generator;
   int num_packets;
 
   function void gen();
-    pkt = new():
+    pkt = new();
     pkt.randomize();
     out_chan.put(pkt);
   endfunction
