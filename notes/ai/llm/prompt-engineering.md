@@ -39,6 +39,18 @@ tags: [AI, LLM, PromptEngineering]
 - 明确要求: 清晰陈述模型必须遵循的要求.
 - 文本相似性: 写类似于提供样本的文本时, 使用相同的语言风格.
 
+:::tip
+
+- Clarity
+- Specificity
+- Context
+- Guide
+- Output
+- Iterate
+- Verify
+
+:::
+
 ## In-Context Learning
 
 Given examples, generate output:
