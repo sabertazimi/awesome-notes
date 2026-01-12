@@ -189,8 +189,9 @@ for `TypeScript` compile and build [Speed](https://github.com/typescript-cheatsh
 
 ## References
 
-- [Learning TypeScript](https://github.com/LearningTypeScript/projects)
-- [Tackling TypeScript](https://exploringjs.com/tackling-ts/index.html)
-- [TypeScript Deep Dive](https://github.com/basarat/typescript-book)
-- [Clean TypeScript Code](https://github.com/labs42io/clean-code-typescript)
-- [Effective TypeScript](https://github.com/danvk/effective-typescript)
+- [Cookbook](https://github.com/gibbok/typescript-book)
+- [Exploring](https://exploringjs.com/ts/index.html)
+- [Effective](https://github.com/danvk/effective-typescript)
+- [Clean Code](https://github.com/labs42io/clean-code-typescript)
+- [Projects](https://github.com/LearningTypeScript/projects)
+- [Toolchain](https://github.com/basarat/typescript-book)
