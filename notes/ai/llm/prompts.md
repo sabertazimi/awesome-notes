@@ -244,7 +244,7 @@ Keep track of your current status in browser-use-ts/agent/TODO.md
 </必须遵守的关键原则>
 ```
 
-### API
+### Endpoint
 
 ```md
 Create a REST API endpoint for ${resource:user profiles}.
@@ -365,6 +365,8 @@ Provide:
 
 ## Testing
 
+### Unit
+
 ```md
 Write unit tests for this function:
 
@@ -393,6 +395,8 @@ Include: Descriptive test names
 ```
 
 ## Review
+
+### Pull Request
 
 ```md
 Review this code for a pull request.
@@ -478,20 +482,32 @@ Provide:
 
 ## Documentation
 
+### Mermaid
+
 ```md
-Add comprehensive documentation to this code:
+Create a Mermaid diagram showing the data flow for our authentication system,
+including OAuth providers, session management, and token refresh.
+```
+
+### API
+
+```md
+Generate API documentation from this code:
 
 Code:
-${code:paste your code here}
+${code:paste your endpoint code here}
 
-Add:
-- File/module docstring (purpose, usage)
-- Function/method docstring (params, returns, raises, examples)
-- Inline comments for complex logic only
-- Type hints if missing
+Format: ${format:OpenAPI/Swagger YAML}
 
-Style: ${docStyle:Google}
+Include:
+- Endpoint description
+- Request/response schemas
+- Example requests/responses
+- Error codes
+- Authentication requirements
 ```
+
+### Module
 
 ```md
 Add comprehensive documentation to this code:
