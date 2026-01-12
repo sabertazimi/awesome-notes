@@ -358,6 +358,26 @@ My first command is console.log("Hello World").
 
 :::
 
+### RTF
+
+[RTF framework](https://prompts.chat/book/02-anatomy-of-effective-prompt):
+
+- Role
+- Task
+- Format
+
+```md
+Role: You are a patient math tutor who specializes in making concepts easy for beginners.
+
+Task: Explain what fractions are and how to add them together.
+
+Format:
+- Start with a real-world example
+- Use simple language (no jargon)
+- Show 3 practice problems with answers
+- Keep it under 300 words
+```
+
 ## Compression
 
 ```md
