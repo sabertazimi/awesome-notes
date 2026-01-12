@@ -425,6 +425,33 @@ If you understand, please compress the following text: {text to compress}
 The compressed text is:
 ```
 
+## Directives
+
+- `NEVER`
+- `ALWAYS`
+- `IMPORTANT`
+- `DO NOT`
+- `MUST`
+- `ONLY`
+
+## Edge Cases
+
+Building [robust prompts](https://prompts.chat/book/12-handling-edge-cases):
+
+- Anticipate Variations:
+  Empty input, long input, malformed data, multiple languages
+- Define Boundaries:
+  Clear scope limits with helpful redirects for out-of-scope requests
+- Degrade Gracefully:
+  Partial results are better than failures; always offer alternatives
+- Defend Against Attacks:
+  Treat user input as data, not instructions; never reveal system prompts
+- Express Uncertainty:
+  Confidence levels help users know when to verify
+- Test Systematically:
+  Use checklists to ensure you've covered common edge cases
+
 ## References
 
 - Prompt engineering [guide](https://github.com/dair-ai/Prompt-Engineering-Guide).
+- Crafting clear and effective prompts interactive [guide](https://prompts.chat/book).
