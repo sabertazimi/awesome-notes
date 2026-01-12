@@ -95,6 +95,11 @@ observe what users ask agent to do,
 
 :::
 
+### Recursive Language Models
+
+[RLM](https://www.primeintellect.ai/blog/rlm)
+通过分治与递归, 实现多跳推理代码, 解决长文本带来的 `Context Rot` 问题.
+
 ## Instructions
 
 - Use existing documents:
