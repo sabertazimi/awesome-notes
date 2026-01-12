@@ -94,6 +94,34 @@ while WinGet is app installer.
 
 :::
 
+:::tip[Recommended Software for Windows]
+
+```bash
+winget install astral-sh.uv BellSoft.LibericaJDK.11 Tencent.WeixinDevTools zig.zig
+```
+
+```bash
+winget install kangfenmao.CherryStudio Microsoft.VisualStudioCode Neovim.Neovim ZedIndustries.Zed
+```
+
+```bash
+winget Microsoft.WindowsTerminal Mobatek.MobaXterm
+```
+
+```bash
+winget install Bandisoft.Bandizip ClashVergeRev.ClashVergeRev Google.Chrome.EXE Microsoft.OneDrive NetEase.MailMaster Tencent.WeType
+```
+
+```bash
+winget install ByteDance.Feishu Tencent.QQ.NT Tencent.WeChat
+```
+
+```bash
+winget install c-egg.tenhou NetEase.CloudMusic Valve.Steam
+```
+
+:::
+
 ### Mise
 
 [Mise](https://github.com/jdx/mise):

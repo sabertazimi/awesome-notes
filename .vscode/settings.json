@@ -4,6 +4,7 @@
     "gson",
     "matplotlib",
     "pytest",
-    "verilog"
+    "verilog",
+    "winget"
   ]
 }
