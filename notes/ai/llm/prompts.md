@@ -244,13 +244,47 @@ Keep track of your current status in browser-use-ts/agent/TODO.md
 </必须遵守的关键原则>
 ```
 
-### Mock
+### API
 
 ```md
-所有的 API 请求需要支持 Mock 接口，请设置一个全局变量来控制是否开启 Mock 数据，
-在 request 中统一进行 Mock 数据的切换，每个 Mock 数据按模块划分与 API 请求一一对应。
+Create a REST API endpoint for ${resource:user profiles}.
 
-命名规范：`<模块名>-mock.ts`。
+Framework: ${framework:FastAPI}
+Method: ${method:GET}
+Path: ${path:/api/users/{id}}
+
+Request:
+- Headers: ${headers:Authorization Bearer token}
+- Body schema: ${bodySchema:N/A for GET}
+- Query params: ${queryParams:include_posts (boolean)}
+
+Response:
+- Success: ${successResponse:200 with user object}
+- Errors: ${errorResponses:401 Unauthorized, 404 Not Found}
+
+Include:
+- Input validation
+- Authentication check
+- Error handling
+- Rate limiting consideration
+```
+
+### Database
+
+```md
+Design a database schema for ${application:e-commerce platform}.
+
+Requirements:
+- ${feature1:User accounts with profiles and addresses}
+- ${feature2:Product catalog with categories and variants}
+- ${feature3:Orders with line items and payment tracking}
+
+Provide:
+1. Entity-relationship description
+2. Table definitions with columns and types
+3. Indexes for common queries
+4. Foreign key relationships
+5. Sample queries for key operations
 ```
 
 ### Generation
@@ -267,6 +301,211 @@ Keep track of your current status in browser-use-ts/agent/TODO.md
 - 根据 ids 查询。
 - 根据 id 删除（软删除）。
 - 根据 ids 删除（软删除）。
+```
+
+## Debugging
+
+```md
+Debug this code.
+It should ${expectedBehavior:return the sum of all numbers} but instead ${actualBehavior:returns 0 for all inputs}.
+
+Code:
+${code:paste your code here}
+
+Error message (if any):
+${error:none}
+
+Steps to debug:
+1. Identify what the code is trying to do
+2. Trace through execution with the given input
+3. Find where expected and actual behavior diverge
+4. Explain the root cause
+5. Provide the fix with explanation
+```
+
+### Interpretation
+
+```md
+Explain this error and how to fix it:
+
+Error:
+${errorMessage:paste error message or stack trace here}
+
+Context:
+- Language/Framework: ${framework:Python 3.11}
+- What I was trying to do: ${action:reading a JSON file}
+- Relevant code: ${codeSnippet:paste relevant code}
+
+Provide:
+1. Plain English explanation of the error
+2. Root cause
+3. Step-by-step fix
+4. How to prevent this in the future
+```
+
+### Performance
+
+```md
+This code is slow. Analyze and optimize:
+
+Code:
+${code:paste your code here}
+
+Current performance: ${currentPerformance:takes 30 seconds for 1000 items}
+Target performance: ${targetPerformance:under 5 seconds}
+Constraints: ${constraints:memory limit 512MB}
+
+Provide:
+1. Identify bottlenecks
+2. Explain why each is slow
+3. Suggest optimizations (ranked by impact)
+4. Show optimized code
+5. Estimate improvement
+```
+
+## Testing
+
+```md
+Write unit tests for this function:
+
+Function:
+${code:paste your function here}
+
+Testing framework: ${testFramework:pytest}
+
+Cover:
+- Happy path (normal inputs)
+- Edge cases (empty, null, boundary values)
+- Error cases (invalid inputs)
+- ${specificScenarios:concurrent access, large inputs}
+
+Format: Arrange-Act-Assert pattern
+Include: Descriptive test names
+```
+
+### Mock
+
+```md
+所有的 API 请求需要支持 Mock 接口，请设置一个全局变量来控制是否开启 Mock 数据，
+在 request 中统一进行 Mock 数据的切换，每个 Mock 数据按模块划分与 API 请求一一对应。
+
+命名规范：`<模块名>-mock.ts`。
+```
+
+## Review
+
+```md
+Review this code for a pull request.
+
+Code:
+${code:paste your code here}
+
+Review for:
+1. **Correctness**: Bugs, logic errors, edge cases
+2. **Security**: Vulnerabilities, injection risks, auth issues
+3. **Performance**: Inefficiencies, N+1 queries, memory leaks
+4. **Maintainability**: Readability, naming, complexity
+5. **Best practices**: ${framework:Python/Django} conventions
+
+Format your review as:
+🔴 Critical: must fix before merge
+🟡 Important: should fix
+🟢 Suggestion: nice to have
+💭 Question: clarification needed
+```
+
+### Security
+
+```md
+Perform a security review of this code:
+
+Code:
+${code:paste your code here}
+
+Check for:
+- [ ] Injection vulnerabilities (SQL, XSS, command)
+- [ ] Authentication/authorization flaws
+- [ ] Sensitive data exposure
+- [ ] Insecure dependencies
+- [ ] Cryptographic issues
+- [ ] Input validation gaps
+- [ ] Error handling that leaks info
+
+For each finding:
+- Severity: Critical/High/Medium/Low
+- Location: Line number or function
+- Issue: Description
+- Exploit: How it could be attacked
+- Fix: Recommended remediation
+```
+
+### Smell
+
+```md
+Analyze this code for code smells and refactoring opportunities:
+
+Code:
+${code:paste your code here}
+
+Identify:
+1. Long methods (suggest extraction)
+2. Duplicate code (suggest DRY improvements)
+3. Complex conditionals (suggest simplification)
+4. Poor naming (suggest better names)
+5. Tight coupling (suggest decoupling)
+
+For each issue, show before/after code.
+```
+
+### Patterns
+
+```md
+Refactor this code using the ${patternName:Factory} pattern.
+
+Current code:
+${code:paste your code here}
+
+Goals:
+- ${whyPattern:decouple object creation from usage}
+- ${benefits:easier testing and extensibility}
+
+Provide:
+1. Explanation of the pattern
+2. How it applies here
+3. Refactored code
+4. Trade-offs to consider
+```
+
+## Documentation
+
+```md
+Add comprehensive documentation to this code:
+
+Code:
+${code:paste your code here}
+
+Add:
+- File/module docstring (purpose, usage)
+- Function/method docstring (params, returns, raises, examples)
+- Inline comments for complex logic only
+- Type hints if missing
+
+Style: ${docStyle:Google}
+```
+
+```md
+Add comprehensive documentation to this code:
+
+Code:
+${code:paste your code here}
+
+Add:
+- File/module docstring (purpose, usage)
+- Function/method docstrings (params, returns, raises, examples)
+- Inline comments for complex logic only
+- Type hints if missing
+
+Style: ${docStyle:Google}
 ```
 
 ## Developer
@@ -495,5 +734,6 @@ Midjourney [cookbook](https://fka.gumroad.com/l/the-art-of-midjourney-ai-guide-t
 ## References
 
 - Awesome ChatGPT [prompts](https://github.com/f/awesome-chatgpt-prompts).
+- Programming and development [prompts](https://prompts.chat/book/19-programming-development).
 - Gemini prompts [cookbook](https://services.google.com/fh/files/misc/gemini-for-google-workspace-prompting-guide-101.pdf).
 - Vibe coding [prompts](https://docs.google.com/spreadsheets/d/1ngoQOhJqdguwNAilCl1joNwTje7FWWN9WiI2bo5VhpU).
