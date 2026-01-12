@@ -182,7 +182,7 @@ button[variant='error'] {
 
 ## Mix
 
-Creating color palettes with [`color-mix()`](https://developer.mozilla.org/en-US/blog/color-palettes-css-color-mix/?utm_source=CSS-Weekly&utm_campaign=Issue-582&utm_medium=web):
+Creating color palettes with [`color-mix()`](https://developer.mozilla.org/en-US/blog/color-palettes-css-color-mix):
 
 ```css
 :root {
