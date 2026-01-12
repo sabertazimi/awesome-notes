@@ -457,6 +457,14 @@ Agents [eval](https://www.anthropic.com/engineering/demystifying-evals-for-ai-ag
 7. Read transcripts (记录).
 8. Pick framework: [prompt foo](https://github.com/promptfoo/promptfoo), [harbor](https://github.com/laude-institute/harbor).
 
+## Benchmarks
+
+[Benchmarks](https://blog.sshh.io/p/understanding-ai-benchmarks):
+
+- Aggregate: Don’t obsess over a 1-2% lead on one benchmark, focus on specific and comprehensive domain.
+- Relative: Compare within the same model family or lab, how did the score change from v1 to v2?
+- Verify: The only benchmark that matters at the end of the day is your workload.
+
 ## Library
 
 ### Instruction
@@ -484,13 +492,10 @@ Agents [eval](https://www.anthropic.com/engineering/demystifying-evals-for-ai-ag
 - [ZRead](https://zread.ai):
   AI-powered github repository reader.
 
-## Benchmarks
+### Slide
 
-[Benchmarks](https://blog.sshh.io/p/understanding-ai-benchmarks):
-
-- Aggregate: Don’t obsess over a 1-2% lead on one benchmark, focus on specific and comprehensive domain.
-- Relative: Compare within the same model family or lab, how did the score change from v1 to v2?
-- Verify: The only benchmark that matters at the end of the day is your workload.
+- [Banana](https://github.com/Anionex/banana-slides):
+  AI-native PPT generator based on nano banana pro.
 
 ## References
 
