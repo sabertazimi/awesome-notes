@@ -390,6 +390,20 @@ Format:
 - Keep it under 300 words
 ```
 
+### BREAK
+
+```md
+Solve this problem using BREAK:
+
+B - Begin by restating the problem
+R - Reason about what approach to use
+E - Execute the solution step by step
+A - Answer clearly
+K - Know by verifying/checking
+
+Problem: A rectangle's length is twice its width. If the perimeter is 36 cm, what is the area?
+```
+
 ## Compression
 
 ```md
