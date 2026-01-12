@@ -143,16 +143,51 @@ tags: [Web, HTML, Form]
 
 ## Validation
 
-- Form validation complete [guide](https://developer.mozilla.org/docs/Learn/Forms/Form_validation).
-- Constraint validation complete [guide](https://developer.mozilla.org/docs/Web/Guide/HTML/Constraint_validation).
+`<input>` validation is (maybe) [good](https://www.htmhell.dev/adventcalendar/2025/28):
 
 ```ts
-const usernameInput = document.querySelector('[name="name"]')
+const form = document.getElementById('my-form')
+const input = document.getElementById('program_name')
+const errorMessage = document.getElementById('program_name-error')
 
-usernameInput.addEventListener('invalid', () => {
-  usernameInput.setCustomValidity('Please enter your name.')
+// IMPORTANT: set this attribute in JS, that way it's a
+// progressive enhancement (ie: if JS isn't available the
+// native form validation will still work).
+form.setAttribute('novalidate', '')
+
+function validateInput() {
+  const isValid = input.checkValidity()
+  errorMessage.textContent = isValid ? '' : input.validationMessage
+  if (isValid) {
+    input.removeAttribute('aria-invalid')
+  } else {
+    input.setAttribute('aria-invalid', 'true')
+  }
+}
+
+// Validate on blur (when user leaves the field)
+input.addEventListener('blur', validateInput)
+
+// Clear errors as user types
+input.addEventListener('input', () => {
+  if (input.checkValidity()) {
+    errorMessage.textContent = ''
+    input.removeAttribute('aria-invalid')
+  }
+})
+
+// Handle form submit
+form.addEventListener('submit', (e) => {
+  if (!form.checkValidity()) {
+    e.preventDefault()
+    // Update validation state for all fields
+    validateInput()
+  }
 })
 ```
+
+- Form validation complete [guide](https://developer.mozilla.org/docs/Learn/Forms/Form_validation).
+- Constraint validation complete [guide](https://developer.mozilla.org/docs/Web/Guide/HTML/Constraint_validation).
 
 ## Attributes
 
