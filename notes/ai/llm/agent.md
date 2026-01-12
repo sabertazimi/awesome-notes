@@ -457,6 +457,13 @@ Agents [eval](https://www.anthropic.com/engineering/demystifying-evals-for-ai-ag
 7. Read transcripts (记录).
 8. Pick framework: [prompt foo](https://github.com/promptfoo/promptfoo), [harbor](https://github.com/laude-institute/harbor).
 
+When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688) is the source of truth:
+
+- Debugging becomes trace analysis
+- Testing becomes eval-driven
+- Can't set breakpoints in reasoning
+- Performance optimization changes: task success rate, reasoning quality, tool usage efficiency
+
 ## Benchmarks
 
 [Benchmarks](https://blog.sshh.io/p/understanding-ai-benchmarks):
