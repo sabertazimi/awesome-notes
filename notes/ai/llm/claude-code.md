@@ -336,3 +336,4 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 
 - Agent skills [best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices).
 - Claude skills [cookbook](https://github.com/anthropics/claude-cookbooks/tree/main/skills).
+- OpenCode complete [guide](https://github.com/vbgate/learn-opencode).
