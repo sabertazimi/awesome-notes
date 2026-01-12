@@ -232,3 +232,21 @@ git push [remote-name] <tagName>
 git push [remote-name] --tags
 git push --follow-tags
 ```
+
+## Worktree
+
+Run [parallel agents](https://code.claude.com/docs/en/common-workflows#run-parallel-claude-code-sessions-with-git-worktrees):
+
+```gitignore
+.env
+.env.local
+.env.*
+**/.claude/settings.local.json
+```
+
+```bash
+git worktree add <worktree-path> <branch-name>
+git worktree list
+git worktree remove <worktree-path>
+git worktree prune
+```

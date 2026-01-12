@@ -5,6 +5,7 @@
     "matplotlib",
     "pytest",
     "verilog",
-    "winget"
+    "winget",
+    "worktree"
   ]
 }
