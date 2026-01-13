@@ -65,8 +65,9 @@ Use Claude Code as a [unix-style utility](https://code.claude.com/docs/en/common
 claude -p "$REVIEW_PROMPT" > review-result.md 2>&1 || true
 ```
 
-See GitHub [agentic code review action](https://github.com/sabertazimi/blog/pull/1572)
-and [improved version](https://github.com/sabertazimi/blog/pull/1573).
+See GitHub [code review action](https://github.com/sabertazimi/blog/pull/1572),
+[improved version](https://github.com/sabertazimi/blog/pull/1573),
+and [agent-native version](https://github.com/sabertazimi/blog/pull/1574).
 
 :::tip[Composable]
 
