@@ -35,6 +35,8 @@ _fzf_compgen_dir() {
 alias app="scoop"
 alias cc="claude"
 alias ccc="claude -c"
+alias ccm="claude -p 'commit'"
+alias code="cursor"
 alias np="pnpm"
 alias vim="nvim"
 
