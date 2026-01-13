@@ -309,8 +309,10 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 
 ### Browser
 
-- [DevBrowser](http://github.com/SawyerHood/dev-browser):
-  Browser automation.
+- [Dev](http://github.com/SawyerHood/dev-browser):
+  Browser automation skills.
+- [Agent](https://github.com/vercel-labs/agent-browser):
+  Browser automation CLI for AI agents.
 
 ### Integration
 
