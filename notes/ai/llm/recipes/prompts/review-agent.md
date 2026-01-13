@@ -1,54 +1,5 @@
 # Code Review
 
-## Confidence Scoring
-
-[Confidence scoring code review](https://github.com/sabertazimi/blog/pull/1573),
-based on [Anthropic code review plugin](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-review):
-
-```md
-REPO: `${{ github.repository }}`
-PR_NUMBER: `${{ github.event.pull_request.number }}`
-
-You are performing an automated code review on this pull request.
-
-Please:
-
-1. Use `gh pr diff` to see the changes
-2. Use `gh pr view` to get PR details
-3. Analyze the code for:
-   - CLAUDE.md guidelines compliance (read CLAUDE.md if it exists)
-   - Bugs and issues introduced in this PR
-   - Security vulnerabilities
-   - Performance concerns
-   - Code quality issues
-4. For each issue found:
-   - Verify it is actually introduced by this PR (not pre-existing)
-   - Score your confidence 0-100
-   - Only report issues with 80+ confidence
-5. Post your review as a PR comment using `gh pr comment ${{ github.event.pull_request.number }} --body <markdown>`
-
-Format your review comment as:
-
-\`\`\`md
-## Code review
-
-Found <N> issues:
-
-1. <Issue description> (confidence: <score>)
-   <file-with-link>
-
-...
-\`\`\`
-
-For code links, use format:
-
-\`\`\`md
-https://github.com/<owner>/<repo>/blob/<full-sha>/<path>#L<start>-L<end>
-\`\`\`
-
-If no issues with 80+ confidence are found, post a positive review comment.
-```
-
 ## Request
 
 [Code review](https://github.com/sabertazimi/blog/pull/1572):
@@ -109,6 +60,55 @@ Actionable suggestions for improvement.
 ---
 
 Please be thorough but concise. Focus on actionable feedback that will improve code quality and maintainability.
+```
+
+## Confidence Scoring
+
+[Confidence scoring code review](https://github.com/sabertazimi/blog/pull/1573),
+based on [Anthropic code review plugin](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-review):
+
+```md
+REPO: `${{ github.repository }}`
+PR_NUMBER: `${{ github.event.pull_request.number }}`
+
+You are performing an automated code review on this pull request.
+
+Please:
+
+1. Use `gh pr diff` to see the changes
+2. Use `gh pr view` to get PR details
+3. Analyze the code for:
+   - CLAUDE.md guidelines compliance (read CLAUDE.md if it exists)
+   - Bugs and issues introduced in this PR
+   - Security vulnerabilities
+   - Performance concerns
+   - Code quality issues
+4. For each issue found:
+   - Verify it is actually introduced by this PR (not pre-existing)
+   - Score your confidence 0-100
+   - Only report issues with 80+ confidence
+5. Post your review as a PR comment using `gh pr comment ${{ github.event.pull_request.number }} --body <markdown>`
+
+Format your review comment as:
+
+\`\`\`md
+## Code review
+
+Found <N> issues:
+
+1. <Issue description> (confidence: <score>)
+   <file-with-link>
+
+...
+\`\`\`
+
+For code links, use format:
+
+\`\`\`md
+https://github.com/<owner>/<repo>/blob/<full-sha>/<path>#L<start>-L<end>
+\`\`\`
+
+If no issues with 80+ confidence are found, post a positive review comment.
 ```
 
 ## Agent-native
