@@ -52,7 +52,8 @@ If no issues with 80+ confidence are found, post a positive review comment.
 [Code review](https://github.com/sabertazimi/blog/pull/1572):
 
 ```md
-You are performing a comprehensive code review on this pull request. Please analyze the changes and provide feedback in the following structure:
+You are performing a comprehensive code review on this pull request.
+Please analyze the changes and provide feedback in the following structure:
 
 ## Summary
 Brief overview of what this PR changes.
