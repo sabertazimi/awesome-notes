@@ -57,6 +57,25 @@ claude -r
 claude -r [session_id]
 ```
 
+## Non-interactive Mode
+
+Use Claude Code as a [unix-style utility](https://code.claude.com/docs/en/common-workflows#use-claude-as-a-unix-style-utility):
+
+```bash
+claude -p "$REVIEW_PROMPT" > review-result.md 2>&1 || true
+```
+
+See GitHub [agentic code review action](https://github.com/sabertazimi/blog/pull/1572)
+and [improved version](https://github.com/sabertazimi/blog/pull/1573).
+
+:::tip[Composable]
+
+Unix 系统中, 命令行工具通常是独立的、可组合的，
+`claude -p` 可以接受标准输入, 并且可以与其他工具无缝集成,
+从而形成一个强大的工具链.
+
+:::
+
 ## Commands
 
 `.claude/commands/api/api-new.md`:
