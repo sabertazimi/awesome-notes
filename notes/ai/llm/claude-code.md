@@ -270,7 +270,7 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
   Convert documentation websites, GitHub repositories, and PDFs
   into Claude AI skills with automatic conflict detection.
 
-### Architecture
+### Workflow
 
 - [Superpowers](https://github.com/obra/superpowers):
   Complete software development workflow.
@@ -278,7 +278,9 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
   Comprehensive production-ready system combining agents, multi-agent workflow orchestrators, skills, and slash commands.
 - [Manus](https://github.com/OthmanAdi/planning-with-files):
   Manus-style persistent markdown planning.
-- [Continuous](https://github.com/parcadei/Continuous-Claude-v2):
+- [Compound](https://github.com/EveryInc/compound-engineering-plugin):
+  Compound engineering plugin.
+- [Continuous](https://github.com/parcadei/Continuous-Claude-v3):
   Session continuity, token-efficient MCP execution, and agentic workflows.
 
 ### Frontend
