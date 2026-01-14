@@ -55,7 +55,6 @@ alias curl="curlie"
 
 export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
-
 export PATH="$HOME/.local/bin:$PATH"
 ```
 
