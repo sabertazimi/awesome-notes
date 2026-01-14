@@ -33,7 +33,7 @@ value of performant, reliable, extensible API will increase.
 
 ## Patterns
 
-[Agent design patterns](https://rlancemartin.github.io/2026/01/09/agent_design):
+Agent design [patterns](https://rlancemartin.github.io/2026/01/09/agent_design):
 
 - Give agents a computer (CLI and files)
 - Progressive disclosure
@@ -44,7 +44,7 @@ value of performant, reliable, extensible API will increase.
 
 ### Agent-native Architecture
 
-[Agent-native apps should](https://every.to/guides/agent-native):
+[Agent-native](https://every.to/guides/agent-native) apps should:
 
 - Parity (对等性): 用户通过 UI 完成任务 `<->` Agent 通过工具实现.
 - Granularity (细粒度): tools should be atomic primitives.
@@ -610,3 +610,5 @@ When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688
 - Vibe coding [prompts](https://docs.google.com/spreadsheets/d/1ngoQOhJqdguwNAilCl1joNwTje7FWWN9WiI2bo5VhpU).
 - Vibe coding [guide](https://github.com/tukuaiai/vibe-coding-cn).
 - Agent system [prompts](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools).
+- [CodeAI](https://github.com/sourcegraph/awesome-code-ai):
+  Curated list of AI coding tools.
