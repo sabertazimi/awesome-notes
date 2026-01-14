@@ -880,4 +880,5 @@ CSS transform animation only runs on `compositor` thread and `Viz` process.
 - Web platform [tests](https://wpt.fyi).
 - Google Chrome platform feature [status](https://github.com/GoogleChrome/chromium-dashboard).
 - Mozilla Firefox platform feature [status](https://github.com/mozilla/standards-positions).
+- Thin wrappers around [native APIs](https://polypane.app/blog/not-all-browser-apis-are-web-apis).
 - JavaScript [runtimes](https://buttondown.com/whatever_jamie/archive/the-many-many-many-javascript-runtimes-of-the-last-decade).
