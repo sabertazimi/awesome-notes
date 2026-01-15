@@ -102,7 +102,7 @@ winget install astral-sh.uv BellSoft.LibericaJDK.11 CoreyButler.NVMforWindows Ru
 ```
 
 ```bash
-winget install kangfenmao.CherryStudio Microsoft.VisualStudioCode Neovim.Neovim ZedIndustries.Zed
+winget install kangfenmao.CherryStudio Google.Antigravity Microsoft.VisualStudioCode Neovim.Neovim Obsidian.Obsidian ZedIndustries.Zed
 ```
 
 ```bash
