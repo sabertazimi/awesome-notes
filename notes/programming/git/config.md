@@ -17,7 +17,7 @@ tags: [Programming, Linux, Git]
 git config --global user.name "sabertazimi"
 git config --global user.email sabertazimi@gmail.com
 git config --global core.autocrlf false
-git config --global core.editor vim
+git config --global core.editor nvim
 git config --global credential.helper store
 git config --global color.ui true
 git config --global commit.template ~/.gitmsg.md
@@ -111,7 +111,7 @@ git config --global user.signingkey <pub-keyID>
 ```bash
 git config --list
 git --help
-man git-
+man git-xxx
 git help
 git help config
 ```
