@@ -98,7 +98,7 @@ while WinGet is app installer.
 :::tip[Recommended Software for Windows]
 
 ```bash
-winget install astral-sh.uv BellSoft.LibericaJDK.11 Tencent.WeixinDevTools zig.zig
+winget install astral-sh.uv BellSoft.LibericaJDK.11 CoreyButler.NVMforWindows Rustlang.Rustup Tencent.WeixinDevTools zig.zig
 ```
 
 ```bash
