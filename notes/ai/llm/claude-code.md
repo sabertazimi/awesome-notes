@@ -333,7 +333,7 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 
 - [Skills](https://github.com/anthropics/skills):
   Anthropic repository for agent skills.
-- [Awesome](https://github.com/travisvn/awesome-claude-skills):
+- [Awesome](https://github.com/ComposioHQ/awesome-claude-skills):
   Curated list of Claude Code skills.
 - [Marketplace](https://skillsmp.com):
   Agent skills marketplace.
