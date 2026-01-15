@@ -106,11 +106,11 @@ winget install Google.Antigravity lbjlaq.AntigravityTools Microsoft.VisualStudio
 ```
 
 ```bash
-winget install Gyan.FFmpeg kangfenmao.CherryStudio Microsoft.WindowsTerminal Mobatek.MobaXterm
+winget install Git.Git GitHub.cli Gyan.FFmpeg kangfenmao.CherryStudio Microsoft.WindowsTerminal Mobatek.MobaXterm
 ```
 
 ```bash
-winget install ClashVergeRev.ClashVergeRev Mihomo-Party.Mihomo-Party Google.Chrome.EXE Microsoft.OneDrive
+winget install ClashVergeRev.ClashVergeRev Mihomo-Party.Mihomo-Party Google.Chrome Microsoft.OneDrive
 ```
 
 ```bash
