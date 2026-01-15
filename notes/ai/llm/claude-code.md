@@ -291,6 +291,8 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 
 ### Frontend
 
+- [UI/UX](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill):
+  Provide design intelligence for building professional UI/UX multiple platforms.
 - [Edmuds](https://github.com/edmund-io/edmunds-claude-code):
   Personal configuration for productive web development.
 
