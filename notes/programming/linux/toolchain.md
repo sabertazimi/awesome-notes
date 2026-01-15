@@ -102,23 +102,19 @@ winget install astral-sh.uv BellSoft.LibericaJDK.11 CoreyButler.NVMforWindows Ru
 ```
 
 ```bash
-winget install kangfenmao.CherryStudio Google.Antigravity Microsoft.VisualStudioCode Neovim.Neovim Obsidian.Obsidian ZedIndustries.Zed
+winget install Google.Antigravity lbjlaq.AntigravityTools Microsoft.VisualStudioCode Neovim.Neovim Obsidian.Obsidian ZedIndustries.Zed
 ```
 
 ```bash
-winget Microsoft.WindowsTerminal Mobatek.MobaXterm
+winget install Gyan.FFmpeg kangfenmao.CherryStudio Microsoft.WindowsTerminal Mobatek.MobaXterm
 ```
 
 ```bash
-winget install Bandisoft.Bandizip ClashVergeRev.ClashVergeRev Google.Chrome.EXE Microsoft.OneDrive NetEase.MailMaster Tencent.WeType
+winget install ClashVergeRev.ClashVergeRev Mihomo-Party.Mihomo-Party Google.Chrome.EXE Microsoft.OneDrive
 ```
 
 ```bash
-winget install ByteDance.Feishu Tencent.QQ.NT Tencent.WeChat
-```
-
-```bash
-winget install c-egg.tenhou NetEase.CloudMusic Valve.Steam
+winget install ByteDance.Feishu NetEase.CloudMusic NetEase.MailMaster Tencent.QQ.NT Tencent.WeChat Tencent.WeType Valve.Steam
 ```
 
 :::
