@@ -341,6 +341,8 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
   Anthropic-managed directory of high quality Claude Code plugins.
 - [Registry](https://github.com/Kamalnrf/claude-plugins):
   Lightweight registry to discover and manage Claude plugins and agent skills.
+- [Build](https://github.com/davepoon/buildwithclaude):
+  Single hub to Claude Skills, Agents, Commands, Hooks, and Plugins.
 
 ## References
 
