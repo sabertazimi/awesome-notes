@@ -83,6 +83,22 @@ git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
 :TSInstall html css javascript typescript tsx vue json jsonc yaml bash
 ```
 
+### Copilot
+
+`~/.config/nvim/lua/community.lua`:
+
+```lua
+return {
+  "AstroNvim/astrocommunity",
+  { import = "astrocommunity.pack.lua" },
+  { import = "astrocommunity.colorscheme.catppuccin" },
+  { import = "astrocommunity.completion.copilot-lua-cmp" },
+  -- import/override with your plugins folder
+}
+```
+
+See plugins list on [Astro Community](https://github.com/AstroNvim/astrocommunity).
+
 ## Easy Motion
 
 | Motion Command                      | Description                           |
