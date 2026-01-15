@@ -216,37 +216,34 @@ Create repo:
 
 ```bash
 # create a repository under your account using the current directory name
-$ git init my-project
-$ cd my-project
-$ gh repo create
+git init my-project
+cd my-project
+gh repo create
 
 # create a repository with a specific name
-$ gh repo create my-project
+gh repo create my-project
 
 # create a repository in an organization
-$ gh repo create cli/my-project
+gh repo create cli/my-project
 
 # disable issues and wiki
-$ gh repo create --enable-issues=false --enable-wiki=false
-```
-
-Push repo:
-
-```bash
-git init
-
-echo "# RepoName" >> README.md
-git add README.md
-git commit -m "Initial commit"
-
-git remote add origin git@github.com:username/RepoName.git
-git push -u origin master
+gh repo create --enable-issues=false --enable-wiki=false
 ```
 
 List repo:
 
 ```bash
 gh repo list sabertazimi
+```
+
+### Workflow
+
+View and watch Workflow:
+
+```bash
+gh run view
+gh run view --log
+gh run watch
 ```
 
 ## Wiki
