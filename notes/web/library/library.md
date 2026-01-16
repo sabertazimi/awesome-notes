@@ -2220,12 +2220,10 @@ import LibraryGallery from '@site/src/components/library-gallery'
   Open and composable observability and data visualization platform.
 - [Plausible](https://github.com/plausible/analytics):
   Lightweight and privacy-friendly alternative to Google Analytics.
-- [UptimeKuma](https://github.com/louislam/uptime-kuma):
+- [Kuma](https://github.com/louislam/uptime-kuma):
   Fancy self-hosted monitoring.
-- [OneUptime](https://github.com/OneUptime/oneuptime):
+- [One](https://github.com/OneUptime/oneuptime):
   Comprehensive solution for monitoring and managing online services.
-- [BetterStack](https://github.com/BetterStackHQ):
-  Uptime and logging platform.
 - [Sentry](https://github.com/getsentry/sentry):
   Developer-first error tracking and performance monitoring.
 - [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-js):
@@ -2236,6 +2234,8 @@ import LibraryGallery from '@site/src/components/library-gallery'
   Free scalable web analytics running on Cloudflare.
 - [WebCheck](https://github.com/Lissy93/web-check):
   All-in-one OSINT for analysing website.
+- [CheckMate](https://github.com/bluewave-labs/Checkmate):
+  Self-hosted tool designed to track and monitor server hardware, uptime, response times, and incidents.
 
 ### Performance
 
