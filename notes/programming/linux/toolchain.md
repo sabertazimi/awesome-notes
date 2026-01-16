@@ -102,7 +102,7 @@ winget install astral-sh.uv BellSoft.LibericaJDK.11 CoreyButler.NVMforWindows Ru
 ```
 
 ```bash
-winget install Google.Antigravity lbjlaq.AntigravityTools Microsoft.VisualStudioCode Neovim.Neovim Obsidian.Obsidian ZedIndustries.Zed
+winget install Google.Antigravity Microsoft.VisualStudioCode Neovim.Neovim Obsidian.Obsidian ZedIndustries.Zed
 ```
 
 ```bash

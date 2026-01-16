@@ -264,7 +264,7 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 
 ## Library
 
-### Templates
+### Boilerplate
 
 - [Switch](https://github.com/farion1231/cc-switch):
   Quick configuration with All-in-One assistant.
