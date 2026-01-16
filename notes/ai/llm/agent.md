@@ -5,6 +5,12 @@ tags: [AI, LLM, Agent]
 
 # Agent
 
+- LLM (brain)
+- Prompting (instructions)
+- Memory
+- External knowledge
+- Tools
+
 ## Principles
 
 ### First-Principles
