@@ -465,5 +465,9 @@ for AI Interfaces:
 
 ## References
 
-- [Awards](https://www.awwwards.com)
-- [Off Menu](https://www.offmenu.design)
+- [Awards](https://www.awwwards.com):
+  Best web design trends.
+- [Off Menu](https://www.offmenu.design):
+  Design team for fast-moving founders.
+- [Web Almanac](https://almanac.httparchive.org):
+  Annual state of the web report.
