@@ -28,7 +28,7 @@ e.g. `.main > .button` vs `.sidebar > .button`,
 
 ## Style
 
-`@container` [style query](https://una.im/style-queries) direct parent:
+[`style`](https://una.im/style-queries) query direct parent:
 
 ```css
 @container style(color: hotpink) {
@@ -92,7 +92,7 @@ e.g. `.main > .button` vs `.sidebar > .button`,
 }
 ```
 
-`@container` style query non-direct parent:
+Non-direct parent:
 
 ```html
 <ul class="card-list">
@@ -114,7 +114,7 @@ e.g. `.main > .button` vs `.sidebar > .button`,
 </style>
 ```
 
-Use `@container` style query to
+Use style query to
 [implement `toggle()` function](https://kizu.dev/alternating-style-queries):
 
 ```css
@@ -129,6 +129,127 @@ Use `@container` style query to
 }
 ```
 
+## Scroll
+
+[`scroll-state`](https://developer.chrome.com/blog/css-scroll-state-queries)
+query:
+
+```css
+.parent {
+  container-type: scroll-state;
+}
+
+.child {
+  /* styles */
+
+  @container scroll-state(<type>: <value>) {
+    /* scroll-based styles */
+  }
+}
+```
+
+### Stuck
+
+停滞 (边缘固定) 时:
+
+```css
+.stuck-top {
+  position: sticky;
+  top: 0;
+  container-type: scroll-state;
+
+  @supports (container-type: scroll-state) {
+    > nav {
+      @container scroll-state(stuck: top) {
+        color: var(--color-highlight-foreground);
+        background: var(--color-highlight);
+      }
+    }
+  }
+}
+```
+
+### Snapped
+
+已贴靠 (轴上对齐) 时:
+
+```css
+.hidden-not-snapped {
+  overflow: auto hidden;
+  scroll-snap-type: x mandatory;
+
+  > article {
+    container-type: scroll-state;
+    scroll-snap-align: center;
+
+    @supports (container-type: scroll-state) {
+      > * {
+        transition: opacity 0.5s ease;
+
+        @container not scroll-state(snapped: x) {
+          opacity: 0.25;
+        }
+      }
+    }
+  }
+}
+```
+
+### Scrollable
+
+可滚动 (内容溢出) 时:
+
+```css
+.scroll-container {
+  container-type: scroll-state size;
+  overflow: auto;
+
+  &::after {
+    content: ' ';
+    background: var(--shadow-top), var(--shadow-bottom);
+    transition:
+      --scroll-shadow-color-1-opacity 0.5s ease,
+      --scroll-shadow-color-2-opacity 0.5s ease;
+
+    @container scroll-state(scrollable: top) {
+      --scroll-shadow-color-1-opacity: var(--shadow-color-opacity, 25%);
+    }
+
+    @container scroll-state(scrollable: bottom) {
+      --scroll-shadow-color-2-opacity: var(--shadow-color-opacity, 25%);
+    }
+  }
+}
+```
+
+### Scrolled
+
+[已滚动](https://una.im/scroll-state-scrolled)时:
+
+```css
+html {
+  container-type: scroll-state;
+}
+
+header {
+  @container (not scroll-state(scrolled: none)) {
+    position: sticky;
+    top: 0;
+    transition: translate 0.2s;
+  }
+
+  /* Hide when scroll down */
+  @container scroll-state(scrolled: bottom) {
+    translate: 0 -100%;
+  }
+
+  /* Appear when scroll up */
+  @container scroll-state(scrolled: top) {
+    translate: 0 0;
+  }
+}
+```
+
 ## References
 
-- An interactive and comprehensive CSS container queries [guide](https://ishadeed.com/article/css-container-query-guide).
+- Interactive and comprehensive CSS container queries [guide](https://ishadeed.com/article/css-container-query-guide).
