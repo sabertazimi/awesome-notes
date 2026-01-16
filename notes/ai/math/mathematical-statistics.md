@@ -60,7 +60,7 @@ $$
 标准化后的随机变量 $Y_n=\frac{\sum_{i=1}^n{X_i}-n\mu}{\sqrt{n}\sigma}$
 近似服从标准正态分布 $N(0,1)$.
 
-[![Central Limit Theorem](./figures/mathematics/central-limit-theorem.png)](https://www.3blue1brown.com/lessons/clt)
+[![Central Limit Theorem](./figures/central-limit-theorem.png)](https://www.3blue1brown.com/lessons/clt)
 
 更一般化的中心极限定理,
 可参见林德伯格中心极限定理 ([Lindeberg CLT](https://en.wikipedia.org/wiki/Central_limit_theorem#Lindeberg_CLT))
@@ -76,7 +76,7 @@ $$
 
 [高维空间求解](https://zhuanlan.zhihu.com/p/651305078)高斯积分:
 
-[![Gaussian Integral](./figures/mathematics/gaussian-integral.png)](https://www.3blue1brown.com/lessons/gaussian-integral)
+[![Gaussian Integral](./figures/gaussian-integral.png)](https://www.3blue1brown.com/lessons/gaussian-integral)
 
 对于正态分布, 系数 $\frac{1}{\sqrt{\pi}}$ 使得概率密度函数的积分为 1,
 即 $\int_{-\infty}^{\infty}f(x)dx=1$, 使其成为有意义的概率分布.
@@ -105,7 +105,7 @@ $$
 \end{equation}
 $$
 
-![Bayes Theorem](./figures/mathematics/bayes-theorem.png 'Bayes Theorem')
+![Bayes Theorem](./figures/bayes-theorem.png 'Bayes Theorem')
 
 其中, $\frac{P(B|A)}{P(B|\neg{A})}$ 称为[贝叶斯系数 (Bayes Factor)](https://www.3blue1brown.com/lessons/better-bayes):
 

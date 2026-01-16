@@ -105,7 +105,7 @@ $$
 \end{bmatrix}
 $$
 
-[![Fourier Transform](./figures/mathematics/fourier-transform.png)](https://www.3blue1brown.com/lessons/fourier-transforms)
+[![Fourier Transform](./figures/fourier-transform.png)](https://www.3blue1brown.com/lessons/fourier-transforms)
 
 ## Differential Equation
 

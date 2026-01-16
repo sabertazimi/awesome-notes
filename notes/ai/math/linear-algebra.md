@@ -85,7 +85,7 @@ $$
 $\det(A)$ 表示矩阵 A 的[行列式](https://www.3blue1brown.com/lessons/determinant),
 表示该变换对空间的缩放因子:
 
-[![Determinant](./figures/mathematics/determinant.svg)](https://www.3blue1brown.com/lessons/determinant)
+[![Determinant](./figures/determinant.svg)](https://www.3blue1brown.com/lessons/determinant)
 
 $\det(A)=0$ 时, 表示该变换将空间压缩到一个低维空间,
 称矩阵 $A$ 为奇异矩阵 (Singular Matrix):
@@ -102,7 +102,7 @@ $$
 \end{equation}
 $$
 
-![Determinant Diagram](./figures/mathematics/determinant-diagram.svg 'Determinant Diagram')
+![Determinant Diagram](./figures/determinant-diagram.svg 'Determinant Diagram')
 
 Determinant for 3d matrix:
 
