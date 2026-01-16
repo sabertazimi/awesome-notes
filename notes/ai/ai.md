@@ -5,6 +5,19 @@ tags: [AI]
 
 # AI
 
-- [LLM](./llm/llm.md) - Large Language Models
+## Foundations
+
+- [Math](./math/math.md) - Mathematical foundations: linear algebra, analysis, statistics, quantum mechanics
 - [Python](./python/python.md) - Python for AI
-- [Theory](./theory/theory.md) - Mathematical foundations and neural architectures
+
+## Machine Learning
+
+- [Machine Learning](./ml/ml.md) - ML paradigms: supervised, unsupervised, self-supervised, reinforcement learning
+
+## Deep Learning
+
+- [Deep Learning](./dl/dl.md) - Neural networks: foundations, architectures, attention mechanisms
+
+## Large Language Models
+
+- [LLM](./llm/llm.md) - Large Language Models

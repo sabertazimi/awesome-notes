@@ -5,7 +5,7 @@ tags: [AI, DeepLearning, Transformer, Attention]
 
 # Transformer
 
-[![Illustrated Transformer](./figures/transformers/transformer-architecture.webp)](https://jalammar.github.io/illustrated-transformer)
+[![Illustrated Transformer](./figures/transformer-architecture.webp)](https://jalammar.github.io/illustrated-transformer)
 
 - Self-attention only:
   comparing to Recurrent Neural Networks (RNNs),
@@ -30,7 +30,7 @@ $$
 \end{equation}
 $$
 
-[![Self-Attention Mechanism](./figures/transformers/self-attention.gif)](https://towardsdatascience.com/illustrated-self-attention-2d627e33b20a)
+[![Self-Attention Mechanism](./figures/self-attention.gif)](https://towardsdatascience.com/illustrated-self-attention-2d627e33b20a)
 
 The illustrations are divided into the following steps:
 

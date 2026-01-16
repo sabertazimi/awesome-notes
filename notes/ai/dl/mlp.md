@@ -5,7 +5,7 @@ tags: [AI, DeepLearning, NeuralNetwork, Backpropagation]
 
 # Multilayer Perceptron
 
-![Multilayer Perceptron](./figures/neural-networks/multilayer-perceptron.avif 'Multilayer Perceptron')
+![Multilayer Perceptron](./figures/multilayer-perceptron.avif 'Multilayer Perceptron')
 
 多层感知机是一种前馈神经网络 (Feedforward Neural Network)
 就像是一个模拟大脑处理信息的过程,
@@ -51,7 +51,7 @@ $$
 - Sigmoid: $\sigma(H)=\frac{1}{1+e^{-H}}$.
 - e.g. 归一化函数, 使得输出值在 0 到 1 之间, 可以使得整个网络成为概率模型.
 
-![Activation Function](./figures/neural-networks/activation-function.png 'Activation Function')
+![Activation Function](./figures/activation-function.png 'Activation Function')
 
 ## Loss Function
 
@@ -71,7 +71,7 @@ $$
 $|\mathcal{H}|$ is the size of hypothesis space,
 larger $|\mathcal{H}|$ means deeper model:
 
-![Why Deep Learning?](./figures/neural-networks/deep-learning.png 'Why Deep Learning?')
+![Why Deep Learning?](./figures/deep-learning.png 'Why Deep Learning?')
 
 Deep model need less neurons (parameters) to represent same function,
 means deep model has smaller $|\mathcal{H}|$,
@@ -122,7 +122,7 @@ $$
 \end{split}
 $$
 
-![Gradient Descent](./figures/neural-networks/gradient-descent.png 'Gradient Descent')
+![Gradient Descent](./figures/gradient-descent.png 'Gradient Descent')
 
 ```python
 def convex_function(x):
@@ -227,7 +227,7 @@ $$
 [反向传播算法](https://www.3blue1brown.com/lessons/backpropagation-calculus):
 从最小化损失函数出发, 由输出层到输入层, 通过链式法则, 计算每一层的梯度, 从而更新权重和偏置.
 
-![Backpropagation](./figures/neural-networks/backpropagation.png 'Backpropagation')
+![Backpropagation](./figures/backpropagation.png 'Backpropagation')
 
 Derivative chain rule (链式法则):
 
@@ -293,7 +293,7 @@ Utilize parallel computing (GPU) to speed up training process:
 | Optimization       | Better | Worse  |
 | Generalization     | Better | Worse  |
 
-![Mini-Batch](./figures/neural-networks/mini-batch.png 'Mini-Batch')
+![Mini-Batch](./figures/mini-batch.png 'Mini-Batch')
 
 :::
 
