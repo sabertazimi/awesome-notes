@@ -594,6 +594,11 @@ When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688
 - [VibeKanban](http://github.com/BloopAI/vibe-kanban):
   Run coding agents in parallel without conflicts, and perform code review.
 
+### Web
+
+- [Puck](https://github.com/puckeditor/puck):
+  Agentic visual editor for React.
+
 ### Documentation
 
 - [DeepWiki](https://github.com/AsyncFuncAI/deepwiki-open).
