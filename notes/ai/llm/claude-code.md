@@ -82,6 +82,29 @@ Create a new POST $ARGUMENTS endpoint with:
 
 ## Skills
 
+```md
+<skills_instructions>
+When users ask you to perform tasks, check if any of the available skills below can help complete the task more effectively.
+
+How to use skills:
+- Invoke skills using this tool with the skill name only (no arguments)
+- When you invoke a skill, you will see <command-message>The "{name}" skill is loading</command-message>
+- The skill's prompt will expand and provide detailed instructions
+
+Important:
+- Only use skills listed in <available_skills> below
+- Do not invoke a skill that is already running
+</skills_instructions>
+
+<available_skills>
+<skill>
+<name>xlsx</name>
+<description>Comprehensive spreadsheet creation, editing, and analysis with support for formulas, formatting, data analysis...</description>
+<location>plugin</location>
+</skill>
+</available_skills>
+```
+
 ```mermaid
 ---
 config:
