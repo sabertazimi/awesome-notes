@@ -148,7 +148,7 @@ If `containing block` `height` is `auto`, it calculated to `0`.
 
 ## Anchor
 
-Anchor [positioning](https://webkit.org/blog/17240/a-gentle-introduction-to-anchor-positioning):
+[Anchor positioning](https://chrome.dev/anchor-tool):
 
 ```css
 .profile-button {
@@ -180,4 +180,5 @@ Anchor [positioning](https://webkit.org/blog/17240/a-gentle-introduction-to-anch
 
 ## References
 
-- `position` property impact on [`display` items](https://dev.to/melnik909/css-isnt-magic-all-tips-about-the-position-property-to-avoid-common-mistakes-398m).
+- Anchor positioning [guide](https://web.dev/learn/css/anchor-positioning).
+- Anchor positioning [introduction](http://webkit.org/blog/17240/a-gentle-introduction-to-anchor-positioning).
