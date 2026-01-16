@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 tags: [AI, DeepLearning, CNN, Convolution]
 ---
 
