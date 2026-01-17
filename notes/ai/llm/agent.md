@@ -321,6 +321,14 @@ List both fixed attributes (always needed) and inferred attributes (derived from
 
 :::
 
+### AGENTS.md
+
+一个好的项目配置文件应该回答三个问题：
+
+- WHAT: 技术栈、项目结构、各模块的职责.
+- WHY: 项目的目的、设计决策的背景, 特别是反模式代码 (历史债务).
+- HOW: 运行、测试、验证的基本命令与流程.
+
 ## Workflow
 
 ### Plan Mode
