@@ -164,31 +164,12 @@
   color: var(--ifm-color-content-secondary);
 }
 
-.subSection {
-  margin-bottom: 3rem;
-}
-
 .subSectionTitle {
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
   font-size: 1.5rem;
   font-weight: var(--ifm-font-weight-semibold);
   color: var(--ifm-color-content);
-  border-bottom: 2px solid var(--ifm-color-emphasis-200);
-}
-
-.subSubSection {
-  margin-bottom: 2rem;
-  margin-left: 1rem;
-}
-
-.subSubSectionTitle {
-  padding-bottom: 0.25rem;
-  margin-bottom: 0.75rem;
-  font-size: 1.25rem;
-  font-weight: var(--ifm-font-weight-semibold);
-  color: var(--ifm-color-content);
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
 }
 
 .emptyState {
