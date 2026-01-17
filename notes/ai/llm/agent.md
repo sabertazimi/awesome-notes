@@ -632,10 +632,15 @@ When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688
 - [VibeKanban](http://github.com/BloopAI/vibe-kanban):
   Run coding agents in parallel without conflicts, and perform code review.
 
-### Web
+### Frontend
 
 - [Puck](https://github.com/puckeditor/puck):
   Agentic visual editor for React.
+
+### API
+
+- [FireCrawl](https://github.com/firecrawl/firecrawl):
+  Turn entire websites into LLM-ready markdown or structured data.
 
 ### Documentation
 
