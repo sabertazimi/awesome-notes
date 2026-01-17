@@ -253,34 +253,10 @@ AI agents powered by tricky LLMs prompting:
 
 ## Context
 
-### Dynamic Discovery
+注意力计算复杂度是 $O(n^2)$, 且是稀疏的 (模型不会均匀地关注所有输入):
 
-Dynamic context [discovery](https://cursor.com/cn/blog/dynamic-context-discovery):
-
-- 工具响应 -> 文件.
-- 终端会话 -> 文件.
-- 上下文压缩时引用对话历史.
-- 按需加载.
-- 渐进式披露.
-
-### Personalization
-
-Metaprompting for [memory extraction](https://cookbook.openai.com/examples/agents_sdk/context_personalization#2-shape-of-a-memory):
-
-```md
-You are a [USE CASE] agent whose goal is [GOAL].
-What information would be important to keep in working memory during a single session?
-List both fixed attributes (always needed) and inferred attributes (derived from user behavior or context).
-```
-
-:::tip[Memory System]
-
-[Memory system](https://cookbook.openai.com/examples/agents_sdk/context_personalization#memory-guardrails):
-
-- Repeatable memory loop: inject → reason → distill → consolidate.
-- Enforce precedence: current user message > session context > memory.
-
-:::
+- 上下文窗口受硬件边界限制.
+- 有效上下文小于标称上下文.
 
 ### Context Engineering
 
@@ -309,6 +285,35 @@ Start of context: [Original goal - far away, forgotten]
 ...many tool calls...
 End of context: [Recently read task_plan.md - gets ATTENTION!]
 ```
+
+:::
+
+### Dynamic Discovery
+
+Dynamic context [discovery](https://cursor.com/cn/blog/dynamic-context-discovery):
+
+- 工具响应 -> 文件.
+- 终端会话 -> 文件.
+- 上下文压缩时引用对话历史.
+- 按需加载.
+- 渐进式披露.
+
+### Personalization
+
+Metaprompting for [memory extraction](https://cookbook.openai.com/examples/agents_sdk/context_personalization#2-shape-of-a-memory):
+
+```md
+You are a [USE CASE] agent whose goal is [GOAL].
+What information would be important to keep in working memory during a single session?
+List both fixed attributes (always needed) and inferred attributes (derived from user behavior or context).
+```
+
+:::tip[Memory System]
+
+[Memory system](https://cookbook.openai.com/examples/agents_sdk/context_personalization#memory-guardrails):
+
+- Repeatable memory loop: inject → reason → distill → consolidate.
+- Enforce precedence: current user message > session context > memory.
 
 :::
 
