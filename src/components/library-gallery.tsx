@@ -173,7 +173,7 @@ export default function LibraryGallery({ content }: Props): React.JSX.Element {
     <div className={styles.container}>
       {/* Category 选择下拉菜单 */}
       <div className={styles.categorySelector}>
-        <label htmlFor="section-dropdown">选择分类：</label>
+        <label htmlFor="category-dropdown">选择分类：</label>
         <div ref={dropdownRef} className={`${styles.dropdown} ${isDropdownOpen ? styles.dropdownOpen : ''}`}>
           <div
             className={styles.dropdownButton}
@@ -188,13 +188,13 @@ export default function LibraryGallery({ content }: Props): React.JSX.Element {
             role="button"
             aria-expanded={isDropdownOpen}
             aria-haspopup="listbox"
-            id="section-dropdown"
+            id="category-dropdown"
           >
             <span>{selectedCategory?.name ?? '请选择分类'}</span>
             <div className={styles.dropdownArrow} />
           </div>
 
-          <ul className={styles.dropdownMenu} role="listbox" aria-labelledby="section-dropdown">
+          <ul className={styles.dropdownMenu} role="listbox" aria-labelledby="category-dropdown">
             {categories.map((category: Category, index: number) => (
               <li
                 key={category.name}
