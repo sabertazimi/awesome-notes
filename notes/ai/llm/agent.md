@@ -379,6 +379,17 @@ Cursor [debug mode](https://cursor.com/blog/agent-best-practices#bug-debug-mode)
    告诉它持续迭代, 直到所有测试通过.
 5. Submit code.
 
+### Compound
+
+[Compound engineering](https://every.to/chain-of-thought/compound-engineering-how-every-codes-with-agents)
+(复利工程), 每个 PR 都在教育系统, 每个 bug 都成为永久的教训, 每次代码审查都在更新 agent 的默认行为:
+
+- 将经验沉淀到项目文档.
+- 让 bug 修复产生长期价值.
+- 从代码审查中提取模式.
+- 建立可复用的工作流程: slash commands, hooks, guardrails, and skills.
+- Linter rules, regression tests, `AGENTS.md` improvements, checklist updates.
+
 ## Orchestration
 
 单智能体系统 (Single-agent systems):
