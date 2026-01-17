@@ -321,16 +321,16 @@ List both fixed attributes (always needed) and inferred attributes (derived from
 
 :::
 
+## Workflow
+
 ### AGENTS.md
 
-项目配置文件：
+项目配置文件应回答[三个问题](https://mp.weixin.qq.com/s/a5UDlkD6Db2kKCAj7LN6gQ):
 
 - WHAT: 技术栈、项目结构、各模块的职责.
 - WHY: 项目的目的、设计决策的背景, 特别是反模式代码 (历史债务).
 - HOW: 运行、测试、验证的基本命令与流程.
 - 渐进式披露: 文件本身 300 行以内，越短越好, 剩余内容列出文档与简要描述.
-
-## Workflow
 
 ### Plan Mode
 
@@ -650,8 +650,8 @@ When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688
 
 ## References
 
-- Vibe coding [prompts](https://docs.google.com/spreadsheets/d/1ngoQOhJqdguwNAilCl1joNwTje7FWWN9WiI2bo5VhpU).
-- Vibe coding [guide](https://github.com/tukuaiai/vibe-coding-cn).
-- Agent system [prompts](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools).
 - [CodeAI](https://github.com/sourcegraph/awesome-code-ai):
   Curated list of AI coding tools.
+- Agent system [prompts](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools).
+- Vibe coding [guide](https://github.com/tukuaiai/vibe-coding-cn).
+- First-principles agentic coding [guide](https://mp.weixin.qq.com/s/a5UDlkD6Db2kKCAj7LN6gQ).

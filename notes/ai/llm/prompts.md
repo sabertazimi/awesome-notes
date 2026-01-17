@@ -749,8 +749,8 @@ Midjourney [cookbook](https://fka.gumroad.com/l/the-art-of-midjourney-ai-guide-t
 
 ## References
 
+- Gemini prompts [cookbook](https://services.google.com/fh/files/misc/gemini-for-google-workspace-prompting-guide-101.pdf).
 - Awesome ChatGPT [prompts](https://github.com/f/awesome-chatgpt-prompts).
 - ChatGPT [prompts](https://github.com/rockbenben/ChatGPT-Shortcut).
 - Programming and development [prompts](https://prompts.chat/book/19-programming-development).
-- Gemini prompts [cookbook](https://services.google.com/fh/files/misc/gemini-for-google-workspace-prompting-guide-101.pdf).
 - Vibe coding [prompts](https://docs.google.com/spreadsheets/d/1ngoQOhJqdguwNAilCl1joNwTje7FWWN9WiI2bo5VhpU).
