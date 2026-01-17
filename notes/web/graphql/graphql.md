@@ -8,8 +8,8 @@ tags: [Web, GraphQL]
 
 Comparing to RESTful API, GraphQL has several advantages:
 
-- No overfetching.
-- No underfetching: need multiple RESTful request.
+- No over-fetching.
+- No under-fetching: need multiple RESTful request.
 - Flexible: clients can specify their exact data requirements.
 - Strong `Schema` and `Type System`.
 
@@ -19,11 +19,11 @@ GraphQL [solves](https://mxstbr.com/thoughts/graphql):
   GraphQL only returns the fields the client explicitly requests,
   so new capabilities can be added by adding new types or fields,
   which is never a breaking change for existing clients.
-- Slow loading times because of request waterfalls and/or overfetching:
+- Slow loading times because of request waterfalls and/or over-fetching:
   With GraphQL, a client sends one request for all the data it needs,
   and the server resolves all of it and sends it back in one response.
 - Difficult maintenance and endpoint discovery
-  due to hundreds of duplicative one-off endpoints:
+  due to hundreds of duplicated one-off endpoints:
   GraphQL centralizes the data access of each entity/resource.
 - Security and performance are a game of whack-a-mole:
   GraphQL is the central data access layer for clients,

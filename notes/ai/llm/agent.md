@@ -159,7 +159,7 @@ Role -> Tool -> Context -> Example -> Boundary
    - 约束: Stating explicit guardrails, e.g. `don't change API shape`, `keep this behavior`, `no new deps`
 4. Verification and code review:
    - 正确性 (correctness): edge cases, race conditions, error handling
-   - 性能 (performance): `N+1` queries, unnecessary re-renders, overfetching
+   - 性能 (performance): `N+1` queries, unnecessary re-renders, over-fetching
    - 安全性 (security): auth boundaries, injection, secrets, SSRF
    - 测试 (tests): coverage for changed behaviors
 5. Integrate and ship:
@@ -304,7 +304,7 @@ Dynamic context [discovery](https://cursor.com/cn/blog/dynamic-context-discovery
 
 ### Personalization
 
-Metaprompting for [memory extraction](https://cookbook.openai.com/examples/agents_sdk/context_personalization#2-shape-of-a-memory):
+Meta-prompting for [memory extraction](https://cookbook.openai.com/examples/agents_sdk/context_personalization#2-shape-of-a-memory):
 
 ```md
 You are a [USE CASE] agent whose goal is [GOAL].
