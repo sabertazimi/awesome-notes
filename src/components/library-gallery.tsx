@@ -121,17 +121,17 @@ export default function LibraryGallery({ content }: Props): React.JSX.Element {
     }
 
     const hasItems = category.items.length > 0
-    const hasSections = category.subSections.length > 0
+    const hasSections = category.sections.length > 0
 
     return (
-      <div className={styles.sectionContent}>
+      <div className={styles.categoryContent}>
         {/* 渲染 category 级别的 items */}
         {hasItems && renderItemsGrid(category.items)}
 
         {/* 渲染 sections */}
         {hasSections && (
           <>
-            {category.subSections.map((section: Section) => (
+            {category.sections.map((section: Section) => (
               <div key={section.name}>
                 <h2 className={styles.sectionTitle}>{section.name}</h2>
                 {renderItemsGrid(section.items)}
@@ -171,8 +171,8 @@ export default function LibraryGallery({ content }: Props): React.JSX.Element {
 
   return (
     <div className={styles.container}>
-      {/* Section 选择下拉菜单 */}
-      <div className={styles.sectionSelector}>
+      {/* Category 选择下拉菜单 */}
+      <div className={styles.categorySelector}>
         <label htmlFor="section-dropdown">选择分类：</label>
         <div ref={dropdownRef} className={`${styles.dropdown} ${isDropdownOpen ? styles.dropdownOpen : ''}`}>
           <div

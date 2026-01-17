@@ -6,11 +6,11 @@
   margin: 0 auto;
 }
 
-.sectionSelector {
+.categorySelector {
   margin-bottom: 2rem;
 }
 
-.sectionSelector label {
+.categorySelector label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: var(--ifm-font-weight-semibold);
@@ -114,7 +114,7 @@
   background-color: var(--ifm-menu-color-background-active);
 }
 
-.sectionContent {
+.categoryContent {
   margin-top: 2rem;
 }
 

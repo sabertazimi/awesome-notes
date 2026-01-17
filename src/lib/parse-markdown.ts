@@ -18,7 +18,7 @@ export interface Section {
 export interface Category {
   name: string
   items: Item[]
-  subSections: Section[]
+  sections: Section[]
 }
 
 function parseItems(items?: string[]) {
@@ -57,13 +57,13 @@ export function parseMarkdown(content: string): Category[] {
         return {
           name: categoryName.trim(),
           items: categoryItems,
-          subSections: [],
+          sections: [],
         }
       } else {
         return {
           name: categoryName.trim(),
           items: categoryItems,
-          subSections: sections.map((rawSection) => {
+          sections: sections.map((rawSection) => {
             const [section, ...subSections] = rawSection.split(/\n#### /).filter(Boolean)
             const [sectionName, ...subItems] = section.split(/\n/).filter(Boolean)
             const sectionItems = parseItems(subItems)
