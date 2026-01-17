@@ -349,6 +349,9 @@ Cursor [debug mode](https://cursor.com/blog/agent-best-practices#bug-debug-mode)
 
 ### TDD
 
+模型通过强化学习, 利用 `尝试 -> 反馈 -> 调整` 循环, 实现 agentic 能力.
+提供清晰的成功标准, 允许试错的使用方式, 与智能体训练过程相契合.
+
 [Test-driven development](https://cursor.com/cn/blog/agent-best-practices):
 
 1. Write tests:
