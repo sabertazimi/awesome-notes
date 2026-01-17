@@ -256,7 +256,8 @@ AI agents powered by tricky LLMs prompting:
 注意力计算复杂度是 $O(n^2)$, 且是稀疏的 (模型不会均匀地关注所有输入):
 
 - 上下文窗口受硬件边界限制.
-- 有效上下文小于标称上下文.
+- 有效上下文小于标称上下文: coding agent 只能有效利用其中的 10-15 $\%$.
+- `Lost in the middle`: 中间内容容易被忽略, 更关注开头和结尾.
 
 ### Context Engineering
 
@@ -274,7 +275,10 @@ e.g. custom gemini CLI [command](./recipes/prompts/url2md.md).
 
 [Manus](https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus):
 
-1. Design around **KV-cache**
+1. Design around **KV-cache**:
+   - 稳定内容放前面: system prompt, tool definitions.
+   - 动态内容放后面: chat history, user input.
+   - 避免在稳定前缀中插入可变内容: e.g. 禁止在 system prompt 中插入时间戳.
 2. **Plan** is required
 3. **Files** are memory
 4. Don't get few-shotted: get rid of repetitive actions
