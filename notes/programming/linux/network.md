@@ -44,6 +44,8 @@ for SSL certificates.
   Tag 机场.
 - [Flower](https://github.com/winston779/flowercloud):
   花云机场.
+- [Sublink](https://github.com/7Sageer/sublink-worker):
+  下一代订阅管理中心.
 
 ### VPN
 
