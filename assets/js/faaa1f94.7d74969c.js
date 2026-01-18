@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkawesome_notes=self.webpackChunkawesome_notes||[]).push([[15916],{20285:e=>{e.exports=JSON.parse('{"tag":{"label":"IP","permalink":"/awesome-notes/tags/ip","allTagsPath":"/awesome-notes/tags","count":1,"items":[{"id":"web/network/ip","title":"IP","description":"Protocol","permalink":"/awesome-notes/web/network/ip"}],"unlisted":false}}')}}]);

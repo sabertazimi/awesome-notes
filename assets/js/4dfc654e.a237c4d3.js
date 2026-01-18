@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkawesome_notes=self.webpackChunkawesome_notes||[]).push([[4540],{77765:e=>{e.exports=JSON.parse('{"tag":{"label":"BOM","permalink":"/awesome-notes/tags/bom","allTagsPath":"/awesome-notes/tags","count":1,"items":[{"id":"web/javascript/bom","title":"BOM","description":"Window","permalink":"/awesome-notes/web/javascript/bom"}],"unlisted":false}}')}}]);

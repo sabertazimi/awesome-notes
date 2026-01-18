@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkawesome_notes=self.webpackChunkawesome_notes||[]).push([[93350],{13421:e=>{e.exports=JSON.parse('{"tag":{"label":"Plot","permalink":"/awesome-notes/tags/plot","allTagsPath":"/awesome-notes/tags","count":1,"items":[{"id":"ai/python/plot","title":"Plot","description":"Types","permalink":"/awesome-notes/ai/python/plot"}],"unlisted":false}}')}}]);

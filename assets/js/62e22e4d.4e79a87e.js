@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkawesome_notes=self.webpackChunkawesome_notes||[]).push([[6565],{41957:s=>{s.exports=JSON.parse('{"tag":{"label":"Mask","permalink":"/awesome-notes/tags/mask","allTagsPath":"/awesome-notes/tags","count":1,"items":[{"id":"web/css/mask","title":"Mask","description":"mask:","permalink":"/awesome-notes/web/css/mask"}],"unlisted":false}}')}}]);

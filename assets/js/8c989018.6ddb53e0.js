@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkawesome_notes=self.webpackChunkawesome_notes||[]).push([[58231],{26391:e=>{e.exports=JSON.parse('{"tag":{"label":"SEO","permalink":"/awesome-notes/tags/seo","allTagsPath":"/awesome-notes/tags","count":1,"items":[{"id":"web/devops/seo","title":"SEO","description":"Metadata","permalink":"/awesome-notes/web/devops/seo"}],"unlisted":false}}')}}]);

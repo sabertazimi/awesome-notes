@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkawesome_notes=self.webpackChunkawesome_notes||[]).push([[95010],{80198:e=>{e.exports=JSON.parse('{"tag":{"label":"NPM","permalink":"/awesome-notes/tags/npm","allTagsPath":"/awesome-notes/tags","count":1,"items":[{"id":"web/node/npm","title":"NPM","description":"Mirrors","permalink":"/awesome-notes/web/node/npm"}],"unlisted":false}}')}}]);

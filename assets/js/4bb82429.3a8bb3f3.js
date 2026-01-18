@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkawesome_notes=self.webpackChunkawesome_notes||[]).push([[24278],{12136:e=>{e.exports=JSON.parse('{"tag":{"label":"Blend","permalink":"/awesome-notes/tags/blend","allTagsPath":"/awesome-notes/tags","count":1,"items":[{"id":"web/css/filter","title":"Filter","description":"filter:","permalink":"/awesome-notes/web/css/filter"}],"unlisted":false}}')}}]);

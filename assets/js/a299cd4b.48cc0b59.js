@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkawesome_notes=self.webpackChunkawesome_notes||[]).push([[36371],{92781:e=>{e.exports=JSON.parse('{"tag":{"label":"Tree","permalink":"/awesome-notes/tags/tree","allTagsPath":"/awesome-notes/tags","count":1,"items":[{"id":"cs/algorithms/tree","title":"Tree","description":"BST","permalink":"/awesome-notes/cs/algorithms/tree"}],"unlisted":false}}')}}]);

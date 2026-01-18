@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkawesome_notes=self.webpackChunkawesome_notes||[]).push([[94487],{26832:e=>{e.exports=JSON.parse('{"tag":{"label":"URL","permalink":"/awesome-notes/tags/url","allTagsPath":"/awesome-notes/tags","count":1,"items":[{"id":"web/node/network","title":"Network","description":"Fetch","permalink":"/awesome-notes/web/node/network"}],"unlisted":false}}')}}]);
