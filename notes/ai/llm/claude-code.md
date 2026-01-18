@@ -364,6 +364,8 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
   Curated list of Claude Code skills.
 - [Marketplace](https://skillsmp.com):
   Agent skills marketplace.
+- [Directory](https://agnxi.com):
+  Agent skills directory.
 - [Plugins](https://github.com/anthropics/claude-plugins-official):
   Anthropic-managed directory of high quality Claude Code plugins.
 - [Registry](https://github.com/Kamalnrf/claude-plugins):
