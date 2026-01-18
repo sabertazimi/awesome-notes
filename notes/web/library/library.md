@@ -1717,6 +1717,8 @@ import LibraryGallery from '@site/src/components/library-gallery'
   React for interactive command-line apps.
 - [Oclif](https://github.com/oclif/oclif):
   Open CLI framework.
+- [OpenTUI](https://github.com/anomalyco/opentui):
+  Terminal user interface framework for OpenCode.
 - [Execa](https://github.com/sindresorhus/execa):
   Process execution for humans.
 - [ZX](https://github.com/google/zx):
