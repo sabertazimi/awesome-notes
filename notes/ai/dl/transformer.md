@@ -404,3 +404,5 @@ $$
 
 [Prompt caching](https://ngrok.com/blog/prompt-caching)
 缓存的不是文本是`思维状态`, 本质是复用 KV 矩阵.
+
+[![KV Caching](./figures/kv-caching.gif)](https://medium.com/@joaolages/kv-caching-explained-276520203249)
