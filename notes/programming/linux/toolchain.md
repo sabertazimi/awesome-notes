@@ -114,7 +114,7 @@ winget install ClashVergeRev.ClashVergeRev Mihomo-Party.Mihomo-Party Google.Chro
 ```
 
 ```bash
-winget install ByteDance.Feishu NetEase.CloudMusic NetEase.MailMaster Tencent.QQ.NT Tencent.WeChat Tencent.WeType Valve.Steam
+winget install ByteDance.Feishu NetEase.CloudMusic Tencent.QQ.NT Tencent.WeChat Tencent.WeType Valve.Steam
 ```
 
 :::
