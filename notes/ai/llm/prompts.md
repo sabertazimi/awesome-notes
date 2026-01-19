@@ -385,6 +385,30 @@ Provide:
 5. Estimate improvement
 ```
 
+### Bug
+
+```md
+Task: Fix abandoned cart bug in checkout page.
+
+Context:
+- File: `app/checkout/page.tsx`
+- Error: Cart resets on page refresh
+- Expected: Cart persists via localStorage
+- Test: Run `pnpm test checkout.test.tsx` to verify
+
+Plan required before implementation:
+1. Identify where cart state is managed
+2. Add `localStorage` persistence
+3. Add hydration logic
+4. Update tests
+5. Verify in Playwright
+
+Constraints:
+- Only modify `app/checkout/*` and `lib/cart.ts`
+- Maintain existing TypeScript types
+- Follow our ESLint rules
+```
+
 ## Testing
 
 ### Unit
