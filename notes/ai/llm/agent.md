@@ -271,6 +271,8 @@ LLM 并未统一利用其上下文,
 优化相关信息的数量并最小化不相关上下文以实现可靠的性能.
 e.g. custom gemini CLI [command](./recipes/prompts/url2md.md).
 
+[![Context Engineering](./figures/context-engineering.jpg)](https://addyo.substack.com/p/how-good-is-ai-at-coding-react-really)
+
 :::tip[Planning with Files]
 
 [Manus](https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus):
