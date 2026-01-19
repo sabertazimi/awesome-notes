@@ -205,6 +205,8 @@ Keep track of your current status in browser-use-ts/agent/TODO.md
 
 ### Scaffold
 
+Website generation [checklist](https://addyo.substack.com/p/how-good-is-ai-at-coding-react-really):
+
 ```md
 Create a Next.js App Router landing page (app/page.tsx) for a developer tools SaaS:
 
@@ -223,6 +225,33 @@ Accessibility:
 - Semantic HTML (header, main, section)
 - Alt text for all images
 - Sufficient color contrast (WCAG AA)
+```
+
+### Component
+
+React [component](https://addyo.substack.com/p/how-good-is-ai-at-coding-react-really):
+
+```md
+Create a sign-up Button component with:
+
+Props:
+- variant: 'primary' | 'secondary' | 'ghost'
+- size: 'sm' | 'md' | 'lg'
+- disabled: boolean
+- loading: boolean
+
+Requirements:
+- Use Tailwind classes
+- Show loading spinner when loading=true
+- Disable pointer events when disabled
+- Support keyboard navigation (Enter/Space)
+- Include focus-visible ring
+- ARIA: use aria-disabled, aria-busy
+
+Example usage:
+<Button variant="primary" size="md" loading={isSubmitting}>
+  Submit
+</Button>
 ```
 
 ## Backend
