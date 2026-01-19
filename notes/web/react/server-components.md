@@ -256,6 +256,21 @@ export default function Page() {
 - Wrap them into a wrapper component using `'use client'`.
 - Library authors [add `'use client'` to components](https://github.com/ant-design/antd-tools/blob/050a91cfeaba87c2892bf19d721665a3770ebde0/lib/gulpfile.js#L197-L213).
 
+## Server Actions
+
+Server actions are [wrapper around `POST` requests](https://www.developerway.com/posts/server-actions-for-data-fetching),
+meant for mutations, e.g. form submissions, database writes, state changes.
+
+:::caution
+
+Server actions are not designed for data fetching:
+
+- Frameworks implementing server functions typically process one action at a time.
+- No caching via HTTP headers.
+- No request memoization.
+
+:::
+
 ## References
 
 - React Server Components in [Next.js](https://vercel.com/blog/understanding-react-server-components).
