@@ -35,7 +35,7 @@ function useInterval(onTick: () => void, delay: number | null) {
 export default useInterval
 ```
 
-[`useEffectEvent`](https://react.dev/reference/react/useEffectEvent)
+[`useEffectEvent`](https://peterkellner.net/2026/01/09/understanding-react-useeffectevent-vs-useeffect)
 to read latest props and state:
 
 ```ts
@@ -56,6 +56,14 @@ Bad dependency arrays that depend on wrong state
 can cause stale closure issues, invalid resets, or even infinite loops.
 
 :::
+
+When to [`useEffectEvent`](https://peterkellner.net/2026/01/09/understanding-react-useeffectevent-vs-useeffect):
+
+- Passed to subscription, timer, or external library.
+- Needs to read latest props/state.
+- Values shouldn't trigger `Effect` to re-run.
+
+[![`useEffectEvent` internals](./figures/useeffectevent-internals.svg)](https://peterkellner.net/2026/01/09/understanding-react-useeffectevent-vs-useeffect)
 
 ## Debounce
 
