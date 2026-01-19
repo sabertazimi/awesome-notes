@@ -195,3 +195,5 @@ CMD ["uv", "run", "my_app"]
 
 - [PySnooper](https://github.com/cool-RR/PySnooper):
   Poor man's debugger.
+- [Extract](https://github.com/google/langextract):
+  Extracting structured information from unstructured text using LLMs.
