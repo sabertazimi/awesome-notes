@@ -203,6 +203,28 @@ Keep track of your current status in browser-use-ts/agent/TODO.md
 4、由于页面较多，你每完成一部分就让我来确认，一直持续到结束。
 ```
 
+### Scaffold
+
+```md
+Create a Next.js App Router landing page (app/page.tsx) for a developer tools SaaS:
+
+Layout sections:
+1. Hero with headline, CTA
+2. Features (3 columns, icon + title + description each)
+3. Social proof (logos grid)
+4. CTA
+
+Stack: Next.js 16, TypeScript, Tailwind, shadcn/ui
+Density: Spacious landing page (not cramped)
+Colors: Avoid purple/pink gradients - use neutral gray with blue accent
+Responsive: Stack features vertically below 768px
+
+Accessibility:
+- Semantic HTML (header, main, section)
+- Alt text for all images
+- Sufficient color contrast (WCAG AA)
+```
+
 ## Backend
 
 ### Integration
