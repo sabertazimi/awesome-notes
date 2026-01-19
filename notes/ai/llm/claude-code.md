@@ -279,7 +279,7 @@ it will extend Claude Code through the plugin system with:
 Claude code [best practices](https://www.anthropic.com/engineering/claude-code-best-practices):
 
 - Plan mode: 对于复杂的任务, 使用 plan mode 先进行规划, 会比直接执行更高效.
-- Extended thinking mode: "think" -> "think hard" -> "think harder" -> "ultrathink".
+- Extended thinking mode: [`MAX_THINKING_TOKENS`](https://decodeclaude.com/ultrathink-deprecated).
 - Claude code has [built-in toolkit](https://code.claude.com/docs/en/settings#tools-available-to-claude),
   follow [certain paradigm](https://www.vtrivedy.com/posts/claudecode-tools-reference) to use them.
 - Avoid `/compact`: dump plan and progress + `/clear` the state + restart from dump file.
