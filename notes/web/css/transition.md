@@ -151,6 +151,90 @@ setTimeout(() => {
 }, 20)
 ```
 
+## `@starting-style`
+
+[`@starting-style`](https://www.joshwcomeau.com/css/starting-style)
+for defining starting styles of elements:
+
+```css
+/* Staggered fade-in */
+li {
+  transition: opacity 0.3s ease;
+  transition-delay: calc((sibling-index() - 1) * 100ms);
+
+  @starting-style {
+    opacity: 0;
+  }
+}
+```
+
+:::tip[Enter Animations]
+
+Previously, enter animations required CSS keyframes.
+With `@starting-style`, elements transition from starting styles to computed styles upon creation.
+
+:::
+
+### Specificity
+
+**Unlike keyframe animations**, `@starting-style` declarations are **not promoted** to high-priority layer.
+Standard specificity rules apply, which can cause enter animation to fail:
+
+```css
+/* This won't work - #title overrides h1's starting-style */
+h1 {
+  transition: opacity 500ms;
+
+  @starting-style {
+    opacity: 0;
+  }
+}
+
+#title {
+  opacity: 1; /* More specific, so no transition occurs */
+}
+```
+
+Similarly, inline styles (set via JavaScript) have higher specificity than class-based starting styles:
+
+```css
+.particle {
+  transition: transform 500ms;
+
+  @starting-style {
+    transform: translate(0, 0); /* Won't apply! */
+  }
+}
+
+/* particle.style.transform = 'translate(42px, -55px)'; wins */
+```
+
+Use **custom properties** to avoid specificity conflicts elegantly:
+
+```css
+.particle {
+  transform: translate(var(--x), var(--y));
+  transition: transform 500ms;
+
+  @starting-style {
+    transform: translate(0, 0);
+  }
+}
+```
+
+```js
+particle.style.setProperty('--x', '42px')
+particle.style.setProperty('--y', '-55px')
+```
+
+:::tip[Interrupt Handling]
+
+`@starting-style` handles animation interrupts better than keyframes.
+When user quickly opens/closes a dialog, it gracefully fades from interrupted state,
+while keyframes may cause flickering.
+
+:::
+
 ## APIs
 
 CSS view transitions [API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API):
