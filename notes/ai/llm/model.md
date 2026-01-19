@@ -85,6 +85,18 @@ Generative videos as world models simulator.
 
 - GRPO [tricks](https://cameronrwolfe.substack.com/p/grpo-tricks).
 
+## Reasoning
+
+Test-time compute (inference-time compute):
+prompting models to generate intermediate [reasoning steps](https://arxiv.org/abs/2201.11903)
+dramatically improved performance on hard problems.
+
+:::tip
+
+Thinking tokens are model's only persistent memory during reasoning.
+
+:::
+
 ## Toolchain
 
 ### LangChain
