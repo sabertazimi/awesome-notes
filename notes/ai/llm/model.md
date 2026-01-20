@@ -78,6 +78,10 @@ Generative videos as world models simulator.
 
 [![Embedding Models](./figures/embedding-models.png)](https://kaggle.com/whitepaper-embeddings-and-vector-stores)
 
+For recommendation systems,
+maps two sets of data (user dataset, item/product/etc dataset)
+into the same embedding space.
+
 ## Group Relative Policy Optimization
 
 - GRPO [tricks](https://cameronrwolfe.substack.com/p/grpo-tricks).
