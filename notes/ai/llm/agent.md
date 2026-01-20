@@ -708,8 +708,9 @@ When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688
 
 ## References
 
-- [CodeAI](https://github.com/sourcegraph/awesome-code-ai):
-  Curated list of AI coding tools.
+- Agents [whitepaper](https://www.kaggle.com/whitepaper-agents).
+- Agents companion [whitepaper](https://www.kaggle.com/whitepaper-agent-companion).
 - Agent system [prompts](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools).
+- Coding agents [list](https://github.com/sourcegraph/awesome-code-ai).
 - Vibe coding [guide](https://github.com/tukuaiai/vibe-coding-cn).
 - First-principles agentic coding [guide](https://mp.weixin.qq.com/s/a5UDlkD6Db2kKCAj7LN6gQ).
