@@ -55,20 +55,16 @@ import LibraryGallery from '@site/src/components/library-gallery'
 
 ### Boilerplate and Templates
 
-- [StartUI](https://github.com/BearStudio/start-ui-web):
-  Next.js boilerplate.
-- [Electron](https://github.com/electron-react-boilerplate/electron-react-boilerplate):
-  React Electron boilerplate.
-- [StarterKit](https://github.com/kriasoft/react-starter-kit):
+- [Starter](https://github.com/kriasoft/react-starter-kit):
   React fullstack app boilerplate.
+- [Start](https://github.com/BearStudio/start-ui-web):
+  TanStack boilerplate.
 - [Plasmo](https://github.com/PlasmoHQ/plasmo):
   Browser extension framework.
 - [WXT](https://github.com/wxt-dev/wxt):
   Next-gen web extension framework.
 - [Extension.js](https://github.com/extension-js/extension.js):
   Plug-and-play, zero-config, cross-browser extension development.
-- [ViteSSE](https://github.com/antfu-collective/vitesse-webext):
-  Browser extension Vite starter.
 
 ## Framework and Solution
 
@@ -88,13 +84,12 @@ import LibraryGallery from '@site/src/components/library-gallery'
 
 ### Micro Frontends Solution
 
-- [QianKun](https://github.com/umijs/qiankun).
-- [Bit](https://github.com/teambit/bit).
-- [IceStark](https://github.com/ice-lab/icestark).
+- [QianKun](https://github.com/umijs/qiankun):
+  Blazing fast, simple and complete solution for micro frontends.
+- [IceStark](https://github.com/ice-lab/icestark):
+  Micro frontends solution for large application.
 - [Garfish](https://github.com/bytedance/garfish):
   ByteDance micro frontends framework.
-- [SingleSPA](https://github.com/single-spa/single-spa):
-  Router for easy micro frontends.
 
 ### Backend Solution
 
@@ -131,7 +126,8 @@ import LibraryGallery from '@site/src/components/library-gallery'
 
 ### Desktop Solution
 
-- [Electron](https://github.com/electron/electron).
+- [Electron](https://github.com/electron/forge):
+  Build and publish Electron applications.
 - [Tauri](https://github.com/tauri-apps/tauri):
   Smaller, faster and more secure Rust application.
 - [Neutralino](https://github.com/neutralinojs/neutralinojs):
@@ -1910,8 +1906,6 @@ import LibraryGallery from '@site/src/components/library-gallery'
   Comprehensive authentication framework for TypeScript.
 - [Next](https://github.com/nextauthjs/next-auth):
   Next.js authentication.
-- [Lucia](https://github.com/lucia-auth/lucia):
-  Simple and clean authentication.
 - [SuperTokens](http://github.com/supertokens/supertokens-core):
   Open source alternative to Auth0 / Firebase Auth / AWS Cognito.
 
