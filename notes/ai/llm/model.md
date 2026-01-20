@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-tags: [AI, LLM]
+tags: [AI, LLM, Embeddings, RAG]
 ---
 
 # Large Language Model
