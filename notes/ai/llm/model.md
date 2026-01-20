@@ -248,5 +248,6 @@ const result = await agent.invoke({ input: '...' })
 
 ## References
 
-- LLM survey: [大语言模型](https://github.com/LLMBook-zh/LLMBook-zh.github.io).
-- LLM survey: [efficient architectures](https://github.com/weigao266/Awesome-Efficient-Arch).
+- 大语言模型[综述](https://github.com/LLMBook-zh/LLMBook-zh.github.io).
+- Efficient LLM architectures [survey](https://github.com/weigao266/Awesome-Efficient-Arch).
+- Foundational LLM [whitepaper](https://www.kaggle.com/whitepaper-foundational-llm-and-text-generation).
