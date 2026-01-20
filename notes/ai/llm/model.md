@@ -85,13 +85,15 @@ Generative videos as world models simulator.
 
 ![Embedding Models](./figures/embedding-models.png 'Embedding Models')
 
-For recommendation systems,
-maps two sets of data (user dataset, item/product/etc dataset)
+:::tip[Recommendation Systems]
+
+Maps two sets of data (user dataset, item/product/etc dataset)
 into the same embedding space.
 
-![Vector Similarity](./figures/vector-similarity.png 'Vector Similarity')
+:::
 
-Embeddings together with vector stores providing ANN:
+Embeddings + ANN (approximate nearest neighbor) vector stores
+(ScaNN, FAISS, LSH, KD-Tree, and Ball-tree):
 
 - Retrieval augmented generation (RAG).
 - Semantic text similarity.
@@ -99,6 +101,8 @@ Embeddings together with vector stores providing ANN:
 - Clustering.
 - Recommendation systems.
 - Anomaly detection.
+
+![Vector Similarity](./figures/vector-similarity.png 'Vector Similarity')
 
 ## Group Relative Policy Optimization
 
