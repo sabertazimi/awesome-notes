@@ -11,7 +11,6 @@ Notes on Large Language Models, Prompt Engineering and Agents.
 
 - [LLM](./model.md) - Large Language Model fundamentals and concepts
 - [Prompt Engineering](./prompt-engineering.md) - Prompt design and optimization techniques
-- [RAG](./rag.md) - Retrieval Augmented Generation
 
 ## Agents
 
