@@ -426,12 +426,33 @@ The compressed text is:
 
 ## Directives
 
-- `NEVER`
 - `ALWAYS`
 - `IMPORTANT`
-- `DO NOT`
 - `MUST`
 - `ONLY`
+- `NEVER`
+- `DO NOT`
+
+:::tip[Use Instructions over Constraints]
+
+Focusing on positive instructions in prompting can be more effective than relying heavily on constraints.
+This approach aligns with how humans prefer positive instructions over lists of what not to do.
+
+DO:
+
+```md
+Generate a 1 paragraph blog post about the top 5 video game consoles.
+Only discuss the console, the company who made it, the year, and total sales.
+```
+
+DO NOT:
+
+```md
+Generate a 1 paragraph blog post about the top 5 video game consoles.
+Do not list video game names.
+```
+
+:::
 
 ## Edge Cases
 
