@@ -91,6 +91,15 @@ into the same embedding space.
 
 ![Vector Similarity](./figures/vector-similarity.png 'Vector Similarity')
 
+Embeddings together with vector stores providing ANN:
+
+- Retrieval augmented generation (RAG).
+- Semantic text similarity.
+- Few shot classification.
+- Clustering.
+- Recommendation systems.
+- Anomaly detection.
+
 ## Group Relative Policy Optimization
 
 - GRPO [tricks](https://cameronrwolfe.substack.com/p/grpo-tricks).
@@ -121,13 +130,20 @@ Thinking tokens are model's only persistent memory during reasoning.
 检索增强生成, 通常称为 RAG (Retrieval-Augmented Generation),
 是一种强大的聊天机器人的设计模式.
 其中, 检索系统实时获取与查询相关的经过验证的源 / 文档,
-并将其输入生成模型 (例如 GPT-4) 以生成响应.
+并将其输入生成模型 (例如 GPT-4) 以生成响应:
+
+- Effect: reduce hallucination.
+- Cost: avoid retraining.
 
 Context is everything when it comes to getting the most out of an AI tool.
 To improve the relevance and quality of a generative AI output,
 you need to [improve the relevance and quality of the input](https://github.blog/2024-04-04-what-is-retrieval-augmented-generation-and-what-does-it-do-for-generative-ai).
 
-> [Quality in, quality out.](https://github.blog/2024-04-04-what-is-retrieval-augmented-generation-and-what-does-it-do-for-generative-ai)
+:::tip
+
+[Quality in, quality out.](https://github.blog/2024-04-04-what-is-retrieval-augmented-generation-and-what-does-it-do-for-generative-ai)
+
+:::
 
 ![Retrieval-Augmented Generation](./figures/retrieval-augmented-generation.png 'Retrieval-Augmented Generation')
 
