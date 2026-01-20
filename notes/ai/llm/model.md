@@ -203,6 +203,15 @@ const result = await agent.invoke({ input: '...' })
 
 ## Library
 
+### Vectors and Embeddings
+
+- [OpenCLIP](https://github.com/mlfoundations/open_clip):
+  Encodes images and text into numerical vectors.
+- [Chroma](https://github.com/chroma-core/chroma):
+  AI-native embedding database.
+- [FaISS](https://github.com/facebookresearch/faiss):
+  Similarity searching and dense vectors clustering library.
+
 ### Text-to-Speech
 
 - [MiniMax](https://www.minimax.io/audio/text-to-speech):
@@ -211,6 +220,26 @@ const result = await agent.invoke({ input: '...' })
   Generative speech model for daily dialogue.
 - [ChatterBox](https://github.com/resemble-ai/chatterbox):
   SoTA open-source TTS model.
+
+### LLMs
+
+- [OLlama](https://github.com/ollama/ollama):
+  Get up and running large language models locally.
+- [OLlamaUI](https://github.com/open-webui/open-webui):
+  User-friendly web UI for LLMs.
+- [Transformers](https://github.com/xenova/transformers.js):
+  Run HuggingFace transformers directly in browser.
+- [Jan](https://github.com/janhq/jan):
+  Offline local ChatGPT.
+- [LocalLLMs](https://github.com/vince-lam/awesome-local-llms):
+  Curated list of locally running LLMs.
+
+### SDK
+
+- [LangChain](https://github.com/langchain-ai/langchainjs):
+  LLM framework.
+- [TypeChat](https://github.com/microsoft/TypeChat):
+  Makes it easy to build natural language interfaces.
 
 ### Platform
 

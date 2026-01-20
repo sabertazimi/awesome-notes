@@ -325,19 +325,17 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 
 - [Dev](http://github.com/SawyerHood/dev-browser):
   Browser automation skills.
-- [Agent](https://github.com/vercel-labs/agent-browser):
-  Browser automation CLI for AI agents.
 
 ### Integration
 
-- [Obsidian](https://github.com/kepano/obsidian-skills):
-  Create and edit Obsidian Bases (`.base`) with Obsidian Flavored Markdown.
 - [NotebookLM](https://github.com/PleasePrompto/notebooklm-skill):
   Communicate directly with Google NotebookLM notebooks.
 - [Figma](https://github.com/figma/mcp-server-guide):
   Figma official skills and MCP server.
 - [Notion](https://github.com/makenotion/claude-code-notion-plugin):
   Notion official skills, commands and MCP server.
+- [Obsidian](https://github.com/kepano/obsidian-skills):
+  Create and edit Obsidian Bases (`.base`) with Obsidian Flavored Markdown.
 
 ### Math
 

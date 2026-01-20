@@ -634,15 +634,66 @@ When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688
 - [VibeKanban](http://github.com/BloopAI/vibe-kanban):
   Run coding agents in parallel without conflicts, and perform code review.
 
+### Client
+
+- [LobeChat](https://github.com/lobehub/lobe-chat):
+  Open-source and modern design AI chat framework.
+- [ChatBox](https://github.com/chatboxai/chatbox):
+  User-friendly desktop client app for AI models.
+- [CherryStudio](https://github.com/CherryHQ/cherry-studio):
+  All-in-One desktop copilot.
+- [ChatHub](https://github.com/chathub-dev/chathub):
+  All-in-one chatbot client.
+
+### Copilot
+
+- [Everywhere](https://github.com/DearVa/Everywhere):
+  Context-aware AI assistant for desktop.
+- [Immersive](https://github.com/immersive-translate/immersive-translate):
+  Translate web pages instantly.
+- [DeepL](https://github.com/DeepLcom):
+  Free translation copilot.
+- [GrammarLy](https://github.com/grammarly):
+  Free writing and grammar checker copilot.
+
 ### Frontend
 
 - [Puck](https://github.com/puckeditor/puck):
   Agentic visual editor for React.
+- [Vercel.ai](https://github.com/vercel/ai):
+  Build AI-powered web applications.
 
-### API
+### Browser
 
+- [BrowserUse](https://github.com/browser-use/browser-use):
+  Leading open-source web agent project.
+- [Agent](https://github.com/vercel-labs/agent-browser):
+  Browser automation CLI for AI agents.
+- [Stagehand](https://github.com/browserbase/stagehand):
+  AI Browser Automation Framework.
+- [LightPanda](https://github.com/lightpanda-io/browser):
+  Headless browser designed for AI and automation.
 - [FireCrawl](https://github.com/firecrawl/firecrawl):
   Turn entire websites into LLM-ready markdown or structured data.
+- [X-Crawl](https://github.com/coder-hxl/x-crawl):
+  Flexible Node.js AI-assisted crawler library.
+
+### SDK
+
+- [n8n](https://github.com/Zie619/n8n-workflows):
+  Curated list of n8n workflows.
+- [Dify](https://github.com/langgenius/dify):
+  LLM app development platform combines AI workflow, RAG pipeline, agent capabilities.
+- [LangGraph](https://github.com/langchain-ai/langgraph):
+  Build resilient language agents as graphs.
+- [MetaGPT](https://github.com/geekan/MetaGPT):
+  Multi-agent framework to form collaborative entity for complex tasks.
+- [ChatDev](https://github.com/OpenBMB/ChatDev):
+  Communicative agents for software development.
+- [SWEAgent](https://github.com/princeton-nlp/SWE-agent):
+  Princeton GitHub issues auto-fixer.
+- [PRAgent](https://github.com/Codium-ai/pr-agent):
+  Codium AI-powered agent for automated pull request analysis, feedback and suggestions.
 
 ### Documentation
 

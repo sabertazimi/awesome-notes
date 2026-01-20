@@ -1992,106 +1992,6 @@ import LibraryGallery from '@site/src/components/library-gallery'
 - [ValTown](https://github.com/val-town):
   Collaborative, flexible environment for creating and running JavaScript.
 
-## AI
-
-### Vectors and Embeddings
-
-- [OpenCLIP](https://github.com/mlfoundations/open_clip):
-  Encodes images and text into numerical vectors.
-- [Chroma](https://github.com/chroma-core/chroma):
-  AI-native embedding database.
-- [FaISS](https://github.com/facebookresearch/faiss):
-  Similarity searching and dense vectors clustering library.
-
-### CV
-
-- [Tesseract](https://github.com/naptha/tesseract.js):
-  Image recognition Tesseract OCR engine.
-
-### LLM
-
-- [LangChain](https://github.com/langchain-ai/langchainjs):
-  LLM framework.
-- [Transformers](https://github.com/xenova/transformers.js):
-  Run HuggingFace transformers directly in browser.
-- [OLlamaUI](https://github.com/open-webui/open-webui):
-  User-friendly web UI for LLMs.
-- [Vercel.ai](https://github.com/vercel/ai):
-  Build AI-powered web applications.
-- [TypeChat](https://github.com/microsoft/TypeChat):
-  Makes it easy to build natural language interfaces.
-- [LocalLLMs](https://github.com/vince-lam/awesome-local-llms):
-  Curated list of locally running LLMs.
-- [OLlama](https://github.com/ollama/ollama):
-  Get up and running large language models locally.
-- [Jan](https://github.com/janhq/jan):
-  Offline local ChatGPT.
-
-### AIaaS
-
-- [JinaAI](https://github.com/jina-ai/jina):
-  Build multimodal AI applications with cloud-native stack.
-- [LeptonAI](https://github.com/leptonai/leptonai):
-  Simplify AI service building.
-
-### AI Chatbot
-
-- [ChatGPT](https://chat.openai.com).
-- [BingAI](https://www.bing.com/chat).
-- [GeminiAI](https://gemini.google.com).
-- [PerplexityAI](https://www.perplexity.ai).
-- [PhindAI](https://www.phind.com).
-- [DeepSeek](https://chat.deepseek.com).
-- [KimiAI](https://kimi.moonshot.cn).
-- [QianWen](https://tongyi.aliyun.com/qianwen).
-- [PoeAI](https://poe.com):
-  Quora chatbot aggregator.
-- [Local](https://github.com/nilsherzig/LLocalSearch):
-  Completely locally running search aggregator using LLM Agents.
-
-### AI Copilot
-
-- [Everywhere](https://github.com/DearVa/Everywhere):
-  Context-aware AI assistant for desktop.
-- [Immersive](https://github.com/immersive-translate/immersive-translate):
-  Translate web pages instantly.
-- [DeepL](https://github.com/DeepLcom):
-  Free translation copilot.
-- [GrammarLy](https://github.com/grammarly):
-  Free writing and grammar checker copilot.
-
-### AI Agent
-
-- [N8N](https://github.com/n8n-io/n8n):
-  Fair-code workflow automation platform with native AI capabilities.
-- [N8NWorkflow](https://github.com/Zie619/n8n-workflows):
-  Curated list of n8n workflows.
-- [Dify](https://github.com/langgenius/dify):
-  LLM app development platform combines AI workflow, RAG pipeline, agent capabilities.
-- [LangGraph](https://github.com/langchain-ai/langgraph):
-  Build resilient language agents as graphs.
-- [BrowserUse](https://github.com/browser-use/browser-use):
-  Leading open-source web agent project.
-- [MetaGPT](https://github.com/geekan/MetaGPT):
-  Multi-agent framework to form collaborative entity for complex tasks.
-- [ChatDev](https://github.com/OpenBMB/ChatDev):
-  Communicative agents for software development.
-- [SWEAgent](https://github.com/princeton-nlp/SWE-agent):
-  Princeton GitHub issues auto-fixer.
-- [PRAgent](https://github.com/Codium-ai/pr-agent):
-  Codium AI-powered agent for automated pull request analysis, feedback and suggestions.
-
-### AI Client
-
-- [LobeChat](https://github.com/lobehub/lobe-chat):
-  Open-source and modern design AI chat framework.
-- [ChatBox](https://github.com/chatboxai/chatbox):
-  User-friendly desktop client app for AI models.
-- [CherryStudio](https://github.com/CherryHQ/cherry-studio):
-  All-in-One desktop copilot.
-- [ChatHub](https://github.com/chathub-dev/chathub):
-  All-in-one chatbot client.
-
 ## Debugging and Testing
 
 ### Unit Testing
@@ -2120,8 +2020,6 @@ import LibraryGallery from '@site/src/components/library-gallery'
 
 ### End to End Testing
 
-- [Stagehand](https://github.com/browserbase/stagehand):
-  AI Browser Automation Framework.
 - [PlayWright](https://github.com/microsoft/playwright):
   Automate Chromium, Firefox and Webkit with single API.
 - [Cypress](https://github.com/cypress-io/cypress):
@@ -2147,14 +2045,10 @@ import LibraryGallery from '@site/src/components/library-gallery'
   Cross-platform automation framework for all kinds of apps.
 - [Cheerio](https://github.com/cheeriojs/cheerio):
   Parsing and manipulating HTML and XML.
-- [Crawlee](https://github.com/apify/crawlee):
-  Web scraping and browser automation library.
-- [X-Crawl](https://github.com/coder-hxl/x-crawl):
-  Flexible Node.js AI-assisted crawler library.
 - [CRI](https://github.com/cyrus-and/chrome-remote-interface):
   Chrome remote interface for Chrome devtools protocol.
-- [LightPanda](https://github.com/lightpanda-io/browser):
-  Headless browser designed for AI and automation.
+- [Crawlee](https://github.com/apify/crawlee):
+  Web scraping and browser automation library.
 
 ### Code Analysis
 

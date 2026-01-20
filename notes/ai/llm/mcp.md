@@ -21,6 +21,8 @@ tags: [AI, LLM, Agent, MCP]
 
 - [Figma](https://github.com/figma/mcp-server-guide).
 - [Notion](https://github.com/makenotion/claude-code-notion-plugin).
+- [Blender](https://github.com/ahujasid/blender-mcp).
+- [n8n](https://github.com/czlonkowski/n8n-mcp).
 
 ### Memory
 
