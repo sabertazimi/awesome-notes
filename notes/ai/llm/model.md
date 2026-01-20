@@ -212,7 +212,7 @@ const result = await agent.invoke({ input: '...' })
 
 ## Library
 
-### Vectors and Embeddings
+### Embeddings and Vector Stores
 
 - [OpenCLIP](https://github.com/mlfoundations/open_clip):
   Encodes images and text into numerical vectors.

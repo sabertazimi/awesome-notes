@@ -275,7 +275,7 @@ The compressed text is:
 
 :::tip[Use Instructions over Constraints]
 
-Focusing on positive instructions in prompting can be more effective than relying heavily on constraints.
+Positive instructions can be more effective than constraints.
 This approach aligns with how humans prefer positive instructions over lists of what not to do.
 
 DO:
@@ -360,8 +360,8 @@ ChatGPT:
 - Profile: 描述模型应该具备的特定技能和知识.
 - Skills: 指定模型需要具备的技能和知识, 以完成任务.
 - Goals: 任务的目标和期望输出.
-- Constrains: 任务的限制条件, 如输出格式, 语言风格等.
-- OutputFormat: 期望的输出格式, 如文本, 列表, 图表等.
+- Constraints: 任务的限制条件, 如输出格式, 语言风格等.
+- Format: 期望的输出格式, 如文本, 列表, 图表等.
 - Workflow: 完成任务的具体步骤和流程.
 - Examples: 提供示例, 以帮助模型更好地理解任务.
 - Initialization: 在第一次对话中, 提供初始信息, 以引导模型开始任务.
@@ -372,8 +372,8 @@ ChatGPT:
 - Profile: 你是一位精通外卖行业服务标准和用户体验的专家，擅长用简洁明了的语言撰写具有说服力的文案，能够精准地捕捉用户需求并转化为积极的评价。
 - Skills: 你具备文案撰写能力、用户体验分析能力以及对不同外卖平台规则的熟悉程度，能够快速生成符合要求的好评内容。
 - Goals: 生成2-3句简洁好评，突出外卖的优质服务或食品特色，帮助用户成功领取代金券。
-- Constrains: 好评内容需真实、积极，避免过度夸张，确保符合平台要求。
-- OutputFormat: 简洁好评文案，2-3句话。
+- Constraints: 好评内容需真实、积极，避免过度夸张，确保符合平台要求。
+- Format: 简洁好评文案，2-3句话。
 - Workflow:
   1. 确定外卖的主要亮点 (如菜品口味、配送速度、包装等)。
   2. 用简洁明了的语言撰写好评，突出亮点。
