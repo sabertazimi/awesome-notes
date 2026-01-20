@@ -85,6 +85,15 @@ Generative videos as world models simulator.
 
 - GRPO [tricks](https://cameronrwolfe.substack.com/p/grpo-tricks).
 
+## Inference Acceleration
+
+- Quantization: 改变模型权重和激活值的精度.
+- Distillation: data, knowledge, on policy.
+- Flash attention: minimize data move between slow HBM to faster memory tier (SRAM/VMEM).
+- Prefix caching: avoid recalculating attention scores for input on each auto-regressive decode step.
+- Speculative decoding: generate multiple candidates with drafter model (much smaller).
+- Batching and parallelization: sequence, pipeline, tensor.
+
 ## Reasoning
 
 Test-time compute (inference-time compute):
