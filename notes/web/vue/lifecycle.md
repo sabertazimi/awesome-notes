@@ -5,7 +5,7 @@ sidebar_position: 23
 
 # Lifecycle
 
-![Lifecycle](./figures/lifecycle.png)
+![Lifecycle](./figures/lifecycle.png 'Lifecycle')
 
 ## Workflow
 

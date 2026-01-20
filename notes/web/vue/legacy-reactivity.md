@@ -5,7 +5,7 @@ sidebar_position: 28
 
 # Legacy Reactivity
 
-![Reactive](./figures/proxy.png)
+![Reactive](./figures/proxy.png 'Reactive')
 
 Collect deps (get):
 
