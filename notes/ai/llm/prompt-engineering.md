@@ -113,7 +113,7 @@ That means that there are 4 blue golf balls.
 
 - [Re3](https://aclanthology.org/2022.emnlp-main.296):
   recursive re-prompting and revision.
-- [ReAct](https://iclr.cc/virtual/2023/11003):
+- [**ReAct**](https://iclr.cc/virtual/2023/11003):
   reasoning and acting (thought-act-observation).
 - [ToT](https://nips.cc/virtual/2023/73874):
   tree of thoughts.
@@ -163,6 +163,25 @@ Let's break down this problem and give me the solution with code format.
 ```
 
 ![Task Planning](./figures/task-planning.png 'Task Planning')
+
+## Automatic
+
+APE (Automatic Prompt Engineering) 利用机器 (machine) 生成 prompts:
+
+- Soft prompt:
+  将向量作为输入, 与文字合并成一个完整的 prompt,
+  作用类似于 BERT adapter.
+- Reinforcement learning prompting:
+  通过强化学习训练一个模型, 负责生成 prompts.
+- [LLM prompting](https://iclr.cc/virtual/2023/10850):
+  通过 LLM 自身生成 prompts.
+- LLMs collaboration:
+  - Utilize multiple LLMs, each with different strengths.
+  - [EoT](https://aclanthology.org/2023.emnlp-main.936):
+    exchange-of-thought, encourage divergent thinking
+    through cross-model communication and multi-agent debate.
+
+[![Automatic Prompting Engineer](./figures/automatic-prompt-engineer.png)](https://github.com/keirp/automatic_prompt_engineer)
 
 ## Codegen
 
@@ -223,26 +242,6 @@ llm_out = llm(DATE_UNDERSTANDING_PROMPT.format(question=question))
 exec(llm_out)
 print(born)
 ```
-
-## Machine
-
-利用机器生成 prompts:
-
-- Soft prompt:
-  将向量作为输入, 与文字合并成一个完整的 prompt,
-  作用类似于 BERT adapter.
-- Reinforcement learning prompting:
-  通过强化学习训练一个模型, 负责生成 prompts.
-- [LLM prompting](https://iclr.cc/virtual/2023/10850):
-  通过 LLM 自身生成 prompts.
-
-[![Automatic Prompting Engineer](./figures/automatic-prompt-engineer.png)](https://github.com/keirp/automatic_prompt_engineer)
-
-- LLMs collaboration:
-  - Utilize multiple LLMs, each with different strengths.
-  - [EoT](https://aclanthology.org/2023.emnlp-main.936):
-    exchange-of-thought, encourage divergent thinking
-    through cross-model communication and multi-agent debate.
 
 ## Frameworks
 
