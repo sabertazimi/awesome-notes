@@ -120,79 +120,16 @@ normalize LLM inputs (e.g. prompts), APIs, and outputs (e.g. completions):
 
 ![LangChain Model I/O Module](./figures/lang-chain-model-io.png 'LangChain Model I/O Module')
 
-```ts
-import { CommaSeparatedListOutputParser } from '@langchain/core/output_parsers'
-import { PromptTemplate } from '@langchain/core/prompts'
-import { OpenAI } from '@langchain/openai'
-
-const template = PromptTemplate.fromTemplate('List 10 {subject}.\n{format_instructions}')
-const model = new OpenAI({ temperature: 0 })
-const listParser = new CommaSeparatedListOutputParser()
-
-const prompt = await template.format({
-  subject: 'countries',
-  format_instructions: listParser.getFormatInstructions(),
-})
-
-const result = await model.invoke(prompt)
-const listResult = await listParser.parse(result)
-```
-
 Retrieval module
 help to process data alongside the user inputs,
 making it easier to retrieve relevant information:
 
 ![LangChain Retrieval Module](./figures/lang-chain-retrieval.png 'LangChain Retrieval Module')
 
-```ts
-import { UpstashVectorStore } from '@langchain/community/vectorstores/upstash'
-import { OpenAIEmbeddings } from '@langchain/openai'
-import { CSVLoader } from 'langchain/document_loaders/fs/csv'
-import { ScoreThresholdRetriever } from 'langchain/retrievers/score_threshold'
-import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter'
-
-// CSV data.
-const loader = new CSVLoader('path/to/example.csv')
-const docs = await loader.load()
-
-// Text splitter.
-const splitter = new RecursiveCharacterTextSplitter({
-  chunkSize: 10,
-  chunkOverlap: 1,
-})
-const docs = await splitter.createDocuments(['...'])
-
-// Embeddings and vector store.
-const vectorStore = new UpstashVectorStore(new OpenAIEmbeddings())
-await vectorStore.addDocuments(docs)
-const retriever = ScoreThresholdRetriever.fromVectorStore(vectorStore, {
-  minSimilarityScore: 0.9,
-})
-const result = await retriever.getRelevantDocuments('...?')
-```
-
 Chains module
 link tasks together:
 
 ![LangChain Chains Module](./figures/lang-chain-chains.png 'LangChain Chains Module')
-
-```ts
-import { CommaSeparatedListOutputParser } from '@langchain/core/output_parsers'
-import { PromptTemplate } from '@langchain/core/prompts'
-import { RunnableSequence } from '@langchain/core/runnables'
-import { OpenAI } from '@langchain/openai'
-
-const template = PromptTemplate.fromTemplate('List 10 {subject}.\n{format_instructions}')
-const model = new OpenAI({ temperature: 0 })
-const listParser = new CommaSeparatedListOutputParser()
-
-const chain = RunnableSequence.from([template, model, listParser])
-
-const result = await chain.invoke({
-  subject: 'countries',
-  format_instructions: listParser.getFormatInstructions(),
-})
-```
 
 Agents module
 is chains with a list of functions (called tools) it can execute,
@@ -200,15 +137,6 @@ while chains are hardcoded,
 agents choose their actions with the help of an LLM:
 
 ![LangChain Agents Module](./figures/lang-chain-agents.png 'LangChain Agents Module')
-
-```ts
-import { createVectorStoreAgent, VectorStoreToolkit } from 'langchain/agents'
-
-const toolkit = new VectorStoreToolkit({ name: 'Demo Data', vectorStore }, model)
-const agent = createVectorStoreAgent(model, toolkit)
-
-const result = await agent.invoke({ input: '...' })
-```
 
 ## Library
 
