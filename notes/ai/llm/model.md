@@ -65,6 +65,8 @@ Generative videos as world models simulator.
 
 ## Embeddings
 
+[Various types](https://kaggle.com/whitepaper-embeddings-and-vector-stores):
+
 - Continuous bag of words (CBOW):
   Predict middle word, with embeddings of surrounding words as input.
   Fast to train and accurate for frequent words.
@@ -73,14 +75,21 @@ Generative videos as world models simulator.
   Slower to train but accurate for rare words.
 - GloVe/SWIVEL:
   Capture both global and local information about words with co-occurrence matrix.
+- Shallow BoW.
+- Deeper pre-trained.
+- Multi-modal: image.
+- Structured data.
+- Graph.
 
-[![Word Embeddings](./figures/word-embeddings.png)](https://kaggle.com/whitepaper-embeddings-and-vector-stores)
+![Word Embeddings](./figures/word-embeddings.png 'Word Embeddings')
 
-[![Embedding Models](./figures/embedding-models.png)](https://kaggle.com/whitepaper-embeddings-and-vector-stores)
+![Embedding Models](./figures/embedding-models.png 'Embedding Models')
 
 For recommendation systems,
 maps two sets of data (user dataset, item/product/etc dataset)
 into the same embedding space.
+
+![Vector Similarity](./figures/vector-similarity.png 'Vector Similarity')
 
 ## Group Relative Policy Optimization
 
