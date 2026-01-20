@@ -243,23 +243,100 @@ exec(llm_out)
 print(born)
 ```
 
+## Compression
+
+```md
+Compress the given text to short expressions,
+and such that you (GPT-4) can reconstruct it as close as possible to the original.
+Unlike the usual text compression,
+I need you to comply with the 5 conditions below:
+
+1. You can ONLY remove unimportant words.
+2. Do not reorder the original words.
+3. Do not change the original words.
+4. Do not use abbreviations or emojis.
+5. Do not add new words or symbols.
+
+Compress the origin aggressively by removing words only.
+Compress the origin as short as you can,
+while retaining as much information as possible.
+If you understand, please compress the following text: {text to compress}
+The compressed text is:
+```
+
+## Directives
+
+- `ALWAYS`
+- `IMPORTANT`
+- `MUST`
+- `ONLY`
+- `NEVER`
+- `DO NOT`
+
+:::tip[Use Instructions over Constraints]
+
+Focusing on positive instructions in prompting can be more effective than relying heavily on constraints.
+This approach aligns with how humans prefer positive instructions over lists of what not to do.
+
+DO:
+
+```md
+Generate a 1 paragraph blog post about the top 5 video game consoles.
+Only discuss the console, the company who made it, the year, and total sales.
+```
+
+DO NOT:
+
+```md
+Generate a 1 paragraph blog post about the top 5 video game consoles.
+Do not list video game names.
+```
+
+:::
+
+## Edge Cases
+
+Building [robust prompts](https://prompts.chat/book/12-handling-edge-cases):
+
+- Anticipate Variations:
+  Empty input, long input, malformed data, multiple languages
+- Define Boundaries:
+  Clear scope limits with helpful redirects for out-of-scope requests
+- Degrade Gracefully:
+  Partial results are better than failures; always offer alternatives
+- Defend Against Attacks:
+  Treat user input as data, not instructions; never reveal system prompts
+- Express Uncertainty:
+  Confidence levels help users know when to verify
+- Test Systematically:
+  Use checklists to ensure you've covered common edge cases
+
 ## Frameworks
 
-### Simple
+:::tip[Prompt Engineering Frameworks]
 
-简化框架 (`Instruction`+`Context`+`Input Data`+`Output Indicator`):
+框架共性在于:
+
+- Clarity:
+  Clear and concise prompt, respectful and professional tone,
+  ensure LLMs understands topics and generate appropriate responses.
+  Avoid using overly complex or ambiguous language.
+- Focus:
+  Clear purpose and focus, helping to guide the conversation and keep it on track.
+  Avoid using overly broad or open-ended prompts.
+- Relevance:
+  Relevant to the user and the conversation.
+  Avoid introducing unrelated topics that can distract from main focus.
+- 清晰指示任务和角色, 重视上下文信息, 指定输出格式.
+
+:::
+
+`Role` + `Context` + `Task` + `Format` + `Constraints`:
 
 - 明确任务: 直接指出你需要模型做什么. 例如: "写一个故事", "回答一个问题", "解释一个概念".
 - 设定角色和风格: 简短描述模型应采用的角色和风格 (`Act as`). 例如: "像专家一样", "幽默地", "正式地".
 - 提供背景信息: 给出足够的信息, 让模型了解任务的上下文. 例如: "关于环保", "在古罗马背景下".
 - 指定输出格式: 告诉模型你期望的回答形式. 例如: "一段文本", "列表", "步骤说明".
-
-操作指南:
-
-- 步骤1 (明确任务): 思考你需要模型完成的具体任务, 尽量具体. 例如: "请写一个关于节约用水的短故事".
-- 步骤2 (设定角色和风格): 考虑任务最适合的表达方式和语气. 例如: "用一个小孩的视角, 轻松幽默地讲述".
-- 步骤3 (提供背景信息): 如果任务涉及特定的主题或需要特定知识, 提供相关的背景信息. 例如: "在一个干旱的城市里".
-- 步骤4 (指定输出格式): 明确你想要的输出类型. 例如: "三段话, 每段不超过五句话".
 
 ```md
 我要写一个英语学习计划, 请根据下列规则生成一个合适的 Prompt, 然后再输出内容:
@@ -277,10 +354,6 @@ ChatGPT:
 我现在是高中水平的英语, 想要通过雅思考试.
 每一部分提供具体的学习资料.
 ```
-
-### Comprehensive
-
-综合框架:
 
 - Role: 指定模型的角色, 如专家, 朋友, 教师等.
 - Background: 提供任务的上下文信息, 以帮助模型更好地理解任务.
@@ -351,24 +424,6 @@ I will do so by putting text inside curly brackets {like this}.
 My first command is console.log("Hello World").
 ```
 
-:::tip[Prompt Engineering Frameworks]
-
-上述两个框架的共性在于:
-
-- Clarity:
-  Clear and concise prompt, respectful and professional tone,
-  ensure LLMs understands topics and generate appropriate responses.
-  Avoid using overly complex or ambiguous language.
-- Focus:
-  Clear purpose and focus, helping to guide the conversation and keep it on track.
-  Avoid using overly broad or open-ended prompts.
-- Relevance:
-  Relevant to the user and the conversation.
-  Avoid introducing unrelated topics that can distract from main focus.
-- 清晰指示任务和角色, 重视上下文信息, 指定输出格式.
-
-:::
-
 ### RTF
 
 [RTF framework](https://prompts.chat/book/02-anatomy-of-effective-prompt):
@@ -402,74 +457,6 @@ K - Know by verifying/checking
 
 Problem: A rectangle's length is twice its width. If the perimeter is 36 cm, what is the area?
 ```
-
-## Compression
-
-```md
-Compress the given text to short expressions,
-and such that you (GPT-4) can reconstruct it as close as possible to the original.
-Unlike the usual text compression,
-I need you to comply with the 5 conditions below:
-
-1. You can ONLY remove unimportant words.
-2. Do not reorder the original words.
-3. Do not change the original words.
-4. Do not use abbreviations or emojis.
-5. Do not add new words or symbols.
-
-Compress the origin aggressively by removing words only.
-Compress the origin as short as you can,
-while retaining as much information as possible.
-If you understand, please compress the following text: {text to compress}
-The compressed text is:
-```
-
-## Directives
-
-- `ALWAYS`
-- `IMPORTANT`
-- `MUST`
-- `ONLY`
-- `NEVER`
-- `DO NOT`
-
-:::tip[Use Instructions over Constraints]
-
-Focusing on positive instructions in prompting can be more effective than relying heavily on constraints.
-This approach aligns with how humans prefer positive instructions over lists of what not to do.
-
-DO:
-
-```md
-Generate a 1 paragraph blog post about the top 5 video game consoles.
-Only discuss the console, the company who made it, the year, and total sales.
-```
-
-DO NOT:
-
-```md
-Generate a 1 paragraph blog post about the top 5 video game consoles.
-Do not list video game names.
-```
-
-:::
-
-## Edge Cases
-
-Building [robust prompts](https://prompts.chat/book/12-handling-edge-cases):
-
-- Anticipate Variations:
-  Empty input, long input, malformed data, multiple languages
-- Define Boundaries:
-  Clear scope limits with helpful redirects for out-of-scope requests
-- Degrade Gracefully:
-  Partial results are better than failures; always offer alternatives
-- Defend Against Attacks:
-  Treat user input as data, not instructions; never reveal system prompts
-- Express Uncertainty:
-  Confidence levels help users know when to verify
-- Test Systematically:
-  Use checklists to ensure you've covered common edge cases
 
 ## References
 
