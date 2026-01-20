@@ -156,7 +156,7 @@ fn main() {
     let a = 3.1 as i8;
     let b = 100_i8 as i32;
     let c = 'a' as u8;
-    println!("{}, {}, {}", a, b, c)
+    println!("{}, {}, {}", a, b, c);
 
     let x: i16 = 1500;
     let x_: u8 = match x.try_into() {
@@ -264,7 +264,7 @@ let s1: str = "Hello there!";
 let s2: str = "How's it going?";
 
 // Ok.
-let s3: &str = "on?"
+let s3: &str = "on?";
 let s4: Box<str> = "Hello there!".into();
 ```
 

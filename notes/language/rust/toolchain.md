@@ -89,15 +89,15 @@ tag-message = "{{tag_name}}"
   - `name`: 名称.
   - `version`: 版本.
   - `authors`: 开发作者.
-  - `edition`: Rust edition..
+  - `edition`: Rust edition.
   - `rust-version`: 支持的最小化 Rust 版本.
   - `description`: 描述.
   - `documentation`: 文档 URL.
   - `readme`: README 文件的路径.
   - `homepage`: 主页 URL.
   - `repository`: 源代码仓库的 URL.
-  - `license`: 开源协议 License..
-  - `license-file`: License 文件的路径..
+  - `license`: 开源协议 License.
+  - `license-file`: License 文件的路径.
   - `keywords`: 项目的关键词.
   - `categories`: 项目分类.
   - `workspace`: 工作空间 workspace 的路径.
@@ -417,7 +417,7 @@ console.log(result)
 - [Quiche](https://github.com/cloudflare/quiche):
   QUIC and HTTP/3 Library.
 - [Tonic](https://github.com/hyperium/tonic):
-  gPRC Framework.
+  gRPC Framework.
 - [QuickWit](https://github.com/quickwit-oss/quickwit):
   Distributed Search Engine.
 - [MeiliSearch](https://github.com/meilisearch/MeiliSearch):

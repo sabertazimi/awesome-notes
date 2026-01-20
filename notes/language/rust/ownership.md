@@ -10,7 +10,7 @@ tags: [Language, Rust]
 ### Stack
 
 - Primitives
-- Fixed size struts.
+- Fixed size structs.
 - Fixed size arrays.
 - Pointers and references.
 
