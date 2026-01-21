@@ -380,16 +380,27 @@ console.log(result)
 
 ## Library
 
+### Number
+
 - [Num](https://github.com/rust-num/num):
   Numeric Types and Traits.
 - [Rand](https://github.com/rust-random/rand):
   Random Number Generator.
+
+### String
+
 - [Regex](https://github.com/rust-lang/regex):
   Regular Expression Engine.
 - [RuleX](https://github.com/rulex-rs/rulex):
   A New and Portable Regular Expression Language.
+
+### DateTime
+
 - [Chrono](https://github.com/chronotope/chrono):
   DateTime Library.
+
+### Asynchronous and Concurrency
+
 - [AsyncStd](https://github.com/async-rs/async-std):
   Asynchronous Version Standard Library.
 - [Crossbeam](https://github.com/crossbeam-rs/crossbeam):
@@ -398,12 +409,23 @@ console.log(result)
   Asynchronous Runtime.
 - [Rayon](https://github.com/rayon-rs/rayon):
   Data Parallelism Library.
-- [Log](https://github.com/rust-lang/log):
-  Logging Library.
-- [Tracing](https://github.com/tokio-rs/tracing):
-  Tracing Library.
+
+### Network
+
+- [Reqwest](https://github.com/seanmonstar/reqwest):
+  HTTP Client.
+- [Quiche](https://github.com/cloudflare/quiche):
+  QUIC and HTTP/3 Library.
+- [Tonic](https://github.com/hyperium/tonic):
+  gRPC Framework.
+
+### Serialization
+
 - [Serde](https://github.com/serde-rs/serde):
   Serialization Framework.
+
+### Web Frameworks
+
 - [Axum](https://github.com/tokio-rs/axum):
   Tokio Web Framework.
 - [Rocket](https://github.com/SergioBenitez/Rocket):
@@ -412,30 +434,51 @@ console.log(result)
   Web Framework.
 - [Warp](https://github.com/seanmonstar/warp):
   Web Framework.
-- [Request](https://github.com/seanmonstar/reqwest):
-  HTTP Client.
-- [Quiche](https://github.com/cloudflare/quiche):
-  QUIC and HTTP/3 Library.
-- [Tonic](https://github.com/hyperium/tonic):
-  gRPC Framework.
+
+### Search Engines
+
 - [QuickWit](https://github.com/quickwit-oss/quickwit):
   Distributed Search Engine.
 - [MeiliSearch](https://github.com/meilisearch/MeiliSearch):
   Realtime Search Engine.
+- [DocFind](https://github.com/microsoft/docfind):
+  High-performance document search engine with WebAssembly support.
+
+### Command Line Interface
+
 - [Clap](https://github.com/clap-rs/clap):
   CLI Framework.
 - [Console](https://github.com/console-rs/indicatif):
   ProgressBar.
-- [Syn](https://github.com/dtolnay/syn):
-  Source Code Parser.
+
+### Language Bindings
+
 - [Neon](https://github.com/neon-bindings/neon):
   Node.js Bindings Library.
 - [Git](https://github.com/rust-lang/git2-rs):
   Git Bindings Library.
+
+### Testing
+
 - [PrettyAssertions](https://github.com/colin-kiegel/rust-pretty-assertions):
   Overwrite `assert_eq!` with a drop-in replacement, adding a colorful diff.
 - [Criterion](https://github.com/bheisler/criterion.rs):
   Benchmarking Library.
+
+### Logging and Tracing
+
+- [Log](https://github.com/rust-lang/log):
+  Logging Library.
+- [Tracing](https://github.com/tokio-rs/tracing):
+  Tracing Library.
+
+### Code Analysis
+
+- [Syn](https://github.com/dtolnay/syn):
+  Source Code Parser.
+
+### Documentation
+
 - [Clog](https://github.com/clog-tool/clog-cli):
   Conventional Changelog.
 
