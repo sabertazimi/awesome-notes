@@ -52,7 +52,7 @@ Content-Length: xxx
 ```http
 Get /index.html HTTP/1.0
 Host: www.google.com
-Authorization: Basic d2FuZzp3YW5n==
+Authorization: Basic d2XXXXXXXXXn==
 ```
 
 ## Session Cookie

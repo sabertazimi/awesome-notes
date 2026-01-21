@@ -297,6 +297,8 @@ Example usage:
 
 ### Endpoint
 
+[API endpoint generation](https://prompts.chat/book/19-programming-development):
+
 ```md
 Create a REST API endpoint for ${resource:user profiles}.
 
@@ -321,6 +323,8 @@ Include:
 ```
 
 ### Database
+
+[Database schema design](https://prompts.chat/book/19-programming-development)
 
 ```md
 Design a database schema for ${application:e-commerce platform}.
@@ -356,6 +360,8 @@ Provide:
 
 ## Debugging
 
+[Bug analysis](https://prompts.chat/book/19-programming-development):
+
 ```md
 Debug this code.
 It should ${expectedBehavior:return the sum of all numbers} but instead ${actualBehavior:returns 0 for all inputs}.
@@ -376,6 +382,8 @@ Steps to debug:
 
 ### Interpretation
 
+[Error message interpretation](https://prompts.chat/book/19-programming-development):
+
 ```md
 Explain this error and how to fix it:
 
@@ -395,6 +403,8 @@ Provide:
 ```
 
 ### Performance
+
+[Performance optimization](https://prompts.chat/book/19-programming-development):
 
 ```md
 This code is slow. Analyze and optimize:
@@ -442,6 +452,8 @@ Constraints:
 
 ### Unit
 
+[Unit test generation](https://prompts.chat/book/19-programming-development):
+
 ```md
 Write unit tests for this function:
 
@@ -473,6 +485,8 @@ Include: Descriptive test names
 
 ### Pull Request
 
+[Comprehensive review](https://prompts.chat/book/19-programming-development):
+
 ```md
 Review this code for a pull request.
 
@@ -494,6 +508,8 @@ Format your review as:
 ```
 
 ### Security
+
+[Security review](https://prompts.chat/book/19-programming-development):
 
 ```md
 Perform a security review of this code:
@@ -520,6 +536,8 @@ For each finding:
 
 ### Smell
 
+[Code smell detection](https://prompts.chat/book/19-programming-development):
+
 ```md
 Analyze this code for code smells and refactoring opportunities:
 
@@ -537,6 +555,8 @@ For each issue, show before/after code.
 ```
 
 ### Patterns
+
+[Design pattern application](https://prompts.chat/book/19-programming-development):
 
 ```md
 Refactor this code using the ${patternName:Factory} pattern.
@@ -566,6 +586,8 @@ including OAuth providers, session management, and token refresh.
 
 ### API
 
+[API documentation](https://prompts.chat/book/19-programming-development):
+
 ```md
 Generate API documentation from this code:
 
@@ -583,6 +605,8 @@ Include:
 ```
 
 ### Module
+
+[Code documentation](https://prompts.chat/book/19-programming-development):
 
 ```md
 Add comprehensive documentation to this code:
@@ -825,7 +849,5 @@ Midjourney [cookbook](https://fka.gumroad.com/l/the-art-of-midjourney-ai-guide-t
 ## References
 
 - Gemini prompts [cookbook](https://services.google.com/fh/files/misc/gemini-for-google-workspace-prompting-guide-101.pdf).
-- Awesome ChatGPT [prompts](https://github.com/f/awesome-chatgpt-prompts).
-- ChatGPT [prompts](https://github.com/rockbenben/ChatGPT-Shortcut).
-- Programming and development [prompts](https://prompts.chat/book/19-programming-development).
+- Prompts and skills [community](https://github.com/f/awesome-chatgpt-prompts).
 - Vibe coding [prompts](https://docs.google.com/spreadsheets/d/1ngoQOhJqdguwNAilCl1joNwTje7FWWN9WiI2bo5VhpU).
