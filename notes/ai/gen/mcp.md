@@ -1,6 +1,6 @@
 ---
 sidebar_position: 7
-tags: [AI, LLM, Agent, MCP]
+tags: [AI, Generative AI, LLM, Agent, MCP]
 ---
 
 # MCP

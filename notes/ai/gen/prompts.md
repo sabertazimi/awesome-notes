@@ -1,6 +1,6 @@
 ---
 sidebar_position: 8
-tags: [AI, LLM, PromptEngineering, Prompts]
+tags: [AI, Generative AI, LLM, Prompt Engineering, Prompts]
 ---
 
 # Prompts

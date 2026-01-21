@@ -1,6 +1,6 @@
 ---
 sidebar_position: 5
-tags: [AI, LLM, Agent, Claude]
+tags: [AI, Generative AI, LLM, Agent, Claude]
 ---
 
 # Claude Code

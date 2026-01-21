@@ -1,11 +1,11 @@
 ---
 sidebar_position: 1
-tags: [AI, LLM, Embeddings, RAG]
+tags: [AI, Generative AI, LLM, Embeddings, RAG]
 ---
 
 # Large Language Model
 
-## Generative AI
+## Generative Model
 
 - Autoregressive (AR) model:
   generate output one token at a time, conditioned on previous tokens.

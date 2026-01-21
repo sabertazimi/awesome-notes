@@ -1,6 +1,6 @@
 ---
 sidebar_position: 4
-tags: [AI, LLM, Agent]
+tags: [AI, Generative AI, LLM, Agent]
 ---
 
 # Agent

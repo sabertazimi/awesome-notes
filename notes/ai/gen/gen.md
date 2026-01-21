@@ -1,15 +1,13 @@
 ---
 sidebar_position: 10
-tags: [AI, LLM, Agent, Prompt Engineering]
+tags: [AI, Generative AI, LLM, Agent, Prompt Engineering]
 ---
 
-# LLM
-
-Notes on Large Language Models, Prompt Engineering and Agents.
+# Generative AI
 
 ## Fundamentals
 
-- [LLM](./model.md) - Large Language Model fundamentals and concepts
+- [Large Language Model](./llm.md) - Large language model fundamentals and concepts
 - [Prompt Engineering](./prompt-engineering.md) - Prompt design and optimization techniques
 
 ## Agents

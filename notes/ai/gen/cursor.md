@@ -1,6 +1,6 @@
 ---
 sidebar_position: 6
-tags: [AI, LLM, Agent, Cursor]
+tags: [AI, Generative AI, LLM, Agent, Cursor]
 ---
 
 # Cursor

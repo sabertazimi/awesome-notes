@@ -18,6 +18,6 @@ tags: [AI]
 
 - [Deep Learning](./dl/dl.md) - Neural networks: foundations, architectures, attention mechanisms
 
-## Large Language Models
+## Generative AI
 
-- [LLM](./llm/llm.md) - Large Language Models
+- [Generative AI](./gen/gen.md) - Large language models, prompt engineering, agent, and agentic coding
