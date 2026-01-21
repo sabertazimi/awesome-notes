@@ -344,6 +344,7 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
   Notion official skills, commands and MCP server.
 - [Obsidian](https://github.com/kepano/obsidian-skills):
   Create and edit Obsidian Bases (`.base`) with Obsidian Flavored Markdown.
+- [Cloudflare](https://github.com/cloudflare/skills).
 
 ### Math
 
