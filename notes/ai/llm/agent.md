@@ -5,11 +5,17 @@ tags: [AI, LLM, Agent]
 
 # Agent
 
+## Architecture
+
+General agent [components](https://www.kaggle.com/whitepaper-agents):
+
 - LLM (brain)
 - Prompting (instructions)
 - Memory
 - External knowledge
 - Tools
+
+![Agent Architecture](./figures/agent-architecture.png 'Agent Architecture')
 
 ## Principles
 
