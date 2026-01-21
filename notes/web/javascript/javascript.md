@@ -16,7 +16,7 @@ tags: [Web, JavaScript, ECMAScript]
 
 - [Array](./array.md) - Array
 - [Collection](./collection.md) - Map and set
-- [Date](./date.md) - Date and temporal
+- [Temporal](./temporal.md) - Temporal and legacy date
 
 ## Expressions
 

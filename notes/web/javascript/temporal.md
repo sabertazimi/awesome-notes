@@ -3,12 +3,9 @@ sidebar_position: 8
 tags: [Web, JavaScript, ECMAScript, Date, Temporal]
 ---
 
-# Date and Temporal
+# Temporal
 
-## Date
-
-- [Date and Temporal API CheatSheet](https://github.com/you-dont-need/You-Dont-Need-Momentjs)
-- [Definitive Guide](https://css-tricks.com/everything-you-need-to-know-about-date-in-javascript)
+## Legacy
 
 ```ts
 const now = new Date()
@@ -85,9 +82,7 @@ function getDateItemList(year, month) {
 }
 ```
 
-## Temporal
-
-### Temporal Basis
+## Modern
 
 ```ts
 Temporal.ZonedDateTime.from({
@@ -118,7 +113,7 @@ Temporal.Now.zonedDateTimeISO().withPlainTime(
 )
 ```
 
-### Temporal Range
+## Range
 
 ```ts
 const dayOfWeek = Temporal.Now.zonedDateTimeISO().dayOfWeek
@@ -146,7 +141,7 @@ Temporal.Instant.fromEpochMilliseconds(Math.max.apply(null, dateArrays))
 Temporal.Instant.fromEpochMilliseconds(Math.min.apply(null, dateArrays))
 ```
 
-### Temporal Display
+## Display
 
 ```ts
 new Intl.DateTimeFormat('en-GB', {
@@ -164,7 +159,7 @@ Temporal.PlainDate.from('2007-01-27')
 Temporal.PlainDate.from('2007-01-27').since('2007-01-29').total({ unit: 'day' })
 ```
 
-### Temporal Query
+## Query
 
 ```ts
 const isBefore = Temporal.PlainDate.compare('2010-10-20', '2010-10-21') === -1
@@ -181,3 +176,9 @@ const isPlainDateTime
 const isZonedDateTime
   = Temporal.Now.zonedDateTimeISO() instanceof Temporal.ZonedDateTime
 ```
+
+## References
+
+- Date definitive [guide](https://css-tricks.com/everything-you-need-to-know-about-date-in-javascript).
+- Temporal [cookbook](https://github.com/you-dont-need/You-Dont-Need-Momentjs).
+- Temporal [playground](https://github.com/javierOrtega95/temporal-playground).
