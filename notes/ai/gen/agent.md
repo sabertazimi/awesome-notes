@@ -622,6 +622,20 @@ When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688
 - Can't set breakpoints in reasoning
 - Performance optimization changes: task success rate, reasoning quality, tool usage efficiency
 
+:::tip[Trajectory]
+
+**Trajectory** is equally important as **final response**:
+
+- Exact match: produce trajectory that perfectly mirrors ideal solution.
+- In-order match: complete expected trajectory, while accommodating extra, un-penalized actions.
+- Any-order match: include all necessary actions.
+- Precision: relevant tool calls.
+- Recall: essential tool calls.
+
+![Trajectory](./figures/trajectory.png 'Trajectory')
+
+:::
+
 ## Benchmarks
 
 [Benchmarks](https://blog.sshh.io/p/understanding-ai-benchmarks):
