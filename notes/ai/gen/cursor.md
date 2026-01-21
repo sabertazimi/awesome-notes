@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 12
 tags: [AI, Generative AI, LLM, Agent, Cursor]
 ---
 
@@ -127,7 +127,7 @@ Prototype implementation [rule](./recipes/rules/prototype-implementation.md):
 - 错误处理与边界情况.
 - 代码检查清单.
 
-## Research Mode
+## Research
 
 1. 在提出解决方案之前，从工作空间和代码库的多个来源中收集全面信息。
 2. 分析代码和近期变更，但不得自动修复问题。
@@ -136,7 +136,7 @@ Prototype implementation [rule](./recipes/rules/prototype-implementation.md):
 5. 避免基于不明确的假设进行分析或建议，必要时向用户请求澄清。
 6. 以一致的格式（如代码块、列表或标题）呈现分析结果和解决方案，便于用户快速阅读。
 
-## Plan Mode
+## Plan
 
 **充分研究和审查**：在开始制定计划前，需全面研究和审查所有相关细节，包括我们讨论过的内容、文档、代码库和外部资源。
 
@@ -161,6 +161,5 @@ Prototype implementation [rule](./recipes/rules/prototype-implementation.md):
 
 ## References
 
-- Cursor [directory](https://cursor.directory).
+- Cursor [directory](https://github.com/pontusab/directories).
 - Awesome Cursor [rules](https://github.com/PatrickJS/awesome-cursorrules).
-- Awesome Cursor [rules](https://github.com/sanjeed5/awesome-cursor-rules-mdc).
