@@ -619,6 +619,42 @@ When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688
 - Relative: Compare within the same model family or lab, how did the score change from v1 to v2?
 - Verify: The only benchmark that matters at the end of the day is your workload.
 
+## LangChain
+
+[LangChain](https://upstash.com/blog/langchain-explained)
+aims to make programming with LLMs easier.
+
+[![LangChain Modules](./figures/lang-chain.png)](https://github.com/langchain-ai/langchainjs)
+
+Model I/O module
+normalize LLM inputs (e.g. prompts), APIs, and outputs (e.g. completions):
+
+![LangChain Model I/O Module](./figures/lang-chain-model-io.png 'LangChain Model I/O Module')
+
+Retrieval module
+help to process data alongside the user inputs,
+making it easier to retrieve relevant information:
+
+![LangChain Retrieval Module](./figures/lang-chain-retrieval.png 'LangChain Retrieval Module')
+
+Chains module
+link tasks together:
+
+![LangChain Chains Module](./figures/lang-chain-chains.png 'LangChain Chains Module')
+
+Agents module
+is chains with a list of functions (called tools) it can execute,
+while chains are hardcoded,
+agents choose their actions with the help of an LLM:
+
+![LangChain Agents Module](./figures/lang-chain-agents.png 'LangChain Agents Module')
+
+See more code [snippets](./recipes/code/langchain.md).
+
+## LangGraph
+
+Building agent with [LangGraph](https://www.kaggle.com/code/markishere/day-3-building-an-agent-with-langgraph).
+
 ## Library
 
 ### Instruction
@@ -630,37 +666,41 @@ When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688
 - [System](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools):
   System prompts for AI agents.
 
+### SDK
+
+- [LangGraph](https://github.com/langchain-ai/langgraph):
+  Build resilient language agents as graphs.
+- [LangChain](https://github.com/langchain-ai/langchain):
+  Platform for reliable agents.
+- [TypeChat](https://github.com/microsoft/TypeChat):
+  Makes it easy to build natural language interfaces.
+- [OpenAI](https://platform.openai.com).
+- [Google](https://ai.google.dev).
+
 ### RAG
 
 - [RAGFlow](https://github.com/infiniflow/ragflow):
   Superior context layer for AI agents.
 
+### Agents
+
+- [n8n](https://github.com/Zie619/n8n-workflows):
+  Curated list of n8n workflows.
+- [Dify](https://github.com/langgenius/dify):
+  LLM app development platform combines AI workflow, RAG pipeline, agent capabilities.
+- [MetaGPT](https://github.com/geekan/MetaGPT):
+  Multi-agent framework to form collaborative entity for complex tasks.
+- [ChatDev](https://github.com/OpenBMB/ChatDev):
+  Communicative agents for software development.
+- [SWEAgent](https://github.com/princeton-nlp/SWE-agent):
+  Princeton GitHub issues auto-fixer.
+- [PRAgent](https://github.com/Codium-ai/pr-agent):
+  Codium AI-powered agent for automated pull request analysis, feedback and suggestions.
+
 ### Project
 
 - [VibeKanban](http://github.com/BloopAI/vibe-kanban):
   Run coding agents in parallel without conflicts, and perform code review.
-
-### Client
-
-- [LobeChat](https://github.com/lobehub/lobe-chat):
-  Open-source and modern design AI chat framework.
-- [ChatBox](https://github.com/chatboxai/chatbox):
-  User-friendly desktop client app for AI models.
-- [CherryStudio](https://github.com/CherryHQ/cherry-studio):
-  All-in-One desktop copilot.
-- [ChatHub](https://github.com/chathub-dev/chathub):
-  All-in-one chatbot client.
-
-### Copilot
-
-- [Everywhere](https://github.com/DearVa/Everywhere):
-  Context-aware AI assistant for desktop.
-- [Immersive](https://github.com/immersive-translate/immersive-translate):
-  Translate web pages instantly.
-- [DeepL](https://github.com/DeepLcom):
-  Free translation copilot.
-- [GrammarLy](https://github.com/grammarly):
-  Free writing and grammar checker copilot.
 
 ### Frontend
 
@@ -684,33 +724,38 @@ When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688
 - [X-Crawl](https://github.com/coder-hxl/x-crawl):
   Flexible Node.js AI-assisted crawler library.
 
-### SDK
+### Client
 
-- [n8n](https://github.com/Zie619/n8n-workflows):
-  Curated list of n8n workflows.
-- [Dify](https://github.com/langgenius/dify):
-  LLM app development platform combines AI workflow, RAG pipeline, agent capabilities.
-- [LangGraph](https://github.com/langchain-ai/langgraph):
-  Build resilient language agents as graphs.
-- [MetaGPT](https://github.com/geekan/MetaGPT):
-  Multi-agent framework to form collaborative entity for complex tasks.
-- [ChatDev](https://github.com/OpenBMB/ChatDev):
-  Communicative agents for software development.
-- [SWEAgent](https://github.com/princeton-nlp/SWE-agent):
-  Princeton GitHub issues auto-fixer.
-- [PRAgent](https://github.com/Codium-ai/pr-agent):
-  Codium AI-powered agent for automated pull request analysis, feedback and suggestions.
+- [LobeChat](https://github.com/lobehub/lobe-chat):
+  Open-source and modern design AI chat framework.
+- [ChatBox](https://github.com/chatboxai/chatbox):
+  User-friendly desktop client app for AI models.
+- [CherryStudio](https://github.com/CherryHQ/cherry-studio):
+  All-in-One desktop copilot.
+- [ChatHub](https://github.com/chathub-dev/chathub):
+  All-in-one chatbot client.
+
+### Copilot
+
+- [Everywhere](https://github.com/DearVa/Everywhere):
+  Context-aware AI assistant for desktop.
+- [Immersive](https://github.com/immersive-translate/immersive-translate):
+  Translate web pages instantly.
+- [DeepL](https://github.com/DeepLcom):
+  Free translation copilot.
+- [GrammarLy](https://github.com/grammarly):
+  Free writing and grammar checker copilot.
+
+### Slide
+
+- [Banana](https://github.com/Anionex/banana-slides):
+  AI-native PPT generator based on nano banana pro.
 
 ### Documentation
 
 - [DeepWiki](https://github.com/AsyncFuncAI/deepwiki-open).
 - [ZRead](https://zread.ai):
   AI-powered github repository reader.
-
-### Slide
-
-- [Banana](https://github.com/Anionex/banana-slides):
-  AI-native PPT generator based on nano banana pro.
 
 ## References
 

@@ -169,38 +169,6 @@ you need to [improve the relevance and quality of the input](https://github.blog
 - Instruction following.
 - Step-by-step reasoning.
 
-## Toolchain
-
-### LangChain
-
-[LangChain](https://upstash.com/blog/langchain-explained)
-aims to make programming with LLMs easier.
-
-[![LangChain Modules](./figures/lang-chain.png)](https://github.com/langchain-ai/langchainjs)
-
-Model I/O module
-normalize LLM inputs (e.g. prompts), APIs, and outputs (e.g. completions):
-
-![LangChain Model I/O Module](./figures/lang-chain-model-io.png 'LangChain Model I/O Module')
-
-Retrieval module
-help to process data alongside the user inputs,
-making it easier to retrieve relevant information:
-
-![LangChain Retrieval Module](./figures/lang-chain-retrieval.png 'LangChain Retrieval Module')
-
-Chains module
-link tasks together:
-
-![LangChain Chains Module](./figures/lang-chain-chains.png 'LangChain Chains Module')
-
-Agents module
-is chains with a list of functions (called tools) it can execute,
-while chains are hardcoded,
-agents choose their actions with the help of an LLM:
-
-![LangChain Agents Module](./figures/lang-chain-agents.png 'LangChain Agents Module')
-
 ## Library
 
 ### Embeddings and Vector Stores
@@ -233,18 +201,6 @@ agents choose their actions with the help of an LLM:
   Offline local ChatGPT.
 - [LocalLLMs](https://github.com/vince-lam/awesome-local-llms):
   Curated list of locally running LLMs.
-
-### SDK
-
-- [LangChain](https://github.com/langchain-ai/langchainjs):
-  LLM framework.
-- [TypeChat](https://github.com/microsoft/TypeChat):
-  Makes it easy to build natural language interfaces.
-
-### Platform
-
-- OpenAI GPT [API](https://platform.openai.com).
-- Google Gemini [API](https://ai.google.dev).
 
 ## References
 
