@@ -615,6 +615,14 @@ Agents [eval](https://www.anthropic.com/engineering/demystifying-evals-for-ai-ag
 7. Read transcripts (记录).
 8. Pick framework: [prompt foo](https://github.com/promptfoo/promptfoo), [harbor](https://github.com/laude-institute/harbor).
 
+| Method            | 👍 Strengths                    | 👎 Weaknesses                                                |
+| ----------------- | ------------------------------- | ------------------------------------------------------------ |
+| Human Evaluation  | Captures nuanced behavior       | Subjective, time-consuming, expensive, difficult to scale    |
+| LLM-as-a-Judge    | Consistent, scalable, efficient | May overlook intermediate steps, limited by LLM capabilities |
+| Automated Metrics | Objective, scalable, efficient  | May not capture full capabilities                            |
+
+### Trace
+
 When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688) is the source of truth:
 
 - Debugging becomes trace analysis
@@ -622,7 +630,7 @@ When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688
 - Can't set breakpoints in reasoning
 - Performance optimization changes: task success rate, reasoning quality, tool usage efficiency
 
-:::tip[Trajectory]
+### Trajectory
 
 **Trajectory** is equally important as **final response**:
 
@@ -633,8 +641,6 @@ When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688
 - Recall: essential tool calls.
 
 ![Trajectory](./figures/trajectory.png 'Trajectory')
-
-:::
 
 ## Benchmarks
 
