@@ -133,9 +133,9 @@ graph TD
   SKILLS --> KNOWLEDGE --> MCP --> STD
   STD --> DB & API & FS & EXT
 
-  style Transport fill:#fceacf
-  style Application fill:#e1eff8
-  style Infrastructure fill:#d9f0e1
+  style Transport fill:#fceacf,color:#333
+  style Application fill:#e1eff8,color:#333
+  style Infrastructure fill:#d9f0e1,color:#333
 ```
 
 **渐进式披露**:

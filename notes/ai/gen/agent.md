@@ -117,6 +117,33 @@ observe what users ask agent to do,
 
 ![Multi-Agent System](./figures/multi-agent-system.png 'Multi-Agent System')
 
+```mermaid
+flowchart TD
+  %% Define styles
+  classDef blue fill:#e6f0ff,stroke:#4285f4,stroke-width:2px,color:#000
+  classDef yellow fill:#fff8e1,stroke:#ffb74d,stroke-width:2px,color:#000
+  classDef default fill:#ffffff,stroke:#333,stroke-width:1px,color:#000
+
+  %% Apply styles
+  Orchestrator[Orchestrator]:::blue
+  Navigation[Navigation]
+  MediaSearch[Media Search]
+  Message[Message]
+  CarManual[Car Manual]
+  Rephraser[Rephraser]:::yellow
+  class Navigation,MediaSearch,Message,CarManual default
+
+  %% Define connections
+  Orchestrator --> Navigation
+  Orchestrator --> MediaSearch
+  Orchestrator --> Message
+  Orchestrator --> CarManual
+  Navigation --> Rephraser
+  MediaSearch --> Rephraser
+  Message --> Rephraser
+  CarManual --> Rephraser
+```
+
 :::tip[Pros]
 
 - Accuracy: cross check.
