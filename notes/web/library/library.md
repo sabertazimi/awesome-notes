@@ -1462,8 +1462,6 @@ import LibraryGallery from '@site/src/components/library-gallery'
   Lightweight JavaScript API for handling browser cookies.
 - [Cookies](https://github.com/bendotcodes/cookies):
   Load and save cookies for React application.
-- [Nookies](https://github.com/maticzav/nookies):
-  Next.js cookie helpers.
 
 ### Web Storage
 
@@ -1483,6 +1481,8 @@ import LibraryGallery from '@site/src/components/library-gallery'
   Async key-value storage API.
 - [Storage](https://github.com/KID-joker/stokado):
   Web storage API wrapper.
+- [LocalSpace](https://github.com/unadlib/localspace):
+  Unifies APIs of IndexedDB, localStorage and Web Storage.
 - [OPfsTools](https://github.com/hughfenghen/opfs-tools):
   Origin private file system API wrapper.
 
