@@ -55,6 +55,10 @@ tags: [AI, LLM, PromptEngineering]
 
 Given examples, generate output:
 
+- One-shot.
+- Few-shot.
+- Retrieval-augmented.
+
 [![In-Context Learning](./figures/in-context-learning.png)](https://nips.cc/virtual/2023/76728)
 
 ## Chain-of-Thought
