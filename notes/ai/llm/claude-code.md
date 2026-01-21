@@ -263,6 +263,10 @@ it will extend Claude Code through the plugin system with:
 ```
 
 ```bash
+/plugin install ralph-wiggum
+```
+
+```bash
 /plugin install superpowers@superpowers-marketplace
 ```
 
@@ -307,6 +311,8 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
   Comprehensive production-ready system combining agents, multi-agent workflow orchestrators, skills, and slash commands.
 - [Manus](https://github.com/OthmanAdi/planning-with-files):
   Manus-style persistent markdown planning.
+- [Ralph](https://github.com/frankbria/ralph-claude-code):
+  Autonomous development loop.
 - [Compound](https://github.com/EveryInc/compound-engineering-plugin):
   Compound engineering plugin.
 - [Continuous](https://github.com/parcadei/Continuous-Claude-v3):
