@@ -115,11 +115,15 @@ observe what users ask agent to do,
 - Collaborative.
 - Competitive.
 
+![Multi-Agent System](./figures/multi-agent-system.png 'Multi-Agent System')
+
 :::tip[Pros]
 
-- Scalability: parallelism.
-- Reliability: reduce hallucinations and biases.
+- Accuracy: cross check.
+- Efficiency: parallelism.
+- Scalability.
 - Fault tolerance.
+- Reliability: reduce hallucinations and biases.
 
 :::
 

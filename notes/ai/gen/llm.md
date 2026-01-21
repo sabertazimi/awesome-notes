@@ -139,6 +139,10 @@ Thinking tokens are model's only persistent memory during reasoning.
 - Effect: reduce hallucination.
 - Cost: avoid retraining.
 
+![Retrieval-Augmented Generation](./figures/retrieval-augmented-generation.png 'Retrieval-Augmented Generation')
+
+### Context
+
 Context is everything when it comes to getting the most out of an AI tool.
 To improve the relevance and quality of a generative AI output,
 you need to [improve the relevance and quality of the input](https://github.blog/2024-04-04-what-is-retrieval-augmented-generation-and-what-does-it-do-for-generative-ai).
@@ -149,7 +153,15 @@ you need to [improve the relevance and quality of the input](https://github.blog
 
 :::
 
-![Retrieval-Augmented Generation](./figures/retrieval-augmented-generation.png 'Retrieval-Augmented Generation')
+### Agentic
+
+Agentic RAG (autonomous retrieval agents)
+actively refine their search based on iterative reasoning:
+
+- Context-aware query expansion.
+- Multi-step reasoning.
+- Adaptive source selection.
+- Validation and correction.
 
 ## Scaling Law
 
