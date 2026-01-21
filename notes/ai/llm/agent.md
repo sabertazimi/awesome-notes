@@ -107,10 +107,21 @@ observe what users ask agent to do,
 
 :::
 
-### Recursive Language Models
+### Multi-Agent System
 
-[RLM](https://www.primeintellect.ai/blog/rlm)
-通过分治与递归, 实现多跳推理代码, 解决长文本带来的 `Context Rot` 问题.
+- Sequential.
+- Hierarchical.
+- Peer-to-peer.
+- Collaborative.
+- Competitive.
+
+:::tip[Pros]
+
+- Scalability: parallelism.
+- Reliability: reduce hallucinations and biases.
+- Fault tolerance.
+
+:::
 
 ## Instructions
 
