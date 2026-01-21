@@ -342,7 +342,7 @@ navigator.geolocation.watchPosition(
 - 历史兼容问题: Netscape -> IE -> Firefox -> Safari -> Chrome -> Edge.
 - 每一个新的浏览器厂商必须保证旧网站的检测脚本能正常识别自家浏览器,
   从而正常打开网页, 导致 `navigator.userAgent` 不断变长.
-- [UserAgent Data Parser](https://github.com/faisalman/ua-parser-js)
+- User-Agent detection [parser](https://github.com/faisalman/ua-parser-js).
 
 ```ts
 console.log(navigator.userAgent)
@@ -414,7 +414,8 @@ class BrowserDetector {
 
 :::caution[Feature Detection]
 
-**不使用特性/浏览器推断**, 往往容易推断错误 (且会随着浏览器更新产生新的错误):
+**不依赖 User-Agent 推断浏览器版本**, 容易推断错误,
+建议使用 [feature detection](https://developer.mozilla.org/docs/Learn_web_development/Extensions/Testing/Feature_detection):
 
 ```ts
 // 检测浏览器是否支持 Netscape 式的插件
@@ -427,11 +428,56 @@ const hasDOM1 = !!(
 )
 
 // 特性检测
-if (document.getElementById)
+if (document.getElementById) {
   element = document.getElementById(id)
+}
 ```
 
 :::
+
+Detect [Safari and iOS versions](https://evilmartians.com/chronicles/how-to-detect-safari-and-ios-versions-with-ease):
+
+```ts
+// Desktop Safari, all mobile WebKit browsers on iOS and webview iOS
+function isWebkit() {
+  return 'GestureEvent' in window
+}
+
+// All mobile webkit browsers and webview iOS
+function isMobileWebKit() {
+  return 'ongesturechange' in window
+}
+
+// Desktop Safari
+function isDesktopWebKit() {
+  return (
+    typeof window !== 'undefined'
+    && 'safari' in window
+    && 'pushNotification' in window.safari
+  )
+}
+
+// Use `CSS.supports` in Javascript or `@supports` in CSS to check if the feature is available.
+const supportsManagedMediaSource = 'ManagedMediaSource' in window
+
+// true on iOS 17.0+ (Safari 17.0+)
+const isAtLeastIOS17 = CSS.supports('contain-intrinsic-size', '100px')
+
+// Combine to isolate 17.0
+function isOnlyIOS170() {
+  return isAtLeastIOS17 && !supportsManagedMediaSource
+}
+
+if (isMobileWebKit()) {
+  if (isOnlyIOS170()) {
+    // Running iOS 17.0 exactly
+  } else if (isAtLeastIOS17) {
+    // Safe to use iOS 17+ features
+  } else {
+    // Fallback for older iOS versions
+  }
+}
+```
 
 ## Screen
 
