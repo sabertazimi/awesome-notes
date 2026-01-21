@@ -7,6 +7,11 @@ tags: [AI, Generative AI, LLM, Agent, MCP]
 
 ## Library
 
+### SDK
+
+- [FastMCP](https://github.com/jlowin/fastmcp):
+  Build MCP servers and clients.
+
 ### API
 
 - [Context7](https://github.com/upstash/context7).
