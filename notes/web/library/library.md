@@ -1176,25 +1176,14 @@ import LibraryGallery from '@site/src/components/library-gallery'
 - [Lottie](https://github.com/airbnb/lottie-web):
   Airbnb AE solution.
 
-### Page Transition
-
-- [Barba.js](https://github.com/luruke/barba.js):
-  Create badass, fluid and smooth transitions between website's pages.
-
 ### Scroll Animation
 
 - [Lenis](https://github.com/darkroomengineering/lenis):
   Lightweight, robust, and performant smooth scroll library.
-- [Snap](https://github.com/lucafalasco/scroll-snap):
-  Snap page when user stops scrolling.
-- [BetterScroll](https://github.com/ustbhuangyi/better-scroll):
-  Smooth and performant scrolling for web.
-- [Smooth](https://github.com/idiotWu/smooth-scrollbar):
-  Customizable, extendable, and high-performance JavaScript-based scrollbar solution.
 - [Parallax](https://github.com/jscottsmith/react-scroll-parallax):
   React hooks and components to create parallax scroll effects.
-- [PushIn](https://github.com/nateplusplus/pushin):
-  Dolly or push-in effect when user scrolls.
+- [Snap](https://github.com/lucafalasco/scroll-snap):
+  Snap page when user stops scrolling.
 
 ### Loading Animation
 
