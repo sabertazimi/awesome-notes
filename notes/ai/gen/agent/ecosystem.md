@@ -77,7 +77,7 @@ Building agent with [LangGraph](https://www.kaggle.com/code/markishere/day-3-bui
 ### Agents
 
 - [n8n](https://github.com/Zie619/n8n-workflows):
-  Curated list of n8n workflows.
+  n8n workflows.
 - [Dify](https://github.com/langgenius/dify):
   LLM app development platform combines workflow, RAG pipeline, agent capabilities.
 - [Code](https://github.com/sourcegraph/awesome-code-ai):

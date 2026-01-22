@@ -217,7 +217,7 @@ actively refine their search based on iterative reasoning:
 - [Jan](https://github.com/janhq/jan):
   Offline local ChatGPT.
 - [LocalLLMs](https://github.com/vince-lam/awesome-local-llms):
-  Curated list of locally running LLMs.
+  Locally running LLMs.
 
 ## References
 

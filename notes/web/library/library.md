@@ -560,7 +560,7 @@ import LibraryGallery from '@site/src/components/library-gallery'
 ### CSS Design
 
 - [Awesome](https://github.com/LisaDziuba/Awesome-Design-Tools):
-  Curated list of design toolkit.
+  Design toolkit.
 - [CodyHouse](https://codyhouse.co):
   CodyHouse components.
 - [Create](https://cccreate.co).
