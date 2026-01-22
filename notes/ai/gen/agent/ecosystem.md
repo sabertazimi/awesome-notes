@@ -50,16 +50,18 @@ Building agent with [LangGraph](https://www.kaggle.com/code/markishere/day-3-bui
 - [llms.txt](https://github.com/AnswerDotAI/llms-txt):
   Helping language models use website.
 - [System](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools):
-  System prompts for AI agents.
+  System prompts for agents.
 
 ### SDK
 
-- [LangGraph](https://github.com/langchain-ai/langgraph):
-  Build resilient language agents as graphs.
 - [LangChain](https://github.com/langchain-ai/langchain):
   Platform for reliable agents.
+- [LangGraph](https://github.com/langchain-ai/langgraph):
+  Build resilient language agents as graphs.
 - [LlamaIndex](https://github.com/run-llama/llama_index):
   Build RAG applications on top of LLMs.
+- [Crew](https://github.com/crewaiinc/crewai):
+  Orchestrate role-playing, autonomous agents
 - [TypeChat](https://github.com/microsoft/TypeChat):
   Makes it easy to build natural language interfaces.
 - [OpenAI](https://platform.openai.com).
@@ -68,14 +70,14 @@ Building agent with [LangGraph](https://www.kaggle.com/code/markishere/day-3-bui
 ### RAG
 
 - [RAGFlow](https://github.com/infiniflow/ragflow):
-  Superior context layer for AI agents.
+  Superior context layer for agents.
 
 ### Agents
 
 - [n8n](https://github.com/Zie619/n8n-workflows):
   Curated list of n8n workflows.
 - [Dify](https://github.com/langgenius/dify):
-  LLM app development platform combines AI workflow, RAG pipeline, agent capabilities.
+  LLM app development platform combines workflow, RAG pipeline, agent capabilities.
 - [MetaGPT](https://github.com/geekan/MetaGPT):
   Multi-agent framework to form collaborative entity for complex tasks.
 - [ChatDev](https://github.com/OpenBMB/ChatDev):
@@ -102,11 +104,11 @@ Building agent with [LangGraph](https://www.kaggle.com/code/markishere/day-3-bui
 - [BrowserUse](https://github.com/browser-use/browser-use):
   Leading open-source web agent project.
 - [Agent](https://github.com/vercel-labs/agent-browser):
-  Browser automation CLI for AI agents.
+  Browser automation CLI for agents.
 - [Stagehand](https://github.com/browserbase/stagehand):
-  AI Browser Automation Framework.
+  Browser Automation Framework.
 - [LightPanda](https://github.com/lightpanda-io/browser):
-  Headless browser designed for AI and automation.
+  Headless browser designed for automation.
 - [FireCrawl](https://github.com/firecrawl/firecrawl):
   Turn entire websites into LLM-ready markdown or structured data.
 - [X-Crawl](https://github.com/coder-hxl/x-crawl):
@@ -115,9 +117,9 @@ Building agent with [LangGraph](https://www.kaggle.com/code/markishere/day-3-bui
 ### Client
 
 - [LobeChat](https://github.com/lobehub/lobe-chat):
-  Open-source and modern design AI chat framework.
+  Chat framework.
 - [ChatBox](https://github.com/chatboxai/chatbox):
-  User-friendly desktop client app for AI models.
+  User-friendly desktop client app.
 - [CherryStudio](https://github.com/CherryHQ/cherry-studio):
   All-in-One desktop copilot.
 - [ChatHub](https://github.com/chathub-dev/chathub):
@@ -126,7 +128,7 @@ Building agent with [LangGraph](https://www.kaggle.com/code/markishere/day-3-bui
 ### Copilot
 
 - [Everywhere](https://github.com/DearVa/Everywhere):
-  Context-aware AI assistant for desktop.
+  Context-aware assistant for desktop.
 - [Immersive](https://github.com/immersive-translate/immersive-translate):
   Translate web pages instantly.
 - [DeepL](https://github.com/DeepLcom):
