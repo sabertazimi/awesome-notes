@@ -22,8 +22,8 @@ AI Agent system that uses LLMs as core reasoning engine, augmented with tools, m
 ## Orchestration
 
 - [Multi-Agent](./multi-agent.md) - Multi-agent orchestration patterns
-- [Guardrails](./guardrails.md) - Safety guardrails for agent execution
 - [Eval](./eval.md) - Evaluation methods, trace analysis, and benchmarks
+- [Security](./security.md) - Safety guardrails for agent execution
 
 ## Resources
 

@@ -1,9 +1,19 @@
 ---
 sidebar_position: 21
-tags: [AI, Generative AI, LLM, Agent, Guardrails]
+tags: [AI, Generative AI, LLM, Agent, Security, Guardrail]
 ---
 
-# Guardrails
+# Security
+
+## Principles
+
+安全[三要素](https://storage.googleapis.com/gweb-research2023-media/pubtools/1018686.pdf):
+
+- Human controllers.
+- Limited powers.
+- Observable actions.
+
+## Guardrails
 
 构建防护措施:
 
@@ -20,9 +30,11 @@ tags: [AI, Generative AI, LLM, Agent, Guardrails]
   并根据只读与写入访问、可逆性、所需的账户权限和财务影响等因素分配低、中或高评级.
   使用这些风险评级来触发自动化操作,
   例如在高风险功能执行前暂停进行防护措施检查, 或在需要时升级到人工干预.
-- 基于规则的保护:
+- 基于规则的防御:
   简单的确定性措施 (黑名单、输入长度限制、正则表达式过滤器) 以防止已知的威胁,
   如禁止的术语或 SQL 注入.
+- 基于推理的防御:
+  使用模型本身来评估输入、输出或代理内部推理中的潜在风险.
 - 输出验证:
   通过提示工程和内容检查确保响应与品牌价值一致, 防止可能损害品牌完整性的输出.
 
