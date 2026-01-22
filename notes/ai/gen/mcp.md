@@ -143,8 +143,12 @@ Build [good](https://www.philschmid.de/mcp-best-practices) MCP servers:
 
 ### Collections
 
+- [Registry](https://github.com/modelcontextprotocol/registry):
+  Official registry.
+- [Pulse](https://www.pulsemcp.com):
+  Directory.
 - [MCP](https://mcpservers.org):
-  Collection of MCP servers and Claude Code skills.
+  Collection.
 - [Awesome](https://github.com/punkpeye/awesome-mcp-servers):
   List.
 
