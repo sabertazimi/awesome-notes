@@ -193,7 +193,9 @@ CMD ["uv", "run", "my_app"]
 
 ## Library
 
-- [PySnooper](https://github.com/cool-RR/PySnooper):
-  Poor man's debugger.
+- [IPython](https://github.com/ipython/ipython):
+  Productive interactive computing.
 - [Extract](https://github.com/google/langextract):
   Extracting structured information from unstructured text using LLMs.
+- [Snooper](https://github.com/cool-RR/PySnooper):
+  Poor man's debugger.
