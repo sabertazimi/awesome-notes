@@ -106,7 +106,7 @@ tags: [AI, Generative AI, LLM, Agent, MCP, Best Practice]
 - Controlled server environment.
 - Prevent naming collisions.
 - Lifecycle hooks.
-- Require human-in-the-loop (HIL).
+- Require human-in-the-loop (HIL): long-running operations, high-risk operations.
 - Input validation.
 - Output sanitization.
 - Separate system prompts.
