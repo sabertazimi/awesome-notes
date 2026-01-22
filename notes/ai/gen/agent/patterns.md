@@ -14,7 +14,7 @@ Agent design [patterns](https://rlancemartin.github.io/2026/01/09/agent_design):
 - Isolate context
 - Evolve context
 
-## Agent-native
+## Agent-Native
 
 [Agent-native](https://every.to/guides/agent-native) apps should:
 
@@ -66,3 +66,11 @@ observe what users ask agent to do,
 - Unused tools: remove.
 
 :::
+
+## Self-Evolving
+
+Self-evolving [agents](https://github.com/CharlesQ9/Self-Evolving-Agents),
+use runtime experience and external signals to optimize future behavior:
+
+- Enhanced context engineering.
+- Tool optimization and creation.

@@ -3,7 +3,7 @@ sidebar_position: 2
 tags: [AI, Generative AI, LLM, Agent, MCP]
 ---
 
-# MCP
+# Model Context Protocol
 
 ## Library
 
