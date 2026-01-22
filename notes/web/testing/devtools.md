@@ -104,8 +104,18 @@ long click reload: multiple reload options e.g. clean cache
 
 ### Style
 
-- color picker
-- filter: class filter, pseudo filter, css style filter
+- Color picker
+- Filter: class filter, pseudo filter, css style filter
+- `:hov`: element state (active, focus, hover, target, etc)
+
+:::tip[Emulate a Focused Page]
+
+Enable `Emulate a focused page` in
+`:hov` element state panel or `Rendering` panel,
+to prevent dropdowns from disappearing.
+`visibilityChange` event will not be triggered.
+
+:::
 
 ## Console
 
