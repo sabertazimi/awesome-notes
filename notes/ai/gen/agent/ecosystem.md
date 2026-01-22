@@ -62,6 +62,8 @@ Building agent with [LangGraph](https://www.kaggle.com/code/markishere/day-3-bui
   Build RAG applications on top of LLMs.
 - [Crew](https://github.com/crewaiinc/crewai):
   Orchestrate role-playing, autonomous agents
+- [AgentOS](https://github.com/agno-agi/agno):
+  Build, run, manage multi-agent systems.
 - [TypeChat](https://github.com/microsoft/TypeChat):
   Makes it easy to build natural language interfaces.
 - [OpenAI](https://platform.openai.com).
