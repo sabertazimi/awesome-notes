@@ -7,11 +7,9 @@ authorImageURL: https://github.com/sabertazimi.png
 tags: [Web, Library]
 ---
 
-<!-- markdownlint-disable MD041 -->
+# Library
 
 import LibraryGallery from '@site/src/components/library-gallery'
-
-# Library
 
 <LibraryGallery content="
 
