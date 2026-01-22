@@ -98,6 +98,20 @@ tags: [AI, Generative AI, LLM, Agent, MCP, Best Practice]
 }
 ```
 
+## Security
+
+- Explicit allowlist.
+- Package pinning.
+- Secure gateway.
+- Controlled server environment.
+- Prevent naming collisions.
+- Lifecycle hooks.
+- Require human-in-the-loop (HIL).
+- Input validation.
+- Output sanitization.
+- Separate system prompts.
+- Least privilege.
+
 ## Best Practices
 
 Build [good](https://www.philschmid.de/mcp-best-practices) MCP servers:
@@ -155,3 +169,4 @@ Build [good](https://www.philschmid.de/mcp-best-practices) MCP servers:
 ## References
 
 - MCP [specification](https://github.com/modelcontextprotocol/modelcontextprotocol).
+- MCP [whitepaper](https://www.kaggle.com/whitepaper-agent-tools-and-interoperability-with-mcp).
