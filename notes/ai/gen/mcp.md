@@ -1,9 +1,23 @@
 ---
 sidebar_position: 2
-tags: [AI, Generative AI, LLM, Agent, MCP]
+tags: [AI, Generative AI, LLM, Agent, MCP, Best Practice]
 ---
 
 # Model Context Protocol
+
+## Best Practices
+
+Build [good](https://www.philschmid.de/mcp-best-practices) MCP servers:
+
+- Outcomes over operations: don't convert REST APIs 1:1 into MCP tools.
+- Flatten arguments.
+- Fewer tools and tighter responses:
+  - 5–15 tools per server.
+  - One server, one job.
+  - Delete unused tools.
+  - Split by persona (Admin/user).
+- Name for discovery `{service}_{action}_{resource}`: e.g. `slack_send_message`, `linear_list_issues`.
+- Paginate large results.
 
 ## Library
 
