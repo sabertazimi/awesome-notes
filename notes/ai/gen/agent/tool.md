@@ -15,9 +15,7 @@ tags: [AI, Generative AI, LLM, Agent, Tool]
 4. Codegen: dynamic programs.
 5. Agent calling: sub-agents, multi-agent systems.
 
-## Best Practices
-
-### Documentation
+## Documentation
 
 Documentation is important:
 
@@ -53,13 +51,26 @@ def get_product_information(product_id: str) -> dict:
     """
 ```
 
-### Agentic
+## Agentic
 
 Describe actions, not implementations:
 
 - What over how.
 - Explain tool interactions over dictate (规定) workflows.
 - Don't duplicate instructions.
+
+## Granularity
+
+- Define clear responsibilities.
+- Don't create multi-tools (❌多功能工具❌).
+
+## Output
+
+Concise output:
+
+- Don't return large responses.
+- Use external data storage for long-term memory.
+- Provide descriptive error messages.
 
 ## References
 
