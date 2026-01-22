@@ -50,3 +50,7 @@ When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688
 - Aggregate: Don’t obsess over a 1-2% lead on one benchmark, focus on specific and comprehensive domain.
 - Relative: Compare within the same model family or lab, how did the score change from v1 to v2?
 - Verify: The only benchmark that matters at the end of the day is your workload.
+
+## References
+
+- Claude Opus 4.5 [system card](https://assets.anthropic.com/m/64823ba7485345a7/Claude-Opus-4-5-System-Card.pdf).
