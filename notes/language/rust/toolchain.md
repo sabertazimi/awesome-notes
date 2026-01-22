@@ -446,6 +446,8 @@ console.log(result)
 
 ### Command Line Interface
 
+- [Rata](https://github.com/ratatui/ratatui):
+  Cook up terminal user interfaces.
 - [Clap](https://github.com/clap-rs/clap):
   CLI Framework.
 - [Console](https://github.com/console-rs/indicatif):
