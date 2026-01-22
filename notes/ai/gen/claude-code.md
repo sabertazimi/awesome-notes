@@ -363,12 +363,14 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 - [Seekers](https://github.com/yusufkaraaslan/Skill_Seekers):
   Convert documentation websites, GitHub repositories, and PDFs
   into Claude AI skills with automatic conflict detection.
-- [Skills](https://github.com/anthropics/skills):
-  Anthropic skills.
 - [Awesome](https://github.com/ComposioHQ/awesome-claude-skills):
   Awesome skills.
+- [Directory](https://skills.sh):
+  `npx skills add <owner/repo>`.
 - [Marketplace](https://skillsmp.com):
   Skills marketplace.
+- [Skills](https://github.com/anthropics/skills):
+  Anthropic skills.
 - [Plugins](https://github.com/anthropics/claude-plugins-official):
   Anthropic plugins.
 - [Registry](https://github.com/Kamalnrf/claude-plugins):
