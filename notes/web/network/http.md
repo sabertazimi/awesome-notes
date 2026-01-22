@@ -102,8 +102,6 @@ defines the following
   - 503 Service Unavailable.
   - 504 Gateway Timeout.
 
-![HTTP Redirect](./figures/http-redirect.png 'HTTP Redirect')
-
 Use reasonable HTTP status codes:
 
 - 200: general success.
@@ -117,6 +115,30 @@ Use reasonable HTTP status codes:
 - 404: missing resources.
 - 429: too many requests.
 - 5xx: internal errors (these should be avoided at all costs).
+
+![HTTP Redirect](./figures/http-redirect.png 'HTTP Redirect')
+
+:::tip[HTTP 402]
+
+HTTP 402 `Payment Required`
+embeds payments directly into HTTP.
+Based on [x402](https://github.com/coinbase/x402),
+agent payments protocol (AP2) designed to [agentic commerce](https://www.msuiche.com/posts/when-machines-pay-machines-the-economics-of-agentic-ai).
+
+```mermaid
+graph TD
+  subgraph Agentic Web
+    AI[AI Agent]
+    DP[Data Provider]
+    EU[End User/System]
+
+    AI -- Micropayment --> DP
+    DP -- "API + 402" --> AI
+    AI -- Results --> EU
+  end
+```
+
+:::
 
 ## Performance
 
