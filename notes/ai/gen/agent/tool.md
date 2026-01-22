@@ -52,3 +52,15 @@ def get_product_information(product_id: str) -> dict:
         }
     """
 ```
+
+### Agentic
+
+Describe actions, not implementations:
+
+- What over how.
+- Explain tool interactions over dictate (规定) workflows.
+- Don't duplicate instructions.
+
+## References
+
+- Agent tools and interoperability [whitepaper](https://www.kaggle.com/whitepaper-agent-tools-and-interoperability-with-mcp).
