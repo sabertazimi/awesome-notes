@@ -5,14 +5,17 @@ tags: [Web, HTML, Head]
 
 # Head
 
-`meta` data list in
-[HEAD](https://github.com/joshbuchea/HEAD).
-
 ## Favicon
+
+Three files fit [most needs](https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs):
 
 ```html
 <head>
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <!-- 180x180 (Apple devices) -->
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 </head>
 ```
 
@@ -40,3 +43,7 @@ Generating favicons in [all necessary sizes](https://github.com/pixel-point/favp
 <meta name="theme-color" content="#319197" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#872e4e" media="(prefers-color-scheme: dark)" />
 ```
+
+## References
+
+- `<head>` element definitive [guide](https://github.com/joshbuchea/HEAD).
