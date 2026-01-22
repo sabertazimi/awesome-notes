@@ -4,6 +4,7 @@
     "codegen",
     "convolutional",
     "cout",
+    "gsap",
     "gson",
     "matplotlib",
     "pytest",

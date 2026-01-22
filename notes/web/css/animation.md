@@ -288,34 +288,44 @@ DOM events:
 - `animationend`: triggered after an animation completes.
 - `animationstart`: triggered at the start of an animation.
 
-## GreenSock
+## GreenSock Animation Platform
 
-### TweenMax
+### Tween
 
 ```ts
-TweenMax.fromTo(element, 1, { x: 0 }, { x: 100 })
+import { gsap } from 'gsap'
+
+gasp.fromTo(element, 1, { x: 0 }, { x: 100 })
 ```
 
-### TimelineMax
+### Flip
+
+Responsive [grid layout transitions](https://tympanus.net/codrops/2026/01/20/animating-responsive-grid-layout-transitions-with-gsap-flip):
 
 ```ts
-const tl = new TimelineMax()
-tl.staggerFrom(
-  [
-    '#Cap_1 > g > path:nth-child(1)',
-    '#Cap_1 > circle:nth-child(7)',
-    '#Cap_1 > path:nth-child(6)',
-    '#Cap_1 > circle:nth-child(5)',
-  ],
-  1,
-  {
-    scaleY: 0,
-    scaleX: 0,
-    transformOrigin: 'center',
-    ease: Bounce.easeOut,
-    stagger: 0.2,
-  }
-)
+import { gsap } from 'gsap'
+import { Flip } from 'gsap/Flip'
+
+gsap.registerPlugin(Flip)
+let animated = false
+
+triggerButton.addEventListener('click', () => {
+  // Lock animation state
+  animated = true
+
+  // Capture the current position and size of all grid items
+  const state = Flip.getState(allGridItem)
+
+  // Animate elements from the previous state to the new layout
+  Flip.from(state, {
+    duration: 0.8,
+    ease: 'expo.inOut',
+    onComplete: () => {
+    // Unlock animation after completion
+      animated = false
+    },
+  })
+})
 ```
 
 ## References
