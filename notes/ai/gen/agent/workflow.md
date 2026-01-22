@@ -71,3 +71,8 @@ Cursor [debug mode](https://cursor.com/blog/agent-best-practices#bug-debug-mode)
 - 从代码审查中提取模式.
 - 建立可复用的工作流程: slash commands, hooks, guardrails, and skills.
 - Linter rules, regression tests, `AGENTS.md` improvements, checklist updates.
+
+## References
+
+- Vibe coding [guide](https://github.com/tukuaiai/vibe-coding-cn).
+- First-principles agentic coding [guide](https://mp.weixin.qq.com/s/a5UDlkD6Db2kKCAj7LN6gQ).

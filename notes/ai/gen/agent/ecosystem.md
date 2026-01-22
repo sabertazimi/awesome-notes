@@ -78,6 +78,8 @@ Building agent with [LangGraph](https://www.kaggle.com/code/markishere/day-3-bui
   Curated list of n8n workflows.
 - [Dify](https://github.com/langgenius/dify):
   LLM app development platform combines workflow, RAG pipeline, agent capabilities.
+- [Code](https://github.com/sourcegraph/awesome-code-ai):
+  Coding agents list.
 - [MetaGPT](https://github.com/geekan/MetaGPT):
   Multi-agent framework to form collaborative entity for complex tasks.
 - [ChatDev](https://github.com/OpenBMB/ChatDev):
@@ -146,12 +148,3 @@ Building agent with [LangGraph](https://www.kaggle.com/code/markishere/day-3-bui
 - [DeepWiki](https://github.com/AsyncFuncAI/deepwiki-open).
 - [ZRead](https://zread.ai):
   AI-powered github repository reader.
-
-## References
-
-- Agents [whitepaper](https://www.kaggle.com/whitepaper-agents).
-- Agents companion [whitepaper](https://www.kaggle.com/whitepaper-agent-companion).
-- Agent system [prompts](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools).
-- Coding agents [list](https://github.com/sourcegraph/awesome-code-ai).
-- Vibe coding [guide](https://github.com/tukuaiai/vibe-coding-cn).
-- First-principles agentic coding [guide](https://mp.weixin.qq.com/s/a5UDlkD6Db2kKCAj7LN6gQ).

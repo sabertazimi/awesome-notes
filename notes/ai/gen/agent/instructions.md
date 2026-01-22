@@ -139,3 +139,8 @@ AI agents powered by tricky LLMs prompting:
   Open agentic coding.
 - Generative [agent](https://github.com/joonspk-research/generative_agents).
 - Minecraft [agent](https://github.com/MineDojo/Voyager).
+
+## References
+
+- Claude system [prompts](https://platform.claude.com/docs/en/release-notes/system-prompts).
+- Agent system [prompts](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools).

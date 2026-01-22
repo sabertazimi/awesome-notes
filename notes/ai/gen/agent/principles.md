@@ -38,3 +38,8 @@ Value of highly polished UI and enterprise applications will decrease,
 value of performant, reliable, extensible API will increase.
 
 :::
+
+## References
+
+- Agents [whitepaper](https://www.kaggle.com/whitepaper-agents).
+- Agents companion [whitepaper](https://www.kaggle.com/whitepaper-agent-companion).
