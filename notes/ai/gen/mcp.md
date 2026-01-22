@@ -5,6 +5,99 @@ tags: [AI, Generative AI, LLM, Agent, MCP, Best Practice]
 
 # Model Context Protocol
 
+[![Model Context Protocol](./figures/model-context-protocol.png)](https://www.kaggle.com/whitepaper-agent-tools-and-interoperability-with-mcp)
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "method": "tools/call",
+  "params": {
+    "name": "get_weather",
+    "arguments": {
+      "location": "New York"
+    }
+  }
+}
+```
+
+## Tool
+
+- `name`
+- `title`
+- `description`
+- `inputSchema`
+- `outputSchema`
+- `annotations`: `destructiveHint`, `idempotentHint`, `openWorldHint`, `readOnlyHint`.
+
+```json
+{
+  "name": "get_stock_price",
+  "title": "Stock Price Retrieval Tool",
+  "description": "Get stock price for a specific ticker symbol. If 'date' is provided, it will retrieve closing price.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "symbol": {
+        "type": "string",
+        "description": "Stock ticker symbol"
+      },
+      "date": {
+        "type": "string",
+        "description": "Date to retrieve (in YYYY-MM-DD format)"
+      }
+    },
+    "required": ["symbol"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "price": {
+        "type": "number",
+        "description": "Stock price"
+      },
+      "date": {
+        "type": "string",
+        "description": "Stock price date"
+      }
+    },
+    "required": ["price", "date"]
+  },
+  "annotations": {
+    "readOnlyHint": "true"
+  }
+}
+```
+
+## Error Handling
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "error": {
+    "code": -32602,
+    "message": "Unknown tool: invalid_tool_name. It may be misspelled, or the tool may not exist on this server."
+  }
+}
+```
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 4,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Failed to fetch weather data: API rate limit exceeded. Wait 15 seconds before calling this tool again."
+      }
+    ],
+    "isError": true
+  }
+}
+```
+
 ## Best Practices
 
 Build [good](https://www.philschmid.de/mcp-best-practices) MCP servers:
@@ -53,4 +146,8 @@ Build [good](https://www.philschmid.de/mcp-best-practices) MCP servers:
 - [MCP](https://mcpservers.org):
   Collection of MCP servers and Claude Code skills.
 - [Awesome](https://github.com/punkpeye/awesome-mcp-servers):
-  Collection of MCP (Model Context Protocol) servers.
+  List.
+
+## References
+
+- MCP [specification](https://github.com/modelcontextprotocol/modelcontextprotocol).
