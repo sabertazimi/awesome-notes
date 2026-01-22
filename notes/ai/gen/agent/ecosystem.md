@@ -58,6 +58,8 @@ Building agent with [LangGraph](https://www.kaggle.com/code/markishere/day-3-bui
   Build resilient language agents as graphs.
 - [LangChain](https://github.com/langchain-ai/langchain):
   Platform for reliable agents.
+- [LlamaIndex](https://github.com/run-llama/llama_index):
+  Build RAG applications on top of LLMs.
 - [TypeChat](https://github.com/microsoft/TypeChat):
   Makes it easy to build natural language interfaces.
 - [OpenAI](https://platform.openai.com).
