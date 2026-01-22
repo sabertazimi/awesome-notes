@@ -338,6 +338,8 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 - [NotebookLM](https://github.com/PleasePrompto/notebooklm-skill).
 - [Obsidian](https://github.com/kepano/obsidian-skills).
 - [Cloudflare](https://github.com/cloudflare/skills).
+- [Remotion](https://github.com/remotion-dev/skills):
+  Create videos programmatically in React.
 
 ### Math
 
