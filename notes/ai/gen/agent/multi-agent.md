@@ -6,6 +6,8 @@ tags: [AI, Generative AI, LLM, Agent, Multi-agent, Orchestration]
 # Multi-Agent
 
 - Sequential.
+- Parallel.
+- Loop.
 - Hierarchical.
 - Peer-to-peer.
 - Collaborative.
