@@ -291,17 +291,14 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 
 ## Library
 
-### Boilerplate
+### Bootstrap
 
-- [Switch](https://github.com/farion1231/cc-switch):
-  Quick configuration with All-in-One assistant.
+- [Everything](https://github.com/affaan-m/everything-claude-code):
+  Complete configuration collection.
+- [Showcase](https://github.com/ChrisWiles/claude-code-showcase):
+  Comprehensive project configuration.
 - [Bootstrap](https://github.com/alinaqi/claude-bootstrap):
   Opinionated project initialization.
-- [Showcase](https://github.com/ChrisWiles/claude-code-showcase):
-  Comprehensive Claude Code project configuration.
-- [Seekers](https://github.com/yusufkaraaslan/Skill_Seekers):
-  Convert documentation websites, GitHub repositories, and PDFs
-  into Claude AI skills with automatic conflict detection.
 
 ### Workflow
 
@@ -323,33 +320,29 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 - [Vercel](https://github.com/vercel-labs/agent-skills):
   React best practices and web design guidelines.
 - [Expo](https://github.com/expo/skills):
-  Skills for Expo projects and application services.
+  Expo projects and application services.
 - [UI/UX](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill):
-  Provide design intelligence for building professional UI/UX multiple platforms.
+  Design intelligence for professional UI/UX.
 - [Edmuds](https://github.com/edmund-io/edmunds-claude-code):
-  Personal configuration for productive web development.
+  Productive web development.
 
 ### Browser
 
 - [Dev](http://github.com/SawyerHood/dev-browser):
-  Browser automation skills.
+  Browser automation.
 
 ### Integration
 
-- [NotebookLM](https://github.com/PleasePrompto/notebooklm-skill):
-  Communicate directly with Google NotebookLM notebooks.
-- [Figma](https://github.com/figma/mcp-server-guide):
-  Figma official skills and MCP server.
-- [Notion](https://github.com/makenotion/claude-code-notion-plugin):
-  Notion official skills, commands and MCP server.
-- [Obsidian](https://github.com/kepano/obsidian-skills):
-  Create and edit Obsidian Bases (`.base`) with Obsidian Flavored Markdown.
+- [Figma](https://github.com/figma/mcp-server-guide).
+- [Notion](https://github.com/makenotion/claude-code-notion-plugin).
+- [NotebookLM](https://github.com/PleasePrompto/notebooklm-skill).
+- [Obsidian](https://github.com/kepano/obsidian-skills).
 - [Cloudflare](https://github.com/cloudflare/skills).
 
 ### Math
 
 - [Scientific](https://github.com/K-Dense-AI/claude-scientific-skills):
-  Comprehensive collection of ready-to-use scientific skills.
+  Comprehensive scientific collection.
 
 ### Guardrails
 
@@ -365,18 +358,23 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 
 ### Collections
 
+- [Switch](https://github.com/farion1231/cc-switch):
+  Quick configuration with All-in-One assistant.
+- [Seekers](https://github.com/yusufkaraaslan/Skill_Seekers):
+  Convert documentation websites, GitHub repositories, and PDFs
+  into Claude AI skills with automatic conflict detection.
 - [Skills](https://github.com/anthropics/skills):
-  Anthropic repository for agent skills.
+  Anthropic skills.
 - [Awesome](https://github.com/ComposioHQ/awesome-claude-skills):
-  Curated list of Claude Code skills.
+  Awesome skills.
 - [Marketplace](https://skillsmp.com):
-  Agent skills marketplace.
+  Skills marketplace.
 - [Plugins](https://github.com/anthropics/claude-plugins-official):
-  Anthropic-managed directory of high quality Claude Code plugins.
+  Anthropic plugins.
 - [Registry](https://github.com/Kamalnrf/claude-plugins):
-  Lightweight registry to discover and manage Claude plugins and agent skills.
+  Lightweight registry to discover and manage plugins and skills.
 - [Build](https://github.com/davepoon/buildwithclaude):
-  Single hub to Claude Skills, Agents, Commands, Hooks, and Plugins.
+  Single hub to skills, agents, commands, hooks, and plugins.
 
 ## References
 
