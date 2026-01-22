@@ -13,6 +13,17 @@ tags: [AI, Generative AI, LLM, Agent, Security, Guardrail]
 - Limited powers.
 - Observable actions.
 
+## Constitution
+
+Anthropic 在训练模型时, 使用了 [Constitutional AI](https://www.anthropic.com/news/claude-new-constitution) 框架,
+确保模型生成的内容符合以下[原则](http://anthropic.com/constitution):
+
+- Broadly safe.
+- Broadly ethical.
+- Compliant with Anthropic’s guidelines.
+- Genuinely helpful.
+- Principals: Anthropic > operators > users.
+
 ## Guardrails
 
 构建防护措施:
