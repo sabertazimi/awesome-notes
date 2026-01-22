@@ -72,6 +72,11 @@ Cursor [debug mode](https://cursor.com/blog/agent-best-practices#bug-debug-mode)
 - 建立可复用的工作流程: slash commands, hooks, guardrails, and skills.
 - Linter rules, regression tests, `AGENTS.md` improvements, checklist updates.
 
+## Actions
+
+- Claude Code action [solutions](https://github.com/anthropics/claude-code-action/blob/main/docs/solutions.md).
+- Cursor agent [cookbook](https://cursor.com/docs/cli/cookbook/code-review).
+
 ## References
 
 - Vibe coding [guide](https://github.com/tukuaiai/vibe-coding-cn).

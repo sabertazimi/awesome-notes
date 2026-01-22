@@ -287,7 +287,8 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 - Claude code has [built-in toolkit](https://code.claude.com/docs/en/settings#tools-available-to-claude),
   follow [certain paradigm](https://www.vtrivedy.com/posts/claudecode-tools-reference) to use them.
 - Avoid `/compact`: dump plan and progress + `/clear` the state + restart from dump file.
-- Use Claude Code [GitHub Actions](https://github.com/anthropics/claude-code-action).
+- Use GitHub [actions](https://github.com/anthropics/claude-code-action):
+  code review, issue triage, documentation sync, etc.
 
 ## Library
 
