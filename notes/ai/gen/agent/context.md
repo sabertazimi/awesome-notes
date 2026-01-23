@@ -127,6 +127,13 @@ What information would be important to keep in working memory during a single se
 List both fixed attributes (always needed) and inferred attributes (derived from user behavior or context).
 ```
 
+### Evaluation
+
+- Precision: 准确率.
+- Recall: 召回率.
+- F1 score: 准确率与召回率的调和平均值.
+- Latency.
+
 ## Dynamic Discovery
 
 Dynamic context [discovery](https://cursor.com/cn/blog/dynamic-context-discovery):
