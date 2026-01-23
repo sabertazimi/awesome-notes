@@ -52,6 +52,27 @@ Agents [eval](https://www.anthropic.com/engineering/demystifying-evals-for-ai-ag
 - Embedding-based similarity: BERTScore, cosine similarity.
 - Task-specific benchmarks.
 
+## LLM
+
+Robust pairwise comparison:
+
+```md
+You are an expert evaluator for a customer support chatbot.
+Your goal is to assess which of two responses is more helpful, polite, and correct.
+
+[User Query]
+"Hi, my order #12345 hasn't arrived yet."
+
+[Answer A]
+"I can see that order #12345 is currently out for delivery and should arrive by 5 PM today."
+
+[Answer B]
+"Order #12345 is on the truck. It will be there by 5."
+
+Please evaluate which answer is better. Compare them on correctness, helpfulness, and tone.
+Provide reasoning and output final decision in JSON object with "winner" key ("A", "B", or "tie") and "rationale" key.
+```
+
 ## Trace
 
 When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688) is the source of truth:
