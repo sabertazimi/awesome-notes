@@ -245,4 +245,4 @@ console.log(delete age) // true
 
 ## References
 
-- [Operator Lookup](https://www.joshwcomeau.com/operator-lookup)
+- Operator [lookup](https://www.joshwcomeau.com/operator-lookup).
