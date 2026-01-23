@@ -311,6 +311,8 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
   Comprehensive production-ready system combining agents, multi-agent workflow orchestrators, skills, and slash commands.
 - [Manus](https://github.com/OthmanAdi/planning-with-files):
   Manus-style persistent markdown planning.
+- [Sisyphus](https://github.com/Yeachan-Heo/oh-my-claudecode):
+  Multi-agent orchestration.
 - [Ralph](https://github.com/frankbria/ralph-claude-code):
   Autonomous development loop.
 - [Compound](https://github.com/EveryInc/compound-engineering-plugin):
