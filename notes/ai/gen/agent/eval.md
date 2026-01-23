@@ -5,6 +5,8 @@ tags: [AI, Generative AI, LLM, Agent, Eval]
 
 # Eval
 
+## Principles
+
 Agents [eval](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents):
 
 1. Start early.
@@ -15,12 +17,6 @@ Agents [eval](https://www.anthropic.com/engineering/demystifying-evals-for-ai-ag
 6. Iterate on evaluations to improve signal-to-noise ratio.
 7. Read transcripts (记录).
 8. Pick framework: [prompt foo](https://github.com/promptfoo/promptfoo), [harbor](https://github.com/laude-institute/harbor).
-
-| Method            | 👍 Strengths                    | 👎 Weaknesses                                                |
-| ----------------- | ------------------------------- | ------------------------------------------------------------ |
-| Human Evaluation  | Captures nuanced behavior       | Subjective, time-consuming, expensive, difficult to scale    |
-| LLM-as-a-Judge    | Consistent, scalable, efficient | May overlook intermediate steps, limited by LLM capabilities |
-| Automated Metrics | Objective, scalable, efficient  | May not capture full capabilities                            |
 
 :::tip[Agent Failure]
 
@@ -34,6 +30,21 @@ Agents [eval](https://www.anthropic.com/engineering/demystifying-evals-for-ai-ag
 - Emergent unintended behaviors.
 
 :::
+
+## Targets
+
+- Effectiveness: goal achievement.
+- Efficiency: operational cost.
+- Robustness: reliability.
+- Safety and alignment: trustworthiness.
+
+## Methods
+
+| Method            | 👍 Strengths                    | 👎 Weaknesses                                                |
+| ----------------- | ------------------------------- | ------------------------------------------------------------ |
+| Automated Metrics | Objective, scalable, efficient  | May not capture full capabilities                            |
+| LLM-as-a-Judge    | Consistent, scalable, efficient | May overlook intermediate steps, limited by LLM capabilities |
+| Human Evaluation  | Captures nuanced behavior       | Subjective, time-consuming, expensive, difficult to scale    |
 
 ## Trace
 
