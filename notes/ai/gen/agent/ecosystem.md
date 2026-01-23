@@ -111,8 +111,6 @@ Building agent with [LangGraph](https://www.kaggle.com/code/markishere/day-3-bui
 
 - [BrowserUse](https://github.com/browser-use/browser-use):
   Leading open-source web agent project.
-- [Agent](https://github.com/vercel-labs/agent-browser):
-  Browser automation CLI for agents.
 - [Stagehand](https://github.com/browserbase/stagehand):
   Browser Automation Framework.
 - [LightPanda](https://github.com/lightpanda-io/browser):

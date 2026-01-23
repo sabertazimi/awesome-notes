@@ -322,15 +322,17 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 
 - [Vercel](https://github.com/vercel-labs/agent-skills):
   React best practices and web design guidelines.
-- [Expo](https://github.com/expo/skills):
-  Expo projects and application services.
 - [UI/UX](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill):
   Design intelligence for professional UI/UX.
+- [Expo](https://github.com/expo/skills):
+  Expo projects and application services.
 - [Edmuds](https://github.com/edmund-io/edmunds-claude-code):
   Productive web development.
 
 ### Browser
 
+- [Agent](https://github.com/vercel-labs/agent-browser):
+  Browser automation CLI.
 - [Dev](http://github.com/SawyerHood/dev-browser):
   Browser automation.
 
