@@ -453,6 +453,16 @@ High conversion rate can happen [despite poor UX](https://www.linkedin.com/posts
 - Historical customer loyalty.
 - No alternative.
 
+### Friction
+
+消除不必要的摩擦，拥抱[好的摩擦](https://www.smashingmagazine.com/2018/01/friction-ux-design-tool):
+
+- 重要操作: 多步认证, 双重认证.
+- 等待动画:
+  - Overlap latency: 使长进程感觉更短.
+  - Extra loading: 使短进程更有安全感.
+- 不必要的摩擦: 过多步骤, 多余确认, 不明导航, 视觉噪声.
+
 ## AI Interfaces
 
 [Design patterns](https://www.smashingmagazine.com/2025/07/design-patterns-ai-interfaces 'Design Patterns for AI Interfaces')
