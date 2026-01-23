@@ -122,6 +122,8 @@ When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688
 - Can't set breakpoints in reasoning
 - Performance optimization changes: task success rate, reasoning quality, tool usage efficiency
 
+[![Trace](./figures/trace.png 'Trace')](https://www.kaggle.com/whitepaper-agent-quality)
+
 ## Trajectory
 
 **Trajectory** is equally important as **final response**:
