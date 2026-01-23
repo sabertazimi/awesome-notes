@@ -59,10 +59,20 @@ End of context: [Recently read task_plan.md - gets ATTENTION!]
 
 ## Session
 
-Immediate dialogue history and working memory for single and continuous conversation:
+Immediate dialogue history and working memory for single and continuous conversation.
 
-- Chronological history (**events**): user input, agent response, tool call, tool output.
-- Working memory (**state**).
+### Events
+
+Chronological history:
+
+- User input.
+- Agent response.
+- Tool call.
+- Tool output.
+
+### State
+
+Working memory and scratchpad stores and updates dynamic details during conversation.
 
 ### Compression
 
