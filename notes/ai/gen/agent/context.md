@@ -93,6 +93,19 @@ Immediate dialogue history and working memory for single and continuous conversa
 - Storage: persist to database.
 - Retrieval: fetch relevant memories.
 
+[![Memory Manager](./figures/memory-manager.png)](https://www.kaggle.com/whitepaper-context-engineering-sessions-and-memory)
+
+:::tip[Consolidation]
+
+记忆管理最复杂的部分是 consolidation:
+
+- Duplication.
+- Conflict: low confidence.
+- Irrelevance: time-based decay.
+- Evolution.
+
+:::
+
 ### Personalization
 
 Meta-prompting for [memory extraction](https://cookbook.openai.com/examples/agents_sdk/context_personalization#2-shape-of-a-memory):
