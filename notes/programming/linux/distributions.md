@@ -201,3 +201,7 @@ autoProxy=true
 Win 11 MediaTek Wi-Fi 6 delay start:
 set `Network Connections` and `WLAN AutoConfig`
 to auto-start in services.
+
+## References
+
+- Linux from scratch [guide](https://www.linuxfromscratch.org/lfs/read.html).
