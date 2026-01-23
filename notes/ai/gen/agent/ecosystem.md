@@ -100,8 +100,10 @@ Building agent with [LangGraph](https://www.kaggle.com/code/markishere/day-3-bui
 
 - [Puck](https://github.com/puckeditor/puck):
   Agentic visual editor for React.
-- [Vercel.ai](https://github.com/vercel/ai):
+- [Vercel](https://github.com/vercel/ai):
   Build AI-powered web applications.
+- [Mastra](https://github.com/mastra-ai/mastra):
+  Build AI-powered applications and agents with modern TypeScript stack.
 
 ### Browser
 
