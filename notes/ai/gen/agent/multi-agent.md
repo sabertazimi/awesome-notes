@@ -13,7 +13,7 @@ tags: [AI, Generative AI, LLM, Agent, Multi-agent, Orchestration]
 - Collaborative.
 - Competitive.
 
-![Multi-Agent System](./figures/multi-agent-system.png 'Multi-Agent System')
+[![Multi-Agent System](./figures/multi-agent-system.png)](https://www.kaggle.com/whitepaper-agent-companion)
 
 :::tip[Pros]
 
@@ -170,4 +170,5 @@ await Runner.run(triage_agent, input("您能提供我最近购买商品的配送
 
 ## References
 
+- Multi-agent [whitepaper](https://www.kaggle.com/whitepaper-agent-companion).
 - 狼人杀[游戏](https://github.com/oil-oil/wolfchat).

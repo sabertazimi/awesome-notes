@@ -41,7 +41,7 @@ When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688
 - Precision: relevant tool calls.
 - Recall: essential tool calls.
 
-![Trajectory](./figures/trajectory.png 'Trajectory')
+[![Trajectory](./figures/trajectory.png)](https://www.kaggle.com/whitepaper-agent-companion)
 
 ## Benchmarks
 
@@ -53,4 +53,5 @@ When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688
 
 ## References
 
+- Agents evaluation [whitepaper](https://www.kaggle.com/whitepaper-agent-companion).
 - Claude Opus 4.5 [system card](https://assets.anthropic.com/m/64823ba7485345a7/Claude-Opus-4-5-System-Card.pdf).

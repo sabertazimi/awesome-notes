@@ -42,4 +42,3 @@ value of performant, reliable, extensible API will increase.
 ## References
 
 - Agents [whitepaper](https://www.kaggle.com/whitepaper-agents).
-- Agents companion [whitepaper](https://www.kaggle.com/whitepaper-agent-companion).
