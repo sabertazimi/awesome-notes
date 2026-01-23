@@ -106,6 +106,13 @@ Immediate dialogue history and working memory for single and continuous conversa
 
 :::
 
+### Trigger
+
+- Session completion.
+- Turn cadence: e.g. every 5 turns.
+- Real-time: every single turn.
+- Explicit command: `remember this`.
+
 ### Personalization
 
 Meta-prompting for [memory extraction](https://cookbook.openai.com/examples/agents_sdk/context_personalization#2-shape-of-a-memory):
