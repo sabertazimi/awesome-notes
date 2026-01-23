@@ -848,6 +848,7 @@ Midjourney [cookbook](https://fka.gumroad.com/l/the-art-of-midjourney-ai-guide-t
 
 ## References
 
+- OpenAI prompt [packs](https://academy.openai.com/public/tags/prompt-packs-6849a0f98c613939acef841c).
 - Gemini prompts [cookbook](https://services.google.com/fh/files/misc/gemini-for-google-workspace-prompting-guide-101.pdf).
 - Prompts and skills [community](https://github.com/f/awesome-chatgpt-prompts).
 - Vibe coding [prompts](https://docs.google.com/spreadsheets/d/1ngoQOhJqdguwNAilCl1joNwTje7FWWN9WiI2bo5VhpU).
