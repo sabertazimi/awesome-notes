@@ -77,6 +77,8 @@ use runtime experience and external signals to optimize future behavior:
 - Tool optimization and creation.
 - Refine guardrails.
 
+[![Flywheel](./figures/flywheel.png)](https://www.kaggle.com/whitepaper-agent-quality)
+
 ## AgentOps
 
 [![AgentOps](./figures/agent-ops.png)](https://www.kaggle.com/whitepaper-prototype-to-production)
