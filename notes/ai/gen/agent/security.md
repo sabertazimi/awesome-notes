@@ -16,7 +16,7 @@ tags: [AI, Generative AI, LLM, Agent, Security, Guardrail]
 ## Guidelines
 
 Anthropic 使用 [Constitutional AI](https://constitutional.ai) 对齐模型,
-确保模型生成的内容符合以下[宪法](https://www.anthropic.com/news/claude-new-constitution):
+确保模型生成的内容符合以下[章程](https://www.anthropic.com/news/claude-new-constitution):
 
 - Broadly safe.
 - Broadly ethical.
