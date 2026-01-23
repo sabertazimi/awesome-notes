@@ -46,6 +46,12 @@ Agents [eval](https://www.anthropic.com/engineering/demystifying-evals-for-ai-ag
 | LLM-as-a-Judge    | Consistent, scalable, efficient | May overlook intermediate steps, limited by LLM capabilities |
 | Human Evaluation  | Captures nuanced behavior       | Subjective, time-consuming, expensive, difficult to scale    |
 
+## Metrics
+
+- String-based similarity: ROUGE, BLEU.
+- Embedding-based similarity: BERTScore, cosine similarity.
+- Task-specific benchmarks.
+
 ## Trace
 
 When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688) is the source of truth:
