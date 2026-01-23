@@ -95,16 +95,14 @@ Immediate dialogue history and working memory for single and continuous conversa
 
 [![Memory Manager](./figures/memory-manager.png)](https://www.kaggle.com/whitepaper-context-engineering-sessions-and-memory)
 
-:::tip[Consolidation]
+### Consolidation
 
-记忆管理最复杂的部分是 consolidation:
+记忆管理最复杂的部分:
 
 - Duplication.
 - Conflict: low confidence.
 - Irrelevance: time-based decay.
 - Evolution.
-
-:::
 
 ### Trigger
 
@@ -112,6 +110,12 @@ Immediate dialogue history and working memory for single and continuous conversa
 - Turn cadence: e.g. every 5 turns.
 - Real-time: every single turn.
 - Explicit command: `remember this`.
+
+### Retrieval
+
+- Relevance: semantic similarity.
+- Recency: time-based decay.
+- Importance.
 
 ### Personalization
 
