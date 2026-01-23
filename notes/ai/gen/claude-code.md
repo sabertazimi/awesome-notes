@@ -328,6 +328,8 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
   Design intelligence for professional UI/UX.
 - [Expo](https://github.com/expo/skills):
   Expo projects and application services.
+- [Stitch](https://github.com/google-labs-code/stitch-skills):
+  UI design toolkit.
 - [Edmuds](https://github.com/edmund-io/edmunds-claude-code):
   Productive web development.
 
