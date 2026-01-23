@@ -22,7 +22,7 @@ CSS vendor prefix order:
 
 ### Normalize
 
-[Minimal normalize](https://meiert.com/blog/a-minimal-css-starter):
+[Minimal](https://meiert.com/blog/a-minimal-css-starter):
 
 ```css
 html {
@@ -42,7 +42,7 @@ html {
 }
 ```
 
-[Modern normalize](https://github.com/sindresorhus/modern-normalize):
+[Modern](https://github.com/sindresorhus/modern-normalize):
 
 ```css
 html,
@@ -118,6 +118,151 @@ button {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
+  }
+}
+```
+
+[Reset](https://vale.rocks/posts/css-reset) user-agent [styles](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/third_party/blink/renderer/core/html/resources/html.css):
+
+```css
+@layer {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+  }
+
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  html {
+    block-size: 100%;
+    line-height: 1.5;
+    text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    min-block-size: 100%;
+  }
+
+  img,
+  iframe,
+  audio,
+  video,
+  canvas {
+    display: block;
+    max-inline-size: 100%;
+    block-size: auto;
+  }
+
+  svg {
+    max-inline-size: 100%;
+  }
+
+  svg:not([fill]) {
+    fill: currentcolor;
+  }
+
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  fieldset,
+  iframe {
+    border: none;
+  }
+
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    overflow-wrap: break-word;
+  }
+
+  p {
+    font-variant-numeric: proportional-nums;
+    text-wrap: pretty;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-variant-numeric: lining-nums;
+  }
+
+  p,
+  blockquote,
+  q,
+  figcaption,
+  li {
+    hanging-punctuation: first allow-end last;
+  }
+
+  input,
+  label,
+  button,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.1;
+  }
+
+  math,
+  time,
+  table {
+    font-variant-numeric: tabular-nums lining-nums slashed-zero;
+  }
+
+  code {
+    font-variant-numeric: slashed-zero;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+
+  abbr {
+    font-variant-caps: all-small-caps;
+    text-decoration: none;
+
+    &[title] {
+      text-decoration: underline dotted;
+      cursor: help;
+    }
+  }
+
+  sup,
+  sub {
+    line-height: 0;
+  }
+
+  :disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+
+  :focus-visible {
+    outline-offset: 0.2rem;
   }
 }
 ```
