@@ -48,9 +48,33 @@ Agents [eval](https://www.anthropic.com/engineering/demystifying-evals-for-ai-ag
 
 ## Metrics
 
+### Regression
+
 - String-based similarity: ROUGE, BLEU.
 - Embedding-based similarity: BERTScore, cosine similarity.
 - Task-specific benchmarks.
+
+### Performance
+
+- Latency: P50, P90, P99.
+- Error rate.
+
+### Cost
+
+- Tokens per task.
+- API cost per run.
+
+### Effectiveness
+
+- Task completion rate.
+- Tool usage frequency.
+
+### Quality
+
+- Correctness.
+- Accuracy.
+- Relevance.
+- Trajectory adherence.
 
 ## LLM
 
