@@ -225,4 +225,4 @@ actively refine their search based on iterative reasoning:
 - Efficient LLM architectures [survey](https://github.com/weigao266/Awesome-Efficient-Arch).
 - Foundational LLM [whitepaper](https://www.kaggle.com/whitepaper-foundational-llm-and-text-generation).
 - Text-to-video generation [survey](https://arxiv.org/abs/2403.05131).
-- LLMs safety [survey](https://arxiv.org/abs/2601.10527).
+- LLMs safety [survey](http://github.com/XSafeAI/AI-safety-report).
