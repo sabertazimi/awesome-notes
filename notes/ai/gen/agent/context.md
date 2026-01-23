@@ -27,7 +27,7 @@ LLM 并未统一利用其上下文,
 - Few-shot examples.
 - User prompt.
 - Conversation history.
-- Short-term memory: state, scratchpad.
+- Short-term memory.
 - Long-term memory.
 - External knowledge.
 - Tool outputs.
@@ -57,15 +57,23 @@ End of context: [Recently read task_plan.md - gets ATTENTION!]
 
 :::
 
-## Dynamic Discovery
+## Session
 
-Dynamic context [discovery](https://cursor.com/cn/blog/dynamic-context-discovery):
+Immediate dialogue history and working memory for single and continuous conversation:
 
-- 工具响应 -> 文件.
-- 终端会话 -> 文件.
-- 上下文压缩时引用对话历史.
-- 按需加载.
-- 渐进式披露.
+- Chronological history (**events**): user input, agent response, tool call, tool output.
+- Working memory (**state**).
+
+### Compression
+
+由于上下文窗口限制、API 费用、生成延迟、生成质量等因素,
+过多的上下文会显著增加成本、延迟、噪声和误差,
+需要对会话进行压缩:
+
+- Keep last N turns.
+- Token-based truncation.
+- Recursive summarization.
+- Trigger: count, time, event.
 
 ## Personalization
 
@@ -77,14 +85,15 @@ What information would be important to keep in working memory during a single se
 List both fixed attributes (always needed) and inferred attributes (derived from user behavior or context).
 ```
 
-:::tip[Memory System]
+## Dynamic Discovery
 
-[Memory system](https://cookbook.openai.com/examples/agents_sdk/context_personalization#memory-guardrails):
+Dynamic context [discovery](https://cursor.com/cn/blog/dynamic-context-discovery):
 
-- Repeatable memory loop: inject → reason → distill → consolidate.
-- Enforce precedence: current user message > session context > memory.
-
-:::
+- 工具响应 -> 文件.
+- 终端会话 -> 文件.
+- 上下文压缩时引用对话历史.
+- 按需加载.
+- 渐进式披露.
 
 ## References
 
