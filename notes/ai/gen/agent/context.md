@@ -75,7 +75,25 @@ Immediate dialogue history and working memory for single and continuous conversa
 - Recursive summarization.
 - Trigger: count, time, event.
 
-## Personalization
+## Memory
+
+### System
+
+[Memory system](https://cookbook.openai.com/examples/agents_sdk/context_personalization#memory-guardrails):
+
+- Repeatable memory loop: inject → reason → distill → consolidate.
+- Enforce precedence: current user message > session context > memory.
+
+[![Memory System](./figures/memory-system.png)](https://www.kaggle.com/whitepaper-context-engineering-sessions-and-memory)
+
+### Manager
+
+- Extraction: distill key information.
+- Consolidation: merge and deduplicate.
+- Storage: persist to database.
+- Retrieval: fetch relevant memories.
+
+### Personalization
 
 Meta-prompting for [memory extraction](https://cookbook.openai.com/examples/agents_sdk/context_personalization#2-shape-of-a-memory):
 
