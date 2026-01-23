@@ -53,6 +53,7 @@ When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688
 
 ## References
 
-- Agents evaluation [whitepaper](https://www.kaggle.com/whitepaper-agent-companion).
+- Agent evaluation [whitepaper](https://www.kaggle.com/whitepaper-agent-companion).
+- Agent quality [whitepaper](https://www.kaggle.com/whitepaper-agent-quality).
 - Claude Opus 4.5 [system card](https://assets.anthropic.com/m/64823ba7485345a7/Claude-Opus-4-5-System-Card.pdf).
 - Autonomous agents [benchmark](https://github.com/GAIR-NLP/AgencyBench).
