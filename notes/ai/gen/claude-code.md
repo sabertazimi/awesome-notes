@@ -363,27 +363,32 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 - [Health](https://github.com/huifer/Claude-Ally-Health):
   Intelligent healthcare assistant.
 
-### Collections
+### Management
 
 - [Switch](https://github.com/farion1231/cc-switch):
   Quick configuration with All-in-One assistant.
 - [Seekers](https://github.com/yusufkaraaslan/Skill_Seekers):
   Convert documentation websites, GitHub repositories, and PDFs
   into Claude AI skills with automatic conflict detection.
-- [Awesome](https://github.com/ComposioHQ/awesome-claude-skills):
-  Awesome skills.
 - [Directory](https://skills.sh):
   `npx skills add <owner/repo>`.
-- [Marketplace](https://skillsmp.com):
-  Skills marketplace.
+- [WuMing](https://github.com/chujianyun/skills):
+  Prompts optimizer and skills synchronizer.
+
+### Collections
+
 - [Skills](https://github.com/anthropics/skills):
   Anthropic skills.
 - [Plugins](https://github.com/anthropics/claude-plugins-official):
   Anthropic plugins.
+- [Awesome](https://github.com/ComposioHQ/awesome-claude-skills):
+  List.
+- [Marketplace](https://skillsmp.com):
+  Marketplace.
 - [Registry](https://github.com/Kamalnrf/claude-plugins):
-  Lightweight registry to discover and manage plugins and skills.
+  Lightweight registry to skills and plugins.
 - [Build](https://github.com/davepoon/buildwithclaude):
-  Single hub to skills, agents, commands, hooks, and plugins.
+  Single hub to skills and plugins.
 
 ## References
 
