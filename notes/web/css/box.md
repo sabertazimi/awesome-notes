@@ -61,6 +61,21 @@ Character box/em-box/selection box:
 }
 ```
 
+### Decoration Break
+
+Inline elements can wrap across lines, and their box is "sliced" at line breaks:
+
+- `box-decoration-break: slice` (default): Box is sliced at line breaks
+- `box-decoration-break: clone`: Each line segment gets its own complete box
+
+```css
+span {
+  box-decoration-break: clone;
+}
+```
+
+Useful for inline elements with borders/backgrounds that wrap across multiple lines.
+
 ### Line Box
 
 - 每一行会形成一个行框盒子.
@@ -69,7 +84,7 @@ Character box/em-box/selection box:
   父元素的 `line-height` 会幽灵空白节点产生作用.
 - 将内联元素设置为 `display: inline-block` 可以消除幽灵空白节点.
 
-### Lines containing Box
+### Lines Containing Box
 
 `<p>` tag 会形成一个包含盒子, 此盒子由一行一行的行框盒子组成.
 
@@ -179,6 +194,24 @@ Box sizing:
 - `Extrinsic Sizing` (外在尺寸):
   表示元素最终的尺寸表现是由上下文决定的,
   e.g. `stretch`/`-moz-available`/`-webkit-fill-available`.
+
+## Display
+
+The `display` property can have **two parts**: an outer and an inner value:
+
+```css
+/* Modern equivalent of inline-block */
+display: inline flow-root;
+
+/* Outer value: how element behaves with other elements (inline, block) */
+
+/* Inner value: how element behaves with its own content (flow, flow-root, grid, flex) */
+```
+
+- `inline-block` is legacy syntax for `inline flow-root`
+- `display: grid` = `block grid` (outer `block` inferred)
+- `display: inline` = `inline flow` (inner `flow` inferred)
+- `flow-root` creates a new block formatting context explicitly
 
 ## Width
 
@@ -468,6 +501,18 @@ include `padding-top` and `padding-bottom`:
 
 [![Vertical Align](./figures/vertical-align.png)](https://developer.mozilla.org/docs/Web/CSS/vertical-align)
 
+### Middle
+
+The `middle` value is **not** exact middle of line:
+
+```css
+/* middle = baseline + (x-height / 2) */
+vertical-align: middle;
+```
+
+It's calculated from `font` metrics and `line-height`,
+so it may not align exactly at center.
+
 ### Applicable Elements
 
 `vertical-align` 作用元素:
@@ -510,8 +555,23 @@ can use the `z-index` property to adjust its stacking level:
 - `filter` element.
 - `backdrop-filter` element.
 - `isolation: isolate` element.
+- `container-type` set to `size` or `inline-size` (container queries).
 - `will-change` above properties element.
 - `contain` `strict`/`content`/`layout`/`paint` element.
+
+:::tip[Explicit Stacking Context]
+
+`isolation: isolate` is the most **explicit** way to create a new stacking context:
+
+```css
+.container {
+  isolation: isolate;
+}
+```
+
+This is useful when you want to create a stacking context without side effects from other properties like `opacity` or `transform`.
+
+:::
 
 The `z-index` of elements inside of a `stacking context`
 are always **relative to parent** current order in its own `stacking context`.
@@ -630,6 +690,30 @@ are always **relative to parent** current order in its own `stacking context`.
 </style>
 ```
 
+## Layout
+
+CSS has **multiple layout algorithms**:
+
+- Normal flow (default)
+- Positioning (`relative`, `absolute`, `fixed`, `sticky`)
+- Flexbox
+- Grid
+- Table layout (legacy)
+- Float (legacy)
+- Multi-column
+
+Specific properties let you opt into different layout algorithms.
+
+:::tip[Gall's Law]
+
+> All complex systems that work evolved from simple systems that worked.
+
+CSS Layout started with a single layout algorithm called **normal flow**.
+All subsequent layout algorithms (positioning, Flexbox, Grid) built upon these foundational concepts.
+
+:::
+
 ## References
 
-- CSS box [model](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/The_box_model).
+- Box [model](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/The_box_model).
+- Layout [fundamentals](https://polypane.app/blog/understanding-the-fundamentals-of-css-layout).

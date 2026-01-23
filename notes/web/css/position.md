@@ -182,3 +182,4 @@ If `containing block` `height` is `auto`, it calculated to `0`.
 
 - Anchor positioning [guide](https://web.dev/learn/css/anchor-positioning).
 - Anchor positioning [introduction](http://webkit.org/blog/17240/a-gentle-introduction-to-anchor-positioning).
+- Layout [fundamentals](https://polypane.app/blog/understanding-the-fundamentals-of-css-layout).
