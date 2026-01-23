@@ -76,3 +76,7 @@ use runtime experience and external signals to optimize future behavior:
 - Enhanced context engineering.
 - Tool optimization and creation.
 - Refine guardrails.
+
+## AgentOps
+
+[![AgentOps](./figures/agent-ops.png)](https://www.kaggle.com/whitepaper-prototype-to-production)
