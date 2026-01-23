@@ -224,3 +224,4 @@ actively refine their search based on iterative reasoning:
 - 大语言模型[综述](https://github.com/LLMBook-zh/LLMBook-zh.github.io).
 - Efficient LLM architectures [survey](https://github.com/weigao266/Awesome-Efficient-Arch).
 - Foundational LLM [whitepaper](https://www.kaggle.com/whitepaper-foundational-llm-and-text-generation).
+- LLMs safety [survey](https://arxiv.org/abs/2601.10527).
