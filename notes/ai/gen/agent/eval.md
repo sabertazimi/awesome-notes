@@ -136,6 +136,13 @@ When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688
 
 [![Trajectory](./figures/trajectory.png)](https://www.kaggle.com/whitepaper-agent-companion)
 
+:::tip[Trajectory Score]
+
+1. Response match score.
+2. Tool trajectory score.
+
+:::
+
 ## Benchmarks
 
 [Benchmarks](https://blog.sshh.io/p/understanding-ai-benchmarks):
