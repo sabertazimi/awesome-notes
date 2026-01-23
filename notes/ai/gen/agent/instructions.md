@@ -136,7 +136,7 @@ AI agents powered by tricky LLMs prompting:
 
 - Deep research agent from [claude agents cookbook](https://github.com/anthropics/claude-cookbooks/tree/main/patterns/agents).
 - [DeepCode](https://github.com/HKUDS/DeepCode):
-  Open agentic coding.
+  Agentic coding.
 - Generative [agent](https://github.com/joonspk-research/generative_agents).
 - Minecraft [agent](https://github.com/MineDojo/Voyager).
 

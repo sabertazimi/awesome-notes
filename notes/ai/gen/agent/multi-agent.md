@@ -167,3 +167,7 @@ triage_agent = Agent(
 
 await Runner.run(triage_agent, input("您能提供我最近购买商品的配送时间表更新吗?"))
 ```
+
+## References
+
+- 狼人杀[游戏](https://github.com/oil-oil/wolfchat).
