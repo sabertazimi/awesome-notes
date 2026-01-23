@@ -147,15 +147,48 @@ ffmpeg -i input.mkv -vf fps=1/60 -strftime 1 out_%Y%m%d%H%M%S.jpg
 
 ## Gif
 
+GIF 格式效率较低，通常需要降低帧率和分辨率以控制文件大小:
+
+1. 帧率选择:
+   - 10-15 fps: 操作步骤、UI 交互展示
+   - 24-30 fps: 流畅动画、游戏画面
+2. 分辨率选择:
+   - 960px: 网页嵌入、文档配图
+   - 1280-1920px: 保持原宽
+
 ```bash
+# 10fps + 960px 宽度 + 调色板优化画质
+ffmpeg -i input.mp4 \
+  -vf "fps=10,scale=960:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" \
+  -loop 0 output.gif
+
+# 15fps + 1280px 宽度
+ffmpeg -i input.mp4 \
+  -vf "fps=15,scale=1280:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" \
+  -loop 0 output.gif
+```
+
+```bash
+# 基础转换
 ffmpeg -i video.mp4 -ss 7.5 -to 8.5 -s 640x320 -r 15 video_gif.gif
 
+# 使用自定义调色板
 palette="/tmp/palette.png"
 filters="fps=10,scale=-1:144:flags=lanczos"
 ffmpeg -ss 30 -t 5 -i input.mp4 -vf "$filters,palettegen" -y $palette
 ffmpeg -ss 30 -t 5 -i input.mp4 -i $palette \
   -filter_complex "$filters [x]; [x][1:v] paletteuse" -y output.gif
 ```
+
+参数说明:
+
+- `fps=N`: 设置帧率
+- `scale=W:H`: 设置分辨率，`-1` 表示自动计算保持比例
+- `flags=lanczos`: 使用 Lanczos 算法进行高质量缩放
+- `palettegen`: 生成自定义调色板 (从 88842 色中生成 256 色)
+- `paletteuse`: 应用调色板
+- `-loop 0`: 无限循环
+- `split[s0][s1]`: 分流视频流, 一路用于生成调色板, 一路用于应用
 
 ## Subtitle
 
