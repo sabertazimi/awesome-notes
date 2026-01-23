@@ -81,6 +81,14 @@ Critic agent:
 3. Were the arguments correct and properly formatted?
 ```
 
+## Human
+
+Human-in-the-Loop (HITL):
+
+- Domain expertise: 领域专业知识.
+- Interpreting nuance: 解释细微差别.
+- Golden set: 创建黄金数据集.
+
 ## Trace
 
 When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688) is the source of truth:
