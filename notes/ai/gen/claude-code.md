@@ -80,6 +80,8 @@ Create a new POST $ARGUMENTS endpoint with:
 /api-new /api/users
 ```
 
+URL to markdown [command](./recipes/prompts/url2md.md).
+
 ## Skills
 
 ```md

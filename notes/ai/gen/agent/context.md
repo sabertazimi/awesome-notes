@@ -20,8 +20,19 @@ LLM 并未统一利用其上下文,
 因此, 仅仅在模型的上下文中拥有相关信息是不够的:
 信息的呈现方式对性能有显著影响.
 这凸显了 `上下文工程` 的必要性,
-优化相关信息的数量并最小化不相关上下文以实现可靠的性能.
-e.g. custom gemini CLI [command](../recipes/prompts/url2md.md).
+优化相关信息的数量并最小化不相关上下文以实现可靠的性能:
+
+- System instructions.
+- Tool definitions.
+- Few-shot examples.
+- User prompt.
+- Conversation history.
+- Short-term memory: state, scratchpad.
+- Long-term memory.
+- External knowledge.
+- Tool outputs.
+- Sub-agent outputs.
+- Artifacts.
 
 [![Context Engineering](./figures/context-engineering.jpg)](https://addyo.substack.com/p/how-good-is-ai-at-coding-react-really)
 
@@ -74,3 +85,7 @@ List both fixed attributes (always needed) and inferred attributes (derived from
 - Enforce precedence: current user message > session context > memory.
 
 :::
+
+## References
+
+- Context engineering [whitepaper](https://www.kaggle.com/whitepaper-context-engineering-sessions-and-memory).
