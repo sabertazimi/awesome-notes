@@ -73,6 +73,14 @@ Please evaluate which answer is better. Compare them on correctness, helpfulness
 Provide reasoning and output final decision in JSON object with "winner" key ("A", "B", or "tie") and "rationale" key.
 ```
 
+Critic agent:
+
+```md
+1. Based on the trace, was the initial plan logical?
+2. Was the {tool_A} tool the correct first choice, or should another tool have been used?
+3. Were the arguments correct and properly formatted?
+```
+
 ## Trace
 
 When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688) is the source of truth:
