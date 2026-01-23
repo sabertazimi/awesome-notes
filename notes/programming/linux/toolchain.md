@@ -575,3 +575,7 @@ set ylabel "Segments (cwnd, ssthresh)"
 plot ARG1 using 1:7 title "snd_cwnd", \
      ARG1 using 1:($8>=2147483647 ? 0 : $8) title "snd_ssthresh"
 ```
+
+## References
+
+- Terminal [tool of the week](https://terminaltrove.com/tool-of-the-week).
