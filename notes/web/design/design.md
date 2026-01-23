@@ -433,6 +433,15 @@ NNGroup article [homepage design principles](https://www.nngroup.com/articles/ho
 - In some single field forms put the button next to the input (e.g. `search` button).
 - Put buttons on multi select forms above the form.
 
+### Card
+
+- 异形: 圆角, 抽屉.
+- 颜色: 图片, 图标, 渐变.
+- 倾斜: 两端对齐, 中间倾斜.
+- 拟真: 票据, 银行卡, 信纸.
+- 破界.
+- 空间: z 轴堆叠.
+
 ## User Experience
 
 High conversion rate can happen [despite poor UX](https://www.linkedin.com/posts/fabian-lenz-digital-experience-leadership_conversion-rate-is-not-a-ux-metric-yes-activity-7394261839506739200-78G9):
