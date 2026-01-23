@@ -22,6 +22,19 @@ Agents [eval](https://www.anthropic.com/engineering/demystifying-evals-for-ai-ag
 | LLM-as-a-Judge    | Consistent, scalable, efficient | May overlook intermediate steps, limited by LLM capabilities |
 | Automated Metrics | Objective, scalable, efficient  | May not capture full capabilities                            |
 
+:::tip[Agent Failure]
+
+智能体的失败通常不是系统崩溃, 而是质量的细微退化,
+源于模型权重、训练数据和环境交互的复杂相互作用.
+这些失败是**隐晦的**:
+
+- Algorithm bias.
+- Factual hallucination.
+- Concept drift: 性能随时间推移而下降, 无法发现新问题.
+- Emergent unintended behaviors.
+
+:::
+
 ## Trace
 
 When building agents, [trace](https://x.com/hwchase17/status/2010044779225329688) is the source of truth:
