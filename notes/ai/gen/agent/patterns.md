@@ -72,5 +72,7 @@ observe what users ask agent to do,
 Self-evolving [agents](https://github.com/CharlesQ9/Self-Evolving-Agents),
 use runtime experience and external signals to optimize future behavior:
 
+- Update evaluation datasets.
 - Enhanced context engineering.
 - Tool optimization and creation.
+- Refine guardrails.

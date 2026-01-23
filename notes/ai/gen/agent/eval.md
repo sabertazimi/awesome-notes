@@ -111,7 +111,7 @@ Human-in-the-Loop (HITL):
 
 - Domain expertise: 领域专业知识.
 - Interpreting nuance: 解释细微差别.
-- Golden set: 创建黄金数据集.
+- Golden set: 将生产故障转化为测试用例.
 
 ## Trace
 
