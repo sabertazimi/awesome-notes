@@ -64,7 +64,7 @@ Domain 层是领域模型系统的核心,
 
 ## High Concurrency
 
-### Concurrent Code Layer
+### Code Layer
 
 - Mutex Performance
 - Database Caches
@@ -73,7 +73,7 @@ Domain 层是领域模型系统的核心,
 - Asynchronous
 - Multi-Thread
 
-### Concurrent DataBase Layer
+### DataBase Layer
 
 - DataBase Type: RDBMS -> NoSQL -> NewSQL
 - Table Structure Design
@@ -83,7 +83,7 @@ Domain 层是领域模型系统的核心,
 - Data Slice and Data Partition
 - Hot Data Cache
 
-### Concurrent Architecture Layer
+### Architecture Layer
 
 - Microservices
 - Scale Friendly
@@ -110,8 +110,6 @@ Domain 层是领域模型系统的核心,
 
 在编程中一个幂等操作的特点是其任意多次执行所产生的影响均与一次执行的影响相同.
 
-#### Write Idempotence
-
 - Mutex
 - Key Index
 - Token
@@ -134,6 +132,9 @@ more than two out of the following three guarantees:
   being dropped (or delayed) by the network between nodes.
 
 ### 服务熔断
+
+当下游服务不可用或响应过慢时, 上游服务停止调用该服务,
+直接快速失败并返回默认响应或执行降级逻辑, 从而保护系统整体可用性.
 
 ### 服务限流
 
@@ -171,9 +172,12 @@ more than two out of the following three guarantees:
 
 ### 服务降级
 
+服务器压力剧增时, 根据业务优先级对非核心服务或页面采用策略性处理,
+如直接返回兜底数据 (fallback) 或拒绝请求, 从而释放资源保证核心功能稳定.
+
 ## References
 
-- Front-end domain driven design [guide](https://dev.to/bespoyasov/clean-architecture-on-frontend-4311).
+- Frontend domain driven design [guide](https://dev.to/bespoyasov/clean-architecture-on-frontend-4311).
 - Scalable React project structure [guide](https://github.com/developerway/example-react-project).
 - Nest.js clean architecture [template](https://medium.com/@jonathan.pretre91/clean-architecture-with-nestjs-e089cef65045).
 - Domain driven design layout in [Golang](https://github.com/lupguo/ddd-layout).
