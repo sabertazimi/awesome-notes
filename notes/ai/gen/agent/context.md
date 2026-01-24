@@ -36,9 +36,7 @@ LLM 并未统一利用其上下文,
 
 [![Context Engineering](./figures/context-engineering.jpg)](https://addyo.substack.com/p/how-good-is-ai-at-coding-react-really)
 
-:::tip[Planning with Files]
-
-[Manus](https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus):
+Planning with files in [Manus](https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus):
 
 1. Design around **KV-cache**:
    - 稳定内容放前面: system prompt, tool definitions.
@@ -54,6 +52,11 @@ Start of context: [Original goal - far away, forgotten]
 ...many tool calls...
 End of context: [Recently read task_plan.md - gets ATTENTION!]
 ```
+
+:::caution[MCP]
+
+MCP 服务器可通过 `notifications/tools/list_changed` 随时更改提供的工具列表.
+在长对话中响应此通知可能会导致代价高昂的[缓存未命中](https://openai.com/index/unrolling-the-codex-agent-loop).
 
 :::
 
