@@ -95,7 +95,7 @@ while WinGet is app installer.
 
 :::
 
-:::tip[Recommended Software for Windows]
+Recommended software for Windows:
 
 ```bash
 winget install astral-sh.uv BellSoft.LibericaJDK.11 CoreyButler.NVMforWindows Rustlang.Rustup Tencent.WeixinDevTools zig.zig
@@ -106,7 +106,7 @@ winget install Google.Antigravity Microsoft.VisualStudioCode Neovim.Neovim Obsid
 ```
 
 ```bash
-winget install Git.Git GitHub.cli Gyan.FFmpeg kangfenmao.CherryStudio Microsoft.WindowsTerminal Mobatek.MobaXterm
+winget install Git.Git GitHub.cli kangfenmao.CherryStudio Microsoft.WindowsTerminal ImageMagick.ImageMagick Gyan.FFmpeg
 ```
 
 ```bash
@@ -116,8 +116,6 @@ winget install ClashVergeRev.ClashVergeRev Mihomo-Party.Mihomo-Party Google.Chro
 ```bash
 winget install ByteDance.Feishu NetEase.CloudMusic Tencent.QQ.NT Tencent.WeChat Tencent.WeType Valve.Steam
 ```
-
-:::
 
 ### Mise
 
