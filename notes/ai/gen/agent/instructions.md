@@ -82,6 +82,8 @@ system [prompts](../recipes/prompts/codex.md):
 - `AGENTS.md` spec.
 - Citations instructions.
 
+[![Codex Agent Loop](./figures/codex-agent-loop.svg)](https://openai.com/index/unrolling-the-codex-agent-loop)
+
 ## Coding
 
 [Writing](https://github.com/agentsmd/agents.md)
