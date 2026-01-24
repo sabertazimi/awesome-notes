@@ -75,13 +75,14 @@ Domain 层是领域模型系统的核心,
 
 ### DataBase Layer
 
-- DataBase Type: RDBMS -> NoSQL -> NewSQL
-- Table Structure Design
-- Index Design
-- Split Table
-- Read and Write Separation
-- Data Slice and Data Partition
-- Hot Data Cache
+- Table structure design.
+- Index design.
+- Query optimization: 避免复杂的多表连接.
+- Read and write separation: 主从复制, Write-Ahead Logging (WAL).
+- Data sharding and data partition: split table.
+- Hot data cache.
+
+[![Cascading Replication](./figures/cascading-replication.svg)](https://openai.com/index/scaling-postgresql)
 
 ### Architecture Layer
 
@@ -181,3 +182,4 @@ more than two out of the following three guarantees:
 - Scalable React project structure [guide](https://github.com/developerway/example-react-project).
 - Nest.js clean architecture [template](https://medium.com/@jonathan.pretre91/clean-architecture-with-nestjs-e089cef65045).
 - Domain driven design layout in [Golang](https://github.com/lupguo/ddd-layout).
+- Scaling PostgreSQL to [millions of QPS](https://openai.com/index/scaling-postgresql).
