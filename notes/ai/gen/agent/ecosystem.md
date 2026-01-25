@@ -106,6 +106,8 @@ Building agent with [LangGraph](https://www.kaggle.com/code/markishere/day-3-bui
   Build AI-powered applications and agents with modern TypeScript stack.
 - [Stitch](https://stitch.withgoogle.com):
   UI design toolkit.
+- [Agentation](https://github.com/benjitaylor/agentation):
+  Elements visual feedback for agents.
 
 ### Browser
 
