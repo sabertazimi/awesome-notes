@@ -66,8 +66,6 @@ Building agent with [LangGraph](https://www.kaggle.com/code/markishere/day-3-bui
   Build, run, manage multi-agent systems.
 - [TypeChat](https://github.com/microsoft/TypeChat):
   Makes it easy to build natural language interfaces.
-- [OpenAI](https://platform.openai.com).
-- [Google](https://ai.google.dev).
 
 ### RAG
 
@@ -98,12 +96,16 @@ Building agent with [LangGraph](https://www.kaggle.com/code/markishere/day-3-bui
 
 ### Frontend
 
-- [Puck](https://github.com/puckeditor/puck):
-  Agentic visual editor for React.
 - [Vercel](https://github.com/vercel/ai):
   Build AI-powered web applications.
 - [Mastra](https://github.com/mastra-ai/mastra):
   Build AI-powered applications and agents with modern TypeScript stack.
+- [JSON](https://github.com/vercel-labs/json-render):
+  AI → JSON → UI.
+- [Puck](https://github.com/puckeditor/puck):
+  Agentic visual editor for React.
+- [Figma](https://github.com/dannote/figma-use):
+  Control Figma from command line.
 - [Stitch](https://stitch.withgoogle.com):
   UI design toolkit.
 - [Agentation](https://github.com/benjitaylor/agentation):
@@ -112,7 +114,9 @@ Building agent with [LangGraph](https://www.kaggle.com/code/markishere/day-3-bui
 ### Browser
 
 - [BrowserUse](https://github.com/browser-use/browser-use):
-  Leading open-source web agent project.
+  Web agent.
+- [Agent](https://github.com/vercel-labs/agent-browser):
+  Browser automation CLI.
 - [Stagehand](https://github.com/browserbase/stagehand):
   Browser Automation Framework.
 - [LightPanda](https://github.com/lightpanda-io/browser):

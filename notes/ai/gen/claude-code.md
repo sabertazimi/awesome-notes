@@ -326,29 +326,26 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
   React best practices and web design guidelines.
 - [UI/UX](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill):
   Design intelligence for professional UI/UX.
-- [Expo](https://github.com/expo/skills):
-  Expo projects and application services.
+- [Figma](https://github.com/figma/mcp-server-guide):
+  Figma integration.
 - [Stitch](https://github.com/google-labs-code/stitch-skills):
   UI design toolkit.
-- [Edmuds](https://github.com/edmund-io/edmunds-claude-code):
-  Productive web development.
-
-### Browser
-
-- [Agent](https://github.com/vercel-labs/agent-browser):
-  Browser automation CLI.
 - [Dev](http://github.com/SawyerHood/dev-browser):
   Browser automation.
+- [Remotion](https://github.com/remotion-dev/skills):
+  Create videos programmatically in React.
+- [Expo](https://github.com/expo/skills):
+  Expo projects and application services.
 
-### Integration
+### DevOps
 
-- [Figma](https://github.com/figma/mcp-server-guide).
+- [Cloudflare](https://github.com/cloudflare/skills).
+
+### Documentation
+
 - [Notion](https://github.com/makenotion/claude-code-notion-plugin).
 - [NotebookLM](https://github.com/PleasePrompto/notebooklm-skill).
 - [Obsidian](https://github.com/kepano/obsidian-skills).
-- [Cloudflare](https://github.com/cloudflare/skills).
-- [Remotion](https://github.com/remotion-dev/skills):
-  Create videos programmatically in React.
 
 ### Math
 
