@@ -34,7 +34,7 @@ Fine-tuned GPT model on conversational data:
 
 - Pre-training:
   学习文字接龙, 学习大规模资料 (self-supervised learning), 生成下一个单词.
-- Instruction-tuning (IT):
+- Supervised fine-tuning (SFT):
   人工文字接龙, 人工标注部分问题的答案 (supervised learning), 引导模型生成的方向.
 - Reinforcement learning from human feedback
   ([RLHF](https://nips.cc/virtual/2022/52886)):
@@ -44,8 +44,10 @@ Fine-tuned GPT model on conversational data:
 
 :::tip[Alignment]
 
-Instruction-tuning (IT) with supervised learning on labelled data
-and reinforcement learning from human feedback (RLHF).
+对齐的[最佳方法](https://cameronrwolfe.substack.com/p/understanding-and-using-supervised):
+
+1. 在适中规模的高质量示例数据集上执行 SFT.
+2. 将剩余精力投入到整理人类偏好数据, 以便通过 RLHF 进行微调.
 
 :::
 
@@ -104,9 +106,30 @@ Embeddings + ANN (approximate nearest neighbor) vector stores
 
 ![Vector Similarity](./figures/vector-similarity.png 'Vector Similarity')
 
+## Supervised Fine-tuning
+
+```python
+from transformers import AutoModelForCausalLM
+from datasets import load_dataset
+from trl import SFTTrainer
+
+dataset = load_dataset("imdb", split="train")
+
+model = AutoModelForCausalLM.from_pretrained("facebook/opt-350m")
+
+trainer = SFTTrainer(
+    model,
+    train_dataset=dataset,
+    dataset_text_field="text",
+    max_seq_length=512,
+)
+
+trainer.train()
+```
+
 ## Group Relative Policy Optimization
 
-- GRPO [tricks](https://cameronrwolfe.substack.com/p/grpo-tricks).
+GRPO [tricks](https://cameronrwolfe.substack.com/p/grpo-tricks).
 
 ## Inference Acceleration
 
