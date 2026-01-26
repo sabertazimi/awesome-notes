@@ -127,7 +127,16 @@ trainer = SFTTrainer(
 trainer.train()
 ```
 
-## Group Relative Policy Optimization
+## Reinforcement Learning from Human Feedback
+
+### Proximal Policy Optimization
+
+限制策略更新的变化幅度,
+$r_t(\theta) = \frac{\pi_{\theta}(a_t | s_t)}{\pi_{\theta_{\text{old}}}(a_t | s_t)}$,
+裁剪 (clipping) 幅度过小或过大的部分,
+这就是 `近端` 的含义.
+
+### Group Relative Policy Optimization
 
 GRPO [tricks](https://cameronrwolfe.substack.com/p/grpo-tricks).
 
