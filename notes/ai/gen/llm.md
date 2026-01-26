@@ -131,14 +131,27 @@ trainer.train()
 
 ### Proximal Policy Optimization
 
-限制策略更新的变化幅度,
-$r_t(\theta) = \frac{\pi_{\theta}(a_t | s_t)}{\pi_{\theta_{\text{old}}}(a_t | s_t)}$,
+限制策略更新的变化幅度:
+
+$$
+r_t(\theta) = \frac{\pi_{\theta}(a_t | s_t)}{\pi_{\theta_{\text{old}}}(a_t | s_t)}
+$$
+
 裁剪 (clipping) 幅度过小或过大的部分,
 这就是 `近端` 的含义.
 
 ### Group Relative Policy Optimization
 
-GRPO [tricks](https://cameronrwolfe.substack.com/p/grpo-tricks).
+PPO 四个模型 (actor, critic, reference, reward), 需要计算成本与大量显存.
+[GRPO](https://cameronrwolfe.substack.com/p/grpo-tricks)
+对于同一问题 (prompt), 一次性生产一组答案,
+利用平均分 (group relative) 估计优势:
+
+$$
+\hat{A}_{i,t} = \frac{r_i - \text{mean}(\mathbf{r})}{\text{std}(\mathbf{r})}
+$$
+
+从而移除 critic 模型.
 
 ## Inference Acceleration
 
