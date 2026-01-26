@@ -193,6 +193,10 @@ CMD ["uv", "run", "my_app"]
 
 ## Library
 
+- [FastAPI](https://github.com/fastapi/fastapi):
+  High-performance web framework.
+- [Uvicorn](https://github.com/Kludex/uvicorn):
+  ASGI web server.
 - [IPython](https://github.com/ipython/ipython):
   Productive interactive computing.
 - [Extract](https://github.com/google/langextract):
