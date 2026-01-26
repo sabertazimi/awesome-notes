@@ -1,6 +1,6 @@
-# Code Review Agent
+# Code Review
 
-[Code review agent](https://nader.substack.com/p/the-complete-guide-to-building-agents):
+Code review [agent](https://nader.substack.com/p/the-complete-guide-to-building-agents):
 
 ```python
 import { query, AgentDefinition } from "@anthropic-ai/claude-agent-sdk";

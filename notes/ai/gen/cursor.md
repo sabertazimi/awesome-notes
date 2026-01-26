@@ -98,7 +98,7 @@ Useful plan and task management system:
 
 ## UI Design
 
-UI design [rule](./recipes/prompts/ui-design.md):
+UI design [rule](./recipes/prompts/ui.md):
 
 - 设计原则.
 - 颜色规范.

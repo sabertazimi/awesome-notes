@@ -278,7 +278,7 @@ it will extend Claude Code through the plugin system with:
 
 ## SDK
 
-- [Code review agent](./recipes/code/code-review-agent.md).
+- [Code review agent](./recipes/code/review.md).
 
 ## Best Practices
 

@@ -194,7 +194,7 @@ Keep track of your current status in browser-use-ts/agent/TODO.md
 ### UI
 
 ```md
-你是一位资深全栈工程师，参考 `ui-design-rules.mdc` 设计一个 @README.md 中描述的应用，
+你是一位资深全栈工程师，参考 `docs/ui-design.md` 设计一个 @README.md 中描述的应用，
 模拟产品经理提出需求和信息架构，请自己构思好功能需求和界面，然后设计 UI/UX：
 
 1、要高级有质感，遵守设计规范，注重 UI 细节。
