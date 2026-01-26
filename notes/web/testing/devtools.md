@@ -328,3 +328,18 @@ CSS overview:
 - Fonts.
 - Unused declarations.
 - Media queries.
+
+## Search Engine
+
+Set search omnibox:
+
+```bash
+# Bing
+https://www.bing.com/copilotsearch?q=%s
+
+# Google
+https://www.google.com/search?q=%s&udm=50
+
+# Perplexity
+https://www.perplexity.ai/?q=%s
+```
