@@ -1,7 +1,5 @@
 ---
 description: RIPER-5 + O1 思维 + 代理执行协议
-globs:
-alwaysApply: false
 ---
 
 # RIPER-5

@@ -1,10 +1,8 @@
 ---
 description: UI 设计规范文档
-globs:
-alwaysApply: false
 ---
 
-# UI Design Guidelines
+# UI Design
 
 ## 1. 设计原则
 
