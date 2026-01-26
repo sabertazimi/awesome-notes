@@ -74,20 +74,26 @@ Building agent with [LangGraph](https://www.kaggle.com/code/markishere/day-3-bui
 
 ### Agents
 
+- [Code](https://github.com/sourcegraph/awesome-code-ai):
+  Coding agents.
+- [SWEAgent](https://github.com/princeton-nlp/SWE-agent):
+  Issue auto-fixer.
+- [PRAgent](https://github.com/qodo-ai/pr-agent):
+  Pull request reviewer.
+
+### Multi-Agent
+
+- [MetaGPT](https://github.com/geekan/MetaGPT):
+  Multi-agent framework.
+- [ChatDev](https://github.com/OpenBMB/ChatDev):
+  Multi-Agent collaboration.
+
+### Workflow
+
 - [n8n](https://github.com/Zie619/n8n-workflows):
   n8n workflows.
 - [Dify](https://github.com/langgenius/dify):
   LLM app development platform combines workflow, RAG pipeline, agent capabilities.
-- [Code](https://github.com/sourcegraph/awesome-code-ai):
-  Coding agents list.
-- [MetaGPT](https://github.com/geekan/MetaGPT):
-  Multi-agent framework to form collaborative entity for complex tasks.
-- [ChatDev](https://github.com/OpenBMB/ChatDev):
-  Communicative agents for software development.
-- [SWEAgent](https://github.com/princeton-nlp/SWE-agent):
-  Princeton GitHub issues auto-fixer.
-- [PRAgent](https://github.com/Codium-ai/pr-agent):
-  Codium AI-powered agent for automated pull request analysis, feedback and suggestions.
 
 ### Project
 
