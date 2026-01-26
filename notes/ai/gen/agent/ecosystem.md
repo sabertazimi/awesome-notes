@@ -145,14 +145,16 @@ Building agent with [LangGraph](https://www.kaggle.com/code/markishere/day-3-bui
 
 ### Copilot
 
+- [Clawd](https://github.com/clawdbot/clawdbot):
+  Personal AI assistant.
 - [Everywhere](https://github.com/DearVa/Everywhere):
   Context-aware assistant for desktop.
 - [Immersive](https://github.com/immersive-translate/immersive-translate):
   Translate web pages instantly.
 - [DeepL](https://github.com/DeepLcom):
-  Free translation copilot.
+  Translation.
 - [GrammarLy](https://github.com/grammarly):
-  Free writing and grammar checker copilot.
+  Writing and grammar checker.
 
 ### Slide
 
