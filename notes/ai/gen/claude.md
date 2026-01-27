@@ -373,7 +373,7 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
 - [Seekers](https://github.com/yusufkaraaslan/Skill_Seekers):
   Convert documentation websites, GitHub repositories, and PDFs
   into Claude AI skills with automatic conflict detection.
-- [Directory](https://skills.sh):
+- [Directory](https://github.com/vercel-labs/skills):
   `npx skills add <owner/repo>`.
 - [WuMing](https://github.com/chujianyun/skills):
   Prompts optimizer and skills synchronizer.
