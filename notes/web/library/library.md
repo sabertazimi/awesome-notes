@@ -2145,15 +2145,14 @@ import LibraryGallery from '@site/src/components/library-gallery'
 
 ### Logging
 
+- [LogTape](https://github.com/dahlia/logtape):
+  Modern logging library.
 - [Winston](https://github.com/winstonjs/winston):
-  Logger for just about everything.
+  Logger.
 - [Pino](https://github.com/pinojs/pino):
-  Super fast, all natural JSON logger.
-- [Log4.js](https://github.com/nomiddlename/log4js-node).
+  Fast JSON logger.
 - [GoAccess](https://github.com/allinurl/goaccess):
   Real-time web log analyzer and interactive viewer.
-- [Stacktrace.js](https://github.com/stacktracejs/stacktrace.js):
-  Generate, parse and enhance JavaScript stack traces in web browsers.
 
 ### Mock
 
