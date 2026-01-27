@@ -319,6 +319,8 @@ Claude code [best practices](https://www.anthropic.com/engineering/claude-code-b
   Compound engineering plugin.
 - [Continuous](https://github.com/parcadei/Continuous-Claude-v3):
   Session continuity, token-efficient MCP execution, and agentic workflows.
+- [TaskMaster](https://github.com/eyaltoledano/claude-task-master):
+  Task-management system.
 
 ### Frontend
 

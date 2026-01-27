@@ -19,4 +19,3 @@ tags: [AI, Generative AI, LLM, Agent, Prompt]
 
 - [Agent](./agent/agent.md) - AI Agent architecture and patterns
 - [Claude Code](./claude.md) - Anthropic Claude AI agent
-- [Cursor](./cursor.md) - AI-powered code editor
