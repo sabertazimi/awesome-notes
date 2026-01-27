@@ -14,7 +14,7 @@ tags: [Web, React, Internals, Reconciler]
   - Web: DOM node.
   - Native: native UI.
   - Server: SSR strings.
-- Real renderer [demo](https://github.com/sabertazimi/awesome-web/tree/main/packages/react-renderer/src/renderer).
+- Real renderer [demo](https://github.com/sabertazimi/lab/tree/main/packages/react-renderer/src/renderer).
 
 `HostConfig` protocol:
 

@@ -119,7 +119,7 @@ The Star And Thank Author License (SATA)
 
 Copyright (c) 2016 sabertazimi(sabertazimi@gmail.com)
 
-Project Url: https://github.com/sabertazimi/Awesome-Notes
+Project Url: https://github.com/sabertazimi/notes
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
