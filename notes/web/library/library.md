@@ -2274,17 +2274,6 @@ import LibraryGallery from '@site/src/components/library-gallery'
   Local GitHub action runner.
 - [TerraForm](https://github.com/hashicorp/terraform).
 
-### Developer Toolkit
-
-- [行书指南](https://github.com/xszn/xszn.github.io):
-  高质量免费与开源软件列表.
-- [IT](https://github.com/CorentinTh/it-tools):
-  Collection of handy online toolkit for developers.
-- [Omni](https://github.com/iib0011/omni-tools):
-  Collection of powerful web-based toolkit for everyday tasks.
-- [Miku](https://github.com/Ice-Hazymoon/MikuTools):
-  Lightweight toolkit collection.
-
 ### GitHub Actions
 
 - [ActionToolkit](https://github.com/actions-cool).
