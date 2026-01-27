@@ -8,7 +8,7 @@ export default function isValid(s: string): boolean {
     ['}', '{'],
   ])
 
-  const tokens = []
+  const tokens: string[] = []
 
   for (let i = 0; i < s.length; i++) {
     const ch = s[i]

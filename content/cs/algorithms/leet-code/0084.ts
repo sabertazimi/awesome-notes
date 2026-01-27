@@ -4,7 +4,7 @@ export default function largestRectangleArea(heights: number[]): number {
   let res = 0
 
   // Record indices of elements with increase height
-  const increaseStack = []
+  const increaseStack: number[] = []
   increaseStack.push(0)
 
   for (let i = 1, top = 0; i < heights.length; i++) {

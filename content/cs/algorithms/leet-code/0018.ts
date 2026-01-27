@@ -23,7 +23,7 @@ export default function fourSum(nums: number[], target: number): number[][] {
         const sum = nums[i] + nums[j] + nums[k] + nums[l]
 
         if (sum === target) {
-          const cur = []
+          const cur: number[] = []
           cur.push(nums[i], nums[j], nums[k], nums[l])
           solution.push(cur)
           k++
