@@ -253,6 +253,10 @@ it will extend Claude Code through the plugin system with:
 ```
 
 ```bash
+/plugin marketplace add anthropics/skills
+```
+
+```bash
 /plugin marketplace add obra/superpowers-marketplace
 ```
 
