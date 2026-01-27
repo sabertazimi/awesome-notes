@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Awesome Notes'
+sidebar_label: 'Notes'
 sidebar_position: 1
 authors:
   name: Sabertaz
@@ -11,15 +11,15 @@ authors:
     x: sabertazimi
 ---
 
-# Awesome Notes
+# Notes
 
 import { NotesMarquee } from '@site/src/components/notes-marquee'
 
 [![Author](https://img.shields.io/badge/author-sabertaz-lightgrey?style=for-the-badge)](https://github.com/sabertazimi)
-[![LICENSE](https://img.shields.io/github/license/sabertazimi/awesome-notes?style=for-the-badge)](https://raw.githubusercontent.com/sabertazimi/awesome-notes/main/LICENSE)
-[![CI](https://img.shields.io/github/actions/workflow/status/sabertazimi/awesome-notes/ci.yml?branch=main&style=for-the-badge&logo=github)](https://github.com/sabertazimi/awesome-notes/actions/workflows/ci.yml)
+[![LICENSE](https://img.shields.io/github/license/sabertazimi/notes?style=for-the-badge)](https://raw.githubusercontent.com/sabertazimi/notes/main/LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/sabertazimi/notes/ci.yml?branch=main&style=for-the-badge&logo=github)](https://github.com/sabertazimi/notes/actions/workflows/ci.yml)
 
-Personal learning [Notes](https://notes.tazimi.dev) (Today I Learned)
+Personal [Notes](https://notes.tazimi.dev): Today I Learned (TIL)
 
 <NotesMarquee />
 

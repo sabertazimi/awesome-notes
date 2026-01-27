@@ -63,7 +63,7 @@ GraphQL [solves](https://mxstbr.com/thoughts/graphql):
       },
       "host": "localhost",
       "port": "8000",
-      "pathPrefix": "/react-blog",
+      "pathPrefix": "/blog",
       "buildTime": "2019-03-05T13:40:39.129Z"
     }
   }
@@ -98,30 +98,30 @@ query {
       "edges": [
         {
           "node": {
-            "relativePath": "gitBasicNotes.md",
+            "relativePath": "git.md",
             "prettySize": "28.1 kB",
             "root": "D:/",
-            "dir": "D:/Work/Source/react-blog/gatsby/_posts",
-            "name": "gitBasicNotes",
+            "dir": "D:/workspace/blog/gatsby/_posts",
+            "name": "git",
             "ext": ".md",
             "internal": {
               "mediaType": "text/markdown"
             },
-            "publicURL": "/static/gitBasicNotes-f4bad03605183759bb31c2db3ba69e53.md"
+            "publicURL": "/static/git-f4bad03605183759bb31c2db3ba69e53.md"
           }
         },
         {
           "node": {
-            "relativePath": "reactjsBasicNotes.md",
+            "relativePath": "react.md",
             "prettySize": "5.87 kB",
             "root": "D:/",
-            "dir": "D:/Work/Source/react-blog/gatsby/_posts",
-            "name": "reactjsBasicNotes",
+            "dir": "D:/workspace/blog/gatsby/_posts",
+            "name": "react",
             "ext": ".md",
             "internal": {
               "mediaType": "text/markdown"
             },
-            "publicURL": "/static/reactjsBasicNotes-a1d04d35063f3e13e6e7302aa40ef1ce.md"
+            "publicURL": "/static/react-a1d04d35063f3e13e6e7302aa40ef1ce.md"
           }
         }
       ]

@@ -39,7 +39,7 @@ class App extends Component {
 
 ## Nested
 
-Key Notes: In component of parent route, should render `{this.props.children}`.
+In component of parent route, should render `{this.props.children}`:
 
 ```tsx
 import {
