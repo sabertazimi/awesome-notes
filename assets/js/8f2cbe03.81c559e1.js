@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunknotes=self.webpackChunknotes||[]).push([[99352],{359:s=>{s.exports=JSON.parse('{"tag":{"label":"Bootstrap","permalink":"/notes/tags/bootstrap","allTagsPath":"/notes/tags","count":1,"items":[{"id":"web/css/bootstrap","title":"Bootstrap","description":"Custom Theme","permalink":"/notes/web/css/bootstrap"}],"unlisted":false}}')}}]);

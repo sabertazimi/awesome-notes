@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunknotes=self.webpackChunknotes||[]).push([[83520],{76984:e=>{e.exports=JSON.parse('{"tag":{"label":"Types","permalink":"/notes/tags/types","allTagsPath":"/notes/tags","count":1,"items":[{"id":"language/java/types","title":"Data Types","description":"\u6574\u578b","permalink":"/notes/language/java/types"}],"unlisted":false}}')}}]);

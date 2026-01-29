@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunknotes=self.webpackChunknotes||[]).push([[35695],{2066:e=>{e.exports=JSON.parse('{"tag":{"label":"Go","permalink":"/notes/tags/go","allTagsPath":"/notes/tags","count":1,"items":[{"id":"language/go/go","title":"Go","description":"Installation","permalink":"/notes/language/go/"}],"unlisted":false}}')}}]);

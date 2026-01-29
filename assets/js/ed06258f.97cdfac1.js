@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunknotes=self.webpackChunknotes||[]).push([[63831],{67501:a=>{a.exports=JSON.parse('{"tag":{"label":"Maven","permalink":"/notes/tags/maven","allTagsPath":"/notes/tags","count":1,"items":[{"id":"language/java/toolchain","title":"Toolchain","description":"\u7f16\u8bd1","permalink":"/notes/language/java/toolchain"}],"unlisted":false}}')}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunknotes=self.webpackChunknotes||[]).push([[75421],{29366:a=>{a.exports=JSON.parse('{"tag":{"label":"Canvas","permalink":"/notes/tags/canvas","allTagsPath":"/notes/tags","count":1,"items":[{"id":"web/javascript/canvas","title":"Canvas","description":"- Path2D \u5bf9\u8c61.","permalink":"/notes/web/javascript/canvas"}],"unlisted":false}}')}}]);

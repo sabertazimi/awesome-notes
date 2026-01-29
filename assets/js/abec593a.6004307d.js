@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunknotes=self.webpackChunknotes||[]).push([[65980],{24546:e=>{e.exports=JSON.parse('{"tag":{"label":"Emmet","permalink":"/notes/tags/emmet","allTagsPath":"/notes/tags","count":1,"items":[{"id":"web/html/emmet","title":"Emmet","description":"\u5d4c\u5957","permalink":"/notes/web/html/emmet"}],"unlisted":false}}')}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunknotes=self.webpackChunknotes||[]).push([[35513],{20746:s=>{s.exports=JSON.parse('{"tag":{"label":"Mahjong","permalink":"/notes/tags/mahjong","allTagsPath":"/notes/tags","count":1,"items":[{"id":"cs/math/mahjong","title":"Mahjong","description":"\u724c\u6548","permalink":"/notes/cs/math/mahjong"}],"unlisted":false}}')}}]);

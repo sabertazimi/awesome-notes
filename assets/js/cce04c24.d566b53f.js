@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunknotes=self.webpackChunknotes||[]).push([[43995],{61599:e=>{e.exports=JSON.parse('{"tag":{"label":"Exceptions","permalink":"/notes/tags/exceptions","allTagsPath":"/notes/tags","count":1,"items":[{"id":"cs/os/exception","title":"Exception","description":"\u5f02\u5e38\u63a7\u5236\u6d41","permalink":"/notes/cs/os/exception"}],"unlisted":false}}')}}]);
